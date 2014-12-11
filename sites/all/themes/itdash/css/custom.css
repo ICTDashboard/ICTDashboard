@@ -1,0 +1,59 @@
+.page-user .tabs {display: none;}
+#content #inner-content .signin-request .tab-content .tab form p input[type="password"] {
+    background-color: #fff;
+    border: 1px solid #b3bdcf;
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+}
+ul#main-menu li {list-style: none;}
+.header {position: relative;z-index: 99;}
+#content #project-listings .project-lists table tr th:first-child {width: 637px;}
+.profile h3 {border: none;}
+
+#content #inner-content .register-form form p input[type="password"],
+input.password-field,
+input.password-confirm,
+input.password-field:focus,
+input.password-confirm:focus
+
+{
+  background-color: #fff;
+  border: 1px solid #b3bdcf;
+  width: 100%;
+  max-width: 100%;
+  font-size: 14px;
+}
+
+
+.form-type-password label{
+  font-size: 14px;
+  font-weight: 700;
+  color: #202b3d;
+}
+
+#user-profile-form .form-submit {
+  background: url("../html/images/submit-btn.png") no-repeat scroll 0 0 transparent;
+  border: 0 none;
+  height: 44px;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 130px;
+}
+
+.confirm-parent, .password-parent {
+  width: 100%;
+}
+
+.user-tools>div span {
+  width: 85px;
+  word-wrap: break-word;
+}
+
+.date .form-item {
+  float: left;
+  padding-right: 0.75em;
+  width: 33.33%;
+}
+
+.date .form-item label {display: none;}

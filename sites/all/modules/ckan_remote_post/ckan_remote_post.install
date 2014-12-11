@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Module install/schema hooks.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function ckan_remote_post_schema()
+{
+    $schema = array();
+
+    $schema['ckan_remote_post_targets'] = array(
+        'description' => 'Holds information regarding submission forwards that should be sent for each valid form submission',
+        'fields' => array(
+
+            'id' => array(
+                'description' => 'The http address that will be used to post upon submission.',
+                'type' => 'int',
+                'not null' => TRUE,
+            ),
+            'timestamp' => array(
+                'description' => 'The http address that will be used to post upon submission.',
+                'type' => 'int',
+                'not null' => TRUE,
+            ),
+            'url' => array(
+                'description' => 'The http address that will be used to post upon submission.',
+                'type' => 'text',
+                'not null' => TRUE,
+            ),
+            'header' => array(
+                'description' => 'The http address that will be used to post upon submission.',
+                'type' => 'text',
+                'not null' => TRUE,
+            ),
+            'payload' => array(
+                'description' => 'The http address that will be used to post upon submission.',
+                'type' => 'text',
+                'not null' => TRUE,
+            ),
+            'status' => array(
+                'description' => 'The http address that will be used to post upon submission.',
+                'type' => 'text',
+                'not null' => TRUE,
+            ),
+            'result' => array(
+                'description' => 'The http address that will be used to post upon submission.',
+                'type' => 'text',
+                'not null' => TRUE,
+            ),
+        ),
+        'primary key' => array('id'),
+    );
+
+    return $schema;
+}
+
+function ckan_remote_post_install() {
+
+  // Create my tables.
+  //drupal_install_schema('ckan_remote_post');
+}
+
+function ckan_remote_post_uninstall() {
+  // Drop my tables.
+  drupal_uninstall_schema('ckan_remote_post');
+}
+
+

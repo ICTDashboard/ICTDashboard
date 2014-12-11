@@ -1,0 +1,49 @@
+<?php
+/**
+ * @file
+ * Code for the ICT Dashboard Forms feature.
+ */
+
+include_once 'ict_dashboard_forms.features.inc';
+
+
+/**
+ * Implement hook_form_alter
+ */
+function ict_project_form_alter( &$form, &$form_state,$form_id){
+  
+//  Alter webform "ICT Project Update Form" to allow users select only projects where they are
+  
+  if($form_id == 'webform_client_form_1662'){
+    global $user;
+    $id = $user->uid;
+    $query = db_select('node', 'node');
+    $query->fields('node', array('title','nid'));
+    $query->leftJoin('field_data_field_project_users', 'u', 'u.entity_id  = node.nid');
+    $query->condition('node.type', 'project', '=');
+    $query->condition('u.field_project_users_uid', $id, '=');
+    $projects = $query->execute()->fetchAll();
+    $form['submitted']['project']['#options'] = array();
+    $form['submitted']['project']['#options']['#default_value'] = 'Select project';
+    foreach($projects as $option){
+      $form['submitted']['project']['#options'][$option->nid] = $option->title;
+    }
+  }
+
+  if($form_id == 'project_node_form') {
+    $form['#theme'] = 'ict_project_add_project_form';
+    //hide native labels
+    $form['field_government_entity_name']['und']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
+    $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['value']['#title_display'] =
+    $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und'][0]['value']['#title_display'] =
+    $form['field_project_category']['und']['#title_display'] = $form['field_project_manager']['und'][0]['value']['#title_display'] =
+    $form['field_project_manager_email']['und'][0]['value']['#title_display'] = $form['field_total_project_budget']['und'][0]['value']['#title_display'] =
+    $form['field_expected_project_benefits']['und'][0]['value']['#title_display'] = $form['field_start_date']['und'][0]['value']['day']['#title_display'] =
+    $form['field_start_date']['und'][0]['value']['month']['#title_display'] = $form['field_start_date']['und'][0]['value']['year']['#title_display'] =
+    $form['field_original_completion_date']['und'][0]['value']['day']['#title_display'] = $form['field_original_completion_date']['und'][0]['value']['month']['#title_display'] =
+    $form['field_original_completion_date']['und'][0]['value']['year']['#title_display'] = $form['field_government_programme']['und'][0]['value']['#title_display'] =
+    $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
+    $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
+        'invisible';
+  }
+}

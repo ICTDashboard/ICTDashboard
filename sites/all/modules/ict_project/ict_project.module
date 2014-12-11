@@ -1,0 +1,88 @@
+<?php
+/**
+ * @file
+ * Code for the ICT Project feature.
+ */
+
+include_once 'ict_project.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ict_project_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && $plugin_type == 'content_types') {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
+ * returns add project  form
+ */
+function ict_project_project_add_block () {
+  if (user_is_logged_in()) {
+    module_load_include('inc', 'node', 'node.pages');
+    $form = node_add('project');
+
+    //remove customization tabs
+    unset($form['additional_settings']);
+    $form['#theme'] = 'ict_project_add_project_form';
+    //hide native labels
+    $form['field_government_entity_name']['und']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
+    $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['value']['#title_display'] =
+    $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und'][0]['value']['#title_display'] =
+    $form['field_project_category']['und']['#title_display'] = $form['field_project_manager']['und'][0]['value']['#title_display'] =
+    $form['field_project_manager_email']['und'][0]['value']['#title_display'] = $form['field_total_project_budget']['und'][0]['value']['#title_display'] =
+    $form['field_expected_project_benefits']['und'][0]['value']['#title_display'] = $form['field_start_date']['und'][0]['value']['day']['#title_display'] =
+    $form['field_start_date']['und'][0]['value']['month']['#title_display'] = $form['field_start_date']['und'][0]['value']['year']['#title_display'] =
+    $form['field_original_completion_date']['und'][0]['value']['day']['#title_display'] = $form['field_original_completion_date']['und'][0]['value']['month']['#title_display'] =
+    $form['field_original_completion_date']['und'][0]['value']['year']['#title_display'] = $form['field_government_programme']['und'][0]['value']['#title_display'] =
+    $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
+    $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
+      $form['field_project_users']['und']['#title_display'] = $form['field_expenditure_type']['und']['#title_display'] =
+    'invisible';
+
+    //add 33%-width to date select elements
+    $form['field_start_date']['und'][0]['value']['day']['#wrapper_class'][] = $form['field_start_date']['und'][0]['value']['month']['#wrapper_class'][] =
+    $form['field_start_date']['und'][0]['value']['year']['#wrapper_class'][] = $form['field_original_completion_date']['und'][0]['value']['day']['#wrapper_class'][] =
+    $form['field_original_completion_date']['und'][0]['value']['month']['#wrapper_class'][] = $form['field_original_completion_date']['und'][0]['value']['year']['#wrapper_class'][] =
+    'd-1of3';
+
+    $form['field_rebaselined_total_budget']['und']['#theme'] = 'ict_project_rebaselined_total_budget';
+
+
+    // Start year should be set via CMS
+    $start_year = 13;
+
+    foreach (element_children($form['field_rebaselined_total_budget']['und']) as $item) {
+      foreach (element_children($form['field_rebaselined_total_budget']['und'][$item]) as $sub_item) {
+        $form['field_rebaselined_total_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
+      }
+      $form['field_rebaselined_total_budget']['und'][$item]['field_year']['#default_value'] = $start_year . '/' . ++$start_year;
+    }
+
+    return drupal_render($form);
+  }
+  else {
+    drupal_not_found();
+  }
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function ict_project_theme () {
+  return array(
+    'ict_project_add_project_form' => array(
+      'template' => 'ict_project_add_project_form',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'render element' => 'form',
+    ),
+    'ict_project_rebaselined_total_budget' => array(
+      'template' => 'ict_project_rebaselined_total_budget',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'render element' => 'element',
+    ),
+  );
+}
+

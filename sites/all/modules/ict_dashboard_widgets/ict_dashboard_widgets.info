@@ -1,0 +1,16 @@
+name = ICT Dashboard Widgets
+core = 7.x
+package = ICT Dashboard
+dependencies[] = dashboard
+dependencies[] = features
+dependencies[] = node_export_features
+dependencies[] = node_export_features
+dependencies[] = text
+features[features_api][] = api:2
+features[field_instance][] = node-page-body
+features[node][] = page
+features[node_export_features][] = 5436dc7d-c224-44a2-9db4-02091f155065
+features[node_export_features][] = 8754ca37-1410-4671-bb58-ce670b640f5d
+features[node_export_features][] = ff1441b5-255b-465e-ba64-21149cc90807
+features_exclude[dependencies][ict_project] = ict_project
+mtime = 1417428982

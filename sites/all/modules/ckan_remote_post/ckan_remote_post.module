@@ -1,0 +1,300 @@
+<?php
+/**
+ * @file
+ * Webform Remote Post module.
+ *
+ * Webform Remote Post is a module that works along the
+ * @link http://drupal.org/project/webform Webform @endlink module.
+ * It eases the integration between Webforms and other web
+ * applications.
+ */
+
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ */
+function ckan_remote_post_help($path, $arg)
+{
+    switch ($path) {
+        case 'admin/help#ckan_remote_post':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Webform Remote Post is a module that works along
+                            the Webform module. It eases the integration
+                            between Webforms and other web applications like
+                            Salesforce and Eloqua.') . '</p>';
+            $output .= '</ul>';
+            return $output;
+    }
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * @see ckan_menu_load()
+ */
+function ckan_remote_post_menu()
+{
+    $items = array();
+
+    $items['admin/ckan-submission-results/resend/%'] = array(
+        'title' => t('Установить статус API'),
+        'page callback' => 'ckan_submissios_resend',
+        'page arguments' => array(3),
+        'type' => MENU_LOCAL_TASK,
+        'access arguments' => array(TRUE),
+        'access callback' => user_access('administer site configuration'),
+    );
+
+    $items['admin/config/content/ckan_remote_post'] = array(
+        'title' => 'CKAN Remote Post module settings',
+        'description' => 'Description of your On this date settings page',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('ckan_remote_post_admin_form'),
+        'access arguments' => array('access administration pages'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function ckan_remote_post_admin_form() {
+    $form = array();
+
+    $form['ckan_resource_id'] = array(
+        '#type' => 'textfield',
+        '#title' => t('CKAN Resource ID'),
+        '#default_value' => variable_get('ckan_resource_id'),
+        '#size' => 255,
+        '#maxlength' => 255,
+        '#description' => t("CKAN Resource ID"),
+        '#required' => TRUE,
+    );
+    $form['ckan_api_key'] = array(
+        '#type' => 'textfield',
+        '#title' => t('CKAN API Key'),
+        '#default_value' => variable_get('ckan_api_key'),
+        '#size' => 255,
+        '#maxlength' => 255,
+        '#description' => t("CKAN API Key"),
+        '#required' => TRUE,
+    );
+    $form['ckan_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t('CKAN URL'),
+        '#default_value' => variable_get('ckan_url'),
+        '#size' => 255,
+        '#maxlength' => 255,
+        '#description' => t("CKAN URL"),
+        '#required' => TRUE,
+    );
+
+    return system_settings_form($form);
+}
+
+function ckan_remote_post_admin_validate($form, &$form_state) {
+   /* $maxdisp = $form_state['values']['onthisdate_maxdisp'];
+    if (!is_numeric($maxdisp)) {
+        form_set_error('onthisdate_maxdisp', t('You must enter an integer for the maximum number of links.'));
+    }*/
+
+}
+
+function ckan_submissios_list(){
+
+}
+
+function ckan_remote_post_views_api() {
+  return array('api'=>3.0);
+}
+
+function submit_key_value($payload){
+
+    $resource_id =variable_get("ckan_resource_id");
+    $api_key =variable_get("ckan_api_key");
+    $url = variable_get("ckan_url")."/api/3/action/datastore_upsert";
+
+  // Acceptable server response codes.
+    $benign_reponse_codes = array('200', '301', '302', '307');
+
+    // JSON Encode the payload.
+    $data = array('resource_id' => $resource_id, 'method' => 'insert', 'records' => array());
+    $timestamp = date('Y-m-d', time());
+    $name = $payload['project'];
+
+    foreach ($payload as $key => $value) {
+        $data['records'][] = array('timestamp' => $timestamp, 'name' => $name, 'metric' => $key, 'value' => $value);
+    }
+
+    $post_data = json_encode($data);
+    $headers = array('Authorization' => $api_key, 'Content-Type' => 'application/json');
+
+// save to DB
+    $target = Array();
+    // TODO: Like in webform, this is not race-condition safe.
+    // Switch to using transactions as well?
+    $next_id_query = db_select('ckan_remote_post_targets');
+    $next_id_query->addExpression('MAX(id) + 1', 'id');
+    $target['id'] = $next_id_query->execute()->fetchField();
+    if ($target['id'] == NULL) {
+        $target['id'] = 1;
+    }
+    $target['timestamp'] = time();
+    $target['url']= $url;
+    $target['header']= json_encode($headers);
+    $target['payload']= serialize($payload);
+    $target['status'] = 'pending';
+    $target['result'] = '-';
+    $success = drupal_write_record('ckan_remote_post_targets', $target);
+
+  // Write a log if we weren't able to save the target successfully.
+    if ($success === FALSE) {
+        watchdog('webform_remote_post', 'There was an error writing a new remote post target to the database.', array(), WATCHDOG_ERROR);
+    }
+    // Repost data to each target. Begin by setting the
+    // options for drupal_http_request().
+    $drupal_http_request_options = array(
+        'method' => 'POST',
+        'data' => $post_data,
+        'timeout' => 15,
+        'headers' => $headers,
+    );
+
+    // Where the magic happens:
+    $request = drupal_http_request($url, $drupal_http_request_options);
+    $result = json_decode($request->data);
+  // Log any errors.
+    if (!isset($request->code) or !in_array($request->code, $benign_reponse_codes)
+      or !isset($result->success) or !$result->success) {
+        $log_msg = 'A remote post to %url  returned a ';
+        $log_msg .= '\'%code\' code, which is a different HTTP response code ';
+        $log_msg .= 'than expected. Please make sure that the remote post URL ';
+        $log_msg .= 'is correct in the Remote Posts webform settings, and that ';
+        $log_msg .= 'the post was received in the remote system. ';
+        $log_msg .= $post_data;
+        $log_msg .= isset($request->data) ? $request->data : $request->error;
+
+        watchdog(
+            'ckan_remote_post',
+            $log_msg,
+            array(
+                '%url' => $url,
+                '%code' => $request->code,
+            ),
+            WATCHDOG_WARNING);
+        // Update the remote post target:
+        db_update('ckan_remote_post_targets')
+            ->fields(array(
+                'status' => 'failed',
+                'result' => isset($request->data) ? 'Data:' . $request->data . 'Error:' . $request->error : 'Error:' . $request->error,
+            ))
+            ->condition( 'id', $target['id'])
+
+            ->execute();
+    } else {
+
+        // Update the remote post target:
+        db_update('ckan_remote_post_targets')
+            ->fields(array(
+                'status' => 'complete',
+                'result' => $request->data
+            ))
+            ->condition( 'id', $target['id'])
+
+            ->execute();
+    }
+}
+
+/**
+ * Implements hook_perm().
+ */
+function ckan_remote_post_permission()
+{
+    return array(
+        'admin webform remote posts' => array(
+            'title' => t('Admin webform remote posts'),
+            'description' => t('Grants access to the "Remote Posts" webform settings on all webform content.'),
+        ),
+    );
+}
+
+
+function ckan_submissios_resend($id){
+
+  //Get submission
+  $query = db_select('ckan_remote_post_targets', 'fm');
+  $query->fields('fm');
+  $query->condition('fm.id', $id, '=');
+  $post = $query->execute()->fetchAssoc();
+  // Acceptable server response codes.
+  $benign_reponse_codes = array('200', '301', '302', '307');
+
+  $payload = unserialize($post['payload']);
+  // JSON Encode the payload.
+
+    $resource_id =variable_get("ckan_resource_id");
+  $data = array('resource_id' => $resource_id, 'method' => 'insert', 'records' => array());
+  $name = $payload['project'];
+  $timestamp = date('Y-m-d', time());
+
+
+  foreach (unserialize($post['payload']) as $key => $value) {
+    $data['records'][] = array('timestamp' => $timestamp, 'name' => $name, 'metric' => $key, 'value' => $value);
+  }
+
+  $post_data = json_encode($data);
+
+  // Repost data to each target. Begin by setting the
+  // options for drupal_http_request().
+  $drupal_http_request_options = array(
+    'method' => 'POST',
+    'data' => $post_data,
+    'timeout' => 15,
+    'headers' => (array)json_decode($post['header']),
+  );
+  // Where the magic happens:
+  $request = drupal_http_request($post['url'], $drupal_http_request_options);
+
+  // Log any errors.
+  if (isset($request->code) && !in_array($request->code, $benign_reponse_codes)) {
+    $log_msg = 'A remote post to %url  returned a ';
+    $log_msg .= '\'%code\' code, which is a different HTTP response code ';
+    $log_msg .= 'than expected. Please make sure that the remote post URL ';
+    $log_msg .= 'is correct in the Remote Posts webform settings, and that ';
+    $log_msg .= 'the post was received in the remote system. ';
+    $log_msg .= $post['payload'];
+    $log_msg .= isset($request->data) ? $request->data : $request->error;
+
+    watchdog(
+      'ckan_remote_post',
+      $log_msg,
+      array(
+        '%url' => $post['payload'],
+        '%code' => $request->code,
+      ),
+      WATCHDOG_WARNING);
+    // Update the remote post target:
+    db_update('ckan_remote_post_targets')
+      ->fields(array(
+        'status' => 'failed',
+        'result' => isset($request->data) ? 'Data:' . $request->data . 'Error:' . $request->error : 'Error:' . $request->error,
+      ))
+      ->condition( 'id', $id)
+
+      ->execute();
+  } else {
+
+    // Update the remote post target:
+    db_update('ckan_remote_post_targets')
+      ->fields(array(
+        'status' => 'complete',
+        'result' => $request->data
+      ))
+      ->condition( 'id', $id)
+
+      ->execute();
+  }
+  drupal_set_message(t('Submission "!number" was resent!', array('!number' => $id)));
+  drupal_goto('admin/ckan-submission-results');
+  die();
+}

@@ -1,0 +1,12 @@
+name = ICT Dashboard Forms
+core = 7.x
+package = ICT Dashboard
+version = 7.x-1.2
+project = ict_dashboard_forms
+dependencies[] = features
+dependencies[] = node_export_features
+dependencies[] = node_export_features
+features[features_api][] = api:2
+features[node][] = webform
+features[node_export_features][] = b6b0e209-428d-40bc-b026-cf571cbd8d8b
+mtime = 1416930347

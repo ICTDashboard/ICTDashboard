@@ -1,0 +1,8 @@
+name = IT Dashboard
+description = IT Dashboard Them
+core = 7.x
+
+plugins[panels][layouts] = layouts
+
+stylesheets[all][] = html/css/style.css
+stylesheets[all][] = css/custom.css

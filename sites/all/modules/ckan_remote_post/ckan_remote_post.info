@@ -1,0 +1,6 @@
+name = CKAN Remote Post
+description = Post data (form submissions) to any arbitrary URL, presumably, an application or script that will use the form data and perform further processing with it.
+core = 7.x
+dependencies[] = rules
+package = ICT Dashboard
+configure = admin/config/content/ckan_remote_post
