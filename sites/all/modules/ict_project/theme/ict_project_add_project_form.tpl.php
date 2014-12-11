@@ -98,6 +98,23 @@
 
 					</td>
 				</tr>
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_project_status']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+
+            <?php
+            print render($form['field_project_status']);
+            ?>
+
+          </td>
+        </tr>
+
+
 				<tr><td colspan="2"><div class="dotted-line"></div></td></tr>
 				
 				<tr>
@@ -136,6 +153,21 @@
 						?>
 					</td>
 				</tr>
+
+        <tr>
+          <td class="label">
+            <?php
+            print substr($form['field_rebaselined_total_project']['und']['#title'], 0, 33).'<em>'.substr($form['field_rebaselined_total_project']['und']['#title'], 33, -1).'</em>'.substr($form['field_rebaselined_total_project']['und']['#title'], -1);
+            ?>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_rebaselined_total_project']);
+            ?>
+          </td>
+        </tr>
+
+
         <tr>
           <td colspan="2">
             <?php
@@ -185,6 +217,44 @@
 						?>
 					</td>
 				</tr>
+
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_rebaselined_project_start']['und']['#title'];
+            ?>
+          </td>
+          <td class="text date">
+            <?php
+            print render($form['field_rebaselined_project_start']['und'][0]['value']['day']);
+            print render($form['field_rebaselined_project_start']['und'][0]['value']['month']);
+            print render($form['field_rebaselined_project_start']['und'][0]['value']['year']);
+            ?>
+          </td>
+        </tr>
+
+
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_rebaselined_project_compl']['und']['#title'];
+            ?>
+          </td>
+          <td class="text date">
+            <?php
+            print render($form['field_rebaselined_project_compl']['und'][0]['value']['day']);
+            print render($form['field_rebaselined_project_compl']['und'][0]['value']['month']);
+            print render($form['field_rebaselined_project_compl']['und'][0]['value']['year']);
+            ?>
+          </td>
+        </tr>
+
+
+
+
+
 				<tr>
 					<td class="label">
 						<?php
@@ -262,6 +332,41 @@
 						?>
 					</td>
 				</tr>
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_internal_fte']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+
+            <?php
+            print render($form['field_internal_fte']);
+            ?>
+
+          </td>
+        </tr>
+
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_external_fte']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+
+            <?php
+            print render($form['field_external_fte']);
+            ?>
+
+          </td>
+        </tr>
+
+
+
+
 				<?php
 				global $user;
 
