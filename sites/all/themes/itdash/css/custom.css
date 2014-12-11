@@ -57,3 +57,36 @@ input.password-confirm:focus
 }
 
 .date .form-item label {display: none;}
+
+#edit-field-rebaselined-total-budget input {
+  background-color: #fff;
+  border: 1px solid #b3bdcf;
+}
+
+#project-node-form select#edit-field-project-users-und {
+  height: 128px;
+  padding: 5px 0;
+}
+
+
+#edit-field-rebaselined-total-budget table, #edit-field-rebaselined-total-budget th,  div#edit-field-rebaselined-total-budget td {
+  border: 1px solid black;
+  margin: 0;
+  padding: 0 !important;
+}
+
+.field-name-field-total input {
+  height: 70px;
+  padding: 0;
+  margin: 0;
+}
+
+div#edit-field-rebaselined-total-budget td {
+  text-align: center;
+}
+
+.field-widget-number input {
+  margin: 0;
+  padding: 0;
+  height: 54px;
+}
