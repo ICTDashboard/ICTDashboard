@@ -1,4 +1,0 @@
-itdashboard
-===========
-
-IT Dashboard
