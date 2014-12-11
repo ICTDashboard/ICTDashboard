@@ -162,8 +162,12 @@ CONTENT STYLES
 			
 			.inner-box {
 				background-color: $white;
-				border: 1px solid #cbd4e1;
+				border-left: 1px solid #cbd4e1;
+				border-right: 1px solid #cbd4e1;
+				border-bottom: 1px solid #cbd4e1;
 				width: 100%;
+				position: relative;
+				padding-top: 1px;
 				
 				h3 {
 					font-size: 18px;
@@ -198,7 +202,16 @@ CONTENT STYLES
 			
 			&.blue {
 				.inner-box {
-					border-top: 4px solid $blue;
+					&:after { 
+						background: $blue;
+						border: 1px solid $green;
+						content: " ";
+						width: 100%;
+						height: 2px;
+						position: absolute;
+						top: 0;
+						left: -1px;
+					}
 					.text {
 						h4 {
 							color: #117e99;
@@ -208,7 +221,16 @@ CONTENT STYLES
 			}
 			&.blue-green {
 				.inner-box {
-					border-top: 4px solid $blue-green;
+					&:after { 
+						background: $green;
+						border: 1px solid $blue-green;
+						content: " ";
+						width: 100%;
+						height: 2px;
+						position: absolute;
+						top: 0;
+						left: -1px;
+					}
 					.text {
 						h4 {
 							color: #268088;
@@ -218,7 +240,16 @@ CONTENT STYLES
 			}
 			&.green {
 				.inner-box {
-					border-top: 4px solid $green;
+					&:after { 
+						background: $green;
+						border: 1px solid $green;
+						content: " ";
+						width: 100%;
+						height: 2px;
+						position: absolute;
+						top: 0;
+						left: -1px;
+					}
 					.text {
 						h4 {
 							color: #058666;
@@ -258,6 +289,7 @@ CONTENT STYLES
 			table {
 				width: 100%;
 				border-bottom: 1px solid #abb6cb;
+				border-collapse:separate;
 				
 				tr {
 					th {
@@ -265,6 +297,7 @@ CONTENT STYLES
 						padding: 8px;
 						background-color: #137992;
 						border-left: 1px solid #0a5f74;
+						border-top: 1px solid #137992;
 						font-size: 15px;
 						font-weight: 700;
 						color: $white;
@@ -287,15 +320,15 @@ CONTENT STYLES
 						
 						
 						&:first-child { border-radius: 4px 0 0; border-left: 0 none; }
-						&:last-child { border-radius: 0 4px 0 0}
+						&:last-child { border-radius: 0 4px 0 0; }
 					}
 					td {
-						border-right: 1px solid #abb6cb;
-						border-left: 1px solid #abb6cb;
+						border-left: 1px solid #dde2ea;
 						padding: 8px;
 						
 						&.title {
 							font-size: 20px;
+							border-left: 1px solid #abb6cb;
 							
 							a {
 								font-size: 14px;
@@ -303,12 +336,15 @@ CONTENT STYLES
 								color: #0d6c88;
 								text-decoration: none;
 							}
+							
 						}
 						
 						&.dates { width: 150px; }
 						&.update {
 							text-align: center;
 							width: 130px;
+							border-right: 1px solid #abb6cb;
+							
 							a {
 								background: url(../images/update-btn.png) no-repeat;
 								height: 30px;
@@ -322,6 +358,12 @@ CONTENT STYLES
 								}
 							}
 						}
+					}
+					
+					&:first-child {
+						border-radius: 4px 4px 0 0;
+						border-left: 1px solid #137992;
+						border-right: 1px solid #137992;
 					}
 					
 					&:nth-child(even) {
@@ -340,6 +382,7 @@ CONTENT STYLES
 		
 		table {
 			font-size: 14px;
+
 			tr {
 				td {
 					padding-bottom: 15px;
@@ -381,6 +424,7 @@ CONTENT STYLES
 			table {
 				width: 100%;
 				border-bottom: 1px solid #abb6cb;
+				border-collapse:separate;
 				
 				tr {
 					th {
@@ -397,9 +441,12 @@ CONTENT STYLES
 						&:last-child { border-radius: 0 4px 0 0 }
 					}
 					td {
-						border-right: 1px solid #abb6cb;
-						border-left: 1px solid #abb6cb;
+						border-left: 1px solid #dde2ea;
 						padding: 8px;
+						color: #202b3d;
+						
+						&:first-child { border-left: 1px solid #abb6cb; }
+						&:last-child { border-right: 1px solid #abb6cb; }
 					}
 					
 					&:nth-child(even) {
