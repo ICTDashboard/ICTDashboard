@@ -42,7 +42,7 @@
       <?php print $content['content']; ?>
     <?php endif; ?>
   </div>
-</div>
+</div></div>
   <footer class="footer" role="contentinfo">
     <div id="inner-footer">
       <div class="wrap cf">
