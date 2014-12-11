@@ -109,4 +109,8 @@ jQuery(document).ready(function($) {
           }
       });
   }
+  
+	$("#edit-field-project-users-und").multiSelect({
+		noneSelected: 'Select users'
+	});
 }); /* end of as page load scripts */

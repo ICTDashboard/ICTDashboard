@@ -504,7 +504,9 @@ CONTENT STYLES
 						textarea {
 							padding: 10px;
 						}
-						span.select {
+						
+						div.form-item-field-project-users-und { position: relative; }
+						div.form-type-select:not(.form-item-field-project-users-und) {
 							display: block;
 							height: 36px;
 							overflow: hidden;
@@ -557,9 +559,39 @@ CONTENT STYLES
 							top: 6px;
 						}
 						
-						span.select {
+						div.form-type-select:not(.form-item-field-project-users-und) {
+							width: 33.33%;
+							background: none;
+							border: 0 none;
+							
+							&>div {
+								display: block;
+								height: 36px;
+								overflow: hidden;
+								position: relative;
+								width: 100%;
+								border: 0 none;
+								border-radius: 3px;
+								cursor: pointer;
+								background: $white;
+								border: 1px solid #b3bdcf;
+								
+								&:after {
+									content: "\f0dc";
+									font-family: FontAwesome;
+									left: 92%;
+									position: absolute;
+									top: 20%;
+									cursor: pointer;
+								}
+							}
+							
 							&:after {
 								left: 92%;
+								content: "";
+							}
+							&:last-child {
+								padding-right: 0;
 							}
 							select {
 								width: 110%;
