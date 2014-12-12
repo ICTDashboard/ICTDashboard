@@ -196,6 +196,7 @@
 						?>
 					</td>
 					<td class="text date">
+            <input type="hidden" id="start-date">
 						<?php
 							print render($form['field_start_date']['und'][0]['value']['day']);
 							print render($form['field_start_date']['und'][0]['value']['month']);
@@ -210,6 +211,7 @@
 						?>
 					</td>
 					<td class="text date">
+            <input type="hidden" id="start-date">
 						<?php
 							print render($form['field_original_completion_date']['und'][0]['value']['day']);
 							print render($form['field_original_completion_date']['und'][0]['value']['month']);
@@ -226,6 +228,7 @@
             ?>
           </td>
           <td class="text date">
+            <input type="hidden" id="start-date">
             <?php
             print render($form['field_rebaselined_project_start']['und'][0]['value']['day']);
             print render($form['field_rebaselined_project_start']['und'][0]['value']['month']);
@@ -243,6 +246,7 @@
             ?>
           </td>
           <td class="text date">
+            <input type="hidden" id="start-date">
             <?php
             print render($form['field_rebaselined_project_compl']['und'][0]['value']['day']);
             print render($form['field_rebaselined_project_compl']['und'][0]['value']['month']);
