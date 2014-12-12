@@ -46,7 +46,19 @@ function ict_project_project_add_block () {
     $form['field_start_date']['und'][0]['value']['day']['#wrapper_class'][] = $form['field_start_date']['und'][0]['value']['month']['#wrapper_class'][] =
     $form['field_start_date']['und'][0]['value']['year']['#wrapper_class'][] = $form['field_original_completion_date']['und'][0]['value']['day']['#wrapper_class'][] =
     $form['field_original_completion_date']['und'][0]['value']['month']['#wrapper_class'][] = $form['field_original_completion_date']['und'][0]['value']['year']['#wrapper_class'][] =
-    'd-1of3';
+
+    $form['field_rebaselined_project_start']['und'][0]['value']['day']['#wrapper_class'][] = $form['field_rebaselined_project_start']['und'][0]['value']['month']['#wrapper_class'][] =
+    $form['field_rebaselined_project_start']['und'][0]['value']['year']['#wrapper_class'][] =
+
+    $form['field_rebaselined_project_compl']['und'][0]['value']['day']['#wrapper_class'][] = $form['field_rebaselined_project_compl']['und'][0]['value']['month']['#wrapper_class'][] =
+    $form['field_rebaselined_project_compl']['und'][0]['value']['year']['#wrapper_class'][] = 'd-1of3';
+
+
+    $form['field_start_date']['und'][0]['value']['year']['#wrapper_class'][] =
+    $form['field_original_completion_date']['und'][0]['value']['year']['#wrapper_class'][] =
+    $form['field_rebaselined_project_start']['und'][0]['value']['year']['#wrapper_class'][] =
+    $form['field_rebaselined_project_compl']['und'][0]['value']['year']['#wrapper_class'][] = 'last-col';
+
 
     $form['field_rebaselined_total_budget']['und']['#theme'] = 'ict_project_rebaselined_total_budget';
 
