@@ -289,9 +289,11 @@ CONTENT STYLES
 			table {
 				width: 100%;
 				border-bottom: 1px solid #abb6cb;
-				border-collapse:separate;
+				border-collapse: separate;
+				border-spacing: 0;
 				
 				tr {
+					
 					th {
 						text-align: left;
 						padding: 8px;
@@ -317,8 +319,7 @@ CONTENT STYLES
 								.fa-sort-asc { color: $yellow-text; }
 							}
 						}
-						
-						
+			
 						&:first-child { border-radius: 4px 0 0; border-left: 0 none; }
 						&:last-child { border-radius: 0 4px 0 0; }
 					}
@@ -339,7 +340,7 @@ CONTENT STYLES
 							
 						}
 						
-						&.dates { width: 150px; }
+						&.dates { width: 153px; }
 						&.update {
 							text-align: center;
 							width: 130px;
@@ -362,8 +363,8 @@ CONTENT STYLES
 					
 					&:first-child {
 						border-radius: 4px 4px 0 0;
-						border-left: 1px solid #137992;
-						border-right: 1px solid #137992;
+						//border-left: 1px solid #137992;
+						//border-right: 1px solid #137992;
 					}
 					
 					&:nth-child(even) {
