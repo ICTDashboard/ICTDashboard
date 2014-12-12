@@ -42,6 +42,7 @@
 														$form[$key][$fname]['day']['#wrapper_class'][] = 
 														$form[$key][$fname]['month']['#wrapper_class'][] = 
 														$form[$key][$fname]['year']['#wrapper_class'][] = 'd-1of3'; //styling - 3 in row
+                            $form[$key][$fname]['year']['#wrapper_class'][] = 'last-col';
 														$second_row .=	render($form[$key][$fname]['day']).
 																render($form[$key][$fname]['month']).
 																render($form[$key][$fname]['year']);
