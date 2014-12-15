@@ -20,7 +20,7 @@ GENERAL STYLES
 body {
 	font-size: 13px;
 	background-color: #e5eaf3;
-	font-family: $opensans;
+	font-family: 'open_sansregular';
 }
 
 html, body, #container { height: 100%; }
@@ -52,13 +52,13 @@ HEADER STYLES
 		img { float: left; margin-right: 15px; }
 		
 		span {
-			font-family: $opensans;
-			font-weight: 300;
+			font-family: 'open_sanslight';
 			display: inline-block;
 			margin-top: 5px;
+			font-style: normal;
 			
 			strong {
-				font-weight: 700; 
+				font-family: 'open_sansbold';
 				font-family: $ptsans;
 			}
 		}
@@ -86,8 +86,8 @@ CONTENT STYLES
 		.inner-title-content {
 			h1 {
 				color: #c8f68f;
-				font-weight: 34px;
-				font-weight: 400;
+				font-size: 34px;
+				font-family: 'open_sansregular';
 			}
 		}
 	}
@@ -172,7 +172,7 @@ CONTENT STYLES
 				h3 {
 					font-size: 18px;
 					color: #202b3d;
-					font-weight: 600;
+					font-family: 'open_sanssemibold';
 					margin: 10px 15px;
 				}
 				
@@ -188,7 +188,7 @@ CONTENT STYLES
 						color: #117e99;
 						font-size: 14px;
 						text-transform: uppercase;
-						font-weight: 600;
+						font-family: 'open_sanssemibold';
 					}
 					p {
 						-moz-hyphens: none;
@@ -301,11 +301,11 @@ CONTENT STYLES
 						border-left: 1px solid #0a5f74;
 						border-top: 1px solid #137992;
 						font-size: 15px;
-						font-weight: 700;
+						font-family: 'open_sansbold';
 						color: $white;
 						
-						a{ float: right; color: $white; font-weight: 400; text-align: right;
-							i { font-size: 10px; font-weight: 300; }
+						a{ float: right; color: $white; text-align: right;
+							i { font-size: 10px; }
 							.fa.fa-sort-desc {
 								margin-left: -5.6px;
 							}
@@ -330,10 +330,11 @@ CONTENT STYLES
 						&.title {
 							font-size: 20px;
 							border-left: 1px solid #abb6cb;
+							width: 635px;
 							
 							a {
 								font-size: 14px;
-								font-weight: 600;
+								font-family: 'open_sanssemibold';
 								color: #0d6c88;
 								text-decoration: none;
 							}
@@ -349,14 +350,14 @@ CONTENT STYLES
 								background: url(../images/button-bg.gif) repeat-x;
 								height: 30px;
 								display: block;
-								min-width: 124px;
+								max-width: 165px;
 								overflow: hidden;
 								text-decoration: none;
 								color: #0d6c88;
 								line-height: 30px;
 								border-radius: 4px;
 								border: 1px solid #d5dae5;
-								font-weight: 600;
+								font-family: 'open_sanssemibold';
 								position: relative;
 								margin: 0;
 								padding: 0;
@@ -419,7 +420,7 @@ CONTENT STYLES
 				td {
 					padding-bottom: 15px;
 					&.label {
-						font-weight: 700;
+						font-family: 'open_sansbold';
 						color: #202b3d;
 						vertical-align: top;
 						width: 200px;
@@ -448,7 +449,7 @@ CONTENT STYLES
 		&.status {}
 		&.metrics {
 			h3 {
-				font-weight: 700;
+				font-family: 'open_sansbold';
 				font-size: 14px;
 				color: #202b3d;
 				margin-top: 0;
@@ -465,7 +466,7 @@ CONTENT STYLES
 						background-color: #137992;
 						border-left: 1px solid #0a5f74;
 						font-size: 15px;
-						font-weight: 700;
+						font-family: 'open_sansbold';
 						color: $white;
 						vertical-align: top;
 
@@ -505,13 +506,13 @@ CONTENT STYLES
 					vertical-align: middle;
 					
 					&.label {
-						font-weight: 700;
+						font-family: 'open_sansbold';
 						color: #202b3d;
 						width: 295px;
 						padding-right: 15px;
 						
 						em { font-style: italic; }
-						span { font-style: italic; font-weight: 400; display: block;}
+						span { font-style: italic; font-family: 'open_sansregular'; display: block;}
 						
 						&.vtop { vertical-align: top; }
 					}
@@ -667,7 +668,7 @@ CONTENT STYLES
 		&>h2 {
 			color: #0d6c88;
 			font-size: 26px;
-			font-weight: 600;
+			font-family: 'open_sanssemibold';
 			border-bottom: 1px solid #d6ddeb;
 			padding-bottom: 10px;
 		}
@@ -679,7 +680,7 @@ CONTENT STYLES
 				p {
 					label {
 						font-size: 14px;
-						font-weight: 700;
+						font-family: 'open_sansbold';
 						color: #202b3d;
 						
 						span { color: #ee2a24; }
@@ -750,8 +751,7 @@ CONTENT STYLES
 				}
 				.description {
 					font-size: 13px;
-					font-style: italic;
-					font-family: $opensans;
+					font-family: 'open_sansitalic';
 				}
 			}
 		}
@@ -772,7 +772,7 @@ CONTENT STYLES
 					a {
 						text-decoration: none;
 						font-size: 18px;
-						font-weight: 600;
+						font-family: 'open_sanssemibold';
 						color: #0d6c88;
 						border-top: 1px solid transparent;
 						border-left: 1px solid transparent;
@@ -833,7 +833,7 @@ CONTENT STYLES
 						p {
 							label {
 								font-size: 14px;
-								font-weight: 700;
+								font-family: 'open_sansbold';
 								color: #202b3d;
 								
 								span { color: #ee2a24; }
@@ -905,7 +905,7 @@ CONTENT STYLES
 				background: url(../images/event-bg.png) repeat scroll center 0 $red;
 				padding: 25px 0;
 				h1 {
-					font-weight: 600;
+					font-family: 'open_sanssemibold';
 					font-size: 27px;
 					color: $white;
 				}
@@ -915,7 +915,7 @@ CONTENT STYLES
 				
 				a { text-decoration: none; }
 				h2, h3, h4 {
-					font-weight: 600;
+					font-family: 'open_sanssemibold';
 					margin: 0 0 .5em;
 				}
 				h2 { font-size: 21px; color: $red; }
@@ -988,7 +988,7 @@ NAVIGATION STYLES
 			border-bottom: 0 none;
 			color: #ffffff;
 			font-size: 15px;
-			font-weight: 600;
+			font-family: 'open_sanssemibold';
 			padding: 44px 0;
 			text-align: center;
 
@@ -1121,7 +1121,7 @@ LOGIN AND REGISTER
 			float: left;
 			a {
 				font-size: 15px;
-				font-weight: 600;
+				font-family: 'open_sanssemibold';
 				text-decoration: none;
 				text-align: center;
 				line-height: 37px;
@@ -1328,7 +1328,7 @@ GENERAL STYLES
 		text-align: center;
 		color: $white;
 		font-size: 14px;
-		font-weight: 700;
+		font-family: 'open_sansbold';
 		border-radius: 4px;
 		line-height: 40px;
 		position: relative;
@@ -1346,7 +1346,7 @@ GENERAL STYLES
 			top: 0;
 			bottom: 0;
 			right: 15px;
-			font-weight: 400;
+			font-family: 'open_sansregular';
 			font-size: 28px;
 			color: $yellow-text;
 		}
@@ -1360,7 +1360,7 @@ GENERAL STYLES
 			top: 0;
 			bottom: 0;
 			right: 20px;
-			font-weight: 400;
+			font-family: 'open_sansregular';
 			font-size: 24px;
 			color: $yellow-text;
 		}
