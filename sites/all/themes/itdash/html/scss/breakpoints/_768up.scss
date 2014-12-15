@@ -343,19 +343,49 @@ CONTENT STYLES
 						&.dates { width: 153px; }
 						&.update {
 							text-align: center;
-							width: 130px;
 							border-right: 1px solid #abb6cb;
 							
 							a {
-								background: url(../images/update-btn.png) no-repeat;
+								background: url(../images/button-bg.gif) repeat-x;
 								height: 30px;
 								display: block;
-								width: 124px;
+								min-width: 124px;
 								overflow: hidden;
-								text-indent: -999em;
+								text-decoration: none;
+								color: #0d6c88;
+								line-height: 30px;
+								border-radius: 4px;
+								border: 1px solid #d5dae5;
+								font-weight: 600;
+								position: relative;
+								margin: 0;
+								padding: 0;
 								
 								&:hover {
 									background-position: 0 -30px;
+									color: $white;
+									background: #137992;
+									border-color: #137992;
+									
+									span {
+										&:after {
+											border-color: transparent transparent transparent #d5ff92;
+										}
+									}
+								}
+								
+								span {
+									display: block;
+									
+									&:after {
+										content: " ";
+										border-width: 3px;
+										border-color: transparent transparent transparent #137992;
+										border-style: solid;
+										position: absolute;
+										left: 10px;
+										top: 12px;
+									}
 								}
 							}
 						}
