@@ -32,6 +32,18 @@
 						?>
 					</td>
 				</tr>
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_program_name']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_program_name']);
+            ?>
+          </td>
+        </tr>
 				<tr><td colspan="2"><div class="dotted-line"></div></td></tr>
 				
 				<tr>
@@ -60,18 +72,72 @@
 					</td>
 				</tr>
 
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_program_name']['und']['#title'];
-						?>
-					</td>
-					<td class="text">
-						<?php
-							print render($form['field_program_name']);
-						?>
-					</td>
-				</tr>
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_start_date']['und']['#title'];
+            ?>
+          </td>
+          <td class="text date">
+            <input type="hidden" class="add_datepicker" id="<?php print $form['field_start_date']['#id']; ?>">
+            <?php
+            print drupal_render($form['field_start_date']['und'][0]['value']['day']);
+            print render($form['field_start_date']['und'][0]['value']['month']);
+            print render($form['field_start_date']['und'][0]['value']['year']);
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_original_completion_date']['und']['#title'];
+            ?>
+          </td>
+          <td class="text date">
+            <input type="hidden" class="add_datepicker" id="<?php print $form['field_original_completion_date']['#id']; ?>">
+            <?php
+            print render($form['field_original_completion_date']['und'][0]['value']['day']);
+            print render($form['field_original_completion_date']['und'][0]['value']['month']);
+            print render($form['field_original_completion_date']['und'][0]['value']['year']);
+            ?>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_rebaselined_project_start']['und']['#title'];
+            ?>
+          </td>
+          <td class="text date">
+            <input type="hidden" class="add_datepicker" id="<?php print $form['field_rebaselined_project_start']['#id']; ?>">
+            <?php
+            print render($form['field_rebaselined_project_start']['und'][0]['value']['day']);
+            print render($form['field_rebaselined_project_start']['und'][0]['value']['month']);
+            print render($form['field_rebaselined_project_start']['und'][0]['value']['year']);
+            ?>
+          </td>
+        </tr>
+
+
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_rebaselined_project_compl']['und']['#title'];
+            ?>
+          </td>
+          <td class="text date">
+            <input type="hidden" class="add_datepicker" id="<?php print $form['field_rebaselined_project_compl']['#id']; ?>">
+            <?php
+            print render($form['field_rebaselined_project_compl']['und'][0]['value']['day']);
+            print render($form['field_rebaselined_project_compl']['und'][0]['value']['month']);
+            print render($form['field_rebaselined_project_compl']['und'][0]['value']['year']);
+            ?>
+          </td>
+        </tr>
+
 				<tr>
 					<td class="label">
 						<?php
@@ -102,45 +168,30 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_project_status']['und']['#title'];
+            print $form['field_project_manager']['und']['#title'];
             ?>
           </td>
           <td class="text">
-
             <?php
-            print render($form['field_project_status']);
+            print render($form['field_project_manager']);
             ?>
-
+          </td>
+        </tr>
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_project_manager_email']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_project_manager_email']);
+            ?>
           </td>
         </tr>
 
-
 				<tr><td colspan="2"><div class="dotted-line"></div></td></tr>
-				
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_project_manager']['und']['#title'];
-						?>
-					</td>
-					<td class="text">
-						<?php
-							print render($form['field_project_manager']);
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_project_manager_email']['und']['#title'];
-						?>
-					</td>
-					<td class="text">
-						<?php
-							print render($form['field_project_manager_email']);
-						?>
-					</td>
-				</tr>
+
 				<tr>
 					<td class="label">
 						<?php
@@ -153,6 +204,17 @@
 						?>
 					</td>
 				</tr>
+
+        <tr>
+          <td class="label">
+            <?php print $form['field_original_total_budget']['und']['#title']; ?>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_original_total_budget']);
+            ?>
+          </td>
+        </tr>
 
         <tr>
           <td class="label">
@@ -169,124 +231,47 @@
 
 
         <tr>
-          <td colspan="2">
+          <td class="label">
+            <?php print $form['field_rebaselined_total_budget']['und']['#title']; ?>
+          </td>
+          <td class="text">
             <?php
               print render($form['field_rebaselined_total_budget']);
             ?>
           </td>
         </tr>
-				<tr>
-					<td class="label">
-						<?php
-							print substr($form['field_expected_project_benefits']['und']['#title'], 0, 27).'<em>'.substr($form['field_expected_project_benefits']['und']['#title'], 27, -1)
-							.'</em>'.substr($form['field_expected_project_benefits']['und']['#title'], -1);
-						?>
-					</td>
-					<td class="text">
-						<?php
-							print render($form['field_expected_project_benefits']);
-						?>
-					</td>
-				</tr>
-
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_start_date']['und']['#title'];
-						?>
-					</td>
-					<td class="text date">
-            <input type="hidden" id="start-date">
-						<?php
-							print render($form['field_start_date']['und'][0]['value']['day']);
-							print render($form['field_start_date']['und'][0]['value']['month']);
-							print render($form['field_start_date']['und'][0]['value']['year']);
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_original_completion_date']['und']['#title'];
-						?>
-					</td>
-					<td class="text date">
-            <input type="hidden" id="start-date">
-						<?php
-							print render($form['field_original_completion_date']['und'][0]['value']['day']);
-							print render($form['field_original_completion_date']['und'][0]['value']['month']);
-							print render($form['field_original_completion_date']['und'][0]['value']['year']);
-						?>
-					</td>
-				</tr>
 
 
         <tr>
           <td class="label">
             <?php
-            print $form['field_rebaselined_project_start']['und']['#title'];
+            print $form['field_project_status']['und']['#title'];
             ?>
           </td>
-          <td class="text date">
-            <input type="hidden" id="start-date">
+          <td class="text">
+
             <?php
-            print render($form['field_rebaselined_project_start']['und'][0]['value']['day']);
-            print render($form['field_rebaselined_project_start']['und'][0]['value']['month']);
-            print render($form['field_rebaselined_project_start']['und'][0]['value']['year']);
+            print render($form['field_project_status']);
             ?>
+
           </td>
         </tr>
-
-
 
         <tr>
           <td class="label">
             <?php
-            print $form['field_rebaselined_project_compl']['und']['#title'];
+            print $form['field_expenditure_type']['und']['#title'];
             ?>
           </td>
-          <td class="text date">
-            <input type="hidden" id="start-date">
+          <td class="text">
+
             <?php
-            print render($form['field_rebaselined_project_compl']['und'][0]['value']['day']);
-            print render($form['field_rebaselined_project_compl']['und'][0]['value']['month']);
-            print render($form['field_rebaselined_project_compl']['und'][0]['value']['year']);
+            print render($form['field_expenditure_type']);
             ?>
+
           </td>
         </tr>
 
-
-
-
-
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_government_programme']['und']['#title'];
-						?>
-					</td>
-					<td class="text">
-						
-							<?php
-							print render($form['field_government_programme']);
-						?>
-
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<?php
-						print $form['field_expenditure_type']['und']['#title'];
-						?>
-					</td>
-					<td class="text">
-
-						<?php
-						print render($form['field_expenditure_type']);
-						?>
-
-					</td>
-				</tr>
 				<tr>
 					<td class="label">
 						<?php
@@ -297,42 +282,6 @@
 					<td class="text">
 						<?php
 							print render($form['field_implementation_partners']);
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_total_spent_to_date']['und']['#title'];
-						?>
-					</td>
-					<td class="text">
-						<?php
-							print render($form['field_total_spent_to_date']);
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_expected_number_of_gov_fte']['und']['#title'];
-						?>
-					</td>
-					<td class="text">
-						<?php
-							print render($form['field_expected_number_of_gov_fte']);
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_expected_num_contractors']['und']['#title'];
-						?>
-					</td>
-					<td class="text">
-						<?php
-							print render($form['field_expected_num_contractors']);
 						?>
 					</td>
 				</tr>

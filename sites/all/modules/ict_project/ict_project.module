@@ -29,9 +29,9 @@ function ict_project_project_add_block () {
     //hide native labels
     $form['field_government_entity_name']['und']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
     $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['value']['#title_display'] =
-    $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und'][0]['value']['#title_display'] =
+    $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und']['#title_display'] =
     $form['field_project_category']['und']['#title_display'] = $form['field_project_manager']['und'][0]['value']['#title_display'] =
-    $form['field_project_manager_email']['und'][0]['value']['#title_display'] = $form['field_total_project_budget']['und'][0]['value']['#title_display'] =
+    $form['field_project_manager_email']['und'][0]['email']['#title_display'] = $form['field_total_project_budget']['und'][0]['value']['#title_display'] =
     $form['field_expected_project_benefits']['und'][0]['value']['#title_display'] = $form['field_start_date']['und'][0]['value']['day']['#title_display'] =
     $form['field_start_date']['und'][0]['value']['month']['#title_display'] = $form['field_start_date']['und'][0]['value']['year']['#title_display'] =
     $form['field_original_completion_date']['und'][0]['value']['day']['#title_display'] = $form['field_original_completion_date']['und'][0]['value']['month']['#title_display'] =
@@ -61,7 +61,20 @@ function ict_project_project_add_block () {
 
 
     $form['field_rebaselined_total_budget']['und']['#theme'] = 'ict_project_rebaselined_total_budget';
+    $form['field_original_total_budget']['und']['#theme'] = 'ict_project_rebaselined_total_budget';
 
+    //date fields (adding empty options)
+    $date_fields = array(
+      'field_start_date',
+      'field_original_completion_date',
+      'field_rebaselined_project_start',
+      'field_rebaselined_project_compl',
+    );
+    foreach ($date_fields as $field) {
+      $form[$field][LANGUAGE_NONE][0]['value']['day']['#options'][''] = t('Day');
+      $form[$field][LANGUAGE_NONE][0]['value']['year']['#options'][''] = t('Year');
+      $form[$field][LANGUAGE_NONE][0]['value']['month']['#options'][''] = t('Month');
+    }
 
     // Start year should be set via CMS
     $start_year = 13;
@@ -71,6 +84,16 @@ function ict_project_project_add_block () {
         $form['field_rebaselined_total_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
       }
       $form['field_rebaselined_total_budget']['und'][$item]['field_year']['#default_value'] = $start_year . '/' . ++$start_year;
+    }
+
+    // Start year should be set via CMS
+    $start_year = 13;
+
+    foreach (element_children($form['field_original_total_budget']['und']) as $item) {
+      foreach (element_children($form['field_original_total_budget']['und'][$item]) as $sub_item) {
+        $form['field_original_total_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
+      }
+      $form['field_original_total_budget']['und'][$item]['field_year']['#default_value'] = $start_year . '/' . ++$start_year;
     }
 
     return drupal_render($form);
@@ -95,6 +118,16 @@ function ict_project_theme () {
       'template' => 'ict_project_rebaselined_total_budget',
       'path' => drupal_get_path('module', 'ict_project') . '/theme',
       'render element' => 'element',
+    ),
+    'ict_project_mid_project_form' => array(
+      'template' => 'ict_project_mid_project_form',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'render element' => 'form',
+    ),
+    'ict_project_end_project_form' => array(
+      'template' => 'ict_project_end_project_form',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'render element' => 'form',
     ),
   );
 }
