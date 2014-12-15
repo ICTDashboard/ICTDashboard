@@ -77,7 +77,7 @@ function ict_project_project_add_block () {
     }
 
     // Start year should be set via CMS
-    $start_year = 13;
+    $start_year = variable_get('ict_dashboard_project_start_year', 13);
 
     foreach (element_children($form['field_rebaselined_total_budget']['und']) as $item) {
       foreach (element_children($form['field_rebaselined_total_budget']['und'][$item]) as $sub_item) {
@@ -87,7 +87,7 @@ function ict_project_project_add_block () {
     }
 
     // Start year should be set via CMS
-    $start_year = 13;
+    $start_year = variable_get('ict_dashboard_project_start_year', 13);
 
     foreach (element_children($form['field_original_total_budget']['und']) as $item) {
       foreach (element_children($form['field_original_total_budget']['und'][$item]) as $sub_item) {
