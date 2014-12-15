@@ -103,6 +103,88 @@ function ict_project_project_add_block () {
   }
 }
 
+/**
+ * Implement hook_form_alter
+ */
+function ict_project_form_alter( &$form, &$form_state,$form_id){
+
+//  Alter webform "ICT Project Update Form" to allow users select only projects where they are
+
+  if($form_id == 'webform_client_form_1662'){
+    global $user;
+    $id = $user->uid;
+    $query = db_select('node', 'node');
+    $query->fields('node', array('title','nid'));
+    $query->leftJoin('field_data_field_project_users', 'u', 'u.entity_id  = node.nid');
+    $query->condition('node.type', 'project', '=');
+    $query->condition('u.field_project_users_uid', $id, '=');
+    $projects = $query->execute()->fetchAll();
+    $form['submitted']['project']['#options'] = array();
+    $form['submitted']['project']['#options']['#default_value'] = 'Select project';
+    foreach($projects as $option){
+      $form['submitted']['project']['#options'][$option->nid] = $option->title;
+    }
+  }
+
+  if($form_id == 'project_node_form') {
+    $form['#theme'] = 'ict_project_add_project_form';
+    //hide native labels
+    $form['field_government_entity_name']['und']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
+    $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['value']['#title_display'] =
+    $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und'][0]['value']['#title_display'] =
+    $form['field_project_category']['und']['#title_display'] = $form['field_project_manager']['und'][0]['value']['#title_display'] =
+    $form['field_project_manager_email']['und'][0]['value']['#title_display'] = $form['field_total_project_budget']['und'][0]['value']['#title_display'] =
+    $form['field_expected_project_benefits']['und'][0]['value']['#title_display'] = $form['field_start_date']['und'][0]['value']['day']['#title_display'] =
+    $form['field_start_date']['und'][0]['value']['month']['#title_display'] = $form['field_start_date']['und'][0]['value']['year']['#title_display'] =
+    $form['field_original_completion_date']['und'][0]['value']['day']['#title_display'] = $form['field_original_completion_date']['und'][0]['value']['month']['#title_display'] =
+    $form['field_original_completion_date']['und'][0]['value']['year']['#title_display'] = $form['field_government_programme']['und'][0]['value']['#title_display'] =
+    $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
+    $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
+      'invisible';
+  }
+
+  if($form_id == 'ict_form_entityform_edit_form') {
+    $project = ict_project_get_project();
+    $form['field_mid_project']['und']['#options'] = $project;
+    $form['#theme'] = 'ict_project_mid_project_form';
+    $form['field_mid_project']['und']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
+    $form['field_mid_project_manager_email']['und'][0]['value']['#title_display'] =
+    $form['field_mid_revised_total_project']['und'][0]['value']['#title_display'] =
+    $form['field_mid_total_project_spend']['und'][0]['value']['#title_display'] =
+
+    $form['field_mid_total_project_spend']['und'][0]['value']['#title_display'] =
+    $form['field_mid_total_project_current']['und'][0]['value']['#title_display'] =
+    $form['field_mid_project_completed']['und'][0]['value']['#title_display'] =
+    $form['field_mid_predicted_project']['und'][0]['value']['#title_display'] =
+    $form['field_mid_predicted_project_real']['und'][0]['value']['#title_display'] =
+    $form['field_mid_internal_fte']['und'][0]['value']['#title_display'] =
+    $form['field_mid_external_fte']['und'][0]['value']['#title_display'] =
+    $form['field_mid_project_status']['und']['#title_display'] =
+    $form['field_mid_agency_comments']['und'][0]['value']['#title_display'] = 'invisible';
+  }
+
+  if($form_id == 'itc_form_end_entityform_edit_form') {
+    $project = ict_project_get_project();
+    $form['field_end_project']['und']['#options'] = $project;
+    $form['#theme'] = 'ict_project_end_project_form';
+    $form['field_end_project']['und']['#title_display'] =
+    $form['field_end_project_stage']['und']['#title_display'] =
+    $form['field_end_project_manager']['und'][0]['value']['#title_display'] =
+    $form['field_end_project_manager_email']['und'][0]['value']['#title_display'] =
+    $form['field_end_revised_total_project']['und'][0]['value']['#title_display'] =
+    $form['field_end_total_project_spend']['und'][0]['value']['#title_display'] =
+    $form['field_end_total_project_current']['und'][0]['value']['#title_display'] =
+    $form['field_end_project_completed']['und'][0]['value']['#title_display'] =
+    $form['field_end_predicted_project']['und'][0]['value']['#title_display'] =
+    $form['field_end_predicted_realised']['und'][0]['value']['#title_display'] =
+    $form['field_end_internal_fte']['und'][0]['value']['#title_display'] =
+    $form['field_end_external_fte']['und'][0]['value']['#title_display'] =
+    $form['field_end_project_status']['und']['#title_display'] =
+    $form['field_end_agency_comments']['und'][0]['value']['#title_display'] =
+      'invisible';
+  }
+}
+
 
 /**
  * Implements hook_theme().
@@ -130,5 +212,54 @@ function ict_project_theme () {
       'render element' => 'form',
     ),
   );
+}
+
+/**
+ * Implements_hook_menu
+ */
+function ict_project_menu() {
+  $items = array();
+
+  $items['admin/config/project-form-settings'] = array(
+    'title' => 'Project form settings',
+    'description' => 'Settings page for Project form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ict_project_admin_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+
+/**
+ * Module configurations form
+ */
+function ict_project_admin_settings_form($form, &$form_state) {
+  $form['ict_dashboard_project_start_year'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Project start year'),
+    '#default_value' => variable_get('ict_dashboard_project_start_year', 13),
+    '#size' => 2,
+    '#maxlength' => 2,
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/*
+ * Return all project
+ */
+function ict_project_get_project() {
+  $projects = db_select('node', 'n')
+    ->fields('n', array('nid', 'title'))
+    ->condition('n.type', 'project')
+    ->condition('n.status', 1)
+    ->execute()
+    ->fetchAllKeyed();
+
+  return $projects;
 }
 
