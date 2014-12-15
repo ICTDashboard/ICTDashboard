@@ -203,8 +203,8 @@ CONTENT STYLES
 			&.blue {
 				.inner-box {
 					&:after { 
-						background: $blue;
-						border: 1px solid $green;
+						background: #2ea5c2;
+						border: 1px solid #2ea5c2;
 						content: " ";
 						width: 100%;
 						height: 2px;
@@ -222,8 +222,8 @@ CONTENT STYLES
 			&.blue-green {
 				.inner-box {
 					&:after { 
-						background: $green;
-						border: 1px solid $blue-green;
+						background: #3ac3cf;
+						border: 1px solid #3ac3cf;
 						content: " ";
 						width: 100%;
 						height: 2px;
@@ -241,8 +241,8 @@ CONTENT STYLES
 			&.green {
 				.inner-box {
 					&:after { 
-						background: $green;
-						border: 1px solid $green;
+						background: #53c0ad;
+						border: 1px solid #53c0ad;
 						content: " ";
 						width: 100%;
 						height: 2px;
@@ -307,7 +307,7 @@ CONTENT STYLES
 						a{ float: right; color: $white; font-weight: 400; text-align: right;
 							i { font-size: 10px; font-weight: 300; }
 							.fa.fa-sort-desc {
-								margin-left: -5.501px;
+								margin-left: -5.6px;
 							}
 							
 							&.asc:hover {

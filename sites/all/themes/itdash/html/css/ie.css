@@ -212,13 +212,14 @@ NAVIGATION STYLES
     /* showing sub-menus */ }
     .nav li a {
       border-bottom: 0;
+	  text-decoration: none;
       /*
       you can use hover styles here even though this size
       has the possibility of being a mobile device.
       */ }
       .nav li a:hover, .nav li a:focus {
         color: white;
-        text-decoration: underline; }
+        text-decoration: none; }
     .nav li ul.sub-menu,
     .nav li ul.children {
       margin-top: 0;
