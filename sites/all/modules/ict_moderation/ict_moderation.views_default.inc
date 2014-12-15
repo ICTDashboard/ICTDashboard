@@ -76,9 +76,17 @@ function ict_moderation_views_default_views() {
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = 'Update Project';
-  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['label'] = 'Update Mid Year';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<a href="/eform/submit/ict-form?project=[nid]"><span>Update Mid Year</span></a>';
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'content/ict-project-update-form?project=[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['prefix'] = '<span>';
+  $handler->display->display_options['fields']['nothing']['alter']['suffix'] = '</span>';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Update End FY';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<a href="/eform/submit/itc-form-end?project=[nid]"><span>Update End FY</span></a>';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';

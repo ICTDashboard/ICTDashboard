@@ -25,6 +25,7 @@
     0 => 'title',
     1 => 'dates',
     2 => 'update',
+    3 => 'update',
   );
 ?>
 
