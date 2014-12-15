@@ -66,6 +66,8 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
+    $project = ict_dashboard_get_project();
+    $form['field_mid_project']['und']['#options'] = $project;
     $form['#theme'] = 'ict_project_mid_project_form';
     $form['field_mid_project']['und']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
       $form['field_mid_project_manager_email']['und'][0]['value']['#title_display'] =
@@ -84,6 +86,8 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
+    $project = ict_dashboard_get_project();
+    $form['field_end_project']['und']['#options'] = $project;
     $form['#theme'] = 'ict_project_end_project_form';
     $form['field_end_project']['und']['#title_display'] =
     $form['field_end_project_stage']['und']['#title_display'] =
@@ -117,4 +121,18 @@ function ict_dashboard_forms_admin_settings_form($form, &$form_state) {
   );
 
   return system_settings_form($form);
+}
+
+/*
+ * Return all project
+ */
+function ict_dashboard_get_project() {
+  $projects = db_select('node', 'n')
+      ->fields('n', array('nid', 'title'))
+      ->condition('n.type', 'project')
+      ->condition('n.status', 1)
+      ->execute()
+      ->fetchAllKeyed();
+
+  return $projects;
 }
