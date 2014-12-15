@@ -195,4 +195,5 @@ function itdash_preprocess_html(&$vars) {
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/ie.css', array('weight' => 999, 'browsers' => array('IE' => 'lte IE 8', '!IE' => FALSE), 'preprocess' => FALSE));
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/slicknav.css');
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/css/jquery.multiSelect.css');
+  drupal_add_css('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/base/jquery-ui.css');
 }

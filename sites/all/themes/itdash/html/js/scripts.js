@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
 
   if ($("#start-date").length) {
     $("#start-date").datepicker({
-          buttonImage: "images/calendar-icon.png",
+          buttonImage: "http://itdash.lws.links.com.au/sites/all/themes/itdash/html/images/calendar-icon.png",
           buttonImageOnly: true,
           showOn: 'button',
           onClose: function(dateText, inst) {
