@@ -84,6 +84,7 @@ input.password-confirm:focus
   margin: 0;
 }
 
+div#edit-field-original-total-budget td,
 div#edit-field-rebaselined-total-budget td {
   text-align: center;
 }
