@@ -23,17 +23,17 @@ function ict_pages_home_bottom_render ($subtype, $conf, $panel_args, $context = 
 					<div class="box blue t-1of3 d-1of3">
 						<div class="inner-box">
 							<h3>Title of data project category</h3>
-							<img src="' . drupal_get_path('theme', 'itdash') . '/html/images/box/1.png" alt="sample"/>
+							<img src="/sites/all/themes/itdash/html/images/box/1.png" alt="sample">
 							<div class="text">
 								<h4>CATEGORY</h4>
 								<p>Quisque efficitur eros non semper pretium. Nunc et ex erat. Pellentesque elementum accumsan diam sit ameted.</p>
 							</div>
 						</div>
 					</div>
-					<div class="box blue t-1of3 d-1of3">
+					<div class="box blue-green t-1of3 d-1of3">
 						<div class="inner-box">
 							<h3>Title of data project category</h3>
-							<img src="' . drupal_get_path('theme', 'itdash') . '/html/images/box/2.png" alt="sample"/>
+							<img src="/sites/all/themes/itdash/html/images/box/2.png" alt="sample">
 							<div class="text">
 								<h4>CATEGORY</h4>
 								<p>Quisque efficitur eros non semper pretium. Nunc et ex erat. Pellentesque elementum accumsan diam sit ameted.</p>
@@ -43,7 +43,7 @@ function ict_pages_home_bottom_render ($subtype, $conf, $panel_args, $context = 
 					<div class="box green d-1of3 t-1of3 last-col">
 						<div class="inner-box">
 							<h3>Title of data project category</h3>
-							<img src="' . drupal_get_path('theme', 'itdash') . '/html/images/box/3.png" alt="sample"/>
+							<img src="/sites/all/themes/itdash/html/images/box/3.png" alt="sample">
 							<div class="text">
 								<h4>CATEGORY</h4>
 								<p>Quisque efficitur eros non semper pretium. Nunc et ex erat. Pellentesque elementum accumsan diam sit ameted.</p>
