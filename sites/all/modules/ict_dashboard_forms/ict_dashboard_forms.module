@@ -64,4 +64,23 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       $form['field_mid_project_status']['und']['#title_display'] =
       $form['field_mid_agency_comments']['und'][0]['value']['#title_display'] = 'invisible';
   }
+
+  if($form_id == 'itc_form_end_entityform_edit_form') {
+    $form['#theme'] = 'ict_project_end_project_form';
+    $form['field_end_project']['und']['#title_display'] =
+    $form['field_end_project_stage']['und']['#title_display'] =
+    $form['field_end_project_manager']['und'][0]['value']['#title_display'] =
+    $form['field_end_project_manager_email']['und'][0]['value']['#title_display'] =
+    $form['field_end_revised_total_project']['und'][0]['value']['#title_display'] =
+    $form['field_end_total_project_spend']['und'][0]['value']['#title_display'] =
+    $form['field_end_total_project_current']['und'][0]['value']['#title_display'] =
+    $form['field_end_project_completed']['und'][0]['value']['#title_display'] =
+    $form['field_end_predicted_project']['und'][0]['value']['#title_display'] =
+    $form['field_end_predicted_realised']['und'][0]['value']['#title_display'] =
+    $form['field_end_internal_fte']['und'][0]['value']['#title_display'] =
+    $form['field_end_external_fte']['und'][0]['value']['#title_display'] =
+    $form['field_end_project_status']['und']['#title_display'] =
+    $form['field_end_agency_comments']['und'][0]['value']['#title_display'] =
+        'invisible';
+  }
 }

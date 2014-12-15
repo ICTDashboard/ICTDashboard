@@ -101,6 +101,11 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme',
       'render element' => 'form',
     ),
+    'ict_project_end_project_form' => array(
+      'template' => 'ict_project_end_project_form',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'render element' => 'form',
+    ),
   );
 }
 
