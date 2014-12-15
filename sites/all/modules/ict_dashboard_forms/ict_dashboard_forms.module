@@ -6,6 +6,24 @@
 
 include_once 'ict_dashboard_forms.features.inc';
 
+/**
+ * Implements_hook_menu
+ */
+function ict_dashboard_forms_menu() {
+  $items = array();
+
+  $items['admin/config/project-form-settings'] = array(
+    'title' => 'Project form settings',
+    'description' => 'Settings page for Project form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ict_dashboard_forms_admin_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
 
 /**
  * Implement hook_form_alter
@@ -83,4 +101,20 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_end_agency_comments']['und'][0]['value']['#title_display'] =
         'invisible';
   }
+}
+
+/**
+ * Module configurations form
+ */
+function ict_dashboard_forms_admin_settings_form($form, &$form_state) {
+  $form['ict_dashboard_project_start_year'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Project start year'),
+    '#default_value' => variable_get('ict_dashboard_project_start_year', 13),
+    '#size' => 2,
+    '#maxlength' => 2,
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
 }
