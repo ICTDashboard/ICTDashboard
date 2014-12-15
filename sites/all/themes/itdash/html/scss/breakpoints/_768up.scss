@@ -1368,11 +1368,16 @@ GENERAL STYLES
 
 .ui-datepicker { display: none; }
 .not-logged-in {
-	.project-lists {
-		table {
-			tr {
-				td {
-					&.dates { border-right: 1px solid #abb6cb; }
+	#content {
+		#project-listings {
+			.project-lists {
+				margin-top: 30px;
+				table {
+					tr {
+						td {
+							&.dates { border-right: 1px solid #abb6cb; }
+						}
+					}
 				}
 			}
 		}
