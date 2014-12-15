@@ -71,43 +71,23 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-  if ($("#start-date").length) {
-    $("#start-date").datepicker({
-          buttonImage: "http://itdash.lws.links.com.au/sites/all/themes/itdash/html/images/calendar-icon.png",
-          buttonImageOnly: true,
-          showOn: 'button',
-          onClose: function(dateText, inst) {
-              $('#start-date-year').val(dateText.split('/')[2]);
-              $('#start-date-month').val(dateText.split('/')[0]);
-              $('#start-date-day').val(dateText.split('/')[1]);
-          }
-      });
-  }
+  if ($(".add_datepicker").length) {
 
-  if ($("#original-date").length) {
-    $("#original-date").datepicker({
-          buttonImage: "images/calendar-icon.png",
-          buttonImageOnly: true,
-          showOn: 'button',
-          onClose: function(dateText, inst) {
-              $('#original-date-year').val(dateText.split('/')[2]);
-              $('#original-date-month').val(dateText.split('/')[0]);
-              $('#original-date-day').val(dateText.split('/')[1]);
-          }
-      });
-  }
+    $(".add_datepicker").each(function () {
+      var id = $(this).attr('id');
 
-  if ($("#expected-date").length) {
-    $("#expected-date").datepicker({
-          buttonImage: "images/calendar-icon.png",
-          buttonImageOnly: true,
-          showOn: 'button',
-          onClose: function(dateText, inst) {
-              $('#expected-date-year').val(dateText.split('/')[2]);
-              $('#expected-date-month').val(dateText.split('/')[0]);
-              $('#expected-date-day').val(dateText.split('/')[1]);
-          }
+      $(this).datepicker({
+        buttonImage: "/sites/all/themes/itdash/html/images/calendar-icon.png",
+        buttonImageOnly: true,
+        showOn: 'button',
+        onClose: function(dateText, inst) {
+          $('#' + id + '-und-0-value-year').val(dateText.split('/')[2]);
+          $('#' + id + '-und-0-value-month').val(dateText.split('/')[0]);
+          $('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
+        }
       });
+    });
+
   }
   
 	$("#edit-field-project-users-und").multiSelect({
