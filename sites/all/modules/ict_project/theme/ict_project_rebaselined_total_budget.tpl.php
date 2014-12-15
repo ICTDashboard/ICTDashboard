@@ -1,5 +1,4 @@
 
-<strong><?php print $element['#title']; ?></strong>
 <table>
   <tbody>
     <tr>
