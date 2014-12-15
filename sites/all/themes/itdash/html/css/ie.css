@@ -334,5 +334,8 @@ header.php file to see what they are:
 
 
 .lt-ie8 .class { ... }
-
 */
+
+
+.header #logo SPAN { font-size: 28px; }
+#content .project-update-submission TABLE TR TD.text SELECT { width: 100%; max-width: 100%; padding: 0; }

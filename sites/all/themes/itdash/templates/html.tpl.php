@@ -67,7 +67,7 @@
   <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/nv.d3.js"></script>
   <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/d3-timeline.js"></script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--meta name="viewport" content="width=device-width, initial-scale=1.0"/-->
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
 <div id="skip-link">
