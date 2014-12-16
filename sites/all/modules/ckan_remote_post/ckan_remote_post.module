@@ -133,7 +133,7 @@ function submit_key_value($payload){
     $target = Array();
     // TODO: Like in webform, this is not race-condition safe.
     // Switch to using transactions as well?
-    $next_id_query = db_select('ckan_remote_post_targets');
+    $next_id_query = db_select('ckan_remote_post_submissions');
     $next_id_query->addExpression('MAX(id) + 1', 'id');
     $target['id'] = $next_id_query->execute()->fetchField();
     if ($target['id'] == NULL) {
@@ -145,7 +145,7 @@ function submit_key_value($payload){
     $target['payload']= serialize($payload);
     $target['status'] = 'pending';
     $target['result'] = '-';
-    $success = drupal_write_record('ckan_remote_post_targets', $target);
+    $success = drupal_write_record('ckan_remote_post_submissions', $target);
 
   // Write a log if we weren't able to save the target successfully.
     if ($success === FALSE) {
@@ -183,7 +183,7 @@ function submit_key_value($payload){
             ),
             WATCHDOG_WARNING);
         // Update the remote post target:
-        db_update('ckan_remote_post_targets')
+        db_update('ckan_remote_post_submissions')
             ->fields(array(
                 'status' => 'failed',
                 'result' => isset($request->data) ? 'Data:' . $request->data . 'Error:' . $request->error : 'Error:' . $request->error,
@@ -194,7 +194,7 @@ function submit_key_value($payload){
     } else {
 
         // Update the remote post target:
-        db_update('ckan_remote_post_targets')
+        db_update('ckan_remote_post_submissions')
             ->fields(array(
                 'status' => 'complete',
                 'result' => $request->data
@@ -222,7 +222,7 @@ function ckan_remote_post_permission()
 function ckan_submissios_resend($id){
 
   //Get submission
-  $query = db_select('ckan_remote_post_targets', 'fm');
+  $query = db_select('ckan_remote_post_submissions', 'fm');
   $query->fields('fm');
   $query->condition('fm.id', $id, '=');
   $post = $query->execute()->fetchAssoc();
@@ -274,7 +274,7 @@ function ckan_submissios_resend($id){
       ),
       WATCHDOG_WARNING);
     // Update the remote post target:
-    db_update('ckan_remote_post_targets')
+    db_update('ckan_remote_post_submissions')
       ->fields(array(
         'status' => 'failed',
         'result' => isset($request->data) ? 'Data:' . $request->data . 'Error:' . $request->error : 'Error:' . $request->error,
@@ -285,7 +285,7 @@ function ckan_submissios_resend($id){
   } else {
 
     // Update the remote post target:
-    db_update('ckan_remote_post_targets')
+    db_update('ckan_remote_post_submissions')
       ->fields(array(
         'status' => 'complete',
         'result' => $request->data
