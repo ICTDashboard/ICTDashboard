@@ -28,7 +28,7 @@ function ict_project_project_add_block () {
     unset($form['additional_settings']);
     $form['#theme'] = 'ict_project_add_project_form';
     //hide native labels
-    $form['field_government_entity_name']['und']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
+    $form['field_government_entity_name']['und'][0]['value']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
     $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['value']['#title_display'] =
     $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und']['#title_display'] =
     $form['field_project_category']['und']['#title_display'] = $form['field_project_manager']['und'][0]['value']['#title_display'] =

@@ -391,7 +391,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 10,
     ),
   );
 
@@ -437,7 +437,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 35,
+      'weight' => 22,
     ),
   );
 
@@ -490,10 +490,10 @@ function ict_project_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'taxonomy',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 1,
+        'type' => 'text_default',
+        'weight' => 34,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -505,15 +505,18 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_government_entity_name',
     'label' => 'Government entity name',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 1,
     ),
   );
@@ -554,7 +557,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 36,
+      'weight' => 23,
     ),
   );
 
@@ -600,7 +603,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 34,
+      'weight' => 21,
     ),
   );
 
@@ -654,7 +657,7 @@ function ict_project_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 12,
+      'weight' => 9,
     ),
   );
 
@@ -697,7 +700,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 33,
+      'weight' => 20,
     ),
   );
 
@@ -774,7 +777,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -814,7 +817,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -853,7 +856,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 32,
+      'weight' => 19,
     ),
   );
 
@@ -890,7 +893,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 31,
+      'weight' => 18,
     ),
   );
 
@@ -927,7 +930,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 23,
+      'weight' => 13,
     ),
   );
 
@@ -964,7 +967,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 11,
     ),
   );
 
@@ -1017,7 +1020,7 @@ function ict_project_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 28,
+      'weight' => 16,
     ),
   );
 
@@ -1070,7 +1073,7 @@ function ict_project_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 27,
+      'weight' => 15,
     ),
   );
 
@@ -1113,7 +1116,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 21,
+      'weight' => 12,
     ),
   );
 
@@ -1153,7 +1156,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 26,
+      'weight' => 14,
     ),
   );
 
@@ -1207,7 +1210,7 @@ function ict_project_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 11,
+      'weight' => 8,
     ),
   );
 
@@ -1253,7 +1256,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 7,
     ),
   );
 
