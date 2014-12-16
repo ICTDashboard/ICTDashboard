@@ -5,6 +5,7 @@
  */
 
 include_once 'ict_project.features.inc';
+require_once(DRUPAL_ROOT . "/modules/node/node.pages.inc");
 
 /**
  * Implements hook_ctools_plugin_directory().

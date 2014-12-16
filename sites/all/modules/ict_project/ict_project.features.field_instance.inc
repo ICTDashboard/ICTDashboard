@@ -513,7 +513,7 @@ function ict_project_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(),
-      'type' => 'options_select',
+      'type' => 'options_buttons',
       'weight' => 1,
     ),
   );
@@ -530,7 +530,7 @@ function ict_project_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 33,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -541,8 +541,8 @@ function ict_project_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_implementation_partners',
-    'label' => 'Implementation Partners',
-    'required' => 1,
+    'label' => 'Implementation Partners?',
+    'required' => 0,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -551,10 +551,10 @@ function ict_project_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'size' => 60,
       ),
-      'type' => 'text_textarea',
-      'weight' => 15,
+      'type' => 'text_textfield',
+      'weight' => 36,
     ),
   );
 
@@ -1265,7 +1265,7 @@ function ict_project_field_default_field_instances() {
   t('Government entity business group, division, & branch ');
   t('Government entity name');
   t('Government programme (if applicable) ');
-  t('Implementation Partners');
+  t('Implementation Partners?');
   t('Internal FTE');
   t('Opex');
   t('Original Total project budget by FY (predicted & past)');
