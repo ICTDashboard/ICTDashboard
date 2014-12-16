@@ -14,7 +14,7 @@ function ict_dashboard_data_push_rules_views_default_views() {
   $view->name = 'ckan_submission_result';
   $view->description = '';
   $view->tag = 'default';
-  $view->base_table = 'ckan_remote_post_targets';
+  $view->base_table = 'ckan_remote_post_submissions';
   $view->human_name = 'Ckan submission result';
   $view->core = 7;
   $view->api_version = '3.0';
@@ -40,33 +40,33 @@ function ict_dashboard_data_push_rules_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: CKAN: Unique identifier */
   $handler->display->display_options['fields']['id']['id'] = 'id';
-  $handler->display->display_options['fields']['id']['table'] = 'ckan_remote_post_targets';
+  $handler->display->display_options['fields']['id']['table'] = 'ckan_remote_post_submissions';
   $handler->display->display_options['fields']['id']['field'] = 'id';
   $handler->display->display_options['fields']['id']['label'] = 'ID';
   /* Field: CKAN: Date created */
   $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
-  $handler->display->display_options['fields']['timestamp']['table'] = 'ckan_remote_post_targets';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'ckan_remote_post_submissions';
   $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['alter']['text'] = '<?php eco "asdasd"; ?>';
   /* Field: CKAN: Submission URL */
   $handler->display->display_options['fields']['url']['id'] = 'url';
-  $handler->display->display_options['fields']['url']['table'] = 'ckan_remote_post_targets';
+  $handler->display->display_options['fields']['url']['table'] = 'ckan_remote_post_submissions';
   $handler->display->display_options['fields']['url']['field'] = 'url';
   /* Field: CKAN: Submission data */
   $handler->display->display_options['fields']['payload']['id'] = 'payload';
-  $handler->display->display_options['fields']['payload']['table'] = 'ckan_remote_post_targets';
+  $handler->display->display_options['fields']['payload']['table'] = 'ckan_remote_post_submissions';
   $handler->display->display_options['fields']['payload']['field'] = 'payload';
   /* Field: CKAN: Submission Header */
   $handler->display->display_options['fields']['header']['id'] = 'header';
-  $handler->display->display_options['fields']['header']['table'] = 'ckan_remote_post_targets';
+  $handler->display->display_options['fields']['header']['table'] = 'ckan_remote_post_submissions';
   $handler->display->display_options['fields']['header']['field'] = 'header';
   /* Field: CKAN: Submission status */
   $handler->display->display_options['fields']['status']['id'] = 'status';
-  $handler->display->display_options['fields']['status']['table'] = 'ckan_remote_post_targets';
+  $handler->display->display_options['fields']['status']['table'] = 'ckan_remote_post_submissions';
   $handler->display->display_options['fields']['status']['field'] = 'status';
   /* Field: CKAN: Result */
   $handler->display->display_options['fields']['result']['id'] = 'result';
-  $handler->display->display_options['fields']['result']['table'] = 'ckan_remote_post_targets';
+  $handler->display->display_options['fields']['result']['table'] = 'ckan_remote_post_submissions';
   $handler->display->display_options['fields']['result']['field'] = 'result';
 
   /* Display: Page */

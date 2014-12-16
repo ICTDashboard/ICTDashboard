@@ -2,7 +2,7 @@
 
 function ckan_remote_post_views_data() {
 
-  $tableName = 'ckan_remote_post_targets';
+  $tableName = 'ckan_remote_post_submissions';
   $data = array();
   $data[$tableName]['table']['group'] = t('CKAN');
 

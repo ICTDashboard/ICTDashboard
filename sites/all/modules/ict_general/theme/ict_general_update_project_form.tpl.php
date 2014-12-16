@@ -43,16 +43,18 @@
 														$form[$key][$fname]['month']['#wrapper_class'][] = 
 														$form[$key][$fname]['year']['#wrapper_class'][] = 'd-1of3'; //styling - 3 in row
                             $form[$key][$fname]['year']['#wrapper_class'][] = 'last-col';
+                            $second_row .= '<input type="hidden" id="start-date">';
 														$second_row .=	render($form[$key][$fname]['day']).
 																render($form[$key][$fname]['month']).
 																render($form[$key][$fname]['year']);
 													break;
 												}
-												if ($second_row) 
+												if ($second_row)
+                          $row = ($fname == 'current_expected_completion_date') ? '</td><td class="text date">' : '</td><td class="text">';
 													print	'<tr><td class="label">'.
 															$form[$key][$fname]['#title'].
 															$tmp_desc.
-															'</td><td class="text">'.
+                              $row .
 															$second_row.
 															'</td></tr>';
 											}

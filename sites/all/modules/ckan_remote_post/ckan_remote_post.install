@@ -12,7 +12,7 @@ function ckan_remote_post_schema()
 {
     $schema = array();
 
-    $schema['ckan_remote_post_targets'] = array(
+    $schema['ckan_remote_post_submissions'] = array(
         'description' => 'Holds information regarding submission forwards that should be sent for each valid form submission',
         'fields' => array(
 

@@ -74,15 +74,11 @@ input.password-confirm:focus
 
 #edit-field-rebaselined-total-budget table, #edit-field-rebaselined-total-budget th,  div#edit-field-rebaselined-total-budget td,
 #edit-field-original-total-budget table, #edit-field-original-total-budget th,  div#edit-field-original-total-budget td {
-  border: 1px solid black;
-  margin: 0;
-  padding: 0 !important;
+ 
 }
 
 .field-name-field-total input {
-  height: 70px;
-  padding: 0;
-  margin: 0;
+
 }
 
 div#edit-field-original-total-budget td,
