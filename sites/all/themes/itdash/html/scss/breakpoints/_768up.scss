@@ -20,7 +20,7 @@ GENERAL STYLES
 body {
 	font-size: 13px;
 	background-color: #e5eaf3;
-	font-family: 'open_sansregular';
+	font-family: $opensans;
 }
 
 html, body, #container { height: 100%; }
@@ -52,13 +52,13 @@ HEADER STYLES
 		img { float: left; margin-right: 15px; }
 		
 		span {
-			font-family: 'open_sanslight';
+			font-weight: 300;
 			display: inline-block;
 			margin-top: 5px;
 			font-style: normal;
 			
 			strong {
-				font-family: 'open_sansbold';
+				font-weight: 700;
 				font-family: $ptsans;
 			}
 		}
@@ -87,7 +87,7 @@ CONTENT STYLES
 			h1 {
 				color: #c8f68f;
 				font-size: 34px;
-				font-family: 'open_sansregular';
+				font-weight: 400;
 			}
 		}
 	}
@@ -172,7 +172,7 @@ CONTENT STYLES
 				h3 {
 					font-size: 18px;
 					color: #202b3d;
-					font-family: 'open_sanssemibold';
+					font-weight: 600;
 					margin: 10px 15px;
 				}
 				
@@ -188,7 +188,7 @@ CONTENT STYLES
 						color: #117e99;
 						font-size: 14px;
 						text-transform: uppercase;
-						font-family: 'open_sanssemibold';
+						font-weight: 600;
 					}
 					p {
 						-moz-hyphens: none;
@@ -301,7 +301,7 @@ CONTENT STYLES
 						border-left: 1px solid #0a5f74;
 						border-top: 1px solid #137992;
 						font-size: 15px;
-						font-family: 'open_sansbold';
+						font-weight: 700;
 						color: $white;
 						
 						a{ float: right; color: $white; text-align: right;
@@ -334,7 +334,7 @@ CONTENT STYLES
 							
 							a {
 								font-size: 14px;
-								font-family: 'open_sanssemibold';
+								font-weight: 600;
 								color: #0d6c88;
 								text-decoration: none;
 							}
@@ -357,7 +357,7 @@ CONTENT STYLES
 								line-height: 30px;
 								border-radius: 4px;
 								border: 1px solid #d5dae5;
-								font-family: 'open_sanssemibold';
+								font-weight: 600;
 								position: relative;
 								margin: 0;
 								padding: 0;
@@ -420,7 +420,7 @@ CONTENT STYLES
 				td {
 					padding-bottom: 15px;
 					&.label {
-						font-family: 'open_sansbold';
+						font-weight: 700;
 						color: #202b3d;
 						vertical-align: top;
 						width: 200px;
@@ -449,7 +449,7 @@ CONTENT STYLES
 		&.status {}
 		&.metrics {
 			h3 {
-				font-family: 'open_sansbold';
+				font-weight: 700;
 				font-size: 14px;
 				color: #202b3d;
 				margin-top: 0;
@@ -466,7 +466,7 @@ CONTENT STYLES
 						background-color: #137992;
 						border-left: 1px solid #0a5f74;
 						font-size: 15px;
-						font-family: 'open_sansbold';
+						font-weight: 700;
 						color: $white;
 						vertical-align: top;
 
@@ -506,13 +506,13 @@ CONTENT STYLES
 					vertical-align: middle;
 					
 					&.label {
-						font-family: 'open_sansbold';
+						font-weight: 700;
 						color: #202b3d;
 						width: 295px;
 						padding-right: 15px;
 						
 						em { font-style: italic; }
-						span { font-style: italic; font-family: 'open_sansregular'; display: block;}
+						span { font-style: italic; font-weight: 400; display: block;}
 						
 						&.vtop { vertical-align: top; }
 					}
@@ -568,7 +568,7 @@ CONTENT STYLES
 								max-width: 105%;
 								width: 105%;
 								position: relative;
-								z-index: 99;
+								z-index: 1;
 								border: 0 none;
 								
 								option { font-style: normal; }
@@ -579,6 +579,59 @@ CONTENT STYLES
 							
 							input[type="radio"] {
 								margin-right: 15px;
+							}
+						}
+						
+						table {
+							width: 100%;
+							border-bottom: 1px solid #abb6cb;
+							border-collapse:separate;
+							font-size: 14px;
+							
+							tr {
+								th {
+									text-align: left;
+									padding: 8px;
+									background-color: #137992;
+									border-left: 1px solid #0a5f74;
+									font-size: 15px;
+									font-weight: 700;
+									color: $white;
+									vertical-align: top;
+									text-shadow: 0 0 0;
+									font-weight: 700;
+									text-align: center;
+
+									&:first-child { border-radius: 4px 0 0; border-left: 0 none; }
+									&:last-child { border-radius: 0 4px 0 0 }
+								}
+								td {
+									border-left: 1px solid #abb6cb;
+									border-top: 1px solid #abb6cb;
+									padding: 0;
+									color: #202b3d;
+									background: #c8d0de;
+									width: 110px;
+									height: 38px;
+									text-align: center;
+									
+									input[type="text"] {
+										border: 0 none;
+										width: 100%;
+										height: 38px;
+										
+										&:hover, &:focus {
+											border: 0 none;
+										}
+									}
+									
+									&:first-child { border-left: 1px solid #abb6cb; }
+									&:last-child { border-right: 1px solid #abb6cb; }
+								}
+								
+								&:nth-child(2) {
+									td { border-top: 0 none; }
+								}
 							}
 						}
 					}
@@ -668,7 +721,7 @@ CONTENT STYLES
 		&>h2 {
 			color: #0d6c88;
 			font-size: 26px;
-			font-family: 'open_sanssemibold';
+			font-weight: 600;
 			border-bottom: 1px solid #d6ddeb;
 			padding-bottom: 10px;
 		}
@@ -680,7 +733,7 @@ CONTENT STYLES
 				p {
 					label {
 						font-size: 14px;
-						font-family: 'open_sansbold';
+						font-weight: 700;
 						color: #202b3d;
 						
 						span { color: #ee2a24; }
@@ -725,7 +778,7 @@ CONTENT STYLES
 							max-width: 105%;
 							width: 105%;
 							position: relative;
-							z-index: 99;
+							z-index: 1;
 							
 							option { font-style: normal; }
 						}
@@ -751,7 +804,8 @@ CONTENT STYLES
 				}
 				.description {
 					font-size: 13px;
-					font-family: 'open_sansitalic';
+					font-weight: 400;
+					font-style: italic;
 				}
 			}
 		}
@@ -772,7 +826,7 @@ CONTENT STYLES
 					a {
 						text-decoration: none;
 						font-size: 18px;
-						font-family: 'open_sanssemibold';
+						font-weight: 600;
 						color: #0d6c88;
 						border-top: 1px solid transparent;
 						border-left: 1px solid transparent;
@@ -833,7 +887,7 @@ CONTENT STYLES
 						p {
 							label {
 								font-size: 14px;
-								font-family: 'open_sansbold';
+								font-weight: 700;
 								color: #202b3d;
 								
 								span { color: #ee2a24; }
@@ -905,7 +959,7 @@ CONTENT STYLES
 				background: url(../images/event-bg.png) repeat scroll center 0 $red;
 				padding: 25px 0;
 				h1 {
-					font-family: 'open_sanssemibold';
+					font-weight: 600;
 					font-size: 27px;
 					color: $white;
 				}
@@ -915,7 +969,7 @@ CONTENT STYLES
 				
 				a { text-decoration: none; }
 				h2, h3, h4 {
-					font-family: 'open_sanssemibold';
+					font-weight: 600;
 					margin: 0 0 .5em;
 				}
 				h2 { font-size: 21px; color: $red; }
@@ -988,7 +1042,7 @@ NAVIGATION STYLES
 			border-bottom: 0 none;
 			color: #ffffff;
 			font-size: 15px;
-			font-family: 'open_sanssemibold';
+			font-weight: 600;
 			padding: 44px 0;
 			text-align: center;
 
@@ -1121,7 +1175,7 @@ LOGIN AND REGISTER
 			float: left;
 			a {
 				font-size: 15px;
-				font-family: 'open_sanssemibold';
+				font-weight: 600;
 				text-decoration: none;
 				text-align: center;
 				line-height: 37px;
@@ -1328,7 +1382,7 @@ GENERAL STYLES
 		text-align: center;
 		color: $white;
 		font-size: 14px;
-		font-family: 'open_sansbold';
+		font-weight: 700;
 		border-radius: 4px;
 		line-height: 40px;
 		position: relative;
@@ -1346,7 +1400,7 @@ GENERAL STYLES
 			top: 0;
 			bottom: 0;
 			right: 15px;
-			font-family: 'open_sansregular';
+			font-weight: 400;
 			font-size: 28px;
 			color: $yellow-text;
 		}
@@ -1360,7 +1414,6 @@ GENERAL STYLES
 			top: 0;
 			bottom: 0;
 			right: 20px;
-			font-family: 'open_sansregular';
 			font-size: 24px;
 			color: $yellow-text;
 		}

@@ -6,7 +6,7 @@ a.multiSelect {
     display: inline-block;
     height: 36px;
     line-height: 36px;
-    margin-top: 10px;
+    margin-top: 0;
     padding: 0 2%;
     position: relative;
     text-decoration: none;
