@@ -41,7 +41,7 @@ function ckan_remote_post_rules_action_remote_post($nid, $sid){
   $string = "";
 
   $node = node_load($nid);
-    if ($node->type == 'webform') {
+    if ($node && $node->type == 'webform') {
         $submission =  webform_get_submission($nid, $sid);
         // Skip draft forms:
         if ($submission->is_draft) {
@@ -81,16 +81,40 @@ function ckan_remote_post_rules_action_remote_post($nid, $sid){
             $payload['project'] = $project->title;
         }
         submit_key_value($payload);
-    } else {
+    } else if ($node && $node->type == 'project') {
         $payload = Array();
         //$data=field_info_instances("node",$node-type);
         //where $source_node_type is the type of the node (not its name).
         // https://api.drupal.org/api/drupal/modules%21field%21field.info.inc/function/field_info_fields/7
         foreach ($node as $field_name => $field) {
+            if ($field_name == 'field_mid_project') {
+                $project_id = $field['und'][0]['value'];
+                $project = node_load($project_id);
+                $payload['project'] = $project->title;
+            } else if (strpos($field_name,"field_") !== false) {
+                $field_name = str_replace("field_", "", $field_name);
+                if (isset($field['und'][0]['value'])) {
+                    $payload[$field_name] = $field['und'][0]['value'];
+                } else if (isset($field['und'][0]['tid'])) {
+                    $term = taxonomy_term_load($field['und'][0]['tid']);
+                    $payload[$field_name] = $term->name;
+                }
+            }
+        }
+        submit_key_value($payload);
+    } else if ($nid == ""){
+        $entityform_id = $sid; // entity form id
+        $entityform = entityform_load($entityform_id);
+        $entityform_wrapper = entity_metadata_wrapper('entityform', $entityform);
+        $payload = Array();
+        //$data=field_info_instances("node",$node-type);
+        //where $source_node_type is the type of the node (not its name).
+        // https://api.drupal.org/api/drupal/modules%21field%21field.info.inc/function/field_info_fields/7
+        foreach ($entityform as $field_name => $field) {
             if ($field_name == 'title') {
                 $payload['project'] = $field;
             } else if (strpos($field_name,"field_") !== false) {
-                $field_name = str_replace("field_", "", $field_name);
+                $field_name = str_replace(array("field_","mid_",'end_'), "", $field_name);
                 if (isset($field['und'][0]['value'])) {
                     $payload[$field_name] = $field['und'][0]['value'];
                 } else if (isset($field['und'][0]['tid'])) {
