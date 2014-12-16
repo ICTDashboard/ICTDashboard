@@ -202,6 +202,22 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_end_project_status']['und']['#title_display'] =
     $form['field_end_agency_comments']['und'][0]['value']['#title_display'] =
       'invisible';
+
+    // Open the file for writing.
+    $fields = array();
+    $exclude = array('field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    foreach(element_children($form) as $field) {
+      if(!in_array($field, $exclude)) {
+        $fields[] = $field;
+      }
+    }
+
+    $file_path = drupal_get_path('module', 'ict_project') . '/export_end.csv';
+    $fh = fopen($file_path, 'w');
+    fputcsv($fh, $fields);
+    // Close & save the file.
+    fclose($fh);
+    file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_REPLACE);
   }
 }
 
