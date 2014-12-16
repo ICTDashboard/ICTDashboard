@@ -219,8 +219,34 @@
             ?>
           </td>
         </tr>
-
       </table>
+
+
+      <h2>Submit CSV</h2>
+      <table>
+        <tr>
+          <td class="label">
+            Export form fields as CSV file
+          </td>
+          <td class="text">
+            <?php print l(t('Export'), file_create_url('public://export_end.csv'), array('attributes' => array('class' => 'export-btn')));?>
+          </td>
+        </tr>
+        <tr>
+          <td class="label">
+            CSV File
+            <span>Enter path to CSV file</span>
+          </td>
+          <td class="text">
+            <label class="myFile">
+              <?php print render($form['field_end_csv_file']);?>
+              <span>Choose file</span>
+            </label>
+          </td>
+        </tr>
+      </table>
+
+
       <div style="display:none;">
         <?php
         print drupal_render_children($form);

@@ -91,3 +91,12 @@ div#edit-field-rebaselined-total-budget td {
   padding: 0;
   height: 54px;
 }
+
+.myFile .description, .myFile label  {
+  display: none;
+}
+
+#edit-field-mid-csv-file-und-0-upload-button {
+  position: absolute;
+  top: 40px;
+}
