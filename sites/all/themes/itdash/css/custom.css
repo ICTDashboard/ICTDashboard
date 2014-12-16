@@ -9,7 +9,7 @@
 ul#main-menu li {list-style: none;}
 .header {position: relative;z-index: 99;}
 #content #project-listings .project-lists table tr td.title,
-#content #project-listings .project-lists table tr th:first-child { }
+#content #project-listings .project-lists table tr th:first-child {width: 490px;}
 .profile h3 {border: none;}
 
 #content #inner-content .register-form form p input[type="password"],

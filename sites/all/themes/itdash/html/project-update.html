@@ -32,7 +32,6 @@
 				<nav role="navigation" id="navigation">
 					<ul id="main-menu" class="nav">
 						<li class="blue"><a href="#">Home</a></li>
-						<li class="blue-green"><a href="#">About</a></li>
 						<li class="green"><a href="#">Projects</a></li>
 						<li class="yellow-green"><a href="#">Dashboard</a></li>
 					</ul>
@@ -75,7 +74,7 @@
 							<tr>
 								<td class="label">Current Expected Completion Date</td>
 								<td class="text date">
-									<input type="hidden" id="expected-date" />
+									<input type="hidden" id="expected-date" class="add_datepicker" />
 									<div class="d-1of3 t-1of3">
 										<span class="select">
 											<select id="expected-date-day">
@@ -188,21 +187,29 @@
 						</table>
 						
 						<h2>Submit CSV</h2>
-						<table>
+						<table cellspacing="0" cellpadding="0" border="0">
 							<tr>
-								<td class="label">Export form fields as CSV file</td>
-								<td class="text"><a href="/form_csv_export/1662">Export</a></td>
+								<td class="label">Export from fields from CSV file</td>
+								<td class="text">
+									<a href="#" class="export-btn">Export</a>         
+								</td>
 							</tr>
 							<tr>
-								<td class="label">CSV file <span>Enter path to CSV file</span></td>
+								<td class="label">CSV File <span>Enter path to CSV file.</span></td>
 								<td class="text">
-									<div class="form-item form-type-file form-item-files-csv-file">
-										<input type="file" id="edit-csv-file" name="files[csv_file]" size="15" class="form-file">
-									</div>
+									<div class="field-type-number-decimal field-name-field-end-external-fte field-widget-number form-wrapper" id="edit-field-end-external-fte">
+										<div id="field-end-external-fte-add-more-wrapper">
+											<label class="myFile">
+												<input type="file" required/>
+												<span>Choose file</span>
+											</label>
+										</div>
+									</div>          
 								</td>
 							</tr>
 						</table>
 						<p class="submit"><input type="submit" /></p>
+						
 					</form>
 				</div>
 
