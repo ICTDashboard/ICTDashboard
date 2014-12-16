@@ -628,7 +628,9 @@ CONTENT STYLES
 									&:last-child { border-right: 1px solid #abb6cb; }
 								}
 								
-								
+								&:nth-child(2) {
+									td { border-top: 0 none; }
+								}
 							}
 						}
 					}
