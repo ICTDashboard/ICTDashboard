@@ -1,4 +1,4 @@
-<table>
+<table id="<?php print $element['#field_name'];?>">
   <tbody>
     <tr>
       <th></th>
@@ -16,26 +16,26 @@
         </td>
       <?php endforeach; ?>
     </tr>
-    <tr>
+    <tr class="sum">
       <td><?php print t('Opex'); ?></td>
-      <?php foreach (element_children($element) as $item) : ?>
-        <td>
+      <?php foreach (element_children($element) as $key => $item) : ?>
+        <td data-sum="<?php print $key;?>" class="opex">
           <?php print drupal_render($element[$item]['field_opex']); ?>
         </td>
       <?php endforeach; ?>
     </tr>
-    <tr>
+    <tr class="sum">
       <td><?php print t('Capex'); ?></td>
-      <?php foreach (element_children($element) as $item) : ?>
-        <td>
+      <?php foreach (element_children($element) as $key => $item) : ?>
+        <td data-sum="<?php print $key;?>" class="capex">
           <?php print drupal_render($element[$item]['field_capex']); ?>
         </td>
       <?php endforeach; ?>
     </tr>
     <tr>
       <td><?php print t('Total'); ?></td>
-      <?php foreach (element_children($element) as $item) : ?>
-        <td>
+      <?php foreach (element_children($element) as $key => $item) : ?>
+        <td data-sum="<?php print $key;?>" class="total">
           <?php print drupal_render($element[$item]['field_total']); ?>
         </td>
       <?php endforeach; ?>
