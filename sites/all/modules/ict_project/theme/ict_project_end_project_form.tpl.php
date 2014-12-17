@@ -1,6 +1,6 @@
 <div class="page-title dotbg">
 	<div class="inner-title-content wrap cf">
-		<h1>ICT Project Submission Form</h1>
+		<h1>Update project</h1>
 	</div>
 </div>
 <div id="inner-content" class="wrap cf">
