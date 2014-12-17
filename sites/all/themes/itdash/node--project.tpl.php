@@ -86,7 +86,7 @@
               <tr><td colspan="2"><div class="dotted-line"></div></td></tr>
               <tr>
                 <td class="label">Original total project budget <em>($m)</em></td>
-                <td class="text"><?php print $node->field_total_project_budget['und'][0]['value'].'$'; ?></td>
+                <td class="text"><?php print ((int)$node->field_total_project_budget['und'][0]['value']).'$'; ?></td>
               </tr>
               <tr>
                 <td class="label">Original Total project budget by FY <em>(predicted & past)</em></td>
