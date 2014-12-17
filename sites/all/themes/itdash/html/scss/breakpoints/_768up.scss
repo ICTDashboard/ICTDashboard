@@ -733,8 +733,8 @@ CONTENT STYLES
 										}
 										
 										select {
-											max-width: 117px;
-											width: 117px;
+											max-width: 117%;
+											width: 117%;
 										}
 									}
 									
@@ -742,6 +742,8 @@ CONTENT STYLES
 										width: 110px !important;
 										max-width: 110px !important;
 									}
+									
+									&.field-multiple-drag { display: none; }
 								}
 							}
 						}
