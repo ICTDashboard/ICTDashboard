@@ -106,3 +106,8 @@ div#edit-field-rebaselined-total-budget td {
     border-bottom: 1px solid #d6ddeb;
     padding-bottom: 10px;
 }
+.page-dashboard .field {
+    max-width: none;
+    line-height: 25px;
+}
+#content .project-categories .box .inner-box .text {min-height: 105px;}
