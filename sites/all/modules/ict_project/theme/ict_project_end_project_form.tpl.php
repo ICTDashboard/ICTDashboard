@@ -1,6 +1,6 @@
 <div class="page-title dotbg">
 	<div class="inner-title-content wrap cf">
-		<h1>ICT Project Submission Form</h1>
+		<h1>Update project</h1>
 	</div>
 </div>
 <div id="inner-content" class="wrap cf">
@@ -112,6 +112,19 @@
           <td class="text">
             <?php
             print render($form['field_end_total_project_current']);
+            ?>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_end_predicted_budget']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_end_predicted_budget']);
             ?>
           </td>
         </tr>
