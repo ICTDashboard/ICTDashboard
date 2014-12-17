@@ -13,7 +13,9 @@
       $("#" + table +' td.total').each(function(i){
         var sum = parseFloat($("#" +table+" td.opex[data-sum='" + i + "']").find('.form-text').val())+parseFloat($("#" +table+ " td.capex[data-sum='" + i + "']").find('.form-text').val());
         var total =  (sum === parseFloat(sum, 10)) ? sum : '';
-        $(this).find('.form-text').val(total.toFixed(2));
+        if (total) {
+          $(this).find('.form-text').val(Number(total).toFixed(2));
+        }
       });
 
     });
