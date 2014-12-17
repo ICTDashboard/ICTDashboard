@@ -337,5 +337,14 @@ function ict_project_bracket_italics ($string) {
   return $string;
 }
 
+/*
+ * Implements hook_node_insert()
+ */
+function ict_project_node_insert (&$node) {
+  if ($node->type == 'project') {
+    $node->status = 1;
+  }
+}
+
 
 
