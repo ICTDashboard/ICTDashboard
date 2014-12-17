@@ -193,10 +193,6 @@
                 <td class="label">External FTE</td>
                 <td class="text"><?php print $node->field_external_fte['und'][0]['value']; ?></td>
               </tr>
-              <tr>
-                <td class="label">Users</td>
-                <td class="text"><?php print $node->field_project_users['und'][0]['value']; ?></td>
-              </tr>
             </tbody>
           </table>
         </div>
