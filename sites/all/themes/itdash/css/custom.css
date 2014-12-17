@@ -62,8 +62,7 @@ input.password-confirm:focus
 #edit-field-original-total-budget input,
 #edit-field-rebaselined-total-budget input {
   background-color: #fff;
-  border:none;
-  border-radius: 0;
+
 }
 
 #project-node-form select#edit-field-project-users-und {

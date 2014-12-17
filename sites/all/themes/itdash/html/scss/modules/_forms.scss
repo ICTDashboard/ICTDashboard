@@ -36,6 +36,24 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 select,
+textarea{
+  border: solid 1px black;
+}
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+select,
 textarea,
 .field {
   display: block;
@@ -48,17 +66,17 @@ textarea,
   border-radius: 3px;
   vertical-align: middle;
   box-shadow: none;
-  border: 0;
   width: 100%;
   max-width: 400px;
   font-family: $lato;
-  background-color: $gray;
+  background-color: $white;
+
   @include transition(background-color 0.24s ease-in-out);
 
   // a focused input (or hovered on)
   &:focus,
   &:active {
-    background-color: lighten($gray, 4%);
+    background-color: lighten($white, 4%);
   } // end hover or focus
 
   // error notification
