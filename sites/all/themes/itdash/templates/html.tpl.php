@@ -66,6 +66,12 @@
   <link href="/<?php print drupal_get_path('theme', 'itdash'); ?>/css/nv.d3.css" rel="stylesheet">
   <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/nv.d3.js"></script>
   <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/d3-timeline.js"></script>
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/flashcanvas.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/flotr2.min.js"></script>
+  <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/moment.min.js"></script>
+  <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/jquery.fn.gantt.js"></script>
 
   <!--meta name="viewport" content="width=device-width, initial-scale=1.0"/-->
 </head>

@@ -44,6 +44,42 @@ function ict_entity_forms_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'entityform-ict_form-field_mid_csv_file'
+  $field_instances['entityform-ict_form-field_mid_csv_file'] = array(
+    'bundle' => 'ict_form',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 15,
+      ),
+    ),
+    'entity_type' => 'entityform',
+    'field_name' => 'field_mid_csv_file',
+    'label' => 'CSV File',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'csv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 16,
+    ),
+  );
+
   // Exported field_instance: 'entityform-ict_form-field_mid_expected_project'
   $field_instances['entityform-ict_form-field_mid_expected_project'] = array(
     'bundle' => 'ict_form',
@@ -606,6 +642,42 @@ function ict_entity_forms_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'entityform-itc_form_end-field_end_csv_file'
+  $field_instances['entityform-itc_form_end-field_end_csv_file'] = array(
+    'bundle' => 'itc_form_end',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 15,
+      ),
+    ),
+    'entity_type' => 'entityform',
+    'field_name' => 'field_end_csv_file',
+    'label' => 'CSV File',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'csv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 16,
+    ),
+  );
+
   // Exported field_instance: 'entityform-itc_form_end-field_end_expected_project'
   $field_instances['entityform-itc_form_end-field_end_expected_project'] = array(
     'bundle' => 'itc_form_end',
@@ -1139,6 +1211,7 @@ function ict_entity_forms_field_default_field_instances() {
   t('% Predicted project benefit realised ($m, as identified in business case) ');
   t('% Project completed ');
   t('Agency comments');
+  t('CSV File');
   t('Expected project completion date');
   t('External FTE');
   t('Internal FTE');
