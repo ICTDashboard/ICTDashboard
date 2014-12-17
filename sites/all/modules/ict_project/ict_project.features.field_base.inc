@@ -210,11 +210,9 @@ function ict_project_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_internal_fte'
@@ -467,9 +465,9 @@ function ict_project_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'green' => 'green',
-        'amber' => 'amber',
-        'red' => 'red',
+        'green' => 'Green',
+        'amber' => 'Amber',
+        'red' => 'Red',
       ),
       'allowed_values_function' => '',
     ),

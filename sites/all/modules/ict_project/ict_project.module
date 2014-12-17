@@ -218,6 +218,22 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     // Close & save the file.
     fclose($fh);
     file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_REPLACE);
+
+
+    $form['field_end_predicted_budget']['und']['#theme'] = 'ict_project_end_predicted_budget';
+
+    // Start year should be set via CMS
+    $start_year = variable_get('ict_dashboard_project_start_year', 13);
+
+    foreach (element_children($form['field_end_predicted_budget']['und']) as $item) {
+      foreach (element_children($form['field_end_predicted_budget']['und'][$item]) as $sub_item) {
+        $form['field_end_predicted_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
+      }
+      $form['field_end_predicted_budget']['und'][$item]['field_predicted_year']['#default_value'] = $start_year . '/' . ++$start_year;
+    }
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
+    );
   }
 }
 
@@ -234,6 +250,11 @@ function ict_project_theme () {
     ),
     'ict_project_rebaselined_total_budget' => array(
       'template' => 'ict_project_rebaselined_total_budget',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'render element' => 'element',
+    ),
+    'ict_project_end_predicted_budget' => array(
+      'template' => 'ict_project_end_predicted_budget',
       'path' => drupal_get_path('module', 'ict_project') . '/theme',
       'render element' => 'element',
     ),
@@ -297,6 +318,14 @@ function ict_project_get_project() {
     ->fetchAllKeyed();
 
   return $projects;
+}
+
+function ict_project_bracket_italics ($string) {
+  $source = explode('(', $string);
+
+  $string = $source[0] . '<em>(' . $source[1] . '</em>';
+
+  return $string;
 }
 
 

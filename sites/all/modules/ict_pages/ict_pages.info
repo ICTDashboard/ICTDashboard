@@ -1,7 +1,7 @@
 name = ICT PAges
 core = 7.x
 package = ICT Dashboard
-version = 7.x-2.2
+version = 7.x-2.3
 project = ict_pages
 dependencies[] = ctools
 dependencies[] = features
@@ -16,4 +16,4 @@ features[page_manager_handlers][] = site_template_panel_context
 features[page_manager_pages][] = dashboard
 features[page_manager_pages][] = home_page
 features[page_manager_pages][] = project_add
-mtime = 1418637267
+mtime = 1418670047

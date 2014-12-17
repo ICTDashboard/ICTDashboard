@@ -35,8 +35,9 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_program_name']['und']['#title'];
+              print ict_project_bracket_italics ($form['field_program_name']['und']['#title']);
             ?>
+            <?php ?>
           </td>
           <td class="text">
             <?php
@@ -195,7 +196,7 @@
 				<tr>
 					<td class="label">
 						<?php
-							print substr($form['field_total_project_budget']['und']['#title'], 0, 22).'<em>'.substr($form['field_total_project_budget']['und']['#title'], 22, -1).'</em>'.substr($form['field_total_project_budget']['und']['#title'], -1);
+							print ict_project_bracket_italics ($form['field_total_project_budget']['und']['#title']);
 						?>
 					</td>
 					<td class="text">
@@ -207,7 +208,7 @@
 
         <tr>
           <td class="label">
-            <?php print $form['field_original_total_budget']['und']['#title']; ?>
+            <?php print ict_project_bracket_italics ($form['field_original_total_budget']['und']['#title']); ?>
           </td>
           <td class="text">
             <?php
@@ -219,7 +220,7 @@
         <tr>
           <td class="label">
             <?php
-            print substr($form['field_rebaselined_total_project']['und']['#title'], 0, 33).'<em>'.substr($form['field_rebaselined_total_project']['und']['#title'], 33, -1).'</em>'.substr($form['field_rebaselined_total_project']['und']['#title'], -1);
+            print ict_project_bracket_italics ($form['field_rebaselined_total_project']['und']['#title']);
             ?>
           </td>
           <td class="text">
@@ -232,7 +233,7 @@
 
         <tr>
           <td class="label">
-            <?php print $form['field_rebaselined_total_budget']['und']['#title']; ?>
+            <?php print ict_project_bracket_italics ($form['field_rebaselined_total_budget']['und']['#title']); ?>
           </td>
           <td class="text">
             <?php
