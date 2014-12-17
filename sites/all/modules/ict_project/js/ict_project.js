@@ -4,6 +4,10 @@
     $("td.total input").attr('readonly', true);
 
 
+    $('.date-day .form-select option:first').text('Day');
+    $('.date-month .form-select option:first').text('Month');
+    $('.date-year .form-select option:first').text('Year');
+
     $('tr.sum input.form-text').keyup(function(){
       var table = $(this).parents('table').attr('id');
       $("#" + table +' td.total').each(function(i){
