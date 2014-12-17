@@ -41,7 +41,7 @@
             ?>
           </td>
           <td class="text date">
-            <input type="hidden" id="start-date">
+            <input type="hidden" class="add_datepicker" id="<?php print $form['field_end_expected_project']['#id']; ?>">
             <?php
             print render($form['field_end_expected_project']['und'][0]['value']['day']);
             print render($form['field_end_expected_project']['und'][0]['value']['month']);
