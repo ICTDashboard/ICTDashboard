@@ -28,9 +28,6 @@
               }
             ?>
           </pre> 
-          <?php 
-          dsm($node); 
-          ?>
           <table>
             <tbody>
               <tr>
@@ -64,11 +61,11 @@
               </tr>
               <tr>
                 <td class="label">Rebaselined project start date</td>
-                <td class="text"><?php print $node->field_rebaselined_project_start['und'][0]['value']; ?></td>
+                <td class="text"><?php print date_format(date_create($node->field_rebaselined_project_start['und'][0]['value']), 'd M Y'); ?></td>
               </tr>
               <tr>
                 <td class="label">Rebaselined project completion date</td>
-                <td class="text"><?php print $node->field_rebaselined_project_compl['und'][0]['value']; ?></td>
+                <td class="text"><?php print date_format(date_create($node->field_rebaselined_project_compl['und'][0]['value']), 'd M Y'); ?></td>
               </tr>
               <tr>
                 <td class="label">Project stage</td>
