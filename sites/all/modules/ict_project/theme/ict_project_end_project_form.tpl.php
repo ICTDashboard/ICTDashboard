@@ -119,6 +119,19 @@
         <tr>
           <td class="label">
             <?php
+            print $form['field_end_predicted_budget']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_end_predicted_budget']);
+            ?>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            <?php
             print $form['field_end_project_completed']['und']['#title'];
             ?>
           </td>
