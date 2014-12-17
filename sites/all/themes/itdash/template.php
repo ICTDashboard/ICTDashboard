@@ -201,6 +201,8 @@ function itdash_preprocess_html(&$vars) {
 function itdash_file_widget($variables) {
 
   $element = $variables['element'];
+
+  $element['upload_button']['#access'] = FALSE;
   $output = '';
   // The "form-managed-file" class is required for proper Ajax functionality.
   $output .= '<div class="file-widget form-managed-file clearfix">';
