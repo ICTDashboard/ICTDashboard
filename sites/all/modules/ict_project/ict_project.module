@@ -23,12 +23,14 @@ function ict_project_project_add_block () {
   if (user_is_logged_in()) {
     module_load_include('inc', 'node', 'node.pages');
     $form = node_add('project');
-
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
+    );
     //remove customization tabs
     unset($form['additional_settings']);
     $form['#theme'] = 'ict_project_add_project_form';
     //hide native labels
-    $form['field_government_entity_name']['und']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
+    $form['field_government_entity_name']['und'][0]['value']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
     $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['value']['#title_display'] =
     $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und']['#title_display'] =
     $form['field_project_category']['und']['#title_display'] = $form['field_project_manager']['und'][0]['value']['#title_display'] =
@@ -162,6 +164,23 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_mid_external_fte']['und'][0]['value']['#title_display'] =
     $form['field_mid_project_status']['und']['#title_display'] =
     $form['field_mid_agency_comments']['und'][0]['value']['#title_display'] = 'invisible';
+
+    // Open the file for writing.
+    $fields = array();
+    $exclude = array('field_mid_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    foreach(element_children($form) as $field) {
+      if(!in_array($field, $exclude)) {
+        $fields[] = $field;
+      }
+    }
+
+    $file_path = drupal_get_path('module', 'ict_project') . '/export.csv';
+    $fh = fopen($file_path, 'w');
+    fputcsv($fh, $fields);
+    // Close & save the file.
+    fclose($fh);
+    file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_REPLACE);
+
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
@@ -183,6 +202,22 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_end_project_status']['und']['#title_display'] =
     $form['field_end_agency_comments']['und'][0]['value']['#title_display'] =
       'invisible';
+
+    // Open the file for writing.
+    $fields = array();
+    $exclude = array('field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    foreach(element_children($form) as $field) {
+      if(!in_array($field, $exclude)) {
+        $fields[] = $field;
+      }
+    }
+
+    $file_path = drupal_get_path('module', 'ict_project') . '/export_end.csv';
+    $fh = fopen($file_path, 'w');
+    fputcsv($fh, $fields);
+    // Close & save the file.
+    fclose($fh);
+    file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_REPLACE);
   }
 }
 
@@ -263,4 +298,6 @@ function ict_project_get_project() {
 
   return $projects;
 }
+
+
 

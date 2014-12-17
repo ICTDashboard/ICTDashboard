@@ -62,8 +62,7 @@ input.password-confirm:focus
 #edit-field-original-total-budget input,
 #edit-field-rebaselined-total-budget input {
   background-color: #fff;
-  border:none;
-  border-radius: 0;
+
 }
 
 #project-node-form select#edit-field-project-users-und {
@@ -90,4 +89,13 @@ div#edit-field-rebaselined-total-budget td {
   margin: 0;
   padding: 0;
   height: 54px;
+}
+
+.myFile .description, .myFile label  {
+  display: none;
+}
+
+#edit-field-mid-csv-file-und-0-upload-button {
+  position: absolute;
+  top: 40px;
 }
