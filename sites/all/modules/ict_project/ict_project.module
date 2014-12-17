@@ -86,7 +86,7 @@ function ict_project_project_add_block () {
       foreach (element_children($form['field_rebaselined_total_budget']['und'][$item]) as $sub_item) {
         $form['field_rebaselined_total_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
       }
-      $form['field_rebaselined_total_budget']['und'][$item]['field_year']['#default_value'] = $start_year . '/' . ++$start_year;
+      $form['field_rebaselined_total_budget']['und'][$item]['field_year']['und'][0]['value']['#value'] = $start_year . '/' . ++$start_year;
     }
 
     // Start year should be set via CMS
@@ -96,7 +96,7 @@ function ict_project_project_add_block () {
       foreach (element_children($form['field_original_total_budget']['und'][$item]) as $sub_item) {
         $form['field_original_total_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
       }
-      $form['field_original_total_budget']['und'][$item]['field_year']['#default_value'] = $start_year . '/' . ++$start_year;
+      $form['field_original_total_budget']['und'][$item]['field_year']['und'][0]['value']['#value'] = $start_year . '/' . ++$start_year;
     }
 
     return drupal_render($form);
@@ -231,7 +231,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       foreach (element_children($form['field_end_predicted_budget']['und'][$item]) as $sub_item) {
         $form['field_end_predicted_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
       }
-      $form['field_end_predicted_budget']['und'][$item]['field_predicted_year']['#default_value'] = $start_year . '/' . ++$start_year;
+      $form['field_end_predicted_budget']['und'][$item]['field_predicted_year']['und'][0]['value']['#value'] = $start_year . '/' . ++$start_year;
     }
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',

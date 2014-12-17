@@ -12,7 +12,10 @@
       <td><?php print t('FY (yy/yy)'); ?></td>
       <?php foreach (element_children($element) as $item) : ?>
         <td>
-          <?php print $element[$item]['field_year']['#default_value']; ?>
+          <div style="display: none;">
+            <?php print drupal_render($element[$item]['field_year']); ?>
+          </div>
+          <?php print $element[$item]['field_year']['und'][0]['value']['#value']; ?>
         </td>
       <?php endforeach; ?>
     </tr>
