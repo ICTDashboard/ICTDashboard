@@ -239,7 +239,9 @@
           </td>
         </tr>
       </table>
-
+      <div class="submit">
+        <?php print drupal_render($form['actions']); ?>
+      </div>
 
 
 
@@ -248,7 +250,6 @@
         print drupal_render_children($form);
         ?>
       </div>
-			<p class="submit"><input type="submit" id="edit-submit" name="op" value="Save" class="form-submit"></p>
 		</form>
 	</div>
 </div>
