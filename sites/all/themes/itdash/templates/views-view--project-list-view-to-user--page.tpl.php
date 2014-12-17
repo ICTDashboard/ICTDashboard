@@ -40,7 +40,7 @@
   <?php global $user; ?>
 
   <?php if (isset($user->name)) : ?>
-    <h2><?php print t('Welcome !user', array('!user' => $user->name)); ?></h2>
+    <h2><?php print t('Add and manage projects'); ?></h2>
   <?php endif; ?>
   <div id="project-listings">
     <div class="project-list-content">
@@ -48,7 +48,7 @@
       <?php if (user_is_logged_in()) : ?>
 
         <div class="text d-4of5">
-          <p>Vivamus consequat massa at erat sodales, eu vestibulum libero semper. Sed fringilla magna quis dolor rhoncus, in cursus velit lacinia. Suspendisse semper tellus quis tellus lacinia pretium. Maecenas sed urna sed neque elementum congue vitae laoreet diam. Duis molestie eros turpis, eu dignissim ante pellentesque vitae. Aliquam erat volutpat. Nullam consequat odio ex, vel fermentum diam hendrerit sed. Aliquam posuere tristique odio ornare tincidunt.</p>
+          <p><?php print t('Use this page to register a new project, or administor any existing projects associated with your login. Mid financial year updates are to be completed between November and January. End financial year updates are to be completed between May and July. Select the Add Project button to register a new project.'); ?></p>
         </div>
 
         <div class="button-add d-1of5 t-2of5 last-col">
