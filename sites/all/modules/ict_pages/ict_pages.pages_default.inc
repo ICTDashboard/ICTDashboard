@@ -140,7 +140,7 @@ function ict_pages_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'threecol_25_50_25';
+  $display->layout = 'itdash_dashboard';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -151,6 +151,10 @@ function ict_pages_default_page_manager_pages() {
       'bottom' => NULL,
       'middle' => NULL,
     ),
+    'style' => 'naked',
+    'middle' => array(
+      'style' => 'naked',
+    ),
   );
   $display->cache = array();
   $display->title = '';
@@ -158,14 +162,14 @@ function ict_pages_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-2df52c1a-a13c-4245-829a-373e74e0ca26';
-    $pane->panel = 'middle';
+    $pane->pid = 'new-96cedb04-1287-4239-9ebd-579149d14178';
+    $pane->panel = 'content';
     $pane->type = 'node';
     $pane->subtype = 'node';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'nid' => '1669',
+      'nid' => '1675',
       'links' => 1,
       'leave_node_title' => 0,
       'identifier' => '',
@@ -177,23 +181,24 @@ function ict_pages_default_page_manager_pages() {
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
+      'style' => 'default',
     );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '2df52c1a-a13c-4245-829a-373e74e0ca26';
-    $display->content['new-2df52c1a-a13c-4245-829a-373e74e0ca26'] = $pane;
-    $display->panels['middle'][0] = 'new-2df52c1a-a13c-4245-829a-373e74e0ca26';
+    $pane->uuid = '96cedb04-1287-4239-9ebd-579149d14178';
+    $display->content['new-96cedb04-1287-4239-9ebd-579149d14178'] = $pane;
+    $display->panels['content'][0] = 'new-96cedb04-1287-4239-9ebd-579149d14178';
     $pane = new stdClass();
-    $pane->pid = 'new-071ed539-55c1-4538-8111-8b5d6a993fbf';
-    $pane->panel = 'middle';
+    $pane->pid = 'new-fa509617-5c9e-40d1-a2f8-d2849d885c00';
+    $pane->panel = 'content';
     $pane->type = 'node';
     $pane->subtype = 'node';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'nid' => '1668',
+      'nid' => '1674',
       'links' => 1,
       'leave_node_title' => 0,
       'identifier' => '',
@@ -210,18 +215,18 @@ function ict_pages_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = '071ed539-55c1-4538-8111-8b5d6a993fbf';
-    $display->content['new-071ed539-55c1-4538-8111-8b5d6a993fbf'] = $pane;
-    $display->panels['middle'][1] = 'new-071ed539-55c1-4538-8111-8b5d6a993fbf';
+    $pane->uuid = 'fa509617-5c9e-40d1-a2f8-d2849d885c00';
+    $display->content['new-fa509617-5c9e-40d1-a2f8-d2849d885c00'] = $pane;
+    $display->panels['content'][1] = 'new-fa509617-5c9e-40d1-a2f8-d2849d885c00';
     $pane = new stdClass();
-    $pane->pid = 'new-3073ef41-aab9-48a1-aff8-3cf4a53ca6b8';
-    $pane->panel = 'middle';
+    $pane->pid = 'new-d6fda037-a6a0-4201-bf21-54bfde3cda7b';
+    $pane->panel = 'content';
     $pane->type = 'node';
     $pane->subtype = 'node';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'nid' => '1667',
+      'nid' => '1673',
       'links' => 1,
       'leave_node_title' => 0,
       'identifier' => '',
@@ -238,9 +243,9 @@ function ict_pages_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $pane->uuid = '3073ef41-aab9-48a1-aff8-3cf4a53ca6b8';
-    $display->content['new-3073ef41-aab9-48a1-aff8-3cf4a53ca6b8'] = $pane;
-    $display->panels['middle'][2] = 'new-3073ef41-aab9-48a1-aff8-3cf4a53ca6b8';
+    $pane->uuid = 'd6fda037-a6a0-4201-bf21-54bfde3cda7b';
+    $display->content['new-d6fda037-a6a0-4201-bf21-54bfde3cda7b'] = $pane;
+    $display->panels['content'][2] = 'new-d6fda037-a6a0-4201-bf21-54bfde3cda7b';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

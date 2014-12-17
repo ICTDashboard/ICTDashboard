@@ -299,5 +299,13 @@ function ict_project_get_project() {
   return $projects;
 }
 
+function ict_project_bracket_italics ($string) {
+  $source = explode('(', $string);
+
+  $string = $source[0] . '<em>(' . $source[1] . '</em>';
+
+  return $string;
+}
+
 
 
