@@ -90,10 +90,16 @@ function ckan_remote_post_rules_action_remote_post($nid, $sid){
             if ($field_name == 'field_mid_project') {
                 $project_id = $field['und'][0]['value'];
                 $project = node_load($project_id);
+                #TODO fix project title is null
                 $payload['project'] = $project->title;
             } else if (strpos($field_name,"field_") !== false) {
                 $field_name = str_replace("field_", "", $field_name);
-                if (isset($field['und'][0]['value'])) {
+                #TODO implementation partners field
+                if ($field_name == 'rebaselined_total_budget' || $field_name == 'original_total_budget') {
+foreach ($field['und'] as $row) {
+    $payload[$field_name] = $row[0]['value'];
+}
+                } else if (isset($field['und'][0]['value'])) {
                     $payload[$field_name] = $field['und'][0]['value'];
                 } else if (isset($field['und'][0]['tid'])) {
                     $term = taxonomy_term_load($field['und'][0]['tid']);
@@ -111,6 +117,7 @@ function ckan_remote_post_rules_action_remote_post($nid, $sid){
         //where $source_node_type is the type of the node (not its name).
         // https://api.drupal.org/api/drupal/modules%21field%21field.info.inc/function/field_info_fields/7
         foreach ($entityform as $field_name => $field) {
+            #TODO FY tables
             if ($field_name == 'title') {
                 $payload['project'] = $field;
             } else if (strpos($field_name,"field_") !== false) {
