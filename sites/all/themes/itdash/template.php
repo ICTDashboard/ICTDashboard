@@ -197,3 +197,24 @@ function itdash_preprocess_html(&$vars) {
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/css/jquery.multiSelect.css');
   drupal_add_css('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/base/jquery-ui.css');
 }
+
+function itdash_file_widget($variables) {
+
+  $element = $variables['element'];
+  $output = '';
+  // The "form-managed-file" class is required for proper Ajax functionality.
+  $output .= '<div class="file-widget form-managed-file clearfix">';
+  $output .= '<div class="fileUpload btn btn-primary"><span>Choose file</span>';
+  if ($element['fid']['#value'] != 0) {
+    // Add the file size after the file name.
+    $element['filename']['#markup'] .= ' <span class="file-size">(' . format_size($element['#file']->filesize) . ')</span> ';
+  }
+
+  $element['upload']['#attributes'] = array('class' => array('upload'));
+  $output .= render($element['upload']);
+  $output .= '</div>';
+  $output .= drupal_render_children($element);
+  $output .= '</div>';
+
+  return $output;
+}

@@ -251,10 +251,7 @@
             <span>Enter path to CSV file</span>
           </td>
           <td class="text">
-            <label class="myFile">
               <?php print render($form['field_end_csv_file']);?>
-              <span>Choose file</span>
-            </label>
           </td>
         </tr>
       </table>
