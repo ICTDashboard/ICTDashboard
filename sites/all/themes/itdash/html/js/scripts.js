@@ -93,4 +93,28 @@ jQuery(document).ready(function($) {
 	$("#edit-field-project-users-und").multiSelect({
 		noneSelected: 'Select users'
 	});
+	
+	
+	/* Partner table implementation */
+	$('.field-multiple-drag').remove();
+	$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 0);
+	$('.tabledrag-toggle-weight').click(function(){
+		if( $('.tabledrag-hide').is(':visible') ) {
+			// Visible
+			$('.tabledrag-hide').prev('td').css({
+				'border-right': '0 none'
+			});
+			$('.tabledrag-hide').prev('th').css({
+				'border-radius': '4px 0 0 0'
+			});
+		} else {
+			// Invisible 
+			$('.tabledrag-hide').prev('td').css({
+				'border-right': '1px solid #abb6cb'
+			});
+			$('.tabledrag-hide').prev('th').css({
+				'border-radius': '4px 4px 0 0'
+			});
+		}
+	});
 }); /* end of as page load scripts */

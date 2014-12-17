@@ -712,11 +712,35 @@ CONTENT STYLES
 							}
 						}
 						
-						.field-implementation-partners-values {
+						table[id^="field-implementation-partners-values"] {
 							tr {
 								td {
+									border-left: 1px solid #abb6cb !important;
+									border-top: 1px solid #abb6cb !important;
+									background: $white;
+									width: auto;
+									
 									input[type="text"] {
 										width: 100%;
+										border-radius: 0 0 0;
+									}
+									
+									div.form-type-select:not(.form-item-field-project-users-und) {
+										border: 0 none;
+										
+										&:after {
+											left: 83%;
+										}
+										
+										select {
+											max-width: 117px;
+											width: 117px;
+										}
+									}
+									
+									&.delta-order {
+										width: 110px !important;
+										max-width: 110px !important;
 									}
 								}
 							}
@@ -819,6 +843,7 @@ CONTENT STYLES
 										height: 38px;
 										padding-left: 10px;
 										padding-right: 10px;
+										border-radius: 0;
 										
 										&:hover, &:focus {
 											border: 0 none;
