@@ -6,7 +6,5 @@ sites/*/files
 sites/*/private
 
 .idea/*
-.gitignore
-.htaccess
 
 /nbproject/private/
