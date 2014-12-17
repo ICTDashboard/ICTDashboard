@@ -91,14 +91,6 @@ div#edit-field-rebaselined-total-budget td {
   height: 54px;
 }
 
-.myFile .description, .myFile label  {
-  display: none;
-}
-
-#edit-field-mid-csv-file-und-0-upload-button {
-  position: absolute;
-  top: 40px;
-}
 .page-dashboard h2 {
     color: #0d6c88;
     font-size: 26px;
@@ -111,3 +103,4 @@ div#edit-field-rebaselined-total-budget td {
     line-height: 25px;
 }
 #content .project-categories .box .inner-box .text {min-height: 105px;}
+

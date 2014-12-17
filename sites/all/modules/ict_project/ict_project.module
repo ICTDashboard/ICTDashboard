@@ -163,7 +163,9 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_mid_internal_fte']['und'][0]['value']['#title_display'] =
     $form['field_mid_external_fte']['und'][0]['value']['#title_display'] =
     $form['field_mid_project_status']['und']['#title_display'] =
-    $form['field_mid_agency_comments']['und'][0]['value']['#title_display'] = 'invisible';
+    $form['field_mid_agency_comments']['und'][0]['value']['#title_display'] =
+    $form['field_mid_csv_file']['und'][0]['#title_display']
+        = 'invisible';
 
     // Open the file for writing.
     $fields = array();
@@ -180,7 +182,6 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     // Close & save the file.
     fclose($fh);
     file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_REPLACE);
-
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
@@ -201,6 +202,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_end_external_fte']['und'][0]['value']['#title_display'] =
     $form['field_end_project_status']['und']['#title_display'] =
     $form['field_end_agency_comments']['und'][0]['value']['#title_display'] =
+    $form['field_end_csv_file']['und'][0]['#title_display'] =
       'invisible';
 
     // Open the file for writing.
@@ -234,6 +236,9 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
     );
+
+
+
   }
 }
 
