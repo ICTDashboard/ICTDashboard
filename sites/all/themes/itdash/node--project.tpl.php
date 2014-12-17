@@ -11,257 +11,192 @@
       
       <div id="inner-content" class="wrap cf">
         <h2>Project Information</h2>
-        <div class="project-view info d-all">
+        <div class="project-view info d-all project-update-submission ">
           
             <?php 
-
-            $sql = 'SELECT DISTINCT d.name, s.timestamp, d.metric, d.value from "'.variable_get("ckan_resource_id").'"
-            d join (select name,metric, max(timestamp) as timestamp from "'.variable_get("ckan_resource_id").'" GROUP BY name,metric) s on d.metric=s.metric and d.timestamp=s.timestamp
-            WHERE d.name = \''.$node->title.'\'';
-            $url = variable_get("ckan_url").'/api/action/datastore_search_sql?sql='.urlencode($sql);
-            $request = drupal_http_request($url);
-            $result = json_decode($request->data);
-            $data = Array();
-            $report_date = "";
-            foreach ($result->result->records as $row) {
-              $data[$row->metric][$row->timestamp] = $row->value;
-              $report_date = $row->timestamp;
-            }
-            /*
-             * CREATE TABLE public.test
-(
-    _id SERIAL PRIMARY KEY NOT NULL,
-    timestamp TEXT NOT NULL,
-    name TEXT NOT NULL,
-    metric TEXT NOT NULL,
-    value TEXT NOT NULL
-);
-            select timestamp,name,array_agg(metric),array_agg(value) from test group by timestamp,name;
-
-            http://stackoverflow.com/questions/12414750/is-there-something-like-a-zip-function-in-postgresql-that-combines-two-arrays
-
-select DISTINCT d.name, s.timestamp, d.metric, d.value from "2133eaed-150b-4c73-a314-67a0bde04115" d join (select name,metric, max(timestamp) as timestamp from "2133eaed-150b-4c73-a314-67a0bde04115" GROUP BY name,metric) s on d.metric=s.metric and d.timestamp=s.timestamp where d.name = 'AAT Project B';
-
-
-select distinct p.name, program, agency, total_value
-FROM (select name, value as program from test where metric = 'program'  ) p full outer JOIN
-  (select name, value as agency from test where metric = 'agency' ) a on p.name = a.name
-  full outer JOIN
-  (select name, value as total_value from test where metric = 'total_value' ) v on p.name = v.name;
-
-            https://wiki.postgresql.org/wiki/Grouping_Sets
-            */
+              $sql = 'SELECT DISTINCT d.name, s.timestamp, d.metric, d.value from "'.variable_get("ckan_resource_id").'"
+              d join (select name,metric, max(timestamp) as timestamp from "'.variable_get("ckan_resource_id").'" GROUP BY name,metric) s on d.metric=s.metric and d.timestamp=s.timestamp
+              WHERE d.name = \''.$node->title.'\'';
+              $url = variable_get("ckan_url").'/api/action/datastore_search_sql?sql='.urlencode($sql);
+              $request = drupal_http_request($url);
+              $result = json_decode($request->data);
+              $data = Array();
+              $report_date = "";
+              foreach ($result->result->records as $row) {
+                $data[$row->metric][$row->timestamp] = $row->value;
+                $report_date = $row->timestamp;
+              }
             ?>
           </pre> 
           <table>
-            <tr>
-              <td class="label">Current report date:</td>
-              <td class="text">
-                <?php 
-                  print $report_date;
-                ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Government entity:</td>
-              <td class="text">
-                <?php print ($node->field_government_entity_name) ? $node->field_government_entity_name['und'][0]['taxonomy_term']->name : ''; ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Project name:</td>
-              <td class="text"><?php print $node->title; ?></td>
-            </tr>
-            <tr>
-              <td class="label">Brief project summary:</td>
-              <td class="text">
-                <?php print ($node->field_brief_project_summary) ? $node->field_brief_project_summary['und'][0]['safe_value'] : ''; ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Project category: </td>
-              <td class="text">
-                <?php 
-                  print ($node->field_project_category) ? $node->field_project_category['und'][0]['value'] : '';
-                ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Project manager: </td>
-              <td class="text">
-                <?php print ($node->field_project_manager) ? $node->field_project_manager['und'][0]['safe_value'] : ''; ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Implementation partners:</td>
-              <td class="text">
-                <?php 
-                    print ($node->field_implementation_partners) ? str_replace("\n", ", ", $node->field_implementation_partners['und'][0]['safe_value']) : '';
-                ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Total project budget ($m):</td>
-              <td class="text">
-                <?php print ($node->field_total_project_budget) ? '$'.(int)$node->field_total_project_budget['und'][0]['value'].' million' : ''; ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Expenditure type:</td>
-              <td class="text">
-                <?php print ($node->field_expenditure_type) ? $node->field_expenditure_type['und'][0]['value'] : ''; ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Start date:</td>
-              <td class="text">
-                <?php 
-                  print date_format(date_create($start_date), 'd M Y');
-                ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Baseline completion date:</td>
-              <td class="text">
-                <?php 
-                  if ($node->field_original_completion_date)
-                    print date_format(date_create($orig_complete_date), 'd M Y');
-                ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Implementation Partners:</td>
-              <td class="text">
-                <?php print ($node->field_implementation_partners) ? $node->field_implementation_partners['und'][0]['safe_value'] : ''; ?>
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td class="label">Government entity name</td>
+                <td class="text"><?php print $node->field_government_entity_name['und'][0]['value']; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Government entity business group, division, & branch</td>
+                <td class="text"><?php print $node->field_government_business_unit['und'][0]['value']; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Government programme <em>(if applicable)</em></td>
+                <td class="text"><?php print $node->field_program_name['und'][0]['value']; ?></td>
+              </tr>
+              <tr><td colspan="2"><div class="dotted-line"></div></td></tr>
+              <tr>
+                <td class="label">Project title</td>
+                <td class="text"><?php print $node->title; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Project description</td>
+                <td class="text"><?php print $node->field_brief_project_summary['und'][0]['value']; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Original project start date</td>
+                <td class="text"><?php print date_format(date_create($node->field_start_date['und'][0]['value']), 'd M Y'); ?></td>
+              </tr>
+              <tr>
+                <td class="label">Original project completion date</td>
+                <td class="text"><?php print date_format(date_create($node->field_original_completion_date['und'][0]['value']), 'd M Y'); ?></td>
+              </tr>
+              <tr>
+                <td class="label">Rebaselined project start date</td>
+                <td class="text"><?php print date_format(date_create($node->field_rebaselined_project_start['und'][0]['value']), 'd M Y'); ?></td>
+              </tr>
+              <tr>
+                <td class="label">Rebaselined project completion date</td>
+                <td class="text"><?php print date_format(date_create($node->field_rebaselined_project_compl['und'][0]['value']), 'd M Y'); ?></td>
+              </tr>
+              <tr>
+                <td class="label">Project stage</td>
+                <td class="text"><?php print $node->field_project_stage['und'][0]['taxonomy_term']->name; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Project category</td>
+                <td class="text"><?php print $node->field_project_category['und'][0]['taxonomy_term']->name; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Project manager</td>
+                <td class="text"><?php print $node->field_project_manager['und'][0]['value']; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Project manager email</td>
+                <td class="text"><?php print $node->field_project_manager_email['und'][0]['email']; ?></td>
+              </tr>
+              <tr><td colspan="2"><div class="dotted-line"></div></td></tr>
+              <tr>
+                <td class="label">Original total project budget <em>($m)</em></td>
+                <td class="text"><?php print ((int)$node->field_total_project_budget['und'][0]['value']).'$'; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Original Total project budget by FY <em>(predicted & past)</em></td>
+                <td class="text">
+                  <?php
+                  $fci = $node->field_original_total_budget['und'];
+                  $fci_cols = array();
+                  foreach($fci as $col){
+                    $fci_cols[] = field_collection_item_load($col['value']);
+                  }
+                  ?>
+                  <table><tbody><tr><th></th><th>Previous</th><th>Current</th><th>1</th><th>2</th><th>3</th></tr><tr><td>FY (yy/yy)</td>
+                  <?php
+                    for ($i = 0; $i<5; $i++) {
+                      print ('<td>'.$fci_cols[$i]->field_year['und'][0]['value'].'</td>');
+                    }
+                  ?>
 
+                  </tr><tr><td>Opex</td>
+                  <?php
+                    for ($i = 0; $i<5; $i++) {
+                      print ('<td>'.$fci_cols[$i]->field_opex['und'][0]['value'].'</td>');
+                    }
+                  ?>
+                  </tr><tr><td>Capex</td>
+                  <?php
+                    for ($i = 0; $i<5; $i++) {
+                      print ('<td>'.$fci_cols[$i]->field_capex['und'][0]['value'].'</td>');
+                    }
+                  ?>
+                  </tr><tr><td>Total</td>
+                  <?php
+                    for ($i = 0; $i<5; $i++) {
+                      print ('<td>'.$fci_cols[$i]->field_total['und'][0]['value'].'</td>');
+                    }
+                  ?>
+                  </tr></tbody></table>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Rebaselined total project budget <em>($m)</em></td>
+                <td class="text"><?php print $node->field_rebaselined_total_budget['und'][0]['value'].'$'; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Rebaselined Total project budget by FY <em>(predicted & past)</em></td>
+                <td class="text">
+                    <?php
+                    $fci = $node->field_rebaselined_total_budget['und'];
+                    $fci_cols = array();
+                    foreach($fci as $col){
+                      $fci_cols[] = field_collection_item_load($col['value']);
+                    }
+                    ?>
+                    <table><tbody><tr><th></th><th>Previous</th><th>Current</th><th>1</th><th>2</th><th>3</th></tr><tr><td>FY (yy/yy)</td>
+                    <?php
+                      for ($i = 0; $i<5; $i++) {
+                        print ('<td>'.$fci_cols[$i]->field_year['und'][0]['value'].'</td>');
+                      }
+                    ?>
+                    </tr><tr><td>Opex</td>
+                    <?php
+                      for ($i = 0; $i<5; $i++) {
+                        print ('<td>'.$fci_cols[$i]->field_opex['und'][0]['value'].'</td>');
+                      }
+                    ?>
+                    </tr><tr><td>Capex</td>
+                    <?php
+                      for ($i = 0; $i<5; $i++) {
+                        print ('<td>'.$fci_cols[$i]->field_capex['und'][0]['value'].'</td>');
+                      }
+                    ?>
+                    </tr><tr><td>Total</td>
+                    <?php
+                      for ($i = 0; $i<5; $i++) {
+                        print ('<td>'.$fci_cols[$i]->field_total['und'][0]['value'].'</td>');
+                      }
+                    ?>
+                    </tr></tbody></table>
+                </td>
+              </tr>
+              <tr>
+                <td class="label">Project status</td>
+                <td class="text"><?php print ucfirst($node->field_project_status['und'][0]['value']); ?></td>
+              </tr>
+              <tr>
+                <td class="label">Expenditure type</td>
+                <td class="text"><?php print $node->field_expenditure_type['und'][0]['value']; ?></td>
+              </tr>
+              <tr>
+                <td class="label">Implementation Partners?<span>A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.</span></td>
+                <td class="text"><?php 
+                 for ($i=0, $count = count($node->field_implementation_partners['und']); $i<$count; $i++){
+                  if ($i) print ', ';
+                   print $node->field_implementation_partners['und'][$i]['value'];
+                 }
+
+                ?></td>
+              </tr>
+              <tr>
+                <td class="label">Internal FTE</td>
+                <td class="text"><?php print $node->field_internal_fte['und'][0]['value']; ?></td>
+              </tr>
+              <tr>
+                <td class="label">External FTE</td>
+                <td class="text"><?php print $node->field_external_fte['und'][0]['value']; ?></td>
+              </tr>
+            </tbody>
           </table>
         </div>
-        
-        <h2>Project Status</h2>
-        <div class="project-view status1 d-all">
-          <table>
-            <tr>
-              <td class="label">Current Project Rating:</td>
-              <td class="text">
-                <?php
-                print reset($data['current_rank']); ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Total spent to date ($m):</td>
-              <td class="text">
-                <?php
-                print '$'.(int)reset($data['total_spent_to_date']).' million' ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Current Total Expected Spend for Current Financial Year ($m):</td>
-              <td class="text">
-                <?php
-                print '$'.(int)reset($data['current_total_expected_spend_current_financial_year']).' million' ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="label">Current Total Expected budget ($m):</td>
-              <td class="text">
-                <?php
-                print '$'.(int)reset($data['current_total_expected_budget']).' million' ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="label">Current Expected Completion Date:</td>
-              <td class="text">
-                <?php
-                print reset($data['current_expected_completion_date']); ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="label">Current Number of Government FTEs</td>
-              <td class="text">
-                <?php
-                print reset($data['current_number_of_government_ftes']); ?>
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Current Number of Contractors</td>
-              <td class="text">
-                <?php
-                print reset($data['current_number_of_contractors']); ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="label">Current estimated level of project completion:</td>
-              <td class="text">
-                <?php
-                print reset($data['current_estimated_level_of_project_completion']); ?>%
-              </td>
-            </tr>
-            <tr>
-              <td class="label">Current Estimate of Value To Be Realised (% value of project cost)</td>
-              <td class="text">
-                <?php
-                print reset($data['current_estimated_level_of_value_realised']); ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="label">Most recent agency comment:</td>
-              <td class="text">
-                <?php
-                print reset($data['agency_comment']); ?>
-              </td>
-            </tr>
-          </table>
-        </div>
-        
-       <!-- <h2>Performance Metrics</h2>
-        <div class="project-view metrics d-all">
-          <h3>Operational Performance: </h3>
-          <table border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <th>Metric Description </th>
-              <th>Frequency</th>
-              <th>Unit of Measure</th>
-              <th>FY2014 Target</th>
-              <th>Most Recent Actual</th>
-              <th>Metric Status *</th>
-              <th>Updated Date of Most Recent Actual *</th>
-            </tr>
-            <tr>
-              <td>% high volume transactions digitised</td>
-              <td>Quarterly</td>
-              <td>% of all transactions identified as high volume (over 50k/yr)</td>
-              <td>60%</td>
-              <td>60%</td>
-              <td>Not yet met</td>
-              <td>2014-08-10</td>
-            </tr>
-            <tr>
-              <td>% high volume transactions digitised</td>
-              <td>Quarterly</td>
-              <td>% of all transactions identified as high volume (over 50k/yr)</td>
-              <td>60%</td>
-              <td>60%</td>
-              <td>Not yet met</td>
-              <td>2014-08-10</td>
-            </tr>
-            <tr>
-              <td>% high volume transactions digitised</td>
-              <td>Quarterly</td>
-              <td>% of all transactions identified as high volume (over 50k/yr)</td>
-              <td>60%</td>
-              <td>60%</td>
-              <td>Not yet met</td>
-              <td>2014-08-10</td>
-            </tr>
-          </table>
-        </div> -->
+      
       </div>
     </div>
   <?php endif; ?>
