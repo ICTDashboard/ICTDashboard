@@ -149,6 +149,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
   if($form_id == 'ict_form_entityform_edit_form') {
     $project = ict_project_get_project();
     $form['field_mid_project']['und']['#options'] = $project;
+    $form['field_mid_project'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
     $form['#theme'] = 'ict_project_mid_project_form';
     $form['field_mid_project']['und']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
     $form['field_mid_project_manager_email']['und'][0]['value']['#title_display'] =
@@ -182,11 +183,17 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     // Close & save the file.
     fclose($fh);
     file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_REPLACE);
+
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
+    );
+
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
     $project = ict_project_get_project();
     $form['field_end_project']['und']['#options'] = $project;
+    $form['field_end_project'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
     $form['#theme'] = 'ict_project_end_project_form';
     $form['field_end_project']['und']['#title_display'] =
     $form['field_end_project_stage']['und']['#title_display'] =
@@ -236,9 +243,6 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
     );
-
-
-
   }
 }
 
