@@ -606,26 +606,15 @@ function ict_project_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_rebaselined_total_project',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'number',
     'settings' => array(
-      'max_length' => 255,
+      'decimal_separator' => '.',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'number_float',
   );
 
   // Exported field_base: 'field_start_date'
@@ -691,11 +680,9 @@ function ict_project_field_default_field_bases() {
     'module' => 'number',
     'settings' => array(
       'decimal_separator' => '.',
-      'precision' => 10,
-      'scale' => 2,
     ),
     'translatable' => 0,
-    'type' => 'number_decimal',
+    'type' => 'number_float',
   );
 
   // Exported field_base: 'field_year'

@@ -46,10 +46,10 @@ input.password-confirm:focus
   width: 100%;
 }
 
-.user-tools>div span {
+/*.user-tools>div span {
   width: 85px;
   word-wrap: break-word;
-}
+}*/
 
 .date .form-item {
   float: left;
