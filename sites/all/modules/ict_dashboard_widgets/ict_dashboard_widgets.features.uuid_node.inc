@@ -143,7 +143,13 @@ jQuery(document).ready(function()
             .attr("dy", ".35em")
             .attr("text-anchor", "middle")
             .text(function(d) { return d.name; })
-            .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
+            .style("opacity", function(d) { 
+if (typeof this.getComputedTextLength  != \'undefined\') {
+d.w = this.getComputedTextLength(); 
+} else {
+d.w = d.name.length * 6
+}
+return d.dx > d.w ? 1 : 0; });
 
         d3.select(window).on("click", function() { zoom(root); });
 
@@ -155,8 +161,7 @@ jQuery(document).ready(function()
 });
 
 
-</script>
-',
+</script>',
         'summary' => '',
         'format' => 'full_html',
         'safe_value' => '<p class="dashboard-description">The ICT Project Treemap compares how each of the major projects compare with each other according to either the total project value or number of projects being delivered by agencies.</p>
@@ -274,7 +279,13 @@ jQuery(document).ready(function()
             .attr("dy", ".35em")
             .attr("text-anchor", "middle")
             .text(function(d) { return d.name; })
-            .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
+            .style("opacity", function(d) { 
+if (typeof this.getComputedTextLength  != \'undefined\') {
+d.w = this.getComputedTextLength(); 
+} else {
+d.w = d.name.length * 6
+}
+return d.dx > d.w ? 1 : 0; });
 
         d3.select(window).on("click", function() { zoom(root); });
 
@@ -382,7 +393,7 @@ jQuery(document).ready(function()
 jQuery(document).ready(function () {
     var source = [];
 var color = [\'Red\',\'Green\',\'Orange\'];
-    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+start_date%2C+end_date%2C+expected_end_date%2C+total_value%2C+expected_total_value%0AFROM+%28select+name%2C+value+as+start_date+from%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27original_completion_date%27++%29+p+full+outer+JOIN%0A++%28select+name%2C+value+as+end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27start_date%27+%29+a+on+p.name+%3D+a.name+full+outer+JOIN%0A++%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+v+on+p.name+%3D+v.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27current_expected_completion_date%27%29+c+on+p.name+%3D+c.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27current_total_expected_budget%27%29+b+on+p.name+%3D+b.name+",
+    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+start_date%2C+end_date%2C+expected_end_date%2C+total_value%2C+expected_total_value%0AFROM+%28select+name%2C+value+as+start_date+from%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27start_date%27++%29+p+full+outer+JOIN%0A++%28select+name%2C+value+as+end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27end_date%27+%29+a+on+p.name+%3D+a.name+full+outer+JOIN%0A++%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+v+on+p.name+%3D+v.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27original_completion_date%27%29+c+on+p.name+%3D+c.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27current_total_expected_budget%27%29+b+on+p.name+%3D+b.name+",
         function (error, data) {
             for (var i in data.result.records) {
                 d = data.result.records[i];
@@ -406,8 +417,8 @@ var color = [\'Red\',\'Green\',\'Orange\'];
                 source: source,
                 navigate: "scroll",
                 minScale: "months",
-                maxScale: "years",
-                itemsPerPage: 10,
+                maxScale: "months",
+                itemsPerPage: 30,
                 
                 onRender: function () {
                     if (window.console && typeof console.log === "function") {
@@ -415,7 +426,6 @@ var color = [\'Red\',\'Green\',\'Orange\'];
                     }
                 }
             });
-// window.setTimeout(function() {jQuery(\'.nav-zoomIn\')[0].click();}, 800);
         });
 });
     </script>
@@ -862,7 +872,7 @@ background-color: #f6f6f6;
 jQuery(document).ready(function () {
     var source = [];
 var color = [\'Red\',\'Green\',\'Orange\'];
-    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+start_date%2C+end_date%2C+expected_end_date%2C+total_value%2C+expected_total_value%0AFROM+%28select+name%2C+value+as+start_date+from%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27original_completion_date%27++%29+p+full+outer+JOIN%0A++%28select+name%2C+value+as+end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27start_date%27+%29+a+on+p.name+%3D+a.name+full+outer+JOIN%0A++%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+v+on+p.name+%3D+v.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27current_expected_completion_date%27%29+c+on+p.name+%3D+c.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27current_total_expected_budget%27%29+b+on+p.name+%3D+b.name+",
+    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+start_date%2C+end_date%2C+expected_end_date%2C+total_value%2C+expected_total_value%0AFROM+%28select+name%2C+value+as+start_date+from%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27start_date%27++%29+p+full+outer+JOIN%0A++%28select+name%2C+value+as+end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27end_date%27+%29+a+on+p.name+%3D+a.name+full+outer+JOIN%0A++%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+v+on+p.name+%3D+v.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27original_completion_date%27%29+c+on+p.name+%3D+c.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27current_total_expected_budget%27%29+b+on+p.name+%3D+b.name+",
         function (error, data) {
             for (var i in data.result.records) {
                 d = data.result.records[i];
@@ -886,8 +896,8 @@ var color = [\'Red\',\'Green\',\'Orange\'];
                 source: source,
                 navigate: "scroll",
                 minScale: "months",
-                maxScale: "years",
-                itemsPerPage: 10,
+                maxScale: "months",
+                itemsPerPage: 30,
                 
                 onRender: function () {
                     if (window.console && typeof console.log === "function") {
@@ -895,7 +905,6 @@ var color = [\'Red\',\'Green\',\'Orange\'];
                     }
                 }
             });
-// window.setTimeout(function() {jQuery(\'.nav-zoomIn\')[0].click();}, 800);
         });
 });
     
@@ -1454,7 +1463,7 @@ height: 400px;
 
 jQuery(document).ready(function()
 {
-    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+total_value%2C+expected_total_value++FROM+%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+p+full+outer+JOIN+++++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp+++++from+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp+++++where+d.metric+%3D+%27current_total_expected_budget%27%29+b+on+p.name+%3D+b.name%3B",
+    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+total_value%2C+expected_total_value++FROM+%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+p+full+outer+JOIN+++++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp+++++from+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp+++++where+d.metric+%3D+%27revised_total_project%27%29+b+on+p.name+%3D+b.name%3B",
         function(error, data) {
             project_names = [];
             project_orig_budget = [];
@@ -1464,7 +1473,7 @@ jQuery(document).ready(function()
                 d =  data.result.records[i]
                 project_names[parseInt(i)] = d.name;
                 project_orig_budget.push([parseInt(i),parseInt(d.total_value) || 0]);
-                project_current_budget.push([parseInt(i)+0.5,parseInt(d.expected_total_value) || 0]);
+                project_current_budget.push([parseInt(i)+0.5,parseInt(d.expected_total_value) || parseInt(i),parseInt(d.total_value) || 0]);
             }
 
        var
@@ -1492,6 +1501,8 @@ trackFormatter: hoverFn
       },
 xaxis: {
 tickFormatter : ticksFn,
+showMinorLabels: false,
+
 },
       yaxis : {
         min : 0,
@@ -1501,8 +1512,7 @@ tickFormatter : ticksFn,
 });
 });
 
-</script>
-',
+</script>',
         'summary' => '',
         'format' => 'full_html',
         'safe_value' => '<p class="dashboard-description">The ICT Project Budgets provides a high level overview of original predicted and actual project budget spending. </p>
@@ -1536,7 +1546,7 @@ height: 400px;
 
 jQuery(document).ready(function()
 {
-    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+total_value%2C+expected_total_value++FROM+%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+p+full+outer+JOIN+++++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp+++++from+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp+++++where+d.metric+%3D+%27current_total_expected_budget%27%29+b+on+p.name+%3D+b.name%3B",
+    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+total_value%2C+expected_total_value++FROM+%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+p+full+outer+JOIN+++++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp+++++from+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp+++++where+d.metric+%3D+%27revised_total_project%27%29+b+on+p.name+%3D+b.name%3B",
         function(error, data) {
             project_names = [];
             project_orig_budget = [];
@@ -1546,7 +1556,7 @@ jQuery(document).ready(function()
                 d =  data.result.records[i]
                 project_names[parseInt(i)] = d.name;
                 project_orig_budget.push([parseInt(i),parseInt(d.total_value) || 0]);
-                project_current_budget.push([parseInt(i)+0.5,parseInt(d.expected_total_value) || 0]);
+                project_current_budget.push([parseInt(i)+0.5,parseInt(d.expected_total_value) || parseInt(i),parseInt(d.total_value) || 0]);
             }
 
        var
@@ -1574,6 +1584,8 @@ trackFormatter: hoverFn
       },
 xaxis: {
 tickFormatter : ticksFn,
+showMinorLabels: false,
+
 },
       yaxis : {
         min : 0,
