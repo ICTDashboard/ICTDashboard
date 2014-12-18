@@ -104,3 +104,17 @@ div#edit-field-rebaselined-total-budget td {
 }
 #content .project-categories .box .inner-box .text {min-height: 105px;}
 
+#user-register-form .form-text {
+  max-width: 100%;
+  border: 1px solid #b3bdcf;
+}
+
+#user-register-form .form-required {
+  color: #ee2a24;
+}
+
+#user-register-form label{
+  font-size: 14px;
+  font-weight: 700;
+  color: #202b3d;
+}
