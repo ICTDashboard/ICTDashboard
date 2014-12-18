@@ -79,7 +79,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_end_revised_total_project']['und']['#title'];
+            print ict_project_bracket_italics($form['field_end_revised_total_project']['und']['#title']);
             ?>
           </td>
           <td class="text">
@@ -92,7 +92,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_end_total_project_spend']['und']['#title'];
+            print ict_project_bracket_italics($form['field_end_total_project_spend']['und']['#title']);
             ?>
           </td>
           <td class="text">
@@ -106,7 +106,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_end_total_project_current']['und']['#title'];
+            print ict_project_bracket_italics($form['field_end_total_project_current']['und']['#title']);
             ?>
           </td>
           <td class="text">
@@ -119,7 +119,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_end_predicted_budget']['und']['#title'];
+            print ict_project_bracket_italics($form['field_end_predicted_budget']['und']['#title']);
             ?>
           </td>
           <td class="text">
@@ -145,7 +145,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_end_predicted_project']['und']['#title'];
+            print ict_project_bracket_italics($form['field_end_predicted_project']['und']['#title']);
             ?>
           </td>
           <td class="text">
@@ -158,7 +158,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_end_predicted_project']['und']['#title'];
+            print ict_project_bracket_italics($form['field_end_predicted_project']['und']['#title']);
             ?>
           </td>
           <td class="text">
@@ -171,7 +171,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_end_predicted_realised']['und']['#title'];
+            print ict_project_bracket_italics($form['field_end_predicted_realised']['und']['#title']);
             ?>
           </td>
           <td class="text">

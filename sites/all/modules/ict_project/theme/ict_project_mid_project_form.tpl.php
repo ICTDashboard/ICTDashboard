@@ -80,7 +80,7 @@
 				<tr>
 					<td class="label">
 						<?php
-							print $form['field_mid_revised_total_project']['und']['#title'];
+							print ict_project_bracket_italics($form['field_mid_revised_total_project']['und']['#title']);
 						?>
 					</td>
 					<td class="text">
@@ -92,7 +92,7 @@
 				<tr>
 					<td class="label">
 						<?php
-						print $form['field_mid_total_project_spend']['und']['#title'];
+						print ict_project_bracket_italics($form['field_mid_total_project_spend']['und']['#title']);
 						?>
 					</td>
 					<td class="text">
@@ -117,7 +117,7 @@
 				<tr>
 					<td class="label">
 						<?php
-							print $form['field_mid_total_project_current']['und']['#title'];
+							print ict_project_bracket_italics($form['field_mid_total_project_current']['und']['#title']);
 						?>
 					</td>
 					<td class="text">
@@ -142,7 +142,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_mid_predicted_project']['und']['#title'];
+            print ict_project_bracket_italics($form['field_mid_predicted_project']['und']['#title']);
             ?>
           </td>
           <td class="text">
@@ -155,7 +155,7 @@
         <tr>
           <td class="label">
             <?php
-            print $form['field_mid_predicted_project_real']['und']['#title'];
+            print ict_project_bracket_italics($form['field_mid_predicted_project_real']['und']['#title']);
             ?>
           </td>
           <td class="text">
