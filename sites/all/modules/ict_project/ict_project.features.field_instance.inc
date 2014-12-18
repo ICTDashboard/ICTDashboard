@@ -33,7 +33,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_capex',
     'label' => 'Capex',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -73,7 +73,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_opex',
     'label' => 'Opex',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -113,7 +113,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_total',
     'label' => 'Total',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -187,7 +187,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_capex',
     'label' => 'Capex',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -227,7 +227,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_opex',
     'label' => 'Opex',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -267,7 +267,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_total',
     'label' => 'Total',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'max' => '',
       'min' => '',

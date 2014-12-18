@@ -105,7 +105,7 @@ function ict_entity_forms_field_default_field_instances() {
     'label' => 'Expected project completion date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -287,37 +287,6 @@ function ict_entity_forms_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'entityform-ict_form-field_mid_project'
-  $field_instances['entityform-ict_form-field_mid_project'] = array(
-    'bundle' => 'ict_form',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'entityform',
-    'field_name' => 'field_mid_project',
-    'label' => 'Project',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'entityform-ict_form-field_mid_project_completed'
   $field_instances['entityform-ict_form-field_mid_project_completed'] = array(
     'bundle' => 'ict_form',
@@ -475,7 +444,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_project_status',
     'label' => 'Project status',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -703,7 +672,7 @@ function ict_entity_forms_field_default_field_instances() {
     'label' => 'Expected project completion date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -805,6 +774,43 @@ function ict_entity_forms_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'entityform-itc_form_end-field_end_predicted_budget'
+  $field_instances['entityform-itc_form_end-field_end_predicted_budget'] = array(
+    'bundle' => 'itc_form_end',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 16,
+      ),
+    ),
+    'entity_type' => 'entityform',
+    'field_name' => 'field_end_predicted_budget',
+    'label' => 'Five year predicted predicted project budget ($m)',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 17,
+    ),
+  );
+
   // Exported field_instance: 'entityform-itc_form_end-field_end_predicted_project'
   $field_instances['entityform-itc_form_end-field_end_predicted_project'] = array(
     'bundle' => 'itc_form_end',
@@ -882,37 +888,6 @@ function ict_entity_forms_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 11,
-    ),
-  );
-
-  // Exported field_instance: 'entityform-itc_form_end-field_end_project'
-  $field_instances['entityform-itc_form_end-field_end_project'] = array(
-    'bundle' => 'itc_form_end',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'entityform',
-    'field_name' => 'field_end_project',
-    'label' => 'Project ',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 1,
     ),
   );
 
@@ -1073,7 +1048,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_project_status',
     'label' => 'Project status',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -1206,18 +1181,173 @@ function ict_entity_forms_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'field_collection_item-field_end_predicted_budget-field_predicted_capex'
+  $field_instances['field_collection_item-field_end_predicted_budget-field_predicted_capex'] = array(
+    'bundle' => 'field_end_predicted_budget',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_predicted_capex',
+    'label' => 'Capex',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_end_predicted_budget-field_predicted_opex'
+  $field_instances['field_collection_item-field_end_predicted_budget-field_predicted_opex'] = array(
+    'bundle' => 'field_end_predicted_budget',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_predicted_opex',
+    'label' => 'Opex',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_end_predicted_budget-field_predicted_total'
+  $field_instances['field_collection_item-field_end_predicted_budget-field_predicted_total'] = array(
+    'bundle' => 'field_end_predicted_budget',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_predicted_total',
+    'label' => 'Total',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_end_predicted_budget-field_predicted_year'
+  $field_instances['field_collection_item-field_end_predicted_budget-field_predicted_year'] = array(
+    'bundle' => 'field_end_predicted_budget',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_predicted_year',
+    'label' => 'Year',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('% Predicted project benefit realised ($m, as identified in business case) ');
   t('% Project completed ');
   t('Agency comments');
   t('CSV File');
+  t('Capex');
   t('Expected project completion date');
   t('External FTE');
+  t('Five year predicted predicted project budget ($m)');
   t('Internal FTE');
+  t('Opex');
   t('Predicted project benefit ($m, as identified in business case) ');
-  t('Project');
-  t('Project ');
   t('Project manager');
   t('Project manager ');
   t('Project manager email');
@@ -1225,8 +1355,10 @@ function ict_entity_forms_field_default_field_instances() {
   t('Project stage');
   t('Project status');
   t('Revised total project budget ($m)');
+  t('Total');
   t('Total project spend current Financial Year ($m)');
   t('Total project spend to date ($m)');
+  t('Year');
 
   return $field_instances;
 }

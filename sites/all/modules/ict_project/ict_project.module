@@ -26,7 +26,7 @@ function ict_project_project_add_block () {
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
     );
-
+    
     $form['#theme'] = 'ict_project_add_project_form';
     //hide native labels
     $form['field_government_entity_name']['und'][0]['value']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =

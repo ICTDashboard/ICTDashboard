@@ -11,7 +11,7 @@ function ict_entity_forms_default_entityform_type() {
   $items = array();
   $items['ict_form'] = entity_import('entityform_type', '{
     "type" : "ict_form",
-    "label" : "ict_form_mid",
+    "label" : "Mid financial year project reporting",
     "data" : {
       "draftable" : 0,
       "draft_redirect_path" : "",
@@ -30,7 +30,7 @@ function ict_entity_forms_default_entityform_type() {
       "submissions_view" : "default",
       "user_submissions_view" : "default",
       "form_status" : "ENTITYFORM_OPEN",
-      "roles" : { "3" : "3", "1" : 0, "2" : 0 },
+      "roles" : { "2" : "2", "3" : "3", "1" : 0 },
       "resubmit_action" : "new",
       "redirect_path" : "",
       "instruction_pre" : { "value" : "", "format" : "filtered_html" }
@@ -41,7 +41,7 @@ function ict_entity_forms_default_entityform_type() {
   }');
   $items['itc_form_end'] = entity_import('entityform_type', '{
     "type" : "itc_form_end",
-    "label" : "itc_form_end",
+    "label" : "End financial year project reporting",
     "data" : {
       "draftable" : 0,
       "draft_redirect_path" : "",
@@ -60,7 +60,7 @@ function ict_entity_forms_default_entityform_type() {
       "submissions_view" : "default",
       "user_submissions_view" : "default",
       "form_status" : "ENTITYFORM_OPEN",
-      "roles" : { "3" : "3", "1" : 0, "2" : 0 },
+      "roles" : { "2" : "2", "3" : "3", "1" : 0 },
       "resubmit_action" : "new",
       "redirect_path" : "",
       "instruction_pre" : { "value" : "", "format" : "filtered_html" }
