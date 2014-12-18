@@ -119,3 +119,12 @@ div#edit-field-rebaselined-total-budget td {
   color: #202b3d;
 }
 .page-node .tabs {display: none;}
+
+.pager li a {
+color: #0d6c88;
+}
+
+.pager li {
+  float: left;
+  padding: 10px;
+}
