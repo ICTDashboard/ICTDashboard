@@ -41,7 +41,7 @@ function ict_project_project_add_block () {
     $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
     $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
       $form['field_project_users']['und']['#title_display'] = $form['field_expenditure_type']['und']['#title_display'] = $form['field_project_status']['und']['#title_display'] = $form['field_internal_fte']['und'][0]['value']['#title_display'] = $form['field_external_fte']['und'][0]['value']['#title_display'] =
-      $form['field_rebaselined_total_project']['und'][0]['value']['#title_display'] =
+      $form['field_rebaselined_total_project']['und'][0]['value']['#title_display'] = $form['field_predicted_project_benefit']['und'][0]['value']['#title_display'] =
     'invisible';
 
     //add 33%-width to date select elements

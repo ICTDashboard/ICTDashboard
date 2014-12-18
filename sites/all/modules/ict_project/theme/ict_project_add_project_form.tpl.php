@@ -242,6 +242,20 @@
           </td>
         </tr>
 
+        <tr>
+          <td class="label">
+            <?php
+              print ict_project_bracket_italics ($form['field_predicted_project_benefit']['und']['#title']);
+            ?>
+          </td>
+          <td class="text">
+
+            <?php
+              print render($form['field_predicted_project_benefit']);
+            ?>
+
+          </td>
+        </tr>
 
         <tr>
           <td class="label">

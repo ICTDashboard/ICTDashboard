@@ -86,7 +86,7 @@
               <tr><td colspan="2"><div class="dotted-line"></div></td></tr>
               <tr>
                 <td class="label">Original total project budget <em>($m)</em></td>
-                <td class="text"><?php print ((int)$node->field_total_project_budget['und'][0]['value']).'$'; ?></td>
+                <td class="text"><?php print ((int)$node->field_total_project_budget['und'][0]['value']); ?></td>
               </tr>
               <tr>
                 <td class="label">Original Total project budget by FY <em>(predicted & past)</em></td>
@@ -128,7 +128,7 @@
               </tr>
               <tr>
                 <td class="label">Rebaselined total project budget <em>($m)</em></td>
-                <td class="text"><?php print $node->field_rebaselined_total_budget['und'][0]['value'].'$'; ?></td>
+                <td class="text"><?php print $node->field_rebaselined_total_budget['und'][0]['value']; ?></td>
               </tr>
               <tr>
                 <td class="label">Rebaselined Total project budget by FY <em>(predicted & past)</em></td>
@@ -166,6 +166,11 @@
                     ?>
                     </tr></tbody></table>
                 </td>
+              </tr>
+              <tr>
+                <td class="label">
+                  Predicted project benefit <em>($m, as identified in business case) </em></td>
+                <td class="text"><?php print ucfirst($node->field_predicted_project_benefit['und'][0]['value']); ?></td>
               </tr>
               <tr>
                 <td class="label">Project status</td>

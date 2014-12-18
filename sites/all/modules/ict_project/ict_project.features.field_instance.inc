@@ -704,6 +704,52 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-project-field_predicted_project_benefit'
+  $field_instances['node-project-field_predicted_project_benefit'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 37,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_predicted_project_benefit',
+    'label' => 'Predicted project benefit ($m, as identified in business case) ',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 33,
+    ),
+  );
+
   // Exported field_instance: 'node-project-field_program_name'
   $field_instances['node-project-field_program_name'] = array(
     'bundle' => 'project',
@@ -1282,6 +1328,7 @@ function ict_project_field_default_field_instances() {
   t('Original project start date');
   t('Original total project budget ($m)');
   t('Please separate each title with a comma.');
+  t('Predicted project benefit ($m, as identified in business case) ');
   t('Project category');
   t('Project description');
   t('Project manager');
