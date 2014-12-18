@@ -110,24 +110,6 @@ function ict_project_project_add_block () {
  */
 function ict_project_form_alter( &$form, &$form_state,$form_id){
 
-//  Alter webform "ICT Project Update Form" to allow users select only projects where they are
-
-  if($form_id == 'webform_client_form_1662'){
-    global $user;
-    $id = $user->uid;
-    $query = db_select('node', 'node');
-    $query->fields('node', array('title','nid'));
-    $query->leftJoin('field_data_field_project_users', 'u', 'u.entity_id  = node.nid');
-    $query->condition('node.type', 'project', '=');
-    $query->condition('u.field_project_users_uid', $id, '=');
-    $projects = $query->execute()->fetchAll();
-    $form['submitted']['project']['#options'] = array();
-    $form['submitted']['project']['#options']['#default_value'] = 'Select project';
-    foreach($projects as $option){
-      $form['submitted']['project']['#options'][$option->nid] = $option->title;
-    }
-  }
-
   if($form_id == 'project_node_form') {
     ksort($form['field_project_stage']['und']['#options']);
     $form['#theme'] = 'ict_project_add_project_form';
@@ -148,7 +130,9 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'ict_form_entityform_edit_form') {
     $project = ict_project_get_project();
+    $default_project = ict_project_get_project_update();
     $form['field_mid_project']['und']['#options'] = $project;
+    $form['field_mid_project']['und']['#default_value'] = $default_project;
     $form['field_mid_project'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
     $form['#theme'] = 'ict_project_mid_project_form';
     $form['field_mid_project']['und']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
@@ -192,7 +176,9 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
     $project = ict_project_get_project();
+    $default_project = ict_project_get_project_update();
     $form['field_end_project']['und']['#options'] = $project;
+    $form['field_mid_project']['und']['#default_value'] = $default_project;
     $form['field_end_project'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
     $form['#theme'] = 'ict_project_end_project_form';
     $form['field_end_project']['und']['#title_display'] =
@@ -348,3 +334,15 @@ function ict_project_node_insert (&$node) {
 
 
 
+function ict_project_get_project_update() {
+  global $user;
+  $id = $user->uid;
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));
+  $query->condition('n.type', 'project', '=');
+  $query->condition('n.uid', $id, '=');
+  $query->orderBy('created', 'ASC');
+  $projects = $query->execute()->fetchField();
+
+  return $projects;
+}
