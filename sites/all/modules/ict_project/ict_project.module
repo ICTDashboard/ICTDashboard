@@ -121,7 +121,6 @@ function ict_project_add_status_tooltips (&$form) {
 
   $form['#attached']['css'][] = drupal_get_path('module', 'ict_project') . '/css/tooltipster.css';
   $form['#attached']['js'][] = drupal_get_path('module', 'ict_project') . '/js/jquery.tooltipster.min.js';
-  $form['#attached']['js'][] = drupal_get_path('module', 'ict_project') . '/js/corner.js';
 }
 
 
