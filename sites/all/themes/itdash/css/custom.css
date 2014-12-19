@@ -135,9 +135,14 @@ div#edit-field-rebaselined-total-budget td {
     border: 1px solid #137992;
     padding: 0 2px 2px;
     border-radius: 100%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
     color: #fff;
     font-weight: bold;
     font-size: 11px;
+    position: relative;
+    behavior: url(PIE.php);
 }
 .tooltipster-icon:hover {background-color: #0a5f74;}
 .radio-description .form-item {float: left;}

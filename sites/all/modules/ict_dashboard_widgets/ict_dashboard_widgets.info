@@ -1,7 +1,7 @@
 name = ICT Dashboard Widgets
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.0
+version = 7.x-1.2
 project = ict_dashboard_widgets
 dependencies[] = dashboard
 dependencies[] = features
@@ -20,4 +20,4 @@ features[variable][] = node_options_page
 features[variable][] = node_submitted_page
 features_exclude[dependencies][ict_project] = ict_project
 features_exclude[dependencies][strongarm] = strongarm
-mtime = 1418816379
+mtime = 1418946082
