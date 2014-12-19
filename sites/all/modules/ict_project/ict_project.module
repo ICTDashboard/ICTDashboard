@@ -116,11 +116,12 @@ function ict_project_add_status_tooltips (&$form) {
 
   foreach (element_children($form['und']) as $item) {
     $form['und'][$item]['#prefix'] = '<div class="radio-description">';
-    $form['und'][$item]['#suffix'] = '<span title="' . $tooltips[$item] . '"'  . ' class="tooltipster-icon">(?)</span></div>';
+    $form['und'][$item]['#suffix'] = '<span class="corner iradius50 tooltipster-icon" title="' . $tooltips[$item] . '"'  . ' >(?)</span></div>';
   }
 
   $form['#attached']['css'][] = drupal_get_path('module', 'ict_project') . '/css/tooltipster.css';
   $form['#attached']['js'][] = drupal_get_path('module', 'ict_project') . '/js/jquery.tooltipster.min.js';
+  $form['#attached']['js'][] = drupal_get_path('module', 'ict_project') . '/js/corner.js';
 }
 
 
