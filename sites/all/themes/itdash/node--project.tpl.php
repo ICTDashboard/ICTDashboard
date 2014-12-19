@@ -156,7 +156,7 @@
               </tr>
               <?php if (!empty($node->field_rebaselined_total_budget['und'][0]['value'])) : ?>
                 <tr>
-                  <td class="label">Rebaselined Total project budget by FY <em>($m, predicted & past)</em></td>
+                  <td class="label">Rebaselined total project budget <em>($m)</td>
                   <td class="text"><?php print $node->field_rebaselined_total_budget['und'][0]['value']; ?></td>
                 </tr>
               <?php endif; ?>
