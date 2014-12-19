@@ -40,7 +40,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
         margin-top: 40px;
     }
 .treemap {
-width:100%;
+width:115%;
 background-color: #fff;
 background-image: none; 
 font-size: 14px;
@@ -206,7 +206,7 @@ return d.dx > d.w ? 1 : 0; });
         margin-top: 40px;
     }
 .treemap {
-width:100%;
+width:115%;
 background-color: #fff;
 background-image: none; 
 font-size: 14px;
