@@ -39,8 +39,16 @@ function ict_dashboard_widgets_uuid_features_default_content() {
         margin: auto;
         margin-top: 40px;
     }
-#treemap {
-width: 930px;
+.treemap {
+width:100%;
+background-color: #fff;
+background-image: none; 
+font-size: 14px;
+line-height: 36px;
+height: 36px;
+position: relative;
+z-index: 1;
+border: 0 none;
 }
 
     text {
@@ -50,12 +58,35 @@ width: 930px;
     rect {
         fill: none;
     }
+.select-wrapper:after {
+content: "\\f0dc";
+font-family: FontAwesome;
+position: absolute;
+top: 5px;
+right: 5px;
+width: 10px;
+height: 10px;
+z-index: 2;
+cursor: pointer;
+color: #202b3d;
+}
+.select-wrapper {
+display: block;
+height: 36px;
+overflow: hidden;
+position: relative;
+width: 300px;
+border: 1px solid #b3bdcf;
+border-radius: 3px;
+cursor: pointer;
+background: #fff;
+}
 
 </style>
-        <div><select class="treemap">
+        <p class="select-wrapper"><select class="treemap">
                 <option value="size">Value of Projects</option>
                 <option value="count">Number of Projects</option>
-            </select></div>
+            </select></p>
 <div id="treemap"></div>
 <script type="text/javascript">
     var w = 930 - 80,
@@ -174,8 +205,16 @@ return d.dx > d.w ? 1 : 0; });
         margin: auto;
         margin-top: 40px;
     }
-#treemap {
-width: 930px;
+.treemap {
+width:100%;
+background-color: #fff;
+background-image: none; 
+font-size: 14px;
+line-height: 36px;
+height: 36px;
+position: relative;
+z-index: 1;
+border: 0 none;
 }
 
     text {
@@ -185,11 +224,34 @@ width: 930px;
     rect {
         fill: none;
     }
+.select-wrapper:after {
+content: "\\f0dc";
+font-family: FontAwesome;
+position: absolute;
+top: 5px;
+right: 5px;
+width: 10px;
+height: 10px;
+z-index: 2;
+cursor: pointer;
+color: #202b3d;
+}
+.select-wrapper {
+display: block;
+height: 36px;
+overflow: hidden;
+position: relative;
+width: 300px;
+border: 1px solid #b3bdcf;
+border-radius: 3px;
+cursor: pointer;
+background: #fff;
+}
 
 
 /*--><!]]>*/
-</style><div>
-<select class="treemap"><option value="size">Value of Projects</option><br /><option value="count">Number of Projects</option><br /></select></div>
+</style><p class="select-wrapper">
+<select class="treemap"><option value="size">Value of Projects</option><br /><option value="count">Number of Projects</option><br /></select></p>
 <div id="treemap"></div>
 <script type="text/javascript">
 <!--//--><![CDATA[// ><!--
