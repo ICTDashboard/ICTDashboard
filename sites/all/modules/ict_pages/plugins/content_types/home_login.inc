@@ -43,9 +43,9 @@ function ict_pages_home_login_render ($subtype, $conf, $panel_args, $context = N
   $block->content = '
     <div class="welcome dotbg">
 				<div class="wrap cf">
-					<h1>IT Projects Dashboard</h1>
+					<h1>ICT Projects Dashboard</h1>
 					<div class="welcome-text d-2of3 t-1of2">
-						<p>The IT Projects Dashboard provides information on the performance of major Australian government ICT projects. The dashboard allows for the public, industry, and government agencies to track ICT projects against their predicted schedules, budgets, resource allocations, and compare theose with actuals, which are updated as part of mid and end year financial reporting.</p>
+						<p>The ICT Projects Dashboard provides information on the performance of major Australian government ICT projects. The dashboard allows for the public, industry, and government agencies to track ICT projects against their predicted schedules, budgets, resource allocations, and compare theose with actuals, which are updated as part of mid and end year financial reporting.</p>
 					</div>
 					' . $form . '
 				</div>
