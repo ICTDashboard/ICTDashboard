@@ -161,7 +161,7 @@
                 </tr>
               <?php endif; ?>
               <tr>
-                <td class="label">Rebaselined Total project budget by FY <em>(predicted & past)</em></td>
+                <td class="label">Rebaselined Total project budget by FY <em>($m, predicted & past)</em></td>
                 <td class="text">
                     <?php
                     $fci = $node->field_rebaselined_total_budget['und'];
