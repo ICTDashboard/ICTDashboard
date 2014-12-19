@@ -141,8 +141,8 @@ div#edit-field-rebaselined-total-budget td {
     color: #fff;
     font-weight: bold;
     font-size: 11px;
-    behavior: url(PIE.htc);
     position: relative;
+    behavior: url(PIE.htc);
 }
 .tooltipster-icon:hover {background-color: #0a5f74;}
 .radio-description .form-item {float: left;}
