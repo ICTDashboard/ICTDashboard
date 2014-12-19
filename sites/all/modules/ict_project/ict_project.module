@@ -163,13 +163,12 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
-    $project = ict_project_get_project();
     $default_project = ict_project_get_project_update();
-    $form['field_mid_project']['und']['#options'] = $project;
-    $form['field_mid_project']['und']['#default_value'] = $default_project;
-    $form['field_mid_project'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
+    $form['field_mid_project_name']['und'][0]['value']['#type'] = 'hidden';
+    $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project;
+    $form['field_mid_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
     $form['#theme'] = 'ict_project_mid_project_form';
-    $form['field_mid_project']['und']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
+    $form['field_mid_project_name']['und'][0]['value']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
     $form['field_mid_project_manager_email']['und'][0]['value']['#title_display'] =
     $form['field_mid_revised_total_project']['und'][0]['value']['#title_display'] =
     $form['field_mid_total_project_spend']['und'][0]['value']['#title_display'] =
@@ -209,13 +208,12 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
-    $project = ict_project_get_project();
     $default_project = ict_project_get_project_update();
-    $form['field_end_project']['und']['#options'] = $project;
-    $form['field_mid_project']['und']['#default_value'] = $default_project;
-    $form['field_end_project'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
+    $form['field_end_project_name']['und'][0]['value']['#type'] = 'hidden';
+    $form['field_end_project_name']['und'][0]['value']['#default_value'] = $default_project;
+    $form['field_end_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
     $form['#theme'] = 'ict_project_end_project_form';
-    $form['field_end_project']['und']['#title_display'] =
+    $form['field_end_project_name']['und'][0]['value']['#title_display'] =
     $form['field_end_project_stage']['und']['#title_display'] =
     $form['field_end_project_manager']['und'][0]['value']['#title_display'] =
     $form['field_end_project_manager_email']['und'][0]['value']['#title_display'] =
@@ -374,7 +372,7 @@ function ict_project_get_project_update() {
   global $user;
   $id = $user->uid;
   $query = db_select('node', 'n');
-  $query->fields('n', array('nid'));
+  $query->fields('n', array('title'));
   $query->condition('n.type', 'project', '=');
   $query->condition('n.uid', $id, '=');
   $query->orderBy('created', 'ASC');
