@@ -395,6 +395,40 @@ function ict_entity_forms_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'entityform-ict_form-field_mid_project_name'
+  $field_instances['entityform-ict_form-field_mid_project_name'] = array(
+    'bundle' => 'ict_form',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 16,
+      ),
+    ),
+    'entity_type' => 'entityform',
+    'field_name' => 'field_mid_project_name',
+    'label' => 'Project name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 17,
+    ),
+  );
+
   // Exported field_instance: 'entityform-ict_form-field_mid_project_stage'
   $field_instances['entityform-ict_form-field_mid_project_stage'] = array(
     'bundle' => 'ict_form',
@@ -999,6 +1033,40 @@ function ict_entity_forms_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'entityform-itc_form_end-field_end_project_name'
+  $field_instances['entityform-itc_form_end-field_end_project_name'] = array(
+    'bundle' => 'itc_form_end',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 17,
+      ),
+    ),
+    'entity_type' => 'entityform',
+    'field_name' => 'field_end_project_name',
+    'label' => 'Project name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
+    ),
+  );
+
   // Exported field_instance: 'entityform-itc_form_end-field_end_project_stage'
   $field_instances['entityform-itc_form_end-field_end_project_stage'] = array(
     'bundle' => 'itc_form_end',
@@ -1352,6 +1420,7 @@ function ict_entity_forms_field_default_field_instances() {
   t('Project manager ');
   t('Project manager email');
   t('Project manager email ');
+  t('Project name');
   t('Project stage');
   t('Project status');
   t('Revised total project budget ($m)');
