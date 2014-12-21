@@ -113,7 +113,7 @@
               <?php if (!empty($node->field_total_project_budget['und'][0]['value'])) : ?>
                 <tr>
                   <td class="label">Original total project budget <em>($m)</em></td>
-                  <td class="text"><?php print ((int)$node->field_total_project_budget['und'][0]['value']); ?></td>
+                  <td class="text">$<?php print ((int)$node->field_total_project_budget['und'][0]['value']); ?>m</td>
                 </tr>
               <?php endif; ?>
               <tr>
@@ -156,8 +156,8 @@
               </tr>
               <?php if (!empty($node->field_rebaselined_total_budget['und'][0]['value'])) : ?>
                 <tr>
-                  <td class="label">Rebaselined total project budget <em>($m)</td>
-                  <td class="text"><?php print $node->field_rebaselined_total_budget['und'][0]['value']; ?></td>
+                  <td class="label">Rebaselined total project budget <em>($m)</em></td>
+                  <td class="text">$<?php print $node->field_rebaselined_total_budget['und'][0]['value']; ?>m</td>
                 </tr>
               <?php endif; ?>
               <tr>
@@ -201,7 +201,7 @@
                 <tr>
                   <td class="label">
                     Predicted project benefit <em>($m, as identified in business case) </em></td>
-                  <td class="text"><?php print ucfirst($node->field_predicted_project_benefit['und'][0]['value']); ?></td>
+                  <td class="text">$<?php print ucfirst($node->field_predicted_project_benefit['und'][0]['value']); ?>m</td>
                 </tr>
               <?php endif; ?>
               <?php if (!empty($node->field_project_status['und'][0]['value'])) : ?>
