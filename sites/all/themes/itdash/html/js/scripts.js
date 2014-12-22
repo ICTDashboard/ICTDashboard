@@ -84,6 +84,8 @@ jQuery(document).ready(function($) {
           $('#' + id + '-und-0-value-year').val(dateText.split('/')[2]);
           $('#' + id + '-und-0-value-month').val(dateText.split('/')[0]);
           $('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
+		  $('.form-select').selectbox('detach');
+		  $('.form-select').selectbox('attach');
         }
       });
     });
@@ -158,4 +160,6 @@ jQuery(document).ready(function($) {
 			});
 		}
     });
+	
+	$('.form-select').selectbox();
 }); /* end of as page load scripts */
