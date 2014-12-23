@@ -65,7 +65,8 @@
 	top: 30px;
 	width: 100.30%;
 	z-index: 1;
-	overflow-y: auto;
+	overflow-y: scroll !important;
+	max-height: 216px !important;
 }
 .sbOptions li{
 	padding: 0 7px;
