@@ -250,7 +250,6 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       }
     }
     asort($sort);
-    dsm($sort);
     foreach($sort as $key=>$field) {
       $fields[] = $key;
     }
