@@ -187,11 +187,17 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     // Open the file for writing.
     $fields = array();
-    $exclude = array('field_mid_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    $exclude = array('field_mid_project_name', 'field_mid_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    $sort = array();
     foreach(element_children($form) as $field) {
       if(!in_array($field, $exclude)) {
-        $fields[] = $field;
+        $sort[$field] = $form[$field]['#weight'];
       }
+    }
+    asort($sort);
+
+    foreach($sort as $key=>$field) {
+      $fields[] = $key;
     }
 
     $file_path = drupal_get_path('module', 'ict_project') . '/export.csv';
@@ -205,6 +211,8 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
     );
 
+    $form['field_mid_project_status']['und']['#required'] = FALSE;
+    $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
@@ -234,11 +242,17 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     // Open the file for writing.
     $fields = array();
-    $exclude = array('field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    $sort = array();
+    $exclude = array('field_end_project_name', 'field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
     foreach(element_children($form) as $field) {
       if(!in_array($field, $exclude)) {
-        $fields[] = $field;
+        $sort[$field] = $form[$field]['#weight'];
       }
+    }
+    asort($sort);
+
+    foreach($sort as $key=>$field) {
+      $fields[] = $key;
     }
 
     $file_path = drupal_get_path('module', 'ict_project') . '/export_end.csv';
@@ -263,6 +277,10 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
     );
+
+    $form['field_end_project_status']['und']['#required'] = FALSE;
+    $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
+
   }
 }
 
@@ -379,4 +397,53 @@ function ict_project_get_project_update() {
   $projects = $query->execute()->fetchField();
 
   return $projects;
+}
+
+
+
+function ict_project_csv_submit_form_submit($form, &$form_state) {
+  //Load file
+  if($form['#form_id'] == 'itc_form_end_entityform_edit_form') {
+    $file_field = 'field_end_csv_file';
+  }else{
+    $file_field = 'field_mid_csv_file';
+  }
+
+  $fid = $form_state['values'][$file_field][LANGUAGE_NONE][0]['fid'];
+  $csv_file = file_load($fid);
+  if(!empty($csv_file)) {
+    //Open csv
+    $handle = fopen($csv_file->uri, 'r');
+    $row = fgetcsv($handle);
+    //Read columns
+    $columns = array();
+    foreach ($row as $i => $header) {
+      $columns[$i] = trim($header);
+    }
+
+    //Read value and filled field form - form state
+    while ($row = fgetcsv($handle)) {
+      foreach ($row as $i => $field) {
+        switch ($columns[$i]) {
+          case 'field_mid_project_stage':
+          case 'field_mid_project_status':
+          case 'field_end_project_stage':
+          case 'field_end_project_status':
+            $form_state['input'][$columns[$i]][LANGUAGE_NONE] = $field;
+            break;
+          case 'field_mid_expected_project':
+          case 'field_end_expected_project':
+            $date = explode('/', $field);
+            $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value']['day'] = $date[0];
+            $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value']['month'] = $date[1];
+            $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value']['year'] = $date[2];
+            break;
+          default:
+            $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value'] = $field;
+        }
+      }
+    }
+    drupal_set_message(t('You\'ve successfully submitted form via CSV'));
+  }
+
 }
