@@ -189,7 +189,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     // Open the file for writing.
     $fields = array();
-    $exclude = array('field_mid_project_name', 'field_mid_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    $exclude = array('field_mid_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
     $sort = array();
     foreach(element_children($form) as $field) {
       if(!in_array($field, $exclude)) {
@@ -247,7 +247,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     // Open the file for writing.
     $fields = array();
     $sort = array();
-    $exclude = array('field_end_project_name', 'field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    $exclude = array('field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
     foreach(element_children($form) as $field) {
       if(!in_array($field, $exclude)) {
         $sort[$field] = $form[$field]['#weight'];
