@@ -167,7 +167,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $default_project = ict_project_get_project_update();
     $form['field_mid_project_name']['und']['#options'] = $project;
     $form['field_mid_project_name']['und']['#default_value'] = $default_project;
-    $form['field_mid_project_name'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
+    //$form['field_mid_project_name'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
 
     $form['#theme'] = 'ict_project_mid_project_form';
     $form['field_mid_project_name']['und']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
@@ -222,7 +222,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $default_project = ict_project_get_project_update();
     $form['field_end_project_name']['und']['#options'] = $project;
     $form['field_end_project_name']['und']['#default_value'] = $default_project;
-    $form['field_end_project_name'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
+    //$form['field_end_project_name'][LANGUAGE_NONE]['#attributes']['disabled'] = TRUE;
 
     $form['#theme'] = 'ict_project_end_project_form';
     $form['field_end_project_name']['und']['#title_display'] =
