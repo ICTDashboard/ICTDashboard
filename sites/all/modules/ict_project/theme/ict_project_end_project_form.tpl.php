@@ -9,14 +9,9 @@
 		<form class="node-form node-project-form" action="/node/add/project" method="post" id="project-node-form" accept-charset="UTF-8">
 			<table>
 				<tr>
-					<td class="label">
-						<?php
-							print $form['field_end_project']['und']['#title'];
-						?>
-					</td>
 					<td class="text">
 						<?php
-							print render($form['field_end_project']);
+							print render($form['field_end_project_name']);
 						?>
 					</td>
 				</tr>

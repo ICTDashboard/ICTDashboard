@@ -124,8 +124,26 @@ div#edit-field-rebaselined-total-budget td {
   color: #0d6c88;
   text-decoration: none;
 }
-
 .pager li {
   float: left;
   padding: 10px;
 }
+.tooltipster-icon {
+    cursor: help;
+    margin-left: 4px;
+    background: #137992;
+    border: 1px solid #137992;
+    padding: 0 2px 2px;
+    border-radius: 100%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 11px;
+    position: relative;
+    behavior: url(PIE.php);
+}
+.tooltipster-icon:hover {background-color: #0a5f74;}
+.radio-description .form-item {float: left;}
+.header #logo {font-size: 29px;}

@@ -546,6 +546,7 @@ CONTENT STYLES
 							margin: 0;
 							height: 36px;
 							line-height: 36px;
+							padding: 0 10px;
 							
 							&:hover, &:focus {
 								border: 1px solid #02a7a4;
@@ -556,7 +557,7 @@ CONTENT STYLES
 						}
 						
 						div.form-item-field-project-users-und { position: relative; }
-						div.form-type-select:not(.form-item-field-project-users-und) {
+						/* div.form-type-select:not(.form-item-field-project-users-und) {
 							display: block;
 							height: 36px;
 							overflow: hidden;
@@ -590,7 +591,7 @@ CONTENT STYLES
 								
 								option { font-style: normal; }
 							}
-						}
+						} */
 						p {
 							margin: 0;
 							
@@ -862,8 +863,12 @@ CONTENT STYLES
 										}
 										
 										select {
-											max-width: 117%;
-											width: 117%;
+											max-width: 100%;
+											width: 100%;
+											border: 0 none;
+											text-align: center;
+											text-indent: 40%;
+											outline: 0 none;
 										}
 									}
 									
@@ -1001,7 +1006,12 @@ CONTENT STYLES
 							top: 6px;
 						}
 						
-						div.form-type-select:not(.form-item-field-project-users-und) {
+						div.form-item:last-child {
+							margin-right: 0;
+							padding-right: 0;
+						}
+						
+						/* div.form-type-select:not(.form-item-field-project-users-und) {
 							width: 33.33%;
 							background: none;
 							border: 0 none;
@@ -1039,7 +1049,7 @@ CONTENT STYLES
 								width: 120%;
 								max-width: 120%;
 							}
-						}
+						} */
 					}
 				}
 			}

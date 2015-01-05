@@ -21,5 +21,13 @@
 
     });
 
+    if ($('.tooltipster-icon').length) {
+      $('.tooltipster-icon').each(function () {
+        $(this).tooltipster({
+          position: 'right'
+        });
+      });
+    }
+
   });
 })(jQuery);

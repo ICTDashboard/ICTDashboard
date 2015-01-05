@@ -84,6 +84,8 @@ jQuery(document).ready(function($) {
           $('#' + id + '-und-0-value-year').val(dateText.split('/')[2]);
           $('#' + id + '-und-0-value-month').val(dateText.split('/')[0]);
           $('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
+		  $('.form-select').selectbox('detach');
+		  $('.form-select').selectbox('attach');
         }
       });
     });
@@ -114,9 +116,10 @@ jQuery(document).ready(function($) {
 			'border-radius': '4px 4px 0 0'
 		});
 	}
-	$('.field-multiple-drag').remove();
+	
 	$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 0);
 	$('.tabledrag-toggle-weight').click(function(){
+		console.log('test');
 		if( $('.delta-order.tabledrag-hide').is(':visible') ) {
 			// Visible
 			console.log('visible');
@@ -140,22 +143,8 @@ jQuery(document).ready(function($) {
 	
 	$("body").bind("ajaxComplete", function(e, xhr, settings){
 		$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 0);
-		if( $('.delta-order.tabledrag-hide').is(':visible') ) {
-			// Visible
-			$('.tabledrag-hide').prev('td').css({
-				'border-right': '0 none'
-			});
-			$('.tabledrag-hide').prev('th').css({
-				'border-radius': '4px 0 0 0'
-			});
-		} else {
-			// Invisible 
-			$('.tabledrag-hide').prev('td').css({
-				'border-right': '1px solid #abb6cb'
-			});
-			$('.tabledrag-hide').prev('th').css({
-				'border-radius': '4px 4px 0 0'
-			});
-		}
     });
+	
+	$('.form-select').selectbox();
+	$('.field_implementation_partners-delta-order').selectbox('detach');
 }); /* end of as page load scripts */

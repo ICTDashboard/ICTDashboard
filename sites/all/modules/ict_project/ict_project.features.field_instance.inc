@@ -690,7 +690,7 @@ function ict_project_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_original_total_budget',
-    'label' => 'Original Total project budget by FY (predicted & past)',
+    'label' => 'Original Total project budget by FY ($m, predicted & past)',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1152,7 +1152,7 @@ function ict_project_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_rebaselined_total_budget',
-    'label' => 'Rebaselined Total project budget by FY (predicted & past)',
+    'label' => 'Rebaselined Total project budget by FY ($m, predicted & past)',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1323,7 +1323,7 @@ function ict_project_field_default_field_instances() {
   t('Implementation Partners?');
   t('Internal FTE');
   t('Opex');
-  t('Original Total project budget by FY (predicted & past)');
+  t('Original Total project budget by FY ($m, predicted & past)');
   t('Original project completion date');
   t('Original project start date');
   t('Original total project budget ($m)');
@@ -1335,7 +1335,7 @@ function ict_project_field_default_field_instances() {
   t('Project manager email');
   t('Project stage');
   t('Project status');
-  t('Rebaselined Total project budget by FY (predicted & past)');
+  t('Rebaselined Total project budget by FY ($m, predicted & past)');
   t('Rebaselined project completion date');
   t('Rebaselined project start date');
   t('Rebaselined total project budget ($m)');
