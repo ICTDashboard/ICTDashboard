@@ -81,8 +81,8 @@ jQuery(document).ready(function($) {
         buttonImageOnly: true,
         showOn: 'button',
         onClose: function(dateText, inst) {
-          $('#' + id + '-und-0-value-year').val(dateText.split('/')[2]);
-          $('#' + id + '-und-0-value-month').val(dateText.split('/')[0]);
+          $('#' + id + '-und-0-value-year').val(Number(dateText.split('/')[2]));
+          $('#' + id + '-und-0-value-month').val(Number(dateText.split('/')[0]));
           $('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
 		  $('.form-select').selectbox('detach');
 		  $('.form-select').selectbox('attach');
