@@ -253,7 +253,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     foreach($sort as $key=>$field) {
       $fields[] = $key;
     }
-
+    dsm($fields);
     $file_path = drupal_get_path('module', 'ict_project') . '/export_end.csv';
     $fh = fopen($file_path, 'w');
     fputcsv($fh, $fields);
