@@ -596,7 +596,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat)
             // Draw the Chart Rows
             vRightTable = 
             '<TD style="width: ' + vChartWidth + 'px;" vAlign=top bgColor=#ffffff>' +
-            '<DIV class=scroll2 id=rightside style="overflow-x: scroll;          width: 460px;">' +
+            '<DIV class=scroll2 id=rightside style="overflow-x: scroll;-ms-overflow-x: scroll; width: 460px; position:relative;">' +
             '<TABLE style="width: ' + vChartWidth + 'px;" cellSpacing=0 cellPadding=0 border=0>' +
             '<TBODY><TR style="HEIGHT: 18px">';
 
