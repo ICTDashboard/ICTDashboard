@@ -1,160 +1,69 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="../css/jsgantt.css" />
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!--[if lte IE 8]>  <script type="text/javascript" src="../js/r2d3.min.js"></script><![endif]-->
+    <!--[if gte IE 9]><!-->
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="http://itdash.127.0.0.1.xip.io/sites/all/themes/itdash/js/d3-timeline.js"></script>
+    <!--<![endif]-->
+    <script type="text/javascript" src="../js/moment.min.js"></script>
+    <script language="javascript" src="../js/jsgantt.js"></script>
+    </head><body>
+    <div style="position:relative" class="gantt" id="GanttChartDIV"></div>
+    <script>
 
-    <style type="text/css">
-        .axis path,
-        .axis line {
-            fill: none;
-            stroke: black;
-            shape-rendering: crispEdges;
-        }
+        var g = new JSGantt.GanttChart('g', document.getElementById('GanttChartDIV'), 'year');
+        jQuery(document).ready(function () {
+            var source = [];
+            d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+start_date%2C+end_date%2C+expected_end_date%2C+total_value%2C+expected_total_value%0AFROM+%28select+name%2C+value+as+start_date+from%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27start_date%27++%29+p+full+outer+JOIN%0A++%28select+name%2C+value+as+end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27end_date%27+%29+a+on+p.name+%3D+a.name+full+outer+JOIN%0A++%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+v+on+p.name+%3D+v.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_end_date+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27original_completion_date%27%29+c+on+p.name+%3D+c.name+full+outer+JOIN%0A++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp%0Afrom+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp%0Awhere+d.metric+%3D+%27current_total_expected_budget%27%29+b+on+p.name+%3D+b.name+",
+                function (error, data) {
 
-        .axis text {
-            font-family: sans-serif;
-            font-size: 10px;
-        }
 
-        .timeline-label {
-            font-family: sans-serif;
-            font-size: 12px;
-        }
+                    g.setShowRes(0); // Show/Hide Responsible (0/1)
+                    g.setShowDur(0); // Show/Hide Duration (0/1)
+                    g.setShowComp(0); // Show/Hide % Complete(0/1)
+                    //g.setCaptionType('Resource');  // Set to Show Caption
 
-        #timeline2 .axis {
-            transform: translate(0px,30px);
-            -ms-transform: translate(0px,30px); /* IE 9 */
-            -webkit-transform: translate(0px,30px); /* Safari and Chrome */
-            -o-transform: translate(0px,30px); /* Opera */
-            -moz-transform: translate(0px,30px); /* Firefox */
-        }
+                    if (g) {
+                        /*TaskItem(pID, pName, pStart, pEnd, pColor, pLink, pMile, pRes, pComp, pGroup, pParent, pOpen, pDepend)
+                         pID: (required) is a unique ID used to identify each row for parent functions and for setting dom id for hiding/showing
+                         pName: (required) is the task Label
+                         pStart: (required) the task start date, can enter empty date ('') for groups. You can also enter specific time (2/10/2008 12:00) for additional percision or half days.
+                         pEnd: (required) the task end date, can enter empty date ('') for groups
+                         pColor: (required) the html color for this task; e.g. '00ff00'
+                         pLink: (optional) any http link navigated to when task bar is clicked.
+                         pMile:(optional) represent a milestone
+                         pRes: (optional) resource name
+                         pComp: (required) completion percent
+                         pGroup: (optional) indicates whether this is a group(parent) - 0=NOT Parent; 1=IS Parent
+                         pParent: (required) identifies a parent pID, this causes this task to be a child of identified task
+                         pOpen: can be initially set to close folder when chart is first drawn
+                         pDepend: optional list of id's this task is dependent on ... line drawn from dependent to this item
+                         pCaption: optional caption that will be added after task bar if CaptionType set to "Caption"*/
+                        //g.AddTaskItem(new JSGantt.TaskItem(1,   'Define Chart API',     '',          '',          'ff0000', 'http://help.com', 0, 'Brian',     0, 1, 0, 1));
+                        var color = d3.scale.category20b();
+                        for (var i in data.result.records) {
+                            d = data.result.records[i];
+                            if (typeof(d.name) != "undefined" ) {
+                                g.AddTaskItem(new JSGantt.TaskItem(i,
+                                    d.name,
+                                    moment(d.start_date).format('DD/MM/YYYY'),
+                                    moment(d.expected_end_date).format('DD/MM/YYYY'),
+                                    color(i), '', 0, '', 0, 0, 0, 1));
+                            }
+                        }
 
-        .coloredDiv {
-            height:20px; width:20px; float:left;
-        }
-    </style>
-    <script type="text/javascript">
-        (function() {
+                        g.Draw();
+                        g.DrawDependencies();
 
-            var d = window.Date,
-                regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})?)?)?)?$/;
 
-            if (d.parse('2011-11-29T15:52:30') !== 1322581950500 ||
-                d.parse('2011-11-29') !== 1322524800000 ||
-                d.parse('2011-11') !== 1320105600000 ||
-                d.parse('2011') !== 1293840000000) {
-
-                d.__parse = d.parse;
-
-                d.parse = function(v) {
-
-                    var m = regexIso8601.exec(v);
-
-                    if (m) {
-                        return Date.UTC(
-                            m[1],
-                            (m[2] || 1) - 1,
-                            m[3] || 1,
-                            m[4] - (m[8] ? m[8] + m[9] : 0) || 0,
-                            m[5] - (m[8] ? m[8] + m[10] : 0) || 0,
-                            m[6] || 0,
-                            ((m[7] || 0) + '00').substr(0, 3)
-                        );
                     }
-
-                    return d.__parse.apply(this, arguments);
-
-                };
-            }
-
-            d.__fromString = d.fromString;
-
-            d.fromString = function(v) {
-
-                if (!d.__fromString || regexIso8601.test(v)) {
-                    return new d(d.parse(v));
-                }
-
-                return d.__fromString.apply(this, arguments);
-            };
-
-        })();
-        window.onload = function() {
-
-
-
-
-
-
-                    var width = 930;
-            var colorScale = d3.scale.ordinal().range(['#6b0000','#ef9b0f','#ffee00'])
-                .domain(['apple','orange','lemon']);
-
-            function timelineHover() {
-                d3.json("http://ckan.itdash.lws.links.com.au/api/action/datastore_search_sql?sql=<?php print urlencode("select distinct p.name, start_date, end_date, expected_end_date, total_value, expected_total_value
-FROM (select name, value as start_date from\"2133eaed-150b-4c73-a314-67a0bde04115\" where metric = 'original_completion_date'  ) p full outer JOIN
-  (select name, value as end_date from \"2133eaed-150b-4c73-a314-67a0bde04115\" where metric = 'start_date' ) a on p.name = a.name full outer JOIN
-  (select name, value as total_value from \"2133eaed-150b-4c73-a314-67a0bde04115\" where metric = 'total_project_budget' ) v on p.name = v.name full outer JOIN
-  (select DISTINCT d.name, d.value as expected_end_date from \"2133eaed-150b-4c73-a314-67a0bde04115\" d join (select name,metric, max(timestamp) as timestamp
-from \"2133eaed-150b-4c73-a314-67a0bde04115\" GROUP BY name,metric) s on d.metric=s.metric and d.timestamp=s.timestamp
-where d.metric = 'current_expected_completion_date') c on p.name = c.name full outer JOIN
-  (select DISTINCT d.name, d.value as expected_total_value from \"2133eaed-150b-4c73-a314-67a0bde04115\" d join (select name,metric, max(timestamp) as timestamp
-from \"2133eaed-150b-4c73-a314-67a0bde04115\" GROUP BY name,metric) s on d.metric=s.metric and d.timestamp=s.timestamp
-where d.metric = 'current_total_expected_budget') b on p.name = b.name ")?>",
-                    function(error, data) {
-                        labelTestData = data.result.records.map(function (d) {
-                            /* end_date: "2014-08-02T00:00:00"expected_end_date: "2015-08-10"expected_total_value: "70"name: "AAT Project B"start_date: "2015-07-02T00:00:00"total_value: "60.00"*/
-                            starting_time = Date.fromString(d.start_date).getTime();
-                            ending_time = Date.fromString(d.end_date).getTime();
-
-                            return {label: d.name,
-                                times: [{"starting_time": starting_time, "ending_time": ending_time}]}
-                        });
-                        /*                  .colors( colorScale )
-                         .colorProperty('budget')*/
-                var chart = d3.timeline()
-                    .width(width)
-                    .stack()
-                    .margin({left:170, right:30, top:0, bottom:0})
-
-                    .tickFormat({
-                            format: d3.time.format("%B %Y"),
-                                tickTime: d3.time.months})
-                    .hover(function (d, i, datum) {
-                        // d is the current rendering object
-                        // i is the index during d3 rendering
-                        // datum is the id object
-                        var div = $('#hoverRes');
-                        var colors = chart.colors();
-                        div.find('.coloredDiv').css('background-color', colors(i))
-                        div.find('#name').text(datum.label);
-                    })
-                    .click(function (d, i, datum) {
-                        console.log(datum.label);
-                    });
-
-                var svg = d3.select("#timeline3").append("svg").attr("width", width)
-                    .datum(labelTestData).call(chart);
-                    });
-            }
-
-            timelineHover();
-        }
+                    else {
+                        alert("not defined");
+                    }
+                });
+        });
     </script>
-</head>
-<body>
-
-<div>
-    <div id="timeline3"></div>
-    <div id="hoverRes">
-        <div class="coloredDiv"></div>
-        <div id="name"></div>
-        <div id="scrolled_date"></div>
-    </div>
-</div>
-
-
-</body>
+  </body>
 </html>
