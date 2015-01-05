@@ -406,9 +406,9 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat)
       var vNumDays = 0;
       var vDayWidth = 0;
       var vStr = "";
-      var vNameWidth = 220;	
+      var vNameWidth = 100;
       var vStatusWidth = 70;
-      var vLeftWidth = 15 + 220 + 70 + 70 + 70 + 70 + 70;
+      var vLeftWidth = 15 + vNameWidth + 70 + 70 + 70 + 70 + 70;
 
       if(vTaskList.length > 0)
       {
@@ -596,7 +596,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat)
             // Draw the Chart Rows
             vRightTable = 
             '<TD style="width: ' + vChartWidth + 'px;" vAlign=top bgColor=#ffffff>' +
-            '<DIV class=scroll2 id=rightside>' +
+            '<DIV class=scroll2 id=rightside style="overflow-x: scroll;          width: 460px;">' +
             '<TABLE style="width: ' + vChartWidth + 'px;" cellSpacing=0 cellPadding=0 border=0>' +
             '<TBODY><TR style="HEIGHT: 18px">';
 
@@ -1502,7 +1502,7 @@ JSGantt.taskLink = function(pRef,pWidth,pHeight)
     if(pWidth)  vWidth =pWidth;  else vWidth =400;
     if(pHeight) vHeight=pHeight; else vHeight=400;
 
-    var OpenWindow=window.open(pRef, "newwin", "height="+vHeight+",width="+vWidth); 
+   // var OpenWindow=window.open(pRef, "newwin", "height="+vHeight+",width="+vWidth);
 
   }
 
