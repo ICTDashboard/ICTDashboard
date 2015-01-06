@@ -8,18 +8,21 @@
 	<div class="project-update-submission d-all">
 		<form class="node-form node-project-form" action="/node/add/project" method="post" id="project-node-form" accept-charset="UTF-8">
 			<table>
+
 				<tr>
           <td class="label">
             <?php
-            print $form['field_mid_project_name']['und']['#title'];
+              print $form['mid_project_name_text']['#title'];
             ?>
           </td>
 					<td class="text">
 						<?php
-							print render($form['field_mid_project_name']);
+							print render($form['mid_project_name_text']);
+              print render($form['field_mid_project_name']);
 						?>
 					</td>
 				</tr>
+
 				<tr>
 					<td class="label">
 						<?php
