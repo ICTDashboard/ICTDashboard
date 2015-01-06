@@ -158,19 +158,6 @@
         <tr>
           <td class="label">
             <?php
-            print ict_project_bracket_italics($form['field_end_predicted_project']['und']['#title']);
-            ?>
-          </td>
-          <td class="text">
-            <?php
-            print render($form['field_end_predicted_project']);
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label">
-            <?php
             print ict_project_bracket_italics($form['field_end_predicted_realised']['und']['#title']);
             ?>
           </td>
