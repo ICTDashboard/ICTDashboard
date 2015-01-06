@@ -13,20 +13,6 @@
         <h2>Project Information</h2>
         <div class="project-view info d-all project-update-submission ">
 
-            <?php
-              $sql = 'SELECT DISTINCT d.name, s.timestamp, d.metric, d.value from "'.variable_get("ckan_resource_id").'"
-              d join (select name,metric, max(timestamp) as timestamp from "'.variable_get("ckan_resource_id").'" GROUP BY name,metric) s on d.metric=s.metric and d.timestamp=s.timestamp
-              WHERE d.name = \''.$node->title.'\'';
-              $url = variable_get("ckan_url").'/api/action/datastore_search_sql?sql='.urlencode($sql);
-              $request = drupal_http_request($url);
-              $result = json_decode($request->data);
-              $data = array();
-              $report_date = "";
-              foreach ($result->result->records as $row) {
-                $data[$row->metric][$row->timestamp] = $row->value;
-                $report_date = $row->timestamp;
-              }
-            ?>
           </pre>
           <table>
             <tbody>
