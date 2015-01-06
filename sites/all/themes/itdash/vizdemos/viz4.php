@@ -1,174 +1,300 @@
 <html><head>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<style type="text/css">
+    <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+    <!--[if lte IE 8]>  <script type="text/javascript" src="../js/r2d3.min.js"></script><![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+    <!--<![endif]-->
+    </head><body>
+    <style type="text/css">
+        #chart {
+            width: 960px;
+            height: 500px;
+            background: #ddd;
+        }
 
-    .chart {
-        display: block;
-        margin: auto;
-        margin-top: 40px;
-    }
+        text {
+            pointer-events: none;
+        }
 
-    text {
-        font-size: 11px;
-    }
+        .grandparent text {
+            font-weight: bold;
+        }
 
-    rect {
-        fill: none;
-    }
+        rect {
+            fill: none;
+            stroke: #fff;
+        }
 
-</style>
-</head>
-<body>
-<div id="body">
-    <div id="footer">
-        d3.layout.treemap
-        <div class="hint">click or option-click to descend or ascend</div>
-        <div><select>
-                <option value="size">Size</option>
-                <option value="count">Count</option>
-            </select></div>
-    </div>
-</div>
+        rect.parent,
+        .grandparent rect {
+            stroke-width: 2px;
+        }
+
+        .grandparent rect {
+            fill: orange;
+        }
+
+        .grandparent:hover rect {
+            fill: #ee9700;
+        }
+
+        .children rect.parent,
+        .grandparent rect {
+            cursor: pointer;
+        }
+
+        .children rect.parent {
+            fill: #bbb;
+            fill-opacity: 1;
+        }
+
+        .children:hover rect.child {
+            fill: #bbb;
+        }
+    </style>
+
+
+<div id="chart"></div>
+
 <script type="text/javascript">
-
-    var w = 1280 - 80,
-        h = 800 - 180,
-        x = d3.scale.linear().range([0, w]),
-        y = d3.scale.linear().range([0, h]),
-        color = d3.scale.category20c(),
-        root,
-        node;
-
-    var treemap = d3.layout.treemap()
-        .round(false)
-        .size([w, h])
-        .sticky(true)
-        .value(function(d) { return d.size; });
-
-    var svg = d3.select("#body").append("div")
-        .attr("class", "chart")
-        .style("width", w + "px")
-        .style("height", h + "px")
-        .append("svg:svg")
-        .attr("width", w)
-        .attr("height", h)
-        .append("svg:g")
-        .attr("transform", "translate(.5,.5)");
-
-    d3.json("http://ckan.itdash.lws.links.com.au/api/action/datastore_search_sql?sql=<?php echo urlencode("select distinct p.name, government_business_unit, government_programme, government_entity,total_value, expected_total_value
-FROM (select name, value as government_business_unit from\"2133eaed-150b-4c73-a314-67a0bde04115\" where metric = 'government_business_unit'  ) b full outer JOIN
-(select name, value as total_value from \"2133eaed-150b-4c73-a314-67a0bde04115\" where metric = 'total_project_budget' ) z on b.name =z.name full outer JOIN
-  (select name, value as government_programme from \"2133eaed-150b-4c73-a314-67a0bde04115\" where metric = 'government_programme' ) p on p.name = b.name full outer JOIN
-(select name, value as government_entity from \"2133eaed-150b-4c73-a314-67a0bde04115\" where metric = 'government_entity' ) e on p.name = e.name full outer JOIN
-   (select DISTINCT d.name, d.value as expected_total_value from \"2133eaed-150b-4c73-a314-67a0bde04115\" d join (select name,metric, max(timestamp) as timestamp 
-from \"2133eaed-150b-4c73-a314-67a0bde04115\" GROUP BY name,metric) s on d.metric=s.metric and d.timestamp=s.timestamp 
-where d.metric = 'current_total_expected_budget') t on p.name = t.name  ");?>",
-        function(error, data) {
-            ents = {};
-            progs = {};
-            gbus = {};
-            datum = {
-                "name": "flare",
-                "children": []
-            };
-            for (var i in data.result.records) {
-                d = data.result.records[i];
-                if (typeof ents[d.government_entity] == 'undefined') {
-                    ents[d.government_entity] = [];
-                }
-                ents[d.government_entity].push(d.government_programme);
-                if (typeof progs[d.government_programme] == 'undefined') {
-                    progs[d.government_programme] = [];
-                }
-                progs[d.government_programme].push(d.government_business_unit);
-                if (typeof gbus[d.government_business_unit]  == 'undefined') {
-                    gbus[d.government_business_unit] = [];
-                }
-                gbus[d.government_business_unit].push({name: d.name,
-                    size: ( d.expected_total_value == null ? parseInt(d.total_value) : parseInt(d.expected_total_value))});
-            }
-            for (var ent in ents) {
-                entobj = {
-                    name: ent,
-                    children: []
-                };
-                programs = ents[ent];
-                for (var i in programs) {
-                    prog = programs[i];
-                    for (var j in progs[prog]) {
-                        gbu = progs[prog][j];
-                        progobj = {
-                            name: prog,
-                            children: gbus[gbu]
-                        };
-                        entobj.children.push(progobj);
+    jQuery(document).ready(function() {
+        d3.json("/datastore_search_sql.js.php?sql=select%20budget.name%2C%20value%20total_project_budget%2C%20government_entity_name%20from%20%222133eaed-150b-4c73-a314-67a0bde04115%22%20budget%20inner%20join%20%20%20%20(%20select%20name%2C%20value%20government_entity_name%20from%20%222133eaed-150b-4c73-a314-67a0bde04115%22%20where%20metric%20%3D%20'government_entity_name')%20gen%20on%20budget.name%20%3D%20gen.name%20where%20metric%20%3D%20'total_project_budget'%3B",
+            function (error, data) {
+                var datum = {};
+                for (var i in data.result.records) {
+                    d = data.result.records[i];
+                    if (typeof(d.name) != "undefined") {
+                        if (!datum[d.government_entity_name]) {
+                            datum[d.government_entity_name] = [];
+                        }
+                        datum[d.government_entity_name].push({"name": d.name, "value": parseInt(d.total_project_budget)});
                     }
                 }
-                datum.children.push(entobj);
-            }
-        node = root = datum;
+                var innerArray = [];
+                for (property in datum) {
+                    innerArray.push({name: property, value:0, children: datum[property]});
+                }
+                var root = {
+                    "name": "Project Budget By Organisation",
+                    "value": 0,
+                    "children": innerArray
+                };
+                var color = d3.scale.category20c();
+                var margin = {top: 20, right: 0, bottom: 0, left: 0},
+                    width = 960,
+                    height = 500 - margin.top - margin.bottom,
+                    formatNumber = d3.format(",d"),
+                    transitioning;
 
-        var nodes = treemap.nodes(root)
-            .filter(function(d) { return !d.children; });
+                var x = d3.scale.linear()
+                    .domain([0, width])
+                    .range([0, width]);
 
-        var cell = svg.selectAll("g")
-            .data(nodes)
-            .enter().append("svg:g")
-            .attr("class", "cell")
-            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-            .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
+                var y = d3.scale.linear()
+                    .domain([0, height])
+                    .range([0, height]);
 
-        cell.append("svg:rect")
-            .attr("width", function(d) { return d.dx - 1; })
-            .attr("height", function(d) { return d.dy - 1; })
-            .style("fill", function(d) { return color(d.parent.name); });
+                var treemap = d3.layout.treemap()
+                    .children(function (d, depth) {
+                        return depth ? null : d._children;
+                    })
+                    .sort(function (a, b) {
+                        return a.value - b.value;
+                    })
+                    .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
+                    .round(false);
 
-        cell.append("svg:text")
-            .attr("x", function(d) { return d.dx / 2; })
-            .attr("y", function(d) { return d.dy / 2; })
-            .attr("dy", ".35em")
-            .attr("text-anchor", "middle")
-            .text(function(d) { return d.name; })
-            .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
+                var svg = d3.select("#chart").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.bottom + margin.top)
+                    .style("margin-left", -margin.left + "px")
+                    .style("margin.right", -margin.right + "px")
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                    .style("shape-rendering", "crispEdges");
 
-        d3.select(window).on("click", function() { zoom(root); });
+                var grandparent = svg.append("g")
+                    .attr("class", "grandparent");
 
-        d3.select("select").on("change", function() {
-            treemap.value(this.value == "size" ? size : count).nodes(root);
-            zoom(node);
-        });
+                grandparent.append("rect")
+                    .attr("y", -margin.top)
+                    .attr("width", width)
+                    .attr("height", margin.top);
+
+                grandparent.append("text")
+                    .attr("x", 6)
+                    .attr("y", 6 - margin.top)
+                    .attr("dy", ".75em");
+
+
+                initialize(root);
+                accumulate(root);
+                layout(root);
+                display(root);
+
+                function initialize(root) {
+                    root.x = root.y = 0;
+                    root.dx = width;
+                    root.dy = height;
+                    root.depth = 0;
+                }
+
+                // Aggregate the values for internal nodes. This is normally done by the
+                // treemap layout, but not here because of our custom implementation.
+                // We also take a snapshot of the original children (_children) to avoid
+                // the children being overwritten when when layout is computed.
+                function accumulate(d) {
+                    return (d._children = d.children)
+                        ? d.value = d.children.reduce(function (p, v) {
+                        return p + accumulate(v);
+                    }, 0)
+                        : d.value;
+                }
+
+                // Compute the treemap layout recursively such that each group of siblings
+                // uses the same size (1×1) rather than the dimensions of the parent cell.
+                // This optimizes the layout for the current zoom state. Note that a wrapper
+                // object is created for the parent node for each group of siblings so that
+                // the parent’s dimensions are not discarded as we recurse. Since each group
+                // of sibling was laid out in 1×1, we must rescale to fit using absolute
+                // coordinates. This lets us use a viewport to zoom.
+                function layout(d) {
+                    if (d._children) {
+                        treemap.nodes({_children: d._children});
+                        d._children.forEach(function (c) {
+                            c.x = d.x + c.x * d.dx;
+                            c.y = d.y + c.y * d.dy;
+                            c.dx *= d.dx;
+                            c.dy *= d.dy;
+                            c.parent = d;
+                            layout(c);
+                        });
+                    }
+                }
+
+                function display(d) {
+                    grandparent
+                        .datum(d.parent)
+                        .on("click", transition)
+                        .select("text")
+                        .text(name(d));
+
+                    var g1 = svg.insert("g", ".grandparent")
+                        .datum(d)
+                        .attr("class", "depth");
+
+                    var g = g1.selectAll("g")
+                        .data(d._children)
+                        .enter().append("g");
+
+                    g.filter(function (d) {
+                        return d._children;
+                    })
+                        .classed("children", true)
+                        .on("click", transition);
+
+                    g.selectAll(".child")
+                        .data(function (d) {
+                            return d._children || [d];
+                        })
+                        .enter().append("rect")
+                        .attr("class", "child")
+                        .style("fill",function(d,i){return color(d.parent.name);})
+                        .call(rect);
+
+                    g.append("rect")
+                        .attr("class", "parent")
+                        .call(rect).on("click", transition)
+                        .style("fill",function(d,i){return color(d.name);})
+                        .append("title")
+                        .text(function (d) {
+                            return formatNumber(d.value);
+                        });
+
+                    g.append("text")
+                        .attr("dy", ".75em")
+                        .text(function (d) {
+                            return d.name + " ($"+ d.value+"m)";
+                        })
+                        .call(text);
+
+                    function transition(d) {
+                        if (transitioning || !d) return;
+                        transitioning = true;
+
+                        var g2 = display(d);
+                        if ($.browser.msie && $.browser.version < 9.0) {
+
+                            var t1 = g1.transition().duration(0),
+                                t2 = g2.transition().duration(0);
+                        } else {
+
+                            var t1 = g1.transition().duration(750),
+                                t2 = g2.transition().duration(750);
+                        }
+
+                        // Update the domain only after entering new elements.
+                        x.domain([d.x, d.x + d.dx]);
+                        y.domain([d.y, d.y + d.dy]);
+
+                        // Enable anti-aliasing during the transition.
+                        svg.style("shape-rendering", null);
+
+                        // Draw child nodes on top of parent nodes.
+                        svg.selectAll(".depth").sort(function (a, b) {
+                            return a.depth - b.depth;
+                        });
+
+                        // Fade-in entering text.
+                        g2.selectAll("text").style("fill-opacity", 0);
+
+                        // Transition to the new view.
+                        t1.selectAll("text").call(text).style("fill-opacity", 0);
+                        t2.selectAll("text").call(text).style("fill-opacity", 1);
+                        t1.selectAll("rect").call(rect);
+                        t2.selectAll("rect").call(rect);
+
+                        // Remove the old node when the transition is finished.
+                        t1.remove().each("end", function () {
+                            svg.style("shape-rendering", "crispEdges");
+                            transitioning = false;
+                        });
+                    }
+
+                    return g;
+                }
+
+                function text(text) {
+                    text.attr("x", function (d) {
+                        return x(d.x) + 6;
+                    })
+                        .attr("y", function (d) {
+                            return y(d.y) + 6;
+                        });
+                }
+
+                function rect(rect) {
+                    rect.attr("x", function (d) {
+                        return x(d.x);
+                    })
+                        .attr("y", function (d) {
+                            return y(d.y);
+                        })
+                        .attr("width", function (d) {
+                            return x(d.x + d.dx) - x(d.x);
+                        })
+                        .attr("height", function (d) {
+                            return y(d.y + d.dy) - y(d.y);
+                        });
+                }
+
+                function name(d) {
+                    return d.parent
+                        ? name(d.parent) + " >> " + d.name
+                        : d.name;
+                }
+
+            });
     });
-
-    function size(d) {
-        return d.size;
-    }
-
-    function count(d) {
-        return 1;
-    }
-
-    function zoom(d) {
-        var kx = w / d.dx, ky = h / d.dy;
-        x.domain([d.x, d.x + d.dx]);
-        y.domain([d.y, d.y + d.dy]);
-
-        var t = svg.selectAll("g.cell").transition()
-            .duration(d3.event.altKey ? 7500 : 750)
-            .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
-
-        t.select("rect")
-            .attr("width", function(d) { return kx * d.dx - 1; })
-            .attr("height", function(d) { return ky * d.dy - 1; })
-
-        t.select("text")
-            .attr("x", function(d) { return kx * d.dx / 2; })
-            .attr("y", function(d) { return ky * d.dy / 2; })
-            .style("opacity", function(d) { return kx * d.dx > d.w ? 1 : 0; });
-
-        node = d;
-        d3.event.stopPropagation();
-    }
-
-</script>
-</body>
-</html>
+</script></body></html>

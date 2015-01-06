@@ -286,26 +286,20 @@ function ict_entity_forms_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_end_project_name',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
+    'foreign keys' => array(),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'list',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_end_project_stage'
@@ -676,26 +670,20 @@ function ict_entity_forms_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_mid_project_name',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
+    'foreign keys' => array(),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'list',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_mid_project_stage'

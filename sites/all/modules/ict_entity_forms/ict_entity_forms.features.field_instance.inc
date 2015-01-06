@@ -40,7 +40,7 @@ function ict_entity_forms_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -76,7 +76,7 @@ function ict_entity_forms_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -123,7 +123,7 @@ function ict_entity_forms_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -163,7 +163,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -203,7 +203,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -243,7 +243,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -283,7 +283,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -323,7 +323,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -357,7 +357,7 @@ function ict_entity_forms_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -391,7 +391,7 @@ function ict_entity_forms_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -404,9 +404,9 @@ function ict_entity_forms_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'list_default',
         'weight' => 16,
       ),
     ),
@@ -415,17 +415,14 @@ function ict_entity_forms_field_default_field_instances() {
     'label' => 'Project name',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 17,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 0,
     ),
   );
 
@@ -456,7 +453,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -487,7 +484,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -527,7 +524,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -567,7 +564,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -607,7 +604,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -724,7 +721,7 @@ function ict_entity_forms_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -841,7 +838,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 17,
+      'weight' => 8,
     ),
   );
 
@@ -995,7 +992,7 @@ function ict_entity_forms_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -1029,7 +1026,7 @@ function ict_entity_forms_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -1042,9 +1039,9 @@ function ict_entity_forms_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'list_default',
         'weight' => 17,
       ),
     ),
@@ -1053,17 +1050,14 @@ function ict_entity_forms_field_default_field_instances() {
     'label' => 'Project name',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 18,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 0,
     ),
   );
 
@@ -1094,7 +1088,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -1165,7 +1159,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -1205,7 +1199,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -1245,7 +1239,7 @@ function ict_entity_forms_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 

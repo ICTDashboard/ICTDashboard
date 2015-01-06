@@ -33,7 +33,8 @@ function ict_dashboard_widgets_uuid_features_default_content() {
         'value' => '<p class="dashboard-description">The ICT Project Treemap compares how each of the major projects compare with each other according to either the total project value or number of projects being delivered by agencies.</p>
 
     <style type="text/css">
-        #treemap {
+
+        #chart {
             width: 960px;
             height: 500px;
             background: #ddd;
@@ -82,7 +83,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
 </head>
 <body>
 
-<div id="treemap"></div>
+<div id="chart"></div>
 
 <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -132,7 +133,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
                     .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
                     .round(false);
 
-                var svg = d3.select("#treemap").append("svg")
+                var svg = d3.select("#chart").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.bottom + margin.top)
                     .style("margin-left", -margin.left + "px")
@@ -331,7 +332,8 @@ function ict_dashboard_widgets_uuid_features_default_content() {
 <style type="text/css">
 <!--/*--><![CDATA[/* ><!--*/
 
-        #treemap {
+
+        #chart {
             width: 960px;
             height: 500px;
             background: #ddd;
@@ -379,7 +381,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
     
 /*--><!]]>*/
 </style><p><br /></p>
-<div id="treemap"></div>
+<div id="chart"></div>
 <script type="text/javascript">
 <!--//--><![CDATA[// ><!--
 
@@ -430,7 +432,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
                     .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
                     .round(false);
 
-                var svg = d3.select("#treemap").append("svg")
+                var svg = d3.select("#chart").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.bottom + margin.top)
                     .style("margin-left", -margin.left + "px")

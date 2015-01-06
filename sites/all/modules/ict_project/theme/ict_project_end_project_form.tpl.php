@@ -9,6 +9,11 @@
 		<form class="node-form node-project-form" action="/node/add/project" method="post" id="project-node-form" accept-charset="UTF-8">
 			<table>
 				<tr>
+          <td class="label">
+            <?php
+            print $form['field_end_project_name']['und']['#title'];
+            ?>
+          </td>
 					<td class="text">
 						<?php
 							print render($form['field_end_project_name']);
@@ -133,19 +138,6 @@
           <td class="text">
             <?php
             print render($form['field_end_project_completed']);
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label">
-            <?php
-            print ict_project_bracket_italics($form['field_end_predicted_project']['und']['#title']);
-            ?>
-          </td>
-          <td class="text">
-            <?php
-            print render($form['field_end_predicted_project']);
             ?>
           </td>
         </tr>

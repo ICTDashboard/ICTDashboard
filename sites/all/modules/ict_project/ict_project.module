@@ -164,11 +164,11 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'ict_form_entityform_edit_form') {
     $default_project = ict_project_get_project_update();
-    $form['field_mid_project_name']['und'][0]['value']['#type'] = 'hidden';
-    $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project;
-    $form['field_mid_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
+    $project = ict_project_get_project();
+    $list = array_merge($default_project, $project);
+    $form['field_mid_project_name']['und']['#options'] = $list;
     $form['#theme'] = 'ict_project_mid_project_form';
-    $form['field_mid_project_name']['und'][0]['value']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
+    $form['field_mid_project_name']['und']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
     $form['field_mid_project_manager_email']['und'][0]['value']['#title_display'] =
     $form['field_mid_revised_total_project']['und'][0]['value']['#title_display'] =
     $form['field_mid_total_project_spend']['und'][0]['value']['#title_display'] =
@@ -187,7 +187,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     // Open the file for writing.
     $fields = array();
-    $exclude = array('field_mid_project_name', 'field_mid_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    $exclude = array('field_mid_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
     $sort = array();
     foreach(element_children($form) as $field) {
       if(!in_array($field, $exclude)) {
@@ -217,11 +217,11 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
     $default_project = ict_project_get_project_update();
-    $form['field_end_project_name']['und'][0]['value']['#type'] = 'hidden';
-    $form['field_end_project_name']['und'][0]['value']['#default_value'] = $default_project;
-    $form['field_end_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
+    $project = ict_project_get_project();
+    $list = array_merge($default_project, $project);
+    $form['field_end_project_name']['und']['#options'] = $list;
     $form['#theme'] = 'ict_project_end_project_form';
-    $form['field_end_project_name']['und'][0]['value']['#title_display'] =
+    $form['field_end_project_name']['und']['#title_display'] =
     $form['field_end_project_stage']['und']['#title_display'] =
     $form['field_end_project_manager']['und'][0]['value']['#title_display'] =
     $form['field_end_project_manager_email']['und'][0]['value']['#title_display'] =
@@ -243,7 +243,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     // Open the file for writing.
     $fields = array();
     $sort = array();
-    $exclude = array('field_end_project_name', 'field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
+    $exclude = array('field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
     foreach(element_children($form) as $field) {
       if(!in_array($field, $exclude)) {
         $sort[$field] = $form[$field]['#weight'];
@@ -253,7 +253,6 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     foreach($sort as $key=>$field) {
       $fields[] = $key;
     }
-
     $file_path = drupal_get_path('module', 'ict_project') . '/export_end.csv';
     $fh = fopen($file_path, 'w');
     fputcsv($fh, $fields);
@@ -356,12 +355,14 @@ function ict_project_admin_settings_form($form, &$form_state) {
  * Return all project
  */
 function ict_project_get_project() {
-  $projects = db_select('node', 'n')
-    ->fields('n', array('nid', 'title'))
-    ->condition('n.type', 'project')
-    ->condition('n.status', 1)
-    ->execute()
-    ->fetchAllKeyed();
+  global $user;
+  $query = db_select('node', 'n');
+  $query->innerJoin('field_data_field_project_users', 'fpu', 'n.nid = fpu.entity_id');
+  $query ->fields('n', array('nid', 'title'));
+  $query->condition('n.type', 'project');
+  $query->condition('n.status', 1);
+  $query->condition('fpu.field_project_users_uid', $user->uid);
+  $projects = $query->execute()->fetchAllKeyed();
 
   return $projects;
 }
@@ -389,11 +390,11 @@ function ict_project_get_project_update() {
   global $user;
   $id = $user->uid;
   $query = db_select('node', 'n');
-  $query->fields('n', array('title'));
+  $query->fields('n', array('nid', 'title'));
   $query->condition('n.type', 'project', '=');
   $query->condition('n.uid', $id, '=');
   $query->orderBy('created', 'ASC');
-  $projects = $query->execute()->fetchField();
+  $projects = $query->execute()->fetchAllKeyed();
 
   return $projects;
 }
