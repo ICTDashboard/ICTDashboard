@@ -3,8 +3,9 @@
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
     <!--[if lte IE 8]>  <script type="text/javascript" src="../js/r2d3.min.js"></script><![endif]-->
     <!--[if gte IE 9]><!-->
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
     <!--<![endif]-->
+    </head><body>
     <style type="text/css">
         #chart {
             width: 960px;
@@ -52,8 +53,7 @@
             fill: #bbb;
         }
     </style>
-</head>
-<body>
+
 
 <div id="chart"></div>
 
@@ -61,18 +61,24 @@
     jQuery(document).ready(function() {
         d3.json("/datastore_search_sql.js.php?sql=select%20budget.name%2C%20value%20total_project_budget%2C%20government_entity_name%20from%20%222133eaed-150b-4c73-a314-67a0bde04115%22%20budget%20inner%20join%20%20%20%20(%20select%20name%2C%20value%20government_entity_name%20from%20%222133eaed-150b-4c73-a314-67a0bde04115%22%20where%20metric%20%3D%20'government_entity_name')%20gen%20on%20budget.name%20%3D%20gen.name%20where%20metric%20%3D%20'total_project_budget'%3B",
             function (error, data) {
-                /*for (var i in data.result.records) {
-                 d = data.result.records[i];
-                 if (typeof(d.name) != "undefined" ) {
-                 return { name: d.name, size: parseInt(d.value)};
-                 }*/
+                var datum = {};
+                for (var i in data.result.records) {
+                    d = data.result.records[i];
+                    if (typeof(d.name) != "undefined") {
+                        if (!datum[d.government_entity_name]) {
+                            datum[d.government_entity_name] = [];
+                        }
+                        datum[d.government_entity_name].push({"name": d.name, "value": parseInt(d.total_project_budget)});
+                    }
+                }
+                var innerArray = [];
+                for (property in datum) {
+                    innerArray.push({name: property, value:0, children: datum[property]});
+                }
                 var root = {
                     "name": "Project Budget By Organisation",
                     "value": 0,
-                    "children": data.result.records.map(function (d) {
-                        return { name: d.government_entity_name, "value": 0,"children": [{name: d.name, "value": parseInt(d.total_project_budget)}]};
-
-                    })
+                    "children": innerArray
                 };
                 var color = d3.scale.category20c();
                 var margin = {top: 20, right: 0, bottom: 0, left: 0},
@@ -194,12 +200,13 @@
                         })
                         .enter().append("rect")
                         .attr("class", "child")
-                        .attr("fill",function(d,i){return color(i);})
+                        .style("fill",function(d,i){return color(d.parent.name);})
                         .call(rect);
 
                     g.append("rect")
                         .attr("class", "parent")
                         .call(rect).on("click", transition)
+                        .style("fill",function(d,i){return color(d.name);})
                         .append("title")
                         .text(function (d) {
                             return formatNumber(d.value);
@@ -208,7 +215,7 @@
                     g.append("text")
                         .attr("dy", ".75em")
                         .text(function (d) {
-                            return d.name;
+                            return d.name + " ($"+ d.value+"m)";
                         })
                         .call(text);
 
