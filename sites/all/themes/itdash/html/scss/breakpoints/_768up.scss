@@ -862,12 +862,14 @@ CONTENT STYLES
 											left: 83%;
 										}
 										
+										.sbHolder { border: 0 none; }
+										.sbOptions { z-index: 100; position: absolute; }
+										
 										select {
 											max-width: 100%;
 											width: 100%;
 											border: 0 none;
 											text-align: center;
-											text-indent: 40%;
 											outline: 0 none;
 										}
 									}
@@ -895,7 +897,7 @@ CONTENT STYLES
 							text-align: center;
 							display: inline-block;
 							position: relative;
-							z-index: 2;
+							z-index: 0;
 							padding-right: 20px;
 							padding-left: 20px;
 							float: right;
