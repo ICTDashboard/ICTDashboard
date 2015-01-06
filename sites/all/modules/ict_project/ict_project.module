@@ -223,6 +223,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     $form['field_mid_project_status']['und']['#required'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
+    $form['actions']['submit']['#validate'][] = 'ict_project_csv_validate';
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
@@ -504,4 +505,95 @@ function ict_project_csv_submit_form_submit($form, &$form_state) {
     drupal_set_message(t('You\'ve successfully submitted form via CSV'));
   }
 
+}
+
+
+function ict_project_csv_validate($form, &$form_state) {
+  //dsm($form);
+
+  if($form['#form_id'] == 'itc_form_end_entityform_edit_form') {
+    $file_field = 'field_end_csv_file';
+  }else{
+    $file_field = 'field_mid_csv_file';
+  }
+
+  $fid = $form_state['values'][$file_field][LANGUAGE_NONE][0]['fid'];
+  $csv_file = file_load($fid);
+  if(!empty($csv_file)) {
+    $project_stage = array('start_up', 'initiation', 'controlling', 'closing');
+    $project_status = array('green', 'amber', 'red');
+    //$form['field_mid_project_manager']['und'][0]['value']['#value'] = 's';
+    //Open csv
+    $handle = fopen($csv_file->uri, 'r');
+    $row = fgetcsv($handle);
+    //Read columns
+    $columns = array();
+    foreach ($row as $i => $header) {
+      $columns[$i] = trim($header);
+    }
+
+    //Read value and filled field form - form state
+    while ($row = fgetcsv($handle)) {
+      dsm($columns);
+      foreach ($row as $i => $field_value) {
+        switch ($columns[$i]) {
+          //mail
+          case 'field_mid_project_manager_email':
+          case 'field_end_project_manager_email':
+
+              if(!valid_email_address($field_value)) {
+                form_set_error('Email', t('Email not valid.'));
+              }
+          break;
+          //integer
+          case 'field_mid_revised_total_project':
+          case 'field_mid_total_project_spend':
+          case 'field_mid_total_project_current':
+          case 'field_mid_project_completed':
+          case 'field_mid_predicted_project':
+          case 'field_mid_predicted_project_real':
+          case 'field_mid_internal_fte':
+          case 'field_mid_external_fte':
+            if (!is_numeric($field_value) && $field_value <= 0) {
+              form_set_error('Field', t('Please provide a positive integer.'));
+            }
+          break;
+          //date
+          case 'field_mid_expected_project':
+          case 'field_end_expected_project':
+            if(!ict_project_validate_date($field_value)) {
+              form_set_error('Date', t('Please valid format date d/m/Y.'));
+            }
+          break;
+          case 'field_mid_project_stage':
+          case 'field_end_project_stage':
+            if(!in_array($field_value, $project_stage)) {
+              form_set_error('Project stage', t('Please valid Project stage value.'));
+            }
+            break;
+
+          case 'field_mid_project_status':
+          case 'field_end_project_status':
+            if(!in_array($field_value, $project_status)) {
+              form_set_error('Project status', t('Please valid Project status value.'));
+            }
+            break;
+
+          default;
+
+        }
+      }
+
+    }
+
+    //form_error($form, t('CSV empty.'));
+
+  }
+
+}
+
+
+function ict_project_validate_date($date) {
+  $d = DateTime::createFromFormat('d/m/Y', $date);
+  return $d && $d->format('d/m/Y') == $date;
 }
