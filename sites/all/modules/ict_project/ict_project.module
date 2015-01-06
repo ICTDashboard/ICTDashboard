@@ -164,13 +164,17 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'ict_form_entityform_edit_form') {
     $default_project = ict_project_get_project_update();
+
+    // Notification for user trying to update a Project that he don't have an access to
+    __ict_project_check_user_allowed_update ($default_project);
+
     $form['mid_project_name_text'] = array(
       '#type' => 'item',
       '#title' => t('Project name'),
-      '#markup' => $default_project,
+      '#markup' => $default_project['title'],
     );
     $form['field_mid_project_name']['und'][0]['value']['#type'] = 'hidden';
-    $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project;
+    $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
     $form['field_mid_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
 
     $form['#theme'] = 'ict_project_mid_project_form';
@@ -223,13 +227,17 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
     $default_project = ict_project_get_project_update();
+
+    // Notification for user trying to update a Project that he don't have an access to
+    __ict_project_check_user_allowed_update ($default_project);
+
     $form['end_project_name_text'] = array(
       '#type' => 'item',
       '#title' => t('Project name'),
-      '#markup' => $default_project,
+      '#markup' => $default_project['title'],
     );
     $form['field_end_project_name']['und'][0]['value']['#type'] = 'hidden';
-    $form['field_end_project_name']['und'][0]['value']['#default_value'] = $default_project;
+    $form['field_end_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
     $form['field_end_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
 
     $form['#theme'] = 'ict_project_end_project_form';
@@ -291,6 +299,44 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_end_project_status']['und']['#required'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
 
+  }
+}
+/*
+ * Implements hook_node_presave().
+ */
+function ict_project_node_presave($node) {
+  if ($node->type == 'project') {
+    global $user;
+
+    $allowed_users = array();
+    foreach ($node->field_project_users[LANGUAGE_NONE] as $item) {
+      $allowed_users[] = $item['uid'];
+    }
+
+    if (!in_array($user->uid, $allowed_users)) {
+      $node->field_project_users[LANGUAGE_NONE][] = array('uid', $user->uid);
+    }
+  }
+}
+
+function __ict_project_check_user_allowed_update ($project) {
+  global $user;
+
+  $node = node_load($project['nid']);
+
+  if (!isset($node->type) || $node->type != 'project') {
+    drupal_set_message(t('Project not found'), 'error');
+    drupal_goto('projects');
+  }
+
+  $allowed_users = array();
+  foreach ($node->field_project_users[LANGUAGE_NONE] as $item) {
+    $allowed_users[] = $item['uid'];
+  }
+
+  if (!$user->name || !in_array($user->uid, $allowed_users)) {
+    drupal_set_message(t('You are not allowed to update "!title"', array('title' => $project['title'])), 'error');
+    drupal_goto('projects');
   }
 }
 
@@ -402,11 +448,11 @@ function ict_project_get_project_update() {
   global $user;
   $id = $user->uid;
   $query = db_select('node', 'n');
-  $query->fields('n', array('title'));
+  $query->fields('n', array('title', 'nid'));
   $query->condition('n.type', 'project', '=');
   $query->condition('n.uid', $id, '=');
   $query->orderBy('created', 'ASC');
-  $projects = $query->execute()->fetchField();
+  $projects = $query->execute()->fetchAssoc();
 
   return $projects;
 }
