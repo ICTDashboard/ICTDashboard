@@ -81,8 +81,8 @@ jQuery(document).ready(function($) {
         buttonImageOnly: true,
         showOn: 'button',
         onClose: function(dateText, inst) {
-          $('#' + id + '-und-0-value-year').val(dateText.split('/')[2]);
-          $('#' + id + '-und-0-value-month').val(dateText.split('/')[0]);
+          $('#' + id + '-und-0-value-year').val(Number(dateText.split('/')[2]));
+          $('#' + id + '-und-0-value-month').val(Number(dateText.split('/')[0]));
           $('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
 		  $('.form-select').selectbox('detach');
 		  $('.form-select').selectbox('attach');
@@ -117,7 +117,8 @@ jQuery(document).ready(function($) {
 		});
 	}
 	
-	$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 0);
+	$('.field-multiple-drag').remove();
+	$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 1);
 	$('.tabledrag-toggle-weight').click(function(){
 		console.log('test');
 		if( $('.delta-order.tabledrag-hide').is(':visible') ) {
@@ -142,9 +143,11 @@ jQuery(document).ready(function($) {
 	});
 	
 	$("body").bind("ajaxComplete", function(e, xhr, settings){
-		$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 0);
+		$('.field_implementation_partners-delta-order').selectbox('attach');
+		$('.field-multiple-drag').remove();
+		$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 1);
     });
 	
 	$('.form-select').selectbox();
-	$('.field_implementation_partners-delta-order').selectbox('detach');
+	$('.field_implementation_partners-delta-order').selectbox();
 }); /* end of as page load scripts */
