@@ -5,7 +5,7 @@
     <div class="full-node clearfix">
       <div class="page-title dotbg">
         <div class="inner-title-content wrap cf">
-          <h1>Service Delivery Reform ICT Project</h1>
+          <h1><?php print t('Service Delivery Reform ICT Project'); ?></h1>
         </div>
       </div>
 
@@ -20,7 +20,7 @@
               $url = variable_get("ckan_url").'/api/action/datastore_search_sql?sql='.urlencode($sql);
               $request = drupal_http_request($url);
               $result = json_decode($request->data);
-              $data = Array();
+              $data = array();
               $report_date = "";
               foreach ($result->result->records as $row) {
                 $data[$row->metric][$row->timestamp] = $row->value;
