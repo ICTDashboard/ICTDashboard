@@ -446,14 +446,25 @@ function ict_project_node_insert (&$node) {
 
 
 function ict_project_get_project_update() {
-  global $user;
-  $id = $user->uid;
-  $query = db_select('node', 'n');
-  $query->fields('n', array('title', 'nid'));
-  $query->condition('n.type', 'project', '=');
-  $query->condition('n.uid', $id, '=');
-  $query->orderBy('created', 'ASC');
-  $projects = $query->execute()->fetchAssoc();
+  $projects = array(
+    'title' => '',
+    'nid' => ''
+  );
+
+  if (isset($_GET['project'])) {
+
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title'));
+    $query->condition('n.type', 'project');
+    $query->condition('n.nid', $_GET['project']);
+    $node = $query->execute()->fetchField();
+
+    $projects = array(
+      'title' => $node,
+      'nid' => $_GET['project']
+    );
+
+  }
 
   return $projects;
 }
