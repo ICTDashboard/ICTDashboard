@@ -309,9 +309,31 @@ function ict_project_node_presave($node) {
   if ($node->type == 'project') {
     global $user;
 
-    if (!isset($node->field_project_users[LANGUAGE_NONE]) || !in_array($user->uid, $node->field_project_users[LANGUAGE_NONE])) {
-      $node->field_project_users[LANGUAGE_NONE][] = array('uid', $user->uid);
+    $checked_users = array();
+    foreach ($node->field_project_users[LANGUAGE_NONE] as $item) {
+      $checked_users[] = $item['uid'];
     }
+
+    if (!$checked_users || !in_array($user->uid, $checked_users)) {
+      $node->field_project_users[LANGUAGE_NONE][] = array('uid' => $user->uid);
+    }
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * @param $view
+ * @param $query
+ */
+function ict_project_views_query_alter(&$view, &$query) {
+
+  // Filters projects for logged in users.
+  if (user_is_logged_in()) {
+    global $user;
+
+    $query->add_table('field_data_field_project_users');
+    $query->add_where(0, 'field_data_field_project_users.field_project_users_uid', $user->uid);
   }
 }
 
