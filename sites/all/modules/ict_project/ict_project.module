@@ -560,7 +560,6 @@ function ict_project_csv_submit_form_submit($form, &$form_state) {
 
 
 function ict_project_csv_validate($form, &$form_state) {
-  //dsm($form);
 
   if($form['#form_id'] == 'itc_form_end_entityform_edit_form') {
     $file_field = 'field_end_csv_file';
@@ -655,6 +654,61 @@ function ict_project_validate_date($date) {
 }
 
 function __ict_project_update_project_default_values (&$form) {
-//  dsm($form);
-//  $form['field_end_project_stage'][LANGUAGE_NONE]['#default']
+  if (!is_numeric($_GET['project']) || !$project = node_load($_GET['project'])) {
+    return;
+  }
+  $project_wrapper = entity_metadata_wrapper('node', $project);
+
+  $stage = $project_wrapper->field_project_stage->value();
+  $manager = $project_wrapper->field_project_manager->value();
+  $manager_mail = $project_wrapper->field_project_manager_email->value();
+  $completion_date = $project->field_original_completion_date['und'][0]['value'];
+  $total_budget = $project_wrapper->field_total_project_budget->value();
+  $predicted_benefit = $project_wrapper->field_predicted_project_benefit->value();
+  if ($form['#entity']->type == 'ict_form') {
+    if (!empty($stage->name)) {
+      $stage_val = array_search($stage->name, $form['field_mid_project_stage']['und']['#options']);
+      if (!empty($stage_val)) {
+        $form['field_mid_project_stage']['und']['#default_value'] = $stage_val;
+      }
+    }
+    if (!empty($manager)) {
+      $form['field_mid_project_manager']['und'][0]['value']['#default_value'] = $manager;
+    }
+    if (!empty($manager_mail)) {
+      $form['field_mid_project_manager_email']['und'][0]['value']['#default_value'] = $manager_mail;
+    }
+    if (!empty($completion_date)) {
+      $form['field_mid_expected_projectds']['und'][0]['#default_value']['value'] = $completion_date;
+    }
+    if (!empty($total_budget)) {
+      $form['field_mid_revised_total_project']['und'][0]['value']['#default_value'] = $total_budget;
+    }
+    if (!empty($predicted_benefit)) {
+      $form['field_mid_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
+    }
+  }
+  elseif ($form['#entity']->type == 'itc_form_end') {
+    if (!empty($stage->name)) {
+      $stage_val = array_search($stage->name, $form['field_end_project_stage']['und']['#options']);
+      if (!empty($stage_val)) {
+        $form['field_end_project_stage']['und']['#default_value'] = $stage_val;
+      }
+    }
+    if (!empty($manager)) {
+      $form['field_end_project_manager']['und'][0]['value']['#default_value'] = $manager;
+    }
+    if (!empty($manager_mail)) {
+      $form['field_end_project_manager_email']['und'][0]['value']['#default_value'] = $manager_mail;
+    }
+    if (!empty($completion_date)) {
+      $form['field_end_expected_project']['und'][0]['#default_value']['value'] = $completion_date;
+    }
+    if (!empty($total_budget)) {
+      $form['field_end_revised_total_project']['und'][0]['value']['#default_value'] = $total_budget;
+    }
+    if (!empty($predicted_benefit)) {
+      $form['field_end_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
+    }
+  }
 }
