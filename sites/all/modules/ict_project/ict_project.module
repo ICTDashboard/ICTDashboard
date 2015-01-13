@@ -179,7 +179,12 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
     $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
       'invisible';
-    $form['field_brief_project_summary']['und'][0]['value']['#type'] = 'text_format';
+    $form['field_brief_project_summary_fake'] = array(
+      '#type' => 'text_format',
+      '#title' => t('Description'),
+      '#element_validate' => array('ict_project_update_project_description'),
+      '#default_value' => $form['field_brief_project_summary']['und'][0]['value']['#default_value'],
+    );
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
@@ -324,6 +329,10 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     __ict_project_update_project_default_values($form);
   }
+}
+
+function ict_project_update_project_description($element, &$form_state, $form) {
+  $form_state['values']['field_brief_project_summary']['und'][0]['value'] = filter_xss($form_state['values']['field_brief_project_summary_fake']['value']);
 }
 /*
  * Implements hook_node_presave().
