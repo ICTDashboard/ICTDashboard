@@ -30,7 +30,7 @@
               <?php endif; ?>
               <?php if (!empty($node->field_program_name['und'][0]['value'])) : ?>
                 <tr>
-                  <td class="label">Government programme <em>(if applicable)</em></td>
+                  <td class="label">Agency Outcome and Programme <em>(if applicable)</em></td>
                   <td class="text"><?php print $node->field_program_name['und'][0]['value']; ?></td>
                 </tr>
               <?php endif; ?>
