@@ -309,12 +309,7 @@ function ict_project_node_presave($node) {
   if ($node->type == 'project') {
     global $user;
 
-    $allowed_users = array();
-    foreach ($node->field_project_users[LANGUAGE_NONE] as $item) {
-      $allowed_users[] = $item['uid'];
-    }
-
-    if (!in_array($user->uid, $allowed_users)) {
+    if (!isset($node->field_project_users[LANGUAGE_NONE]) || !in_array($user->uid, $node->field_project_users[LANGUAGE_NONE])) {
       $node->field_project_users[LANGUAGE_NONE][] = array('uid', $user->uid);
     }
   }
