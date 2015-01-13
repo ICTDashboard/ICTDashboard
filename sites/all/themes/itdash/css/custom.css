@@ -147,3 +147,9 @@ div#edit-field-rebaselined-total-budget td {
 .tooltipster-icon:hover {background-color: #0a5f74;}
 /*.radio-description .form-item {float: left;}*/
 .header #logo {font-size: 29px;}
+.footer #inner-footer .copy {width: 70%;}
+#contact_link {
+    color: #363a41;
+    margin: 1.5em 0;
+    float: left;
+}
