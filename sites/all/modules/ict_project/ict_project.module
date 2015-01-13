@@ -163,6 +163,12 @@ function ict_project_form_project_users_validate (&$form, &$form_state) {
 function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'project_node_form') {
+
+    // Removes _none option for Project Isers field
+    if (isset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none'])) {
+      unset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none']);
+    }
+
     $form['#validate'][] = 'ict_project_form_project_users_validate';
     ksort($form['field_project_stage']['und']['#options']);
     $form['#theme'] = 'ict_project_add_project_form';
