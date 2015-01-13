@@ -91,11 +91,11 @@ jQuery(document).ready(function($) {
     });
 
   }
-  
+
 	$("#edit-field-project-users-und").multiSelect({
 		noneSelected: 'Select users'
 	});
-	
+
 	
 	/* Partner table implementation */
 	

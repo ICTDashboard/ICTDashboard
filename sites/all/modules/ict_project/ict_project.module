@@ -140,11 +140,30 @@ function ict_project_preprocess_ict_project_end_project_form (&$variables){
 }
 
 /**
+ * Validates Project Users field
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_project_form_project_users_validate (&$form, &$form_state) {
+
+  if (isset($_POST['edit-field-project-users-und'])) {
+    foreach ($_POST['edit-field-project-users-und'] as $uid) {
+      $form_state['values']['field_project_users'][LANGUAGE_NONE][] = array('uid' => $uid);
+      $form['field_project_users'][LANGUAGE_NONE]['#default_value'][] = $uid;
+      $form['field_project_users'][LANGUAGE_NONE]['#value'][] = $uid;
+    }
+  }
+
+}
+
+/**
  * Implement hook_form_alter
  */
 function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'project_node_form') {
+    $form['#validate'][] = 'ict_project_form_project_users_validate';
     ksort($form['field_project_stage']['und']['#options']);
     $form['#theme'] = 'ict_project_add_project_form';
     //hide native labels
@@ -225,6 +244,8 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_mid_project_status']['und']['#required'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
     $form['actions']['submit']['#validate'][] = 'ict_project_csv_validate';
+
+    __ict_project_update_project_default_values($form);
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
@@ -301,6 +322,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_end_project_status']['und']['#required'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
 
+    __ict_project_update_project_default_values($form);
   }
 }
 /*
@@ -318,23 +340,6 @@ function ict_project_node_presave($node) {
     if (!$checked_users || !in_array($user->uid, $checked_users)) {
       $node->field_project_users[LANGUAGE_NONE][] = array('uid' => $user->uid);
     }
-  }
-}
-
-/**
- * Implements hook_views_query_alter().
- *
- * @param $view
- * @param $query
- */
-function ict_project_views_query_alter(&$view, &$query) {
-
-  // Filters projects for logged in users.
-  if (user_is_logged_in()) {
-    global $user;
-
-    $query->add_table('field_data_field_project_users');
-    $query->add_where(0, 'field_data_field_project_users.field_project_users_uid', $user->uid);
   }
 }
 
@@ -623,8 +628,18 @@ function ict_project_csv_validate($form, &$form_state) {
 
 }
 
-
+/**
+ * Validates date
+ *
+ * @param $date
+ * @return bool
+ */
 function ict_project_validate_date($date) {
   $d = DateTime::createFromFormat('d/m/Y', $date);
   return $d && $d->format('d/m/Y') == $date;
+}
+
+function __ict_project_update_project_default_values (&$form) {
+//  dsm($form);
+//  $form['field_end_project_stage'][LANGUAGE_NONE]['#default']
 }

@@ -4,9 +4,9 @@
       <th></th>
       <th><?php print t('Previous'); ?></th>
       <th><?php print t('Current'); ?></th>
-      <th><?php print t('1'); ?></th>
-      <th><?php print t('2'); ?></th>
-      <th><?php print t('3'); ?></th>
+      <th><?php print t('+1'); ?></th>
+      <th><?php print t('+2'); ?></th>
+      <th><?php print t('+3'); ?></th>
     </tr>
     <tr>
       <td><?php print t('FY (yy/yy)'); ?></td>
