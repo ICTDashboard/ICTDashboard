@@ -48,7 +48,7 @@
       <?php if (user_is_logged_in()) : ?>
 
         <div class="text d-4of5">
-          <p><?php print t('Use this page to register a new project, or administor any existing projects associated with your login. Mid financial year updates are to be completed between November and January. End financial year updates are to be completed between May and July. Select the Add Project button to register a new project.'); ?></p>
+          <p><?php print t('Use this page to register a new project, or administer any existing projects associated with your login. Mid financial year updates are to be completed between November and January. End financial year updates are to be completed between May and July. Select the Add Project button to register a new project.'); ?></p>
         </div>
 
         <div class="button-add d-1of5 t-2of5 last-col">
