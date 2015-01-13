@@ -160,6 +160,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
     $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
       'invisible';
+    $form['field_brief_project_summary']['und'][0]['value']['#type'] = 'text_format';
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
