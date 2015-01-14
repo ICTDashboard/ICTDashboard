@@ -140,11 +140,36 @@ function ict_project_preprocess_ict_project_end_project_form (&$variables){
 }
 
 /**
+ * Validates Project Users field
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_project_form_project_users_validate (&$form, &$form_state) {
+
+  if (isset($_POST['edit-field-project-users-und'])) {
+    foreach ($_POST['edit-field-project-users-und'] as $uid) {
+      $form_state['values']['field_project_users'][LANGUAGE_NONE][] = array('uid' => $uid);
+      $form['field_project_users'][LANGUAGE_NONE]['#default_value'][] = $uid;
+      $form['field_project_users'][LANGUAGE_NONE]['#value'][] = $uid;
+    }
+  }
+
+}
+
+/**
  * Implement hook_form_alter
  */
 function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'project_node_form') {
+
+    // Removes _none option for Project Isers field
+    if (isset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none'])) {
+      unset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none']);
+    }
+
+    $form['#validate'][] = 'ict_project_form_project_users_validate';
     ksort($form['field_project_stage']['und']['#options']);
     $form['#theme'] = 'ict_project_add_project_form';
     //hide native labels
@@ -160,17 +185,31 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
     $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
       'invisible';
+    $form['field_brief_project_summary_fake'] = array(
+      '#type' => 'text_format',
+      '#title' => t('Description'),
+      '#element_validate' => array('ict_project_update_project_description'),
+      '#default_value' => $form['field_brief_project_summary']['und'][0]['value']['#default_value'],
+      '#required' => TRUE,
+      '#title' => $form['field_brief_project_summary']['und'][0]['value']['#title'],
+      '#title_display' => 'invisible',
+    );
+    $form['field_brief_project_summary']['und'][0]['value']['#required'] = FALSE;
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
     $default_project = ict_project_get_project_update();
+
+    // Notification for user trying to update a Project that he don't have an access to
+    __ict_project_check_user_allowed_update ($default_project);
+
     $form['mid_project_name_text'] = array(
       '#type' => 'item',
       '#title' => t('Project name'),
-      '#markup' => $default_project,
+      '#markup' => $default_project['title'],
     );
     $form['field_mid_project_name']['und'][0]['value']['#type'] = 'hidden';
-    $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project;
+    $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
     $form['field_mid_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
 
     $form['#theme'] = 'ict_project_mid_project_form';
@@ -221,31 +260,31 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_mid_project_status']['und']['#required'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
     $form['actions']['submit']['#validate'][] = 'ict_project_csv_validate';
+
     $form['preview'] = array(
       '#type' => 'button',
       '#value' => t('Preview'),
       '#executes_submit_callback' => TRUE,
       '#submit' => array('ict_project_preview_submission'),
     );
+
+    __ict_project_update_project_default_values($form);
+
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
-
-
-
-    $entity = entityform_load(101);
-
-    $i = field_collection_item_load($entity->field_end_predicted_budget['und'][0]['value']);
-    dsm($entity);
-
     $default_project = ict_project_get_project_update();
+
+    // Notification for user trying to update a Project that he don't have an access to
+    __ict_project_check_user_allowed_update ($default_project);
+
     $form['end_project_name_text'] = array(
       '#type' => 'item',
       '#title' => t('Project name'),
-      '#markup' => $default_project,
+      '#markup' => $default_project['title'],
     );
     $form['field_end_project_name']['und'][0]['value']['#type'] = 'hidden';
-    $form['field_end_project_name']['und'][0]['value']['#default_value'] = $default_project;
+    $form['field_end_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
     $form['field_end_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
 
     $form['#theme'] = 'ict_project_end_project_form';
@@ -315,6 +354,49 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       '#submit' => array('ict_project_preview_submission'),
     );
 
+    __ict_project_update_project_default_values($form);
+  }
+}
+
+function ict_project_update_project_description($element, &$form_state, $form) {
+  $form_state['values']['field_brief_project_summary']['und'][0]['value'] = filter_xss($form_state['values']['field_brief_project_summary_fake']['value']);
+}
+/*
+ * Implements hook_node_presave().
+ */
+function ict_project_node_presave($node) {
+  if ($node->type == 'project') {
+    global $user;
+
+    $checked_users = array();
+    foreach ($node->field_project_users[LANGUAGE_NONE] as $item) {
+      $checked_users[] = $item['uid'];
+    }
+
+    if (!$checked_users || !in_array($user->uid, $checked_users)) {
+      $node->field_project_users[LANGUAGE_NONE][] = array('uid' => $user->uid);
+    }
+  }
+}
+
+function __ict_project_check_user_allowed_update ($project) {
+  global $user;
+
+  $node = node_load($project['nid']);
+
+  if (!isset($node->type) || $node->type != 'project') {
+    drupal_set_message(t('Project not found'), 'error');
+    drupal_goto('projects');
+  }
+
+  $allowed_users = array();
+  foreach ($node->field_project_users[LANGUAGE_NONE] as $item) {
+    $allowed_users[] = $item['uid'];
+  }
+
+  if (!$user->name || !in_array($user->uid, $allowed_users)) {
+    drupal_set_message(t('You are not allowed to update "!title"', array('title' => $project['title'])), 'error');
+    drupal_goto('projects');
   }
 }
 
@@ -445,7 +527,9 @@ function ict_project_get_project() {
 function ict_project_bracket_italics ($string) {
   $source = explode('(', $string);
 
-  $string = $source[0] . '<em>(' . $source[1] . '</em>';
+  if (count($source) > 1) {
+    $string = $source[0] . '<em>(' . $source[1] . '</em>';
+  }
 
   return $string;
 }
@@ -462,14 +546,25 @@ function ict_project_node_insert (&$node) {
 
 
 function ict_project_get_project_update() {
-  global $user;
-  $id = $user->uid;
-  $query = db_select('node', 'n');
-  $query->fields('n', array('title'));
-  $query->condition('n.type', 'project', '=');
-  $query->condition('n.uid', $id, '=');
-  $query->orderBy('created', 'ASC');
-  $projects = $query->execute()->fetchField();
+  $projects = array(
+    'title' => '',
+    'nid' => ''
+  );
+
+  if (isset($_GET['project'])) {
+
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title'));
+    $query->condition('n.type', 'project');
+    $query->condition('n.nid', $_GET['project']);
+    $node = $query->execute()->fetchField();
+
+    $projects = array(
+      'title' => $node,
+      'nid' => $_GET['project']
+    );
+
+  }
 
   return $projects;
 }
@@ -615,12 +710,16 @@ function ict_project_csv_validate($form, &$form_state) {
 
 }
 
-
+/**
+ * Validates date
+ *
+ * @param $date
+ * @return bool
+ */
 function ict_project_validate_date($date) {
   $d = DateTime::createFromFormat('d/m/Y', $date);
   return $d && $d->format('d/m/Y') == $date;
 }
-
 
 
 function ict_project_preview_submission($form, &$form_state) {
@@ -735,3 +834,64 @@ function ict_project_review_end_submission($form, &$form_state) {
     drupal_goto('projects');
   }
 }
+
+function __ict_project_update_project_default_values (&$form) {
+  if (!is_numeric($_GET['project']) || !$project = node_load($_GET['project'])) {
+    return;
+  }
+  $project_wrapper = entity_metadata_wrapper('node', $project);
+
+  $stage = $project_wrapper->field_project_stage->value();
+  $manager = $project_wrapper->field_project_manager->value();
+  $manager_mail = $project_wrapper->field_project_manager_email->value();
+  $completion_date = $project->field_original_completion_date['und'][0]['value'];
+  $total_budget = $project_wrapper->field_total_project_budget->value();
+  $predicted_benefit = $project_wrapper->field_predicted_project_benefit->value();
+  if ($form['#entity']->type == 'ict_form') {
+    if (!empty($stage->name)) {
+      $stage_val = array_search($stage->name, $form['field_mid_project_stage']['und']['#options']);
+      if (!empty($stage_val)) {
+        $form['field_mid_project_stage']['und']['#default_value'] = $stage_val;
+      }
+    }
+    if (!empty($manager)) {
+      $form['field_mid_project_manager']['und'][0]['value']['#default_value'] = $manager;
+    }
+    if (!empty($manager_mail)) {
+      $form['field_mid_project_manager_email']['und'][0]['value']['#default_value'] = $manager_mail;
+    }
+    if (!empty($completion_date)) {
+      $form['field_mid_expected_projectds']['und'][0]['#default_value']['value'] = $completion_date;
+    }
+    if (!empty($total_budget)) {
+      $form['field_mid_revised_total_project']['und'][0]['value']['#default_value'] = $total_budget;
+    }
+    if (!empty($predicted_benefit)) {
+      $form['field_mid_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
+    }
+  }
+  elseif ($form['#entity']->type == 'itc_form_end') {
+    if (!empty($stage->name)) {
+      $stage_val = array_search($stage->name, $form['field_end_project_stage']['und']['#options']);
+      if (!empty($stage_val)) {
+        $form['field_end_project_stage']['und']['#default_value'] = $stage_val;
+      }
+    }
+    if (!empty($manager)) {
+      $form['field_end_project_manager']['und'][0]['value']['#default_value'] = $manager;
+    }
+    if (!empty($manager_mail)) {
+      $form['field_end_project_manager_email']['und'][0]['value']['#default_value'] = $manager_mail;
+    }
+    if (!empty($completion_date)) {
+      $form['field_end_expected_project']['und'][0]['#default_value']['value'] = $completion_date;
+    }
+    if (!empty($total_budget)) {
+      $form['field_end_revised_total_project']['und'][0]['value']['#default_value'] = $total_budget;
+    }
+    if (!empty($predicted_benefit)) {
+      $form['field_end_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
+    }
+  }
+}
+

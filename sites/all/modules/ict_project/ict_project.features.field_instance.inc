@@ -424,7 +424,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_external_fte',
     'label' => 'External FTE',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -505,7 +505,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_government_entity_name',
     'label' => 'Government entity name',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -590,7 +590,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_internal_fte',
     'label' => 'Internal FTE',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -733,7 +733,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_predicted_project_benefit',
     'label' => 'Predicted project benefit ($m, as identified in business case) ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -773,7 +773,7 @@ function ict_project_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_program_name',
-    'label' => 'Government programme (if applicable) ',
+    'label' => 'Which Outcome and Programme does this project support?',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -891,7 +891,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_project_manager_email',
     'label' => 'Project manager email',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -1319,7 +1319,6 @@ function ict_project_field_default_field_instances() {
   t('External FTE');
   t('Government entity business group, division, & branch ');
   t('Government entity name');
-  t('Government programme (if applicable) ');
   t('Implementation Partners?');
   t('Internal FTE');
   t('Opex');
@@ -1341,6 +1340,7 @@ function ict_project_field_default_field_instances() {
   t('Rebaselined total project budget ($m)');
   t('Total');
   t('Users');
+  t('Which Outcome and Programme does this project support?');
   t('Which government programme does this project support? ');
   t('Year');
 

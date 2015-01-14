@@ -46,7 +46,8 @@
   <footer class="footer" role="contentinfo">
     <div id="inner-footer">
       <div class="wrap cf">
-        <p class="copy">&copy; ICT Dashboard 2014</p>
+        <?php print l(t('Contact us'), 'mailto:InvestmentFrame@finance.gov.au', array('attributes' => array('id' => 'contact_link'))); ?>
+        <p class="copy">&copy; <?php print t('All content is available under the Creative Commons CC BY 3.0 Licence, except where otherwise stated'); ?></p>
       </div>
     </div>
   </footer>

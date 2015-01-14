@@ -67,11 +67,55 @@
 						?>
 					</td>
 					<td class="text">
-						<?php
-							print render($form['field_brief_project_summary']);
-						?>
+            <?php print render($form['field_brief_project_summary_fake']); ?>
+						<div class="element-hidden"><?php print render($form['field_brief_project_summary']); ?></div>
 					</td>
 				</tr>
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_implementation_partners']['und']['#title'];
+            ?>
+            <span>A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.</span>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_implementation_partners']);
+            ?>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_internal_fte']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+
+            <?php
+            print render($form['field_internal_fte']);
+            ?>
+
+          </td>
+        </tr>
+
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_external_fte']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+
+            <?php
+            print render($form['field_external_fte']);
+            ?>
+
+          </td>
+        </tr>
 
         <tr>
           <td class="label">
@@ -165,6 +209,21 @@
 
 					</td>
 				</tr>
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_expenditure_type']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+
+            <?php
+            print render($form['field_expenditure_type']);
+            ?>
+
+          </td>
+        </tr>
 
         <tr>
           <td class="label">
@@ -271,69 +330,6 @@
 
           </td>
         </tr>
-
-        <tr>
-          <td class="label">
-            <?php
-            print $form['field_expenditure_type']['und']['#title'];
-            ?>
-          </td>
-          <td class="text">
-
-            <?php
-            print render($form['field_expenditure_type']);
-            ?>
-
-          </td>
-        </tr>
-
-				<tr>
-					<td class="label">
-						<?php
-							print $form['field_implementation_partners']['und']['#title'];
-						?>
-						<span>A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.</span>
-					</td>
-					<td class="text">
-						<?php
-							print render($form['field_implementation_partners']);
-						?>
-					</td>
-				</tr>
-
-        <tr>
-          <td class="label">
-            <?php
-            print $form['field_internal_fte']['und']['#title'];
-            ?>
-          </td>
-          <td class="text">
-
-            <?php
-            print render($form['field_internal_fte']);
-            ?>
-
-          </td>
-        </tr>
-
-
-        <tr>
-          <td class="label">
-            <?php
-            print $form['field_external_fte']['und']['#title'];
-            ?>
-          </td>
-          <td class="text">
-
-            <?php
-            print render($form['field_external_fte']);
-            ?>
-
-          </td>
-        </tr>
-
-
-
 
 				<?php
 				global $user;

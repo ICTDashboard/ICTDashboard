@@ -92,19 +92,23 @@ function ict_moderation_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: Author uid */
-  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
-  $handler->display->display_options['arguments']['uid']['table'] = 'node';
-  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
-  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
-  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['uid']['specify_validation'] = TRUE;
-  $handler->display->display_options['arguments']['uid']['validate']['type'] = 'php';
-  $handler->display->display_options['arguments']['uid']['validate_options']['code'] = 'if(user_is_logged_in()) return TRUE;';
-  $handler->display->display_options['arguments']['uid']['validate']['fail'] = 'ignore';
+  /* Contextual filter: Content: Users (field_project_users) */
+  $handler->display->display_options['arguments']['field_project_users_uid']['id'] = 'field_project_users_uid';
+  $handler->display->display_options['arguments']['field_project_users_uid']['table'] = 'field_data_field_project_users';
+  $handler->display->display_options['arguments']['field_project_users_uid']['field'] = 'field_project_users_uid';
+  $handler->display->display_options['arguments']['field_project_users_uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_project_users_uid']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['field_project_users_uid']['default_argument_options']['code'] = 'global $user;
+
+if (user_is_logged_in()) {
+return $user->uid;
+}
+else {
+return \'all\';
+}';
+  $handler->display->display_options['arguments']['field_project_users_uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_project_users_uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_project_users_uid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';

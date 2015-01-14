@@ -1,7 +1,7 @@
 name = ICT Moderation
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.1
+version = 7.x-1.4
 project = ict_moderation
 dependencies[] = ctools
 dependencies[] = references
@@ -11,4 +11,4 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = project_list_view_to_user
 features[views_view][] = view_moderation_reporters
-mtime = 1418283972
+mtime = 1421153093
