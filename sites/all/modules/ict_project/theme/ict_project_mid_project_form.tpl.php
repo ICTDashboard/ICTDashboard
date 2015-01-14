@@ -243,6 +243,7 @@
         </tr>
       </table>
       <div class="submit">
+        <?php print drupal_render($form['preview']); ?>
         <?php print drupal_render($form['actions']); ?>
       </div>
 

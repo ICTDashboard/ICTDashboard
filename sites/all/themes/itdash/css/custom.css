@@ -147,3 +147,35 @@ div#edit-field-rebaselined-total-budget td {
 .tooltipster-icon:hover {background-color: #0a5f74;}
 /*.radio-description .form-item {float: left;}*/
 .header #logo {font-size: 29px;}
+
+#content .project-update-submission .submit input#edit-preview {
+  background: url(../html/images/general-btn.png) repeat-x scroll 0 0 transparent;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-indent: 0px;
+  height: 41px;
+  float: right;
+  margin: 0 10px;
+}
+
+
+#content .project-update-submission .submit input#edit-preview:hover {
+  background-position: 0 -41px;
+}
+
+.page-review-submission .submit a {
+  width: 130px;
+}
+
+.page-review-submission .submit {
+  margin-top: 20px;
+}
+
+.project-view .back {
+  float: right;
+  margin: 0 10px;
+  text-transform: uppercase;
+}
