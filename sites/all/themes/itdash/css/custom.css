@@ -162,8 +162,12 @@ div#edit-field-rebaselined-total-budget td {
   display: inline-block;
 }
 
-#content .project-update-submission #edit-actions {
+#content .project-update-submission #edit-actions,
+.project-update-submission a.back,
+.project-update-submission form
+{
   display: inline-block;
+  vertical-align: top;
 }
 
 #content .project-update-submission .submit input#edit-preview:hover {
