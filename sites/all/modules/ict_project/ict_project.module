@@ -190,7 +190,11 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       '#title' => t('Description'),
       '#element_validate' => array('ict_project_update_project_description'),
       '#default_value' => $form['field_brief_project_summary']['und'][0]['value']['#default_value'],
+      '#required' => TRUE,
+      '#title' => $form['field_brief_project_summary']['und'][0]['value']['#title'],
+      '#title_display' => 'invisible',
     );
+    $form['field_brief_project_summary']['und'][0]['value']['#required'] = FALSE;
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
