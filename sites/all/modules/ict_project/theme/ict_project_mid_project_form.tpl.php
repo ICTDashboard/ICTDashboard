@@ -80,6 +80,33 @@
 					</td>
 				</tr>
 
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_mid_internal_fte']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_mid_internal_fte']);
+            ?>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            <?php
+            print $form['field_mid_external_fte']['und']['#title'];
+            ?>
+          </td>
+          <td class="text">
+            <?php
+            print render($form['field_mid_external_fte']);
+            ?>
+          </td>
+        </tr>
+
 				<tr>
 					<td class="label">
 						<?php
@@ -164,33 +191,6 @@
           <td class="text">
             <?php
               print render($form['field_mid_predicted_project_real']);
-            ?>
-          </td>
-        </tr>
-
-
-        <tr>
-          <td class="label">
-            <?php
-            print $form['field_mid_internal_fte']['und']['#title'];
-            ?>
-          </td>
-          <td class="text">
-            <?php
-            print render($form['field_mid_internal_fte']);
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label">
-            <?php
-            print $form['field_mid_external_fte']['und']['#title'];
-            ?>
-          </td>
-          <td class="text">
-            <?php
-            print render($form['field_mid_external_fte']);
             ?>
           </td>
         </tr>

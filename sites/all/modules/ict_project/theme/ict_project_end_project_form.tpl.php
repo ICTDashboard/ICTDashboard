@@ -51,6 +51,32 @@
           </td>
         </tr>
 
+      <tr>
+        <td class="label">
+          <?php
+          print $form['field_end_internal_fte']['und']['#title'];
+          ?>
+        </td>
+        <td class="text">
+          <?php
+          print render($form['field_end_internal_fte']);
+          ?>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="label">
+          <?php
+          print $form['field_end_external_fte']['und']['#title'];
+          ?>
+        </td>
+        <td class="text">
+          <?php
+          print render($form['field_end_external_fte']);
+          ?>
+        </td>
+      </tr>
+
 				<tr>
 					<td class="label vtop">
 						<?php
@@ -165,32 +191,6 @@
           <td class="text">
             <?php
             print render($form['field_end_predicted_realised']);
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label">
-            <?php
-            print $form['field_end_internal_fte']['und']['#title'];
-            ?>
-          </td>
-          <td class="text">
-            <?php
-            print render($form['field_end_internal_fte']);
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label">
-            <?php
-            print $form['field_end_external_fte']['und']['#title'];
-            ?>
-          </td>
-          <td class="text">
-            <?php
-            print render($form['field_end_external_fte']);
             ?>
           </td>
         </tr>
