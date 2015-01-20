@@ -103,7 +103,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_expected_project',
     'label' => 'Expected project completion date',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -150,7 +150,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_external_fte',
     'label' => 'External FTE',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -190,7 +190,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_internal_fte',
     'label' => 'Internal FTE',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -230,7 +230,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_predicted_project',
     'label' => 'Predicted project benefit ($m, as identified in business case) ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -270,7 +270,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_predicted_project_real',
     'label' => '% Predicted project benefit realised ($m, as identified in business case) ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -310,7 +310,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_project_completed',
     'label' => '% Project completed ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -345,7 +345,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_project_manager',
     'label' => 'Project manager ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -379,7 +379,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_project_manager_email',
     'label' => 'Project manager email ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -447,7 +447,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_project_stage',
     'label' => 'Project stage',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -514,7 +514,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_revised_total_project',
     'label' => 'Revised total project budget ($m)',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -554,7 +554,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_total_project_current',
     'label' => 'Total project spend current Financial Year ($m)',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -594,7 +594,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_total_project_spend',
     'label' => 'Total project spend to date ($m)',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -704,7 +704,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_expected_project',
     'label' => 'Expected project completion date',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -751,7 +751,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_external_fte',
     'label' => 'External FTE',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -791,7 +791,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_internal_fte',
     'label' => 'Internal FTE',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -832,7 +832,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_predicted_budget',
     'label' => 'Five year predicted predicted project budget ($m)',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -868,7 +868,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_predicted_project',
     'label' => 'Predicted project benefit ($m, as identified in business case) ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -908,7 +908,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_predicted_realised',
     'label' => '% Predicted project benefit realised ($m, as identified in business case) ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -948,7 +948,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_project_completed',
     'label' => '% Project completed ',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -983,7 +983,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_project_manager',
     'label' => 'Project manager',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -1017,7 +1017,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_project_manager_email',
     'label' => 'Project manager email',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -1085,7 +1085,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_project_stage',
     'label' => 'Project stage',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -1152,7 +1152,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_revised_total_project',
     'label' => 'Revised total project budget ($m)',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -1192,7 +1192,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_total_project_current',
     'label' => 'Total project spend current Financial Year ($m)',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -1232,7 +1232,7 @@ function ict_entity_forms_field_default_field_instances() {
     'entity_type' => 'entityform',
     'field_name' => 'field_end_total_project_spend',
     'label' => 'Total project spend to date ($m)',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'max' => '',
       'min' => '',

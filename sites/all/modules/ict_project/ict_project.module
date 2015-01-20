@@ -185,7 +185,16 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
     $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
       'invisible';
-    $form['field_brief_project_summary']['und'][0]['value']['#type'] = 'text_format';
+    $form['field_brief_project_summary_fake'] = array(
+      '#type' => 'text_format',
+      '#title' => t('Description'),
+      '#element_validate' => array('ict_project_update_project_description'),
+      '#default_value' => $form['field_brief_project_summary']['und'][0]['value']['#default_value'],
+      '#required' => TRUE,
+      '#title' => $form['field_brief_project_summary']['und'][0]['value']['#title'],
+      '#title_display' => 'invisible',
+    );
+    $form['field_brief_project_summary']['und'][0]['value']['#required'] = FALSE;
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
@@ -236,12 +245,13 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       $fields[] = $key;
     }
 
-    $file_path = drupal_get_path('module', 'ict_project') . '/export.csv';
+    $dir = variable_get('file_public_path', conf_path() . '/files');
+    $file_path =  $dir . '/export.csv';
     $fh = fopen($file_path, 'w');
     fputcsv($fh, $fields);
     // Close & save the file.
     fclose($fh);
-    file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_REPLACE);
+    file_unmanaged_copy($file_path, $destination = NULL, FILE_EXISTS_RENAME);
 
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
@@ -251,7 +261,15 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
     $form['actions']['submit']['#validate'][] = 'ict_project_csv_validate';
 
+    $form['preview'] = array(
+      '#type' => 'button',
+      '#value' => t('Preview'),
+      '#executes_submit_callback' => TRUE,
+      '#submit' => array('ict_project_preview_submission'),
+    );
+
     __ict_project_update_project_default_values($form);
+
   }
 
   if($form_id == 'itc_form_end_entityform_edit_form') {
@@ -302,12 +320,14 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     foreach($sort as $key=>$field) {
       $fields[] = $key;
     }
-    $file_path = drupal_get_path('module', 'ict_project') . '/export_end.csv';
+
+    $dir = variable_get('file_public_path', conf_path() . '/files');
+    $file_path = $dir . '/export_end.csv';
     $fh = fopen($file_path, 'w');
     fputcsv($fh, $fields);
     // Close & save the file.
     fclose($fh);
-    file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_REPLACE);
+    file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_RENAME);
 
 
     $form['field_end_predicted_budget']['und']['#theme'] = 'ict_project_end_predicted_budget';
@@ -327,9 +347,19 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     $form['field_end_project_status']['und']['#required'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
+    $form['preview'] = array(
+      '#type' => 'button',
+      '#value' => t('Preview'),
+      '#executes_submit_callback' => TRUE,
+      '#submit' => array('ict_project_preview_submission'),
+    );
 
     __ict_project_update_project_default_values($form);
   }
+}
+
+function ict_project_update_project_description($element, &$form_state, $form) {
+  $form_state['values']['field_brief_project_summary']['und'][0]['value'] = filter_xss($form_state['values']['field_brief_project_summary_fake']['value']);
 }
 /*
  * Implements hook_node_presave().
@@ -401,6 +431,16 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme',
       'render element' => 'form',
     ),
+    'ict_project_review' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'template' => 'ict_project_review_page',
+      'variables' => array('form' => NULL),
+    ),
+    'ict_project_review_end' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'template' => 'ict_project_review_page_end',
+      'variables' => array('form' => NULL),
+    ),
   );
 }
 
@@ -419,9 +459,38 @@ function ict_project_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
 
+
+  $items['review-submission'] = array(
+    'title' => 'Review form',
+    'page callback' => 'ict_project_review_page',
+    'access callback' => TRUE,
+  );
+
+
   return $items;
 }
 
+
+function ict_project_review_page() {
+  drupal_add_js ('(function ($) {
+  $("a.back").click(function(){
+     parent.history.back();
+     return false;
+       });
+    })(jQuery);',array('type' => 'inline','scope' => 'footer','weight' =>5));
+
+  if(isset($_SESSION['review_submission'])) {
+    $form = $_SESSION['review_submission'];
+    if($form['form']['#form_id'] == 'ict_form_entityform_edit_form') {
+      return theme('ict_project_review', $form);
+    }
+    else {
+      return theme('ict_project_review_end', $form);
+    }
+  }
+
+  return drupal_not_found();
+}
 
 /**
  * Module configurations form
@@ -551,7 +620,6 @@ function ict_project_csv_submit_form_submit($form, &$form_state) {
 
 
 function ict_project_csv_validate($form, &$form_state) {
-  //dsm($form);
 
   if($form['#form_id'] == 'itc_form_end_entityform_edit_form') {
     $file_field = 'field_end_csv_file';
@@ -564,7 +632,7 @@ function ict_project_csv_validate($form, &$form_state) {
   if(!empty($csv_file)) {
     $project_stage = array('start_up', 'initiation', 'controlling', 'closing');
     $project_status = array('green', 'amber', 'red');
-    //$form['field_mid_project_manager']['und'][0]['value']['#value'] = 's';
+
     //Open csv
     $handle = fopen($csv_file->uri, 'r');
     $row = fgetcsv($handle);
@@ -576,7 +644,6 @@ function ict_project_csv_validate($form, &$form_state) {
 
     //Read value and filled field form - form state
     while ($row = fgetcsv($handle)) {
-      dsm($columns);
       foreach ($row as $i => $field_value) {
         switch ($columns[$i]) {
           //mail
@@ -629,6 +696,15 @@ function ict_project_csv_validate($form, &$form_state) {
     }
 
     //form_error($form, t('CSV empty.'));
+    $errors = form_get_errors();
+    if($errors) {
+
+      $form['field_mid_project_manager']['und'][0]['value']['#value'] = 's';
+      $form['field_mid_project_manager']['und'][0]['value']['#default_value'] = 's2';
+
+
+    }
+    form_set_value($form['field_mid_project_manager'], array(0 => array('value' => 's')), $form_state);
 
   }
 
@@ -645,7 +721,177 @@ function ict_project_validate_date($date) {
   return $d && $d->format('d/m/Y') == $date;
 }
 
-function __ict_project_update_project_default_values (&$form) {
-//  dsm($form);
-//  $form['field_end_project_stage'][LANGUAGE_NONE]['#default']
+
+function ict_project_preview_submission($form, &$form_state) {
+  $_SESSION['review_submission'] = array('form' => $form, 'form_state' => $form_state);
+  $form_state['redirect'] = 'review-submission';
 }
+
+function ict_project_review_form($form, &$form_state) {
+
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#submit' => array('ict_project_review_submission'),
+  );
+
+  return $form;
+}
+
+function ict_project_review_end_form($form, &$form_state) {
+
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#submit' => array('ict_project_review_end_submission'),
+  );
+
+  return $form;
+}
+
+function ict_project_review_submission($form, &$form_state) {
+  if(isset($_SESSION['review_submission'])) {
+    $entityform = entity_create('entityform', array(
+      'type' => "ict_form",
+      'created' => time(),
+      'changed' => time(),
+      'language' => LANGUAGE_NONE,
+      'uid' => 1
+    ));
+
+    $wrapper = entity_metadata_wrapper('entityform', $entityform);
+    $values = $_SESSION['review_submission']['form_state'];
+    // And set the fields.
+    $wrapper->field_mid_project_name = $values['input']['field_mid_project_name']['und'][0]['value'];
+    $wrapper->field_mid_project_stage = ($values['input']['field_mid_project_stage']['und']) ? $values['input']['field_mid_project_stage']['und'] : '_none';
+    $wrapper->field_mid_project_manager = ($values['input']['field_mid_project_manager']['und'][0]['value']) ? $values['input']['field_mid_project_manager']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_project_manager_email = ($values['input']['field_mid_project_manager_email']['und'][0]['value']) ? $values['input']['field_mid_project_manager_email']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_revised_total_project = ($values['input']['field_mid_revised_total_project']['und'][0]['value']) ? $values['input']['field_mid_revised_total_project']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_expected_project = $values['values']['field_mid_expected_project']['und'][0]['value'] ? strtotime($values['values']['field_mid_expected_project']['und'][0]['value']) : NULL;
+    $wrapper->field_mid_total_project_spend = ($values['input']['field_mid_total_project_spend']['und'][0]['value']) ? $values['input']['field_mid_total_project_spend']['und'][0]['value'] : NULL;
+
+    $wrapper->field_mid_total_project_current = ($values['input']['field_mid_total_project_current']['und'][0]['value']) ? $values['input']['field_mid_total_project_current']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_project_completed = ($values['input']['field_mid_project_completed']['und'][0]['value']) ? $values['input']['field_mid_project_completed']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_predicted_project = ($values['input']['field_mid_predicted_project']['und'][0]['value']) ? $values['input']['field_mid_predicted_project']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_predicted_project_real = ($values['input']['field_mid_predicted_project_real']['und'][0]['value']) ? $values['input']['field_mid_predicted_project_real']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_internal_fte = ($values['input']['field_mid_internal_fte']['und'][0]['value']) ? $values['input']['field_mid_internal_fte']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_external_fte = ($values['input']['field_mid_external_fte']['und'][0]['value']) ? $values['input']['field_mid_external_fte']['und'][0]['value'] : NULL;
+    $wrapper->field_mid_project_status = ($values['input']['field_mid_project_status']['und']) ? $values['input']['field_mid_project_status']['und'] : '_none';
+    $wrapper->field_mid_agency_comments = ($values['input']['field_mid_agency_comments']['und'][0]['value']) ? $values['input']['field_mid_agency_comments']['und'][0]['value'] : NULL;
+    $wrapper->save();
+    unset($_SESSION['review_submission']);
+    drupal_set_message(t('Thank you, your submission has been received.'));
+    drupal_goto('projects');
+  }
+}
+
+
+function ict_project_review_end_submission($form, &$form_state) {
+  if(isset($_SESSION['review_submission'])) {
+
+    $entityform = entity_create('entityform', array(
+      'type' => "itc_form_end",
+      'created' => time(),
+      'changed' => time(),
+      'language' => LANGUAGE_NONE,
+      'uid' => 1
+    ));
+    $wrapper = entity_metadata_wrapper('entityform', $entityform);
+    $values = $_SESSION['review_submission']['form_state'];
+    $wrapper->field_end_project_name = $values['input']['field_end_project_name']['und'][0]['value'];
+    $wrapper->field_end_project_stage = ($values['input']['field_end_project_stage']['und']) ? $values['input']['field_end_project_stage']['und'] : '_none';
+    $wrapper->field_end_project_manager = ($values['input']['field_end_project_manager']['und'][0]['value']) ? $values['input']['field_end_project_manager']['und'][0]['value'] : NULL;
+    $wrapper->field_end_project_manager_email = ($values['input']['field_end_project_manager_email']['und'][0]['value']) ? $values['input']['field_end_project_manager_email']['und'][0]['value'] : NULL;
+    $wrapper->field_end_revised_total_project = ($values['input']['field_end_revised_total_project']['und'][0]['value']) ? $values['input']['field_end_revised_total_project']['und'][0]['value'] : NULL;
+    $wrapper->field_end_expected_project = $values['values']['field_end_expected_project']['und'][0]['value'] ? strtotime($values['values']['field_end_expected_project']['und'][0]['value']) : NULL;
+    $wrapper->field_end_total_project_spend = ($values['input']['field_end_total_project_spend']['und'][0]['value']) ? $values['input']['field_end_total_project_spend']['und'][0]['value'] : NULL;
+    $wrapper->field_end_total_project_current = ($values['input']['field_end_total_project_current']['und'][0]['value']) ? $values['input']['field_end_total_project_current']['und'][0]['value'] : NULL;
+    $wrapper->field_end_project_completed = ($values['input']['field_end_project_completed']['und'][0]['value']) ? $values['input']['field_end_project_completed']['und'][0]['value'] : NULL;
+    $wrapper->field_end_predicted_project = ($values['input']['field_end_predicted_project']['und'][0]['value']) ? $values['input']['field_end_predicted_project']['und'][0]['value'] : NULL;
+    $wrapper->field_end_predicted_realised = ($values['input']['field_end_predicted_realised']['und'][0]['value']) ? $values['input']['field_end_predicted_realised']['und'][0]['value'] : NULL;
+    $wrapper->field_end_internal_fte = ($values['input']['field_end_internal_fte']['und'][0]['value']) ? $values['input']['field_end_internal_fte']['und'][0]['value'] : NULL;
+    $wrapper->field_end_external_fte = ($values['input']['field_end_external_fte']['und'][0]['value']) ? $values['input']['field_end_external_fte']['und'][0]['value'] : NULL;
+    $wrapper->field_end_project_status = ($values['input']['field_end_project_status']['und']) ? $values['input']['field_end_project_status']['und'] : '_none';
+    $wrapper->field_end_agency_comments = ($values['input']['field_end_agency_comments']['und'][0]['value']) ? $values['input']['field_end_agency_comments']['und'][0]['value'] : NULL;
+    $wrapper->save();
+
+    $budget = $values['values']['field_end_predicted_budget'][LANGUAGE_NONE];
+    foreach($budget as $row) {
+      // Create a new field collection
+      $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_end_predicted_budget'));
+      $field_collection_item->setHostEntity('itc_form_end', $entityform);
+
+      // Load items into field collection
+      $field_collection_item->field_predicted_capex[LANGUAGE_NONE][0]['value'] = $row['field_predicted_capex'][LANGUAGE_NONE][0]['value'];
+      $field_collection_item->field_predicted_opex[LANGUAGE_NONE][0]['value'] = $row['field_predicted_opex'][LANGUAGE_NONE][0]['value'];
+      $field_collection_item->field_predicted_total[LANGUAGE_NONE][0]['value'] = $row['field_predicted_total'][LANGUAGE_NONE][0]['value'];
+
+       // Save field collection item
+       $field_collection_item->save();
+    }
+    unset($_SESSION['review_submission']);
+    drupal_set_message(t('Thank you, your submission has been received.'));
+    drupal_goto('projects');
+  }
+}
+
+function __ict_project_update_project_default_values (&$form) {
+  if (!is_numeric($_GET['project']) || !$project = node_load($_GET['project'])) {
+    return;
+  }
+  $project_wrapper = entity_metadata_wrapper('node', $project);
+
+  $stage = $project_wrapper->field_project_stage->value();
+  $manager = $project_wrapper->field_project_manager->value();
+  $manager_mail = $project_wrapper->field_project_manager_email->value();
+  $completion_date = $project->field_original_completion_date['und'][0]['value'];
+  $total_budget = $project_wrapper->field_total_project_budget->value();
+  $predicted_benefit = $project_wrapper->field_predicted_project_benefit->value();
+  if ($form['#entity']->type == 'ict_form') {
+    if (!empty($stage->name)) {
+      $stage_val = array_search($stage->name, $form['field_mid_project_stage']['und']['#options']);
+      if (!empty($stage_val)) {
+        $form['field_mid_project_stage']['und']['#default_value'] = $stage_val;
+      }
+    }
+    if (!empty($manager)) {
+      $form['field_mid_project_manager']['und'][0]['value']['#default_value'] = $manager;
+    }
+    if (!empty($manager_mail)) {
+      $form['field_mid_project_manager_email']['und'][0]['value']['#default_value'] = $manager_mail;
+    }
+    if (!empty($completion_date)) {
+      $form['field_mid_expected_projectds']['und'][0]['#default_value']['value'] = $completion_date;
+    }
+    if (!empty($total_budget)) {
+      $form['field_mid_revised_total_project']['und'][0]['value']['#default_value'] = $total_budget;
+    }
+    if (!empty($predicted_benefit)) {
+      $form['field_mid_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
+    }
+  }
+  elseif ($form['#entity']->type == 'itc_form_end') {
+    if (!empty($stage->name)) {
+      $stage_val = array_search($stage->name, $form['field_end_project_stage']['und']['#options']);
+      if (!empty($stage_val)) {
+        $form['field_end_project_stage']['und']['#default_value'] = $stage_val;
+      }
+    }
+    if (!empty($manager)) {
+      $form['field_end_project_manager']['und'][0]['value']['#default_value'] = $manager;
+    }
+    if (!empty($manager_mail)) {
+      $form['field_end_project_manager_email']['und'][0]['value']['#default_value'] = $manager_mail;
+    }
+    if (!empty($completion_date)) {
+      $form['field_end_expected_project']['und'][0]['#default_value']['value'] = $completion_date;
+    }
+    if (!empty($total_budget)) {
+      $form['field_end_revised_total_project']['und'][0]['value']['#default_value'] = $total_budget;
+    }
+    if (!empty($predicted_benefit)) {
+      $form['field_end_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
+    }
+  }
+}
+

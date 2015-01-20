@@ -67,9 +67,8 @@
 						?>
 					</td>
 					<td class="text">
-						<?php
-							print render($form['field_brief_project_summary']);
-						?>
+            <?php print render($form['field_brief_project_summary_fake']); ?>
+						<div class="element-hidden"><?php print render($form['field_brief_project_summary']); ?></div>
 					</td>
 				</tr>
 
