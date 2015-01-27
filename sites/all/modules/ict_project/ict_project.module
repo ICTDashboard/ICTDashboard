@@ -164,7 +164,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'project_node_form') {
 
-    // Removes _none option for Project Isers field
+    // Removes _none option for Project Users field
     if (isset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none'])) {
       unset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none']);
     }
@@ -194,6 +194,10 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       '#title' => $form['field_brief_project_summary']['und'][0]['value']['#title'],
       '#title_display' => 'invisible',
     );
+
+    // Adds validation to the form
+    $form['#validate'][] = 'ict_project_form_project_submission_validate';
+
     $form['field_brief_project_summary']['und'][0]['value']['#required'] = FALSE;
   }
 
@@ -347,6 +351,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     $form['field_end_project_status']['und']['#required'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
+    $form['actions']['submit']['#validate'][] = 'ict_project_update_form_validate';
     $form['preview'] = array(
       '#type' => 'button',
       '#value' => t('Preview'),
@@ -355,6 +360,49 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     );
 
     __ict_project_update_project_default_values($form);
+  }
+}
+
+/**
+ * Custom validation for Project Update form
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_project_update_form_validate ($form, &$form_state) {
+  __ict_project_form_fy_validation ($form['field_end_predicted_budget'][LANGUAGE_NONE], $form_state['values']['field_end_predicted_budget'][LANGUAGE_NONE], array('capex' => 'field_predicted_capex', 'opex' => 'field_predicted_opex'));
+}
+
+/**
+ * Custom validation for Project Add form
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_project_form_project_submission_validate ($form, &$form_state) {
+  // FY validation
+  __ict_project_form_fy_validation ($form['field_original_total_budget'][LANGUAGE_NONE], $form_state['values']['field_original_total_budget'][LANGUAGE_NONE]);
+  __ict_project_form_fy_validation ($form['field_rebaselined_total_budget'][LANGUAGE_NONE], $form_state['values']['field_rebaselined_total_budget'][LANGUAGE_NONE]);
+}
+
+/**
+ * Validates FY fields
+ *
+ * @param $elements
+ * @param $elemets_values
+ * @param $required
+ */
+function __ict_project_form_fy_validation ($elements, &$elements_values, $required = array('capex' => 'field_capex', 'opex' => 'field_opex')) {
+  $valid = FALSE;
+  foreach ($elements_values as $element) {
+    if ($element[$required['opex']][LANGUAGE_NONE][0]['value'] || $element[$required['opex']][LANGUAGE_NONE][0]['value']) {
+      $valid = TRUE;
+      break;
+    }
+  }
+
+  if (!$valid) {
+    form_set_error($elements['#field_name'], t('!title value should be entered at least for one year.', array('!title' => $elements['#title'])));
   }
 }
 
