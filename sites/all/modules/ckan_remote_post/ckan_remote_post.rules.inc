@@ -103,12 +103,9 @@ function ckan_remote_post_rules_action_remote_post($nid, $sid)
                     }
                 } else if ($field_name == 'implementation_partners') {
                     $partners = Array();
-                   /* foreach ($field['und'] as $row) {
-                        $entity = entity_load("field_collection_item", array($row['value']));
-                        $partner = reset($entity)->field_year['und']['0']['value'];
-                        $payload[$field_name] = '';
-                        $partners[] = $partner;
-                    }*/
+                   for ($i=0, $count = count($node->field_implementation_partners['und']); $i<$count; $i++){
+                     $partners[] = $node->field_implementation_partners['und'][$i]['value'];
+                    }
                     $payload[$field_name] = implode(';',$partners);
                 } else if (isset($field['und'][0]['value'])) {
                     $payload[$field_name] = $field['und'][0]['value'];

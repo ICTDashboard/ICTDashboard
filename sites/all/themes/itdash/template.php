@@ -225,7 +225,7 @@ function itdash_file_widget($variables) {
 
 function itdash_preprocess_node(&$variables) {
 
-  if ($variables['type'] = 'project') {
+  if ($variables['type'] == 'project') {
     $sql = 'SELECT DISTINCT d.name, s.timestamp, d.metric, d.value from "'.variable_get("ckan_resource_id").'"
               d join (select name,metric, max(timestamp) as timestamp from "'.variable_get("ckan_resource_id").'" GROUP BY name,metric) s on d.metric=s.metric and d.timestamp=s.timestamp
               WHERE d.name = \''.$variables['title'].'\'';
@@ -235,8 +235,10 @@ function itdash_preprocess_node(&$variables) {
     $variables['data'] = array();
     $variables['report_date'] = "";
     foreach ($result->result->records as $row) {
-      $variables['data'][$row->metric][$row->timestamp] = $row->value;
-      $variables['report_date'] = $row->timestamp;
+      if (!empty($row->value)) {
+        $variables['data'][$row->metric][$row->timestamp] = $row->value;
+        $variables['report_date'] = $row->timestamp;
+      }
     }
   }
 
