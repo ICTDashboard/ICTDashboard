@@ -315,6 +315,7 @@
                 }
               }
               sort($years);
+              if ($total):
               ?>
               <tr>
                 <td class="label">Five year predicted project budget <em>($m)</em></td>
@@ -347,12 +348,13 @@
                     </tr></tbody></table>
                 </td>
               </tr>
-
+              <?php endif; ?>
 
 
 
             </tbody>
           </table>
+
         </div>
 
       </div>
