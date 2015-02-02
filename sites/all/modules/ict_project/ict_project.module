@@ -838,17 +838,19 @@ function ict_project_csv_validate($form, &$form_state) {
 
         }
       }
-
     }
 
     //form_error($form, t('CSV empty.'));
     $errors = form_get_errors();
     if($errors) {
-
-      $form['field_mid_project_manager']['und'][0]['value']['#value'] = 's';
-      $form['field_mid_project_manager']['und'][0]['value']['#default_value'] = 's2';
-
-
+     $file = file_load($form_state['complete form']['field_mid_csv_file']['und'][0]['#value']['fid']);
+     file_delete($file);
+      unset($form_state['complete form']['field_mid_csv_file']['und'][0]['fid']);
+      unset($form_state['complete form']['field_mid_csv_file']['und'][0]['#file']);
+      unset($form_state['complete form']['field_mid_csv_file']['und'][0]['#value']);
+      unset($form_state['complete form']['field_mid_csv_file']['und'][0]['filename']);
+      //$form['field_mid_project_manager']['und'][0]['value']['#value'] = 's';
+      //$form['field_mid_project_manager']['und'][0]['value']['#default_value'] = 's2';
     }
     form_set_value($form['field_mid_project_manager'], array(0 => array('value' => 's')), $form_state);
 
