@@ -223,8 +223,6 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     // Notification for user trying to update a Project that he don't have an access to
     __ict_project_check_user_allowed_update ($default_project);
-    $project = node_load($default_project['nid']);
-    $project_updates = get_project_updates($default_project['title']);
 
     $form['mid_project_name_text'] = array(
       '#type' => 'item',
@@ -232,33 +230,10 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       '#markup' => $default_project['title'],
     );
     $form['field_mid_project_name']['und'][0]['value']['#type'] = 'hidden';
-    $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
-    $form['field_mid_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
+      $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
+      $form['field_mid_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
 
-      if (empty($project_updates['project_manager'])) {
-          $form['field_mid_project_manager']['und'][0]['value']['#default_value'] = $project->field_project_manager['und'][0]['value'];
-      } else {
-          $form['field_mid_project_manager']['und'][0]['value']['#default_value'] = reset($project_updates['project_manager']);
-      }
-      if (empty($project_updates['internal_fte'])) {
-          $form['field_mid_internal_fte']['und'][0]['value']['#default_value'] = $project->field_internal_fte['und'][0]['value'];
-      } else {
-          $form['field_mid_internal_fte']['und'][0]['value']['#default_value'] = reset($project_updates['internal_fte']);
-      }
-      if (empty($project_updates['external_fte'])) {
-          $form['field_mid_external_fte']['und'][0]['value']['#default_value'] = $project->field_external_fte['und'][0]['value'];
-      } else {
-          $form['field_mid_external_fte']['und'][0]['value']['#default_value'] = reset($project_updates['external_fte']);
-      }
-
-      $form['field_mid_total_project_spend']['und'][0]['value']['#default_value'] = (int)reset($project_updates['total_project_spend']);
-      $form['field_mid_total_project_current']['und'][0]['value']['#default_value'] = (int)reset($project_updates['total_project_current']);
-      $form['field_mid_project_completed']['und'][0]['value']['#default_value'] = reset($project_updates['project_completed']);
-
-      $form['field_mid_predicted_project']['und'][0]['value']['#default_value'] = reset($project_updates['predicted_project']);
-      $form['field_mid_predicted_realised']['und'][0]['value']['#default_value'] = reset($project_updates['predicted_realised']);
-
-    $form['#theme'] = 'ict_project_mid_project_form';
+      $form['#theme'] = 'ict_project_mid_project_form';
     $form['mid_project_name_text']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
     $form['field_mid_project_manager_email']['und'][0]['value']['#title_display'] =
     $form['field_mid_revised_total_project']['und'][0]['value']['#title_display'] =
@@ -323,8 +298,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     // Notification for user trying to update a Project that he don't have an access to
     __ict_project_check_user_allowed_update ($default_project);
-    $project = node_load($default_project['nid']);
-    $project_updates = get_project_updates($default_project['title']);
+
     $form['end_project_name_text'] = array(
       '#type' => 'item',
       '#title' => t('Project name'),
@@ -333,31 +307,6 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_end_project_name']['und'][0]['value']['#type'] = 'hidden';
     $form['field_end_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
     $form['field_end_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
-
-      if (empty($project_updates['project_manager'])) {
-          $form['field_end_project_manager']['und'][0]['value']['#default_value'] = $project->field_project_manager['und'][0]['value'];
-      } else {
-          $form['field_end_project_manager']['und'][0]['value']['#default_value'] = reset($project_updates['project_manager']);
-      }
-      if (empty($project_updates['internal_fte'])) {
-          $form['field_end_internal_fte']['und'][0]['value']['#default_value'] = $project->field_internal_fte['und'][0]['value'];
-      } else {
-          $form['field_end_internal_fte']['und'][0]['value']['#default_value'] = reset($project_updates['internal_fte']);
-      }
-      if (empty($project_updates['external_fte'])) {
-          $form['field_end_external_fte']['und'][0]['value']['#default_value'] = $project->field_external_fte['und'][0]['value'];
-      } else {
-          $form['field_end_external_fte']['und'][0]['value']['#default_value'] = reset($project_updates['external_fte']);
-      }
-
-    $form['field_end_total_project_spend']['und'][0]['value']['#default_value'] = (int)reset($project_updates['total_project_spend']);
-      $form['field_end_total_project_current']['und'][0]['value']['#default_value'] = (int)reset($project_updates['total_project_current']);
-      $form['field_end_revised_total_project']['und'][0]['value']['#default_value'] = (int)reset($project_updates['revised_total_project']);
-      $form['field_end_project_completed']['und'][0]['value']['#default_value'] = reset($project_updates['project_completed']);
-
-      $form['field_end_predicted_project']['und'][0]['value']['#default_value'] = reset($project_updates['predicted_project']);
-      $form['field_end_predicted_realised']['und'][0]['value']['#default_value'] = reset($project_updates['predicted_realised']);
-
 
     $form['#theme'] = 'ict_project_end_project_form';
     $form['end_project_name_text']['#title_display'] =
@@ -407,7 +356,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     // Start year should be set via CMS
     $start_year = variable_get('ict_dashboard_project_start_year', 13);
 
-      $fybudget = Array();
+      /*$fybudget = Array();
       $years= Array();
       $total = 0;
       foreach ($project_updates as $key => $value) {
@@ -424,13 +373,13 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
               }
           }
       }
-      sort($years);
+      sort($years);*/
 
     foreach (element_children($form['field_end_predicted_budget']['und']) as $item) {
       foreach (element_children($form['field_end_predicted_budget']['und'][$item]) as $sub_item) {
         $form['field_end_predicted_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
       }
-        $yearlabel = $start_year . '/' . ++$start_year;
+   /*     $yearlabel = $start_year . '/' . ++$start_year;
       $form['field_end_predicted_budget']['und'][$item]['field_predicted_year']['und'][0]['value']['#value'] = $yearlabel;
         $year = 'fy'.str_replace('/','',$yearlabel);
         if (!empty($fybudget[$year]) && !empty($fybudget[$year]['opex'])) {
@@ -441,7 +390,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
         }
         if (!empty($fybudget[$year]) && !empty($fybudget[$year]['total'])) {
             $form['field_end_predicted_budget']['und'][$item]['field_predicted_total']['und'][0]['value']['#value'] = $fybudget[$year]['total'];
-        }
+        }*/
     }
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
@@ -987,15 +936,51 @@ function __ict_project_update_project_default_values (&$form) {
   }
   $project_wrapper = entity_metadata_wrapper('node', $project);
 
-  $stage = $project_wrapper->field_project_stage->value();
-  $manager = $project_wrapper->field_project_manager->value();
-  $manager_mail = $project_wrapper->field_project_manager_email->value();
-  $completion_date = $project->field_original_completion_date['und'][0]['value'];
-  $total_budget = $project_wrapper->field_total_project_budget->value();
-  $predicted_benefit = $project_wrapper->field_predicted_project_benefit->value();
+    $project_updates = get_project_updates($project->title);
+
+    if (empty($project_updates['project_manager'])) {
+        $manager = $project_wrapper->field_project_manager->value();
+    } else {
+        $manager = reset($project_updates['project_manager']);
+    }
+    if (empty($project_updates['project_manager_email'])) {
+        $manager_mail = $project_wrapper->field_project_manager_email->value();
+    } else {
+        $manager_mail = reset($project_updates['project_manager_email']);
+    }
+    if (empty($project_updates['project_stage'])) {
+        $stage = $project_wrapper->field_project_stage->value()->name;
+    } else {
+        $stage = reset($project_updates['project_stage']);
+    }
+    if (empty($project_updates['expected_project'])) {
+        $completion_date  = reset($project_updates['expected_project']);
+    } else {
+        $completion_date = $project->field_original_completion_date['und'][0]['value'];
+    }
+
+    if (empty($project_updates['revised_total_project'])) {
+        $total_budget = (int)reset($project_updates['revised_total_project']);
+    } else {
+        $total_budget = $project_wrapper->field_total_project_budget->value();
+    }
+    if (empty($project_updates['predicted_project'])) {
+        $predicted_benefit = reset($project_updates['predicted_project']);
+    } else {
+        $predicted_benefit = $project_wrapper->field_predicted_project_benefit->value();
+    }
+
+    if (!empty($project_updates['project_status'])) {
+        $status = reset($project_updates['project_status']);
+    }
+
   if ($form['#entity']->type == 'ict_form') {
-    if (!empty($stage->name)) {
-      $stage_val = array_search($stage->name, $form['field_mid_project_stage']['und']['#options']);
+    if (!empty($stage)) {
+        if (!empty($form['field_mid_project_stage']['und']['#options'][$stage])) {
+         $stage_val = $stage;
+        } else {
+            $stage_val = array_search($stage, $form['field_mid_project_stage']['und']['#options']);
+        }
       if (!empty($stage_val)) {
         $form['field_mid_project_stage']['und']['#default_value'] = $stage_val;
       }
@@ -1007,7 +992,8 @@ function __ict_project_update_project_default_values (&$form) {
       $form['field_mid_project_manager_email']['und'][0]['value']['#default_value'] = $manager_mail;
     }
     if (!empty($completion_date)) {
-      $form['field_mid_expected_projectds']['und'][0]['#default_value']['value'] = $completion_date;
+      $form['field_mid_expected_project']['und'][0]['#default_value']['value'] = $completion_date;
+        $form['field_mid_expected_project']['und'][0]['#default_value']['value2'] = $completion_date;
     }
     if (!empty($total_budget)) {
       $form['field_mid_revised_total_project']['und'][0]['value']['#default_value'] = $total_budget;
@@ -1015,11 +1001,18 @@ function __ict_project_update_project_default_values (&$form) {
     if (!empty($predicted_benefit)) {
       $form['field_mid_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
     }
+      if (!empty($status)) {
+          $form['field_mid_project_status'][LANGUAGE_NONE]['#default_value'] = $status;
+      }
   }
   elseif ($form['#entity']->type == 'itc_form_end') {
-    if (!empty($stage->name)) {
-      $stage_val = array_search($stage->name, $form['field_end_project_stage']['und']['#options']);
-      if (!empty($stage_val)) {
+      if (!empty($stage)) {
+          if (!empty($form['field_end_project_stage']['und']['#options'][$stage])) {
+              $stage_val = $stage;
+          } else {
+              $stage_val = array_search($stage, $form['field_end_project_stage']['und']['#options']);
+          }
+          if (!empty($stage_val)) {
         $form['field_end_project_stage']['und']['#default_value'] = $stage_val;
       }
     }
@@ -1031,6 +1024,7 @@ function __ict_project_update_project_default_values (&$form) {
     }
     if (!empty($completion_date)) {
       $form['field_end_expected_project']['und'][0]['#default_value']['value'] = $completion_date;
+        $form['field_end_expected_project']['und'][0]['#default_value']['value2'] = $completion_date;
     }
     if (!empty($total_budget)) {
       $form['field_end_revised_total_project']['und'][0]['value']['#default_value'] = $total_budget;
@@ -1038,6 +1032,9 @@ function __ict_project_update_project_default_values (&$form) {
     if (!empty($predicted_benefit)) {
       $form['field_end_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
     }
+      if (!empty($status)) {
+          $form['field_end_project_status'][LANGUAGE_NONE]['#default_value'] = $status;
+      }
   }
 }
 
