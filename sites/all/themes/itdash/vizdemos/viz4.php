@@ -5,9 +5,10 @@
     <!--[if gte IE 9]><!-->
     <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
     <!--<![endif]-->
+    <script type="text/javascript" src="../js/colorbrewer.js"></script>
     </head><body>
     <style type="text/css">
-        #chart {
+        #treemap {
             width: 960px;
             height: 500px;
             background: #ddd;
@@ -55,7 +56,7 @@
     </style>
 
 
-<div id="chart"></div>
+<div id="treemap"></div>
 
 <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -80,7 +81,7 @@
                     "value": 0,
                     "children": innerArray
                 };
-                var color = d3.scale.category20c();
+
                 var margin = {top: 20, right: 0, bottom: 0, left: 0},
                     width = 960,
                     height = 500 - margin.top - margin.bottom,
@@ -105,7 +106,7 @@
                     .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
                     .round(false);
 
-                var svg = d3.select("#chart").append("svg")
+                var svg = d3.select("#treemap").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.bottom + margin.top)
                     .style("margin-left", -margin.left + "px")
@@ -130,6 +131,10 @@
 
                 initialize(root);
                 accumulate(root);
+                var color =d3.scale.category20c();
+                var o = d3.scale.ordinal()
+                    .domain([0,root.value])
+                    .range(colorbrewer.Blues[9]);
                 layout(root);
                 display(root);
 
@@ -200,13 +205,13 @@
                         })
                         .enter().append("rect")
                         .attr("class", "child")
-                        .style("fill",function(d,i){return color(d.parent.name);})
+                        .style("fill",function(d,i){return color(d.value);})
                         .call(rect);
 
                     g.append("rect")
                         .attr("class", "parent")
-                        .call(rect).on("click", transition)
-                        .style("fill",function(d,i){return color(d.name);})
+                        .call(rect)
+                        .style("fill",function(d,i){return color(d.value);})
                         .append("title")
                         .text(function (d) {
                             return formatNumber(d.value);
