@@ -188,6 +188,7 @@ function itdash_css_alter(&$css) {
 }
 
 function itdash_preprocess_html(&$vars) {
+  drupal_add_library('system', 'ui.datepicker');
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/js/jquery.multiSelect.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/jquery.slicknav.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js('//select-box.googlecode.com/svn/tags/0.2/jquery.selectbox-0.2.min.js', array('type' => 'file', 'scope' => 'footer'));

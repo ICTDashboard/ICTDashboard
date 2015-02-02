@@ -339,7 +339,25 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     }
     asort($sort);
     foreach($sort as $key=>$field) {
-      $fields[] = $key;
+      if($key == 'field_end_predicted_budget') {
+        $fields[] = 'opex-13/14';
+        $fields[] = 'capex-13/14';
+
+        $fields[] = 'opex-14/15';
+        $fields[] = 'capex-14/15';
+
+        $fields[] = 'opex-15/16';
+        $fields[] = 'capex-15/16';
+
+        $fields[] = 'opex-16/17';
+        $fields[] = 'capex-16/17';
+
+        $fields[] = 'opex-17/18';
+        $fields[] = 'capex-17/18';
+      }
+      else {
+        $fields[] = $key;
+      }
     }
 
     $dir = variable_get('file_public_path', conf_path() . '/files');
@@ -719,8 +737,6 @@ function ict_project_get_project_update() {
   return $projects;
 }
 
-
-
 function ict_project_csv_submit_form_submit($form, &$form_state) {
   //Load file
   if($form['#form_id'] == 'itc_form_end_entityform_edit_form') {
@@ -757,6 +773,41 @@ function ict_project_csv_submit_form_submit($form, &$form_state) {
             $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value']['day'] = $date[0];
             $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value']['month'] = $date[1];
             $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value']['year'] = $date[2];
+            break;
+          //field collection
+          case 'opex-13/14':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][0]['value'] = $field;
+            break;
+          case 'capex-13/14':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][0]['value'] = $field;
+            break;
+          //14/15
+          case 'opex-14/15':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][1]['value'] = $field;
+            break;
+          case 'capex-14/15':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][1]['value'] = $field;
+            break;
+          //15/16
+          case 'opex-15/16':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][2]['value'] = $field;
+            break;
+          case 'capex-15/16':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][2]['value'] = $field;
+            break;
+          //16/17
+          case 'opex-16/17':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][3]['value'] = $field;
+            break;
+          case 'capex-16/17':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][3]['value'] = $field;
+            break;
+          //17/18
+          case 'opex-17/18':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][4]['value'] = $field;
+            break;
+          case 'capex-17/18':
+            $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][4]['value'] = $field;
             break;
           default:
             $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value'] = $field;
@@ -842,17 +893,19 @@ function ict_project_csv_validate($form, &$form_state) {
 
         }
       }
-
     }
 
     //form_error($form, t('CSV empty.'));
     $errors = form_get_errors();
     if($errors) {
-
-      $form['field_mid_project_manager']['und'][0]['value']['#value'] = 's';
-      $form['field_mid_project_manager']['und'][0]['value']['#default_value'] = 's2';
-
-
+     $file = file_load($form_state['complete form']['field_mid_csv_file']['und'][0]['#value']['fid']);
+     file_delete($file);
+      unset($form_state['complete form']['field_mid_csv_file']['und'][0]['fid']);
+      unset($form_state['complete form']['field_mid_csv_file']['und'][0]['#file']);
+      unset($form_state['complete form']['field_mid_csv_file']['und'][0]['#value']);
+      unset($form_state['complete form']['field_mid_csv_file']['und'][0]['filename']);
+      //$form['field_mid_project_manager']['und'][0]['value']['#value'] = 's';
+      //$form['field_mid_project_manager']['und'][0]['value']['#default_value'] = 's2';
     }
     form_set_value($form['field_mid_project_manager'], array(0 => array('value' => 's')), $form_state);
 
@@ -1092,4 +1145,5 @@ function __ict_project_update_project_default_values (&$form) {
       }
   }
 }
+
 
