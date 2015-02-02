@@ -191,7 +191,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['#theme'] = 'ict_project_add_project_form';
     //hide native labels
     $form['field_government_entity_name']['und']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
-    $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['value']['#title_display'] =
+    $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['#title_display'] =
     $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und'][0]['value']['#title_display'] =
     $form['field_project_category']['und']['#title_display'] = $form['field_project_manager']['und'][0]['value']['#title_display'] =
     $form['field_project_manager_email']['und'][0]['value']['#title_display'] = $form['field_total_project_budget']['und'][0]['value']['#title_display'] =
@@ -206,16 +206,16 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       '#type' => 'text_format',
       '#title' => t('Description'),
       '#element_validate' => array('ict_project_update_project_description'),
-      '#default_value' => $form['field_brief_project_summary']['und'][0]['value']['#default_value'],
+      '#default_value' => $form['field_brief_project_summary']['und'][0]['#default_value'],
       '#required' => TRUE,
-      '#title' => $form['field_brief_project_summary']['und'][0]['value']['#title'],
+      '#title' => $form['field_brief_project_summary']['und'][0]['#title'],
       '#title_display' => 'invisible',
     );
 
     // Adds validation to the form
     $form['#validate'][] = 'ict_project_form_project_submission_validate';
 
-    $form['field_brief_project_summary']['und'][0]['value']['#required'] = FALSE;
+    $form['field_brief_project_summary']['und'][0]['#required'] = FALSE;
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
@@ -430,6 +430,61 @@ function ict_project_form_project_submission_validate ($form, &$form_state) {
   // FY validation
   __ict_project_form_fy_validation ($form['field_original_total_budget'][LANGUAGE_NONE], $form_state['values']['field_original_total_budget'][LANGUAGE_NONE]);
   __ict_project_form_fy_validation ($form['field_rebaselined_total_budget'][LANGUAGE_NONE], $form_state['values']['field_rebaselined_total_budget'][LANGUAGE_NONE]);
+
+  // Override error messages
+  __ict_project_form_prepare_errors($form, $form_state);
+}
+
+/**
+ * Override and sort form errors
+ */
+function __ict_project_form_prepare_errors($form, &$form_state) {
+
+  $errors_text = array(
+    'field_government_entity_name' => t('Government department, agency, or organisation name is required'),
+    'field_government_business_unit' => t('Section (business group, division, branch) of responsible government entity is required'),
+    'field_program_name' => t(''),
+    'title' => t('Project title is required'),
+    'field_brief_project_summary_fake' => t('Description of project is required'),
+    'field_implementation_partners' => t(''),
+    'field_internal_fte' => t('Internal FTE is required'),
+    'field_external_fte' => t('External FTE is required'),
+    'field_start_date' => t('Original project start date is required'),
+    'field_original_completion_date' => t('Original project completion date is required'),
+    'field_rebaselined_project_start' => t(''),
+    'field_rebaselined_project_compl' => t(''),
+    'field_project_stage' => t('Default to `Start up`'),
+    'field_project_category' => t('Project category is required'),
+    'field_expenditure_type' => t('Default to `Departmental`'),
+    'field_project_manager' => t('Project manager name and email address is required'),
+    'field_project_manager_email' => t('Project manager name and email address is required'),
+    'field_total_project_budget' => t('Original total project budget is required'),
+    'field_original_total_budget' => t('Original total project budget by FY is required'),
+    'field_rebaselined_total_project' => t(''),
+    'field_rebaselined_total_budget' => t('Rebaselined total project budget by FY is required'),
+    'field_predicted_project_benefit' => t('Predicted project benefit is required'),
+    'field_project_status' => t('Project status is required'),
+  );
+  $errs = form_get_errors();
+  form_clear_error();
+  drupal_get_messages('error');
+
+  foreach ($errors_text as $key => $text) {
+    foreach ($errs as $err_key => $err_txt) {
+      if (strpos($err_key, $key . ']') !== FALSE || $key == $err_key) {
+        if (strpos($errs[$err_key], t('required')) !== FALSE && !empty($text)) {
+          form_set_error($key, $text);
+        }
+        else {
+          form_set_error($err_key, $err_txt);
+        }
+        unset($errs[$err_key]);
+      }
+    }
+  }
+  foreach ($errs as $key => $text) {
+    form_set_error($key, $text);
+  }
 }
 
 /**
@@ -449,7 +504,7 @@ function __ict_project_form_fy_validation ($elements, &$elements_values, $requir
   }
 
   if (!$valid) {
-    form_set_error($elements['#field_name'], t('!title value should be entered at least for one year.', array('!title' => $elements['#title'])));
+    form_set_error($elements['#field_name'], t('!title total project budget by FY is required', array('!title' => $elements['#title'])));
   }
 }
 
