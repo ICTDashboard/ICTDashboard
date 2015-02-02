@@ -16,7 +16,7 @@
         sum += parseFloat($("#" +table+ " td.capex[data-sum='" + i + "']").find('.form-text').val()) || 0;
         var total =  (sum === parseFloat(sum, 10)) ? sum : '';
 
-          $(this).find('.form-text').val(Number(total).toFixed(1));
+          $(this).find('.form-text').val(total.toFixed(1));
       });
 
     });
