@@ -1,7 +1,7 @@
 name = ICT Entity forms
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.11
+version = 7.x-1.2
 project = ict_entity_forms
 dependencies[] = date
 dependencies[] = entity
@@ -90,4 +90,4 @@ features[field_instance][] = field_collection_item-field_end_predicted_budget-fi
 features[field_instance][] = field_collection_item-field_end_predicted_budget-field_predicted_opex
 features[field_instance][] = field_collection_item-field_end_predicted_budget-field_predicted_total
 features[field_instance][] = field_collection_item-field_end_predicted_budget-field_predicted_year
-mtime = 1421172149
+mtime = 1421748348

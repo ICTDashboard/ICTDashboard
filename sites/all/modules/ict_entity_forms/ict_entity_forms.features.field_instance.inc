@@ -831,7 +831,7 @@ function ict_entity_forms_field_default_field_instances() {
     ),
     'entity_type' => 'entityform',
     'field_name' => 'field_end_predicted_budget',
-    'label' => 'Five year predicted predicted project budget ($m)',
+    'label' => 'Total project budget by FY (predicted & past) ($m)',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1412,7 +1412,6 @@ function ict_entity_forms_field_default_field_instances() {
   t('Capex');
   t('Expected project completion date');
   t('External FTE');
-  t('Five year predicted predicted project budget ($m)');
   t('Internal FTE');
   t('Opex');
   t('Predicted project benefit ($m, as identified in business case) ');
@@ -1425,6 +1424,7 @@ function ict_entity_forms_field_default_field_instances() {
   t('Project status');
   t('Revised total project budget ($m)');
   t('Total');
+  t('Total project budget by FY (predicted & past) ($m)');
   t('Total project spend current Financial Year ($m)');
   t('Total project spend to date ($m)');
   t('Year');

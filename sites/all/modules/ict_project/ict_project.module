@@ -287,6 +287,8 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       '#value' => t('Preview'),
       '#executes_submit_callback' => TRUE,
       '#submit' => array('ict_project_preview_submission'),
+      // Override error messages
+      '#validate' => array('ict_project_csv_validate'),
     );
 
     __ict_project_update_project_default_values($form);
@@ -417,11 +419,14 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     $form['field_end_project_status']['und']['#required'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
     $form['actions']['submit']['#validate'][] = 'ict_project_update_form_validate';
+    // Override error messages
+    $form['actions']['submit']['#validate'][] = '__ict_project_form_prepare_errors';
     $form['preview'] = array(
       '#type' => 'button',
       '#value' => t('Preview'),
       '#executes_submit_callback' => TRUE,
       '#submit' => array('ict_project_preview_submission'),
+      '#validate' => array('ict_project_csv_submit_form_submit', 'ict_project_update_form_validate', '__ict_project_form_prepare_errors'),
     );
 
     __ict_project_update_project_default_values($form);
@@ -946,7 +951,8 @@ function ict_project_csv_validate($form, &$form_state) {
     form_set_value($form['field_mid_project_manager'], array(0 => array('value' => 's')), $form_state);
 
   }
-
+  // Override error messages
+  __ict_project_form_prepare_errors($form, $form_state);
 }
 
 /**
