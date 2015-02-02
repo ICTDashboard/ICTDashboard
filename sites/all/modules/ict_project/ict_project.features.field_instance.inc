@@ -361,7 +361,11 @@ function ict_project_field_default_field_instances() {
   // Exported field_instance: 'node-project-field_expenditure_type'
   $field_instances['node-project-field_expenditure_type'] = array(
     'bundle' => 'project',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'Departmental',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -909,7 +913,11 @@ function ict_project_field_default_field_instances() {
   // Exported field_instance: 'node-project-field_project_stage'
   $field_instances['node-project-field_project_stage'] = array(
     'bundle' => 'project',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 5,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
