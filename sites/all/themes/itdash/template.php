@@ -240,6 +240,9 @@ function itdash_preprocess_node(&$variables) {
         $variables['report_date'] = $row->timestamp;
       }
     }
+
+    // Override field titles
+    $variables['content']['field_program_name']['#title'] = 'Agency Outcome and Programme (if applicable)';
   }
 
 }
