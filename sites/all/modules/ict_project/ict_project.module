@@ -459,6 +459,8 @@ function ict_project_form_project_submission_validate ($form, &$form_state) {
 function __ict_project_form_prepare_errors($form, &$form_state) {
 
   $errors_text = array(
+
+    // Baseline form
     'field_government_entity_name' => t('Government department, agency, or organisation name is required'),
     'field_government_business_unit' => t('Section (business group, division, branch) of responsible government entity is required'),
     'field_program_name' => t(''),
@@ -482,7 +484,41 @@ function __ict_project_form_prepare_errors($form, &$form_state) {
     'field_rebaselined_total_budget' => t('Rebaselined total project budget by FY is required'),
     'field_predicted_project_benefit' => t('Predicted project benefit is required'),
     'field_project_status' => t('Project status is required'),
+
+     // Project update MID year
+    'field_mid_project_stage' => t('Project stage is required'),
+    'field_mid_project_manager' => t('Project manager name and email address is required'),
+    'field_mid_project_manager_email' => t('Project manager name and email address is required'),
+    'field_mid_expected_project' => t('Expected project completion date is required'),
+    'field_mid_internal_fte' => t('Internal FTE is required'),
+    'field_mid_external_fte' => t('External FTE is required'),
+    'field_mid_revised_total_project' => t('Revised total project budget is required'),
+    'field_mid_total_project_spend' => t('Total project spend to date is required'),
+    'field_mid_total_project_current' => t('Total project spend current finance year is required'),
+    'field_mid_project_completed' => t('% of project completed is required'),
+    'field_mid_predicted_project' => t('Predicted project benefit is required'),
+    'field_mid_predicted_project_real' => t('% of predicted project benefit realised is required'),
+    'field_mid_project_status' => t('Project status is required'),
+    'field_mid_agency_comments' => t(''),
+
+    // Project update END year
+    'field_end_project_stage' => t('Project stage is required'),
+    'field_end_expected_project' => t('Expected project completion date is required'),
+    'field_end_internal_fte' => t('Internal FTE is required'),
+    'field_end_external_fte' => t('External FTE is required'),
+    'field_end_project_manager' => t('Project manager name and email address is required'),
+    'field_end_project_manager_email' => t('Project manager name and email address is required'),
+    'field_end_revised_total_project' => t('Revised total project budget is required'),
+    'field_end_total_project_spend' => t('Total project spend to date is required'),
+    'field_end_total_project_current' => t('Total project spend current finance year is required'),
+    'field_end_predicted_budget' => t('Total project budget by FY (predicted and past) is required'),
+    'field_end_project_completed' => t('% of project completed is required'),
+    'field_end_predicted_project' => t('Predicted project benefit is required'),
+    'field_end_predicted_realised' => t('% of predicted project benefit realised is required'),
+    'field_end_project_status' => t('Project status is required '),
+    'field_end_agency_comments' => t(''),
   );
+
   $errs = form_get_errors();
   form_clear_error();
   drupal_get_messages('error');
