@@ -399,7 +399,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
       foreach (element_children($form['field_end_predicted_budget']['und'][$item]) as $sub_item) {
         $form['field_end_predicted_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
       }
-   /*     $yearlabel = $start_year . '/' . ++$start_year;
+        $yearlabel = $start_year . '/' . ++$start_year;
       $form['field_end_predicted_budget']['und'][$item]['field_predicted_year']['und'][0]['value']['#value'] = $yearlabel;
         $year = 'fy'.str_replace('/','',$yearlabel);
         if (!empty($fybudget[$year]) && !empty($fybudget[$year]['opex'])) {
@@ -410,7 +410,7 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
         }
         if (!empty($fybudget[$year]) && !empty($fybudget[$year]['total'])) {
             $form['field_end_predicted_budget']['und'][$item]['field_predicted_total']['und'][0]['value']['#value'] = $fybudget[$year]['total'];
-        }*/
+        }
     }
     $form['#attached']['js'] = array(
       drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
