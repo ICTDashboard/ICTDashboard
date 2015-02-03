@@ -342,20 +342,20 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
     asort($sort);
     foreach($sort as $key=>$field) {
       if($key == 'field_end_predicted_budget') {
-        $fields[] = 'opex-13/14';
-        $fields[] = 'capex-13/14';
+        $fields[] = 'opex-previous';
+        $fields[] = 'capex-previous';
 
-        $fields[] = 'opex-14/15';
-        $fields[] = 'capex-14/15';
+        $fields[] = 'opex-current';
+        $fields[] = 'capex-current';
 
-        $fields[] = 'opex-15/16';
-        $fields[] = 'capex-15/16';
+        $fields[] = 'opex-1';
+        $fields[] = 'capex-1';
 
-        $fields[] = 'opex-16/17';
-        $fields[] = 'capex-16/17';
+        $fields[] = 'opex-2';
+        $fields[] = 'capex-2';
 
-        $fields[] = 'opex-17/18';
-        $fields[] = 'capex-17/18';
+        $fields[] = 'opex-3';
+        $fields[] = 'capex-3';
       }
       else {
         $fields[] = $key;
@@ -816,38 +816,38 @@ function ict_project_csv_submit_form_submit($form, &$form_state) {
             $form_state['input'][$columns[$i]][LANGUAGE_NONE][0]['value']['year'] = $date[2];
             break;
           //field collection
-          case 'opex-13/14':
+          case 'opex-previous':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][0]['value'] = $field;
             break;
-          case 'capex-13/14':
+          case 'capex-previous':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][0]['value'] = $field;
             break;
           //14/15
-          case 'opex-14/15':
+          case 'opex-current':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][1]['value'] = $field;
             break;
-          case 'capex-14/15':
+          case 'capex-current':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][1]['value'] = $field;
             break;
           //15/16
-          case 'opex-15/16':
+          case 'opex-1':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][2]['value'] = $field;
             break;
-          case 'capex-15/16':
+          case 'capex-1':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][2]['value'] = $field;
             break;
           //16/17
-          case 'opex-16/17':
+          case 'opex-2':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][3]['value'] = $field;
             break;
-          case 'capex-16/17':
+          case 'capex-2':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][3]['value'] = $field;
             break;
           //17/18
-          case 'opex-17/18':
+          case 'opex-3':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_opex']['und'][4]['value'] = $field;
             break;
-          case 'capex-17/18':
+          case 'capex-3':
             $form_state['input']['field_end_predicted_budget'][LANGUAGE_NONE][0]['field_predicted_capex']['und'][4]['value'] = $field;
             break;
           default:
