@@ -1062,22 +1062,21 @@ function __ict_project_update_project_default_values (&$form) {
         $stage = reset($project_updates['project_stage']);
     }
     if (empty($project_updates['expected_project'])) {
-        $completion_date  = reset($project_updates['expected_project']);
+      $completion_date = $project->field_original_completion_date['und'][0]['value'];
     } else {
-        $completion_date = $project->field_original_completion_date['und'][0]['value'];
+      $completion_date  = reset($project_updates['expected_project']);
     }
 
     if (empty($project_updates['revised_total_project'])) {
-        $total_budget = (int)reset($project_updates['revised_total_project']);
+      $total_budget = $project_wrapper->field_total_project_budget->value();
     } else {
-        $total_budget = $project_wrapper->field_total_project_budget->value();
+      $total_budget = (int)reset($project_updates['revised_total_project']);
     }
-    if (empty($project_updates['predicted_project'])) {
-        $predicted_benefit = reset($project_updates['predicted_project']);
+    if (empty($project_updates['predicted_project_benefit'])) {
+      $predicted_benefit = $project_wrapper->field_predicted_project_benefit->value();
     } else {
-        $predicted_benefit = $project_wrapper->field_predicted_project_benefit->value();
+      $predicted_benefit = reset($project_updates['predicted_project_benefit']);
     }
-
     if (!empty($project_updates['project_status'])) {
         $status = reset($project_updates['project_status']);
     }
@@ -1109,9 +1108,9 @@ function __ict_project_update_project_default_values (&$form) {
     if (!empty($predicted_benefit)) {
       $form['field_mid_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
     }
-      if (!empty($status)) {
-          $form['field_mid_project_status'][LANGUAGE_NONE]['#default_value'] = $status;
-      }
+    if (!empty($status)) {
+        $form['field_mid_project_status'][LANGUAGE_NONE]['#default_value'] = $status;
+    }
   }
   elseif ($form['#entity']->type == 'itc_form_end') {
       if (!empty($stage)) {
@@ -1140,9 +1139,9 @@ function __ict_project_update_project_default_values (&$form) {
     if (!empty($predicted_benefit)) {
       $form['field_end_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
     }
-      if (!empty($status)) {
-          $form['field_end_project_status'][LANGUAGE_NONE]['#default_value'] = $status;
-      }
+    if (!empty($status)) {
+        $form['field_end_project_status'][LANGUAGE_NONE]['#default_value'] = $status;
+    }
   }
 }
 
