@@ -1104,13 +1104,21 @@ function __ict_project_update_project_default_values (&$form) {
         $stage = reset($project_updates['project_stage']);
     }
     if (empty($project_updates['expected_project'])) {
-      $completion_date = $project->field_original_completion_date['und'][0]['value'];
+        if (empty($project->field_field_rebaselined_project_compl['und'][0]['value'])) {
+            $completion_date = $project->field_original_completion_date['und'][0]['value'];
+        } else {
+            $completion_date = $project->field_field_rebaselined_project_compl['und'][0]['value'];
+        }
     } else {
       $completion_date  = reset($project_updates['expected_project']);
     }
 
     if (empty($project_updates['revised_total_project'])) {
-      $total_budget = $project_wrapper->field_total_project_budget->value();
+        if(empty($project->field_field_rebaselined_total_project['und'][0]['value'])) {
+            $total_budget = $project_wrapper->field_total_project_budget->value();
+        } else {
+            $total_budget = $project_wrapper->field_rebaselined_total_project->value();
+        }
     } else {
       $total_budget = (int)reset($project_updates['revised_total_project']);
     }
@@ -1149,9 +1157,6 @@ function __ict_project_update_project_default_values (&$form) {
     }
     if (!empty($predicted_benefit)) {
       $form['field_mid_predicted_project']['und'][0]['value']['#default_value'] = $predicted_benefit;
-    }
-    if (!empty($status)) {
-        $form['field_mid_project_status'][LANGUAGE_NONE]['#default_value'] = $status;
     }
   }
   elseif ($form['#entity']->type == 'itc_form_end') {
