@@ -148,7 +148,9 @@ div#edit-field-rebaselined-total-budget td {
 /*.radio-description .form-item {float: left;}*/
 .header #logo {font-size: 29px;}
 
-#content .project-update-submission .submit input#edit-preview {
+#content .project-update-submission .submit input#edit-preview,
+#content .project-update-submission .submit input#edit-preview--2
+{
   background: url(../html/images/general-btn.png) repeat-x scroll 0 0 transparent;
   text-align: center;
   color: #fff;
@@ -171,7 +173,9 @@ div#edit-field-rebaselined-total-budget td {
   vertical-align: top;
 }
 
-#content .project-update-submission .submit input#edit-preview:hover {
+#content .project-update-submission .submit input#edit-preview:hover,
+#content .project-update-submission .submit input#edit-preview--2:hover
+{
   background-position: 0 -41px;
 }
 
