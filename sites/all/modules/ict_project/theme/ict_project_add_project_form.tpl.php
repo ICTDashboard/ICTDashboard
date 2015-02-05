@@ -356,7 +356,9 @@
         print drupal_render_children($form);
         ?>
       </div>
-			<p class="submit"><input type="submit" id="edit-submit" name="op" value="Save" class="form-submit"></p>
+			<p class="submit">
+        <?php print render($form['preview']) ;?>
+        <input type="submit" id="edit-submit" name="op" value="Save" class="form-submit"></p>
 		</form>
 	</div>
 </div>

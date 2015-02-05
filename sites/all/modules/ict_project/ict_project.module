@@ -180,7 +180,6 @@ function get_project_updates($project_name) {
 function ict_project_form_alter( &$form, &$form_state,$form_id){
 
   if($form_id == 'project_node_form') {
-
     // Removes _none option for Project Users field
     if (isset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none'])) {
       unset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none']);
@@ -214,8 +213,14 @@ function ict_project_form_alter( &$form, &$form_state,$form_id){
 
     // Adds validation to the form
     $form['#validate'][] = 'ict_project_form_project_submission_validate';
-
     $form['field_brief_project_summary']['und'][0]['#required'] = FALSE;
+    //
+    $form['preview'] = array(
+      '#type' => 'button',
+      '#value' => t('Preview'),
+      '#executes_submit_callback' => TRUE,
+      '#submit' => array('ict_project_preview_submission'),
+    );
   }
 
   if($form_id == 'ict_form_entityform_edit_form') {
@@ -648,6 +653,11 @@ function ict_project_theme () {
       'template' => 'ict_project_review_page_end',
       'variables' => array('form' => NULL),
     ),
+    'ict_project_review_project' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'template' => 'ict_project_review_page_project',
+      'variables' => array('form' => NULL),
+    ),
   );
 }
 
@@ -690,6 +700,10 @@ function ict_project_review_page() {
     $form = $_SESSION['review_submission'];
     if($form['form']['#form_id'] == 'ict_form_entityform_edit_form') {
       return theme('ict_project_review', $form);
+    }
+    elseif ($form['form']['#form_id'] == 'project_node_form') {
+      $form = $_SESSION['review_project'];
+      return theme('ict_project_review_project', $form);
     }
     else {
       return theme('ict_project_review_end', $form);
@@ -962,7 +976,13 @@ function ict_project_validate_date($date) {
 
 
 function ict_project_preview_submission($form, &$form_state) {
-  $_SESSION['review_submission'] = array('form' => $form, 'form_state' => $form_state);
+  if($form['#form_id'] == 'project_node_form') {
+    $_SESSION['review_project'] = array('form' => $form, 'form_state' => $form_state);
+  }
+  else {
+    $_SESSION['review_submission'] = array('form' => $form, 'form_state' => $form_state);
+  }
+
   $form_state['redirect'] = 'review-submission';
 }
 
@@ -970,7 +990,7 @@ function ict_project_review_form($form, &$form_state) {
 
   $form['submit_button'] = array(
     '#type' => 'submit',
-    '#value' => t('Submit'),
+    '#value' => t('Preview'),
     '#submit' => array('ict_project_review_submission'),
   );
 
@@ -983,6 +1003,17 @@ function ict_project_review_end_form($form, &$form_state) {
     '#type' => 'submit',
     '#value' => t('Submit'),
     '#submit' => array('ict_project_review_end_submission'),
+  );
+
+  return $form;
+}
+
+function ict_project_review_project_form($form, &$form_state) {
+
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#submit' => array('ict_project_review_project_submission'),
   );
 
   return $form;
@@ -1187,3 +1218,14 @@ function __ict_project_update_project_default_values (&$form) {
 }
 
 
+
+function ict_project_review_project_submission($form, &$form_state) {
+  if(isset($_SESSION['review_project'])) {
+    module_load_include('inc', 'node', 'node.pages');
+    $lib_form = $_SESSION['review_project']['form'];
+    $lib_form_state = $_SESSION['review_project']['form_state'];
+    $node = node_form_submit_build_node($lib_form, $lib_form_state);
+    node_save($node);
+    drupal_goto('projects');
+  }
+}
