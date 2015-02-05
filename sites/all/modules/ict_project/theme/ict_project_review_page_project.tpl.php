@@ -25,7 +25,7 @@
 
           <tr>
             <td class="label"><?php print t('Project title');?></td>
-            <td class="text"><?php print $form_state['values']['title']['und'][0]['value'];?></td>
+            <td class="text"><?php print $form_state['values']['title'];?></td>
           </tr>
 
           <tr>
@@ -241,7 +241,9 @@
 
       <div class="submit">
         <a class="general-button back" href="#"><span>Edit</span></a>
-        <?php print render(drupal_get_form('ict_project_review_project_form'));?>
+        <?php
+        $form_s = drupal_get_form('ict_project_review_project_form');
+        print drupal_render($form_s);?>
       </div>
 
     </div>
