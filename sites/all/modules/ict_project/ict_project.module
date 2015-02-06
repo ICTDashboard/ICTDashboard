@@ -978,7 +978,9 @@ function ict_project_validate_date($date) {
 
 function ict_project_preview_submission($form, &$form_state) {
   if($form['#form_id'] == 'project_node_form') {
-    $_SESSION['review_project'] = array('form' => $form, 'form_state' => $form_state);
+    $_SESSION['review_project'] = array('form_state' => $form_state);
+    $node = node_form_submit_build_node($form, $form_state);
+    $_SESSION['new_node'] = serialize($node);
     $form_state['redirect'] = 'review-submission/project';
   }
   else {
@@ -1219,89 +1221,92 @@ function __ict_project_update_project_default_values (&$form) {
 
 function ict_project_review_project_submission($form, &$form_state) {
   if(isset($_SESSION['review_project'])) {
-    $fs = $_SESSION['review_project']['form_state'];
-    $values = $fs['values'];
-
-    $node = new stdClass();
-    $node->type = 'project';
-    node_object_prepare($node);
-    $node->title    = $values['title'];
-    $node->language = LANGUAGE_NONE;
-    $node->field_government_entity_name[$node->language][0]['value'] = $values['field_government_entity_name'][LANGUAGE_NONE][0]['value'];
-
-    $node->field_government_business_unit[$node->language][0]['value'] = $values['field_government_business_unit'][LANGUAGE_NONE][0]['value'];
-
-    $node->field_program_name[$node->language][0]['value'] = $values['field_program_name'][LANGUAGE_NONE][0]['value'];
-
-    $node->field_brief_project_summary[$node->language][0]['value'] = $values['field_brief_project_summary'][LANGUAGE_NONE][0]['value'];
-
-    //fc
-    foreach($values['field_implementation_partners']['und'] as $key=>$p) {
-      if($key !== 'add_more') {
-        $node->field_implementation_partners[$node->language][$key]['value'] = $p['value'];
-      }
-    }
-
-    $node->field_internal_fte[$node->language][0]['value'] = $values['field_internal_fte'][LANGUAGE_NONE][0]['value'];
-
-    $node->field_external_fte[$node->language][0]['value'] = $values['field_external_fte'][LANGUAGE_NONE][0]['value'];
-
-    //date
-    $node->field_start_date[$node->language][0]['value'] = $values['field_start_date']['und'][0]['value'];
-    $node->field_rebaselined_project_start[$node->language][0]['value'] = $values['field_rebaselined_project_start']['und'][0]['value'];
-    $node->field_rebaselined_project_compl[$node->language][0]['value'] = $values['field_rebaselined_project_compl']['und'][0]['value'];
-    $node->field_original_completion_date[$node->language][0]['value'] = $values['field_original_completion_date']['und'][0]['value'];
-
-    //
-    $node->field_project_stage[$node->language][0]['tid'] = $values['field_project_stage'][LANGUAGE_NONE][0]['tid'];
-    $node->field_project_category[$node->language][0]['tid'] = $values['field_project_category'][LANGUAGE_NONE][0]['tid'];
-
-    $node->field_expenditure_type[$node->language][0]['value'] = $values['field_expenditure_type'][LANGUAGE_NONE][0]['value'];
-
-    $node->field_project_manager[$node->language][0]['value'] = $values['field_project_manager'][LANGUAGE_NONE][0]['value'];
-
-    $node->field_project_manager_email[$node->language][0]['email'] = $values['field_project_manager_email'][LANGUAGE_NONE][0]['email'];
-
-    $node->field_total_project_budget[$node->language][0]['value'] = $values['field_total_project_budget'][LANGUAGE_NONE][0]['value'];
-
-     $node->field_rebaselined_total_project[$node->language][0]['value'] = $values['field_rebaselined_total_project'][LANGUAGE_NONE][0]['value'];
-
-
-    $node->field_predicted_project_benefit[$node->language][0]['value'] = $values['field_predicted_project_benefit'][LANGUAGE_NONE][0]['value'];
-
-    $node->field_project_status[$node->language][0]['value'] = $values['field_project_status'][LANGUAGE_NONE][0]['value'];
-
-    //Users
-  foreach($values['field_project_users'][LANGUAGE_NONE] as $key=>$row) {
-    if($row['uid']) {
-      $node->field_project_users[LANGUAGE_NONE][$key]['uid'] = $row['uid'];
-    }
-  }
+    $node = unserialize($_SESSION['new_node']);
     node_save($node);
-
-    // Create and save field collection for node
-    $budget_r = $values['field_rebaselined_total_budget'][LANGUAGE_NONE];
-    foreach($budget_r as $key=>$b) {
-    $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_original_total_budget'));
-    $field_collection_item->setHostEntity('node', $node);
-      $field_collection_item->field_year[LANGUAGE_NONE][$key]['value'] = $b['field_year']['und'][0]['value'];
-      $field_collection_item->field_opex[LANGUAGE_NONE][$key]['value'] = $b['field_opex']['und'][0]['value'];
-      $field_collection_item->field_capex[LANGUAGE_NONE][$key]['value'] = $b['field_capex']['und'][0]['value'];
-      $field_collection_item->field_total[LANGUAGE_NONE][$key]['value'] = $b['field_total']['und'][0]['value'];;
-    $field_collection_item->save();
-    }
-
-    $budget_b = $values['field_rebaselined_total_budget'][LANGUAGE_NONE];
-    foreach($budget_b as $key=>$b) {
-      $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_rebaselined_total_budget'));
-      $field_collection_item->setHostEntity('node', $node);
-      $field_collection_item->field_year[LANGUAGE_NONE][$key]['value'] = $b['field_year']['und'][0]['value'];
-      $field_collection_item->field_opex[LANGUAGE_NONE][$key]['value'] = $b['field_opex']['und'][0]['value'];
-      $field_collection_item->field_capex[LANGUAGE_NONE][$key]['value'] = $b['field_capex']['und'][0]['value'];
-      $field_collection_item->field_total[LANGUAGE_NONE][$key]['value'] = $b['field_total']['und'][0]['value'];;
-      $field_collection_item->save();
-    }
+    unset($_SESSION['new_node']);
     unset($_SESSION['review_project']);
     drupal_goto('projects');
+//    $fs = $_SESSION['review_project']['form_state'];
+//    $values = $fs['values'];
+//
+//    $node = new stdClass();
+//    $node->type = 'project';
+//    node_object_prepare($node);
+//    $node->title    = $values['title'];
+//    $node->language = LANGUAGE_NONE;
+//    $node->field_government_entity_name[$node->language][0]['value'] = $values['field_government_entity_name'][LANGUAGE_NONE][0]['value'];
+//
+//    $node->field_government_business_unit[$node->language][0]['value'] = $values['field_government_business_unit'][LANGUAGE_NONE][0]['value'];
+//
+//    $node->field_program_name[$node->language][0]['value'] = $values['field_program_name'][LANGUAGE_NONE][0]['value'];
+//
+//    $node->field_brief_project_summary[$node->language][0]['value'] = $values['field_brief_project_summary'][LANGUAGE_NONE][0]['value'];
+//
+//    //fc
+//    foreach($values['field_implementation_partners']['und'] as $key=>$p) {
+//      if($key !== 'add_more') {
+//        $node->field_implementation_partners[$node->language][$key]['value'] = $p['value'];
+//      }
+//    }
+//
+//    $node->field_internal_fte[$node->language][0]['value'] = $values['field_internal_fte'][LANGUAGE_NONE][0]['value'];
+//
+//    $node->field_external_fte[$node->language][0]['value'] = $values['field_external_fte'][LANGUAGE_NONE][0]['value'];
+//
+//    //date
+//    $node->field_start_date[$node->language][0]['value'] = $values['field_start_date']['und'][0]['value'];
+//    $node->field_rebaselined_project_start[$node->language][0]['value'] = $values['field_rebaselined_project_start']['und'][0]['value'];
+//    $node->field_rebaselined_project_compl[$node->language][0]['value'] = $values['field_rebaselined_project_compl']['und'][0]['value'];
+//    $node->field_original_completion_date[$node->language][0]['value'] = $values['field_original_completion_date']['und'][0]['value'];
+//
+//    //
+//    $node->field_project_stage[$node->language][0]['tid'] = $values['field_project_stage'][LANGUAGE_NONE][0]['tid'];
+//    $node->field_project_category[$node->language][0]['tid'] = $values['field_project_category'][LANGUAGE_NONE][0]['tid'];
+//
+//    $node->field_expenditure_type[$node->language][0]['value'] = $values['field_expenditure_type'][LANGUAGE_NONE][0]['value'];
+//
+//    $node->field_project_manager[$node->language][0]['value'] = $values['field_project_manager'][LANGUAGE_NONE][0]['value'];
+//
+//    $node->field_project_manager_email[$node->language][0]['email'] = $values['field_project_manager_email'][LANGUAGE_NONE][0]['email'];
+//
+//    $node->field_total_project_budget[$node->language][0]['value'] = $values['field_total_project_budget'][LANGUAGE_NONE][0]['value'];
+//
+//     $node->field_rebaselined_total_project[$node->language][0]['value'] = $values['field_rebaselined_total_project'][LANGUAGE_NONE][0]['value'];
+//
+//
+//    $node->field_predicted_project_benefit[$node->language][0]['value'] = $values['field_predicted_project_benefit'][LANGUAGE_NONE][0]['value'];
+//
+//    $node->field_project_status[$node->language][0]['value'] = $values['field_project_status'][LANGUAGE_NONE][0]['value'];
+//
+//    //Users
+//  foreach($values['field_project_users'][LANGUAGE_NONE] as $key=>$row) {
+//    if($row['uid']) {
+//      $node->field_project_users[LANGUAGE_NONE][$key]['uid'] = $row['uid'];
+//    }
+//  }
+//    node_save($node);
+//
+//    // Create and save field collection for node
+//    $budget_r = $values['field_rebaselined_total_budget'][LANGUAGE_NONE];
+//    foreach($budget_r as $key=>$b) {
+//    $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_original_total_budget'));
+//    $field_collection_item->setHostEntity('node', $node);
+//      $field_collection_item->field_year[LANGUAGE_NONE][$key]['value'] = $b['field_year']['und'][0]['value'];
+//      $field_collection_item->field_opex[LANGUAGE_NONE][$key]['value'] = $b['field_opex']['und'][0]['value'];
+//      $field_collection_item->field_capex[LANGUAGE_NONE][$key]['value'] = $b['field_capex']['und'][0]['value'];
+//      $field_collection_item->field_total[LANGUAGE_NONE][$key]['value'] = $b['field_total']['und'][0]['value'];;
+//    $field_collection_item->save();
+//    }
+//
+//    $budget_b = $values['field_rebaselined_total_budget'][LANGUAGE_NONE];
+//    foreach($budget_b as $key=>$b) {
+//      $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_rebaselined_total_budget'));
+//      $field_collection_item->setHostEntity('node', $node);
+//      $field_collection_item->field_year[LANGUAGE_NONE][$key]['value'] = $b['field_year']['und'][0]['value'];
+//      $field_collection_item->field_opex[LANGUAGE_NONE][$key]['value'] = $b['field_opex']['und'][0]['value'];
+//      $field_collection_item->field_capex[LANGUAGE_NONE][$key]['value'] = $b['field_capex']['und'][0]['value'];
+//      $field_collection_item->field_total[LANGUAGE_NONE][$key]['value'] = $b['field_total']['und'][0]['value'];;
+//      $field_collection_item->save();
+//    }
   }
 }
