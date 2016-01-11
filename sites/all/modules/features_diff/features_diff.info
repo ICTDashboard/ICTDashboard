@@ -5,9 +5,9 @@ package = "Features"
 dependencies[] = features
 dependencies[] = diff
 
-; Information added by drupal.org packaging script on 2013-04-29
-version = "7.x-1.0-beta1"
+; Information added by Drupal.org packaging script on 2015-04-01
+version = "7.x-1.0-beta2"
 core = "7.x"
 project = "features_diff"
-datestamp = "1367249779"
+datestamp = "1427846882"
 
