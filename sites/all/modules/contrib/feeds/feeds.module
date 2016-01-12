@@ -982,7 +982,7 @@ function feeds_include_library($file, $library) {
     // Try first whether libraries module is present and load the file from
     // there. If this fails, require the library from the local path.
     if (module_exists('libraries') && file_exists(libraries_get_path($library) . "/$file")) {
-      require libraries_get_path($library) . "/$file";
+      require libraries_get_path($library) . "/feeds.module";
       $included[$file] = TRUE;
     }
     elseif ($library_dir && file_exists("$library_dir/$library/$file")) {
