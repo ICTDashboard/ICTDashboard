@@ -24,9 +24,17 @@ function ict_users_user_default_permissions() {
   $permissions['access users overview'] = array(
     'name' => 'access users overview',
     'roles' => array(
+      'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: 'administer funding_source vocabulary terms'.
+  $permissions['administer funding_source vocabulary terms'] = array(
+    'name' => 'administer funding_source vocabulary terms',
+    'roles' => array(),
+    'module' => 'vppr',
   );
 
   // Exported permission: 'administer permissions'.
@@ -36,6 +44,34 @@ function ict_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'administer project_category vocabulary terms'.
+  $permissions['administer project_category vocabulary terms'] = array(
+    'name' => 'administer project_category vocabulary terms',
+    'roles' => array(),
+    'module' => 'vppr',
+  );
+
+  // Exported permission: 'administer project_owner vocabulary terms'.
+  $permissions['administer project_owner vocabulary terms'] = array(
+    'name' => 'administer project_owner vocabulary terms',
+    'roles' => array(),
+    'module' => 'vppr',
+  );
+
+  // Exported permission: 'administer project_stage vocabulary terms'.
+  $permissions['administer project_stage vocabulary terms'] = array(
+    'name' => 'administer project_stage vocabulary terms',
+    'roles' => array(),
+    'module' => 'vppr',
+  );
+
+  // Exported permission: 'administer tags vocabulary terms'.
+  $permissions['administer tags vocabulary terms'] = array(
+    'name' => 'administer tags vocabulary terms',
+    'roles' => array(),
+    'module' => 'vppr',
   );
 
   // Exported permission: 'administer users'.
@@ -60,6 +96,7 @@ function ict_users_user_default_permissions() {
   $permissions['cancel users with role 2'] = array(
     'name' => 'cancel users with role 2',
     'roles' => array(
+      'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'administerusersbyrole',
@@ -88,6 +125,7 @@ function ict_users_user_default_permissions() {
   $permissions['create users'] = array(
     'name' => 'create users',
     'roles' => array(
+      'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'administerusersbyrole',
@@ -97,6 +135,7 @@ function ict_users_user_default_permissions() {
   $permissions['edit users with role 2'] = array(
     'name' => 'edit users with role 2',
     'roles' => array(
+      'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'administerusersbyrole',

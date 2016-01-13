@@ -5,3 +5,30 @@
  */
 
 include_once 'ict_users.features.inc';
+
+function ict_users_email_registration_name($edit, $account) {
+  $email = $account->mail;
+  return reset(explode('@', $email));
+}
+
+function ict_users_form_alter (&$form, &$form_state, $form_id) {
+  if ($form_id == 'user_register_form') {
+    $form['#validate'][] = 'ict_users_register_form_email_validation';
+  }
+}
+
+function ict_users_register_form_email_validation ($form, &$form_state) {
+  $values = $form_state['values'];
+
+  function endsWith($haystack, $needle) {
+    $length = strlen($needle);
+    if ($length == 0) {
+      return true;
+    }
+    return (substr($haystack, -$length) === $needle);
+  }
+
+  if (!endsWith($values['mail'], '.gov.au')) {
+    form_set_error('mail', t('Email doesn\'t belong to Australian government.'));
+  }
+}
