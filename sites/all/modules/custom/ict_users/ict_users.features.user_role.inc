@@ -10,13 +10,6 @@
 function ict_users_user_default_roles() {
   $roles = array();
 
-  // Exported role: Departmental Admin.
-  $roles['Departmental Admin'] = array(
-    'name' => 'Departmental Admin',
-    'weight' => 4,
-    'machine_name' => 'departmental_admin',
-  );
-
   // Exported role: Finance Admin.
   $roles['Finance Admin'] = array(
     'name' => 'Finance Admin',
