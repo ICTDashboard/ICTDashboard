@@ -97,5 +97,12 @@ function ict_pages_strongarm() {
   );
   $export['ds_extras_view_modes_faq_item'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'ft-default';
+  $strongarm->value = 'theme_ds_field_expert';
+  $export['ft-default'] = $strongarm;
+
   return $export;
 }
