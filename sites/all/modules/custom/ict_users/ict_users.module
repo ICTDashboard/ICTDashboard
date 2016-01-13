@@ -6,17 +6,32 @@
 
 include_once 'ict_users.features.inc';
 
+/**
+ * Implements hook_email_registration_name().
+ */
 function ict_users_email_registration_name($edit, $account) {
   $email = $account->mail;
   return reset(explode('@', $email));
 }
 
+/**
+ * Implements hook_form_alter().
+ */
 function ict_users_form_alter (&$form, &$form_state, $form_id) {
   if ($form_id == 'user_register_form') {
     $form['#validate'][] = 'ict_users_register_form_email_validation';
   }
+  else if ($form_id == 'user_profile_form') {
+    $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
+  }
 }
 
+/**
+ * Make sure that provided email belongs to the AU government
+ *
+ * @param $form
+ * @param $form_state
+ */
 function ict_users_register_form_email_validation ($form, &$form_state) {
   $values = $form_state['values'];
 
@@ -30,5 +45,21 @@ function ict_users_register_form_email_validation ($form, &$form_state) {
 
   if (!endsWith($values['mail'], '.gov.au')) {
     form_set_error('mail', t('Email doesn\'t belong to Australian government.'));
+  }
+}
+
+/**
+ * Make sure that Departmental Admin is assigned to a department
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_users_profile_departmental_admin_validate ($form, &$form_state) {
+  $values = $form_state['values'];
+  $department_admin_role_id = user_role_load_by_name('Departmental Admin')->rid;
+
+  if ($values['roles'][$department_admin_role_id] &&
+    empty($values['field_department'][LANGUAGE_NONE][0]['tid'])) {
+    form_set_error('field_department][und', t('Departmental Admin should be assigned to a department.'));
   }
 }
