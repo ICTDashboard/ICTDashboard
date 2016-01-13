@@ -20,6 +20,7 @@ function ict_users_email_registration_name($edit, $account) {
 function ict_users_form_alter (&$form, &$form_state, $form_id) {
   if ($form_id == 'user_register_form') {
     $form['#validate'][] = 'ict_users_register_form_email_validation';
+    $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
   }
   else if ($form_id == 'user_profile_form') {
     $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
