@@ -10,6 +10,25 @@
 function ict_users_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access administration menu'.
+  $permissions['access administration menu'] = array(
+    'name' => 'access administration menu',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'admin_menu',
+  );
+
+  // Exported permission: 'access dashboard'.
+  $permissions['access dashboard'] = array(
+    'name' => 'access dashboard',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'dashboard',
+  );
+
   // Exported permission: 'access user profiles'.
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
@@ -92,6 +111,13 @@ function ict_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'cancel users with role 153917155'.
+  $permissions['cancel users with role 153917155'] = array(
+    'name' => 'cancel users with role 153917155',
+    'roles' => array(),
+    'module' => 'administerusersbyrole',
+  );
+
   // Exported permission: 'cancel users with role 2'.
   $permissions['cancel users with role 2'] = array(
     'name' => 'cancel users with role 2',
@@ -99,6 +125,13 @@ function ict_users_user_default_permissions() {
       'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: 'cancel users with role 41888116'.
+  $permissions['cancel users with role 41888116'] = array(
+    'name' => 'cancel users with role 41888116',
+    'roles' => array(),
     'module' => 'administerusersbyrole',
   );
 
@@ -122,6 +155,22 @@ function ict_users_user_default_permissions() {
     'module' => 'administerusersbyrole',
   );
 
+  // Exported permission: 'display drupal links'.
+  $permissions['display drupal links'] = array(
+    'name' => 'display drupal links',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'admin_menu',
+  );
+
+  // Exported permission: 'edit users with role 153917155'.
+  $permissions['edit users with role 153917155'] = array(
+    'name' => 'edit users with role 153917155',
+    'roles' => array(),
+    'module' => 'administerusersbyrole',
+  );
+
   // Exported permission: 'edit users with role 2'.
   $permissions['edit users with role 2'] = array(
     'name' => 'edit users with role 2',
@@ -130,6 +179,22 @@ function ict_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: 'edit users with role 41888116'.
+  $permissions['edit users with role 41888116'] = array(
+    'name' => 'edit users with role 41888116',
+    'roles' => array(),
+    'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: 'flush caches'.
+  $permissions['flush caches'] = array(
+    'name' => 'flush caches',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'admin_menu',
   );
 
   // Exported permission: 'select account cancellation method'.
