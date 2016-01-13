@@ -102,15 +102,6 @@ function ict_users_user_default_permissions() {
     'module' => 'administerusersbyrole',
   );
 
-  // Exported permission: 'cancel users with role 4'.
-  $permissions['cancel users with role 4'] = array(
-    'name' => 'cancel users with role 4',
-    'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'administerusersbyrole',
-  );
-
   // Exported permission: 'change own username'.
   $permissions['change own username'] = array(
     'name' => 'change own username',
@@ -136,15 +127,6 @@ function ict_users_user_default_permissions() {
     'name' => 'edit users with role 2',
     'roles' => array(
       'Finance Admin' => 'Finance Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'administerusersbyrole',
-  );
-
-  // Exported permission: 'edit users with role 4'.
-  $permissions['edit users with role 4'] = array(
-    'name' => 'edit users with role 4',
-    'roles' => array(
       'administrator' => 'administrator',
     ),
     'module' => 'administerusersbyrole',
