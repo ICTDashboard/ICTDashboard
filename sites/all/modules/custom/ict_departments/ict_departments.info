@@ -13,7 +13,3 @@ dependencies[] = vppr
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[taxonomy][] = department
-features[user_permission][] = administer department vocabulary terms
-features[user_permission][] = delete terms in department
-features[user_permission][] = edit terms in department
-features[user_role][] = Departmental Admin
