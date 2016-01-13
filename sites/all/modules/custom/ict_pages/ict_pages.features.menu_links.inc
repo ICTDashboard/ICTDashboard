@@ -10,7 +10,7 @@
 function ict_pages_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: menu-header-menu_dashboard:dashboard
+  // Exported menu link: menu-header-menu_dashboard:dashboard.
   $menu_links['menu-header-menu_dashboard:dashboard'] = array(
     'menu_name' => 'menu-header-menu',
     'link_path' => 'dashboard',
@@ -30,14 +30,14 @@ function ict_pages_menu_default_menu_links() {
       'identifier' => 'menu-header-menu_dashboard:dashboard',
     ),
     'module' => 'menu',
-    'hidden' => 0,
+    'hidden' => 1,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -47,
     'customized' => 1,
   );
-  // Exported menu link: menu-header-menu_home:<front>
+  // Exported menu link: menu-header-menu_home:<front>.
   $menu_links['menu-header-menu_home:<front>'] = array(
     'menu_name' => 'menu-header-menu',
     'link_path' => '<front>',
@@ -64,11 +64,11 @@ function ict_pages_menu_default_menu_links() {
     'weight' => -50,
     'customized' => 1,
   );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Dashboard');
   t('Home');
-
 
   return $menu_links;
 }

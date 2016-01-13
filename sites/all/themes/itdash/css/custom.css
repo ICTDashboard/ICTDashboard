@@ -238,3 +238,43 @@ textarea.is-invalid,
     color: #5c6b80;
 }
 
+.view-id-faq {
+    padding: 50px 0;
+}
+.view-id-faq .view-content {
+    border: 1px solid #a7b0bd;
+}
+.ict-faq-question {
+    color: #0d6c88;
+    position: relative;
+    padding: 15px 15px 15px 60px;
+    cursor: pointer;
+}
+.ict-faq-question.ict-faq-question-active:before,
+.ict-faq-question:hover:before {
+    background-image: url(../html/images/minus.png);
+}
+.views-row-odd .ict-faq-question {
+    background-color: white;
+}
+.views-row-even .ict-faq-question {
+    background-color: #dff1f5;
+}
+.ict-faq-question h2 {
+    margin: 0;
+}
+.ict-faq-question:before {
+    content: ' ';
+    background-image: url(../html/images/plus.png);
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+}
+.ict-faq-answer {
+    display: none;
+    padding: 15px 15px 15px 60px;
+    font-size: 14px;
+}
+

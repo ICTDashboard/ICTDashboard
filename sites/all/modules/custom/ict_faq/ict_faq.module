@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ICT FAQ feature.
+ */
+
+include_once 'ict_faq.features.inc';
