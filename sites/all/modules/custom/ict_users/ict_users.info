@@ -29,6 +29,7 @@ features[field_instance][] = user-user-field_department
 features[field_instance][] = user-user-field_first_name
 features[field_instance][] = user-user-field_last_name
 features[user_permission][] = access administration menu
+features[user_permission][] = access administration pages
 features[user_permission][] = access content overview
 features[user_permission][] = access dashboard
 features[user_permission][] = access user profiles
