@@ -20,6 +20,16 @@ function ict_users_user_default_permissions() {
     'module' => 'admin_menu',
   );
 
+  // Exported permission: 'access content overview'.
+  $permissions['access content overview'] = array(
+    'name' => 'access content overview',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'access dashboard'.
   $permissions['access dashboard'] = array(
     'name' => 'access dashboard',
@@ -48,13 +58,6 @@ function ict_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'administerusersbyrole',
-  );
-
-  // Exported permission: 'administer department vocabulary terms'.
-  $permissions['administer department vocabulary terms'] = array(
-    'name' => 'administer department vocabulary terms',
-    'roles' => array(),
-    'module' => 'vppr',
   );
 
   // Exported permission: 'administer funding_source vocabulary terms'.
@@ -173,13 +176,6 @@ function ict_users_user_default_permissions() {
     'module' => 'administerusersbyrole',
   );
 
-  // Exported permission: 'delete terms in department'.
-  $permissions['delete terms in department'] = array(
-    'name' => 'delete terms in department',
-    'roles' => array(),
-    'module' => 'taxonomy',
-  );
-
   // Exported permission: 'display drupal links'.
   $permissions['display drupal links'] = array(
     'name' => 'display drupal links',
@@ -188,16 +184,6 @@ function ict_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'admin_menu',
-  );
-
-  // Exported permission: 'edit terms in department'.
-  $permissions['edit terms in department'] = array(
-    'name' => 'edit terms in department',
-    'roles' => array(
-      'Finance Admin' => 'Finance Admin',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'taxonomy',
   );
 
   // Exported permission: 'edit users with role 153917155'.

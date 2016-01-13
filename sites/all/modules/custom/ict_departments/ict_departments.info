@@ -1,7 +1,7 @@
 name = ICT Departments
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.02
+version = 7.x-1.03
 dependencies[] = ctools
 dependencies[] = entityreference
 dependencies[] = features
@@ -13,3 +13,7 @@ dependencies[] = vppr
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[taxonomy][] = department
+features[user_permission][] = administer department vocabulary terms
+features[user_permission][] = delete terms in department
+features[user_permission][] = edit terms in department
+features[user_role][] = Departmental Admin
