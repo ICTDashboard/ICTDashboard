@@ -131,7 +131,6 @@ jQuery(document).ready(function($) {
 		console.log('test');
 		if( $('.delta-order.tabledrag-hide').is(':visible') ) {
 			// Visible
-			console.log('visible');
 			$('.tabledrag-hide').prev('td').css({
 				'border-right': '0'
 			});
@@ -159,3 +158,30 @@ jQuery(document).ready(function($) {
 	$('.form-select').selectbox();
 	$('.field_implementation_partners-delta-order').selectbox();
 }); /* end of as page load scripts */
+
+Drupal.behaviors.ictFaq = {
+	attach: function(context) {
+		jQuery('.ict-faq-question', context).click(function(){
+			if (jQuery(this).hasClass('ict-faq-question-active')) {
+				var wrap = jQuery(this).parent(),
+					answer = wrap.find('.ict-faq-answer');
+
+				jQuery(this).removeClass('ict-faq-question-active');
+				answer.slideUp();
+			}
+			else {
+				var wrap = jQuery(this).parent(),
+					answer = wrap.find('.ict-faq-answer'),
+					activeQuest = jQuery('.ict-faq-question-active'),
+					activeWrap = activeQuest.parent(),
+					activeAnsw = activeWrap.find('.ict-faq-answer');
+
+				activeQuest.removeClass('ict-faq-question-active');
+				activeAnsw.slideUp();
+				jQuery(this).addClass('ict-faq-question-active');
+				answer.slideDown();
+			}
+			return false;
+		});
+	}
+}

@@ -50,6 +50,39 @@ function ict_pages_default_page_manager_handlers() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-958281cd-8c50-4f06-aa35-1fe50b5da524';
+    $pane->panel = 'content';
+    $pane->type = 'page_title';
+    $pane->subtype = 'page_title';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'logic' => 'and',
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'faq',
+          ),
+          'context' => 'argument_string_1',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+      'style' => 'naked',
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '958281cd-8c50-4f06-aa35-1fe50b5da524';
+    $display->content['new-958281cd-8c50-4f06-aa35-1fe50b5da524'] = $pane;
+    $display->panels['content'][0] = 'new-958281cd-8c50-4f06-aa35-1fe50b5da524';
+    $pane = new stdClass();
     $pane->pid = 'new-5299535b-5c91-48d5-91f9-e44ac84535ca';
     $pane->panel = 'content';
     $pane->type = 'pane_messages';
@@ -64,11 +97,11 @@ function ict_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $pane->uuid = '5299535b-5c91-48d5-91f9-e44ac84535ca';
     $display->content['new-5299535b-5c91-48d5-91f9-e44ac84535ca'] = $pane;
-    $display->panels['content'][0] = 'new-5299535b-5c91-48d5-91f9-e44ac84535ca';
+    $display->panels['content'][1] = 'new-5299535b-5c91-48d5-91f9-e44ac84535ca';
     $pane = new stdClass();
     $pane->pid = 'new-459b4dca-0c70-43c6-810d-2fba68be2949';
     $pane->panel = 'content';
@@ -88,13 +121,13 @@ function ict_pages_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $pane->uuid = '459b4dca-0c70-43c6-810d-2fba68be2949';
     $display->content['new-459b4dca-0c70-43c6-810d-2fba68be2949'] = $pane;
-    $display->panels['content'][1] = 'new-459b4dca-0c70-43c6-810d-2fba68be2949';
-  $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = '0';
+    $display->panels['content'][2] = 'new-459b4dca-0c70-43c6-810d-2fba68be2949';
+  $display->hide_title = PANELS_TITLE_NONE;
+  $display->title_pane = 'new-459b4dca-0c70-43c6-810d-2fba68be2949';
   $handler->conf['display'] = $display;
   $export['site_template_panel_context'] = $handler;
 
@@ -326,7 +359,7 @@ function ict_pages_default_page_manager_pages() {
     $pane->panel = 'middle';
     $pane->type = 'home_bottom';
     $pane->subtype = 'home_bottom';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array();
     $pane->cache = array();
@@ -355,7 +388,10 @@ function ict_pages_default_page_manager_pages() {
   $page->admin_title = 'Project Add';
   $page->admin_description = '';
   $page->path = 'project/add';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(

@@ -20,6 +20,5 @@ function ict_pages_menu_default_menu_custom() {
   // Included for use with string extractors like potx.
   t('Header Menu');
 
-
   return $menus;
 }

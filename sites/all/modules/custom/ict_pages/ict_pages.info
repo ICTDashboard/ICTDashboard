@@ -16,4 +16,3 @@ features[page_manager_handlers][] = site_template_panel_context
 features[page_manager_pages][] = dashboard
 features[page_manager_pages][] = home_page
 features[page_manager_pages][] = project_add
-mtime = 1418670047
