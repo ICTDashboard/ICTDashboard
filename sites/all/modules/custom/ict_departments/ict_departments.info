@@ -1,7 +1,7 @@
 name = ICT Departments
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.03
+version = 7.x-1.04
 dependencies[] = ctools
 dependencies[] = entityreference
 dependencies[] = features
