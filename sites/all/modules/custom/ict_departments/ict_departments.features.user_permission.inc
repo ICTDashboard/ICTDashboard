@@ -13,7 +13,10 @@ function ict_departments_user_default_permissions() {
   // Exported permission: 'administer department vocabulary terms'.
   $permissions['administer department vocabulary terms'] = array(
     'name' => 'administer department vocabulary terms',
-    'roles' => array(),
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'vppr',
   );
 
