@@ -59,7 +59,7 @@ function ict_users_profile_departmental_admin_validate ($form, &$form_state) {
   $values = $form_state['values'];
   $department_admin_role_id = user_role_load_by_name('Departmental Admin')->rid;
 
-  if ($values['roles'][$department_admin_role_id] &&
+  if (($values['roles'][$department_admin_role_id] || $values['roleassign_roles'][$department_admin_role_id]) &&
     empty($values['field_department'][LANGUAGE_NONE][0]['tid'])) {
     form_set_error('field_department][und', t('Departmental Admin should be assigned to a department.'));
   }

@@ -1,7 +1,7 @@
 name = ICT Users
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.04
+version = 7.x-1.05
 dependencies[] = admin_menu
 dependencies[] = administerusersbyrole
 dependencies[] = ctools

@@ -52,9 +52,12 @@
           <p><?php print t('The ICT Project Dashboard shows the performance of major ICT enabled projects. These are ICT enabled projects that meet the threshold for consideration as part of the ICT Two Pass Review Process.'); ?></p>
         </div>
 
-        <div class="button-add d-1of5 t-2of5 last-col">
-          <a href="<?php print url('project/add'); ?>" class="general-button plus"><span><?php print t('Add Project'); ?></span></a>
-        </div>
+        <?php global $user; ?>
+        <?php if (node_access('create', 'project', $user)): ?>
+          <div class="button-add d-1of5 t-2of5 last-col">
+            <a href="<?php print url('project/add'); ?>" class="general-button plus"><span><?php print t('Add Project'); ?></span></a>
+          </div>
+        <?php endif; ?>
 
       <?php endif; ?>
     </div>
