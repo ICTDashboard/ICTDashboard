@@ -241,4 +241,8 @@ div#edit-field-rebaselined-total-budget td {
     padding: 15px 15px 15px 60px;
     font-size: 14px;
 }
+.ict-faq-answer ul {
+    margin-left: 35px;
+    list-style-type: disc;
+}
 
