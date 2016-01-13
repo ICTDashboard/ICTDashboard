@@ -30,3 +30,4 @@ features[variable][] = ds_extras_switch_field
 features[variable][] = ds_extras_switch_view_mode
 features[variable][] = ds_extras_vd
 features[variable][] = ds_extras_view_modes_faq_item
+features[variable][] = ft-default
