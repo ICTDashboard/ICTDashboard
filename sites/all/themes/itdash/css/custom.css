@@ -201,4 +201,40 @@ div#edit-field-rebaselined-total-budget td {
 .tabledrag-toggle-weight {display: none;}
 #project-node-form .tabledrag-hide {display: none;}
 #edit-field-brief-project-summary-fake-format {display: none;}
+input.error[type="text"],
+input.is-invalid[type="text"],
+input.error[type="password"],
+input.is-invalid[type="password"],
+input.error[type="datetime"],
+input.is-invalid[type="datetime"],
+input.error[type="datetime-local"],
+input.is-invalid[type="datetime-local"],
+input.error[type="date"],
+input.is-invalid[type="date"],
+input.error[type="month"],
+input.is-invalid[type="month"],
+input.error[type="time"],
+input.is-invalid[type="time"],
+input.error[type="week"],
+input.is-invalid[type="week"],
+input.error[type="number"],
+input.is-invalid[type="number"],
+input.error[type="email"],
+input.is-invalid[type="email"],
+input.error[type="url"],
+input.is-invalid[type="url"],
+input.error[type="search"],
+input.is-invalid[type="search"],
+input.error[type="tel"],
+input.is-invalid[type="tel"],
+input.error[type="color"],
+input.is-invalid[type="color"],
+select.error,
+select.is-invalid,
+textarea.error,
+textarea.is-invalid,
+.field.error,
+.field.is-invalid {
+    color: #5c6b80;
+}
 

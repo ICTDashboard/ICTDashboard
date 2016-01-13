@@ -14,6 +14,7 @@ function ict_users_user_default_roles() {
   $roles['Finance Admin'] = array(
     'name' => 'Finance Admin',
     'weight' => 3,
+    'machine_name' => 'finance_admin',
   );
 
   return $roles;

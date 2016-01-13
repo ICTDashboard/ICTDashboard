@@ -10,49 +10,28 @@
 function ict_departments_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: 'create department content'.
-  $permissions['create department content'] = array(
-    'name' => 'create department content',
-    'roles' => array(
-      'Finance Admin' => 'Finance Admin',
-    ),
-    'module' => 'node',
+  // Exported permission: 'administer department vocabulary terms'.
+  $permissions['administer department vocabulary terms'] = array(
+    'name' => 'administer department vocabulary terms',
+    'roles' => array(),
+    'module' => 'vppr',
   );
 
-  // Exported permission: 'delete any department content'.
-  $permissions['delete any department content'] = array(
-    'name' => 'delete any department content',
-    'roles' => array(
-      'Finance Admin' => 'Finance Admin',
-    ),
-    'module' => 'node',
+  // Exported permission: 'delete terms in department'.
+  $permissions['delete terms in department'] = array(
+    'name' => 'delete terms in department',
+    'roles' => array(),
+    'module' => 'taxonomy',
   );
 
-  // Exported permission: 'delete own department content'.
-  $permissions['delete own department content'] = array(
-    'name' => 'delete own department content',
+  // Exported permission: 'edit terms in department'.
+  $permissions['edit terms in department'] = array(
+    'name' => 'edit terms in department',
     'roles' => array(
       'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
     ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit any department content'.
-  $permissions['edit any department content'] = array(
-    'name' => 'edit any department content',
-    'roles' => array(
-      'Finance Admin' => 'Finance Admin',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: 'edit own department content'.
-  $permissions['edit own department content'] = array(
-    'name' => 'edit own department content',
-    'roles' => array(
-      'Finance Admin' => 'Finance Admin',
-    ),
-    'module' => 'node',
+    'module' => 'taxonomy',
   );
 
   return $permissions;
