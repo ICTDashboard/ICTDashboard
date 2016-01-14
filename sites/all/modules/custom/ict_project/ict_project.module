@@ -7,6 +7,8 @@
 include_once 'ict_project.features.inc';
 require_once(DRUPAL_ROOT . "/modules/node/node.pages.inc");
 
+define('ICT_PROJECT_POLICY', 'opt-out-policy');
+
 /**
  * Implements hook_ctools_plugin_directory().
  */
