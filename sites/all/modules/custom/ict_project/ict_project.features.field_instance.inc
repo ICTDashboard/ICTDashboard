@@ -10,7 +10,8 @@
 function ict_project_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'field_collection_item-field_original_total_budget-field_capex'
+  // Exported field_instance:
+  // 'field_collection_item-field_original_total_budget-field_capex'.
   $field_instances['field_collection_item-field_original_total_budget-field_capex'] = array(
     'bundle' => 'field_original_total_budget',
     'default_value' => NULL,
@@ -50,7 +51,8 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_original_total_budget-field_opex'
+  // Exported field_instance:
+  // 'field_collection_item-field_original_total_budget-field_opex'.
   $field_instances['field_collection_item-field_original_total_budget-field_opex'] = array(
     'bundle' => 'field_original_total_budget',
     'default_value' => NULL,
@@ -90,7 +92,8 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_original_total_budget-field_total'
+  // Exported field_instance:
+  // 'field_collection_item-field_original_total_budget-field_total'.
   $field_instances['field_collection_item-field_original_total_budget-field_total'] = array(
     'bundle' => 'field_original_total_budget',
     'default_value' => NULL,
@@ -130,7 +133,8 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_original_total_budget-field_year'
+  // Exported field_instance:
+  // 'field_collection_item-field_original_total_budget-field_year'.
   $field_instances['field_collection_item-field_original_total_budget-field_year'] = array(
     'bundle' => 'field_original_total_budget',
     'default_value' => NULL,
@@ -164,7 +168,8 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_rebaselined_total_budget-field_capex'
+  // Exported field_instance:
+  // 'field_collection_item-field_rebaselined_total_budget-field_capex'.
   $field_instances['field_collection_item-field_rebaselined_total_budget-field_capex'] = array(
     'bundle' => 'field_rebaselined_total_budget',
     'default_value' => NULL,
@@ -204,7 +209,8 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_rebaselined_total_budget-field_opex'
+  // Exported field_instance:
+  // 'field_collection_item-field_rebaselined_total_budget-field_opex'.
   $field_instances['field_collection_item-field_rebaselined_total_budget-field_opex'] = array(
     'bundle' => 'field_rebaselined_total_budget',
     'default_value' => NULL,
@@ -244,7 +250,8 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_rebaselined_total_budget-field_total'
+  // Exported field_instance:
+  // 'field_collection_item-field_rebaselined_total_budget-field_total'.
   $field_instances['field_collection_item-field_rebaselined_total_budget-field_total'] = array(
     'bundle' => 'field_rebaselined_total_budget',
     'default_value' => NULL,
@@ -284,7 +291,8 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_rebaselined_total_budget-field_year'
+  // Exported field_instance:
+  // 'field_collection_item-field_rebaselined_total_budget-field_year'.
   $field_instances['field_collection_item-field_rebaselined_total_budget-field_year'] = array(
     'bundle' => 'field_rebaselined_total_budget',
     'default_value' => NULL,
@@ -318,7 +326,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_brief_project_summary'
+  // Exported field_instance: 'node-project-field_brief_project_summary'.
   $field_instances['node-project-field_brief_project_summary'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -358,7 +366,44 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_expenditure_type'
+  // Exported field_instance: 'node-project-field_department'.
+  $field_instances['node-project-field_department'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 38,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_department',
+    'label' => 'Department',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance: 'node-project-field_expenditure_type'.
   $field_instances['node-project-field_expenditure_type'] = array(
     'bundle' => 'project',
     'default_value' => array(
@@ -370,7 +415,7 @@ function ict_project_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -399,7 +444,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_external_fte'
+  // Exported field_instance: 'node-project-field_external_fte'.
   $field_instances['node-project-field_external_fte'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -445,7 +490,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_government_business_unit'
+  // Exported field_instance: 'node-project-field_government_business_unit'.
   $field_instances['node-project-field_government_business_unit'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -485,7 +530,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_government_entity_name'
+  // Exported field_instance: 'node-project-field_government_entity_name'.
   $field_instances['node-project-field_government_entity_name'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -525,7 +570,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_implementation_partners'
+  // Exported field_instance: 'node-project-field_implementation_partners'.
   $field_instances['node-project-field_implementation_partners'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -565,7 +610,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_internal_fte'
+  // Exported field_instance: 'node-project-field_internal_fte'.
   $field_instances['node-project-field_internal_fte'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -594,7 +639,7 @@ function ict_project_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_internal_fte',
     'label' => 'Internal FTE',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'max' => '',
       'min' => '',
@@ -611,7 +656,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_original_completion_date'
+  // Exported field_instance: 'node-project-field_original_completion_date'.
   $field_instances['node-project-field_original_completion_date'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -627,6 +672,7 @@ function ict_project_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 12,
@@ -665,7 +711,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_original_total_budget'
+  // Exported field_instance: 'node-project-field_original_total_budget'.
   $field_instances['node-project-field_original_total_budget'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -708,7 +754,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_predicted_project_benefit'
+  // Exported field_instance: 'node-project-field_predicted_project_benefit'.
   $field_instances['node-project-field_predicted_project_benefit'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -754,7 +800,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_program_name'
+  // Exported field_instance: 'node-project-field_program_name'.
   $field_instances['node-project-field_program_name'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -794,7 +840,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_project_category'
+  // Exported field_instance: 'node-project-field_project_category'.
   $field_instances['node-project-field_project_category'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -831,7 +877,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_project_manager'
+  // Exported field_instance: 'node-project-field_project_manager'.
   $field_instances['node-project-field_project_manager'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -871,7 +917,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_project_manager_email'
+  // Exported field_instance: 'node-project-field_project_manager_email'.
   $field_instances['node-project-field_project_manager_email'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -910,7 +956,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_project_stage'
+  // Exported field_instance: 'node-project-field_project_stage'.
   $field_instances['node-project-field_project_stage'] = array(
     'bundle' => 'project',
     'default_value' => array(
@@ -951,7 +997,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_project_status'
+  // Exported field_instance: 'node-project-field_project_status'.
   $field_instances['node-project-field_project_status'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -988,7 +1034,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_project_users'
+  // Exported field_instance: 'node-project-field_project_users'.
   $field_instances['node-project-field_project_users'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -1025,7 +1071,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_rebaselined_project_compl'
+  // Exported field_instance: 'node-project-field_rebaselined_project_compl'.
   $field_instances['node-project-field_rebaselined_project_compl'] = array(
     'bundle' => 'project',
     'deleted' => 0,
@@ -1040,6 +1086,7 @@ function ict_project_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 26,
@@ -1078,7 +1125,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_rebaselined_project_start'
+  // Exported field_instance: 'node-project-field_rebaselined_project_start'.
   $field_instances['node-project-field_rebaselined_project_start'] = array(
     'bundle' => 'project',
     'deleted' => 0,
@@ -1093,6 +1140,7 @@ function ict_project_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 27,
@@ -1131,7 +1179,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_rebaselined_total_budget'
+  // Exported field_instance: 'node-project-field_rebaselined_total_budget'.
   $field_instances['node-project-field_rebaselined_total_budget'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -1174,7 +1222,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_rebaselined_total_project'
+  // Exported field_instance: 'node-project-field_rebaselined_total_project'.
   $field_instances['node-project-field_rebaselined_total_project'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -1220,7 +1268,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_start_date'
+  // Exported field_instance: 'node-project-field_start_date'.
   $field_instances['node-project-field_start_date'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -1236,6 +1284,7 @@ function ict_project_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 11,
@@ -1274,7 +1323,7 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_total_project_budget'
+  // Exported field_instance: 'node-project-field_total_project_budget'.
   $field_instances['node-project-field_total_project_budget'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -1323,6 +1372,7 @@ function ict_project_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Capex');
+  t('Department');
   t('Expenditure type');
   t('External FTE');
   t('Government entity business group, division, & branch ');

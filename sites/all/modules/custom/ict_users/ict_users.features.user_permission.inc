@@ -145,7 +145,10 @@ function ict_users_user_default_permissions() {
   // Exported permission: 'cancel users with role 153917155'.
   $permissions['cancel users with role 153917155'] = array(
     'name' => 'cancel users with role 153917155',
-    'roles' => array(),
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'administerusersbyrole',
   );
 
@@ -199,7 +202,10 @@ function ict_users_user_default_permissions() {
   // Exported permission: 'edit users with role 153917155'.
   $permissions['edit users with role 153917155'] = array(
     'name' => 'edit users with role 153917155',
-    'roles' => array(),
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'administerusersbyrole',
   );
 
