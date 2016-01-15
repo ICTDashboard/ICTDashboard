@@ -82,20 +82,27 @@ jQuery(document).ready(function($) {
     });
 
     $(".add_datepicker").each(function () {
-      var id = $(this).attr('id');
-
-      $(this).datepicker({
-        buttonImage: "/sites/all/themes/itdash/html/images/calendar-icon.png",
-        buttonImageOnly: true,
-        showOn: 'button',
-        onClose: function(dateText, inst) {
-          $('#' + id + '-und-0-value-year').val(Number(dateText.split('/')[2]));
-          $('#' + id + '-und-0-value-month').val(Number(dateText.split('/')[0]));
-          $('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
-		    $('.form-select').selectbox('detach');
-		    $('.form-select').selectbox('attach');
-        }
-      });
+      	var id = $(this).attr('id');
+		var parent = $(this).parents('.popup-radio');
+		var dateinput = $('.form-type-date-popup input[type=text]', parent);
+		var opts = {
+			buttonImage: "/sites/all/themes/itdash/html/images/calendar-icon.png",
+			buttonImageOnly: true,
+			showOn: 'button',
+			onClose: function(dateText, inst) {
+				$('#' + id + '-und-0-value-year').val(Number(dateText.split('/')[2]));
+				$('#' + id + '-und-0-value-month').val(Number(dateText.split('/')[0]));
+				$('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
+				$('.form-select').selectbox('detach');
+				$('.form-select').selectbox('attach');
+				dateinput.val(dateText);
+			}
+		};
+		var dateFormat = $(this).attr('data-dateFormat');
+		if (dateFormat) {
+			opts.dateFormat = dateFormat;
+		}
+      	$(this).datepicker(opts);
     });
 
   }

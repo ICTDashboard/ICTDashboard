@@ -330,3 +330,39 @@ input.editor-email {margin-bottom: 10px !important;}
 #content #project-listings .project-lists table tr th:last-child {
     text-align: center;
 }
+.popup-radio {
+    position: relative;
+}
+.popup-radio .form-type-radio {
+    padding-top: 7px;
+    padding-bottom: 15px;
+}
+.popup-radio .form-radios {
+    float: left;
+}
+.popup-radio .add_datepicker {
+    position: absolute;
+    right: 0;
+    width: 92%!important;
+}
+.popup-radio .ui-datepicker-trigger {
+    position: absolute;
+    right: -35px;
+    top: 4px;
+}
+.select-no-border .sbHolder,
+#content .project-update-submission table tr td.select-no-border select {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border: 0;
+    width: 100%;
+    height: 100%;
+}
+#content .project-update-submission table tr td.select-no-border div {
+    height: 100%;
+}
+td.select-no-border .sbHolder {
+    height: 38px;
+}
+
