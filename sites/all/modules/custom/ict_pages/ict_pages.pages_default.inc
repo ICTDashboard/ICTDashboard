@@ -63,7 +63,8 @@ function ict_pages_default_page_manager_handlers() {
           'settings' => array(
             'visibility_setting' => '1',
             'paths' => 'faq
-dashboard',
+dashboard
+project/*/update',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,
