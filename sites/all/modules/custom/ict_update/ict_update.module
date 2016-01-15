@@ -1,0 +1,87 @@
+<?php
+/**
+ * @file
+ * Code for the ICT Update feature.
+ */
+
+include_once 'ict_update.features.inc';
+/**
+ * @file
+ * Code for the ICT Project feature.
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ict_update_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && $plugin_type == 'content_types') {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+function ict_update_update_form_recursive($key, $value, $array) {
+  $array[$key] = $value;
+  foreach(element_children($array) as $k) {
+    $array[$k] = ict_update_update_form_recursive($key, $value, $array[$k]);
+  }
+  return $array;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#theme'] = 'ict_update_add_form';
+
+  $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
+
+  $form['field_expected_completion_date']['und'][0]['#prefix'] = '<div class="element-hidden">';
+  $form['field_expected_completion_date']['und'][0]['#suffix'] = '</div>';
+  $form['field_expected_completion_date']['date']['#type'] = 'textfield';
+  $form['field_expected_completion_date']['und'][0]['#theme_wrappers'] = array();
+  if (empty($form['nid']['#value'])) {
+    $form['field_expected_completion_date']['und'][0]['#default_value'] = '';
+  }
+  $form['field_expected_completion_date']['date']['#default_value'] = $form['field_expected_completion_date']['und'][0]['#default_value'];
+  $form['field_expected_completion_date']['date']['#attributes'] = array(
+    'class' => array('add_datepicker'),
+    'data-dateFormat' => 'dd/mm/yy',
+  );
+  $form['field_expected_completion_date']['radio'] = array(
+    '#type' => 'radios',
+    '#options' => array(
+      'time' => '',
+      'na' => 'N/A',
+    ),
+    '#default_value' => 'time',
+    '#weight' => -999,
+  );
+  $form['field_expected_completion_date']['#element_validate'] = array('ict_update_datepicker_value');
+
+  $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
+}
+
+function ict_update_datepicker_value($element, &$form_state, $form) {
+  $field_name = $element['und']['#field_name'];
+  if ($form_state['values'][$field_name]['radio'] == 'na') {
+    $form_state['values'][$field_name]['und'][0]['value'] = '';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ict_update_theme($existing, $type, $theme, $path) {
+  return array(
+    'ict_update_add_form' => array(
+      'template' => 'ict-update-add-form',
+      'path' => drupal_get_path('module', 'ict_update') . '/theme',
+      'render element' => 'form',
+    ),
+    'field_benefits_realised_table' => array(
+      'template' => 'field-benefits-realised-table',
+      'path' => drupal_get_path('module', 'ict_update') . '/theme',
+      'render element' => 'element',
+    ),
+  );
+}
