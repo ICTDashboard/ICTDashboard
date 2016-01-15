@@ -149,8 +149,8 @@ div#edit-field-rebaselined-total-budget td {
 .header #logo {font-size: 29px;}
 
 #content .project-update-submission .submit input#edit-preview,
-#content .project-update-submission .submit input#edit-preview--2
-{
+#content .project-update-submission .submit input#edit-preview--2,
+#content .project-update-submission .submit input#edit-submit {
   background: url(../html/images/general-btn.png) repeat-x scroll 0 0 transparent;
   text-align: center;
   color: #fff;
@@ -174,7 +174,8 @@ div#edit-field-rebaselined-total-budget td {
 }
 
 #content .project-update-submission .submit input#edit-preview:hover,
-#content .project-update-submission .submit input#edit-preview--2:hover
+#content .project-update-submission .submit input#edit-preview--2:hover,
+#content .project-update-submission .submit input#edit-submit:hover
 {
   background-position: 0 -41px;
 }
@@ -277,4 +278,9 @@ textarea.is-invalid,
     padding: 15px 15px 15px 60px;
     font-size: 14px;
 }
+.sbHolderDisabled {
+    background-color: #b3bdcf;
+    border: inherit;
+}
+input.editor-email {margin-bottom: 10px !important;}
 
