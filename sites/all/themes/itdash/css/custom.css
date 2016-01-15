@@ -9,7 +9,7 @@
 ul#main-menu li {list-style: none;}
 .header {position: relative;z-index: 99;}
 #content #project-listings .project-lists table tr td.title,
-#content #project-listings .project-lists table tr th:first-child {width: 490px;}
+#content #project-listings .project-lists table tr th:first-child {width: 500px;}
 .profile h3 {border: none;}
 
 #content #inner-content .register-form form p input[type="password"],
@@ -319,4 +319,14 @@ input.editor-email {margin-bottom: 10px !important;}
     padding: 0 20px;
     overflow: scroll;
     position: relative;
+}
+.project-list-content {
+    overflow: hidden;
+}
+#content #project-listings .project-lists table tr td.update a {
+    display: inline-block;
+    max-width: 200px;
+}
+#content #project-listings .project-lists table tr th:last-child {
+    text-align: center;
 }
