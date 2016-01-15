@@ -283,4 +283,40 @@ textarea.is-invalid,
     border: inherit;
 }
 input.editor-email {margin-bottom: 10px !important;}
-
+.ict-faq-answer ul {
+    margin-left: 35px;
+    list-style-type: disc;
+}
+.fancybox-inner .fancybox-title {
+    padding: 13px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #137992;
+    margin: 0;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.fancybox-actions {
+    padding: 20px 0 25px;
+    text-align: right;
+    border-top: 1px solid #b3bccd;
+    margin: 0 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.bean-opt-out-policy {
+    padding: 0 20px;
+    overflow: scroll;
+    position: relative;
+}

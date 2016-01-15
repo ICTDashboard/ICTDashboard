@@ -9,6 +9,8 @@ include_once 'ict_project.access.inc';
 include_once 'ict_project.create.inc';
 require_once(DRUPAL_ROOT . "/modules/node/node.pages.inc");
 
+define('ICT_PROJECT_POLICY', 'opt-out-policy');
+
 /**
  * Implements hook_boot().
  */
