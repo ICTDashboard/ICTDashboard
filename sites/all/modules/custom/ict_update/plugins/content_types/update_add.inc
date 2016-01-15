@@ -6,6 +6,9 @@ $plugin = array(
   'description' => t('Update Add page.'),
   'category' => t('ICT'),
   'render callback' => 'ict_update_add_render',
+  'required context' => array(
+    new ctools_context_required(t('Node'), 'node'),
+  ),
 );
 
 /**
