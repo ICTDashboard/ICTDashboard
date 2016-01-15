@@ -362,7 +362,7 @@ function ict_project_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -399,7 +399,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 35,
+      'weight' => 26,
     ),
   );
 
@@ -486,7 +486,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 22,
+      'weight' => 20,
     ),
   );
 
@@ -526,7 +526,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -539,10 +539,10 @@ function ict_project_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 34,
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 41,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -553,19 +553,16 @@ function ict_project_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_government_entity_name',
-    'label' => 'Government entity name',
+    'label' => 'Government Entity Name',
     'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
       'weight' => 1,
     ),
   );
@@ -606,7 +603,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 23,
+      'weight' => 21,
     ),
   );
 
@@ -652,7 +649,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 21,
+      'weight' => 19,
     ),
   );
 
@@ -750,7 +747,44 @@ function ict_project_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 20,
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance: 'node-project-field_portfolio_name'.
+  $field_instances['node-project-field_portfolio_name'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 40,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_portfolio_name',
+    'label' => 'Portfolio Name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 0,
     ),
   );
 
@@ -796,7 +830,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 33,
+      'weight' => 25,
     ),
   );
 
@@ -836,7 +870,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -873,7 +907,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -913,7 +947,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -952,7 +986,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 19,
+      'weight' => 17,
     ),
   );
 
@@ -993,7 +1027,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 16,
     ),
   );
 
@@ -1121,7 +1155,7 @@ function ict_project_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -1175,7 +1209,7 @@ function ict_project_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -1264,7 +1298,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 31,
+      'weight' => 23,
     ),
   );
 
@@ -1365,7 +1399,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 32,
+      'weight' => 24,
     ),
   );
 
@@ -1375,8 +1409,8 @@ function ict_project_field_default_field_instances() {
   t('Department');
   t('Expenditure type');
   t('External FTE');
+  t('Government Entity Name');
   t('Government entity business group, division, & branch ');
-  t('Government entity name');
   t('Implementation Partners?');
   t('Internal FTE');
   t('Opex');
@@ -1385,6 +1419,7 @@ function ict_project_field_default_field_instances() {
   t('Original project start date');
   t('Original total project budget ($m)');
   t('Please separate each title with a comma.');
+  t('Portfolio Name');
   t('Predicted project benefit ($m, as identified in business case) ');
   t('Project category');
   t('Project description');
