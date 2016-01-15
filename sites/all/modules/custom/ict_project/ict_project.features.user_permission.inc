@@ -14,7 +14,9 @@ function ict_project_user_default_permissions() {
   $permissions['create project content'] = array(
     'name' => 'create project content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'Departmental Admin' => 'Departmental Admin',
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
