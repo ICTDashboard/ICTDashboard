@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Code for the ICT Project install functions.
+ */
+
+/**
+ * Creates project_access table
+ */
+function ict_project_update_7301() {
+  if (!db_table_exists('project_access')) {
+    $project_edit_schema = array(
+      'description' => 'User gained access to approve or edit projects or projects updates.',
+      'fields' => array(
+        'nid' => array(
+          'description' => 'Node ID of the project',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE
+        ),
+        'uid' => array(
+          'description' => 'ID of the user granted with the access',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE
+        ),
+        'access_type' => array(
+          'description' => 'approve or edit',
+          'type' => 'varchar',
+          'length' => 7,
+          'not null' => TRUE
+        ),
+        'created' => array(
+          'description' => 'The Unix timestamp when the access was granted.',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0
+        ),
+        'expires' => array(
+          'description' => 'The Unix timestamp when the access was expires.',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0
+        ),
+      ),
+      'indexes' => array(
+        'uid' => array('uid'),
+        'nid' => array('nid')
+      ),
+      'foreign keys' => array(
+        'user' => array(
+          'table' => 'user',
+          'columns' => array('uid' => 'uid'),
+        ),
+        'node' => array(
+          'table' => 'node',
+          'columns' => array('nid' => 'nid'),
+        ),
+      ),
+      'primary key' => array('nid', 'uid', 'access_type'),
+    );
+    db_create_table('project_access', $project_edit_schema);
+  }
+  return 'Add the project_access table for the ict_project module.';
+}
+
+

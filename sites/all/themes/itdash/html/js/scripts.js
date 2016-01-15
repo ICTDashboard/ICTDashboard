@@ -163,6 +163,7 @@ jQuery(document).ready(function($) {
     });
 	
 	$('.form-select').selectbox();
+	$('.form-select[disabled="disabled"]').selectbox("disable");
 	$('.field_implementation_partners-delta-order').selectbox();
 }); /* end of as page load scripts */
 
