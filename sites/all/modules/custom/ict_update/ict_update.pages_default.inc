@@ -69,6 +69,12 @@ function ict_update_default_page_manager_pages() {
           'context' => 'argument_entity_id:node_1',
           'not' => FALSE,
         ),
+        2 => array(
+          'name' => 'create_update',
+          'settings' => NULL,
+          'context' => 'argument_entity_id:node_1',
+          'not' => FALSE,
+        ),
       ),
       'logic' => 'and',
     ),

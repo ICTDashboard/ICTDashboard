@@ -91,9 +91,11 @@
                   <a href="<?php print url('node/' . $project->nid); ?>">
                     <span><?php print t('View'); ?></span>
                   </a>
-                  <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
-                    <span><?php print t('Create an update draft'); ?></span>
-                  </a>
+                  <?php if ($user->uid == 1 || in_array($user->uid, ict_project_get_users($project->nid, ICT_PROJECT_EDITOR_ACCESS))) : ?>
+                    <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
+                      <span><?php print t('Create an update draft'); ?></span>
+                    </a>
+                  <?php endif; ?>
                 <?php else : ?>
                   <?php foreach ($project->demo_buttons as $key => $button) : ?>
                     <a href="http://sandpit.itdash.lws.links.com.au/?path=<?php print $key; ?>#nid=<?php print $project->nid; ?>">
