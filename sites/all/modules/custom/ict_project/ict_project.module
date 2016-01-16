@@ -117,8 +117,8 @@ function get_project_updates($project_name) {
 /**
  * Implement hook_form_alter
  */
-function ict_project_form_alter( &$form, &$form_state,$form_id){
-  if($form_id == 'project_node_form') {
+function ict_project_form_alter( &$form, &$form_state, $form_id){
+  if($form_id == 'project_node_form1') {
 
     // create project form should not be changed
     if (!$form['nid']['#value']) {
