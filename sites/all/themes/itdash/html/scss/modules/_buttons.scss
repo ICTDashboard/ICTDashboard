@@ -72,3 +72,27 @@ and it will create a button dependant on those variables.
   } // end active
 
 } // end blue button
+
+.delete-btn {
+  @extend %btn; // here we load the btn defaults
+  position: relative;
+  font-size: 13px;
+  background-color: transparent;
+  color: #0d6c88;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: right;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    @include sprite-icon('remove-icon-normal');
+  }
+  &:hover {
+    color: #0d6c88;
+    &:after {
+      @include sprite-icon('remove-icon-normal');
+    }
+  }
+}
