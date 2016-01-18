@@ -91,7 +91,7 @@
                   <a href="<?php print url('node/' . $project->nid); ?>">
                     <span><?php print t('View'); ?></span>
                   </a>
-                  <?php if ($user->uid == 1 || in_array($user->uid, ict_project_get_users($project->nid, ICT_PROJECT_EDITOR_ACCESS))) : ?>
+                  <?php if (ict_project_access_update('create', $project->nid)) : ?>
                     <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
                       <span><?php print t('Create an update draft'); ?></span>
                     </a>

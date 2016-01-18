@@ -8,6 +8,7 @@ include_once 'ict_project.features.inc';
 include_once 'ict_project.access.inc';
 include_once 'ict_project.create.inc';
 include_once 'ict_project.listing.inc';
+include_once 'ict_project.workflow.inc';
 require_once(DRUPAL_ROOT . "/modules/node/node.pages.inc");
 
 define('ICT_PROJECT_POLICY', 'opt-out-policy');
@@ -710,9 +711,9 @@ function ict_project_bracket_italics ($string) {
 /*
  * Implements hook_node_insert()
  */
-function ict_project_node_insert (&$node) {
+function ict_project_node_insert ($node) {
   if ($node->type == 'project') {
-    $node->status = 1;
+    ict_project_set_workflow_state('predraft', $node->nid, $node->vid);
   }
 }
 
