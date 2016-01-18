@@ -70,4 +70,12 @@ probably best not to use it. I mean, were you going to anyway? */
 	box-sizing:         $type;
 }
 
+@mixin sprite-icon($name){
+  @include icons-sprite($name);
+  width: icons-sprite-width($name);
+  height: icons-sprite-height($name);
+  display: block;
+}
+
+
 

@@ -13,7 +13,6 @@
  */
 function ict_project_projects_create_form($form, &$form_state) {
   global $user;
-
   $government_entities_vocab = taxonomy_vocabulary_machine_name_load('funding_source');
   $government_entities = taxonomy_get_tree($government_entities_vocab->vid);
   $entities_options = array();
@@ -69,6 +68,28 @@ function ict_project_projects_create_form($form, &$form_state) {
     $form['field_department']['#disabled'] = TRUE;
   }
 
+  if (isset($form_state['triggering_element']['#attributes']['data-delete']) &&
+    $form_state['triggering_element']['#attributes']['data-delete'] == 'approver') {
+    $input_approvers = &$form_state['input']['approvers'];
+    $index = $form_state['triggering_element']['#attributes']['data-index'];
+    unset($input_approvers['email_item_' . $index]);
+    $form_state['storage']['approvers']--;
+
+    // collect values
+    $values = array();
+    foreach ($input_approvers as $editor) {
+      $values[] = $editor['email'];
+    }
+    // update input
+    $input_approvers = array();
+    foreach ($values as $key => $value) {
+      $value_index = $key + 1;
+      $input_approvers['email_item_' . $value_index] = array(
+        'email' => $value
+      );
+    }
+  }
+
   // update approvers counter
   if (isset($form_state['storage']['approvers']) &&
     $form_state['triggering_element']['#value'] == 'Add Approver') {
@@ -90,16 +111,40 @@ function ict_project_projects_create_form($form, &$form_state) {
 
   if ($form_state['storage']['approvers']) {
     for ($i = 1; $i <= $form_state['storage']['approvers']; $i++) {
-      $form['approvers']['email_' . $i] = array(
+      $form['approvers']['email_item_' . $i] = array(
+        '#type' => 'container',
+        '#tree' => TRUE,
+        '#attributes' => array('class' => array('email-container'))
+      );
+
+      $form['approvers']['email_item_' . $i]['email'] = array(
         '#type' => 'textfield',
-        '#required' => TRUE,
+        '#required' => $i == 1,
         '#title' => t('Data Approvers'),
         '#attributes' => array(
           'placeholder' => t('Please enter email address'),
-          'class' => array('editor-email')
+          'class' => array('approver-email')
         ),
         '#title_display' => 'invisible',
       );
+
+      $form['approvers']['email_item_' . $i]['remove_btn'] = array(
+        '#type' => 'button',
+        '#value' => t('Remove'),
+        '#href' => '',
+        '#name' => 'remove_approver_' . $i,
+        '#limit_validation_errors' => array(),
+        '#ajax' => array(
+          'callback' => 'ict_project_create_project_remove_approver',
+          'wrapper' => 'approvers',
+        ),
+        '#attributes' => array(
+          'class' => array('delete-btn'),
+          'data-delete' => 'approver',
+          'data-index' => $i
+        ),
+      );
+
     }
   }
 
@@ -112,21 +157,42 @@ function ict_project_projects_create_form($form, &$form_state) {
       'callback' => 'ict_project_create_project_add_approver',
       'wrapper' => 'approvers',
     ),
-    '#attributes' => array('class' => array('add-button'))
+    '#attributes' => array('class' => array('add-button', 'field-add-more-submit'))
   );
 
-  // update editors counter
-  if (isset($form_state['storage']['editors']) &&
-    $form_state['triggering_element']['#value'] == 'Add Editor') {
-    $form_state['storage']['editors'] +=1;
+  if (isset($form_state['triggering_element']['#attributes']['data-delete']) &&
+    $form_state['triggering_element']['#attributes']['data-delete'] == 'editor') {
+    $input_editors = &$form_state['input']['editors'];
+    $index = $form_state['triggering_element']['#attributes']['data-index'];
+    unset($input_editors['email_item_' . $index]);
+    $form_state['storage']['editors']--;
+
+    // collect values
+    $values = array();
+    foreach ($input_editors as $editor) {
+      $values[] = $editor['email'];
+    }
+    // update input
+    $input_editors = array();
+    foreach ($values as $key => $value) {
+      $value_index = $key + 1;
+      $input_editors['email_item_' . $value_index] = array(
+        'email' => $value
+      );
+    }
   }
-  elseif (isset($form_state['storage']['editors'])) {
+
+  // update editors counter
+  if (!empty($form_state['storage']['editors']) &&
+    $form_state['triggering_element']['#value'] == 'Add Editor') {
+    $form_state['storage']['editors']++;
+  }
+  elseif (!empty($form_state['storage']['editors'])) {
     $form_state['storage']['editors'] = $form_state['storage']['editors'];
   }
   else {
     $form_state['storage']['editors'] = 1;
   }
-
 
   $form['editors'] = array(
     '#type' => 'container',
@@ -137,15 +203,38 @@ function ict_project_projects_create_form($form, &$form_state) {
 
   if ($form_state['storage']['editors']) {
     for ($i = 1; $i <= $form_state['storage']['editors']; $i++) {
-      $form['editors']['email_' . $i] = array(
+      $form['editors']['email_item_' . $i] = array(
+        '#type' => 'container',
+        '#tree' => TRUE,
+        '#attributes' => array('class' => array('email-container'))
+      );
+
+      $form['editors']['email_item_' . $i]['email'] = array(
         '#type' => 'textfield',
-        '#required' => TRUE,
+        '#required' => $i == 1,
         '#title' => t('Data Editor'),
         '#attributes' => array(
           'placeholder' => t('Please enter email address'),
           'class' => array('editor-email')
         ),
         '#title_display' => 'invisible',
+      );
+
+      $form['editors']['email_item_' . $i]['remove_btn'] = array(
+        '#type' => 'button',
+        '#value' => t('Remove'),
+        '#button_type' => 'button',
+        '#name' => 'remove_editor_' . $i,
+        '#limit_validation_errors' => array(),
+        '#ajax' => array(
+          'callback' => 'ict_project_create_project_remove_editor',
+          'wrapper' => 'editors',
+        ),
+        '#attributes' => array(
+          'class' => array('delete-btn'),
+          'data-delete' => 'editor',
+          'data-index' => $i
+        ),
       );
     }
   }
@@ -159,7 +248,7 @@ function ict_project_projects_create_form($form, &$form_state) {
       'callback' => 'ict_project_create_project_add_editor',
       'wrapper' => 'editors',
     ),
-    '#attributes' => array('class' => array('add-button'))
+    '#attributes' => array('class' => array('add-button', 'field-add-more-submit'))
   );
 
   $form['title'] = array(
@@ -204,6 +293,28 @@ function ict_project_create_project_add_editor($form, &$form_state) {
 }
 
 /**
+ * Remove approver callback
+ *
+ * @param $form
+ * @param $form_state
+ * @return mixed
+ */
+function ict_project_create_project_remove_approver($form, &$form_state) {
+  return $form['approvers'];
+}
+
+/**
+ * Remove editor callback
+ *
+ * @param $form
+ * @param $form_state
+ * @return mixed
+ */
+function ict_project_create_project_remove_editor($form, &$form_state) {
+  return $form['editors'];
+}
+
+/**
  * Validate project data before creation
  *
  * @param $form
@@ -212,6 +323,7 @@ function ict_project_create_project_add_editor($form, &$form_state) {
  */
 function ict_project_create_form_validate($form, &$form_state) {
   $values = $form_state['values'];
+  dsm($values);
   $approver_emails = array();
   $editor_emails = array();
 
@@ -224,14 +336,16 @@ function ict_project_create_form_validate($form, &$form_state) {
   }
 
   foreach ($values['approvers'] as $key => $approver) {
-    if ($key == 'add_approver' || !$approver) continue;
-    $approver_emails[] = $approver;
+    if ($key == 'add_approver' || !$approver['email']) continue;
+    $approver_emails[] = $approver['email'];
   }
 
   foreach ($values['editors'] as $key => $editor) {
-    if ($key == 'add_editor' || !$editor) continue;
-    $editor_emails[] = $editor;
+    if ($key == 'add_editor' || !$editor['email']) continue;
+    $editor_emails[] = $editor['email'];
   }
+  dsm($editor_emails);
+  dsm($approver_emails);
 
   foreach ($approver_emails as $email) {
     if (valid_email_address($email) &&
