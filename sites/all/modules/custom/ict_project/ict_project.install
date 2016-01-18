@@ -65,4 +65,48 @@ function ict_project_update_7301() {
   return 'Add the project_access table for the ict_project module.';
 }
 
-
+/**
+ * Creates project_workflow table
+ */
+function ict_project_update_7302() {
+  if (!db_table_exists('project_workflow')) {
+    $project_edit_schema = array(
+      'description' => 'Contains workflow states for projects, updates, rebaslines.',
+      'fields' => array(
+        'nid' => array(
+          'description' => 'Node ID of the project',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE
+        ),
+        'vid' => array(
+          'description' => 'Revision ID of node vid version identifier.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE
+        ),
+        'state' => array(
+          'description' => 'approve or edit',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => TRUE
+        ),
+        'created' => array(
+          'description' => 'The Unix timestamp when the access was granted.',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0
+        ),
+      ),
+      'indexes' => array(
+        'nid' => array('nid'),
+        'vid' => array('vid'),
+        'state' => array('state'),
+        'created' => array('created'),
+      ),
+      'primary key' => array('nid', 'vid', 'created'),
+    );
+    db_create_table('project_workflow', $project_edit_schema);
+  }
+  return 'Add the project_workflow table for the ict_project module.';
+}

@@ -22,9 +22,8 @@ $plugin = array(
  * Check for access.
  */
 function ict_update_creation_access($conf, $context) {
-  global $user;
 
-  if ($user->uid == 1 || in_array($user->uid, ict_project_get_users($context->argument, ICT_PROJECT_EDITOR_ACCESS))) {
+  if (ict_project_access_update('create', $context->argument)) {
     return TRUE;
   }
 
