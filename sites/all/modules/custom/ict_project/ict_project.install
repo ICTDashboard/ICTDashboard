@@ -85,8 +85,14 @@ function ict_project_update_7302() {
           'unsigned' => TRUE,
           'not null' => TRUE
         ),
+        'old_state' => array(
+          'description' => 'Old workflow state',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => TRUE
+        ),
         'state' => array(
-          'description' => 'approve or edit',
+          'description' => 'Workflow state',
           'type' => 'varchar',
           'length' => 32,
           'not null' => TRUE
@@ -97,12 +103,19 @@ function ict_project_update_7302() {
           'not null' => TRUE,
           'default' => 0
         ),
+        'uid' => array(
+          'description' => 'User ID.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE
+        ),
       ),
       'indexes' => array(
         'nid' => array('nid'),
         'vid' => array('vid'),
         'state' => array('state'),
         'created' => array('created'),
+        'uid' => array('uid'),
       ),
       'primary key' => array('nid', 'vid', 'created'),
     );
