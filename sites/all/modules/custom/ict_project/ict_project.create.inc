@@ -119,7 +119,7 @@ function ict_project_projects_create_form($form, &$form_state) {
 
       $form['approvers']['email_item_' . $i]['email'] = array(
         '#type' => 'textfield',
-        '#required' => $i == 1,
+        '#required' => FALSE,
         '#title' => t('Data Approvers'),
         '#attributes' => array(
           'placeholder' => t('Please enter email address'),
@@ -211,7 +211,7 @@ function ict_project_projects_create_form($form, &$form_state) {
 
       $form['editors']['email_item_' . $i]['email'] = array(
         '#type' => 'textfield',
-        '#required' => $i == 1,
+        '#required' => FALSE,
         '#title' => t('Data Editor'),
         '#attributes' => array(
           'placeholder' => t('Please enter email address'),
@@ -323,7 +323,6 @@ function ict_project_create_project_remove_editor($form, &$form_state) {
  */
 function ict_project_create_form_validate($form, &$form_state) {
   $values = $form_state['values'];
-  dsm($values);
   $approver_emails = array();
   $editor_emails = array();
 
@@ -344,8 +343,14 @@ function ict_project_create_form_validate($form, &$form_state) {
     if ($key == 'add_editor' || !$editor['email']) continue;
     $editor_emails[] = $editor['email'];
   }
-  dsm($editor_emails);
-  dsm($approver_emails);
+
+  if (!$approver_emails) {
+    form_set_error('approvers', t('At least one Data Approver email is required.'));
+  }
+
+  if (!$editor_emails) {
+    form_set_error('editors', t('At least one Data Editor email is required.'));
+  }
 
   foreach ($approver_emails as $email) {
     if (valid_email_address($email) &&
