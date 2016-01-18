@@ -72,8 +72,9 @@
         </tr>
       </table>
       <p class="submit">
-        <?php print render($form['preview']) ;?>
-        <input type="submit" id="edit-submit" name="op" value="Save" class="form-submit"></p>
+        <?php print render($form['actions']['submit_request']) ;?>
+        <input type="submit" id="edit-submit" name="op" value="Save" class="form-submit">
+      </p>
     </form>
   </div>
 </div>

@@ -120,7 +120,11 @@ function ict_project_workflow_set_wait_approve($form, &$form_state) {
     return;
   }
   $nid = $form['#node']->nid;
-  ict_project_set_workflow_state('waiting_approval', $nid);
+  if (ict_project_get_workflow_state($nid) != 'waiting_approval') {
+    $form_state['node']->revision = TRUE;
+    node_save($form_state['node']);
+    ict_project_set_workflow_state('waiting_approval', $nid);
+  }
 }
 
 function ict_project_workflow_set_draft($form, &$form_state) {
@@ -128,7 +132,11 @@ function ict_project_workflow_set_draft($form, &$form_state) {
     return;
   }
   $nid = $form['#node']->nid;
-  ict_project_set_workflow_state('draft', $nid);
+  if (ict_project_get_workflow_state($nid) != 'draft') {
+    $form_state['node']->revision = TRUE;
+    node_save($form_state['node']);
+    ict_project_set_workflow_state('draft', $nid);
+  }
 }
 
 /**

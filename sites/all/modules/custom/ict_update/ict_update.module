@@ -59,6 +59,12 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   $form['field_expected_completion_date']['#element_validate'] = array('ict_update_datepicker_value');
 
   $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
+
+  $form['actions']['submit']['#attributes']['class'] = array('form-submit');
+  $form['actions']['submit_request'] = $form['actions']['submit'];
+  $form['actions']['submit_request']['#value'] = t('Save and request approval');
+  $form['actions']['submit_request']['#submit'][] = 'ict_project_workflow_set_wait_approve';
+  $form['actions']['submit']['#submit'][] = 'ict_project_workflow_set_draft';
 }
 
 function ict_update_datepicker_value($element, &$form_state, $form) {
