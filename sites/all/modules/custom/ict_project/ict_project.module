@@ -115,10 +115,35 @@ function get_project_updates($project_name) {
   return $data;
 }
 
+function ict_project_workflow_set_wait_approve($form, &$form_state) {
+  if (!$form['#node']->nid) {
+    return;
+  }
+  $nid = $form['#node']->nid;
+  ict_project_set_workflow_state('waiting_approval', $nid);
+}
+
+function ict_project_workflow_set_draft($form, &$form_state) {
+  if (!$form['#node']->nid) {
+    return;
+  }
+  $nid = $form['#node']->nid;
+  ict_project_set_workflow_state('draft', $nid);
+}
+
 /**
  * Implement hook_form_alter
  */
 function ict_project_form_alter( &$form, &$form_state, $form_id){
+  if ($form_id == 'project_node_form') {
+    $node = $form['#node'];
+    if (!empty($node->nid)) {
+      $form['actions']['submit_request'] = $form['actions']['submit'];
+      $form['actions']['submit_request']['#value'] = t('Save and request approval');
+      $form['actions']['submit_request']['#submit'][] = 'ict_project_workflow_set_wait_approve';
+      $form['actions']['submit']['#submit'][] = 'ict_project_workflow_set_draft';
+    }
+  }
   if($form_id == 'project_node_form1') {
 
     // create project form should not be changed
