@@ -98,7 +98,7 @@
                   <?php endif; ?>
                 <?php else : ?>
                   <?php foreach ($project->demo_buttons as $key => $button) : ?>
-                    <a href="http://sandpit.itdash.lws.links.com.au/?path=<?php print $key; ?>#nid=<?php print $project->nid; ?>">
+                    <a href="http://sandpit.itdash.lws.links.com.au/?path=<?php print $key; ?>&nid=<?php print $project->nid; ?>">
                       <span><?php print $button ?></span>
                     </a>
                   <?php endforeach; ?>
