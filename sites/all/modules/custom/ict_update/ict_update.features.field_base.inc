@@ -206,6 +206,21 @@ function ict_update_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_project_revision'.
+  $field_bases['field_project_revision'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_project_revision',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
   // Exported field_base: 'field_spend_to_date_by_financial'.
   $field_bases['field_spend_to_date_by_financial'] = array(
     'active' => 1,

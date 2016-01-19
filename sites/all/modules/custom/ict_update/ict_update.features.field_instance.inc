@@ -122,7 +122,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 35,
+      'weight' => 8,
     ),
   );
 
@@ -166,7 +166,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 38,
+      'weight' => 11,
     ),
   );
 
@@ -213,7 +213,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 36,
+      'weight' => 9,
     ),
   );
 
@@ -254,7 +254,7 @@ function ict_update_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 39,
+      'weight' => 12,
     ),
   );
 
@@ -301,7 +301,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 37,
+      'weight' => 10,
     ),
   );
 
@@ -357,7 +357,7 @@ function ict_update_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 33,
+      'weight' => 6,
     ),
   );
 
@@ -404,7 +404,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 34,
+      'weight' => 7,
     ),
   );
 
@@ -448,7 +448,92 @@ function ict_update_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 31,
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-update-field_project_revision'.
+  $field_instances['node-update-field_project_revision'] = array(
+    'bundle' => 'update',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_project_revision',
+    'label' => 'Project revision',
+    'required' => 1,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-update-field_project_stage'.
+  $field_instances['node-update-field_project_stage'] = array(
+    'bundle' => 'update',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_project_stage',
+    'label' => 'Project stage',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
     ),
   );
 
@@ -495,7 +580,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 32,
+      'weight' => 5,
     ),
   );
 
@@ -510,6 +595,8 @@ function ict_update_field_default_field_instances() {
   t('Expected Completion Date');
   t('Forecast Level of Project Completion (%)');
   t('Project');
+  t('Project revision');
+  t('Project stage');
   t('Spend To Date By Financial Year ($m)');
   t('Status');
 

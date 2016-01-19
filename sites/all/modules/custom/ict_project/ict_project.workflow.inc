@@ -50,3 +50,20 @@ function ict_project_get_workflow_state($nid, $vid = NULL) {
 
   return reset($res);
 }
+
+/**
+ * Get workflow state. If revision is NULL set for the latest revision
+ */
+function ict_project_get_last_transaction_by_state($nid, $state) {
+  if (!$nid) {
+    return FALSE;
+  }
+  $query = db_select('project_workflow', 'w');
+  $query->fields('w');
+  $query->condition('nid', $nid);
+  $query->condition('state', $state);
+  $query->orderBy('created', 'DESC');
+  $res = $query->execute()->fetchAll();
+
+  return reset($res);
+}

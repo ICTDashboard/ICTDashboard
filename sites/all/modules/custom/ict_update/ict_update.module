@@ -31,40 +31,77 @@ function ict_update_update_form_recursive($key, $value, $array) {
  * Implements hook_form_FORM_ID_alter().
  */
 function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) {
+  $update = $form['#node'];
+  if (empty($update->nid)) {
+    $project_id = arg(1);
+    $project = node_load($project_id);
+    $approved_vid = ict_project_get_last_transaction_by_state($project_id, 'approved');
+    if (!$approved_vid->vid) {
+      drupal_not_found();
+    }
+    $form['title']['#value'] = $project->title . ' Update submission ' . format_date(REQUEST_TIME, 'medium', 'd/m/Y h:i');
+    $form['field_project'][LANGUAGE_NONE][0]['target_id']['#value'] = $project->title . ' (' . $project_id . ')';
+    $form['field_project_revision'][LANGUAGE_NONE][0]['value']['#value'] = $approved_vid->vid;
+  }
+
   $form['#theme'] = 'ict_update_add_form';
 
   $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
 
-  $form['field_expected_completion_date']['und'][0]['#prefix'] = '<div class="element-hidden">';
-  $form['field_expected_completion_date']['und'][0]['#suffix'] = '</div>';
-  $form['field_expected_completion_date']['date']['#type'] = 'textfield';
+//  $form['field_expected_completion_date']['und'][0]['#prefix'] = '<div class="element-hidden">';
+//  $form['field_expected_completion_date']['und'][0]['#suffix'] = '</div>';
+//  $form['field_expected_completion_date']['date']['#type'] = 'textfield';
   $form['field_expected_completion_date']['und'][0]['#theme_wrappers'] = array();
-  if (empty($form['nid']['#value'])) {
-    $form['field_expected_completion_date']['und'][0]['#default_value'] = '';
-  }
-  $form['field_expected_completion_date']['date']['#default_value'] = $form['field_expected_completion_date']['und'][0]['#default_value'];
+//  if (empty($form['nid']['#value'])) {
+//    $form['field_expected_completion_date']['und'][0]['#default_value'] = '';
+//  }
+//  $form['field_expected_completion_date']['date']['#default_value'] = $form['field_expected_completion_date']['und'][0]['#default_value'];
   $form['field_expected_completion_date']['date']['#attributes'] = array(
     'class' => array('add_datepicker'),
     'data-dateFormat' => 'dd/mm/yy',
   );
-  $form['field_expected_completion_date']['radio'] = array(
-    '#type' => 'radios',
-    '#options' => array(
-      'time' => '',
-      'na' => 'N/A',
-    ),
-    '#default_value' => 'time',
-    '#weight' => -999,
-  );
-  $form['field_expected_completion_date']['#element_validate'] = array('ict_update_datepicker_value');
+//  $form['field_expected_completion_date']['radio'] = array(
+//    '#type' => 'radios',
+//    '#options' => array(
+//      'time' => '',
+//      'na' => 'N/A',
+//    ),
+//    '#default_value' => 'time',
+//    '#weight' => -999,
+//  );
+//  $form['field_expected_completion_date']['#element_validate'] = array('ict_update_datepicker_value');
 
   $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
 
-  $form['actions']['submit']['#attributes']['class'] = array('form-submit');
+  $form['actions']['submit']['#attributes']['class'] = array('submit-button');
   $form['actions']['submit_request'] = $form['actions']['submit'];
   $form['actions']['submit_request']['#value'] = t('Save and request approval');
-  $form['actions']['submit_request']['#submit'][] = 'ict_project_workflow_set_wait_approve';
-  $form['actions']['submit']['#submit'][] = 'ict_project_workflow_set_draft';
+  $form['actions']['submit_request']['#submit'][] = 'ict_update_workflow_set_wait_approve';
+  $form['actions']['submit']['#submit'][] = 'ict_update_workflow_set_draft';
+}
+
+function ict_update_workflow_set_wait_approve($form, &$form_state) {
+  if (!$form_state['node']->nid) {
+    return;
+  }
+  $nid = $form_state['node']->nid;
+  if (ict_project_get_workflow_state($nid) != 'waiting_approval') {
+    $form_state['node']->revision = TRUE;
+    node_save($form_state['node']);
+    ict_project_set_workflow_state('waiting_approval', $nid);
+  }
+}
+
+function ict_update_workflow_set_draft($form, &$form_state) {
+  if (!$form_state['node']->nid) {
+    return;
+  }
+  $nid = $form_state['node']->nid;
+  if (ict_project_get_workflow_state($nid) != 'draft') {
+    $form_state['node']->revision = TRUE;
+    node_save($form_state['node']);
+    ict_project_set_workflow_state('draft', $nid);
+  }
 }
 
 function ict_update_datepicker_value($element, &$form_state, $form) {

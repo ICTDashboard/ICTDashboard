@@ -68,10 +68,10 @@ function ict_update_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '1',
         ),
       ),
       'display' => array(),
@@ -101,7 +101,6 @@ function ict_update_strongarm() {
   $strongarm->name = 'node_options_update';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'revision',
   );
   $export['node_options_update'] = $strongarm;
 
