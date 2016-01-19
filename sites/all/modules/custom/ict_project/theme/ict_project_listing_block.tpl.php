@@ -88,14 +88,49 @@
               </td>
               <td class="update">
                 <?php if (!isset($project->demo_buttons)) : ?>
+
                   <a href="<?php print url('node/' . $project->nid); ?>">
-                    <span><?php print t('View'); ?></span>
+                    <span><?php print t('View Project'); ?></span>
                   </a>
-                  <?php if (ict_project_access_update('create', $project->nid)) : ?>
-                    <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
-                      <span><?php print t('Create an update draft'); ?></span>
+
+                  <?php if (ict_project_access_project('delete', $user, $project->nid)) : ?>
+                    <a href="<?php print url('node/' . $project->nid . '/delete'); ?>">
+                      <span><?php print t('Delete Project'); ?></span>
                     </a>
                   <?php endif; ?>
+
+                  <?php // create or edit draft ?>
+                  <?php if (ict_project_access_project('edit', $user, $project->nid)) : ?>
+                    <?php if (ict_project_get_workflow_state($project->nid) == 'predraft') : ?>
+                      <a href="<?php print url('baseline/' . $project->nid . '/create-draft'); ?>">
+                        <span><?php print t('Create Baseline Draft'); ?></span>
+                      </a>
+                    <?php else : ?>
+                      <a href="<?php print url('baseline/' . $project->nid . '/edit-draft'); ?>">
+                        <span><?php print t('Edit Baseline Draft'); ?></span>
+                      </a>
+                    <?php endif; ?>
+                  <?php endif; ?>
+
+                  <?php // create or edit draft ?>
+                  <?php if (ict_project_access_project('approve', $user, $project->nid)) : ?>
+                    <a href="<?php print url('baseline/' . $project->nid . '/review'); ?>">
+                      <span><?php print t('Review Baseline Draft'); ?></span>
+                    </a>
+                  <?php endif; ?>
+
+                  <?php if (ict_project_access_update('create', $project->nid)) : ?>
+                    <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
+                      <span><?php print t('Create Update Draft'); ?></span>
+                    </a>
+                  <?php endif; ?>
+
+                  <?php if (ict_project_access_update('create', $project->nid)) : ?>
+                    <a href="<?php print url('update/' . $project->nid . '/edit'); ?>">
+                      <span><?php print t('Edit Update Draft'); ?></span>
+                    </a>
+                  <?php endif; ?>
+
                 <?php else : ?>
                   <?php foreach ($project->demo_buttons as $key => $button) : ?>
                     <a href="http://sandpit.itdash.lws.links.com.au/?path=<?php print $key; ?>&nid=<?php print $project->nid; ?>">

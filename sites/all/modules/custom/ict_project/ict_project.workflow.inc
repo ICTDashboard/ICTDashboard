@@ -51,9 +51,6 @@ function ict_project_get_workflow_state($nid, $vid = NULL) {
   return reset($res);
 }
 
-/**
- * Get workflow state. If revision is NULL set for the latest revision
- */
 function ict_project_get_last_transaction_by_state($nid, $state) {
   if (!$nid) {
     return FALSE;
@@ -66,4 +63,20 @@ function ict_project_get_last_transaction_by_state($nid, $state) {
   $res = $query->execute()->fetchAll();
 
   return reset($res);
+}
+
+/**
+ * Get workflow state. If revision is NULL set for the latest revision
+ */
+function ict_project_check_if_baseline_ever_approved($nid) {
+  if (!$nid) {
+    return FALSE;
+  }
+  $query = db_select('project_workflow', 'w');
+  $query->addField('w', 'state');
+  $query->condition('nid', $nid);
+  $query->condition('state', 'approved');
+  $res = $query->execute()->fetchCol();
+
+  return !reset($res);
 }

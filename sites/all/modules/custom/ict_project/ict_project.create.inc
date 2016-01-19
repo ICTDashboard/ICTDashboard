@@ -389,7 +389,7 @@ function ict_project_create_form_submit($form, &$form_state) {
   $node = new stdClass();
   $node->type = 'project';
   $node->title = $values['title'];
-  $node->status = 0;
+  $node->status = 1;
 
   $node->language = LANGUAGE_NONE;
   node_object_prepare($node);
