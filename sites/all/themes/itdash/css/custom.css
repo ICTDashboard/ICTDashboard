@@ -148,6 +148,7 @@ div#edit-field-rebaselined-total-budget td {
 /*.radio-description .form-item {float: left;}*/
 .header #logo {font-size: 29px;}
 
+#content .project-update-submission .submit input.form-submit,
 #content .project-update-submission .submit input#edit-preview,
 #content .project-update-submission .submit input#edit-preview--2,
 #content .project-update-submission .submit input#edit-submit {
@@ -163,6 +164,9 @@ div#edit-field-rebaselined-total-budget td {
   vertical-align: top;
   display: inline-block;
   font-weight: 600;
+  width: auto;
+  min-width: 130px;
+  padding: 2px 15px;
 }
 
 #content .project-update-submission #edit-actions,
