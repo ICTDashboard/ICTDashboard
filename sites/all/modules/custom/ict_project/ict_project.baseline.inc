@@ -172,7 +172,7 @@ function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) 
 }
 
 /**
- * Submit Vaseline approval - APPROVED
+ * Submit Vaseline approval - DECLINED
  *
  * @param $form
  * @param $form_state
