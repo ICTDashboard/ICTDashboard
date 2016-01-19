@@ -653,6 +653,15 @@ function ict_project_theme () {
       'template' => 'ict_project_baseline_edit_draft',
       'render element' => 'form'
     ),
+    'ict_project_baseline_approve_form' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'template' => 'ict_project_baseline_approve_form',
+      'render element' => 'form'
+    ),
+    'ict_project_baseline_approve_block' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'template' => 'ict_project_baseline_approve_block',
+    ),
   );
 }
 
