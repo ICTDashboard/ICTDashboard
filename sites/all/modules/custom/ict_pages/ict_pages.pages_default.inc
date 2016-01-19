@@ -64,7 +64,8 @@ function ict_pages_default_page_manager_handlers() {
             'visibility_setting' => '1',
             'paths' => 'faq
 dashboard
-project/*/update',
+project/*/update
+update/*',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,

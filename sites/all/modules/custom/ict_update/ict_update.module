@@ -73,11 +73,23 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
 
-  $form['actions']['submit']['#attributes']['class'] = array('submit-button');
-  $form['actions']['submit_request'] = $form['actions']['submit'];
-  $form['actions']['submit_request']['#value'] = t('Save and request approval');
-  $form['actions']['submit_request']['#submit'][] = 'ict_update_workflow_set_wait_approve';
-  $form['actions']['submit']['#submit'][] = 'ict_update_workflow_set_draft';
+  $action = arg(2);
+  if ($action == 'approve') {
+    $form['actions']['submit']['#attributes']['class'] = array('submit-button');
+    $form['actions']['submit_approve'] = $form['actions']['submit_decline'] = $form['actions']['submit'];
+    unset($form['actions']['submit']);
+    $form['actions']['submit_decline']['#value'] = t('Decline');
+    $form['actions']['submit_approve']['#value'] = t('Approve');
+    $form['actions']['submit_decline']['#submit'][] = 'ict_update_workflow_set_draft';
+    $form['actions']['submit_approve']['#submit'][] = 'ict_update_workflow_set_approve';
+  }
+  else {
+    $form['actions']['submit']['#attributes']['class'] = array('submit-button');
+    $form['actions']['submit_request'] = $form['actions']['submit'];
+    $form['actions']['submit_request']['#value'] = t('Save and request approval');
+    $form['actions']['submit_request']['#submit'][] = 'ict_update_workflow_set_wait_approve';
+    $form['actions']['submit']['#submit'][] = 'ict_update_workflow_set_draft';
+  }
 }
 
 function ict_update_workflow_set_wait_approve($form, &$form_state) {
@@ -89,6 +101,18 @@ function ict_update_workflow_set_wait_approve($form, &$form_state) {
     $form_state['node']->revision = TRUE;
     node_save($form_state['node']);
     ict_project_set_workflow_state('waiting_approval', $nid);
+  }
+}
+
+function ict_update_workflow_set_approve($form, &$form_state) {
+  if (!$form_state['node']->nid) {
+    return;
+  }
+  $nid = $form_state['node']->nid;
+  if (ict_project_get_workflow_state($nid) != 'approved') {
+    $form_state['node']->revision = TRUE;
+    node_save($form_state['node']);
+    ict_project_set_workflow_state('approved', $nid);
   }
 }
 
