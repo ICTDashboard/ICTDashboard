@@ -119,15 +119,23 @@
                     </a>
                   <?php endif; ?>
 
-                  <?php if (ict_project_access_update('create', $project->nid)) : ?>
+                  <?php $updates = ict_update_project_get_list($project_id); ?>
+                  <?php $update_id = reset($updates); ?>
+                  <?php if (ict_update_creation_allowed($project->nid)) : ?>
                     <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
                       <span><?php print t('Create Update Draft'); ?></span>
                     </a>
                   <?php endif; ?>
 
-                  <?php if (ict_project_access_update('create', $project->nid)) : ?>
-                    <a href="<?php print url('update/' . $project->nid . '/edit'); ?>">
+                  <?php if (ict_update_edit_allowed($project->nid, $update_id)) : ?>
+                    <a href="<?php print url('update/' . $update_id . '/edit'); ?>">
                       <span><?php print t('Edit Update Draft'); ?></span>
+                    </a>
+                  <?php endif; ?>
+
+                  <?php if (ict_update_approve_allowed($project->nid, $update_id)) : ?>
+                    <a href="<?php print url('update/' . $update_id . '/approve'); ?>">
+                      <span><?php print t('Review Update Draft'); ?></span>
                     </a>
                   <?php endif; ?>
 

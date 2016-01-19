@@ -152,3 +152,65 @@ function ict_update_theme($existing, $type, $theme, $path) {
     ),
   );
 }
+
+function ict_update_creation_allowed($project_id) {
+  if (!ict_project_access_update('create', $project_id)) {
+    return FALSE;
+  }
+  $updates = ict_update_project_get_list($project_id);
+  if (!empty($updates)) {
+    $update = reset($updates);
+    $state = ict_project_get_workflow_state($update);
+    if ($state == 'approved') {
+      return TRUE;
+    }
+  }
+  else {
+    $approved_vid = ict_project_get_last_transaction_by_state($project_id, 'approved');
+    if ($approved_vid->vid) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+function ict_update_edit_allowed($project_id, $update_id = NULL) {
+  if (!$update_id) {
+    $updates = ict_update_project_get_list($project_id);
+    if (empty($updates)) {
+      return FALSE;
+    }
+    $update_id = reset($updates);
+  }
+  if (!ict_project_access_update('edit', $project_id, NULL, $update_id)) {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+function ict_update_approve_allowed($project_id, $update_id = NULL) {
+  if (!$update_id) {
+    $updates = ict_update_project_get_list($project_id);
+    if (empty($updates)) {
+      return FALSE;
+    }
+    $update_id = reset($updates);
+  }
+  if (!ict_project_access_update('waiting_approval', $project_id, NULL, $update_id)) {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+function ict_update_project_get_list($project_id) {
+  $query = db_select('field_data_field_project', 'p');
+  $query->addField('p', 'entity_id');
+  $query->condition('field_project_target_id', $project_id);
+  $query->orderBy('entity_id', 'DESC');
+  $res = $query->execute()->fetchCol();
+
+  return $res;
+}
