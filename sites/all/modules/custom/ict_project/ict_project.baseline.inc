@@ -79,3 +79,60 @@ function ict_project_baseline_edit_draft_block ($nid) {
 
   return drupal_render($form);
 }
+
+/**
+ * Baseline Approve block
+ * @param $nid
+ * @return string
+ */
+function ict_project_baseline_approve_block($nid) {
+  $node = node_load($nid);
+
+  if (!$node) {
+    drupal_not_found();
+  }
+
+  if (!ict_project_access_project('approve', NULL, $node->nid)) {
+    drupal_access_denied();
+  }
+
+  $form = drupal_get_form('ict_project_baseline_approve_form', $nid);
+  $approve_form = render($form);
+
+  return theme('ict_project_baseline_approve_block', array(
+    'approve_form' => $approve_form,
+    'node' => $node
+  ));
+}
+
+/**
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_project_baseline_approve_form($form, $form_state, $nid) {
+  $form['#theme'] = 'ict_project_baseline_approve_form';
+
+  $form['nid'] = array(
+    '#value' => $nid,
+    '#type' => 'values'
+  );
+
+  $form['approve'] = array(
+    '#type' => 'submit',
+    '#value' => t('Approve'),
+    '#submit' => array(),
+    '#attributes' => array('class' => array('submit-button')),
+    '#validate' => array()
+  );
+
+  $form['decline'] = array(
+    '#type' => 'submit',
+    '#value' => t('Decline'),
+    '#submit' => array(),
+    '#attributes' => array('class' => array('submit-button')),
+    '#validate' => array()
+  );
+
+  return $form;
+}
