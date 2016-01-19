@@ -27,7 +27,7 @@ function ict_project_baseline_create_draft_block ($nid) {
   }
 
   // update workflow state
-  ict_project_set_workflow_state('draft', $nid);
+  ict_project_set_workflow_state('draft', $node->nid, $node->vid);
   drupal_set_message(t('Draft has been created, now you can edit it.'));
 
   drupal_goto('baseline/' . $nid . '/edit-draft');
@@ -121,18 +121,69 @@ function ict_project_baseline_approve_form($form, $form_state, $nid) {
   $form['approve'] = array(
     '#type' => 'submit',
     '#value' => t('Approve'),
-    '#submit' => array(),
     '#attributes' => array('class' => array('submit-button')),
-    '#validate' => array()
+    '#submit' => array('ict_project_baseline_approve_form_submit_approve'),
+    '#validate' => array('ict_project_baseline_approve_form_validate')
   );
 
   $form['decline'] = array(
     '#type' => 'submit',
     '#value' => t('Decline'),
-    '#submit' => array(),
     '#attributes' => array('class' => array('submit-button')),
-    '#validate' => array()
+    '#submit' => array('ict_project_baseline_approve_form_submit_decline'),
+    '#validate' => array('ict_project_baseline_approve_form_validate')
   );
 
   return $form;
+}
+
+/**
+ * Validate Vaseline approval
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_project_baseline_approve_form_validate ($form, &$form_state) {
+  // make sure that other approver hasn't approved the project
+  $nid = $form['nid']['#value'];
+  if (!ict_project_access_project('approve', NULL, $nid)) {
+    form_set_error('nid', t('Sorry but the Baseline Data cannot be approved. Make sure that you have correct access rights and that it has not been approved or declined by another Data Approver'));
+  }
+}
+
+/**
+ * Submit Vaseline approval - APPROVED
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) {
+  $nid = $form['nid']['#value'];
+  // need to create new revision
+  $node = node_load($nid);
+  $node->revision = TRUE;
+  node_save($node);
+  // update workflow state
+  ict_project_set_workflow_state('approved', $node->nid, $node->vid);
+  drupal_set_message(t('Baseline Data has been approved.'));
+
+  // redirect user to projects page
+  $form['#redirect'] = "projects";
+}
+
+/**
+ * Submit Vaseline approval - DECLINED
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) {
+  $nid = $form['nid']['#value'];
+  $node = node_load($nid);
+  // update workflow state
+  ict_project_set_workflow_state('draft', $node->nid, $node->vid);
+  drupal_set_message(t('Baseline Data has been declined.'));
+
+  // redirect user to projects page
+  $form['#redirect'] = "projects";
 }
