@@ -68,10 +68,10 @@ function ict_project_update_7301() {
 /**
  * Creates project_workflow table
  */
-function ict_project_update_7302() {
+function ict_project_update_7303() {
   if (!db_table_exists('project_workflow')) {
     $project_edit_schema = array(
-      'description' => 'Contains workflow states for projects, updates, rebaslines.',
+      'description' => 'Contains workflow states for projects, updates, rebaselines.',
       'fields' => array(
         'nid' => array(
           'description' => 'Node ID of the project',
@@ -98,7 +98,7 @@ function ict_project_update_7302() {
           'not null' => TRUE
         ),
         'created' => array(
-          'description' => 'The Unix timestamp when the access was granted.',
+          'description' => 'The Unix timestamp when the workflow state was changed.',
           'type' => 'int',
           'not null' => TRUE,
           'default' => 0
