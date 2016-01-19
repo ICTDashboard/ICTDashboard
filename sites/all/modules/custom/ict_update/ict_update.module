@@ -186,6 +186,9 @@ function ict_update_edit_allowed($project_id, $update_id = NULL) {
   if (!ict_project_access_update('edit', $project_id, NULL, $update_id)) {
     return FALSE;
   }
+  if (!in_array(ict_project_get_workflow_state($update_id), array('draft'))) {
+    return FALSE;
+  }
 
   return TRUE;
 }
@@ -198,7 +201,10 @@ function ict_update_approve_allowed($project_id, $update_id = NULL) {
     }
     $update_id = reset($updates);
   }
-  if (!ict_project_access_update('waiting_approval', $project_id, NULL, $update_id)) {
+  if (!ict_project_access_update('approve', $project_id, NULL, $update_id)) {
+    return FALSE;
+  }
+  if (!in_array(ict_project_get_workflow_state($update_id), array('waiting_approval'))) {
     return FALSE;
   }
 

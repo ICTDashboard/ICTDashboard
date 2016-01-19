@@ -119,7 +119,7 @@
                     </a>
                   <?php endif; ?>
 
-                  <?php $updates = ict_update_project_get_list($project_id); ?>
+                  <?php $updates = ict_update_project_get_list($project->nid); ?>
                   <?php $update_id = reset($updates); ?>
                   <?php if (ict_update_creation_allowed($project->nid)) : ?>
                     <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
