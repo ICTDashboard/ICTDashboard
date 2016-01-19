@@ -42,8 +42,7 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
   if ($op == 'view' && $nid) {
     $state = ict_project_get_workflow_state($nid);
     if (in_array($state, array('predraft', 'draft', 'waiting_approval'))) {
-      if (in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_EDITOR_ACCESS))
-        || in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_APPROVER_ACCESS))) {
+      if (TRUE) {
         return TRUE;
       }
     }
@@ -71,7 +70,16 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
   }
 
   if ($op == 'approve' && $nid) {
+    dvm(in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_APPROVER_ACCESS)));
     if (in_array(ict_project_get_workflow_state($nid), array('waiting_approval')) && in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_APPROVER_ACCESS))) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  if ($op == 'delete' && $nid) {
+    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account) &&
+      ict_project_check_if_baseline_ever_approved($nid)) {
       return TRUE;
     }
     return FALSE;

@@ -98,7 +98,7 @@ and it will create a button dependant on those variables.
 }
 
 .export-btn {
-  color: #202b3d;
+  color: #202b3d !important;
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
@@ -120,7 +120,7 @@ and it will create a button dependant on those variables.
   background: linear-gradient(to bottom, #d0d8e5 0%, #c9d1de 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d8e5', endColorstr='#c9d1de',GradientType=0 );
   &:hover {
-    color: #fff;
+    color: #fff !important;
     border: 1px solid #0e6872;
     background: #157a86;
     background: -moz-linear-gradient(top, #157a86 0%, #0e6872 100%);

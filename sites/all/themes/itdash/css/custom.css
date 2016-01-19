@@ -165,7 +165,7 @@ div#edit-field-rebaselined-total-budget td {
   display: inline-block;
   font-weight: 600;
   width: auto;
-  min-width: 130px;
+  /*min-width: 130px;*/
   padding: 2px 15px;
 }
 

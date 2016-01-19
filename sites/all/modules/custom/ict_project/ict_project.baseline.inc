@@ -57,6 +57,25 @@ function ict_project_baseline_edit_draft_block ($nid) {
   module_load_include('inc', 'node', 'node.pages');
   $form = drupal_get_form('project_node_form', $node);
 
-//  return drupal_render($form);
-  return theme('ict_project_baseline_edit_draft');
+  // makes form elements titles
+  function make_title_display(&$elem) {
+    foreach (element_children($elem) as $element) {
+      $elem[$element]['#title_display'] = 'invisible';
+      make_title_display($element);
+    }
+  }
+
+  foreach (element_children($form) as $element) {
+    $element_name = explode('_', $element);
+    if (reset($element_name) == 'field') {
+      $form[$element]['#title_display'] = 'invisible';
+      make_title_display($form[$element]);
+    }
+  }
+
+  $form['actions']['submit']['#attributes']['class'][] = 'submit-button';
+  $form['actions']['submit_request']['#attributes']['class'][] = 'submit-button';
+  $form['#theme'] = 'ict_project_baseline_edit_draft';
+
+  return drupal_render($form);
 }
