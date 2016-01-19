@@ -1,20 +1,4 @@
 <div id="inner-content" class="wrap cf">
-  <h2>  This is for the first view of a newly created update draft...</h2>
-  <p>This one should:</p>
-  <p>Show non editable baseline fileds for node 1769</p>
-  <p>Show editable update fields.</p>
-  <p>Not have any data entered for the update fields.</p>
-
-  <p>Provide a link to  <strong><a href="/?path=preview_update_draft&amp;nid=1769">save and go to update preview page</a></strong> or <strong><a href="http://itdash.lws.links.com.au/projects">cancel and return to projects  list</a></strong>.</p>
-
-  <h2>&nbsp;</h2>
-  <h2>&nbsp;</h2>
-  <h2>&nbsp;</h2>
-  <h2>About this form</h2>
-  <p>The information and fields below provide you with a view on how project managers will be able to see previously entered baseline data and data from a previous update, while also having the opportunity to enter details for a new update.</p>
-  <p>This sandpit form is not functional and does not attempt to validate data that is entered.</p>
-  <p>The form has not yet been optimised for older browsers. If you have difficulty you can <a href="./Sandpit_form_demo.pdf" target="_blank">download a PDF preview</a> and review the <a href="./Dashboard_Data_Definitions.pdf" target="_blank">associated data definition document</a> for reference.<br>
-  </p>
   <h2>Update data</h2>
   <h3>Basic project information</h3>
   <div class="project-update-submission d-all">
@@ -295,9 +279,11 @@
           <?php print t('Cancel'); ?>
         </a>
         <?php print render($form['actions']['submit']); ?>
+        <?php print render($form['actions']['submit_approve']); ?>
       </div>
       <div style="overflow:hidden; text-align: right;" class="text">
         <?php print render($form['actions']['submit_request']); ?>
+        <?php print render($form['actions']['submit_decline']); ?>
       </div>
     </div>
   </div>

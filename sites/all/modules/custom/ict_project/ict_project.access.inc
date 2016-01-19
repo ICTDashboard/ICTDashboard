@@ -117,7 +117,8 @@ function ict_project_access_update($op, $project_id, $account = NULL, $nid = NUL
 
   if ($op == 'create' && $project_id) {
     $state = ict_project_get_workflow_state($project_id);
-    if (in_array($state, array('approved')) && in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_EDITOR_ACCESS))) {
+    $approved_vid = ict_project_get_last_transaction_by_state($project_id, 'approved');
+    if ($approved_vid->vid && in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_EDITOR_ACCESS))) {
       return TRUE;
     }
     return FALSE;
