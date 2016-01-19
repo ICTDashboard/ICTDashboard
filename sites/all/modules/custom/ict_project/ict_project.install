@@ -89,7 +89,7 @@ function ict_project_update_7302() {
           'description' => 'Old workflow state',
           'type' => 'varchar',
           'length' => 32,
-          'not null' => TRUE
+          'not null' => FALSE,
         ),
         'state' => array(
           'description' => 'Workflow state',
