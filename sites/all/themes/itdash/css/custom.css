@@ -283,10 +283,12 @@ textarea.is-invalid,
     font-size: 14px;
 }
 .sbHolderDisabled {
-    background-color: #b3bdcf;
-    border: inherit;
+    background-color: #ced6e6;
+    /*border: inherit;*/
+    border-color: #b3bdcf;
 }
-input.editor-email {margin-bottom: 10px !important;}
+input.editor-email,
+input.approver-email {margin-bottom: 10px !important;}
 .ict-faq-answer ul {
     margin-left: 35px;
     list-style-type: disc;
@@ -369,4 +371,16 @@ input.editor-email {margin-bottom: 10px !important;}
 td.select-no-border .sbHolder {
     height: 38px;
 }
-
+.email-container {
+    padding-right: 80px;
+    position: relative;
+}
+.email-container input[type="submit"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#approvers .field-add-more-submit,
+#editors .field-add-more-submit {
+    float: left !important;
+}
