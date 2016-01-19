@@ -12,7 +12,7 @@ function ict_project_set_workflow_state($state, $nid, $vid = NULL) {
     $last = reset($revisions);
     $vid = !empty($last->vid) ? $last->vid : NULL;
   }
-  dvm($vid);
+
   if (!$nid || !$vid || !$state) {
     return FALSE;
   }

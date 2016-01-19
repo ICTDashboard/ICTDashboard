@@ -647,6 +647,10 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme',
       'template' => 'ict_project_listing_block'
     ),
+    'ict_project_baseline_edit_draft' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'template' => 'ict_project_baseline_edit_draft'
+    ),
   );
 }
 

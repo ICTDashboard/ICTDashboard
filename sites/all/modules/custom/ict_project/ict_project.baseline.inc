@@ -57,5 +57,6 @@ function ict_project_baseline_edit_draft_block ($nid) {
   module_load_include('inc', 'node', 'node.pages');
   $form = drupal_get_form('project_node_form', $node);
 
-  return drupal_render($form);
+//  return drupal_render($form);
+  return theme('ict_project_baseline_edit_draft');
 }

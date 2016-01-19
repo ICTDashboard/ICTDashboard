@@ -96,3 +96,39 @@ and it will create a button dependant on those variables.
     }
   }
 }
+
+.export-btn {
+  color: #202b3d;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  height: 41px;
+  line-height: 41px;
+  border: 1px solid #99a8c2;
+  border-radius: 4px;
+  min-width: 128px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  background: #d0d8e5;
+  background: -moz-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d0d8e5), color-stop(100%, #c9d1de));
+  background: -webkit-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
+  background: -o-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
+  background: -ms-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
+  background: linear-gradient(to bottom, #d0d8e5 0%, #c9d1de 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d8e5', endColorstr='#c9d1de',GradientType=0 );
+  &:hover {
+    color: #fff;
+    border: 1px solid #0e6872;
+    background: #157a86;
+    background: -moz-linear-gradient(top, #157a86 0%, #0e6872 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #157a86), color-stop(100%, #0e6872));
+    background: -webkit-linear-gradient(top, #157a86 0%, #0e6872 100%);
+    background: -o-linear-gradient(top, #157a86 0%, #0e6872 100%);
+    background: -ms-linear-gradient(top, #157a86 0%, #0e6872 100%);
+    background: linear-gradient(to bottom, #157a86 0%, #0e6872 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#157a86', endColorstr='#0e6872',GradientType=0 );
+  }
+}
