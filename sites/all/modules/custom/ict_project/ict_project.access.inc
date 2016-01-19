@@ -35,14 +35,19 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
     global $user;
     $account = $user;
   }
+
   if ($account->uid == 1) {
+//  FOR DEVELOPMENT PURPOSES ONLY!!!
     return TRUE;
   }
 
   if ($op == 'view' && $nid) {
     $state = ict_project_get_workflow_state($nid);
     if (in_array($state, array('predraft', 'draft', 'waiting_approval'))) {
-      if (TRUE) {
+      $node = node_load($nid);
+      $project_department = ict_department_get_department_tid_of_entity('project', $node);
+      $user_department = ict_department_get_department_tid_of_entity('user', $account);
+      if ($user_department == $project_department) {
         return TRUE;
       }
     }
@@ -70,7 +75,6 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
   }
 
   if ($op == 'approve' && $nid) {
-    dvm(in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_APPROVER_ACCESS)));
     if (in_array(ict_project_get_workflow_state($nid), array('waiting_approval')) && in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_APPROVER_ACCESS))) {
       return TRUE;
     }
@@ -80,7 +84,13 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
   if ($op == 'delete' && $nid) {
     if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account) &&
       ict_project_check_if_baseline_ever_approved($nid)) {
-      return TRUE;
+      $node = node_load($nid);
+      $project_department = ict_department_get_department_tid_of_entity('project', $node);
+      $user_department = ict_department_get_department_tid_of_entity('user', $account);
+      if ($user_department == $project_department) {
+        return TRUE;
+      }
+      return FALSE;
     }
     return FALSE;
   }
