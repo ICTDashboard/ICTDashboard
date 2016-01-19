@@ -147,7 +147,7 @@ function ict_project_baseline_approve_form_validate ($form, &$form_state) {
   // make sure that other approver hasn't approved the project
   $nid = $form['nid']['#value'];
   if (!ict_project_access_project('approve', NULL, $nid)) {
-    form_set_error('nid', t('Sorry but the Baseline cannot be approved. Make sure that you have correct access rights and that it is not approved by another Data Approver'));
+    form_set_error('nid', t('Sorry but the Baseline Data cannot be approved. Make sure that you have correct access rights and that it has not been approved or declined by another Data Approver'));
   }
 }
 
