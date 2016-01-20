@@ -168,164 +168,6 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'field_collection_item-field_rebaselined_total_budget-field_capex'.
-  $field_instances['field_collection_item-field_rebaselined_total_budget-field_capex'] = array(
-    'bundle' => 'field_rebaselined_total_budget',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 2,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_capex',
-    'label' => 'Capex',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_rebaselined_total_budget-field_opex'.
-  $field_instances['field_collection_item-field_rebaselined_total_budget-field_opex'] = array(
-    'bundle' => 'field_rebaselined_total_budget',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_opex',
-    'label' => 'Opex',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_rebaselined_total_budget-field_total'.
-  $field_instances['field_collection_item-field_rebaselined_total_budget-field_total'] = array(
-    'bundle' => 'field_rebaselined_total_budget',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 3,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_total',
-    'label' => 'Total',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_rebaselined_total_budget-field_year'.
-  $field_instances['field_collection_item-field_rebaselined_total_budget-field_year'] = array(
-    'bundle' => 'field_rebaselined_total_budget',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_year',
-    'label' => 'Year',
-    'required' => 1,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-project-field_brief_project_summary'.
   $field_instances['node-project-field_brief_project_summary'] = array(
     'bundle' => 'project',
@@ -347,12 +189,13 @@ function ict_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_brief_project_summary',
-    'label' => 'Project description',
+    'label' => 'Project Summary and Objectives ',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -362,7 +205,7 @@ function ict_project_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -400,7 +243,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 27,
+      'weight' => 14,
     ),
   );
 
@@ -437,136 +280,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 26,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_expenditure_type'.
-  $field_instances['node-project-field_expenditure_type'] = array(
-    'bundle' => 'project',
-    'default_value' => array(
-      0 => array(
-        'value' => 'Departmental',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 13,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_expenditure_type',
-    'label' => 'Expenditure type',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_external_fte'.
-  $field_instances['node-project-field_external_fte'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 32,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_external_fte',
-    'label' => 'External FTE',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 20,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_government_business_unit'.
-  $field_instances['node-project-field_government_business_unit'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please separate each title with a comma.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_government_business_unit',
-    'label' => 'Government entity business group, division, & branch ',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 15,
     ),
   );
 
@@ -575,7 +289,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The Government department or entity responsible for leading the project.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -591,6 +305,7 @@ function ict_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_government_entity_name',
     'label' => 'Government Entity Name',
@@ -603,7 +318,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -612,14 +327,14 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 33,
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 43,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -628,68 +343,23 @@ function ict_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_implementation_partners',
-    'label' => 'Implementation Partners?',
+    'label' => 'Government Implementation Partner/s',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'options',
       'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'text_textfield',
-      'weight' => 21,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_internal_fte'.
-  $field_instances['node-project-field_internal_fte'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 31,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_internal_fte',
-    'label' => 'Internal FTE',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 19,
+      'type' => 'options_select',
+      'weight' => 4,
     ),
   );
 
@@ -724,7 +394,7 @@ function ict_project_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_original_completion_date',
-    'label' => 'Original project completion date',
+    'label' => 'Original approved completion date ',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -740,13 +410,13 @@ function ict_project_field_default_field_instances() {
         'increment' => 15,
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
+        'label_position' => 'none',
+        'no_fieldset' => 1,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
-      'type' => 'date_select',
-      'weight' => 9,
+      'type' => 'date_popup',
+      'weight' => 11,
     ),
   );
 
@@ -755,7 +425,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -780,7 +450,7 @@ function ict_project_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_original_total_budget',
-    'label' => 'Original Total project budget by FY ($m, predicted & past)',
+    'label' => 'Project Budget By Financial Year ',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -790,7 +460,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 18,
+      'weight' => 9,
     ),
   );
 
@@ -799,7 +469,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The Portfolio for which the department or entity belongs.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -815,6 +485,7 @@ function ict_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_portfolio_name',
     'label' => 'Portfolio Name',
@@ -827,7 +498,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
@@ -836,7 +507,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The financial value of benefits expected by the project as identified in the business case. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -860,7 +531,7 @@ function ict_project_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_predicted_project_benefit',
-    'label' => 'Predicted project benefit ($m, as identified in business case) ',
+    'label' => 'Financial Benefits',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -874,7 +545,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 25,
+      'weight' => 12,
     ),
   );
 
@@ -883,7 +554,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Which government programme does this project support? ',
+    'description' => 'The official government programme that the project supports. ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -899,9 +570,10 @@ function ict_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_program_name',
-    'label' => 'Which Outcome and Programme does this project support?',
+    'label' => 'Programme Name',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -914,126 +586,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_project_category'.
-  $field_instances['node-project-field_project_category'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_project_category',
-    'label' => 'Project category',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_project_manager'.
-  $field_instances['node-project-field_project_manager'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_project_manager',
-    'label' => 'Project manager',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_project_manager_email'.
-  $field_instances['node-project-field_project_manager_email'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'email',
-        'settings' => array(),
-        'type' => 'email_default',
-        'weight' => 29,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_project_manager_email',
-    'label' => 'Project manager email',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'email',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'email_textfield',
-      'weight' => 17,
+      'weight' => 3,
     ),
   );
 
@@ -1062,10 +615,11 @@ function ict_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_project_stage',
-    'label' => 'Project stage',
-    'required' => 1,
+    'label' => 'Project Stage',
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
@@ -1074,23 +628,23 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 6,
     ),
   );
 
-  // Exported field_instance: 'node-project-field_project_status'.
-  $field_instances['node-project-field_project_status'] = array(
+  // Exported field_instance: 'node-project-field_resp_officer_position'.
+  $field_instances['node-project-field_resp_officer_position'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The position (including group, division & branch) of the Senior Responsible Officer.',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 21,
+        'type' => 'text_default',
+        'weight' => 45,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1101,131 +655,37 @@ function ict_project_field_default_field_instances() {
     ),
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
-    'field_name' => 'field_project_status',
-    'label' => 'Project status',
+    'field_name' => 'field_resp_officer_position',
+    'label' => 'Senior Responsible Officer  Position ',
     'required' => 0,
     'settings' => array(
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 13,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_project_users'.
-  $field_instances['node-project-field_project_users'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'user_reference',
-        'settings' => array(),
-        'type' => 'user_reference_default',
-        'weight' => 19,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_project_users',
-    'label' => 'Users',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 11,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_rebaselined_project_compl'.
-  $field_instances['node-project-field_rebaselined_project_compl'] = array(
-    'bundle' => 'project',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 26,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_rebaselined_project_compl',
-    'label' => 'Rebaselined project completion date',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'blank',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
+      'module' => 'text',
       'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'size' => 60,
       ),
-      'type' => 'date_select',
-      'weight' => 15,
+      'type' => 'text_textfield',
+      'weight' => 8,
     ),
   );
 
-  // Exported field_instance: 'node-project-field_rebaselined_project_start'.
-  $field_instances['node-project-field_rebaselined_project_start'] = array(
+  // Exported field_instance: 'node-project-field_responsible_officer_name'.
+  $field_instances['node-project-field_responsible_officer_name'] = array(
     'bundle' => 'project',
+    'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The name of the Senior Responsible Officer (SRO) for the delivery of the project. ',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 27,
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 44,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1234,119 +694,23 @@ function ict_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
-    'field_name' => 'field_rebaselined_project_start',
-    'label' => 'Rebaselined project start date',
+    'field_name' => 'field_responsible_officer_name',
+    'label' => 'Senior Responsible Officer Name',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'blank',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'date',
+      'module' => 'text',
       'settings' => array(
-        'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'size' => 60,
       ),
-      'type' => 'date_select',
-      'weight' => 14,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_rebaselined_total_budget'.
-  $field_instances['node-project-field_rebaselined_total_budget'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'field_collection',
-        'settings' => array(
-          'add' => 'Add',
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_view',
-        'weight' => 20,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_rebaselined_total_budget',
-    'label' => 'Rebaselined Total project budget by FY ($m, predicted & past)',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 12,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_rebaselined_total_project'.
-  $field_instances['node-project-field_rebaselined_total_project'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 35,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_rebaselined_total_project',
-    'label' => 'Rebaselined total project budget ($m)',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 23,
+      'type' => 'text_textfield',
+      'weight' => 7,
     ),
   );
 
@@ -1381,7 +745,7 @@ function ict_project_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_start_date',
-    'label' => 'Original project start date',
+    'label' => 'Original approved start date',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -1397,96 +761,43 @@ function ict_project_field_default_field_instances() {
         'increment' => 15,
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
+        'label_position' => 'none',
+        'no_fieldset' => 1,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
-      'type' => 'date_select',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-project-field_total_project_budget'.
-  $field_instances['node-project-field_total_project_budget'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 36,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_total_project_budget',
-    'label' => 'Original total project budget ($m)',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 24,
+      'type' => 'date_popup',
+      'weight' => 10,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.');
+  t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
   t('Capex');
   t('Demo Buttons');
   t('Department');
-  t('Expenditure type');
-  t('External FTE');
+  t('Financial Benefits');
   t('Government Entity Name');
-  t('Government entity business group, division, & branch ');
-  t('Implementation Partners?');
-  t('Internal FTE');
+  t('Government Implementation Partner/s');
   t('Opex');
-  t('Original Total project budget by FY ($m, predicted & past)');
-  t('Original project completion date');
-  t('Original project start date');
-  t('Original total project budget ($m)');
-  t('Please separate each title with a comma.');
+  t('Original approved completion date ');
+  t('Original approved start date');
   t('Portfolio Name');
-  t('Predicted project benefit ($m, as identified in business case) ');
-  t('Project category');
-  t('Project description');
-  t('Project manager');
-  t('Project manager email');
-  t('Project stage');
-  t('Project status');
-  t('Rebaselined Total project budget by FY ($m, predicted & past)');
-  t('Rebaselined project completion date');
-  t('Rebaselined project start date');
-  t('Rebaselined total project budget ($m)');
+  t('Programme Name');
+  t('Project Budget By Financial Year ');
+  t('Project Stage');
+  t('Project Summary and Objectives ');
+  t('Senior Responsible Officer  Position ');
+  t('Senior Responsible Officer Name');
+  t('The Government department or entity responsible for leading the project.');
+  t('The Portfolio for which the department or entity belongs.');
+  t('The financial value of benefits expected by the project as identified in the business case. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.');
+  t('The name of the Senior Responsible Officer (SRO) for the delivery of the project. ');
+  t('The official government programme that the project supports. ');
+  t('The position (including group, division & branch) of the Senior Responsible Officer.');
   t('Total');
-  t('Users');
-  t('Which Outcome and Programme does this project support?');
-  t('Which government programme does this project support? ');
   t('Year');
 
   return $field_instances;

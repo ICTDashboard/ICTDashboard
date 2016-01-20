@@ -26,7 +26,7 @@ function ict_project_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Project title'),
+      'title_label' => t('Project Title'),
       'help' => '',
     ),
   );
