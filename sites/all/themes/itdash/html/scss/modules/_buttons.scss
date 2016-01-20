@@ -119,6 +119,8 @@ and it will create a button dependant on those variables.
   background: -ms-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
   background: linear-gradient(to bottom, #d0d8e5 0%, #c9d1de 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d8e5', endColorstr='#c9d1de',GradientType=0 );
+  @include box-shadow(0, 3px, 0, #ccd1db);
+  margin-bottom: 3px;
   &:hover {
     color: #fff !important;
     border: 1px solid #0e6872;

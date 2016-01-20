@@ -606,7 +606,7 @@ function ict_project_theme () {
     ),
     'ict_project_create_form' => array(
       'template' => 'ict_project_create_form',
-      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'render element' => 'form',
     ),
     'ict_project_rebaselined_total_budget' => array(
@@ -649,18 +649,22 @@ function ict_project_theme () {
       'template' => 'ict_project_listing_block'
     ),
     'ict_project_baseline_edit_draft' => array(
-      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'ict_project_baseline_edit_draft',
       'render element' => 'form'
     ),
     'ict_project_baseline_approve_form' => array(
-      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'ict_project_baseline_approve_form',
       'render element' => 'form'
     ),
     'ict_project_baseline_approve_block' => array(
-      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'ict_project_baseline_approve_block',
+    ),
+    'ict_project_baseline_admin_user_details' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'ict_project_baseline_admin_user_details',
     ),
   );
 }
