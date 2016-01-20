@@ -88,20 +88,25 @@
       }
       .text {
         select,
-        input {
+        input[type="text"],
+        textarea {
           border: 1px solid #b3bdcf;
           background-color: #fff;
           background-image: none;
           color: #4d586a;
           width: 100%;
-          max-width: 60%;
+          max-width: 640px;
           margin: 0;
           height: 36px;
           line-height: 36px;
           padding: 0 10px;
         }
+        .grippie {
+          max-width: 640px;
+        }
         table {
           width: 100%;
+          max-width: 640px;
           border-bottom: 1px solid #abb6cb;
           border-collapse: separate;
           font-size: 14px;
@@ -138,6 +143,19 @@
           }
         }
       }
+      .form-item {
+        float: none;
+        width: 100%;
+        margin-bottom: 0;
+        .date-padding {
+          float: none;
+          padding: 0;
+          input[type="text"] {
+            width: 100%;
+            max-width: 640px;
+          }
+        }
+      }
     }
     .email-value {
       text-decoration: none;
@@ -147,9 +165,26 @@
       width: auto;
       margin-bottom: 15px;
     }
+    .dotted-line {
+      margin-top: 30px;
+      display: block;
+      height: 0px;
+      border-bottom: 1px dotted #b3bdd2;
+      width: 100%;
+    }
+    .sbHolder {
+      max-width: 640px;
+    }
+    .sbSelector {
+      width: 100%;
+    }
   }
   .submit {
     margin-bottom: 20px;
+    border-top: 1px solid #b0bacd;
+    padding-top: 20px;
+    text-align: right;
+    margin-top: 30px;
     .submit-button {
       background: url(../images/general-btn.png) repeat-x scroll 0 0 transparent;
       min-width: 275px;
@@ -163,12 +198,24 @@
       margin: 0 10px;
       vertical-align: top;
       display: inline-block;
-      font-weight: 600;
+      font-weight: bold;
       border: 0 none;
       overflow: hidden;
+      @include box-shadow(0, 3px, 0, #b1b7c1);
+      margin-bottom: 3px;
       &:hover {
         background-position: 0 -41px;
       }
     }
+  }
+}
+
+// TEMPORARY
+#ict-project-projects-create-form {
+  input {
+    max-width: 100% !important;
+  }
+  .sbHolder {
+    max-width: 100% !important;
   }
 }

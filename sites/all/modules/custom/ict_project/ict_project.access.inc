@@ -54,9 +54,6 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
     if (in_array($state, array('approved'))) {
       return TRUE;
     }
-    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
-      return TRUE;
-    }
     return FALSE;
   }
 
@@ -120,9 +117,6 @@ function ict_project_access_rebaseline($op, $project_id, $account = NULL) {
       }
     }
     if (in_array($state, array('approved'))) {
-      return TRUE;
-    }
-    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
       return TRUE;
     }
     return FALSE;
