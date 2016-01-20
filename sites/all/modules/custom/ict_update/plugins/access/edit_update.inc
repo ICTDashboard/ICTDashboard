@@ -22,8 +22,10 @@ $plugin = array(
  * Check for access.
  */
 function ict_update_edit_access($conf, $context) {
-
-  if (ict_project_access_update('edit', $context->argument)) {
+  $update_id = $context->argument;
+  $update = $context->data;
+  $project_id = $update->field_project['und'][0]['target_id'];
+  if (ict_update_edit_allowed($project_id, $update_id)) {
     return TRUE;
   }
 

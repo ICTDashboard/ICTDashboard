@@ -22,8 +22,11 @@ $plugin = array(
  * Check for access.
  */
 function ict_update_approve_access($conf, $context) {
+  $update_id = $context->argument;
+  $update = $context->data;
+  $project_id = $update->field_project['und'][0]['target_id'];
 
-  if (ict_project_access_update('approve', $context->argument)) {
+  if (ict_update_approve_allowed($project_id, $update_id)) {
     return TRUE;
   }
 

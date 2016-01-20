@@ -23,7 +23,7 @@ $plugin = array(
  */
 function ict_update_creation_access($conf, $context) {
 
-  if (ict_project_access_update('create', $context->argument)) {
+  if (ict_update_creation_allowed($context->argument)) {
     return TRUE;
   }
 
