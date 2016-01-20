@@ -168,7 +168,7 @@ function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been approved.'));
 
   // redirect user to projects page
-  $form['#redirect'] = "projects";
+  $form_state['#redirect'] = "projects";
 }
 
 /**
@@ -179,11 +179,14 @@ function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) 
  */
 function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) {
   $nid = $form['nid']['#value'];
+  // need to create new revision
   $node = node_load($nid);
+  $node->revision = TRUE;
+  node_save($node);
   // update workflow state
   ict_project_set_workflow_state('draft', $node->nid, $node->vid);
   drupal_set_message(t('Baseline Data has been declined.'));
 
   // redirect user to projects page
-  $form['#redirect'] = "projects";
+  $form_state['#redirect'] = "projects";
 }
