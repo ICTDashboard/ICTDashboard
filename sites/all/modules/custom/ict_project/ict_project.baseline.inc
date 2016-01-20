@@ -134,7 +134,7 @@ function ict_project_baseline_approve_block($nid) {
  * @param $form
  * @param $form_state
  */
-function ict_project_baseline_approve_form($form, $form_state, $nid) {
+function ict_project_baseline_approve_form($form, &$form_state, $nid) {
   $form['#theme'] = 'ict_project_baseline_approve_form';
 
   $form['nid'] = array(
@@ -192,7 +192,7 @@ function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been approved.'));
 
   // redirect user to projects page
-  $form_state['#redirect'] = "projects";
+  $form_state['redirect'] = "projects";
 }
 
 /**
@@ -212,7 +212,7 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been declined.'));
 
   // redirect user to projects page
-  $form_state['#redirect'] = "projects";
+  $form_state['redirect'] = "projects";
 }
 
 /**
