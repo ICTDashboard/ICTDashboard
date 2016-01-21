@@ -16,6 +16,10 @@
       <td><?php print drupal_render($element[$key]['field_benefit']); ?></td>
       <td class="select-no-border"><?php print drupal_render($element[$key]['field_status']); ?></td>
       <td><?php print drupal_render($element[$key]['field_commentary']); ?></td>
+      <?php $element[$key]['field_benefit_start_date']['und'][0]['value']['date']['#title'] =
+            $element[$key]['field_benefit_start_date']['und'][0]['value']['date']['#description'] =
+            $element[$key]['field_end_date']['und'][0]['value']['date']['#title'] =
+            $element[$key]['field_end_date']['und'][0]['value']['date']['#description'] = ''; ?>
       <td><?php print drupal_render($element[$key]['field_benefit_start_date']); ?></td>
       <td><?php print drupal_render($element[$key]['field_end_date']); ?></td>
       <td><?php print drupal_render($element[$key]['field_financial']); ?></td>

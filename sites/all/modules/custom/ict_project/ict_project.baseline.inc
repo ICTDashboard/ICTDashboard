@@ -50,7 +50,7 @@ function ict_project_baseline_edit_draft_block ($nid) {
 
   $state = ict_project_get_workflow_state($node->nid);
   if ($state != 'draft') {
-    drupal_set_message(t('You need to create draft first.'), 'error');
+    drupal_set_message(t('There is no draft.'), 'error');
     drupal_goto('projects');
   }
 
@@ -58,20 +58,44 @@ function ict_project_baseline_edit_draft_block ($nid) {
   $form = drupal_get_form('project_node_form', $node);
 
   // makes form elements titles
-  function make_title_display(&$elem) {
+  function prepare_for_display(&$elem, &$form) {
     foreach (element_children($elem) as $element) {
       $elem[$element]['#title_display'] = 'invisible';
-      make_title_display($element);
+      $parent_element = &$form[reset($elem[$element]['#array_parents'])];
+      if (!empty($elem[$element]['#description'])) {
+        $parent_element['#description'] = $elem[$element]['#description'];
+        $elem[$element]['#description'] = NULL;
+      }
+      if (!empty($elem[$element]['#title'])) {
+        $parent_element['#title'] = $elem[$element]['#title'];
+      }
+      prepare_for_display($elem[$element], $form);
     }
   }
 
   foreach (element_children($form) as $element) {
     $element_name = explode('_', $element);
-    if (reset($element_name) == 'field') {
+    if (reset($element_name) == 'field' || $element == 'title') {
       $form[$element]['#title_display'] = 'invisible';
-      make_title_display($form[$element]);
+      prepare_for_display($form[$element], $form);
     }
   }
+
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
+  );
+
+  // PROJECT ADMIN USERS
+  $project_admins = ict_project_baseline_get_admin_user_emails($node);
+
+  $form['admin_user_details'] = array(
+    '#type' => 'markup',
+    '#markup' => theme('ict_project_baseline_admin_user_details', array(
+      'departmental_admins' => $project_admins['departmental_admins'],
+      'data_editors' => $project_admins['data_editors'],
+      'data_approvers' => $project_admins['data_approvers']
+    ))
+  );
 
   $form['actions']['submit']['#attributes']['class'][] = 'submit-button';
   $form['actions']['submit_request']['#attributes']['class'][] = 'submit-button';
@@ -110,7 +134,7 @@ function ict_project_baseline_approve_block($nid) {
  * @param $form
  * @param $form_state
  */
-function ict_project_baseline_approve_form($form, $form_state, $nid) {
+function ict_project_baseline_approve_form($form, &$form_state, $nid) {
   $form['#theme'] = 'ict_project_baseline_approve_form';
 
   $form['nid'] = array(
@@ -168,7 +192,7 @@ function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been approved.'));
 
   // redirect user to projects page
-  $form_state['#redirect'] = "projects";
+  $form_state['redirect'] = "projects";
 }
 
 /**
@@ -188,5 +212,45 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been declined.'));
 
   // redirect user to projects page
-  $form_state['#redirect'] = "projects";
+  $form_state['redirect'] = "projects";
+}
+
+/**
+ * Project admin emails by rol
+ *
+ * @param $node
+ * @return array
+ */
+function ict_project_baseline_get_admin_user_emails ($node) {
+  $project_department = ict_department_get_department_tid_of_entity('project', $node);
+  $query = db_select('users', 'u');
+  $query->join('field_data_field_department', 'd', 'd.entity_id = u.uid');
+  $query->join('users_roles', 'ur', 'u.uid = ur.uid');
+  $query->condition('d.bundle', 'user');
+  $query->condition('d.field_department_tid', $project_department);
+  $query->condition('ur.rid', ICT_DEPARTMENT_ADMIN_ROLE);
+  $query->fields('u', array('uid'));
+  $results = $query->execute()->fetchCol();
+
+  $departmental_admins = array();
+  foreach ($results as $uid) {
+    $departmental_admins[] = user_load($uid)->mail;
+  }
+
+  $approvers = array();
+  foreach (ict_project_get_users($node->nid, ICT_PROJECT_APPROVER_ACCESS) as $uid) {
+    $approvers[] = user_load($uid)->mail;
+  }
+
+  $editors = array();
+  foreach (ict_project_get_users($node->nid, ICT_PROJECT_EDITOR_ACCESS) as $uid) {
+    $user = user_load($uid);
+    $editors[] = $user->mail;
+  }
+
+  return array(
+    'departmental_admins' => $departmental_admins,
+    'data_approvers' => $approvers,
+    'data_editors' => $editors
+  );
 }
