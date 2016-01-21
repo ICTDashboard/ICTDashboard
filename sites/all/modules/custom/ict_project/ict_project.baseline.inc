@@ -316,5 +316,14 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
       form_set_error($field . '][und][0', 'Field <em>' . $form[$field]['und'][0]['#title'] . '</em> is required.');
     }
   }
+
+  // date validation
+  if (!empty($form_state['values']['field_start_date']['und'][0]['value']) &&
+    !empty($form_state['values']['field_original_completion_date']['und'][0]['value'])) {
+    if ($form_state['values']['field_start_date']['und'][0]['value'] >= $form_state['values']['field_original_completion_date']['und'][0]['value']) {
+      form_set_error('field_start_date][und][0', t('<em>Original approved start date</em> cannot be later than <em>Original approved completion date </em>'));
+    }
+  }
+
   ict_update_benefits_realised_validate($form, $form_state);
 }
