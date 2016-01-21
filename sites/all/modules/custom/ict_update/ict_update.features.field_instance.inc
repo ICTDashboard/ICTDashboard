@@ -261,7 +261,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The actual percentage of work completed at the current update.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -352,7 +352,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The current financial value of benefits expected by the project. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -399,7 +399,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Context, remedial action, changes in project scope or other commentary.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -440,7 +440,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The estimated financial benefits that have been realised to date.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -486,7 +486,7 @@ function ict_update_field_default_field_instances() {
   $field_instances['node-update-field_expected_completion_date'] = array(
     'bundle' => 'update',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The current expected completion date of the project.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -543,7 +543,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The percentage of work forecasted to be completed at the current update.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -767,6 +767,7 @@ function ict_update_field_default_field_instances() {
   t('Benefit');
   t('Benefits Realised');
   t('Commentary');
+  t('Context, remedial action, changes in project scope or other commentary.');
   t('Current Financial Benefits ($m)');
   t('End date');
   t('Entity comments');
@@ -780,6 +781,11 @@ function ict_update_field_default_field_instances() {
   t('Spend To Date By Financial Year ($m)');
   t('Start date');
   t('Status');
+  t('The actual percentage of work completed at the current update.');
+  t('The current expected completion date of the project.');
+  t('The current financial value of benefits expected by the project. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.');
+  t('The estimated financial benefits that have been realised to date.');
+  t('The percentage of work forecasted to be completed at the current update.');
 
   return $field_instances;
 }

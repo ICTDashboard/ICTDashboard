@@ -330,7 +330,9 @@
         <?php endforeach; ?>
       </div>
     </div>
-    <?php print drupal_render(node_view($update_node)); ?>
+    <?php if (!empty($update_node)) : ?>
+      <?php print drupal_render(node_view($update_node)); ?>
+    <?php endif; ?>
 
     <div class="row">
       <div class="label">Benefits</div>
