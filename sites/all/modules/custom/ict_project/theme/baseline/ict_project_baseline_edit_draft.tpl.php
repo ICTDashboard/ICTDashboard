@@ -267,6 +267,9 @@
           </tr>
           </tbody>
         </table>
+        <div style="float:right: width:55%; overflow:hidden; margin-top: 10px; margin-bottom: 20px;" class="text">
+          <a href="javascript:void(0);" class="export-btn">Add Another Financial Year</a>
+        </div>
       </div>
     </div>
 
@@ -320,6 +323,23 @@
       </div>
       <div class="text">
         <?php print render($form['field_predicted_project_benefit']); ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
+        <?php print t('Top Benefits'); ?>
+        <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              List the measurable benefits (quantitative or qualitative) this project will deliver or contribute to, as identified in the business case.
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        <?php print render($form['field_benefits_realised']); ?>
       </div>
     </div>
 

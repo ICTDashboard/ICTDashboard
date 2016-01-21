@@ -29,7 +29,7 @@ function ict_project_projects_create_form($form, &$form_state) {
   );
 
   $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
-  $portfolios = taxonomy_get_tree($portfolio_vocab->vid);
+  $portfolios = taxonomy_get_tree($portfolio_vocab->vid, 0, 1);
   $portfolio_options = array();
   foreach ($portfolios as $entity) {
     $portfolio_options[$entity->tid] = $entity->name;

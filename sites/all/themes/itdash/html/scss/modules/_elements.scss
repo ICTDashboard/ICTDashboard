@@ -215,11 +215,14 @@
       border: 0 none;
       overflow: hidden;
       @include box-shadow(0 3px 0 #b1b7c1);
-
       margin-bottom: 3px;
       &:hover {
         background-position: 0 -41px;
       }
+    }
+    a.submit-button {
+      line-height: 41px;
+      text-decoration: none;
     }
   }
 }

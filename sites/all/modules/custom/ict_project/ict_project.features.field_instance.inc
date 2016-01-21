@@ -168,6 +168,49 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-project-field_benefits_realised'.
+  $field_instances['node-project-field_benefits_realised'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 46,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_benefits_realised',
+    'label' => 'Top Realised',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 13,
+    ),
+  );
+
   // Exported field_instance: 'node-project-field_brief_project_summary'.
   $field_instances['node-project-field_brief_project_summary'] = array(
     'bundle' => 'project',
@@ -243,7 +286,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -280,7 +323,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -797,6 +840,7 @@ function ict_project_field_default_field_instances() {
   t('The name of the Senior Responsible Officer (SRO) for the delivery of the project. ');
   t('The official government programme that the project supports. ');
   t('The position (including group, division & branch) of the Senior Responsible Officer.');
+  t('Top Realised');
   t('Total');
   t('Year');
 

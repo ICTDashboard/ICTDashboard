@@ -1,7 +1,9 @@
 <?php $number = 1; ?>
 <table>
   <tr>
-    <th></th>
+    <?php if (!empty($element['#baseline'])) : ?>
+      <th></th>
+    <?php endif; ?>
     <th><?php print t('Benefits'); ?></th>
     <th><?php print t('Realised status'); ?></th>
     <th><?php print t('Commentary'); ?></th>
@@ -12,7 +14,9 @@
   <?php foreach(element_children($element) as $key) : ?>
     <?php if (!is_numeric($key)) continue; ?>
     <tr>
-      <td><?php print (!empty($element['#baseline'])) ? t('Baseline') : t('Updated'); ?></td>
+      <?php if (!empty($element['#baseline'])) : ?>
+        <td><?php print (!empty($element['#baseline'])) ? t('Baseline') : t('Updated'); ?></td>
+      <?php endif; ?>
       <td><?php print drupal_render($element[$key]['field_benefit']); ?></td>
       <td class="select-no-border"><?php print drupal_render($element[$key]['field_status']); ?></td>
       <td><?php print drupal_render($element[$key]['field_commentary']); ?></td>
