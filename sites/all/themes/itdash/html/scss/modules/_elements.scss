@@ -104,6 +104,9 @@
             max-width: 607px;
           }
         }
+        select[multiple="multiple"] {
+          height: auto;
+        }
         .grippie {
           max-width: 640px;
         }
@@ -148,6 +151,9 @@
             text-align: center;
             vertical-align: middle;
           }
+        }
+        p {
+          margin: 0 0 5px;
         }
       }
       .form-item {
@@ -208,7 +214,8 @@
       font-weight: bold;
       border: 0 none;
       overflow: hidden;
-      @include box-shadow(0, 3px, 0, #b1b7c1);
+      @include box-shadow(0 3px 0 #b1b7c1);
+
       margin-bottom: 3px;
       &:hover {
         background-position: 0 -41px;

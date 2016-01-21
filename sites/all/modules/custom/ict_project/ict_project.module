@@ -34,6 +34,54 @@ function ict_project_ctools_plugin_directory($owner, $plugin_type) {
   }
 }
 
+function ict_project_preprocess_node(&$vars) {
+
+  if ($vars['type'] == 'project') {
+
+    $node = $vars['node'];
+    $view_mode = $vars['view_mode'];
+
+    foreach ($vars as $var_name => &$value) {
+      $element_name = explode('_', $var_name);
+      if (reset($element_name) == 'field') {
+        $field_info = field_info_instance('node', $var_name, 'project');
+        $value['meta']['#description'] = !empty($field_info['description']) ?
+          $field_info['description'] :
+          FALSE;
+        $value['meta']['#title'] = $field_info['label'];
+      }
+    }
+
+    // PROJECT ADMIN USERS
+    $project_admins = ict_project_baseline_get_admin_user_emails($node);
+    $vars['admin_user_details'] = theme(
+      'ict_project_baseline_admin_user_details', array(
+        'departmental_admins' => $project_admins['departmental_admins'],
+        'data_editors' => $project_admins['data_editors'],
+        'data_approvers' => $project_admins['data_approvers']
+      )
+    );
+
+    // Set up template suggestions for non-standard view modes
+    if ($view_mode !== 'full') {
+      $vars['theme_hook_suggestions'][] = 'node__' . $node->type . '__' . $view_mode;
+      $vars['theme'] = 'ict_project_add_project_form';
+      return;
+    }
+
+    if (ict_update_project_get_list($vars['nid'])) {
+      $vars['project_updates_available'] = TRUE;
+
+      // other Update logic
+    }
+
+    if (ict_project_access_project('approve', NULL, $vars['nid'])) {
+      $form = drupal_get_form('ict_project_baseline_approve_form', $vars['nid']);
+      $vars['approve_form'] = render($form);
+    }
+  }
+}
+
 /**
  * returns add project  form
  */

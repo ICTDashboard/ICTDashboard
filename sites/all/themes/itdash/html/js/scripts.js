@@ -166,7 +166,7 @@ jQuery(document).ready(function($) {
 		$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 1);
     });
 	
-	$('.form-select').selectbox();
+	$('.form-select:not([multiple="multiple"])').selectbox();
 	$('.form-select[disabled="disabled"]').selectbox("disable");
 	$('.field_implementation_partners-delta-order').selectbox();
 }); /* end of as page load scripts */
