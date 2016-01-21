@@ -503,7 +503,11 @@ CONTENT STYLES
 	
 	.project-update-submission {
 		margin-bottom: 25px;
-		
+
+	  	.sbHolder {
+		  max-width: 600px;
+		}
+
 		h2 {
 			color: #0d6c88;
 			font-size: 26px;
@@ -862,7 +866,9 @@ CONTENT STYLES
 											left: 83%;
 										}
 										
-										.sbHolder { border: 0 none; }
+										.sbHolder {
+										  border: 0 none;
+										}
 										.sbOptions { z-index: 100; position: absolute; }
 										
 										select {

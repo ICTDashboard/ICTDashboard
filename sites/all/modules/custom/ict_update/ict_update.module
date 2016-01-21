@@ -48,28 +48,31 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
 
-//  $form['field_expected_completion_date']['und'][0]['#prefix'] = '<div class="element-hidden">';
-//  $form['field_expected_completion_date']['und'][0]['#suffix'] = '</div>';
-//  $form['field_expected_completion_date']['date']['#type'] = 'textfield';
+  $form['field_expected_completion_date']['und'][0]['#prefix'] = '<div class="element-hidden">';
+  $form['field_expected_completion_date']['und'][0]['#suffix'] = '</div>';
+  $form['field_expected_completion_date']['date']['#type'] = 'textfield';
   $form['field_expected_completion_date']['und'][0]['#theme_wrappers'] = array();
-//  if (empty($form['nid']['#value'])) {
-//    $form['field_expected_completion_date']['und'][0]['#default_value'] = '';
-//  }
-//  $form['field_expected_completion_date']['date']['#default_value'] = $form['field_expected_completion_date']['und'][0]['#default_value'];
+  $form['field_expected_completion_date']['date']['#default_value'] = $form['field_expected_completion_date']['und'][0]['#default_value'];
   $form['field_expected_completion_date']['date']['#attributes'] = array(
     'class' => array('add_datepicker'),
     'data-dateFormat' => 'dd/mm/yy',
   );
-//  $form['field_expected_completion_date']['radio'] = array(
-//    '#type' => 'radios',
-//    '#options' => array(
-//      'time' => '',
-//      'na' => 'N/A',
-//    ),
-//    '#default_value' => 'time',
-//    '#weight' => -999,
-//  );
-//  $form['field_expected_completion_date']['#element_validate'] = array('ict_update_datepicker_value');
+  $form['field_expected_completion_date']['radio'] = array(
+    '#type' => 'radios',
+    '#options' => array(
+      'time' => '',
+      'na' => 'N/A',
+    ),
+    '#default_value' => 'time',
+    '#weight' => -999,
+  );
+  $form['field_expected_completion_date']['#element_validate'] = array('ict_update_datepicker_value');
+
+  foreach(element_children($form['field_benefits_realised']['und']) as $benefit_key) {
+    if (!is_numeric($benefit_key)) continue;
+    $form['field_benefits_realised']['und'][$benefit_key]['field_benefit_start_date']['und'][0]['#theme_wrappers'] = array();
+    $form['field_benefits_realised']['und'][$benefit_key]['field_end_date']['und'][0]['#theme_wrappers'] = array();
+  }
 
   $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
 

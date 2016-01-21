@@ -102,8 +102,12 @@ jQuery(document).ready(function($) {
 		if (dateFormat) {
 			opts.dateFormat = dateFormat;
 		}
+		if (dateinput.length > 0) {
+			var defaultDate = dateinput.val();
+		}
       	$(this).datepicker(opts);
-    });
+		$(this).val(defaultDate);
+	});
 
   }
 
