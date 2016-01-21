@@ -12,7 +12,7 @@
   <?php foreach(element_children($element) as $key) : ?>
     <?php if (!is_numeric($key)) continue; ?>
     <tr>
-      <td><?php print t('Updated'); ?></td>
+      <td><?php print (!empty($element['#baseline'])) ? t('Baseline') : t('Updated'); ?></td>
       <td><?php print drupal_render($element[$key]['field_benefit']); ?></td>
       <td class="select-no-border"><?php print drupal_render($element[$key]['field_status']); ?></td>
       <td><?php print drupal_render($element[$key]['field_commentary']); ?></td>
@@ -23,6 +23,7 @@
       <td><?php print drupal_render($element[$key]['field_benefit_start_date']); ?></td>
       <td><?php print drupal_render($element[$key]['field_end_date']); ?></td>
       <td><?php print drupal_render($element[$key]['field_financial']); ?></td>
+      <td><?php print drupal_render($element[$key]['remove_button']); ?></td>
     </tr>
     <?php $number ++ ?>
   <?php endforeach; ?>

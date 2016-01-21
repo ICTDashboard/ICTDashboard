@@ -90,8 +90,75 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $form['actions']['submit']['#attributes']['class'] = array('submit-button');
     $form['actions']['submit_request'] = $form['actions']['submit'];
     $form['actions']['submit_request']['#value'] = t('Save and request approval');
+    $form['actions']['submit_request']['#validate'][] = 'ict_update_all_fields_required_validate';
     $form['actions']['submit_request']['#submit'][] = 'ict_update_workflow_set_wait_approve';
     $form['actions']['submit']['#submit'][] = 'ict_update_workflow_set_draft';
+  }
+}
+
+function ict_update_benefits_realised_validate($form, &$form_state) {
+  $list = array(
+    'field_status',
+  );
+  $text = array(
+    'field_commentary',
+    'field_benefit',
+  );
+  $date = array(
+    'field_benefit_start_date',
+    'field_end_date',
+  );
+  foreach ($form_state['values']['field_benefits_realised']['und'] as $benefit_key => $benefit) {
+    if (!is_numeric($benefit_key)) continue;
+    foreach($list as $field) {
+      if (empty($benefit[$field]['und'][0]['value'])) {
+        form_set_error('field_benefits_realised][und][ ' . $benefit_key . '][' . $field . '][und][0][value', 'Field <em>' . $form['field_benefits_realised']['und'][$benefit_key][$field]['und']['#title'] . '</em> is required.');
+      }
+    }
+    foreach($text as $field) {
+      if (empty($benefit[$field]['und'][0]['value'])) {
+        form_set_error('field_benefits_realised][und][ ' . $benefit_key . '][' . $field . '][und][0][value', 'Field <em>' . $form['field_benefits_realised']['und'][$benefit_key][$field]['und'][0]['value']['#title'] . '</em> is required.');
+      }
+    }
+    foreach($date as $field) {
+      if (empty($benefit[$field]['und'][0]['value'])) {
+        form_set_error('field_benefits_realised][und][ ' . $benefit_key . '][' . $field . '][und][0][value', 'Field <em>' . $form['field_benefits_realised']['und'][$benefit_key][$field]['und'][0]['#title'] . '</em> is required.');
+      }
+    }
+    $start = strtotime($benefit['field_benefit_start_date']['und'][0]['value']);
+    $end = strtotime($benefit['field_end_date']['und'][0]['value']);
+    if ($end < $start) {
+      form_set_error('field_benefits_realised][und][ ' . $benefit_key . '][field_end_date][und][0][value', '<em>End date</em> could not be before <em>Start date</em>.');
+    }
+  }
+
+}
+
+function ict_update_all_fields_required_validate($form, &$form_state) {
+  $text = array(
+    'field_forecast_level_of_project_',
+    'field_actual_level_of_project_co',
+    'field_current_financial_benefits',
+    'field_estimated_value_of_benefit',
+    'field_entity_comments',
+  );
+  $term = array(
+    'field_project_stage',
+  );
+  foreach($term as $field) {
+    if (empty($form_state['values'][$field]['und'][0]['tid'])) {
+      form_set_error($field . '][und][0][value', 'Field <em>' . $form[$field]['und']['#title'] . '</em> is required.');
+    }
+  }
+  foreach($text as $field) {
+    if (empty($form_state['values'][$field]['und'][0]['value'])) {
+      form_set_error($field . '][und][0][value', 'Field <em>' . $form[$field]['und'][0]['value']['#title'] . '</em> is required.');
+    }
+  }
+  ict_update_benefits_realised_validate($form, $form_state);
+
+  if (empty($form_state['values']['field_expected_completion_date']['date']) && $form_state['values']['field_expected_completion_date']['radio'] != 'na') {
+    form_set_error('field_expected_completion_date][date', 'Field <em>' . $form['field_expected_completion_date']['und'][0]['#title'] . '</em> is required.');
   }
 }
 
@@ -214,7 +281,7 @@ function ict_update_approve_allowed($project_id, $update_id = NULL) {
   return TRUE;
 }
 
-function ict_update_project_get_list($project_id) {
+function ict_update_project_get_list($project_id, $state = NULL) {
   $query = db_select('field_data_field_project', 'p');
   $query->addField('p', 'entity_id');
   $query->condition('field_project_target_id', $project_id);

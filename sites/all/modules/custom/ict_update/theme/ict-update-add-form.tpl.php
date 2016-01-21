@@ -255,14 +255,14 @@
       </div>
     </div>
     <div class="row">
-      <div class="label"><?php print $form['field_current_financial_benefits']['und']['#title']; ?> <em>($m)</em><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The current financial value of benefits expected by the project. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.</span></a></div>
+      <div class="label"><?php print $form['field_current_financial_benefits']['und']['#title']; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The current financial value of benefits expected by the project. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.</span></a></div>
       <div class="text">
         <?php print drupal_render($form['field_current_financial_benefits']); ?>
       </div>
       <div class="text"></div>
     </div>
     <div class="row">
-      <div class="label"><?php print $form['field_estimated_value_of_benefit']['und']['#title']; ?> <em>($m)</em><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The estimated financial benefits that have been realised to date.</span></a></div>
+      <div class="label"><?php print $form['field_estimated_value_of_benefit']['und']['#title']; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The estimated financial benefits that have been realised to date.</span></a></div>
       <div class="text">
         <?php print drupal_render($form['field_estimated_value_of_benefit']); ?>
       </div>
