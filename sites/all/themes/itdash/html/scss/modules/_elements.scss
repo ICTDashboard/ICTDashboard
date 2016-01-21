@@ -101,6 +101,9 @@
           line-height: 36px;
           padding: 0 10px;
         }
+        select[multiple="multiple"] {
+          height: auto;
+        }
         .grippie {
           max-width: 640px;
         }

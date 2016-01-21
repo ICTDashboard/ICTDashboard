@@ -216,7 +216,7 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
 }
 
 /**
- * Project admin emails by rol
+ * Project admin emails by role
  *
  * @param $node
  * @return array
