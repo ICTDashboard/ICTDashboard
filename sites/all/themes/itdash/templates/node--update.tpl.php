@@ -219,12 +219,12 @@
 
     <div class="row">
       <div class="label">
-        <?php print t('Project Budget By Financial Year'); ?>
-        <?php if (!empty($form['field_original_total_budget']['#description'])) : ?>
+        <?php print t('Benefits realised'); ?>
+        <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print $form['field_original_total_budget']['#description']; ?>
+                <?php print $form['field_benefits_realised']['#description']; ?>
               </span>
           </a>
         <?php endif; ?>
