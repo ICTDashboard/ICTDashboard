@@ -330,6 +330,7 @@
         <?php endforeach; ?>
       </div>
     </div>
+    <?php print drupal_render(node_view($update_node)); ?>
 
     <div class="row">
       <div class="label">Benefits</div>
@@ -441,15 +442,16 @@
       </div>
     </div>
 
-    <?php if (isset($approve_form)) : ?>
-      <?php print $approve_form; ?>
-    <?php endif; ?>
-
-    <?php if (isset($edit_form)) : ?>
-      <div class="submit">
-        <?php print $edit_form; ?>
-      </div>
-    <?php endif; ?>
-
+    <div class="submit">
+      <?php if (isset($update_form)) : ?>
+        <?php print drupal_render($update_form); ?>
+      <?php endif; ?>
+      <?php if (isset($approve_form)) : ?>
+        <?php print $approve_form; ?>
+      <?php endif; ?>
+      <?php if (isset($edit_form)) : ?>
+          <?php print $edit_form; ?>
+      <?php endif; ?>
+    </div>
   </div>
 </div>

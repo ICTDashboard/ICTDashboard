@@ -40,9 +40,14 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       drupal_not_found();
     }
     $form['title']['#value'] = $project->title . ' Update submission ' . format_date(REQUEST_TIME, 'medium', 'd/m/Y h:i');
-    $form['field_project'][LANGUAGE_NONE][0]['target_id']['#value'] = $project->title . ' (' . $project_id . ')';
+    $form['#project_id'] = $form['field_project'][LANGUAGE_NONE][0]['target_id']['#value'] = $project->title . ' (' . $project_id . ')';
     $form['field_project_revision'][LANGUAGE_NONE][0]['value']['#value'] = $approved_vid->vid;
   }
+  else {
+    $form['#project_id'] = $project_id = $form['#node']->field_project['und'][0]['target_id'];
+    $project = node_load($project_id);
+  }
+  $form['#project_node'] = $project;
 
   $form['#theme'] = 'ict_update_add_form';
 
@@ -184,6 +189,7 @@ function ict_update_workflow_set_approve($form, &$form_state) {
     node_save($form_state['node']);
     ict_project_set_workflow_state('approved', $nid);
   }
+  $form_state['redirect'] = url('node/'. $form['#project_id']);
 }
 
 function ict_update_workflow_set_draft($form, &$form_state) {
@@ -196,6 +202,7 @@ function ict_update_workflow_set_draft($form, &$form_state) {
     node_save($form_state['node']);
     ict_project_set_workflow_state('draft', $nid);
   }
+  $form_state['redirect'] = url('node/'. $form['#project_id']);
 }
 
 function ict_update_datepicker_value($element, &$form_state, $form) {
@@ -285,8 +292,77 @@ function ict_update_project_get_list($project_id, $state = NULL) {
   $query = db_select('field_data_field_project', 'p');
   $query->addField('p', 'entity_id');
   $query->condition('field_project_target_id', $project_id);
+  if ($state) {
+    $query->join('project_workflow', 'w', "w.state = '" . $state . "' AND w.nid = p.entity_id");
+  }
   $query->orderBy('entity_id', 'DESC');
+
   $res = $query->execute()->fetchCol();
 
   return $res;
+}
+
+function ict_update_approve_form($form, &$form_state, $nid, $update_id) {
+  $form['#theme'] = 'ict_project_baseline_approve_form';
+
+  $form['#nid'] = $nid;
+  $form['#update_id'] = $update_id;
+
+  $form['approve'] = array(
+    '#type' => 'submit',
+    '#value' => t('Approve Update'),
+    '#attributes' => array('class' => array('submit-button')),
+    '#submit' => array('ict_update_review_workflow_set_approve'),
+    '#validate' => array('ict_update_baseline_approve_form_validate')
+  );
+
+  $form['decline'] = array(
+    '#type' => 'submit',
+    '#value' => t('Decline Update'),
+    '#attributes' => array('class' => array('submit-button')),
+    '#submit' => array('ict_update_review_workflow_set_draft'),
+    '#validate' => array('ict_update_baseline_approve_form_validate')
+  );
+
+  return $form;
+}
+
+/**
+ * Validate Vaseline approval
+ *
+ * @param $form
+ * @param $form_state
+ */
+function ict_update_baseline_approve_form_validate ($form, &$form_state) {
+  // make sure that other approver hasn't approved the project
+  $nid = $form['#nid'];
+  if (!ict_update_approve_allowed($nid)) {
+    form_set_error('nid', t('Sorry but the Update Data cannot be approved. Make sure that you have correct access rights and that it has not been approved or declined by another Data Approver'));
+  }
+}
+
+function ict_update_review_workflow_set_approve($form, &$form_state) {
+  if (!$form['#update_id']) {
+    return;
+  }
+  $nid = $form['#update_id'];
+  $node = node_load($nid);
+  if (ict_project_get_workflow_state($nid) != 'approved') {
+    $node->revision = TRUE;
+    node_save($node);
+    ict_project_set_workflow_state('approved', $nid);
+  }
+}
+
+function ict_update_review_workflow_set_draft($form, &$form_state) {
+  if (!$form['#update_id']) {
+    return;
+  }
+  $nid = $form['#update_id'];
+  $node = node_load($nid);
+  if (ict_project_get_workflow_state($nid) != 'draft') {
+    $node->revision = TRUE;
+    node_save($node);
+    ict_project_set_workflow_state('draft', $nid);
+  }
 }
