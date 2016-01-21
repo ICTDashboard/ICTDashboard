@@ -142,7 +142,7 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php print render($form['field_responsible_officer_name']); ?>
+        <?php print render($form['field_resp_officer_position']); ?>
       </div>
     </div>
 
@@ -270,7 +270,7 @@
       </div>
     </div>
 
-    <?php $start_date = $form['field_start_date'][LANGUAGE_NONE][0]; ?>
+    <?php $start_date = &$form['field_start_date']; ?>
     <div class="row">
       <div class="label">
         <?php print $start_date['#title']; ?>
@@ -288,7 +288,7 @@
       </div>
     </div>
 
-    <?php $end_date = $form['field_original_completion_date'][LANGUAGE_NONE][0]; ?>
+    <?php $end_date = &$form['field_original_completion_date']; ?>
     <div class="row">
       <div class="label">
         <?php print $end_date['#title']; ?>
@@ -339,4 +339,5 @@
     <div style="display:none;">
       <?php print drupal_render_children($form); ?>
     </div>
+  </div>
 </div>

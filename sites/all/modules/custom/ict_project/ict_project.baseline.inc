@@ -254,3 +254,31 @@ function ict_project_baseline_get_admin_user_emails ($node) {
     'data_editors' => $editors
   );
 }
+
+function _ict_project_baseline_get_simple_values ($items) {
+  $values = array();
+  foreach ($items as $key => $item) {
+    // exclude field meta data from the display
+    if ($key === 'meta') continue;
+
+    if (isset($item['safe_value'])) {
+      // text fields
+      $values[] = $item['safe_value'];
+    }
+    elseif (isset($item['taxonomy_term'])) {
+      // term reference fields
+      $values[] = $item['taxonomy_term']->name;
+    }
+    elseif (isset($item['timezone'])) {
+      // date fields
+      $date = strtotime($item['value']);
+      $values[] = date('d/m/Y', $date);
+    }
+    elseif (isset($item['value'])) {
+      // number fields
+      $values[] = $item['value'];
+    }
+  }
+
+  return $values;
+}
