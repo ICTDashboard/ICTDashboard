@@ -36,7 +36,7 @@ function ict_project_taxonomy_default_vocabularies() {
       'name' => 'Portfolio',
       'machine_name' => 'portfolio',
       'description' => '',
-      'hierarchy' => 0,
+      'hierarchy' => 1,
       'module' => 'taxonomy',
       'weight' => 0,
       'rdf_mapping' => array(
