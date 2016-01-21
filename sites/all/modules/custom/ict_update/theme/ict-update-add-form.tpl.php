@@ -1,71 +1,7 @@
 <div id="inner-content" class="wrap cf">
   <h2>Update data</h2>
-  <h3>Basic project information</h3>
   <div class="project-update-submission d-all">
-    <div class="row">
-      <div class="label">Government Entity Name <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The Government department or entity responsible for leading the project.</span></a></div>
-      <div class="text">
-        Lorem Ipsum
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">Portfolio Name<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The Portfolio for which the department or entity belongs.</span></a></div>
-      <div class="text">
-        Ut Vinctus project
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">Project Title<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The official full name of the project, excluding acronyms.</span></a></div>
-      <div class="text">
-        Aliquam aliquet ornare urna
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">Programme Name<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The official government programme that the project supports. Can be the same as the Project Title.</span></a></div>
-      <div class="text">
-        Sed congue metus in metus
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">Project Summary and Objectives</div>
-      <div class="text">
-        Quisque consectetur viverra mattis. Nam vehicula condimentum augue a sodales. Donec fringilla vel mauris eget varius. Mauris sit amet ligula et orci rhoncus ultricies rhoncus a sapien. Nam auctor ullamcorper elit sit amet hendrerit. Aenean eu mollis felis. Nulla facilisi. Sed sed hendrerit diam. Ut laoreet vel neque ut congue. In a tempus mauris, sed ullamcorper metus. Aenean auctor consectetur sapien vitae varius. Proin magna est, sodales sed urna non, sodales gravida magna.
-      </div>
-    </div>
-    <div class="dotted-line"></div>
-    <h3>User information</h3>
-    <div class="row">
-      <div class="label">Senior Responsibile Officer Name<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The name of the Senior Responsible Officer (SRO) for the delivery of the project. <em>(Not published)</em>&gt;</span></a></div>
-      <div class="text">
-        Jordan Ibe
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">Senior Responsibile Officer Position<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The position (including group, division &amp; branch) of the Senior Responsible Officer. <em>(Not published)</em></span></a></div>
-      <div class="text">
-        Suspendisse facilisis erat nisi
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">Departmental Administrators<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">Departmental Administrators can create and assign Data Approvers to a project. They can not be Approvers or Editors within the same project.</span></a><a href="javascript:void(0);" class="edit-btn">Edit</a></div>
-      <div class="text">
-        <a class="email-value" href="mailto:jordan.henderson@email.com.au">jordan.henderson@email.com.au</a>
-        <a class="email-value" href="mailto:joe.allen@email.com.au">joe.allen@email.com.au</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">Data Approvers<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">Data Approvers can review, approve or reject baseline and update submissions once submitted for approval. They can not be Departmental Administrators or Editors within the same project.</span></a><a href="javascript:void(0);" class="edit-btn">Edit</a></div>
-      <div class="text">
-        <a class="email-value" href="mailto:joe.gomez@email.com.au">joe.gomez@email.com.au</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">Data Editors<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">Data Editors can review, edit and submit baseline and update submissions for approval. They can not be Departmental Administrators or Approvers within the same project.</span></a><a href="javascript:void(0);" class="edit-btn">Edit</a></div>
-      <div class="text">
-        <a class="email-value" href="mailto:adam.lallana@email.com.au">adam.lallana@email.com.au</a>
-      </div>
-    </div>
-    <div class="dotted-line"></div>
+    <?php print drupal_render(node_view($form['#project_node'], 'update')); ?>
     <h3>Costs, Benefits and Timings</h3>
     <div class="row">
       <div class="label"><?php print $form['field_project_stage']['und']['#title']; ?></div>
@@ -73,11 +9,11 @@
     </div>
     <div class="row">
       <div class="label">Original approved start date </div>
-      <div class="text">10/2013</div>
+      <div class="text"><?php print date('m/Y', strtotime($form['#project_node']->field_start_date['und'][0]['value'])); ?></div>
     </div>
     <div class="row">
       <div class="label">Original approved completion date </div>
-      <div class="text">10/2018</div>
+      <div class="text"><?php print date('m/Y', strtotime($form['#project_node']->field_original_completion_date['und'][0]['value'])); ?></div>
     </div>
     <div class="row">
       <div class="label"><?php print $form['field_expected_completion_date']['und']['#title']; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The current expected completion date of the project.</span></a></div>
@@ -249,10 +185,8 @@
       <div class="text"><?php print drupal_render($form['field_benefits_realised']); ?></div>
     </div>
     <div class="row">
-      <div class="label">Original Expected Financial Benefits<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The financial value of benefits expected by the project as identified in the business case. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.</span></a></div>
-      <div class="text">
-        $60m
-      </div>
+      <div class="label">Original Expected Financial Benefits ($m)<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The financial value of benefits expected by the project as identified in the business case. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.</span></a></div>
+      <div class="text">$<?php print $form['#project_node']->field_predicted_project_benefit['und'][0]['value']; ?></div>
     </div>
     <div class="row">
       <div class="label"><?php print $form['field_current_financial_benefits']['und']['#title']; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The current financial value of benefits expected by the project. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.</span></a></div>

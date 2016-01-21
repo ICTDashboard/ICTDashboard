@@ -43,6 +43,11 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $form['field_project'][LANGUAGE_NONE][0]['target_id']['#value'] = $project->title . ' (' . $project_id . ')';
     $form['field_project_revision'][LANGUAGE_NONE][0]['value']['#value'] = $approved_vid->vid;
   }
+  else {
+    $project_id = $form['#node']->field_project['und'][0]['target_id'];
+    $project = node_load($project_id);
+  }
+  $form['#project_node'] = $project;
 
   $form['#theme'] = 'ict_update_add_form';
 
@@ -286,6 +291,7 @@ function ict_update_project_get_list($project_id, $state = NULL) {
   $query->addField('p', 'entity_id');
   $query->condition('field_project_target_id', $project_id);
   $query->orderBy('entity_id', 'DESC');
+
   $res = $query->execute()->fetchCol();
 
   return $res;

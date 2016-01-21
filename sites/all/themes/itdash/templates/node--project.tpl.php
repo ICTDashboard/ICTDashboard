@@ -330,6 +330,7 @@
         <?php endforeach; ?>
       </div>
     </div>
+    <?php print drupal_render(node_view($update_node)); ?>
 
     <?php if (isset($approve_form)) : ?>
       <?php print $approve_form; ?>

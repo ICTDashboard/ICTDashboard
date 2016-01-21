@@ -35,7 +35,21 @@ function ict_project_ctools_plugin_directory($owner, $plugin_type) {
 }
 
 function ict_project_preprocess_node(&$vars) {
+  if ($vars['type'] == 'update') {
+    $node = $vars['node'];
+    $view_mode = $vars['view_mode'];
 
+    foreach ($vars as $var_name => &$value) {
+      $element_name = explode('_', $var_name);
+      if (reset($element_name) == 'field') {
+        $field_info = field_info_instance('node', $var_name, 'update');
+        $value['meta']['#description'] = !empty($field_info['description']) ?
+          $field_info['description'] :
+          FALSE;
+        $value['meta']['#title'] = $field_info['label'];
+      }
+    }
+  }
   if ($vars['type'] == 'project') {
 
     $node = $vars['node'];
@@ -65,14 +79,15 @@ function ict_project_preprocess_node(&$vars) {
     // Set up template suggestions for non-standard view modes
     if ($view_mode !== 'full') {
       $vars['theme_hook_suggestions'][] = 'node__' . $node->type . '__' . $view_mode;
-      $vars['theme'] = 'ict_project_add_project_form';
       return;
     }
 
-    if (ict_update_project_get_list($vars['nid'])) {
+    if ($updates = ict_update_project_get_list($vars['nid'])) {
       $vars['project_updates_available'] = TRUE;
 
-      // other Update logic
+      $update_id = reset($updates);
+      $update = node_load($update_id);
+      $vars['update_node'] = $update;
     }
 
     if (ict_project_access_project('approve', NULL, $vars['nid'])) {
