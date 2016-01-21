@@ -267,6 +267,9 @@
           </tr>
           </tbody>
         </table>
+        <div style="float:right: width:55%; overflow:hidden; margin-top: 10px; margin-bottom: 20px;" class="text">
+          <a href="javascript:void(0);" class="export-btn">Add Another Financial Year</a>
+        </div>
       </div>
     </div>
 

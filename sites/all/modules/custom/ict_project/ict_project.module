@@ -79,6 +79,15 @@ function ict_project_preprocess_node(&$vars) {
       $form = drupal_get_form('ict_project_baseline_approve_form', $vars['nid']);
       $vars['approve_form'] = render($form);
     }
+    if(ict_project_access_project('edit', NULL, $vars['nid'])) {
+      $vars['edit_form'] = l(
+        t('Edit Baseline Draft'),
+        "baseline/$node->nid/edit-draft",
+        array('attributes' => array('class' => array(
+          'submit-button'
+        )))
+      );
+    }
   }
 }
 
@@ -209,6 +218,7 @@ function ict_project_form_alter( &$form, &$form_state, $form_id){
 
       $form['actions']['submit_request'] = $form['actions']['submit'];
       $form['actions']['submit_request']['#value'] = t('Save and request approval');
+      $form['actions']['submit_request']['#validate'][] = 'ict_project_baseline_approve_form_validate_required_fields';
       $form['actions']['submit_request']['#submit'][] = 'ict_project_workflow_set_wait_approve';
       $form['actions']['submit']['#submit'][] = 'ict_project_workflow_set_draft';
     }

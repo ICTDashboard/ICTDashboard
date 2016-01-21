@@ -114,7 +114,7 @@
 
                   <?php // create or edit draft ?>
                   <?php if (ict_project_access_project('approve', $user, $project->nid)) : ?>
-                    <a href="<?php print url('baseline/' . $project->nid . '/review'); ?>">
+                    <a href="<?php print url('node/' . $project->nid); ?>">
                       <span><?php print t('Review Baseline Draft'); ?></span>
                     </a>
                   <?php endif; ?>

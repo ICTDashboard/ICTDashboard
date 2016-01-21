@@ -280,5 +280,41 @@ function _ict_project_baseline_get_simple_values ($items) {
     }
   }
 
-  return $values;
+  return $values ? $values : array('-');
+}
+
+function ict_project_baseline_approve_form_validate_required_fields($form, &$form_state) {
+  $text = array(
+    'field_program_name',
+    'field_brief_project_summary',
+    'field_responsible_officer_name',
+    'field_resp_officer_position',
+    'field_predicted_project_benefit',
+  );
+  $term = array(
+    'field_government_entity_name',
+    'field_implementation_partners',
+    'field_portfolio_name',
+    'field_project_stage',
+  );
+  $dates = array(
+    'field_start_date',
+    'field_original_completion_date',
+  );
+  foreach($term as $field) {
+    if (empty($form_state['values'][$field]['und'][0]['tid'])) {
+      form_set_error($field . '][und][0][value', 'Field <em>' . $form[$field]['und']['#title'] . '</em> is required.');
+    }
+  }
+  foreach($text as $field) {
+    if (empty($form_state['values'][$field]['und'][0]['value'])) {
+      form_set_error($field . '][und][0][value', 'Field <em>' . $form[$field]['und'][0]['value']['#title'] . '</em> is required.');
+    }
+  }
+  foreach($dates as $field) {
+    if (empty($form_state['values'][$field]['und'][0]['value'])) {
+      form_set_error($field . '][und][0', 'Field <em>' . $form[$field]['und'][0]['#title'] . '</em> is required.');
+    }
+  }
+  ict_update_benefits_realised_validate($form, $form_state);
 }

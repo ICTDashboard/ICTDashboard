@@ -103,7 +103,7 @@ function ict_project_access_rebaseline($op, $project_id, $account = NULL) {
 
   if ($account->uid == 1) {
 //  FOR DEVELOPMENT PURPOSES ONLY!!!
-    return TRUE;
+//    return TRUE;
   }
 
   if ($op == 'view' && $project_id) {
@@ -182,7 +182,8 @@ function ict_project_access_update($op, $project_id, $account = NULL, $nid = NUL
     $account = $user;
   }
   if ($account->uid == 1) {
-    return TRUE;
+//  FOR DEVELOPMENT PURPOSES ONLY!!!
+//    return TRUE;
   }
 
   if ($op == 'view' && $nid) {

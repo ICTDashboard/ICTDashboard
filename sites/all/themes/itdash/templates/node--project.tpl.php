@@ -331,8 +331,124 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="label">Benefits</div>
+      <div class="text">
+        <table id="field_end_predicted_budget" style="max-width:100%;">
+          <tbody>
+          <tr>
+            <th><div class="label" style="color:white; margin:0;">Benefits<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">List the benefits (quantitative or qualitative) this project will deliver or contribute to, as identified in the business case.
+  </span></a></div>
+
+            </th><th><div class="label" style="color:white; margin:0;">Realised?<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, indicate the status of benefit realisation. Realised - The benefit has been realised; Partially - The benefit has been partially realised; On Track – The project is on track to realise the benefit as originally expected; At Risk - The benefit is not likely to be realised as originally expected; Not Realised - The benefit has not been realised.
+  </span></a></div></th>
+            <th><div class="label" style="color:white; margin:0;">Commentary</div></th>
+            <th colspan="2"><div class="label" style="color:white; margin:0;">Date Range <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, the date range when benefit is expected to be realised.
+  </span></a> From - To</div></th>
+            <th><div class="label" style="color:white; margin:0;">Financial<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, mark those where the benefit can be measured financially.
+  </span></a></div>
+            </th></tr>
+          <tr class="sum">
+            <td><em>1. Lorem ipsum dolor sit amet</em></td>
+            <td data-sum="1" class="capex" style="background-color:white; padding-left:3px;">
+              <div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-1-field-predicted-capex"><div id="field-end-predicted-budget-und-1-field-predicted-capex-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-1-field-predicted-capex-und-0-value">
+                    <select><option selected="">Realised</option><option>Partially</option><option>On Track</option><option>At Risk</option><option>Not Realised</option></select>
+                  </div>
+                </div></div>        </td>
+            <td data-sum="2" class="capex" style="background-color:white;">
+              <div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-2-field-predicted-capex"><div id="field-end-predicted-budget-und-2-field-predicted-capex-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-2-field-predicted-capex-und-0-value">
+                    <textarea type="text" rows="3" width="14"></textarea>
+                  </div>
+                </div></div>        </td>
+            <td data-sum="3" class="capex" style="background-color:white;">
+              <div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-3-field-predicted-capex"><div id="field-end-predicted-budget-und-3-field-predicted-capex-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-3-field-predicted-capex-und-0-value">
+
+                    10/2013
+                    <input type="hidden" class="add_datepicker hasDatepicker" id="edit-field-mid-expected-project"><img class="ui-datepicker-trigger" src="/sites/all/themes/itdash/html/images/calendar-icon.png" alt="..." title="...">
+                    <div class="form-item form-type-select form-item-field-mid-expected-project-und-0-value-day">
+
+
+                    </div>
+                  </div>
+                </div></div>        </td>
+            <td data-sum="3" class="capex" style="background-color:white;"><div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-3-field-predicted-capex"><div id="field-end-predicted-budget-und-3-field-predicted-capex-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-3-field-predicted-capex-und-0-value">
+
+                    10/2014
+                    <input type="hidden" class="add_datepicker hasDatepicker" id="edit-field-mid-expected-project"><img class="ui-datepicker-trigger" src="/sites/all/themes/itdash/html/images/calendar-icon.png" alt="..." title="...">
+                    <div class="form-item form-type-select form-item-field-mid-expected-project-und-0-value-day">
+
+
+                    </div>
+                  </div>
+                </div></div>        </td>
+            <td data-sum="4" class="capex" style="background-color:white;">
+              <div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-4-field-predicted-capex"><div id="field-end-predicted-budget-und-4-field-predicted-capex-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-4-field-predicted-capex-und-0-value">
+
+                    <input type="checkbox" name="checkbox" id="checkbox" checked="">
+
+                  </div>
+                </div></div>
+            </td>
+          </tr>
+          <tr class="sum">
+            <td><em>2. Lorem ipsum dolor sit amet</em></td>
+            <td data-sum="1" class="capex" style="background-color:white; padding-left:3px;"><div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-1-field-predicted-capex2">
+                <div id="field-end-predicted-budget-und-1-field-predicted-capex-add-more-wrapper2">
+                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-1-field-predicted-capex-und-0-value">
+
+                    <select><option>Realised</option><option selected="">Partially</option><option>On Track</option><option>At Risk</option><option>Not Realised</option></select>
+                  </div>
+                </div>
+              </div></td>
+            <td data-sum="2" class="capex" style="background-color:white;"><div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-2-field-predicted-capex2">
+                <div id="field-end-predicted-budget-und-2-field-predicted-capex-add-more-wrapper2">
+                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-2-field-predicted-capex-und-0-value">
+                    <textarea name="textarea" rows="3" type="text" width="14"></textarea>
+                  </div>
+                </div>
+              </div></td>
+            <td data-sum="3" class="capex" style="background-color:white;"><div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-3-field-predicted-capex2">
+                <div id="field-end-predicted-budget-und-3-field-predicted-capex-add-more-wrapper2">
+                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-3-field-predicted-capex-und-0-value">
+                    <label class="element-invisible" for="edit-field-end-predicted-budget-und-3-field-predicted-capex-und-0-value2">Capex </label>
+                    10/2014
+                    <input type="hidden" class="add_datepicker hasDatepicker" id="edit-field-mid-expected-project2"><img class="ui-datepicker-trigger" src="/sites/all/themes/itdash/html/images/calendar-icon.png" alt="..." title="...">
+                    <div class="form-item form-type-select form-item-field-mid-expected-project-und-0-value-day"></div>
+                  </div>
+                </div>
+              </div></td>
+            <td data-sum="3" class="capex" style="background-color:white;"><div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-3-field-predicted-capex2">
+                <div id="field-end-predicted-budget-und-3-field-predicted-capex-add-more-wrapper2">
+                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-3-field-predicted-capex-und-0-value">
+                    <label class="element-invisible" for="edit-field-end-predicted-budget-und-3-field-predicted-capex-und-0-value2">Capex </label>
+                    10/2015
+                    <input type="hidden" class="add_datepicker hasDatepicker" id="edit-field-mid-expected-project2"><img class="ui-datepicker-trigger" src="/sites/all/themes/itdash/html/images/calendar-icon.png" alt="..." title="...">
+                    <div class="form-item form-type-select form-item-field-mid-expected-project-und-0-value-day"></div>
+                  </div>
+                </div>
+              </div></td>
+            <td data-sum="4" class="capex" style="background-color:white;"><div class="field-type-number-decimal field-name-field-predicted-capex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-4-field-predicted-capex2">
+                <div id="field-end-predicted-budget-und-4-field-predicted-capex-add-more-wrapper2">
+                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-4-field-predicted-capex-und-0-value">
+
+                    <input type="checkbox" name="checkbox2" id="checkbox2" checked="checked">
+                  </div>
+                </div>
+              </div></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <?php if (isset($approve_form)) : ?>
       <?php print $approve_form; ?>
+    <?php endif; ?>
+
+    <?php if (isset($edit_form)) : ?>
+      <div class="submit">
+        <?php print $edit_form; ?>
+      </div>
     <?php endif; ?>
 
   </div>
