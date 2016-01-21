@@ -100,6 +100,9 @@
           height: 36px;
           line-height: 36px;
           padding: 0 10px;
+          &.add_datepicker {
+            max-width: 607px;
+          }
         }
         select[multiple="multiple"] {
           height: auto;
@@ -113,6 +116,10 @@
           border-bottom: 1px solid #abb6cb;
           border-collapse: separate;
           font-size: 14px;
+
+        }
+        #field-benefits-realised-add-more-wrapper table{
+          max-width: none;
         }
         tr {
           th {
@@ -204,7 +211,8 @@
       font-weight: bold;
       border: 0 none;
       overflow: hidden;
-      @include box-shadow(0, 3px, 0, #b1b7c1);
+      @include box-shadow(0 3px 0 #b1b7c1);
+
       margin-bottom: 3px;
       &:hover {
         background-position: 0 -41px;
