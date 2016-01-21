@@ -196,6 +196,17 @@ function ict_project_form_alter( &$form, &$form_state, $form_id){
   if ($form_id == 'project_node_form') {
     $node = $form['#node'];
     if (!empty($node->nid)) {
+      $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
+      $form['field_benefits_realised']['und']['#baseline'] = TRUE;
+
+      $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
+      $portfolios = taxonomy_get_tree($portfolio_vocab->vid, 0, 1);
+      $portfolio_options = array();
+      foreach ($portfolios as $entity) {
+        $portfolio_options[$entity->tid] = $entity->name;
+      }
+      $form['field_portfolio_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
+
       $form['actions']['submit_request'] = $form['actions']['submit'];
       $form['actions']['submit_request']['#value'] = t('Save and request approval');
       $form['actions']['submit_request']['#submit'][] = 'ict_project_workflow_set_wait_approve';
