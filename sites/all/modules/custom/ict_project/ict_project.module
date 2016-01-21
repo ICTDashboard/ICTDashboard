@@ -84,6 +84,19 @@ function ict_project_preprocess_node(&$vars) {
 
     if ($updates = ict_update_project_get_list($vars['nid'])) {
       $vars['project_updates_available'] = TRUE;
+      if (ict_update_approve_allowed($vars['nid'])) {
+        $updates = ict_update_project_get_list($vars['nid'], 'waiting_approval');
+        $update_id = reset($updates);
+        $vars['update_form'] = drupal_get_form('ict_update_approve_form', $vars['nid'], $update_id);
+      }
+      elseif (ict_update_edit_allowed($vars['nid'])) {
+        $updates = ict_update_project_get_list($vars['nid'], 'draft');
+        $update_id = reset($updates);
+        $vars['update_form'] = array('#markup' => l(t('Edit Update Draft'), "update/$update_id/edit", array('attributes' => array('class' => array('submit-button')))));
+      }
+      else {
+        $updates = ict_update_project_get_list($vars['nid'], 'approved');
+      }
 
       $update_id = reset($updates);
       $update = node_load($update_id);
