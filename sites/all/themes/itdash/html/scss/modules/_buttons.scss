@@ -102,8 +102,7 @@ and it will create a button dependant on those variables.
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
-  height: 41px;
-  line-height: 41px;
+  min-height: 41px;
   border: 1px solid #99a8c2;
   border-radius: 4px;
   min-width: 128px;
@@ -112,6 +111,7 @@ and it will create a button dependant on those variables.
   position: relative;
   z-index: 2;
   background: #d0d8e5;
+  padding: 10px 15px;
   background: -moz-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d0d8e5), color-stop(100%, #c9d1de));
   background: -webkit-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
@@ -119,7 +119,7 @@ and it will create a button dependant on those variables.
   background: -ms-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
   background: linear-gradient(to bottom, #d0d8e5 0%, #c9d1de 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d8e5', endColorstr='#c9d1de',GradientType=0 );
-  @include box-shadow(0, 3px, 0, #ccd1db);
+  @include box-shadow(0 3px 2px #ccd1db);
   margin-bottom: 3px;
   &:hover {
     color: #fff !important;
