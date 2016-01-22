@@ -1,5 +1,5 @@
 <?php $number = 1; ?>
-<table>
+<table id="financial-benefits">
   <tr>
     <?php if (!empty($element['#baseline'])) : ?>
       <th></th>

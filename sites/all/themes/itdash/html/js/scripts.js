@@ -197,3 +197,12 @@ Drupal.behaviors.ictFaq = {
 		});
 	}
 }
+
+Drupal.behaviors.atepickerIcon = {
+	attach: function(context) {
+		for (id in Drupal.settings.datePopup) {
+			jQuery('#' + id).datepicker(Drupal.settings.datePopup[id].settings)
+			.addClass('date-popup-init');
+		}
+	}
+}

@@ -201,6 +201,21 @@ function itdash_preprocess_html(&$vars) {
   drupal_add_css('//ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/base/jquery-ui.css');
 }
 
+function itdash_js_alter(&$javascript) {
+  $settings = &$javascript['settings'];
+  foreach($settings['data'] as &$setting) {
+    if (isset($setting['datePopup'])) {
+      foreach($setting['datePopup'] as &$field) {
+        $field['settings']['buttonImage'] = "/sites/all/themes/itdash/html/images/calendar-icon.png";
+        $field['settings']['buttonImageOnly'] = TRUE;
+        $field['settings']['showOn'] = 'button';
+        $field['settings']['changeYear'] = FALSE;
+        $field['settings']['changeMonth'] = FALSE;
+      }
+    }
+  }
+}
+
 function itdash_file_widget($variables) {
 
   $element = $variables['element'];
