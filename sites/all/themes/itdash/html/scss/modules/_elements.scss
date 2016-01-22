@@ -176,6 +176,18 @@
             }
           }
         }
+        .date-field-wrapper {
+          .form-item {
+            min-width: 640px;
+            width: auto;
+            position: relative;
+            .ui-datepicker-trigger {
+              position: absolute;
+              top: 4px;
+              right: -38px;
+            }
+          }
+        }
       }
       .form-item {
         float: none;

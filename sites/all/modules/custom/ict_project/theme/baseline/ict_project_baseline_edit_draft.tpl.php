@@ -200,7 +200,9 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php print render($start_date); ?>
+        <div class="date-field-wrapper">
+          <?php print render($start_date); ?>
+        </div>
       </div>
     </div>
 
@@ -218,7 +220,9 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php print render($end_date); ?>
+        <div class="date-field-wrapper">
+          <?php print render($end_date); ?>
+        </div>
       </div>
     </div>
 
