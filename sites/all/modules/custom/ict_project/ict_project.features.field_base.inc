@@ -50,25 +50,6 @@ function ict_project_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_capex'.
-  $field_bases['field_capex'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_capex',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(
-      'decimal_separator' => '.',
-      'precision' => 10,
-      'scale' => 2,
-    ),
-    'translatable' => 0,
-    'type' => 'number_decimal',
-  );
-
   // Exported field_base: 'field_demo_buttons'.
   $field_bases['field_demo_buttons'] = array(
     'active' => 1,
@@ -150,25 +131,6 @@ function ict_project_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_opex'.
-  $field_bases['field_opex'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_opex',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(
-      'decimal_separator' => '.',
-      'precision' => 10,
-      'scale' => 2,
-    ),
-    'translatable' => 0,
-    'type' => 'number_decimal',
-  );
-
   // Exported field_base: 'field_original_completion_date'.
   $field_bases['field_original_completion_date'] = array(
     'active' => 1,
@@ -201,7 +163,7 @@ function ict_project_field_default_field_bases() {
   // Exported field_base: 'field_original_total_budget'.
   $field_bases['field_original_total_budget'] = array(
     'active' => 1,
-    'cardinality' => 5,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_original_total_budget',
@@ -213,7 +175,7 @@ function ict_project_field_default_field_bases() {
     'locked' => 0,
     'module' => 'field_collection',
     'settings' => array(
-      'hide_blank_items' => 1,
+      'hide_blank_items' => 0,
       'path' => '',
     ),
     'translatable' => 0,
