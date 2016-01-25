@@ -52,5 +52,30 @@
       });
     }
 
+    if ($('.start-year-select').length) {
+        var select_box = $('.start-year-select select');
+        for (index in Drupal.settings.year_range.year_range) {
+            var value = Drupal.settings.year_range.year_range[index],
+                year_str = value+'/'+(value+1);
+            select_box.append($('<option>', {
+                value: year_str,
+                text: year_str
+            }));
+        }
+        select_box.val(Drupal.settings.year_range.start_year);
+        select_box.change(function() {
+            var value = select_box.val(),
+                start_year = value.split('/')[0];
+            $('#field_end_predicted_budget th.year_header').each(function() {
+                console.log(1);
+                var new_val = start_year+'/'+(++start_year);
+                console.log(new_val);
+                $(this).find('input[type="text"]').val(new_val);
+                console.log($(this).find('.year_value').length);
+                $(this).find('.year_value').text(new_val);
+            });
+        });
+    }
+
   });
 })(jQuery);

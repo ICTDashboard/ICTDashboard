@@ -180,6 +180,11 @@
             </span>
           </a>
         <?php endif; ?>
+        <span class="start-year-select">
+          <em> Start from:</em>
+          <select>
+          </select>
+        </span>
       </div>
       <div class="text">
         <?php print render($form['field_original_total_budget']); ?>

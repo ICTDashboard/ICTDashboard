@@ -240,6 +240,7 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
   if ($form_id == 'project_node_form') {
     $node = $form['#node'];
     if (!empty($node->nid)) {
+//      $entity_list = ict_update_get_allowed_entity_list($node->nid);
 
       // project budget by financial year
       _ict_project_broject_budget_by_year_form ($form, $form_state);
@@ -290,7 +291,8 @@ function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_e
     $budget_table_items['items_count']++;
     $budget_table['#after_build'] = 'field_form_element_after_build';
 
-    $start_year = $year = variable_get('ict_dashboard_project_start_year', 13);
+    $year = variable_get('ict_dashboard_project_start_year', 13);
+    $start_year = $year;
     foreach (element_children($budget_table) as $item) {
       if ($item === 'add_more') continue;
       $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
@@ -300,28 +302,12 @@ function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_e
 
     if (empty($form_state['triggering_element'])) {
       // remove unnecessary last item on edit form
-//      $items_count = $budget_table['#max_delta'];
-//      $field_name = 'field_original_total_budget';
-//      $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
-//      dsm($budget_table_items['items_count']);
-//
-//      // Generate required number of fields collection
-//      if ($items_count > 1) {
-//        $budget_table_items['items_count'] = $items_count;
-//        $budget_table = field_multiple_value_form(
-//          $budget_table_items['field'],
-//          $budget_table_items['instance'],
-//          LANGUAGE_NONE,
-//          array(),
-//          $form,
-//          $form_state);
-//      }
-//      $budget_table_items['items_count']--;
-//      $budget_table['#after_build'] = 'field_form_element_after_build';
+
     }
 
     // set years
     $year = end(explode('/', $budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']));
+    $start_year = $year - 1;
     foreach (element_children($budget_table) as $item) {
       if (!$item || !is_numeric($item)) continue;
       $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
@@ -340,8 +326,17 @@ function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_e
       continue;
     }
     $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#title_display'] = 'invisible';
+    $budget_table[$item]['remove_button']['#attributes']['class'][] = 'remove-column-button';
+//    $budget_table[$item]['remove_button'] = ;
   }
   $budget_table['#theme'] = 'field_original_total_budget_table';
+
+  $year_range_settings  = array(
+    'start_year' => $start_year . '/' . ++$start_year,
+    'year_range' => range(date('y') - 5, date('y') + 10)
+  );
+
+  drupal_add_js(array('year_range' => $year_range_settings), 'setting');
 }
 
 /**
