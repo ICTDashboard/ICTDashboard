@@ -47,6 +47,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   else {
     $form['#project_id'] = $project_id = $form['#node']->field_project['und'][0]['target_id'];
     $project = node_load($project_id);
+    $form['#update_id'] = $update->nid;
   }
   $form['project_id'] = array('#type' => 'hidden', '#value' => $project_id);
   $form['#project_node'] = $project;
@@ -83,6 +84,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
   $form['field_benefits_realised']['und']['#project_id'] = $project_id;
+  $form['field_benefits_realised']['und']['#update_id'] = !empty($form['#update_id']) ? $form['#update_id'] : NULL;
 
   $action = arg(2);
   if ($action == 'approve') {
@@ -432,6 +434,10 @@ function template_preprocess_field_benefits_realised_table(&$vars) {
           }
         }
       }
+    }
+    $last_entity = end($benefits);
+    if (ict_project_get_workflow_state($last_entity['id']) != 'approved') {
+      array_pop($benefits);
     }
   }
   $vars['benefits'] = $benefits;
