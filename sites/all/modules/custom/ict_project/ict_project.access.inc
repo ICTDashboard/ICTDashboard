@@ -264,3 +264,45 @@ function ict_project_access_add_editor($email, $nid) {
 
   return $query;
 }
+
+function ict_project_allowed_view_states($project_id, $account = NULL) {
+  $states = array(
+    'approved',
+  );
+
+  if (!$account) {
+    global $user;
+    $account = $user;
+  }
+  if ($account->uid == 1) {
+    //  FOR DEVELOPMENT PURPOSES ONLY!!!
+//    return TRUE;
+  }
+
+  if (in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_EDITOR_ACCESS))) {
+    $states = array(
+      'predraft',
+      'draft',
+      'waiting_approval',
+      'approved',
+    );
+  }
+  if (in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_APPROVER_ACCESS))) {
+    $states = array(
+      'predraft',
+      'draft',
+      'waiting_approval',
+      'approved',
+    );
+  }
+  if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
+    $states = array(
+      'predraft',
+      'draft',
+      'waiting_approval',
+      'approved',
+    );
+  }
+
+  return $states;
+}
