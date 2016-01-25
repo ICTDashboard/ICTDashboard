@@ -334,7 +334,7 @@ function ict_project_budget_by_year_validate($form, &$form_state) {
     if (!is_numeric($key)) continue;
       if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
         $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
-        form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('<em>Budget Value</em> is required for !year Financial Year', array(
+        form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
           '!year' => $year
         )));
       }
