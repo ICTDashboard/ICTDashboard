@@ -89,14 +89,14 @@
           margin-left: 10px;
           select {
             display: inline;
-            width: 70px;
+            width: 80px;
+            -webkit-appearance: menulist;
             padding: 0 10px;
-            height: 18px;
+            height: 20px;
             line-height: 14px;
             margin: 0;
             border: 1px solid #a6a6a6;
-            background-image: url(../images/select-icons.png);
-            background-position: 43px -124px;
+            background-image: none;
             color: #202b3d;
           }
         }

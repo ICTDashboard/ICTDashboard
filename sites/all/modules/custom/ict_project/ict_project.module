@@ -331,12 +331,26 @@ function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_e
   }
   $budget_table['#theme'] = 'field_original_total_budget_table';
 
-  $year_range_settings  = array(
+  $budget_table['#year_range_settings'] = array(
     'start_year' => $start_year . '/' . ++$start_year,
     'year_range' => range(date('y') - 5, date('y') + 10)
   );
 
-  drupal_add_js(array('year_range' => $year_range_settings), 'setting');
+  $form['#after_build'][] = '_ict_project_budget_table_after_build';
+}
+
+/**
+ * Adds required settings
+ *
+ * @param $form
+ * @param $form_state
+ * @return mixed
+ */
+function _ict_project_budget_table_after_build($form, &$form_state) {
+  $budget_table = $form['field_original_total_budget'][LANGUAGE_NONE];
+
+  drupal_add_js(array('year_range' => $budget_table['#year_range_settings']), 'setting');
+  return $form;
 }
 
 /**

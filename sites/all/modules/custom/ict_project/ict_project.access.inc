@@ -38,7 +38,7 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
 
   if ($account->uid == 1) {
 //  FOR DEVELOPMENT PURPOSES ONLY!!!
-    return TRUE;
+//    return TRUE;
   }
 
   if ($op == 'view' && $nid) {
