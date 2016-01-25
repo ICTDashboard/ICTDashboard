@@ -325,4 +325,18 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
   }
 
   ict_update_benefits_realised_validate($form, $form_state);
+  ict_project_budget_by_year_validate($form, $form_state);
+}
+
+function ict_project_budget_by_year_validate($form, &$form_state) {
+  $budget_values = $form_state['values']['field_original_total_budget'][LANGUAGE_NONE];
+  foreach ($budget_values as $key => $value) {
+    if (!is_numeric($key)) continue;
+      if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
+        $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
+        form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
+          '!year' => $year
+        )));
+      }
+  }
 }

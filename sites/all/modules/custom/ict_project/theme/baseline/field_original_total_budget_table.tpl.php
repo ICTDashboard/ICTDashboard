@@ -5,19 +5,24 @@
   <tr>
     <th><?php print t('FY (yy/yy)'); ?></th>
     <?php  foreach ($element_keys as $item) : ?>
-      <?php if ($item === 'add_more') continue; ?>
-      <th>
+      <?php if (!is_numeric($item)) continue; ?>
+      <th class="year_header">
         <div style="display: none;">
           <?php print render($element[$item]['field_year']); ?>
         </div>
-        <?php print $element[$item]['field_year'][LANGUAGE_NONE][0]['value']['#value']; ?>
+        <span class="year_value">
+          <?php print $element[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']; ?>
+        </span>
+        <?php if ($item == $element['#max_delta']) : ?>
+          <?php print render($element[$item]['remove_button']); ?>
+        <?php endif; ?>
       </th>
     <?php endforeach; ?>
   </tr>
   <tr class="sum">
     <td><div class="label"><?php print t('Baseline'); ?></div></td>
     <?php foreach ($element_keys as $item) : ?>
-      <?php if ($item === 'add_more') continue; ?>
+      <?php if (!is_numeric($item)) continue; ?>
       <td>
         <?php print render($element[$item]['field_total']); ?>
       </td>
@@ -25,4 +30,7 @@
   </tr>
   </tbody>
 </table>
+<?php if (isset($element['add_more_before'])) : ?>
+  <?php print render($element['add_more_before']); ?>&nbsp;
+<?php endif; ?>
 <?php print render($element['add_more']); ?>

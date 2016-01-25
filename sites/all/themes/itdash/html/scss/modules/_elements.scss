@@ -85,6 +85,21 @@
             }
           }
         }
+        .start-year-select {
+          margin-left: 10px;
+          select {
+            display: inline;
+            width: 80px;
+            -webkit-appearance: menulist;
+            padding: 0 10px;
+            height: 20px;
+            line-height: 14px;
+            margin: 0;
+            border: 1px solid #a6a6a6;
+            background-image: none;
+            color: #202b3d;
+          }
+        }
       }
       .text {
         select,
@@ -187,6 +202,13 @@
               right: -38px;
             }
           }
+        }
+        .remove-column-button {
+          background: none;
+          outline: none;
+          border: none;
+          color: #fff;
+          text-decoration: underline;
         }
       }
       .form-item {

@@ -236,59 +236,14 @@ function ict_project_workflow_set_draft($form, &$form_state) {
 /**
  * Implement hook_form_alter
  */
-function ict_project_form_alter( &$form, &$form_state, $form_id){
+function ict_project_form_alter( &$form, &$form_state, $form_id) {
   if ($form_id == 'project_node_form') {
     $node = $form['#node'];
     if (!empty($node->nid)) {
+//      $entity_list = ict_update_get_allowed_entity_list($node->nid);
 
       // project budget by financial year
-      $budget_table = &$form['field_original_total_budget'][LANGUAGE_NONE];
-      if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
-        // !nitial form render with no values
-
-        $items_count = 4;
-        $field_name = 'field_original_total_budget';
-        $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
-
-        // Generate required number of fields collection
-        if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
-          $budget_table_items['items_count'] = $items_count;
-          $budget_table = field_multiple_value_form(
-            $budget_table_items['field'],
-            $budget_table_items['instance'],
-            LANGUAGE_NONE,
-            array(),
-            $form,
-            $form_state);
-        }
-        $budget_table_items['items_count']++;
-        $budget_table['#after_build'] = 'field_form_element_after_build';
-
-        $start_year = variable_get('ict_dashboard_project_start_year', 13);
-        foreach (element_children($budget_table) as $item) {
-          if ($item === 'add_more') continue;
-          $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $start_year . '/' . ++$start_year;
-        }
-      }
-      else {
-        // if any data is set
-
-        $start_year = end(explode('/', $budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']));
-        foreach (element_children($budget_table) as $item) {
-          if ($item === 'add_more' || $item == 0) continue;
-          $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $start_year . '/' . ++$start_year;
-        }
-      }
-
-      // theming   stuff
-      foreach (element_children($budget_table) as $item) {
-        if ($item === 'add_more') {
-          $budget_table[$item]['#attributes']['class'][] = 'export-btn';
-          continue;
-        }
-        $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#title_display'] = 'invisible';
-      }
-      $budget_table['#theme'] = 'field_original_total_budget_table';
+      _ict_project_broject_budget_by_year_form ($form, $form_state);
 
       // benefits table
       $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
@@ -312,6 +267,91 @@ function ict_project_form_alter( &$form, &$form_state, $form_id){
       $form['actions']['submit']['#submit'][] = 'ict_project_workflow_set_draft';
     }
   }
+}
+
+function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_entities = array()) {
+  $budget_table = &$form['field_original_total_budget'][LANGUAGE_NONE];
+  if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+    // initial form render with no values
+
+    $items_count = 4;
+    $field_name = 'field_original_total_budget';
+    $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
+
+    // Generate required number of fields collection
+    if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+      $budget_table_items['items_count'] = $items_count;
+      $budget_table = field_multiple_value_form(
+        $budget_table_items['field'],
+        $budget_table_items['instance'],
+        LANGUAGE_NONE,
+        array(),
+        $form,
+        $form_state);
+    }
+    $budget_table_items['items_count']++;
+    $budget_table['#after_build'] = 'field_form_element_after_build';
+
+    $year = variable_get('ict_dashboard_project_start_year', 13);
+    $start_year = $year;
+    foreach (element_children($budget_table) as $item) {
+      if ($item === 'add_more') continue;
+      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
+    }
+  }
+  else { // if any data is set
+
+    if (empty($form_state['triggering_element'])) {
+      // remove unnecessary last item on edit form
+
+    }
+
+    // set years
+    $year = end(explode('/', $budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']));
+    $start_year = $year - 1;
+    foreach (element_children($budget_table) as $item) {
+      if (!$item || !is_numeric($item)) continue;
+      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
+    }
+  }
+
+  // Add More button label
+  $budget_table['add_more']['#value'] = t('Add another Financial Year', array(
+    '!year' => $year . '/' . ++$year
+  ));
+
+  // theming stuff
+  foreach (element_children($budget_table) as $item) {
+    if (!is_numeric($item)) {
+      $budget_table[$item]['#attributes']['class'][] = 'export-btn';
+      continue;
+    }
+    $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#title_display'] = 'invisible';
+    $budget_table[$item]['remove_button']['#attributes']['class'][] = 'remove-column-button';
+//    $budget_table[$item]['remove_button'] = ;
+  }
+  $budget_table['#theme'] = 'field_original_total_budget_table';
+
+  $budget_table['#year_range_settings'] = array(
+    'start_year' => $start_year . '/' . ++$start_year,
+    'year_range' => range(date('y') - 5, date('y') + 10)
+  );
+
+  $form['#after_build'][] = '_ict_project_budget_table_after_build';
+}
+
+/**
+ * Adds required settings
+ *
+ * @param $form
+ * @param $form_state
+ * @return mixed
+ */
+function _ict_project_budget_table_after_build($form, &$form_state) {
+  $budget_table = $form['field_original_total_budget'][LANGUAGE_NONE];
+
+  drupal_add_js(array('year_range' => $budget_table['#year_range_settings']), 'setting');
+  return $form;
 }
 
 /**
