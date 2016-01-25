@@ -11,88 +11,6 @@ function ict_project_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'field_collection_item-field_original_total_budget-field_capex'.
-  $field_instances['field_collection_item-field_original_total_budget-field_capex'] = array(
-    'bundle' => 'field_original_total_budget',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 3,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_capex',
-    'label' => 'Capex',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_original_total_budget-field_opex'.
-  $field_instances['field_collection_item-field_original_total_budget-field_opex'] = array(
-    'bundle' => 'field_original_total_budget',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_opex',
-    'label' => 'Opex',
-    'required' => 0,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_original_total_budget-field_total'.
   $field_instances['field_collection_item-field_original_total_budget-field_total'] = array(
     'bundle' => 'field_original_total_budget',
@@ -818,13 +736,11 @@ function ict_project_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.');
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
-  t('Capex');
   t('Demo Buttons');
   t('Department');
   t('Financial Benefits');
   t('Government Entity Name');
   t('Government Implementation Partner/s');
-  t('Opex');
   t('Original approved completion date ');
   t('Original approved start date');
   t('Portfolio Name');

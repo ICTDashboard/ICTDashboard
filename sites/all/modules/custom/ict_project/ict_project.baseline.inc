@@ -87,7 +87,6 @@ function ict_project_baseline_edit_draft_block ($nid) {
 
   // PROJECT ADMIN USERS
   $project_admins = ict_project_baseline_get_admin_user_emails($node);
-
   $form['admin_user_details'] = array(
     '#type' => 'markup',
     '#markup' => theme('ict_project_baseline_admin_user_details', array(

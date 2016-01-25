@@ -82,6 +82,13 @@ function ict_project_preprocess_node(&$vars) {
       return;
     }
 
+    $vars['field_original_total_budget'] = theme(
+      'field_original_total_budget_table_view',
+      array(
+        'baseline' => $vars['field_original_total_budget']
+      )
+    );
+
     if ($updates = ict_update_project_get_list($vars['nid'])) {
       $vars['project_updates_available'] = TRUE;
       if (ict_update_approve_allowed($vars['nid'])) {
@@ -233,9 +240,61 @@ function ict_project_form_alter( &$form, &$form_state, $form_id){
   if ($form_id == 'project_node_form') {
     $node = $form['#node'];
     if (!empty($node->nid)) {
+
+      // project budget by financial year
+      $budget_table = &$form['field_original_total_budget'][LANGUAGE_NONE];
+      if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+        // !nitial form render with no values
+
+        $items_count = 4;
+        $field_name = 'field_original_total_budget';
+        $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
+
+        // Generate required number of fields collection
+        if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+          $budget_table_items['items_count'] = $items_count;
+          $budget_table = field_multiple_value_form(
+            $budget_table_items['field'],
+            $budget_table_items['instance'],
+            LANGUAGE_NONE,
+            array(),
+            $form,
+            $form_state);
+        }
+        $budget_table_items['items_count']++;
+        $budget_table['#after_build'] = 'field_form_element_after_build';
+
+        $start_year = variable_get('ict_dashboard_project_start_year', 13);
+        foreach (element_children($budget_table) as $item) {
+          if ($item === 'add_more') continue;
+          $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $start_year . '/' . ++$start_year;
+        }
+      }
+      else {
+        // if any data is set
+
+        $start_year = end(explode('/', $budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']));
+        foreach (element_children($budget_table) as $item) {
+          if ($item === 'add_more' || $item == 0) continue;
+          $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $start_year . '/' . ++$start_year;
+        }
+      }
+
+      // theming   stuff
+      foreach (element_children($budget_table) as $item) {
+        if ($item === 'add_more') {
+          $budget_table[$item]['#attributes']['class'][] = 'export-btn';
+          continue;
+        }
+        $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#title_display'] = 'invisible';
+      }
+      $budget_table['#theme'] = 'field_original_total_budget_table';
+
+      // benefits table
       $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
       $form['field_benefits_realised']['und']['#baseline'] = TRUE;
 
+      // portfolio options change
       $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
       $portfolios = taxonomy_get_tree($portfolio_vocab->vid, 0, 1);
       $portfolio_options = array();
@@ -244,273 +303,13 @@ function ict_project_form_alter( &$form, &$form_state, $form_id){
       }
       $form['field_portfolio_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
 
+      // alter actions
       $form['actions']['submit_request'] = $form['actions']['submit'];
       $form['actions']['submit_request']['#value'] = t('Save and request approval');
       $form['actions']['submit_request']['#validate'][] = 'ict_project_baseline_approve_form_validate_required_fields';
       $form['actions']['submit_request']['#submit'][] = 'ict_project_workflow_set_wait_approve';
       $form['actions']['submit']['#submit'][] = 'ict_project_workflow_set_draft';
     }
-  }
-  if($form_id == 'project_node_form1') {
-
-    // create project form should not be changed
-    if (!$form['nid']['#value']) {
-      return;
-    }
-
-    // Removes _none option for Project Users field
-    if (isset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none'])) {
-      unset($form['field_project_users'][LANGUAGE_NONE]['#options']['_none']);
-    }
-
-    $form['#validate'][] = 'ict_project_form_project_users_validate';
-    ksort($form['field_project_stage']['und']['#options']);
-    $form['#theme'] = 'ict_project_add_project_form';
-    //hide native labels
-    $form['field_government_entity_name']['und']['#title_display'] = $form['field_government_business_unit']['und'][0]['value']['#title_display'] =
-    $form['title']['#title_display'] = $form['field_brief_project_summary']['und'][0]['#title_display'] =
-    $form['field_program_name']['und'][0]['value']['#title_display'] = $form['field_project_stage']['und'][0]['value']['#title_display'] =
-    $form['field_project_category']['und']['#title_display'] = $form['field_project_manager']['und'][0]['value']['#title_display'] =
-    $form['field_project_manager_email']['und'][0]['value']['#title_display'] = $form['field_total_project_budget']['und'][0]['value']['#title_display'] =
-    $form['field_expected_project_benefits']['und'][0]['value']['#title_display'] = $form['field_start_date']['und'][0]['value']['day']['#title_display'] =
-    $form['field_start_date']['und'][0]['value']['month']['#title_display'] = $form['field_start_date']['und'][0]['value']['year']['#title_display'] =
-    $form['field_original_completion_date']['und'][0]['value']['day']['#title_display'] = $form['field_original_completion_date']['und'][0]['value']['month']['#title_display'] =
-    $form['field_original_completion_date']['und'][0]['value']['year']['#title_display'] = $form['field_government_programme']['und'][0]['value']['#title_display'] =
-    $form['field_implementation_partners']['und'][0]['value']['#title_display'] = $form['field_total_spent_to_date']['und'][0]['value']['#title_display'] =
-    $form['field_expected_number_of_gov_fte']['und'][0]['value']['#title_display'] = $form['field_expected_num_contractors']['und'][0]['value']['#title_display'] =
-      'invisible';
-    $form['field_brief_project_summary_fake'] = array(
-      '#type' => 'text_format',
-      '#title' => t('Description'),
-      '#element_validate' => array('ict_project_update_project_description'),
-      '#default_value' => $form['field_brief_project_summary']['und'][0]['#default_value'],
-      '#required' => TRUE,
-      '#title' => $form['field_brief_project_summary']['und'][0]['#title'],
-      '#title_display' => 'invisible',
-    );
-
-    // Adds validation to the form
-    $form['#validate'][] = 'ict_project_form_project_submission_validate';
-    $form['field_brief_project_summary']['und'][0]['#required'] = FALSE;
-    //
-    $form['preview'] = array(
-      '#type' => 'button',
-      '#value' => t('Preview'),
-      '#executes_submit_callback' => TRUE,
-      '#submit' => array('ict_project_preview_submission'),
-    );
-  }
-
-  if($form_id == 'ict_form_entityform_edit_form') {
-    $default_project = ict_project_get_project_update();
-
-    // Notification for user trying to update a Project that he don't have an access to
-    __ict_project_check_user_allowed_update ($default_project);
-
-    $form['mid_project_name_text'] = array(
-      '#type' => 'item',
-      '#title' => t('Project name'),
-      '#markup' => $default_project['title'],
-    );
-    $form['field_mid_project_name']['und'][0]['value']['#type'] = 'hidden';
-      $form['field_mid_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
-      $form['field_mid_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
-
-      $form['#theme'] = 'ict_project_mid_project_form';
-    $form['mid_project_name_text']['#title_display'] = $form['field_mid_project_stage']['und']['#title_display'] =            $form['field_mid_project_manager']['und'][0]['value']['#title_display'] =
-    $form['field_mid_project_manager_email']['und'][0]['value']['#title_display'] =
-    $form['field_mid_revised_total_project']['und'][0]['value']['#title_display'] =
-    $form['field_mid_total_project_spend']['und'][0]['value']['#title_display'] =
-    $form['field_mid_total_project_current']['und'][0]['value']['#title_display'] =
-    $form['field_mid_project_completed']['und'][0]['value']['#title_display'] =
-    $form['field_mid_predicted_project']['und'][0]['value']['#title_display'] =
-    $form['field_mid_predicted_project_real']['und'][0]['value']['#title_display'] =
-    $form['field_mid_internal_fte']['und'][0]['value']['#title_display'] =
-    $form['field_mid_external_fte']['und'][0]['value']['#title_display'] =
-    $form['field_mid_project_status']['und']['#title_display'] =
-    $form['field_mid_agency_comments']['und'][0]['value']['#title_display'] =
-    $form['field_mid_csv_file']['und'][0]['#title_display']
-        = 'invisible';
-
-    // Open the file for writing.
-    $fields = array();
-    $exclude = array('field_mid_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
-    $sort = array();
-    foreach(element_children($form) as $field) {
-      if(!in_array($field, $exclude)) {
-        $sort[$field] = $form[$field]['#weight'];
-      }
-    }
-    asort($sort);
-
-    foreach($sort as $key=>$field) {
-      $fields[] = $key;
-    }
-
-    $dir = variable_get('file_public_path', conf_path() . '/files');
-    $file_path =  $dir . '/export.csv';
-    $fh = fopen($file_path, 'w');
-    fputcsv($fh, $fields);
-    // Close & save the file.
-    fclose($fh);
-    file_unmanaged_copy($file_path, $destination = NULL, FILE_EXISTS_RENAME);
-
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
-    );
-
-    $form['field_mid_project_status']['und']['#required'] = FALSE;
-    $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
-    $form['actions']['submit']['#validate'][] = 'ict_project_csv_validate';
-
-    $form['preview'] = array(
-      '#type' => 'button',
-      '#value' => t('Preview'),
-      '#executes_submit_callback' => TRUE,
-      '#submit' => array('ict_project_preview_submission'),
-      // Override error messages
-      '#validate' => array('ict_project_csv_validate'),
-    );
-
-    __ict_project_update_project_default_values($form);
-
-  }
-
-  if($form_id == 'itc_form_end_entityform_edit_form') {
-    $default_project = ict_project_get_project_update();
-
-    // Notification for user trying to update a Project that he don't have an access to
-    __ict_project_check_user_allowed_update ($default_project);
-
-    $form['end_project_name_text'] = array(
-      '#type' => 'item',
-      '#title' => t('Project name'),
-      '#markup' => $default_project['title'],
-    );
-    $form['field_end_project_name']['und'][0]['value']['#type'] = 'hidden';
-    $form['field_end_project_name']['und'][0]['value']['#default_value'] = $default_project['title'];
-    $form['field_end_project_name'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
-
-    $form['#theme'] = 'ict_project_end_project_form';
-    $form['end_project_name_text']['#title_display'] =
-    $form['field_end_project_stage']['und']['#title_display'] =
-    $form['field_end_project_manager']['und'][0]['value']['#title_display'] =
-    $form['field_end_project_manager_email']['und'][0]['value']['#title_display'] =
-    $form['field_end_revised_total_project']['und'][0]['value']['#title_display'] =
-    $form['field_end_total_project_spend']['und'][0]['value']['#title_display'] =
-    $form['field_end_total_project_current']['und'][0]['value']['#title_display'] =
-    $form['field_end_project_completed']['und'][0]['value']['#title_display'] =
-    $form['field_end_predicted_project']['und'][0]['value']['#title_display'] =
-    $form['field_end_predicted_realised']['und'][0]['value']['#title_display'] =
-    $form['field_end_internal_fte']['und'][0]['value']['#title_display'] =
-    $form['field_end_external_fte']['und'][0]['value']['#title_display'] =
-    $form['field_end_project_status']['und']['#title_display'] =
-    $form['field_end_agency_comments']['und'][0]['value']['#title_display'] =
-    $form['field_end_csv_file']['und'][0]['#title_display'] =
-      'invisible';
-
-    ict_project_add_status_tooltips ($form['field_end_project_status']);
-
-    // Open the file for writing.
-    $fields = array();
-    $sort = array();
-    $exclude = array('field_end_csv_file', 'actions', 'form_build_id', 'form_token', 'form_id');
-    foreach(element_children($form) as $field) {
-      if(!in_array($field, $exclude)) {
-        $sort[$field] = $form[$field]['#weight'];
-      }
-    }
-    asort($sort);
-    foreach($sort as $key=>$field) {
-      if($key == 'field_end_predicted_budget') {
-        $fields[] = 'opex-previous';
-        $fields[] = 'capex-previous';
-
-        $fields[] = 'opex-current';
-        $fields[] = 'capex-current';
-
-        $fields[] = 'opex-1';
-        $fields[] = 'capex-1';
-
-        $fields[] = 'opex-2';
-        $fields[] = 'capex-2';
-
-        $fields[] = 'opex-3';
-        $fields[] = 'capex-3';
-      }
-      else {
-        $fields[] = $key;
-      }
-    }
-
-    $dir = variable_get('file_public_path', conf_path() . '/files');
-    $file_path = $dir . '/export_end.csv';
-    $fh = fopen($file_path, 'w');
-    fputcsv($fh, $fields);
-    // Close & save the file.
-    fclose($fh);
-    file_unmanaged_copy($file_path, $destination = NULL,  FILE_EXISTS_RENAME);
-
-
-    $form['field_end_predicted_budget']['und']['#theme'] = 'ict_project_end_predicted_budget';
-
-    // Start year should be set via CMS
-    $start_year = variable_get('ict_dashboard_project_start_year', 13);
-
-      /*$fybudget = Array();
-      $years= Array();
-      $total = 0;
-      foreach ($project_updates as $key => $value) {
-          if (strpos($key,'predicted_budget') !== false) {
-              $keyParts = explode('_',str_replace('predicted_budget_','',$key));
-              $year = $keyParts[0];
-              $metric= $keyParts[1];
-              $fybudget[$year][$metric] = reset($value);
-              if ($metric == 'total') {
-                  $total += reset($value);
-              }
-              if (array_search($year,$years) === false) {
-                  $years[] = $year;
-              }
-          }
-      }
-      sort($years);*/
-
-    foreach (element_children($form['field_end_predicted_budget']['und']) as $item) {
-      foreach (element_children($form['field_end_predicted_budget']['und'][$item]) as $sub_item) {
-        $form['field_end_predicted_budget']['und'][$item][$sub_item]['und'][0]['value']['#title_display'] = 'invisible';
-      }
-        $yearlabel = $start_year . '/' . ++$start_year;
-      $form['field_end_predicted_budget']['und'][$item]['field_predicted_year']['und'][0]['value']['#value'] = $yearlabel;
-        $year = 'fy'.str_replace('/','',$yearlabel);
-        if (!empty($fybudget[$year]) && !empty($fybudget[$year]['opex'])) {
-            $form['field_end_predicted_budget']['und'][$item]['field_predicted_opex']['und'][0]['value']['#value'] = $fybudget[$year]['opex'];
-        }
-        if (!empty($fybudget[$year]) && !empty($fybudget[$year]['capex'])) {
-            $form['field_end_predicted_budget']['und'][$item]['field_predicted_capex']['und'][0]['value']['#value'] = $fybudget[$year]['capex'];
-        }
-        if (!empty($fybudget[$year]) && !empty($fybudget[$year]['total'])) {
-            $form['field_end_predicted_budget']['und'][$item]['field_predicted_total']['und'][0]['value']['#value'] = $fybudget[$year]['total'];
-        }
-    }
-    $form['#attached']['js'] = array(
-      drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
-    );
-
-    $form['field_end_project_status']['und']['#required'] = FALSE;
-    $form['actions']['submit']['#submit'][] = 'ict_project_csv_submit_form_submit';
-    $form['actions']['submit']['#validate'][] = 'ict_project_update_form_validate';
-    // Override error messages
-    $form['actions']['submit']['#validate'][] = '__ict_project_form_prepare_errors';
-    $form['preview'] = array(
-      '#type' => 'button',
-      '#value' => t('Preview'),
-      '#executes_submit_callback' => TRUE,
-      '#submit' => array('ict_project_preview_submission'),
-      '#validate' => array('ict_project_csv_submit_form_submit', 'ict_project_update_form_validate', '__ict_project_form_prepare_errors'),
-    );
-
-    __ict_project_update_project_default_values($form);
   }
 }
 
@@ -763,6 +562,15 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'ict_project_baseline_admin_user_details',
     ),
+    'field_original_total_budget_table' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'field_original_total_budget_table',
+      'render element' => 'element',
+    ),
+    'field_original_total_budget_table_view' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'field_original_total_budget_table_view',
+    ),
   );
 }
 
@@ -867,31 +675,6 @@ function ict_project_node_insert ($node) {
   }
 }
 
-
-
-function ict_project_get_project_update() {
-  $projects = array(
-    'title' => '',
-    'nid' => ''
-  );
-
-  if (isset($_GET['project'])) {
-
-    $query = db_select('node', 'n');
-    $query->fields('n', array('title'));
-    $query->condition('n.type', 'project');
-    $query->condition('n.nid', $_GET['project']);
-    $node = $query->execute()->fetchField();
-
-    $projects = array(
-      'title' => $node,
-      'nid' => $_GET['project']
-    );
-
-  }
-
-  return $projects;
-}
 
 function ict_project_csv_submit_form_submit($form, &$form_state) {
   //Load file
@@ -1333,4 +1116,20 @@ function ict_project_review_project_submission($form, &$form_state) {
     unset($_SESSION['review_project']);
     drupal_goto('projects');
   }
+}
+
+function ict_project_preprocess_field_original_total_budget_table_view (&$vars) {
+  $fc_ids = array();
+  foreach ($vars['baseline'] as $item) {
+    $fc_ids[] = $item['value'];
+  }
+  $fc = field_collection_item_load_multiple($fc_ids);
+  $baseline = array();
+  foreach ($fc as $item) {
+    $baseline[] = array(
+      'year' => $item->field_year[LANGUAGE_NONE][0]['value'],
+      'total' => $item->field_total[LANGUAGE_NONE][0]['value']
+    );
+  }
+  $vars['baseline'] = $baseline;
 }
