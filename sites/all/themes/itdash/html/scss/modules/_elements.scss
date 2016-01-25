@@ -269,3 +269,53 @@
     max-width: 100% !important;
   }
 }
+
+#content .project-draft-submission table#financial-benefits,
+#content .project-update-submission table#financial-benefits {
+  border: 0;
+  td {
+    border-bottom: 1px solid #abb6cb;
+    border-top: 0;
+  }
+  label {
+    display: none;
+  }
+  .field-widget-date-popup {
+    position: relative;
+    img {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+    }
+  }
+  .row-white td{
+    background-color: white;
+  }
+  .row-blue td{
+    background-color: #dff1f5;
+  }
+  .sbHolder {
+    background-color: transparent;
+  }
+  input[type=text] {
+    height: 38px;
+    @include border-radius(0);
+    border: 0;
+    background-color: transparent;
+  }
+  .date-no-float {
+    width: 100%;
+  }
+  td.table-remove-button {
+    background-color: transparent;
+    input {
+      background-color: transparent;
+      color: #0d6c88;
+      border: 0;
+      border-bottom: 1px dotted;
+      padding: 0;
+    }
+    border: 0;
+  }
+}
+

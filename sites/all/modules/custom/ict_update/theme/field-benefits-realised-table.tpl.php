@@ -13,7 +13,7 @@
   </tr>
   <?php foreach(element_children($element) as $key) : ?>
     <?php if (!is_numeric($key)) continue; ?>
-    <tr>
+    <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
       <?php if (!empty($element['#baseline'])) : ?>
         <td><?php print (!empty($element['#baseline'])) ? t('Baseline') : t('Updated'); ?></td>
       <?php endif; ?>
@@ -27,7 +27,7 @@
       <td><?php print drupal_render($element[$key]['field_benefit_start_date']); ?></td>
       <td><?php print drupal_render($element[$key]['field_end_date']); ?></td>
       <td><?php print drupal_render($element[$key]['field_financial']); ?></td>
-      <td><?php print drupal_render($element[$key]['remove_button']); ?></td>
+      <td class="table-remove-button"><?php print drupal_render($element[$key]['remove_button']); ?></td>
     </tr>
     <?php $number ++ ?>
   <?php endforeach; ?>

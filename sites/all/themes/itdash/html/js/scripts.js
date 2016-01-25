@@ -159,17 +159,19 @@ jQuery(document).ready(function($) {
 			});
 		}
 	});
-	
-	$("body").bind("ajaxComplete", function(e, xhr, settings){
-		$('.field_implementation_partners-delta-order').selectbox('attach');
-		$('.field-multiple-drag').remove();
-		$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 1);
-    });
-	
-	$('.form-select:not([multiple="multiple"])').selectbox();
-	$('.form-select[disabled="disabled"]').selectbox("disable");
-	$('.field_implementation_partners-delta-order').selectbox();
 }); /* end of as page load scripts */
+
+Drupal.behaviors.initSelectbox = {
+	attach: function(context) {
+		jQuery('.field_implementation_partners-delta-order', context).selectbox('attach');
+		jQuery('.field-multiple-drag', context).remove();
+		jQuery('table[id^="field-implementation-partners-values"] tr th', context).attr('colspan', 1);
+
+		jQuery('.form-select:not([multiple="multiple"])', context).selectbox();
+		jQuery('.form-select[disabled="disabled"]', context).selectbox("disable");
+		jQuery('.field_implementation_partners-delta-order', context).selectbox();
+	}
+}
 
 Drupal.behaviors.ictFaq = {
 	attach: function(context) {
