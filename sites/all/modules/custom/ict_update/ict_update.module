@@ -33,20 +33,22 @@ function ict_update_update_form_recursive($key, $value, $array) {
 function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) {
   $update = $form['#node'];
   if (empty($update->nid)) {
-    $project_id = arg(1);
+    $project_id = !empty($_REQUEST['project_id']) && is_numeric($_REQUEST['project_id']) ? check_plain($_REQUEST['project_id']) : arg(1);
     $project = node_load($project_id);
     $approved_vid = ict_project_get_last_transaction_by_state($project_id, 'approved');
     if (!$approved_vid->vid) {
       drupal_not_found();
     }
     $form['title']['#value'] = $project->title . ' Update submission ' . format_date(REQUEST_TIME, 'medium', 'd/m/Y h:i');
-    $form['#project_id'] = $form['field_project'][LANGUAGE_NONE][0]['target_id']['#value'] = $project->title . ' (' . $project_id . ')';
+    $form['#project_id'] = $project_id;
+    $form['field_project'][LANGUAGE_NONE][0]['target_id']['#value'] = $project->title . ' (' . $project_id . ')';
     $form['field_project_revision'][LANGUAGE_NONE][0]['value']['#value'] = $approved_vid->vid;
   }
   else {
     $form['#project_id'] = $project_id = $form['#node']->field_project['und'][0]['target_id'];
     $project = node_load($project_id);
   }
+  $form['project_id'] = array('#type' => 'hidden', '#value' => $project_id);
   $form['#project_node'] = $project;
 
   $form['#theme'] = 'ict_update_add_form';
@@ -80,6 +82,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   }
 
   $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
+  $form['field_benefits_realised']['und']['#project_id'] = $project_id;
 
   $action = arg(2);
   if ($action == 'approve') {
@@ -398,24 +401,40 @@ function template_preprocess_field_benefits_realised_table(&$vars) {
 
   $vars['element']['add_more']['#attributes']['class'][] = 'export-btn';
 
-  $project_id = arg(1);
-  $project_history = ict_update_get_allowed_entity_list($project_id);
+  $project_id = $vars['element']['#project_id'];
   $benefits = array();
-  foreach($project_history as $project_vid => $updates) {
-    $project = node_load($project_id, $project_vid);
-    $project_wrapper = entity_metadata_wrapper('node', $project);
-    if (isset($project_wrapper->field_benefits_realised)) {
-      $benefits[] = $project_wrapper->field_benefits_realised->value();
-    }
-    foreach($updates as $update_id) {
-      $update_wrapper = entity_metadata_wrapper('node', $update_id);
-      if (isset($update_wrapper->field_benefits_realised)) {
-        $benefits[] = $update_wrapper->field_benefits_realised->value();
+  if ($project_id) {
+    $project_history = ict_update_get_allowed_entity_list($project_id);
+    foreach ($project_history as $project_vid => $updates) {
+      $project = node_load($project_id, $project_vid);
+      $project_wrapper = entity_metadata_wrapper('node', $project);
+      if (isset($project_wrapper->field_benefits_realised)) {
+        $benefit_val = $project_wrapper->field_benefits_realised->value();
+        if (!empty($benefit_val)) {
+          $benefits[] = array_merge(array(
+            'type' => 'project',
+            'id' => $project_id,
+            'vid' => $project_vid,
+            'count' => count($benefit_val)
+          ), $benefit_val);
+        }
+      }
+      foreach ($updates as $update_id) {
+        $update_wrapper = entity_metadata_wrapper('node', $update_id);
+        if (isset($update_wrapper->field_benefits_realised)) {
+          $benefit_val = $update_wrapper->field_benefits_realised->value();
+          if (!empty($benefit_val)) {
+            $benefits[] = array_merge(array(
+              'type' => 'update',
+              'id' => $update_id,
+              'count' => count($benefit_val)
+            ), $benefit_val);
+          }
+        }
       }
     }
   }
-
-  return $benefits;
+  $vars['benefits'] = $benefits;
 }
 
 function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
@@ -451,6 +470,15 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
   $query->orderBy('p.entity_id', 'ASC');
   $updates_res = $query->execute()->fetchAllAssoc('update_nid');
 
+  // Check last update access
+  end($updates_res);
+  $last_update_id = key($updates_res);
+  $update_state = ict_project_get_workflow_state($last_update_id);
+  if (!in_array($update_state, $allowed_states)) {
+    array_pop($updates_res);
+  }
+
+  // Sort updates by project revisions
   $ids_list = array();
   array_map(function($val)  use (&$ids_list){ $ids_list[$val] = array(); }, $project_vids);
 

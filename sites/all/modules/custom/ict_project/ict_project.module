@@ -293,6 +293,7 @@ function ict_project_form_alter( &$form, &$form_state, $form_id){
       // benefits table
       $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
       $form['field_benefits_realised']['und']['#baseline'] = TRUE;
+      $form['field_benefits_realised']['und']['#project_id'] = !empty($node->nid) ? $node->nid : NULL;
 
       // portfolio options change
       $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
