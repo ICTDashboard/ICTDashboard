@@ -5,12 +5,34 @@
     <?php if (empty($element['#baseline'])) : ?>
       <th></th>
     <?php endif; ?>
-    <th><?php print t('Benefits'); ?></th>
-    <th><?php print t('Realised status'); ?></th>
-    <th><?php print t('Commentary'); ?></th>
-    <th><?php print t('Start date'); ?></th>
-    <th><?php print t('End date'); ?></th>
-    <th><?php print t('Financial'); ?></th>
+    <th><div class="label"><?php print t('Benefits'); ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">List the benefits (quantitative or qualitative) this project will deliver or contribute to, as identified in the business case.
+  </span></a></div></th>
+    <th>
+      <div class="label">
+        <?php print t('Realised status'); ?>
+        <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, indicate the status of benefit realisation. Realised - The benefit has been realised; Partially - The benefit has been partially realised; On Track – The project is on track to realise the benefit as originally expected; At Risk - The benefit is not likely to be realised as originally expected; Not Realised - The benefit has not been realised.
+  </span></a>
+      </div>
+    </th>
+    <th>
+      <div class="label">
+        <?php print t('Commentary'); ?>
+      </div>
+    </th>
+    <th colspan="2">
+      <div class="label">
+        <?php print t('Date Range: From-To'); ?>
+        <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, the date range when benefit is expected to be realised.
+  </span></a>
+      </div>
+    </th>
+    <th>
+      <div class="label">
+        <?php print t('Financial'); ?>
+        <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, mark those where the benefit can be measured financially.
+  </span></a>
+      </div>
+    </th>
   </tr>
   <?php foreach($benefits as $val) : ?>
     <?php if ($val['type'] == 'project')

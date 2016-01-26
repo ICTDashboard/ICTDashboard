@@ -299,6 +299,11 @@
     border-bottom: 1px solid #abb6cb;
     border-top: 0;
   }
+  th {
+    .label {
+      color: white;
+    }
+  }
   label {
     display: none;
   }

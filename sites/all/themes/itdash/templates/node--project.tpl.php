@@ -244,7 +244,7 @@
         <?php endforeach; ?>
       </div>
     </div>
-          
+
     <?php if (!$project_updates_available) : ?>
       <div class="row">
         <div class="label">
