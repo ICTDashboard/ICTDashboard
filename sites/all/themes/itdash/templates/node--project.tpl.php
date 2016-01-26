@@ -248,7 +248,7 @@
     <?php if (!$project_updates_available) : ?>
       <div class="row">
         <div class="label">
-          <?php print $field_benefits_realised['meta']['#title'] . ' <em>($m)</em>'; ?>
+          <?php print t('Top Benefits'); ?>
           <?php if (!empty($field_benefits_realised['meta']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
