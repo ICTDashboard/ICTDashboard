@@ -123,3 +123,15 @@ function ict_project_update_7303() {
   }
   return 'Add the project_workflow table for the ict_project module.';
 }
+
+/**
+ * Add Comment field to Project_workflow table.
+ */
+function ict_project_update_7304() {
+  $spec = array(
+    'type' => 'text',
+    'description' => "Comment for workflow transaction",
+    'not null' => FALSE,
+  );
+  db_add_field( 'project_workflow', 'comment', $spec);
+}

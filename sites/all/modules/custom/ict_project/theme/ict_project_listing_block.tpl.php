@@ -43,7 +43,7 @@
         <div style="display: none;" id="ict-policy">
           <?php $bean = bean_load_delta('opt-out-policy'); ?>
           <h2 class="fancybox-title"><?php print $bean->title; ?></h2>
-          <?php print drupal_render(bean_view($bean)); ?>
+          <div class="ict-fancy-content"><?php print drupal_render(bean_view($bean)); ?></div>
           <div class="fancybox-actions">
             <a class="ict-fancybox-close general-button" href="#"><span><?php print t('Close'); ?></span></a>
           </div>

@@ -3,7 +3,7 @@
 /**
  * Set workflow state. If revision is NULL set for the latest revision
  */
-function ict_project_set_workflow_state($state, $nid, $vid = NULL) {
+function ict_project_set_workflow_state($state, $nid, $vid = NULL, $comment = '') {
   global $user;
 
   if (!$vid) {
@@ -28,6 +28,7 @@ function ict_project_set_workflow_state($state, $nid, $vid = NULL) {
     'state' => $state,
     'created' => REQUEST_TIME,
     'uid' => $user->uid,
+    'comment' => $comment,
   ));
   return $query->execute();
 }

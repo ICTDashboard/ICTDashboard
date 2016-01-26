@@ -3,6 +3,7 @@ jQuery(document).ready(function(){
     jQuery('.fancybox-inline').fancybox({
         type: 'inline',
         maxWidth: 700,
+        minHeight: 320,
         padding: 0,
         closeBtn: false,
         afterShow: function() {
@@ -11,9 +12,28 @@ jQuery(document).ready(function(){
                     bottomPadding = jQuery('.fancybox-inner .fancybox-actions').outerHeight(),
                     fancyHeight = jQuery('.fancybox-inner').outerHeight();
 
-                jQuery('.fancybox-inner .bean-opt-out-policy').height(fancyHeight - topPadding - bottomPadding);
-                jQuery('.fancybox-inner .bean-opt-out-policy').css('margin-top', topPadding);
-                jQuery('.fancybox-inner .bean-opt-out-policy').css('margin-bottom', bottomPadding);
+                jQuery('.fancybox-inner .ict-fancy-content').height(fancyHeight - topPadding - bottomPadding);
+                jQuery('.fancybox-inner .ict-fancy-content').css('margin-top', topPadding);
+                jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom', bottomPadding);
+            }, 0);
+        }
+    });
+    jQuery('.fancybox-baseline-decline-form').fancybox({
+        type: 'inline',
+        maxWidth: 700,
+        minHeight: 320,
+        padding: 0,
+        closeBtn: false,
+        afterShow: function() {
+            setTimeout(function(){
+                var topPadding = jQuery('.fancybox-inner .fancybox-title').outerHeight(),
+                    bottomPadding = jQuery('.fancybox-inner .fancybox-actions').outerHeight(),
+                    fancyHeight = jQuery('.fancybox-inner').outerHeight();
+
+                jQuery('.fancybox-inner .ict-fancy-content').height(fancyHeight - topPadding - bottomPadding);
+                jQuery('.fancybox-inner .ict-fancy-content').css('margin-top', topPadding);
+                jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom', bottomPadding);
+                jQuery('.fancybox-wrap').appendTo('form#ict-project-baseline-approve-form');
             }, 0);
         }
     });
