@@ -1,4 +1,4 @@
-/*.page-user .tabs {display: none;}*/
+.page-user .tabs {display: none;}
 #content #inner-content .signin-request .tab-content .tab form p input[type="password"] {
     background-color: #fff;
     border: 1px solid #b3bdcf;
@@ -118,7 +118,7 @@ div#edit-field-rebaselined-total-budget td {
   font-weight: 700;
   color: #202b3d;
 }
-/*.page-node .tabs {display: none;}*/
+.page-node .tabs {display: none;}
 
 .pager li a {
   color: #0d6c88;

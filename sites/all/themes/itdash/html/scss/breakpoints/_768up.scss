@@ -1727,7 +1727,7 @@ mobile. Make sure to double check these!
 	background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
 	border-top: 1px solid #03a7a4;
 
-	height: 60px;
+	height: 90px;
 	clear: both;
     margin-top: -60px;
     position: relative;
@@ -1739,10 +1739,42 @@ mobile. Make sure to double check these!
 			float: right;
 			text-align: right;
 			color: #363a41;
-			margin: 1.5em 0;
+			margin: 1.5em 0 0;
+		}
+		.menu{
+			display: inline-block;
+			margin-top: 15px;
+			margin-bottom: 0;
+			li{
+				display: inline;
+				&:before{
+					content: '\00b7';
+					color: #137992;
+					font-size: 26px;
+					padding: 5px 5px 5px 3px;
+					vertical-align: -4px;
+					line-height: 26px;
+				}
+				&:first-child:before{
+					content: '';
+					padding: 0;
+				}
+				a{
+					color: #363a41;
+					text-decoration: none;
+					&:hover{
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+		.copy.second-copy{
+			margin: 0;
+			margin-top: 7px;
 		}
 	}
 }
+
 
 /*********************
 GENERAL STYLES
