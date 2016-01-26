@@ -27,14 +27,20 @@ function ict_user_guide_user_default_permissions() {
   // Exported permission: 'edit any user_guide bean'.
   $permissions['edit any user_guide bean'] = array(
     'name' => 'edit any user_guide bean',
-    'roles' => array(),
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'bean',
   );
 
   // Exported permission: 'view any user_guide bean'.
   $permissions['view any user_guide bean'] = array(
     'name' => 'view any user_guide bean',
-    'roles' => array(),
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'bean',
   );
 
