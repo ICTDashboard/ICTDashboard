@@ -151,7 +151,7 @@ function ict_project_baseline_approve_form($form, &$form_state, $nid) {
 
   $form['decline'] = array(
     '#type' => 'submit',
-    '#value' => t('Reject submission'),
+    '#value' => t('Reject and Notify Editors'),
     '#attributes' => array('class' => array('submit-button')),
     '#submit' => array('ict_project_baseline_approve_form_submit_decline'),
     '#validate' => array('ict_project_baseline_approve_form_validate')

@@ -348,7 +348,7 @@ function ict_update_approve_form($form, &$form_state, $nid, $update_id) {
 
   $form['decline'] = array(
     '#type' => 'submit',
-    '#value' => t('Decline Update'),
+    '#value' => t('Reject and Notify Editors'),
     '#attributes' => array('class' => array('submit-button')),
     '#submit' => array('ict_update_review_workflow_set_draft'),
     '#validate' => array('ict_update_baseline_approve_form_validate')
