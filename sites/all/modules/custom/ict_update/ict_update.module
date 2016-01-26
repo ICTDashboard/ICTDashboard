@@ -354,6 +354,10 @@ function ict_update_approve_form($form, &$form_state, $nid, $update_id) {
     '#validate' => array('ict_update_baseline_approve_form_validate')
   );
 
+  $form['comment'] = array(
+    '#type' => 'textarea',
+  );
+
   return $form;
 }
 
@@ -381,6 +385,17 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('approved', $nid);
+
+    $project_id = $node->field_project['und'][0]['target_id'];
+    if ($project = node_load($project_id)) {
+      $accs = ict_project_prepare_mail($project);
+      foreach ($accs as $acc) {
+        drupal_mail('ict_project', 'update_approve', $acc['mail'], LANGUAGE_NONE, array(
+          'name' => $acc['name'],
+          'title' => $project->title,
+        ));
+      }
+    }
   }
 }
 
@@ -394,6 +409,19 @@ function ict_update_review_workflow_set_draft($form, &$form_state) {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('draft', $nid);
+
+    $project_id = $node->field_project['und'][0]['target_id'];
+    $comment = $form_state['values']['comment'];
+    if ($project = node_load($project_id)) {
+      $accs = ict_project_prepare_mail($project);
+      foreach ($accs as $acc) {
+        drupal_mail('ict_project', 'update_decline', $acc['mail'], LANGUAGE_NONE, array(
+          'name' => $acc['name'],
+          'title' => $project->title,
+          'comment' => $comment,
+        ));
+      }
+    }
   }
 }
 

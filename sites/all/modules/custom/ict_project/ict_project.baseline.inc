@@ -256,7 +256,20 @@ function ict_project_mail($key, &$message, $params) {
 
     case 'baseline_decline':
       $msg = t("@username has rejected the baseline submission for @project_title", array('@username' => $params['name'], '@project_title' => $params['title']));
-      $msg .= !empty($params['comment']) ? t('with the following comment:') : '.';
+      $msg .= !empty($params['comment']) ? t(' with the following comment:') : '.';
+      $message['body'] = array($msg);
+      if (!empty($params['comment'])) {
+        $message['body'][] = $params['comment'];
+      }
+      break;
+
+    case 'update_approve':
+      $message['body'] = array(t("@username has approved the update submission for @project_title.", array('@username' => $params['name'], '@project_title' => $params['title'])));
+      break;
+
+    case 'update_decline':
+      $msg = t("@username has rejected the update submission for @project_title", array('@username' => $params['name'], '@project_title' => $params['title']));
+      $msg .= !empty($params['comment']) ? t(' with the following comment:') : '.';
       $message['body'] = array($msg);
       if (!empty($params['comment'])) {
         $message['body'][] = $params['comment'];
