@@ -52,7 +52,7 @@
           </td>
         <?php endif; ?>
         <td><?php print $collection_wrapper->field_benefit->value(); ?></td>
-        <td><?php print $collection_wrapper->field_status->value(); ?></td>
+        <td><?php print $collection_wrapper->field_status->label(); ?></td>
         <td><?php print $collection_wrapper->field_commentary->value(); ?></td>
         <td><?php print format_date($collection_wrapper->field_benefit_start_date->value(), 'medium', 'm/Y'); ?></td>
         <td><?php print format_date($collection_wrapper->field_end_date->value(), 'medium', 'm/Y'); ?></td>

@@ -186,6 +186,8 @@
         </div>
         <div class="text">
           <?php print $field_original_total_budget; ?>
+        </div>
+      </div>
     <?php endif; ?>
 
     <div class="row">
@@ -268,14 +270,15 @@
       <?php print drupal_render(node_view($update_node)); ?>
     <?php endif; ?>
 
-    <div class="submit">
-      <?php if (isset($update_form)) : ?>
-        <?php print drupal_render($update_form); ?>
-      <?php endif; ?>
-      <?php if (isset($edit_form)) : ?>
+    <?php if (isset($update_form)) : ?>
+      <?php print drupal_render($update_form); ?>
+    <?php endif; ?>
+
+    <?php if (isset($edit_form)) : ?>
+      <div class="submit">
           <?php print $edit_form; ?>
-      <?php endif; ?>
-    </div>
+      </div>
+    <?php endif; ?>
 
     <?php if (isset($approve_form)) : ?>
       <?php print $approve_form; ?>
