@@ -156,7 +156,8 @@ function itdash_menu_link__menu_header_menu ($variables) {
   if ($element['#below']) {
     $sub_menu = drupal_render($element['#below']);
   }
-  $output = l($element['#title'], $element['#href'], $element['#localized_options']['attributes']);
+  $attributes = isset($element['#localized_options']['attributes']) ? $element['#localized_options']['attributes'] : ['class'=>'yellow-text'];
+  $output = l($element['#title'], $element['#href'], $attributes);
   $element['#attributes']['class'] = array_merge($element['#attributes']['class'], $element['#localized_options']['attributes']['class']);
   return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }

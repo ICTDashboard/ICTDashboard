@@ -4,7 +4,7 @@
     <div id="inner-header" class="wrap cf">
       <p id="logo" class="h1"><a href="/" rel="nofollow">
           <img src="/<?php print drupal_get_path('theme', 'itdash'); ?>/html/images/agdof-logo.png" alt="ICT Dashboard"/>
-          <span><strong><?php print t('ICT Projects'); ?></strong> <?php print t('Dashboard'); ?></span></a>
+          <span><strong><?php print t('ICT Projects'); ?></strong><br><?php print t('Dashboard'); ?></span></a>
       </p>
       <nav role="navigation" id="navigation">
         <?php
