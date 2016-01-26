@@ -73,13 +73,13 @@ jQuery(document).ready(function($) {
 
   if ($(".add_datepicker").length) {
 
-    $(document).click(function (e)
-    {
-      if (!$(this).hasClass('ui-datepicker-trigger'))
-      {
-        $('.add_datepicker').datepicker("hide");
-      }
-    });
+    //$(document).click(function (e)
+    //{
+    //  if (!$(this).hasClass('ui-datepicker-trigger'))
+    //  {
+    //    $('.add_datepicker').datepicker("hide");
+    //  }
+    //});
 
     $(".add_datepicker").each(function () {
       	var id = $(this).attr('id');
@@ -90,11 +90,6 @@ jQuery(document).ready(function($) {
 			buttonImageOnly: true,
 			showOn: 'button',
 			onClose: function(dateText, inst) {
-				$('#' + id + '-und-0-value-year').val(Number(dateText.split('/')[2]));
-				$('#' + id + '-und-0-value-month').val(Number(dateText.split('/')[0]));
-				$('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
-				$('.form-select').selectbox('detach');
-				$('.form-select').selectbox('attach');
 				dateinput.val(dateText);
 			}
 		};
