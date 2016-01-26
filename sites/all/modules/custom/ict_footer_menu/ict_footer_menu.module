@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ICT Footer Menu feature.
+ */
+
+include_once 'ict_footer_menu.features.inc';
