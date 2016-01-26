@@ -134,7 +134,7 @@
                   <?php endif; ?>
 
                   <?php if (ict_update_approve_allowed($project->nid, $update_id)) : ?>
-                    <a href="<?php print url('update/' . $update_id . '/approve'); ?>">
+                    <a href="<?php print url('node/' . $project->nid); ?>">
                       <span><?php print t('Review Update Draft'); ?></span>
                     </a>
                   <?php endif; ?>

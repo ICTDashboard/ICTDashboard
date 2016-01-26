@@ -21,7 +21,7 @@
     </th>
     <th colspan="2">
       <div class="label">
-        <?php print t('Date Range: From-To'); ?>
+        <?php print t('Date Range: Start - End'); ?>
         <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, the date range when benefit is expected to be realised.
   </span></a>
       </div>
@@ -52,7 +52,7 @@
           </td>
         <?php endif; ?>
         <td><?php print $collection_wrapper->field_benefit->value(); ?></td>
-        <td><?php print $collection_wrapper->field_status->value(); ?></td>
+        <td><?php print $collection_wrapper->field_status->label(); ?></td>
         <td><?php print $collection_wrapper->field_commentary->value(); ?></td>
         <td><?php print format_date($collection_wrapper->field_benefit_start_date->value(), 'medium', 'm/Y'); ?></td>
         <td><?php print format_date($collection_wrapper->field_end_date->value(), 'medium', 'm/Y'); ?></td>

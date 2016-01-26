@@ -186,6 +186,8 @@
         </div>
         <div class="text">
           <?php print $field_original_total_budget; ?>
+        </div>
+      </div>
     <?php endif; ?>
 
     <div class="row">
@@ -248,7 +250,7 @@
     <?php if (!$project_updates_available) : ?>
       <div class="row">
         <div class="label">
-          <?php print $field_benefits_realised['meta']['#title'] . ' <em>($m)</em>'; ?>
+          <?php print t('Top Benefits'); ?>
           <?php if (!empty($field_benefits_realised['meta']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
@@ -268,14 +270,15 @@
       <?php print drupal_render(node_view($update_node)); ?>
     <?php endif; ?>
 
-    <div class="submit">
-      <?php if (isset($update_form)) : ?>
-        <?php print drupal_render($update_form); ?>
-      <?php endif; ?>
-      <?php if (isset($edit_form)) : ?>
+    <?php if (isset($update_form)) : ?>
+      <?php print drupal_render($update_form); ?>
+    <?php endif; ?>
+
+    <?php if (isset($edit_form)) : ?>
+      <div class="submit">
           <?php print $edit_form; ?>
-      <?php endif; ?>
-    </div>
+      </div>
+    <?php endif; ?>
 
     <?php if (isset($approve_form)) : ?>
       <?php print $approve_form; ?>

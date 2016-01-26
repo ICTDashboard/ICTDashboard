@@ -74,7 +74,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Start date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -161,7 +161,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'End date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -285,7 +285,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_actual_level_of_project_co',
-    'label' => 'Actual Level of Project Completion (%)',
+    'label' => 'Actual Level of Project Completion',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -343,7 +343,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -376,7 +376,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_current_financial_benefits',
-    'label' => 'Current Financial Benefits ($m)',
+    'label' => 'Current Financial Benefits',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -390,7 +390,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -431,7 +431,7 @@ function ict_update_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -464,7 +464,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_estimated_value_of_benefit',
-    'label' => 'Estimated Value of Benefits Realised ($m)',
+    'label' => 'Estimated Value of Benefits Realised',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -478,7 +478,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -515,7 +515,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Expected Completion Date',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'same',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -526,7 +526,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 0,
@@ -567,7 +567,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_forecast_level_of_project_',
-    'label' => 'Forecast Level of Project Completion (%)',
+    'label' => 'Forecast Level of Project Completion',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -582,6 +582,49 @@ function ict_update_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-update-field_original_total_budget'.
+  $field_instances['node-update-field_original_total_budget'] = array(
+    'bundle' => 'update',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_original_total_budget',
+    'label' => 'Project Budget By Financial Year ',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 9,
     ),
   );
 
@@ -763,19 +806,20 @@ function ict_update_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Actual Level of Project Completion (%)');
+  t('Actual Level of Project Completion');
   t('Benefit');
   t('Benefits Realised');
   t('Commentary');
   t('Context, remedial action, changes in project scope or other commentary.');
-  t('Current Financial Benefits ($m)');
+  t('Current Financial Benefits');
   t('End date');
   t('Entity comments');
-  t('Estimated Value of Benefits Realised ($m)');
+  t('Estimated Value of Benefits Realised');
   t('Expected Completion Date');
   t('Financial');
-  t('Forecast Level of Project Completion (%)');
+  t('Forecast Level of Project Completion');
   t('Project');
+  t('Project Budget By Financial Year ');
   t('Project revision');
   t('Project stage');
   t('Spend To Date By Financial Year ($m)');

@@ -48,6 +48,7 @@ body,
           height: 16px;
           margin-bottom: -3px;
           margin-left: 10px;
+          z-index: 1;
           @include sprite-icon('tooltip-icon-normal');
           display: inline-block;
           &:hover {
@@ -104,6 +105,9 @@ body,
         }
       }
       .text {
+        .description {
+          display: none;
+        }
         select,
         input[type="text"],
         textarea {
@@ -133,7 +137,9 @@ body,
           border-bottom: 1px solid #abb6cb;
           border-collapse: separate;
           font-size: 14px;
-
+          &#financial-benefits {
+            max-width: none;
+          }
         }
         #edit-field-benefits-realised table{
           max-width: none;
@@ -167,17 +173,20 @@ body,
             height: 38px;
             text-align: center;
             vertical-align: middle;
+            &.number-cell {
+              background-color: #fff;
+            }
           }
         }
         p {
           margin: 0 0 5px;
         }
         table.table_field_collection {
-          margin-bottom: 15px;
+          margin-bottom: 10px;
           tr {
             td {
               border-top: none;
-              border-bottom: none;
+              border-bottom: 1px solid #abb6cb;
               input {
                 text-align: center;
                 border-radius: 0;
@@ -189,6 +198,11 @@ body,
               }
               &:last-child {
                 border-right: 1px solid #abb6cb;
+              }
+            }
+            &:last-child {
+              td {
+                border-bottom: none;
               }
             }
           }
@@ -331,6 +345,9 @@ body,
     @include border-radius(0);
     border: 0;
     background-color: transparent;
+    &.hasDatepicker {
+      padding-right: 30px;
+    }
   }
   .date-no-float {
     width: 100%;
@@ -355,4 +372,8 @@ body,
 }
 .ict-align-center {
   text-align: center;
+}
+
+.field-name-field-guide{
+  background-color: transparent;
 }

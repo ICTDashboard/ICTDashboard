@@ -50,6 +50,18 @@ function ict_project_preprocess_node(&$vars) {
         $value['meta']['#title'] = $field_info['label'];
       }
     }
+
+    // Budget Table
+    $project_id = $vars['project_id'];
+    $budget_items = array();
+    if ($project_id) {
+      $budget_items = _ict_project_prepare_budget_history($project_id, 'view');
+    }
+    $vars['field_original_total_budget'] = theme(
+      'field_original_total_budget_table_view', array(
+        'rows' => $budget_items
+      )
+    );
   }
   if ($vars['type'] == 'project') {
 
@@ -83,10 +95,10 @@ function ict_project_preprocess_node(&$vars) {
       return;
     }
 
+    $budget_items = _ict_project_prepare_budget_history($node->nid, 'view');
     $vars['field_original_total_budget'] = theme(
-      'field_original_total_budget_table_view',
-      array(
-        'baseline' => $vars['field_original_total_budget']
+      'field_original_total_budget_table_view', array(
+        'rows' => $budget_items
       )
     );
 
@@ -244,12 +256,13 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
 //      $entity_list = ict_update_get_allowed_entity_list($node->nid);
 
       // project budget by financial year
-      _ict_project_broject_budget_by_year_form ($form, $form_state);
+      _ict_project_project_budget_by_year_form ($form, $form_state);
 
       // benefits table
       $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table_form';
       $form['field_benefits_realised']['und']['#baseline'] = TRUE;
       $form['field_benefits_realised']['und']['#project_id'] = !empty($node->nid) ? $node->nid : NULL;
+      $form['field_benefits_realised']['und']['add_more']['#value'] = t('Add another Benefit');
 
       // portfolio options change
       $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
@@ -270,9 +283,58 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
   }
 }
 
-function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_entities = array()) {
+function _ict_project_prepare_budget_history($project_id, $mode = 'form') {
+  $budget_info = _ict_update_load_history_budget_collections($project_id);
+
+  if ($mode == 'form') {
+    $last_entity = end($budget_info);
+    if (ict_project_get_workflow_state($last_entity['id']) != 'approved') {
+      array_pop($budget_info);
+    }
+  }
+
+  $budget_rows = array();
+  $baseline_added = FALSE;
+  foreach ($budget_info  as $budget_value) {
+    if (!$baseline_added && $budget_value['type'] == 'project') {
+      $row_type = 'original';
+      $baseline_added = TRUE;
+    }
+    elseif ($budget_value['type'] == 'project') {
+      $row_type = 'rebaselined';
+    }
+    else {
+      $row_type = '';
+    }
+
+    $budget_rows[] = array(
+      'type' =>  $row_type,
+      'title' => $budget_value['type'] == 'project' ?
+        t('Project Budget') :
+        t('Spend to Date'),
+      'description' => $budget_value['type'] == 'project' ?
+        t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.') :
+        t('Actual project spend for the current financial year at the time of update.'),
+      'date' => $budget_value['date']?
+        date('d/m/y', $budget_value['date']) :
+        '',
+      'budget_items' => $budget_value['budget_values'],
+      'count' => $budget_value['count']
+    );
+  }
+
+  return $budget_rows;
+}
+
+function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
+  $budget_rows = !empty($form['#project_id']) ?
+    _ict_project_prepare_budget_history($form['#project_id'], 'form') :
+    array();
+  $budget_table['#min_index'] = 0;
+  $budget_table['#budget_rows'] = $budget_rows;
+
   $budget_table = &$form['field_original_total_budget'][LANGUAGE_NONE];
-  if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+  if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']) && !$budget_rows) {
     // initial form render with no values
 
     $items_count = 4;
@@ -300,6 +362,45 @@ function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_e
       $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
     }
   }
+  elseif ($budget_rows) {
+    $first_fin_year = $budget_rows[0]['budget_items'][0]->field_year[LANGUAGE_NONE][0]['value'];
+
+    $min_columns = 0;
+    foreach ($budget_rows as $row) {
+      if ($row['count'] <= $min_columns) {
+        continue;
+      }
+      $min_columns = $row['count'];
+    }
+
+    $items_count = $min_columns - 1;
+    $field_name = 'field_original_total_budget';
+    $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
+
+    if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+      // Generate required number of fields collection
+      if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+        $budget_table_items['items_count'] = $items_count;
+        $budget_table = field_multiple_value_form(
+          $budget_table_items['field'],
+          $budget_table_items['instance'],
+          LANGUAGE_NONE,
+          array(),
+          $form,
+          $form_state);
+      }
+      $budget_table_items['items_count']++;
+      $budget_table['#after_build'] = 'field_form_element_after_build';
+    }
+    $budget_table['#min_index'] = $min_columns - 1;
+    $budget_table['#budget_rows'] = $budget_rows;
+
+    $year = reset(explode('/', $first_fin_year));
+    foreach (element_children($budget_table) as $item) {
+      if (!is_numeric($item)) continue;
+      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
+    }
+  }
   else { // if any data is set
 
     if (empty($form_state['triggering_element'])) {
@@ -322,6 +423,23 @@ function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_e
   ));
 
   // theming stuff
+  $form_type = $form['type']['#value'];
+  $budget_table['#row_title'] = $form_type == 'project' ?
+    t('Project Budget') :
+    t('Spend to Date');
+
+  $budget_table['#row_description'] = $form_type == 'project' ?
+    t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.') :
+    t('Actual project spend for the current financial year at the time of update.');
+
+  $budget_table['#row_type'] = '';
+  if (!$budget_rows && $form_type == 'project') {
+    $budget_table['#row_type'] = 'original';
+  }
+  elseif ($form_type == 'project') {
+    $budget_table['#row_type'] = 'rebaselined';
+  }
+
   foreach (element_children($budget_table) as $item) {
     if (!is_numeric($item)) {
       $budget_table[$item]['#attributes']['class'][] = 'export-btn';
@@ -329,7 +447,6 @@ function _ict_project_broject_budget_by_year_form (&$form, &$form_state, $prev_e
     }
     $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#title_display'] = 'invisible';
     $budget_table[$item]['remove_button']['#attributes']['class'][] = 'remove-column-button';
-//    $budget_table[$item]['remove_button'] = ;
   }
   $budget_table['#theme'] = 'field_original_total_budget_table';
 
@@ -1161,17 +1278,15 @@ function ict_project_review_project_submission($form, &$form_state) {
 }
 
 function ict_project_preprocess_field_original_total_budget_table_view (&$vars) {
-  $fc_ids = array();
-  foreach ($vars['baseline'] as $item) {
-    $fc_ids[] = $item['value'];
+  $rows = $vars['rows'];
+  $max_columns = 0;
+  foreach ($rows as $item) {
+    if ($item['count'] <= $max_columns) continue;
+    $max_columns = $item['count'];
+    $max_item = $item;
   }
-  $fc = field_collection_item_load_multiple($fc_ids);
-  $baseline = array();
-  foreach ($fc as $item) {
-    $baseline[] = array(
-      'year' => $item->field_year[LANGUAGE_NONE][0]['value'],
-      'total' => $item->field_total[LANGUAGE_NONE][0]['value']
-    );
-  }
-  $vars['baseline'] = $baseline;
+  $max_delta = $max_columns - 1;
+  $delta_range = range(0, $max_delta);
+  $vars['max_item'] = $max_item;
+  $vars['delta_range'] = $delta_range;
 }
