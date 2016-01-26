@@ -339,5 +339,13 @@
     }
     border: 0;
   }
+  .ict-tick {
+    display: inline-block;
+  }
 }
-
+.ict-tick {
+  @include sprite-icon('tick');
+}
+.ict-align-center {
+  text-align: center;
+}

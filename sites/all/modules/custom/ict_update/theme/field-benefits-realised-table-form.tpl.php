@@ -22,17 +22,19 @@
       <?php if (!is_numeric($key)) continue; ?>
       <?php $collection_wrapper = entity_metadata_wrapper('field_collection_item', $benefit); ?>
       <tr>
-        <td>
-          <?php if ($val['type'] == 'update') print t('Update ') . $updates_num; ?>
-          <?php if ($val['type'] == 'project' && $projects_num == 1) print t('Baseline'); ?>
-          <?php if ($val['type'] == 'project' && $projects_num > 1) print t('Rebaseline'); ?>
-        </td>
+        <?php if ($key == 0) : ?>
+          <td rowspan="<?php print $val['count']; ?>">
+            <?php if ($val['type'] == 'update') print t('Update ') . $updates_num; ?>
+            <?php if ($val['type'] == 'project' && $projects_num == 1) print t('Baseline'); ?>
+            <?php if ($val['type'] == 'project' && $projects_num > 1) print t('Rebaseline'); ?>
+          </td>
+        <?php endif; ?>
         <td><?php print $collection_wrapper->field_benefit->value(); ?></td>
         <td><?php print $collection_wrapper->field_status->value(); ?></td>
         <td><?php print $collection_wrapper->field_commentary->value(); ?></td>
         <td><?php print format_date($collection_wrapper->field_benefit_start_date->value(), 'medium', 'm/Y'); ?></td>
         <td><?php print format_date($collection_wrapper->field_end_date->value(), 'medium', 'm/Y'); ?></td>
-        <td><?php print $collection_wrapper->field_financial->value() ? 'YES' : 'NO'; ?></td>
+        <td class="ict-align-center"><?php print $collection_wrapper->field_financial->value() ? '<span class="ict-tick"></span>' : '-'; ?></td>
       </tr>
     <?php endforeach; ?>
   <?php endforeach; ?>
@@ -40,7 +42,9 @@
   <?php foreach(element_children($element) as $key) : ?>
     <?php if (!is_numeric($key)) continue; ?>
     <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
-      <?php print (!empty($element['#baseline'])) ? '' : '<td>' . t('Update ') . $updates_num . '</td>'; ?>
+      <?php if ($key == 0) : ?>
+        <?php print (!empty($element['#baseline'])) ? '' : '<td rowspan="' . (count(element_children($element)) -1) . '">' . t('Update ') . $updates_num . '</td>'; ?>
+      <?php endif; ?>
       <td><?php print drupal_render($element[$key]['field_benefit']); ?></td>
       <td class="select-no-border"><?php print drupal_render($element[$key]['field_status']); ?></td>
       <td><?php print drupal_render($element[$key]['field_commentary']); ?></td>

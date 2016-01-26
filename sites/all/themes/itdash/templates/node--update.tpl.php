@@ -217,169 +217,24 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="label">
-        <?php print t('Benefits realised'); ?>
-        <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print $form['field_benefits_realised']['#description']; ?>
-              </span>
-          </a>
-        <?php endif; ?>
+    <?php if (!empty($project_id)) : ?>
+      <div class="row">
+        <div class="label">
+          <?php print t('Benefits realised'); ?>
+          <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+                <span class="tooltip-content">
+                  <?php print $form['field_benefits_realised']['#description']; ?>
+                </span>
+            </a>
+          <?php endif; ?>
+        </div>
+        <div class="text">
+          <?php print theme('field_benefits_realised_table_view', array('project_id' => $project_id)); ?>
+        </div>
       </div>
-      <div class="text">
-        <!--        --><?php //print render($form['field_original_total_budget']); ?>
-        <table id="field_end_predicted_budget">
-          <tbody>
-          <tr>
-            <th></th><th>
-              <div style="display: none;">
-                <div class="field-type-text field-name-field-predicted-year field-widget-text-textfield form-wrapper" id="edit-field-end-predicted-budget-und-0-field-predicted-year"><div id="field-end-predicted-budget-und-0-field-predicted-year-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-0-field-predicted-year-und-0-value">
-                      <label class="element-invisible" for="edit-field-end-predicted-budget-und-0-field-predicted-year-und-0-value">Year </label>
-                      <input class="text-full form-text" type="text" id="edit-field-end-predicted-budget-und-0-field-predicted-year-und-0-value" name="field_end_predicted_budget[und][0][field_predicted_year][und][0][value]" value="13/14" size="60" maxlength="255">
-                    </div>
-                  </div></div>          </div>
-              Benefits        </th>
-            <th>
-              <div style="display: none;">
-                <div class="field-type-text field-name-field-predicted-year field-widget-text-textfield form-wrapper" id="edit-field-end-predicted-budget-und-1-field-predicted-year"><div id="field-end-predicted-budget-und-1-field-predicted-year-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-1-field-predicted-year-und-0-value">
-                      <label class="element-invisible" for="edit-field-end-predicted-budget-und-1-field-predicted-year-und-0-value">Year </label>
-                      <input class="text-full form-text" type="text" id="edit-field-end-predicted-budget-und-1-field-predicted-year-und-0-value" name="field_end_predicted_budget[und][1][field_predicted_year][und][0][value]" value="14/15" size="60" maxlength="255">
-                    </div>
-                  </div></div>          </div>
-              Status        </th>
-            <th>
-              <div style="display: none;">
-                <div class="field-type-text field-name-field-predicted-year field-widget-text-textfield form-wrapper" id="edit-field-end-predicted-budget-und-2-field-predicted-year"><div id="field-end-predicted-budget-und-2-field-predicted-year-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-2-field-predicted-year-und-0-value">
-                      <label class="element-invisible" for="edit-field-end-predicted-budget-und-2-field-predicted-year-und-0-value">Year </label>
-                      <input class="text-full form-text" type="text" id="edit-field-end-predicted-budget-und-2-field-predicted-year-und-0-value" name="field_end_predicted_budget[und][2][field_predicted_year][und][0][value]" value="15/16" size="60" maxlength="255">
-                    </div>
-                  </div></div>          </div>
-              Commentary        </th>
-            <th>
-              <div style="display: none;">
-                <div class="field-type-text field-name-field-predicted-year field-widget-text-textfield form-wrapper" id="edit-field-end-predicted-budget-und-3-field-predicted-year"><div id="field-end-predicted-budget-und-3-field-predicted-year-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-3-field-predicted-year-und-0-value">
-                      <label class="element-invisible" for="edit-field-end-predicted-budget-und-3-field-predicted-year-und-0-value">Year </label>
-                      <input class="text-full form-text" type="text" id="edit-field-end-predicted-budget-und-3-field-predicted-year-und-0-value" name="field_end_predicted_budget[und][3][field_predicted_year][und][0][value]" value="16/17" size="60" maxlength="255">
-                    </div>
-                  </div></div>          </div>
-              Start date        </th>
-            <th>
-              <div style="display: none;">
-                <div class="field-type-text field-name-field-predicted-year field-widget-text-textfield form-wrapper" id="edit-field-end-predicted-budget-und-4-field-predicted-year"><div id="field-end-predicted-budget-und-4-field-predicted-year-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-4-field-predicted-year-und-0-value">
-                      <label class="element-invisible" for="edit-field-end-predicted-budget-und-4-field-predicted-year-und-0-value">Year </label>
-                      <input class="text-full form-text" type="text" id="edit-field-end-predicted-budget-und-4-field-predicted-year-und-0-value" name="field_end_predicted_budget[und][4][field_predicted_year][und][0][value]" value="17/18" size="60" maxlength="255">
-                    </div>
-                  </div></div>          </div>
-              End date
-            </th>
-            <th>
-              <div style="display: none;">
-                <div class="field-type-text field-name-field-predicted-year field-widget-text-textfield form-wrapper" id="edit-field-end-predicted-budget-und-4-field-predicted-year"><div id="field-end-predicted-budget-und-4-field-predicted-year-add-more-wrapper"><div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-4-field-predicted-year-und-0-value">
-                      <label class="element-invisible" for="edit-field-end-predicted-budget-und-4-field-predicted-year-und-0-value">Year </label>
-                      <input class="text-full form-text" type="text" id="edit-field-end-predicted-budget-und-4-field-predicted-year-und-0-value" name="field_end_predicted_budget[und][4][field_predicted_year][und][0][value]" value="17/18" size="60" maxlength="255">
-                    </div>
-                  </div></div>          </div>
-              Financial
-            </th></tr>
-          </tr>
-
-          <tr class="sum">
-            <td><div class="label" style="color:black; margin:0; font-weight:normal">Baseline</div></td>
-            <td data-sum="0" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-0-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-0-field-predicted-opex-add-more-wrapper3">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-0-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-0-field-predicted-opex-und-0-value2">Benefit One </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="1" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-1-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-1-field-predicted-opex-add-more-wrapper3">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-1-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-1-field-predicted-opex-und-0-value3">Completed </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="2" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-2-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-2-field-predicted-opex-add-more-wrapper3">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-2-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-2-field-predicted-opex-und-0-value3">No Commentary </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="3" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-3-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-3-field-predicted-opex-add-more-wrapper3">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-3-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-3-field-predicted-opex-und-0-value3">10/2015 </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="4" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-4-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-4-field-predicted-opex-add-more-wrapper2">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-4-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-4-field-predicted-opex-und-0-value2">02/2016 </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="4" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-4-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-4-field-predicted-opex-add-more-wrapper2">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-4-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-4-field-predicted-opex-und-0-value2">Yes </label>
-                  </div>
-                </div>
-              </div></td>
-          </tr>
-          <tr class="sum">
-            <td><div class="label" style="color:black; margin:0; font-weight:normal">Updated</div></td>
-            <td data-sum="0" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-0-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-0-field-predicted-opex-add-more-wrapper3">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-0-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-0-field-predicted-opex-und-0-value2">Benefit One </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="1" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-1-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-1-field-predicted-opex-add-more-wrapper3">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-1-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-1-field-predicted-opex-und-0-value3">Completed </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="2" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-2-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-2-field-predicted-opex-add-more-wrapper3">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-2-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-2-field-predicted-opex-und-0-value3">No Commentary </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="3" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-3-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-3-field-predicted-opex-add-more-wrapper3">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-3-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-3-field-predicted-opex-und-0-value3">10/2015 </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="4" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-4-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-4-field-predicted-opex-add-more-wrapper2">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-4-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-4-field-predicted-opex-und-0-value2">02/2016 </label>
-                  </div>
-                </div>
-              </div></td>
-            <td data-sum="4" class="opex"><div class="field-type-number-decimal field-name-field-predicted-opex field-widget-number form-wrapper" id="edit-field-end-predicted-budget-und-4-field-predicted-opex3">
-                <div id="field-end-predicted-budget-und-4-field-predicted-opex-add-more-wrapper2">
-                  <div class="form-item form-type-textfield form-item-field-end-predicted-budget-und-4-field-predicted-opex-und-0-value">
-                    <label for="edit-field-end-predicted-budget-und-4-field-predicted-opex-und-0-value2">Yes </label>
-                  </div>
-                </div>
-              </div></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <?php endif; ?>
 
     <div class="row">
       <div class="label">

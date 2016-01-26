@@ -38,6 +38,7 @@ function ict_project_preprocess_node(&$vars) {
   if ($vars['type'] == 'update') {
     $node = $vars['node'];
     $view_mode = $vars['view_mode'];
+    $vars['project_id'] = $vars['field_project'][0]['target_id'];
 
     foreach ($vars as $var_name => &$value) {
       $element_name = explode('_', $var_name);
@@ -246,7 +247,7 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       _ict_project_broject_budget_by_year_form ($form, $form_state);
 
       // benefits table
-      $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table';
+      $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table_form';
       $form['field_benefits_realised']['und']['#baseline'] = TRUE;
       $form['field_benefits_realised']['und']['#project_id'] = !empty($node->nid) ? $node->nid : NULL;
 
