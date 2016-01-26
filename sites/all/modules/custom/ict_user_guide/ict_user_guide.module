@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ICT User Guide feature.
+ */
+
+include_once 'ict_user_guide.features.inc';
