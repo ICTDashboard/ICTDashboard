@@ -131,7 +131,9 @@
           border-bottom: 1px solid #abb6cb;
           border-collapse: separate;
           font-size: 14px;
-
+          &#financial-benefits {
+            max-width: none;
+          }
         }
         #edit-field-benefits-realised table{
           max-width: none;
@@ -171,7 +173,7 @@
           margin: 0 0 5px;
         }
         table.table_field_collection {
-          margin-bottom: 15px;
+          margin-bottom: 10px;
           tr {
             td {
               border-top: none;
@@ -329,6 +331,9 @@
     @include border-radius(0);
     border: 0;
     background-color: transparent;
+    &.hasDatepicker {
+      padding-right: 25px;
+    }
   }
   .date-no-float {
     width: 100%;

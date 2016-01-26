@@ -1,6 +1,6 @@
 <?php $number = 1; ?>
 <?php $projects_num = $updates_num = 0; ?>
-<table id="financial-benefits">
+<table id="financial-benefits" class="table_field_collection">
   <tr>
     <?php if (empty($element['#baseline'])) : ?>
       <th></th>
@@ -21,7 +21,7 @@
     </th>
     <th colspan="2">
       <div class="label">
-        <?php print t('Date Range: From-To'); ?>
+        <?php print t('Date Range: Start - End'); ?>
         <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, the date range when benefit is expected to be realised.
   </span></a>
       </div>
