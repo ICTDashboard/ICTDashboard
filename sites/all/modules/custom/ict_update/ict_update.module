@@ -85,6 +85,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table_form';
   $form['field_benefits_realised']['und']['#project_id'] = $project_id;
   $form['field_benefits_realised']['und']['#update_id'] = !empty($form['#update_id']) ? $form['#update_id'] : NULL;
+  $form['field_benefits_realised']['und']['add_more']['#value'] = t('Add another Benefit');
 
   $action = arg(2);
   if ($action == 'approve') {
@@ -104,6 +105,9 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $form['actions']['submit_request']['#submit'][] = 'ict_update_workflow_set_wait_approve';
     $form['actions']['submit']['#submit'][] = 'ict_update_workflow_set_draft';
   }
+
+  // project budget by financial year
+  _ict_project_project_budget_by_year_form ($form, $form_state);
 }
 
 function ict_update_benefits_realised_validate($form, &$form_state) {
@@ -463,6 +467,47 @@ function _ict_update_load_history_collections($project_id) {
   }
 
   return $benefits;
+}
+
+function _ict_update_load_history_budget_collections($project_id) {
+  $budget_values = array();
+  $project_history = ict_update_get_allowed_entity_list($project_id);
+  foreach ($project_history as $project_vid => $updates) {
+    $project = node_load($project_id, $project_vid);
+    $project_wrapper = entity_metadata_wrapper('node', $project);
+    if (isset($project_wrapper->field_original_total_budget)) {
+      $budget_val = $project_wrapper->field_original_total_budget->value();
+      if (!empty($budget_val)) {
+        $approved = ict_project_get_last_transaction_by_state($project_id, 'approved');
+        $budget_values[] = array(
+          'type' => 'project',
+          'id' => $project_id,
+          'date' => $approved ? $approved->created : NULL,
+          'vid' => $project_vid,
+          'count' => count($budget_val),
+          'budget_values' => $budget_val,
+        );
+      }
+    }
+    foreach ($updates as $update_id) {
+      $update_wrapper = entity_metadata_wrapper('node', $update_id);
+      if (isset($update_wrapper->field_original_total_budget)) {
+        $budget_val = $update_wrapper->field_original_total_budget->value();
+        if (!empty($budget_val)) {
+          $approved = ict_project_get_last_transaction_by_state($update_id, 'approved');
+          $budget_values[] = array(
+            'type' => 'update',
+            'id' => $update_id,
+            'date' => $approved ? $approved->created : NULL,
+            'count' => count($budget_val),
+            'budget_values' => $budget_val,
+          );
+        }
+      }
+    }
+  }
+
+  return $budget_values;
 }
 
 function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
