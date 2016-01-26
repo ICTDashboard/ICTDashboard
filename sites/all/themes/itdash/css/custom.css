@@ -1,4 +1,4 @@
-.page-user .tabs {display: none;}
+/*.page-user .tabs {display: none;}*/
 #content #inner-content .signin-request .tab-content .tab form p input[type="password"] {
     background-color: #fff;
     border: 1px solid #b3bdcf;
@@ -73,7 +73,7 @@ input.password-confirm:focus
 
 #edit-field-rebaselined-total-budget table, #edit-field-rebaselined-total-budget th,  div#edit-field-rebaselined-total-budget td,
 #edit-field-original-total-budget table, #edit-field-original-total-budget th,  div#edit-field-original-total-budget td {
- 
+
 }
 
 .field-name-field-total input {
@@ -118,7 +118,7 @@ div#edit-field-rebaselined-total-budget td {
   font-weight: 700;
   color: #202b3d;
 }
-.page-node .tabs {display: none;}
+/*.page-node .tabs {display: none;}*/
 
 .pager li a {
   color: #0d6c88;
@@ -146,7 +146,7 @@ div#edit-field-rebaselined-total-budget td {
 }
 .tooltipster-icon:hover {background-color: #0a5f74;}
 /*.radio-description .form-item {float: left;}*/
-.header #logo {font-size: 29px;}
+.header #logo {font-size: 34px;}
 
 #content .project-update-submission .submit input.form-submit,
 #content .project-update-submission .submit input#edit-preview,
