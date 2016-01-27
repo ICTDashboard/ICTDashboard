@@ -1453,6 +1453,10 @@ NAVIGATION STYLES
 			width: 98px;
 			&:before { background: $yellow-text; }
 		}
+		&.salad {
+			width: 98px;
+			&:before { background: $salad; }
+		}
 		&.yellow-green {
 			width: 103px;
 			&:before { background: $yellow-green; }
