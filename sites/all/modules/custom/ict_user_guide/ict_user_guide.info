@@ -1,7 +1,7 @@
 name = ICT User Guide
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.1
+version = 7.x-1.11
 dependencies[] = bean
 dependencies[] = bean_admin_ui
 dependencies[] = ctools
@@ -19,6 +19,7 @@ features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[field_base][] = field_guide
 features[field_instance][] = bean-user_guide-field_guide
+features[page_manager_pages][] = feedback
 features[page_manager_pages][] = user_guide
 features[user_permission][] = create any user_guide bean
 features[user_permission][] = delete any user_guide bean
