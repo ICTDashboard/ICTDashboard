@@ -377,3 +377,14 @@ body,
 .field-name-field-guide{
   background-color: transparent;
 }
+
+.node-basic-page, .bean-admin-editable{
+  .field{
+    max-width: none;
+    background-color: transparent;
+  }
+}
+
+.sbOptions {
+  z-index: 2;
+}
