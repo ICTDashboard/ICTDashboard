@@ -13,36 +13,42 @@ function ict_project_project_list_block() {
   $user = user_load($user->uid);
   $results = array();
 
-  if (user_is_logged_in()) {
-    $query = db_select('node', 'n')
-      ->fields('n', array('nid', 'title', 'changed'))
-      ->condition('n.type', 'project');
 
-    $tid = !empty($user->field_department[LANGUAGE_NONE][0]['tid']) ?
-      $user->field_department[LANGUAGE_NONE][0]['tid'] :
-      NULL;
+  $query = db_select('node', 'n')
+    ->fields('n', array('nid', 'title', 'changed'))
+    ->condition('n.type', 'project');
 
-    if (!array_intersect($user->roles, array('administrator', 'Finance Admin')) &&
-      $tid) {
+  $tid = !empty($user->field_department[LANGUAGE_NONE][0]['tid']) ?
+    $user->field_department[LANGUAGE_NONE][0]['tid'] :
+    NULL;
 
-      $query->join(
-        'field_data_field_department',
-        'd',
-        'd.bundle = n.type AND n.nid = d.entity_id'
-      );
+  if (!array_intersect($user->roles, array('administrator', 'Finance Admin')) &&
+    $tid) {
 
-      $query->condition(
-        'd.field_department_tid',
-        $user->field_department[LANGUAGE_NONE][0]['tid']
-      );
+    $query->join(
+      'field_data_field_department',
+      'd',
+      'd.bundle = n.type AND n.nid = d.entity_id'
+    );
 
-    }
+    $query->condition(
+      'd.field_department_tid',
+      $user->field_department[LANGUAGE_NONE][0]['tid']
+    );
 
-    $results = $query
-      ->orderBy('n.title', 'ASC')
-      ->execute()
-      ->fetchAll();
   }
+
+  $results = $query
+    ->orderBy('n.title', 'ASC')
+    ->execute()
+    ->fetchAll();
+
+  foreach($results as $key => $project) {
+    if (!ict_project_access_project('view', NULL, $project->nid)) {
+      unset($results[$key]);
+    }
+  }
+
   //############################################################################
   // temporary work around for demo
   // SHOULD BE REMOVED LATER

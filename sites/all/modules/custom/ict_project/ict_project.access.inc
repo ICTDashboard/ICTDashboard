@@ -43,6 +43,18 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
 
   if ($op == 'view' && $nid) {
     $state = ict_project_get_workflow_state($nid);
+    if (empty($account->uid)) {
+      $updates = ict_update_project_get_list($nid);
+      $project_state = ict_project_get_workflow_state($nid);
+      $update_id = end($updates);
+      if ($update_id) {
+        $update_state = ict_project_get_workflow_state($update_id);
+        if (in_array($update_state, array('approved')) && in_array($project_state, array('approved'))) {
+          return TRUE;
+        }
+      }
+      return FALSE;
+    }
     if (in_array($state, array('predraft', 'draft', 'waiting_approval'))) {
       $node = node_load($nid);
       $project_department = ict_department_get_department_tid_of_entity('project', $node);
