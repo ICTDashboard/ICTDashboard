@@ -272,6 +272,7 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
         $portfolio_options[$entity->tid] = $entity->name;
       }
       $form['field_portfolio_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
+      unset($form['field_implementation_partners'][LANGUAGE_NONE]['#options']['_none']);
 
       // alter actions
       $form['actions']['submit_request'] = $form['actions']['submit'];
