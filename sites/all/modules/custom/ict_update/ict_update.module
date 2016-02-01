@@ -103,6 +103,9 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $form['actions']['submit_request']['#value'] = t('Save and request approval');
     $form['actions']['submit_request']['#validate'][] = 'ict_update_all_fields_required_validate';
     $form['actions']['submit_request']['#submit'][] = 'ict_update_workflow_set_wait_approve';
+    // Disable request for approve button for update form
+    $form['actions']['submit_request']['#access'] = FALSE;
+
     $form['actions']['submit']['#submit'][] = 'ict_update_workflow_set_draft';
   }
 
@@ -145,7 +148,43 @@ function ict_update_benefits_realised_validate($form, &$form_state) {
       form_set_error('field_benefits_realised][und][ ' . $benefit_key . '][field_end_date][und][0][value', '<em>End date</em> could not be before <em>Start date</em>.');
     }
   }
+}
 
+function ict_update_benefits_realised_preview_page_validate($node, &$errors) {
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  $fields = array(
+    'list' => array(
+      'field_status',
+    ),
+    'text' => array(
+      'field_commentary',
+      'field_benefit',
+    ),
+    'date' => array(
+      'field_benefit_start_date',
+      'field_end_date',
+    ),
+  );
+  $collections = $node_wrapper->field_benefits_realised->value();
+  foreach ($collections as $benefit_key => $benefit) {
+    if (!is_numeric($benefit_key)) continue;
+    foreach($fields as $type => $subfields) {
+      foreach($subfields as $field) {
+        if ((empty($benefit->{$field}['und'][0]['value']) && $type == 'list')
+          || (empty($benefit->{$field}['und'][0]['value']) && $type == 'text')
+          || (empty($benefit->{$field}['und'][0]['value']) && $type == 'date')) {
+          $field_info = field_info_instance('field_collection_item', $field, 'field_benefits_realised');
+          $errors[] = 'Field <em>' . $field_info['label'] . '</em> is required.';
+        }
+      }
+    }
+
+    $start = strtotime($benefit->field_benefit_start_date['und'][0]['value']);
+    $end = strtotime($benefit->field_end_date['und'][0]['value']);
+    if ($end < $start) {
+      $errors[] = 'Benefit <em>End date</em> could not be before <em>Start date</em>.';
+    }
+  }
 }
 
 function ict_update_all_fields_required_validate($form, &$form_state) {
@@ -190,6 +229,62 @@ function ict_update_all_fields_required_validate($form, &$form_state) {
   }
 }
 
+function ict_update_all_fields_required_validate_page_preview($node) {
+  if (empty($node)) {
+    return array(t('Incorrect entity passed'));
+  }
+  $errors = &drupal_static(__FUNCTION__ . $node->nid . $node->vid);
+  if (isset($errors)) {
+    return $errors;
+  }
+
+  $project_id = $node->field_project['und'][0]['target_id'];
+  $allowed_list = ict_update_get_allowed_entity_list($project_id);
+  end($allowed_list);
+  $project_vid = key($allowed_list);
+  $project = node_load($project_id, $project_vid);
+
+  $fields = array(
+    'text' => array(
+      'field_forecast_level_of_project_',
+      'field_actual_level_of_project_co',
+      'field_current_financial_benefits',
+      'field_estimated_value_of_benefit',
+      'field_entity_comments',
+    ),
+    'term' => array(
+      'field_project_stage',
+    ),
+  );
+  foreach($fields as $type => $subfields) {
+    foreach($subfields as $field) {
+      if ((empty($node->{$field}['und'][0]['tid']) && $type == 'term')
+        || (empty($node->{$field}['und'][0]['value']) && $type == 'text')) {
+        $field_info = field_info_instance('node', $field, 'update');
+        $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
+      }
+    }
+  }
+
+  ict_update_benefits_realised_preview_page_validate($node, $errors);
+  ict_project_budget_by_year_preview_page_validate($node, $errors);
+
+//  if (empty($form_state['values']['field_expected_completion_date']['date']) && $form_state['values']['field_expected_completion_date']['radio'] != 'na') {
+//    form_set_error('field_expected_completion_date][date', 'Field <em>' . $form['field_expected_completion_date']['und'][0]['#title'] . '</em> is required.');
+//  }
+
+  if (!empty($node->field_expected_completion_date['und'][0]['value'])) {
+    $expected_completition = $node->field_expected_completion_date['und'][0]['value'];
+    $original_completition = $project->field_original_completion_date['und'][0]['value'];
+    if ($expected_completition < $original_completition) {
+      $field_info = field_info_instance('node', 'field_expected_completion_date', 'update');
+      $errors[] = t('Field <em>' . $field_info['label'] . '</em> could not be less than <em>Originally approved completion date</em>');
+    }
+  }
+
+  return $errors;
+}
+
 function ict_update_workflow_set_wait_approve($form, &$form_state) {
   if (!$form_state['node']->nid) {
     return;
@@ -201,6 +296,19 @@ function ict_update_workflow_set_wait_approve($form, &$form_state) {
     ict_project_set_workflow_state('waiting_approval', $nid);
   }
   $form_state['redirect'] = url('node/'. $form['#project_id']);
+}
+
+function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) {
+  if (!$form['#node']) {
+    return;
+  }
+  $node = $form['#node'];
+  if (ict_project_get_workflow_state($node->nid) != 'waiting_approval') {
+    $node->revision = TRUE;
+    node_save($node);
+    ict_project_set_workflow_state('waiting_approval', $node->nid);
+  }
+  $form_state['redirect'] = url('node/'. $form['#nid']);
 }
 
 function ict_update_workflow_set_approve($form, &$form_state) {
@@ -373,6 +481,43 @@ function ict_update_approve_form($form, &$form_state, $nid, $update_id) {
   );
 
   return $form;
+}
+
+function ict_update_edit_form($form, &$form_state, $nid, $update_id) {
+  $form['#theme'] = 'ict_project_baseline_edit_form';
+
+  $form['#nid'] = $nid;
+  $form['#update_id'] = $update_id;
+
+  $update = node_load($update_id);
+  $form['#node'] = $update;
+  $project_id = $update->field_project['und'][0]['target_id'];
+
+  $errs = ict_update_all_fields_required_validate_page_preview($update);
+
+  if (empty($errs) && ict_update_edit_allowed($project_id)) {
+    $form['request_approve'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save and request approval'),
+      '#attributes' => array('class' => array('submit-button')),
+      '#submit' => array('ict_update_workflow_set_wait_approve_preview_page'),
+      '#validate' => array('ict_update_request_approve_form_validate')
+    );
+  }
+
+  $form['edit'] = array('#markup' => l(t('Edit Update Draft'), "update/$update_id/edit", array('attributes' => array('class' => array('submit-button')))));
+
+  return $form;
+}
+
+function ict_update_request_approve_form_validate($form, &$form_state) {
+  $node = $form['#node'];
+  $project_id = $form['#nid'];
+
+  $errs = ict_update_all_fields_required_validate_page_preview($node);
+  if (!empty($errs) || !ict_update_edit_allowed($project_id)) {
+    form_set_error('nid', t('Sorry but the Update Data cannot be requested for approve. Make sure that you have correct access rights and all data entered valid'));
+  }
 }
 
 /**
