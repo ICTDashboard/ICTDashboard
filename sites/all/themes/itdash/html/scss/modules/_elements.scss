@@ -48,6 +48,7 @@ body,
           height: 16px;
           margin-bottom: -3px;
           margin-left: 10px;
+          margin-right: 10px;
           z-index: 1;
           @include sprite-icon('tooltip-icon-normal');
           display: inline-block;
@@ -89,7 +90,6 @@ body,
           }
         }
         .start-year-select {
-          margin-left: 10px;
           select {
             display: inline;
             width: 80px;
@@ -102,6 +102,9 @@ body,
             background-image: none;
             color: #202b3d;
           }
+        }
+        .form-helptext {
+          font-weight: normal;
         }
       }
       .text {

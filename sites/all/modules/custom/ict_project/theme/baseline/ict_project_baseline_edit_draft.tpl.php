@@ -36,6 +36,7 @@
             </span>
           </a>
         <?php endif; ?>
+        <em class="form-helptext">Ctrl+click to select multiple</em>
       </div>
       <div class="text">
         <?php print render($form['field_implementation_partners']); ?>
@@ -180,7 +181,7 @@
             </span>
           </a>
         <?php endif; ?>
-        <span class="start-year-select">
+        <span class="start-year-select form-helptext">
           <em> Start from:</em>
           <select>
           </select>
