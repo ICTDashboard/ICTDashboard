@@ -154,6 +154,23 @@ function ict_project_project_add_block () {
   }
 }
 
+/**
+ * Implements hook_node_access().
+ */
+function ict_project_node_access($node, $op, $account) {
+  if ($node == 'project' || $node->type == 'project') {
+    if ($op == 'view' && !empty($node->nid)) {
+      if (ict_project_access_project('view', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
 function ict_project_add_status_tooltips (&$form) {
   $tooltips = array(
     'green' => t('The project appears likely to deliver its intended benefits, and is broadly on time and within budget.'),
