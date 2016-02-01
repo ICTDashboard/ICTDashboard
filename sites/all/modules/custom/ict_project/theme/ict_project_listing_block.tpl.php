@@ -139,6 +139,12 @@
                     </a>
                   <?php endif; ?>
 
+                  <?php if (ict_update_delete_allowed($project->nid, $update_id)) : ?>
+                    <a href="<?php print url('node/' . $project->nid .'/delete'); ?>">
+                      <span><?php print t('Delete Update Draft'); ?></span>
+                    </a>
+                  <?php endif; ?>
+
                 <?php else : ?>
                   <?php foreach ($project->demo_buttons as $key => $button) : ?>
                     <a href="http://sandpit.itdash.lws.links.com.au/?path=<?php print $key; ?>&nid=<?php print $project->nid; ?>">
