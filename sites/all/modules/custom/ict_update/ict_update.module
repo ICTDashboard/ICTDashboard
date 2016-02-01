@@ -318,6 +318,20 @@ function ict_update_approve_allowed($project_id, $update_id = NULL) {
   return TRUE;
 }
 
+function ict_update_delete_allowed($project_id, $update_id = NULL) {
+  if (!$update_id) {
+    $updates = ict_update_project_get_list($project_id);
+    if (empty($updates)) {
+      return FALSE;
+    }
+    $update_id = reset($updates);
+  }
+  if (!ict_project_access_update('delete', $project_id, NULL, $update_id)) {
+    return FALSE;
+  }
+  return TRUE;
+}
+
 function ict_update_project_get_list($project_id, $state = NULL) {
   $query = db_select('field_data_field_project', 'p');
   $query->addField('p', 'entity_id');
@@ -604,4 +618,50 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
   ksort($ids_list);
 
   return $ids_list;
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function ict_update_node_access($node, $op, $account) {
+  if ($node == 'update' || $node->type == 'prupdateoject') {
+
+    if ($op == 'view' && !empty($node->nid)) {
+      if (ict_project_access_update('view', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+
+    if ($op == 'create' && !empty($node->nid)) {
+      if (ict_project_access_update('create', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+
+    if ($op == 'update' && !empty($node->nid)) {
+      if (ict_project_access_update('edit', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+
+    if ($op == 'delete' && !empty($node->nid)) {
+      if (ict_project_access_update('delete', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+  }
+
+  return NODE_ACCESS_IGNORE;
 }

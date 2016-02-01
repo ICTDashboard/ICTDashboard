@@ -159,6 +159,7 @@ function ict_project_project_add_block () {
  */
 function ict_project_node_access($node, $op, $account) {
   if ($node == 'project' || $node->type == 'project') {
+
     if ($op == 'view' && !empty($node->nid)) {
       if (ict_project_access_project('view', $account, $node->nid)) {
         return NODE_ACCESS_ALLOW;
@@ -167,7 +168,35 @@ function ict_project_node_access($node, $op, $account) {
         return NODE_ACCESS_DENY;
       }
     }
+
+    if ($op == 'create' && !empty($node->nid)) {
+      if (ict_project_access_project('create', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+
+    if ($op == 'update' && !empty($node->nid)) {
+      if (ict_project_access_project('edit', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+
+    if ($op == 'delete' && !empty($node->nid)) {
+      if (ict_project_access_project('delete', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
   }
+
   return NODE_ACCESS_IGNORE;
 }
 
