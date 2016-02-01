@@ -84,7 +84,7 @@
                 </a>
               </td>
               <td class="dates">
-                <?php print date('d/m/Y h:i A', $project->changed); ?>
+                <?php print format_date($project->changed, 'medium', 'j M Y h:i A'); ?>
               </td>
               <td class="update">
                 <?php if (!isset($project->demo_buttons)) : ?>
