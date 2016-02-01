@@ -427,19 +427,26 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
       $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
     }
 
-    $current_year = date('y');
-    $future_expenditure = FALSE;
-    foreach (element_children($budget_table) as $item) {
-      if (!is_numeric($item)) continue;
-      $item_year = explode('/', $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']);
-      $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = FALSE;
-      if (reset($item_year) <= $current_year) continue;
-      $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
-      $future_expenditure = TRUE;
-    }
+    // restrict entering future expenditure for Updates
+    if ($form['type']['#value'] == 'update') {
+      $current_year = date('y');
+      $future_expenditure = FALSE;
+      foreach (element_children($budget_table) as $item) {
+        if (!is_numeric($item)) {
+          continue;
+        }
+        $item_year = explode('/', $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']);
+        $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = FALSE;
+        if (reset($item_year) <= $current_year) {
+          continue;
+        }
+        $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
+        $future_expenditure = TRUE;
+      }
 
-    if ($future_expenditure) {
-      $budget_table['add_more']['#access'] = FALSE;
+      if ($future_expenditure) {
+        $budget_table['add_more']['#access'] = FALSE;
+      }
     }
   }
   else { // if any data is set
