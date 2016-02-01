@@ -239,6 +239,20 @@ function ict_project_access_update($op, $project_id, $account = NULL, $nid = NUL
     return FALSE;
   }
 
+  if ($op == 'delete' && $nid) {
+    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account) &&
+      in_array(ict_project_get_workflow_state($nid), array('draft', 'waiting_approval'))) {
+      $node = node_load($project_id);
+      $project_department = ict_department_get_department_tid_of_entity('project', $node);
+      $user_department = ict_department_get_department_tid_of_entity('user', $account);
+      if ($user_department == $project_department) {
+        return TRUE;
+      }
+      return FALSE;
+    }
+    return FALSE;
+  }
+
   return FALSE;
 }
 

@@ -9,11 +9,11 @@
     </div>
     <div class="row">
       <div class="label">Original approved start date </div>
-      <div class="text"><?php print date('m/Y', strtotime($form['#project_node']->field_start_date['und'][0]['value'])); ?></div>
+      <div class="text"><?php print format_date(strtotime($form['#project_node']->field_start_date['und'][0]['value']), 'medium', 'j M Y'); ?></div>
     </div>
     <div class="row">
       <div class="label">Original approved completion date </div>
-      <div class="text"><?php print date('m/Y', strtotime($form['#project_node']->field_original_completion_date['und'][0]['value'])); ?></div>
+      <div class="text"><?php print format_date(strtotime($form['#project_node']->field_original_completion_date['und'][0]['value']), 'medium', 'j M Y'); ?></div>
     </div>
     <div class="row">
       <div class="label"><?php print $form['field_expected_completion_date']['und']['#title']; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The current expected completion date of the project.</span></a></div>

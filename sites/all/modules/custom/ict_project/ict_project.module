@@ -169,6 +169,7 @@ function ict_project_project_add_block () {
  */
 function ict_project_node_access($node, $op, $account) {
   if ($node == 'project' || $node->type == 'project') {
+
     if ($op == 'view' && !empty($node->nid)) {
       if (ict_project_access_project('view', $account, $node->nid)) {
         return NODE_ACCESS_ALLOW;
@@ -177,7 +178,35 @@ function ict_project_node_access($node, $op, $account) {
         return NODE_ACCESS_DENY;
       }
     }
+
+    if ($op == 'create' && !empty($node->nid)) {
+      if (ict_project_access_project('create', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+
+    if ($op == 'update' && !empty($node->nid)) {
+      if (ict_project_access_project('edit', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
+
+    if ($op == 'delete' && !empty($node->nid)) {
+      if (ict_project_access_project('delete', $account, $node->nid)) {
+        return NODE_ACCESS_ALLOW;
+      }
+      else {
+        return NODE_ACCESS_DENY;
+      }
+    }
   }
+
   return NODE_ACCESS_IGNORE;
 }
 
@@ -409,6 +438,14 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     }
   }
   elseif ($budget_rows) {
+    if (empty($form_state['triggering_element'])) {
+      // remove unnecessary last item on edit form
+      $max_delta = $budget_table['#max_delta'];
+      unset($budget_table[$max_delta]);
+      $budget_table['#max_delta']--;
+      $form_state['field']['field_original_total_budget'][LANGUAGE_NONE]['items_count']--;
+    }
+
     $first_fin_year = $budget_rows[0]['budget_items'][0]->field_year[LANGUAGE_NONE][0]['value'];
 
     $min_columns = 0;
@@ -446,9 +483,30 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
       if (!is_numeric($item)) continue;
       $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
     }
+
+    // restrict entering future expenditure for Updates
+    if ($form['type']['#value'] == 'update') {
+      $current_year = date('y');
+      $future_expenditure = FALSE;
+      foreach (element_children($budget_table) as $item) {
+        if (!is_numeric($item)) {
+          continue;
+        }
+        $item_year = explode('/', $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']);
+        $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = FALSE;
+        if (reset($item_year) <= $current_year) {
+          continue;
+        }
+        $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
+        $future_expenditure = TRUE;
+      }
+
+      if ($future_expenditure) {
+        $budget_table['add_more']['#access'] = FALSE;
+      }
+    }
   }
   else { // if any data is set
-
     if (empty($form_state['triggering_element'])) {
       // remove unnecessary last item on edit form
       $max_delta = $budget_table['#max_delta'];

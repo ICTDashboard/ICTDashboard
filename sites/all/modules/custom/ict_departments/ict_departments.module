@@ -14,6 +14,9 @@ function ict_department_get_department_tid_of_entity($bundle, $entity ) {
   }
 
   if ($bundle == 'user') {
+    $entity = isset($entity->field_department) ?
+      $entity :
+      user_load($entity->uid);
     return
       !empty($entity->field_department[LANGUAGE_NONE][0]['tid']) ?
         $entity->field_department[LANGUAGE_NONE][0]['tid'] :
