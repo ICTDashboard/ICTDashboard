@@ -624,7 +624,7 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
  * Implements hook_node_access().
  */
 function ict_update_node_access($node, $op, $account) {
-  if ($node == 'update' || $node->type == 'prupdateoject') {
+  if ($node == 'update' || $node->type == 'update') {
 
     if ($op == 'view' && !empty($node->nid)) {
       if (ict_project_access_update('view', $account, $node->nid)) {
