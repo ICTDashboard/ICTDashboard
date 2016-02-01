@@ -164,6 +164,40 @@ function ict_project_baseline_approve_form($form, &$form_state, $nid) {
   return $form;
 }
 
+function ict_project_baseline_edit_form($form, &$form_state, $nid) {
+  $form['#theme'] = 'ict_project_baseline_edit_form';
+
+  $form['nid'] = array(
+    '#value' => $nid,
+    '#type' => 'values'
+  );
+
+  $form['edit'] = array(
+    '#markup' => l(
+      t('Edit Baseline Draft'),
+      "baseline/$nid/edit-draft",
+      array('attributes' => array('class' => array(
+        'submit-button'
+      )))
+    ),
+  );
+
+  $node = node_load($nid);
+  $errs = ict_project_baseline_preview_page_validate_required_fields($node);
+
+  if (empty($errs) && ict_project_access_project('edit', NULL, $nid)) {
+    $form['request_approve'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save and request approval'),
+      '#attributes' => array('class' => array('submit-button')),
+      '#submit' => array('ict_project_workflow_set_wait_approve_preview_page'),
+      '#validate' => array('ict_project_baseline_request_approve_form_validate')
+    );
+  }
+
+  return $form;
+}
+
 /**
  * Validate Vaseline approval
  *
@@ -175,6 +209,16 @@ function ict_project_baseline_approve_form_validate ($form, &$form_state) {
   $nid = $form['nid']['#value'];
   if (!ict_project_access_project('approve', NULL, $nid)) {
     form_set_error('nid', t('Sorry but the Baseline Data cannot be approved. Make sure that you have correct access rights and that it has not been approved or declined by another Data Approver'));
+  }
+}
+
+function ict_project_baseline_request_approve_form_validate($form, &$form_state) {
+  $nid = $form['nid']['#value'];
+  $node = node_load($nid);
+
+  $errs = ict_project_baseline_preview_page_validate_required_fields($node);
+  if (!empty($errs) || !ict_project_access_project('edit', NULL, $nid)) {
+    form_set_error('nid', t('Sorry but the Baseline Data cannot be requested for approve. Make sure that you have correct access rights and all data entered valid'));
   }
 }
 
@@ -392,6 +436,61 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
   ict_project_budget_by_year_validate($form, $form_state);
 }
 
+function ict_project_baseline_preview_page_validate_required_fields($node) {
+  if (empty($node)) {
+    return array(t('Incorrect entity passed'));
+  }
+  $errors = &drupal_static(__FUNCTION__ . $node->nid . $node->vid);
+  if (isset($errors)) {
+    return $errors;
+  }
+
+  $fields = array(
+    'text' => array(
+      'field_program_name',
+      'field_brief_project_summary',
+      'field_responsible_officer_name',
+      'field_resp_officer_position',
+      'field_predicted_project_benefit',
+    ),
+    'term' => array(
+      'field_government_entity_name',
+      'field_implementation_partners',
+      'field_portfolio_name',
+      'field_project_stage',
+    ),
+    'dates' => array(
+      'field_start_date',
+      'field_original_completion_date',
+    ),
+  );
+  foreach($fields as $type => $subfields) {
+    foreach($subfields as $field) {
+      if ((empty($node->{$field}['und'][0]['tid']) && $type == 'term')
+        || (empty($node->{$field}['und'][0]['value']) && $type == 'text')
+        || (empty($node->{$field}['und'][0]['value']) && $type == 'dates')) {
+        $field_info = field_info_instance('node', $field, 'project');
+        $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
+      }
+    }
+  }
+
+  // date validation
+  if (!empty($node->field_start_date['und'][0]['value']) &&
+    !empty($node->field_original_completion_date['und'][0]['value'])) {
+    if ($node->field_start_date['und'][0]['value'] >= $node->field_original_completion_date['und'][0]['value']) {
+      $errors[] = t('<em>Original approved start date</em> cannot be later than <em>Original approved completion date </em>');
+    }
+  }
+
+  ict_update_benefits_realised_preview_page_validate($node, $errors);
+  ict_project_budget_by_year_preview_page_validate($node, $errors);
+
+  return $errors;
+}
+
+
+
 function ict_project_budget_by_year_validate($form, &$form_state) {
   $budget_values = $form_state['values']['field_original_total_budget'][LANGUAGE_NONE];
   foreach ($budget_values as $key => $value) {
@@ -402,5 +501,19 @@ function ict_project_budget_by_year_validate($form, &$form_state) {
           '!year' => $year
         )));
       }
+  }
+}
+
+function ict_project_budget_by_year_preview_page_validate($node, &$errors) {
+  $node_wrapper = entity_metadata_wrapper('node', $node);
+  $budget_values = $node_wrapper->field_original_total_budget->value();
+  foreach ($budget_values as $key => $value) {
+    if (!is_numeric($key)) continue;
+    if (empty($value->field_total[LANGUAGE_NONE][0]['value'])) {
+      $year = $value->field_year[LANGUAGE_NONE][0]['value'];
+      $errors[] = t(t('Field <em>Budget Value</em> is required for !year Financial Year', array(
+        '!year' => $year
+      )));
+    }
   }
 }

@@ -271,13 +271,11 @@
     <?php endif; ?>
 
     <?php if (isset($update_form)) : ?>
-      <?php print drupal_render($update_form); ?>
+      <?php print $update_form; ?>
     <?php endif; ?>
 
     <?php if (isset($edit_form)) : ?>
-      <div class="submit">
-          <?php print $edit_form; ?>
-      </div>
+      <?php print $edit_form; ?>
     <?php endif; ?>
 
     <?php if (isset($approve_form)) : ?>
