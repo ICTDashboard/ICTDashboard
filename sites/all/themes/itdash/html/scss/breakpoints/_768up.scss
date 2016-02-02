@@ -81,7 +81,7 @@ CONTENT STYLES
 #content {
 	color: #4e5365;
 	margin: 0;
-	background-color: #e5eaf3;
+	background-color: #fff;
 	padding-bottom: 60px;
 
 	.dotbg { background: url(../images/dot-bg.png) repeat scroll top center #1e2635; overflow: hidden; }
@@ -147,6 +147,9 @@ CONTENT STYLES
 
 					&.submit {
 						text-align: right;
+						border-top: none;
+						margin: 30px 0 0 0;
+						padding: 0;
 					}
 				}
 			}
@@ -281,7 +284,7 @@ CONTENT STYLES
 				}
 			}
 			.button-add {
-				border-left: 1px dotted #b6c0d4;
+				border-left: 1px dotted #f0f4fa;
 				text-align: right;
 				margin-top: 10px;
 				a {
@@ -515,7 +518,7 @@ CONTENT STYLES
 			color: #0d6c88;
 			font-size: 26px;
 			font-weight: 600;
-			border-bottom: 1px solid #d6ddeb;
+			border-bottom: 1px solid #f0f4fa;
 			padding-bottom: 10px;
 		}
 
@@ -1099,7 +1102,7 @@ CONTENT STYLES
 			color: #0d6c88;
 			font-size: 26px;
 			font-weight: 600;
-			border-bottom: 1px solid #d6ddeb;
+			border-bottom: 1px solid #f0f4fa;
 			padding-bottom: 10px;
 		}
 
@@ -1161,6 +1164,7 @@ CONTENT STYLES
 						}
 					}
 					&.submit {
+					  	border-top: none;
 						text-align: right;
 						margin-top: 30px;
 						padding-top: 30px;
@@ -1192,7 +1196,7 @@ CONTENT STYLES
 			overflow: hidden;
 
 			.tab-head {
-				border-bottom: 1px solid #d6ddeb;
+				border-bottom: 1px solid #f0f4fa;
 				height: 32px;
 				margin: 30px 0 10px;
 
@@ -1290,6 +1294,7 @@ CONTENT STYLES
 								option { font-style: normal; }
 							}
 							&.submit {
+							  	border-top: none;
 								text-align: right;
 								margin-top: 30px;
 								padding-top: 30px;
@@ -1715,7 +1720,7 @@ LOGIN AND REGISTER STYLES
 *********************/
 body.login,
 body.login {
-	background: #e7eaf3;
+	background: #fff;
 }
 
 /*********************
