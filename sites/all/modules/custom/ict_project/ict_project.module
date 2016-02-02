@@ -956,7 +956,7 @@ function ict_project_bracket_italics ($string) {
  */
 function ict_project_node_insert ($node) {
   if ($node->type == 'project') {
-    ict_project_set_workflow_state('predraft', $node->nid, $node->vid);
+    ict_project_set_workflow_state('draft', $node->nid, $node->vid);
   }
 }
 
