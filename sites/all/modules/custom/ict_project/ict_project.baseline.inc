@@ -507,10 +507,15 @@ function ict_project_budget_by_year_validate($form, &$form_state) {
 function ict_project_budget_by_year_preview_page_validate($node, &$errors) {
   $node_wrapper = entity_metadata_wrapper('node', $node);
   $budget_values = $node_wrapper->field_original_total_budget->value();
+  $current_year = date('y');
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
     if (empty($value->field_total[LANGUAGE_NONE][0]['value'])) {
       $year = $value->field_year[LANGUAGE_NONE][0]['value'];
+      $item_year = explode('/', $year);
+      if ($node->type == 'update' && reset($item_year) > $current_year) {
+        continue;
+      }
       $errors[] = t(t('Field <em>Budget Value</em> is required for !year Financial Year', array(
         '!year' => $year
       )));
