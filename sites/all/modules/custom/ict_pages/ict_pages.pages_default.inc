@@ -65,7 +65,8 @@ function ict_pages_default_page_manager_handlers() {
             'paths' => 'faq
 dashboard
 project/*/update
-update/*',
+update/*
+node/*/delete',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,
