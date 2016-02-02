@@ -770,9 +770,18 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
  */
 function ict_update_node_access($node, $op, $account) {
   if ($node == 'update' || $node->type == 'update') {
+    if (empty($node->nid)) {
+      return NODE_ACCESS_DENY;
+    }
 
-    if ($op == 'view' && !empty($node->nid)) {
-      if (ict_project_access_update('view', $account, $node->nid)) {
+    if (empty($node->field_project[LANGUAGE_NONE][0]['target_id'])) {
+      return NODE_ACCESS_DENY;
+    }
+
+    $project_id = $node->field_project[LANGUAGE_NONE][0]['target_id'];
+
+    if ($op == 'view') {
+      if (ict_project_access_update('view', $project_id, $account, $node->nid)) {
         return NODE_ACCESS_ALLOW;
       }
       else {
@@ -780,8 +789,8 @@ function ict_update_node_access($node, $op, $account) {
       }
     }
 
-    if ($op == 'create' && !empty($node->nid)) {
-      if (ict_project_access_update('create', $account, $node->nid)) {
+    if ($op == 'create') {
+      if (ict_project_access_update('create', $project_id, $account, $node->nid)) {
         return NODE_ACCESS_ALLOW;
       }
       else {
@@ -789,8 +798,8 @@ function ict_update_node_access($node, $op, $account) {
       }
     }
 
-    if ($op == 'update' && !empty($node->nid)) {
-      if (ict_project_access_update('edit', $account, $node->nid)) {
+    if ($op == 'update') {
+      if (ict_project_access_update('edit', $project_id, $account, $node->nid)) {
         return NODE_ACCESS_ALLOW;
       }
       else {
@@ -798,8 +807,8 @@ function ict_update_node_access($node, $op, $account) {
       }
     }
 
-    if ($op == 'delete' && !empty($node->nid)) {
-      if (ict_project_access_update('delete', $account, $node->nid)) {
+    if ($op == 'delete') {
+      if (ict_project_access_update('delete', $project_id, $account, $node->nid)) {
         return NODE_ACCESS_ALLOW;
       }
       else {

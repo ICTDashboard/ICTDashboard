@@ -140,7 +140,7 @@
                   <?php endif; ?>
 
                   <?php if (ict_update_delete_allowed($project->nid, $update_id)) : ?>
-                    <a href="<?php print url('node/' . $project->nid .'/delete'); ?>">
+                    <a href="<?php print url('node/' . $update_id .'/delete'); ?>">
                       <span><?php print t('Delete Update Draft'); ?></span>
                     </a>
                   <?php endif; ?>
