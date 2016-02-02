@@ -24,7 +24,9 @@ function ict_project_user_default_permissions() {
   // Exported permission: 'delete any project content'.
   $permissions['delete any project content'] = array(
     'name' => 'delete any project content',
-    'roles' => array(),
+    'roles' => array(
+      'Departmental Admin' => 'Departmental Admin',
+    ),
     'module' => 'node',
   );
 
@@ -32,7 +34,7 @@ function ict_project_user_default_permissions() {
   $permissions['delete own project content'] = array(
     'name' => 'delete own project content',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'Departmental Admin' => 'Departmental Admin',
     ),
     'module' => 'node',
   );
