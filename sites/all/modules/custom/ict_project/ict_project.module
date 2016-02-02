@@ -356,6 +356,15 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       $form['actions']['submit']['#value'] = t('Save and Preview');
     }
   }
+
+  if ($form_id == 'node_delete_confirm') {
+    global $theme;
+    if ($theme = 'itdash') {
+      $form['#theme'] = 'ict_project_node_delete_form';
+      $form['actions']['submit']['#attributes']['class'][] = 'submit-button';
+      $form['actions']['cancel']['#attributes']['class'][] = 'export-btn';
+    }
+  }
 }
 
 function _ict_project_prepare_budget_history($project_id, $mode = 'form') {
@@ -837,6 +846,11 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'field_original_total_budget_table',
       'render element' => 'element',
+    ),
+    'ict_project_node_delete_form' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'template' => 'ict_project_node_delete_form',
+      'render element' => 'form',
     ),
     'field_original_total_budget_table_view' => array(
       'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
