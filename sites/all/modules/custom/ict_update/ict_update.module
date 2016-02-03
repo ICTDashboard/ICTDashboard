@@ -205,7 +205,6 @@ function ict_update_all_fields_required_validate($form, &$form_state) {
     'field_actual_level_of_project_co',
     'field_current_financial_benefits',
     'field_estimated_value_of_benefit',
-    'field_entity_comments',
   );
   $term = array(
     'field_project_stage',
@@ -256,7 +255,6 @@ function ict_update_all_fields_required_validate_page_preview($node) {
       'field_actual_level_of_project_co',
       'field_current_financial_benefits',
       'field_estimated_value_of_benefit',
-      'field_entity_comments',
     ),
     'term' => array(
       'field_project_stage',
