@@ -156,15 +156,15 @@ function ict_project_preprocess_node(&$vars) {
       $vars['approve_form'] = render($form);
     }
     if(ict_project_access_project('edit', NULL, $vars['nid'])) {
+      $errors = ict_project_baseline_preview_page_validate_required_fields($node);
+      if (!empty($errors)) {
+        $errors = array_merge(array(t('To send Baseline/Rebaseline for approval you need to solve following validation errors:')), $errors);
+        foreach($errors as $e) {
+          drupal_set_message($e, 'error');
+        }
+      }
       $form = drupal_get_form('ict_project_baseline_edit_form', $vars['nid']);
       $vars['edit_form'] = drupal_render($form);
-    }
-    $errors = ict_project_baseline_preview_page_validate_required_fields($node);
-    if (!empty($errors)) {
-      $errors = array_merge(array(t('To send Baseline/Rebaseline for approval you need to solve following validation errors:')), $errors);
-      foreach($errors as $e) {
-        drupal_set_message($e, 'error');
-      }
     }
   }
 }
