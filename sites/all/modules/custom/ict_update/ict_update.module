@@ -113,6 +113,10 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   // project budget by financial year
   _ict_project_project_budget_by_year_form ($form, $form_state);
+
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
+  );
 }
 
 function ict_update_benefits_realised_validate($form, &$form_state) {
@@ -201,7 +205,6 @@ function ict_update_all_fields_required_validate($form, &$form_state) {
     'field_actual_level_of_project_co',
     'field_current_financial_benefits',
     'field_estimated_value_of_benefit',
-    'field_entity_comments',
   );
   $term = array(
     'field_project_stage',
@@ -252,7 +255,6 @@ function ict_update_all_fields_required_validate_page_preview($node) {
       'field_actual_level_of_project_co',
       'field_current_financial_benefits',
       'field_estimated_value_of_benefit',
-      'field_entity_comments',
     ),
     'term' => array(
       'field_project_stage',

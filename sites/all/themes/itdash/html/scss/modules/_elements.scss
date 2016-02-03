@@ -255,8 +255,8 @@ body,
     .dotted-line {
       margin-top: 30px;
       display: block;
-      height: 0px;
-      border-bottom: 1px dotted #f0f4fa;
+      background: transparent url("../images/dot-line-bg.png") repeat-x scroll 0 0;
+      height: 1px;
       width: 100%;
     }
     .sbHolder {
