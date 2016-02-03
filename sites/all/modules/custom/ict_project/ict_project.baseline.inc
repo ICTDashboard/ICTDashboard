@@ -362,7 +362,7 @@ function ict_project_baseline_get_admin_user_emails ($node) {
   );
 }
 
-function _ict_project_baseline_get_simple_values ($items) {
+function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE) {
   $values = array();
   foreach ($items as $key => $item) {
     // exclude field meta data from the display
@@ -386,8 +386,9 @@ function _ict_project_baseline_get_simple_values ($items) {
       $values[] = $item['value'];
     }
   }
+  $default_value = $not_applicable ? t('Not Applicable') : '-';
 
-  return $values ? $values : array('-');
+  return $values ? $values : array($default_value);
 }
 
 function ict_project_baseline_approve_form_validate_required_fields($form, &$form_state) {
@@ -400,7 +401,6 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
   );
   $term = array(
     'field_government_entity_name',
-    'field_implementation_partners',
     'field_portfolio_name',
     'field_project_stage',
   );
@@ -455,7 +455,6 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
     ),
     'term' => array(
       'field_government_entity_name',
-      'field_implementation_partners',
       'field_portfolio_name',
       'field_project_stage',
     ),
@@ -474,7 +473,7 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
       }
     }
   }
-
+  dsm($node);
   // date validation
   if (!empty($node->field_start_date['und'][0]['value']) &&
     !empty($node->field_original_completion_date['und'][0]['value'])) {

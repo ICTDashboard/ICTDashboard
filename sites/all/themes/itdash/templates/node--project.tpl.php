@@ -41,7 +41,7 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_implementation_partners) as $value) : ?>
+        <?php foreach (_ict_project_baseline_get_simple_values($field_implementation_partners, TRUE) as $value) : ?>
           <p><?php print $value; ?></p>
         <?php endforeach; ?>
       </div>
