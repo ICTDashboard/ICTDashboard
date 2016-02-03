@@ -265,9 +265,12 @@
         </div>
       </div>
     <?php endif; ?>
-
     <?php if (!empty($update_node)) : ?>
       <?php print drupal_render(node_view($update_node)); ?>
+    <?php endif; ?>
+
+    <?php if (!empty(ict_field_diff_list_latest($nid))) : ?>
+      <p><em><?php print t('* - fields that was updated.'); ?></em></p>
     <?php endif; ?>
 
     <?php if (isset($update_form)) : ?>

@@ -1,3 +1,4 @@
+<?php $row_num = 1; ?>
 <table id="field_end_predicted_budget" class="table_field_collection">
   <tbody>
   <tr>
@@ -31,8 +32,12 @@
           <?php if (!empty($row['budget_items'][$delta]->field_total[LANGUAGE_NONE][0]['value'])) : ?>
             <?php print '$' . $row['budget_items'][$delta]->field_total[LANGUAGE_NONE][0]['value']; ?>
           <?php endif; ?>
+          <?php if ($row_num == count($rows) && isset($diff['field_original_total_budget'][$row['budget_items'][$delta]->field_year[LANGUAGE_NONE][0]['value']])) : ?>
+            <?php print '*'; ?>
+          <?php endif; ?>
         </td>
       <?php endforeach; ?>
+      <?php $row_num++; ?>
     </tr>
   <?php endforeach; ?>
   </tbody>

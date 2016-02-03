@@ -40,6 +40,11 @@ function ict_project_preprocess_node(&$vars) {
     $view_mode = $vars['view_mode'];
     $vars['project_id'] = $vars['field_project'][0]['target_id'];
 
+    $vars['diff'] = array();
+    if (ict_update_approve_allowed($vars['project_id'], $node->nid)) {
+      $vars['diff'] = ict_field_diff_list_latest($vars['project_id']);
+    }
+
     foreach ($vars as $var_name => &$value) {
       $element_name = explode('_', $var_name);
       if (reset($element_name) == 'field') {
@@ -48,6 +53,10 @@ function ict_project_preprocess_node(&$vars) {
           $field_info['description'] :
           FALSE;
         $value['meta']['#title'] = $field_info['label'];
+        if (in_array($var_name, $vars['diff'])) {
+          $value['meta']['#changed'] = TRUE;
+          $value['meta']['#title'] .= '<span>*</span>';
+        }
       }
     }
 
@@ -59,7 +68,8 @@ function ict_project_preprocess_node(&$vars) {
     }
     $vars['field_original_total_budget'] = theme(
       'field_original_total_budget_table_view', array(
-        'rows' => $budget_items
+        'rows' => $budget_items,
+        'diff' => $vars['diff'],
       )
     );
   }
@@ -67,6 +77,11 @@ function ict_project_preprocess_node(&$vars) {
 
     $node = $vars['node'];
     $view_mode = $vars['view_mode'];
+    $vars['diff'] = array();
+    if (ict_project_access_project('approve', NULL, $node->nid)) {
+      $vars['diff'] = ict_field_diff_list_latest($node->nid);
+    }
+
     foreach ($vars as $var_name => &$value) {
       $element_name = explode('_', $var_name);
       if (reset($element_name) == 'field') {
@@ -75,6 +90,10 @@ function ict_project_preprocess_node(&$vars) {
           $field_info['description'] :
           FALSE;
         $value['meta']['#title'] = $field_info['label'];
+        if (in_array($var_name, $vars['diff'])) {
+          $value['meta']['#changed'] = TRUE;
+          $value['meta']['#title'] .= '<span>*</span>';
+        }
       }
     }
 
@@ -97,7 +116,8 @@ function ict_project_preprocess_node(&$vars) {
     $budget_items = _ict_project_prepare_budget_history($node->nid, 'view');
     $vars['field_original_total_budget'] = theme(
       'field_original_total_budget_table_view', array(
-        'rows' => $budget_items
+        'rows' => $budget_items,
+        'diff' => $vars['diff'],
       )
     );
 
