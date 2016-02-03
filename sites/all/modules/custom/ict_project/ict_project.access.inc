@@ -55,7 +55,7 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
       }
       return FALSE;
     }
-    if (in_array($state, array('predraft', 'draft', 'waiting_approval'))) {
+    if (in_array($state, array('draft', 'waiting_approval'))) {
       $node = node_load($nid);
       $project_department = ict_department_get_department_tid_of_entity('project', $node);
       $user_department = ict_department_get_department_tid_of_entity('user', $account);
@@ -77,7 +77,7 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
   }
 
   if ($op == 'edit' && $nid) {
-    if (in_array(ict_project_get_workflow_state($nid), array('predraft', 'draft')) && in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_EDITOR_ACCESS))) {
+    if (in_array(ict_project_get_workflow_state($nid), array('draft')) && in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_EDITOR_ACCESS))) {
       return TRUE;
     }
     return FALSE;
@@ -307,7 +307,6 @@ function ict_project_allowed_view_states($project_id, $account = NULL) {
 
   if (in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_EDITOR_ACCESS))) {
     $states = array(
-      'predraft',
       'draft',
       'waiting_approval',
       'approved',
@@ -315,7 +314,6 @@ function ict_project_allowed_view_states($project_id, $account = NULL) {
   }
   if (in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_APPROVER_ACCESS))) {
     $states = array(
-      'predraft',
       'draft',
       'waiting_approval',
       'approved',
@@ -323,7 +321,6 @@ function ict_project_allowed_view_states($project_id, $account = NULL) {
   }
   if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
     $states = array(
-      'predraft',
       'draft',
       'waiting_approval',
       'approved',

@@ -101,15 +101,9 @@
 
                   <?php // create or edit draft ?>
                   <?php if (ict_project_access_project('edit', $user, $project->nid)) : ?>
-                    <?php if (ict_project_get_workflow_state($project->nid) == 'predraft') : ?>
-                      <a href="<?php print url('baseline/' . $project->nid . '/create-draft'); ?>">
-                        <span><?php print t('Create Baseline Draft'); ?></span>
-                      </a>
-                    <?php else : ?>
-                      <a href="<?php print url('baseline/' . $project->nid . '/edit-draft'); ?>">
-                        <span><?php print t('Edit Baseline Draft'); ?></span>
-                      </a>
-                    <?php endif; ?>
+                    <a href="<?php print url('baseline/' . $project->nid . '/edit-draft'); ?>">
+                      <span><?php print t('Edit Baseline Draft'); ?></span>
+                    </a>
                   <?php endif; ?>
 
                   <?php // create or edit draft ?>

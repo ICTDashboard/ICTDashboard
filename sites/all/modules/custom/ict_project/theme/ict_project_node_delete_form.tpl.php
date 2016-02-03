@@ -1,6 +1,5 @@
 <div id="inner-content" class="wrap cf">
   <div class="project-draft-submission d-all">
-    <?php dsm($form); ?>
     <div class="row">
       <div class="label">
         <?php print drupal_render($form['description']); ?>

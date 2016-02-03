@@ -7,7 +7,7 @@
 <div id="inner-content" class="wrap cf">
   <h2><?php print t('Baseline data'); ?></h2>
   <h3><?php print t('Basic project information'); ?></h3>
-  <div class="project-draft-submission d-all">
+  <div class="project-draft-submission d-all ict-view-page">
 
     <div class="row">
       <div class="label">
