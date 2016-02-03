@@ -128,6 +128,7 @@ function ict_project_preprocess_node(&$vars) {
         $update_id = reset($updates);
         $form = drupal_get_form('ict_update_approve_form', $vars['nid'], $update_id);
         $vars['update_form'] = drupal_render($form);
+        $vars['diff'] = ict_field_diff_list_latest($vars['nid']);
       }
       elseif (ict_update_edit_allowed($vars['nid'])) {
         $updates = ict_update_project_get_list($vars['nid'], 'draft');
