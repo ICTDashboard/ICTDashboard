@@ -67,17 +67,12 @@
             var value = select_box.val(),
                 start_year = value.split('/')[0];
             $('#field_end_predicted_budget th.year_header').each(function() {
-                console.log(1);
                 var new_val = start_year+'/'+(++start_year);
-                console.log(new_val);
                 $(this).find('input[type="text"]').val(new_val);
-                console.log($(this).find('.year_value').length);
                 $(this).find('.year_value').text(new_val);
             });
         });
     }
-
-    console.log(111);
 
   });
 })(jQuery);

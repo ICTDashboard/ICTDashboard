@@ -156,9 +156,11 @@ select {
       .form-radios {
         float: left;
       }
+      #field-expected-completion-date-add-more-wrapper input,
       .add_datepicker {
         position: absolute;
         max-width: 607px;
+        top: 0;
         left: 33px;
       }
       .ui-datepicker-trigger {

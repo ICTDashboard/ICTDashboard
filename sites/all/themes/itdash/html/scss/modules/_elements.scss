@@ -124,6 +124,8 @@ body,
           height: 36px;
           line-height: 36px;
           padding: 0 10px;
+
+          #field-expected-completion-date-add-more-wrapper input,
           &.add_datepicker {
             max-width: 607px;
           }
