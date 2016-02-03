@@ -269,7 +269,8 @@
       <?php print drupal_render(node_view($update_node)); ?>
     <?php endif; ?>
 
-    <?php if (!empty(ict_field_diff_list_latest($nid))) : ?>
+    <?php $diff = ict_field_diff_list_latest($nid); ?>
+    <?php if (!empty($diff)) : ?>
       <p><em><?php print t('* - fields that was updated.'); ?></em></p>
     <?php endif; ?>
 
