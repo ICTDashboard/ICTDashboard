@@ -473,7 +473,7 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
       }
     }
   }
-  dsm($node);
+
   // date validation
   if (!empty($node->field_start_date['und'][0]['value']) &&
     !empty($node->field_original_completion_date['und'][0]['value'])) {
