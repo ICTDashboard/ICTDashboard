@@ -133,6 +133,15 @@ function ict_project_preprocess_node(&$vars) {
       elseif (ict_update_edit_allowed($vars['nid'])) {
         $updates = ict_update_project_get_list($vars['nid'], 'draft');
         $update_id = reset($updates);
+        $update = node_load($update_id);
+        $vars['update_node'] = $update;
+        $errors = ict_update_all_fields_required_validate_page_preview($update);
+        if (!empty($errors)) {
+          $errors = array_merge(array(t('To send Update for approval you need to solve following validation errors:')), $errors);
+          foreach($errors as $e) {
+            drupal_set_message($e, 'error');
+          }
+        }
         $form = drupal_get_form('ict_update_edit_form', $vars['nid'], $update_id);
         $vars['update_form'] = drupal_render($form);
       }
@@ -140,16 +149,6 @@ function ict_project_preprocess_node(&$vars) {
         $updates = ict_update_project_get_list($vars['nid'], 'approved');
       }
 
-      $update_id = reset($updates);
-      $update = node_load($update_id);
-      $vars['update_node'] = $update;
-      $errors = ict_update_all_fields_required_validate_page_preview($update);
-      if (!empty($errors)) {
-        $errors = array_merge(array(t('To send Update for approval you need to solve following validation errors:')), $errors);
-        foreach($errors as $e) {
-          drupal_set_message($e, 'error');
-        }
-      }
     }
 
     if (ict_project_access_project('approve', NULL, $vars['nid'])) {
