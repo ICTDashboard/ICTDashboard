@@ -28,9 +28,7 @@
 						?>
 					</td>
 					<td class="text">
-						<?php
-							print render($form['field_government_entity_name']);
-						?>
+							<?php print render($form['field_government_entity_name']); ?>
 					</td>
 				</tr>
 
