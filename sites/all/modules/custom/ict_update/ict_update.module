@@ -65,7 +65,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     }
     else {
       $last_update = node_load(end($last_project_revision_updates));
-      $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_original_completion_date[LANGUAGE_NONE][0]['value'];
+      $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_expected_completion_date[LANGUAGE_NONE][0]['value'];
     }
   }
   $form['field_expected_completion_date']['und'][0]['#theme_wrappers'] = array();
