@@ -219,9 +219,9 @@ function ict_update_all_fields_required_validate($form, &$form_state) {
 
   if ($form_state['values']['field_expected_completion_date']['radio'] != 'na') {
     $expected_completition = $form_state['values']['field_expected_completion_date']['und'][0]['value'];
-    $original_completition = $project->field_original_completion_date['und'][0]['value'];
-    if ($expected_completition < $original_completition) {
-      form_set_error('field_expected_completion_date', 'Field <em>' . $form['field_expected_completion_date']['und'][0]['#title'] . '</em> could not be less than <em>Originally approved completion date</em>');
+    $original_start = $project->field_start_date['und'][0]['value'];
+    if ($expected_completition < $original_start) {
+      form_set_error('field_expected_completion_date', 'Field <em>' . $form['field_expected_completion_date']['und'][0]['#title'] . '</em> could not be less than <em>Originally approved start date</em>');
     }
   }
 }
@@ -271,10 +271,10 @@ function ict_update_all_fields_required_validate_page_preview($node) {
 
   if (!empty($node->field_expected_completion_date['und'][0]['value'])) {
     $expected_completition = $node->field_expected_completion_date['und'][0]['value'];
-    $original_completition = $project->field_original_completion_date['und'][0]['value'];
-    if ($expected_completition < $original_completition) {
+    $original_start = $project->field_start_date['und'][0]['value'];
+    if ($expected_completition < $original_start) {
       $field_info = field_info_instance('node', 'field_expected_completion_date', 'update');
-      $errors[] = t('Field <em>' . $field_info['label'] . '</em> could not be less than <em>Originally approved completion date</em>');
+      $errors[] = t('Field <em>' . $field_info['label'] . '</em> could not be less than <em>Originally approved start date</em>');
     }
   }
 
