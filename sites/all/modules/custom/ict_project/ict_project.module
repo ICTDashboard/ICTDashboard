@@ -700,7 +700,7 @@ function __ict_project_form_prepare_errors($form, &$form_state) {
     'field_project_status' => t('Project status is required'),
 
      // Project update MID year
-    'field_mid_project_stage' => t('Project stage is required'),
+    'field_mid_project_stage' => t('Project Stage is required'),
     'field_mid_project_manager' => t('Project manager name and email address is required'),
     'field_mid_project_manager_email' => t('Project manager name and email address is required'),
     'field_mid_expected_project' => t('Expected project completion date is required'),
@@ -716,7 +716,7 @@ function __ict_project_form_prepare_errors($form, &$form_state) {
     'field_mid_agency_comments' => t(''),
 
     // Project update END year
-    'field_end_project_stage' => t('Project stage is required'),
+    'field_end_project_stage' => t('Project Stage is required'),
     'field_end_expected_project' => t('Expected project completion date is required'),
     'field_end_internal_fte' => t('Internal FTE is required'),
     'field_end_external_fte' => t('External FTE is required'),
@@ -1156,7 +1156,7 @@ function ict_project_csv_validate($form, &$form_state) {
           case 'field_mid_project_stage':
           case 'field_end_project_stage':
             if(!in_array($field_value, $project_stage)) {
-              form_set_error('Project stage', t('Please valid Project stage value.'));
+              form_set_error('Project Stage', t('Please valid Project Stage value.'));
             }
             break;
 

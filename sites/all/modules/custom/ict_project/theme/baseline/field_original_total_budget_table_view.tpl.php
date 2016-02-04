@@ -30,7 +30,7 @@
       <?php  foreach ($delta_range as $delta) : ?>
         <td>
           <?php if (!empty($row['budget_items'][$delta]->field_total[LANGUAGE_NONE][0]['value'])) : ?>
-            <?php print '$' . $row['budget_items'][$delta]->field_total[LANGUAGE_NONE][0]['value']; ?>
+            <?php print '$' . $row['budget_items'][$delta]->field_total[LANGUAGE_NONE][0]['value'] . 'm'; ?>
           <?php endif; ?>
           <?php if ($row_num == count($rows) && isset($diff['field_original_total_budget'][$row['budget_items'][$delta]->field_year[LANGUAGE_NONE][0]['value']])) : ?>
             <?php print '*'; ?>

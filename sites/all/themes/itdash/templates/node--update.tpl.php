@@ -1,6 +1,5 @@
 <div id="inner-content" class="wrap cf">
-  <h2><?php print t('Update data'); ?></h2>
-  <h3><?php print t('Costs, Benefits and Timings'); ?></h3>
+  <h3><?php print t('Costs, Benefits and Schedules'); ?></h3>
   <div class="project-draft-submission d-all">
     <div class="row">
       <div class="label">
@@ -53,7 +52,7 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_forecast_level_of_project_) as $value) : ?>
+        <?php foreach (_ict_project_baseline_get_simple_values($field_forecast_level_of_project_, FALSE, '', '%') as $value) : ?>
           <p><?php print $value; ?></p>
         <?php endforeach; ?>
       </div>
@@ -72,7 +71,7 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_actual_level_of_project_co) as $value) : ?>
+        <?php foreach (_ict_project_baseline_get_simple_values($field_actual_level_of_project_co, FALSE, '', '%') as $value) : ?>
           <p><?php print $value; ?></p>
         <?php endforeach; ?>
       </div>
@@ -98,7 +97,7 @@
     <?php if (!empty($project_id)) : ?>
       <div class="row">
         <div class="label">
-          <?php print t('Benefits realised'); ?>
+          <?php print t('Benefits Realised'); ?>
           <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
@@ -127,7 +126,7 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_current_financial_benefits) as $value) : ?>
+        <?php foreach (_ict_project_baseline_get_simple_values($field_current_financial_benefits, FALSE, '$', 'm', TRUE) as $value) : ?>
           <p><?php print $value; ?></p>
         <?php endforeach; ?>
       </div>
@@ -146,7 +145,7 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_estimated_value_of_benefit) as $value) : ?>
+        <?php foreach (_ict_project_baseline_get_simple_values($field_estimated_value_of_benefit, FALSE, '$', 'm', TRUE) as $value) : ?>
           <p><?php print $value; ?></p>
         <?php endforeach; ?>
       </div>

@@ -4,7 +4,7 @@
   </div>
 </div>
 <div id="inner-content" class="wrap cf">
-  <h2><?php print t('Baseline data');?></h2>
+  <h2><?php print t('Baseline Data');?></h2>
   <div class="project-view info d-all project-update-submission">
       <table>
         <tbody>
@@ -85,7 +85,7 @@
           </tr>
 
           <tr>
-            <td class="label"><?php print t('Project stage');?></td>
+            <td class="label"><?php print t('Project Stage');?></td>
             <td class="text"><?php
               $name_stage = taxonomy_term_load($form_state['values']['field_project_stage']['und'][0]['tid']);
               print $name_stage->name;?></td>

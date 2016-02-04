@@ -355,7 +355,7 @@ function ict_project_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_original_completion_date',
-    'label' => 'Original approved completion date ',
+    'label' => 'Original Approved Completion Date ',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -706,7 +706,7 @@ function ict_project_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_start_date',
-    'label' => 'Original approved start date',
+    'label' => 'Original Approved Start Date',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -741,8 +741,8 @@ function ict_project_field_default_field_instances() {
   t('Financial Benefits');
   t('Government Entity Name');
   t('Government Implementation Partner/s');
-  t('Original approved completion date ');
-  t('Original approved start date');
+  t('Original Approved Completion Date ');
+  t('Original Approved Start Date');
   t('Portfolio Name');
   t('Programme Name');
   t('Project Budget By Financial Year ');

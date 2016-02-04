@@ -89,7 +89,7 @@ function ict_update_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'ICT Update Submission Form';
+  $display->title = 'Update Project Data Form';
   $display->uuid = '1f491044-1cec-4471-b69d-9916139cc81a';
   $display->content = array();
   $display->panels = array();
@@ -191,7 +191,7 @@ function ict_update_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'ICT Update Submission Form';
+  $display->title = 'Update Project Data Form';
   $display->uuid = 'e9dd6540-7a9e-4d2e-9a58-bdeafea60e35';
   $display->content = array();
   $display->panels = array();
@@ -293,7 +293,7 @@ function ict_update_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'ICT Update Submission Form';
+  $display->title = 'Update Project Data Form';
   $display->uuid = '4efa4263-ff7e-48eb-87fa-173d542f9d92';
   $display->content = array();
   $display->panels = array();

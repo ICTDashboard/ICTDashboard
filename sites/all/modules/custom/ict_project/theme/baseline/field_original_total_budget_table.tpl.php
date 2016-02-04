@@ -42,7 +42,7 @@
         <?php if (!is_numeric($item)) continue; ?>
         <td>
           <?php if (!empty($row['budget_items'][$item]->field_total[LANGUAGE_NONE][0]['value'])) : ?>
-            <?php print '$' . $row['budget_items'][$item]->field_total[LANGUAGE_NONE][0]['value']; ?>
+            <?php print '$' . $row['budget_items'][$item]->field_total[LANGUAGE_NONE][0]['value'] . 'm'; ?>
           <?php endif; ?>
         </td>
       <?php endforeach; ?>

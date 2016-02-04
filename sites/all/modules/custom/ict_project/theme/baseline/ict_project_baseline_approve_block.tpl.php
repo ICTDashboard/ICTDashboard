@@ -4,7 +4,7 @@
   </div>
 </div>
 <div id="inner-content" class="wrap cf">
-  <h2>Basic project information</h2>
+  <h2>Basic Project Information</h2>
   <div class="project-draft-submission d-all">
 
     <div class="row">

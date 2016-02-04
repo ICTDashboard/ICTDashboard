@@ -4,8 +4,8 @@
   </div>
 </div>
 <div id="inner-content" class="wrap cf">
-  <h2><?php print t('Baseline data'); ?></h2>
-  <h3><?php print t('Basic project information'); ?></h3>
+  <h2><?php print t('Baseline Data'); ?></h2>
+  <h3><?php print t('Basic Project Information'); ?></h3>
   <div class="project-draft-submission d-all">
 
     <div class="row">
@@ -111,7 +111,7 @@
 
     <div class="dotted-line"></div>
 
-    <h3><?php print t('User information'); ?></h3>
+    <h3><?php print t('User Information'); ?></h3>
 
     <div class="row">
       <div class="label">
@@ -151,7 +151,7 @@
 
     <div class="dotted-line"></div>
 
-    <h3><?php print t('Cost benefits and timings'); ?></h3>
+    <h3><?php print t('Costs, Benefits and Schedules'); ?></h3>
 
     <div class="row">
       <div class="label">
