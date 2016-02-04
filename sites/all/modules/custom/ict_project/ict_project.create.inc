@@ -367,7 +367,7 @@ function ict_project_create_form_validate($form, &$form_state) {
   $form_state['approvers'] = $approver_emails;
   $form_state['editors'] = $editor_emails;
 
-  foreach ($approver_emails + $editor_emails as $email) {
+  foreach (array_merge($approver_emails, $editor_emails) as $email) {
     if (user_load_by_mail($email)) continue;
     form_set_error('editors',
       t('User with the email !email is not found', array(
