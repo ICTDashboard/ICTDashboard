@@ -361,18 +361,43 @@ function ict_project_create_form_validate($form, &$form_state) {
   foreach ($editor_emails as $email) {
     if (valid_email_address($email) &&
       endsWith($email, '.gov.au')) continue;
-    form_set_error('editors', t('Data Editor address should be valid and belonging to Australian government.'));
+    form_set_error('editors', t('Data Editor address should be valid be associated to Australian government.'));
   }
 
   $form_state['approvers'] = $approver_emails;
   $form_state['editors'] = $editor_emails;
 
+  $approver_editor_users = array();
   foreach (array_merge($approver_emails, $editor_emails) as $email) {
-    if (user_load_by_mail($email)) continue;
+    if ($role_user = user_load_by_mail($email)) {
+      $approver_editor_users[] = $role_user;
+      continue;
+    }
     form_set_error('editors',
       t('User with the email !email is not found', array(
         '!email' => $email
       ))
+    );
+  }
+
+  $current_department = $values['field_department'][0];
+  $dep_data = taxonomy_term_load($current_department);
+  foreach ($approver_editor_users as $role_user) {
+    $department_tid = ict_department_get_department_tid_of_entity('user', $role_user);
+    if (!$department_tid || $department_tid != $current_department) {
+      form_set_error(
+        'editors',
+        t('Project Editors and Project Approvers should be associated to !dep_name', array(
+          '!dep_name' => $dep_data->name
+        ))
+      );
+    }
+  }
+
+  if (array_intersect($approver_emails, $editor_emails)) {
+    form_set_error(
+      'editors',
+      t('Project Editor and Project Approver cannot be the same user.')
     );
   }
 }
