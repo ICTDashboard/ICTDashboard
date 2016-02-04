@@ -43,9 +43,12 @@ function ict_pages_home_login_render ($subtype, $conf, $panel_args, $context = N
   $block->content = '
     <div class="welcome dotbg">
 				<div class="wrap cf">
-					<h1>ICT Project Dashboard</h1>
+					<h1>ICT Projects Dashboard</h1>
 					<div class="welcome-text d-2of3 t-1of2">
-						<p>The ICT Project Dashboard provides information on the performance of major Australian Government ICT enabled projects. The Dashboard allows the public, industry, and government agencies to track ICT projects’ performance against their predicted schedules, budgets and resource allocations. The Dashboard allows users to access actual data for individual projects, updated as part of mid and end of year financial reporting.</p>
+						<p>The purpose of the ICT Projects Dashboard is to increase transparency of the performance of major Government ICT-enabled projects by publishing their status against a baseline, focusing on cost, schedule and expected benefits.</p>
+            <p>Major ICT-enabled projects are defined as those with a total project cost of $30 million or more, including ICT costs of at least $10 million.</p>
+            <p>A dashboard user account is required to report or update project information. If you do not have a user account please contact your ICT Projects Dashboard Departmental Administrator.</p>
+            <p>If you require more information please contact the ICT Dashboard team by e-mail <a href="mailto:ICTProjectDashboard@finance.gov.au">ICTProjectDashboard@finance.gov.au</a> or phone (02) 6215 2091</p>
 					</div>
 					' . $form . '
 				</div>

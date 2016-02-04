@@ -448,23 +448,24 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
   if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']) && !$budget_rows) {
     // initial form render with no values
 
-    $items_count = 4;
-    $field_name = 'field_original_total_budget';
-    $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
-
-    // Generate required number of fields collection
-    if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
-      $budget_table_items['items_count'] = $items_count;
-      $budget_table = field_multiple_value_form(
-        $budget_table_items['field'],
-        $budget_table_items['instance'],
-        LANGUAGE_NONE,
-        array(),
-        $form,
-        $form_state);
-    }
-    $budget_table_items['items_count']++;
-    $budget_table['#after_build'] = 'field_form_element_after_build';
+// 5 items by default. There were some issues therefore it was commented.drush
+//    $items_count = 4;
+//    $field_name = 'field_original_total_budget';
+//    $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
+//
+//    // Generate required number of fields collection
+//    if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+//      $budget_table_items['items_count'] = $items_count;
+//      $budget_table = field_multiple_value_form(
+//        $budget_table_items['field'],
+//        $budget_table_items['instance'],
+//        LANGUAGE_NONE,
+//        array(),
+//        $form,
+//        $form_state);
+//    }
+//    $budget_table_items['items_count']++;
+//    $budget_table['#after_build'] = 'field_form_element_after_build';
 
     $year = variable_get('ict_dashboard_project_start_year', 13);
     $start_year = $year;
