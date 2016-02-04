@@ -743,7 +743,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_project_stage',
-    'label' => 'Project stage',
+    'label' => 'Project Stage',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -821,7 +821,7 @@ function ict_update_field_default_field_instances() {
   t('Project');
   t('Project Budget By Financial Year ');
   t('Project revision');
-  t('Project stage');
+  t('Project Stage');
   t('Spend To Date By Financial Year ($m)');
   t('Start date');
   t('Status');

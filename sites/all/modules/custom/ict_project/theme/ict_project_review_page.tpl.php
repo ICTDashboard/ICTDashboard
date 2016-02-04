@@ -14,7 +14,7 @@
           </tr>
 
         <tr>
-          <td class="label"><?php print t('Project stage');?></td>
+          <td class="label"><?php print t('Project Stage');?></td>
           <td class="text"><?php print $form_state['values']['field_mid_project_stage']['und'][0]['value'];?></td>
         </tr>
 

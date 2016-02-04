@@ -1,4 +1,4 @@
-    <h3><?php print t('Basic project information'); ?></h3>
+    <h3><?php print t('Basic Project Information'); ?></h3>
     <div class="row">
       <div class="label">
         <?php print $field_government_entity_name['meta']['#title']; ?>
@@ -111,7 +111,7 @@
 
     <div class="dotted-line"></div>
 
-    <h3><?php print t('User information'); ?></h3>
+    <h3><?php print t('User Information'); ?></h3>
 
     <div class="row">
       <div class="label">

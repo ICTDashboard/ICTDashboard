@@ -446,7 +446,7 @@ function ict_entity_forms_field_default_field_instances() {
     ),
     'entity_type' => 'entityform',
     'field_name' => 'field_mid_project_stage',
-    'label' => 'Project stage',
+    'label' => 'Project Stage',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1084,7 +1084,7 @@ function ict_entity_forms_field_default_field_instances() {
     ),
     'entity_type' => 'entityform',
     'field_name' => 'field_end_project_stage',
-    'label' => 'Project stage',
+    'label' => 'Project Stage',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1420,7 +1420,7 @@ function ict_entity_forms_field_default_field_instances() {
   t('Project manager email');
   t('Project manager email ');
   t('Project name');
-  t('Project stage');
+  t('Project Stage');
   t('Project status');
   t('Revised total project budget ($m)');
   t('Total');

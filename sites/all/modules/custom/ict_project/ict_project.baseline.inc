@@ -362,7 +362,7 @@ function ict_project_baseline_get_admin_user_emails ($node) {
   );
 }
 
-function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE) {
+function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE, $prefix = '', $suffix = '', $finance = FALSE) {
   $values = array();
   foreach ($items as $key => $item) {
     // exclude field meta data from the display
@@ -370,21 +370,26 @@ function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALS
 
     if (isset($item['safe_value'])) {
       // text fields
-      $values[] = $item['safe_value'];
+      $val = $item['safe_value'];
     }
     elseif (isset($item['taxonomy_term'])) {
       // term reference fields
-      $values[] = $item['taxonomy_term']->name;
+      $val = $item['taxonomy_term']->name;
     }
     elseif (isset($item['timezone'])) {
       // date fields
       $date = strtotime($item['value']);
-      $values[] = format_date($date, 'medium', 'j M Y');
+      $val = format_date($date, 'medium', 'j M Y');
     }
     elseif (isset($item['value'])) {
       // number fields
-      $values[] = $item['value'];
+      $val = $item['value'];
     }
+
+    if ($finance) {
+      $val = number_format($val, 2, '.', '');
+    }
+    $values[] = $val ? $prefix . $val . $suffix : '';
   }
   $default_value = $not_applicable ? t('Not Applicable') : '-';
 
@@ -428,7 +433,7 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
   if (!empty($form_state['values']['field_start_date']['und'][0]['value']) &&
     !empty($form_state['values']['field_original_completion_date']['und'][0]['value'])) {
     if ($form_state['values']['field_start_date']['und'][0]['value'] >= $form_state['values']['field_original_completion_date']['und'][0]['value']) {
-      form_set_error('field_start_date][und][0', t('<em>Original approved start date</em> cannot be later than <em>Original approved completion date </em>'));
+      form_set_error('field_start_date][und][0', t('<em>Original Approved Start Date</em> cannot be later than <em>Original Approved Completion Date </em>'));
     }
   }
 
@@ -478,7 +483,7 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
   if (!empty($node->field_start_date['und'][0]['value']) &&
     !empty($node->field_original_completion_date['und'][0]['value'])) {
     if ($node->field_start_date['und'][0]['value'] >= $node->field_original_completion_date['und'][0]['value']) {
-      $errors[] = t('<em>Original approved start date</em> cannot be later than <em>Original approved completion date </em>');
+      $errors[] = t('<em>Original Approved Start Date</em> cannot be later than <em>Original Approved Completion Date </em>');
     }
   }
 
