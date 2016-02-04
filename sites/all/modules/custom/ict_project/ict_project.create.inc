@@ -4,6 +4,11 @@
  * Code for the ICT Project create functions.
  */
 
+
+function ict_project_update_gov_entity_name($form, &$form_state) {
+
+  return $form['field_government_entity_name'];
+}
 /**
  * Project create form
  *
@@ -13,20 +18,6 @@
  */
 function ict_project_projects_create_form($form, &$form_state) {
   global $user;
-  $government_entities_vocab = taxonomy_vocabulary_machine_name_load('funding_source');
-  $government_entities = taxonomy_get_tree($government_entities_vocab->vid);
-  $entities_options = array();
-  foreach ($government_entities as $entity) {
-    $entities_options[$entity->tid] = $entity->name;
-  }
-
-  $form['field_government_entity_name'] = array(
-    '#type' => 'select',
-    '#title' => t('Government Entity Name'),
-    '#title_display' => 'invisible',
-    '#required' => TRUE,
-    '#options' => $entities_options
-  );
 
   $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
   $portfolios = taxonomy_get_tree($portfolio_vocab->vid, 0, 1);
@@ -40,8 +31,35 @@ function ict_project_projects_create_form($form, &$form_state) {
     '#required' => TRUE,
     '#title' => t('Portfolio Name'),
     '#title_display' => 'invisible',
-    '#options' => $portfolio_options
+    '#options' => $portfolio_options,
+    '#ajax' => array(
+      'callback' => 'ict_project_update_gov_entity_name',
+      'wrapper' => 'ict-form-government-entity-name',
+      'method' => 'replace',
+      'effect' => 'fade',
+    ),
   );
+
+  $form['field_government_entity_name'] = array(
+    '#type' => 'select',
+    '#title' => t('Government Entity Name'),
+    '#title_display' => 'invisible',
+    '#prefix' => '<div id="ict-form-government-entity-name">',
+    '#suffix' => '</div>',
+    '#required' => TRUE,
+    '#options' => array(),
+    '#disabled' => TRUE,
+  );
+
+  if (!empty($form_state['values']['field_portfolio_name'])) {
+    $portfolios = taxonomy_get_tree($portfolio_vocab->vid, $form_state['values']['field_portfolio_name'], 1);
+    $portfolio_options = array();
+    foreach ($portfolios as $entity) {
+      $portfolio_options[$entity->tid] = $entity->name;
+    }
+    $form['field_government_entity_name']['#options'] = $portfolio_options;
+    $form['field_government_entity_name']['#disabled'] = FALSE;
+  }
 
   $department_vocab = taxonomy_vocabulary_machine_name_load('department');
   $departments = taxonomy_get_tree($department_vocab->vid);
