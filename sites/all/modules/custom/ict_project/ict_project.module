@@ -499,7 +499,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
 
     if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
       // Generate required number of fields collection
-      if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+      if ($items_count >= 0 && $budget_table_items['items_count'] != $items_count) {
         $budget_table_items['items_count'] = $items_count;
         $budget_table = field_multiple_value_form(
           $budget_table_items['field'],
@@ -529,8 +529,8 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
       $last_row = end($budget_rows);
       if ($last_row['entity_type'] == 'update') {
         $default_values = $last_row['budget_items'];
-        $budget_table['#budget_rows'] = array($baseline_row);
       }
+      $budget_table['#budget_rows'] = array($baseline_row);
 
       $last_update = array();
       foreach ($default_values as $fin_year_value) {
@@ -542,7 +542,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
         $last_update[$fin_year] = $year_budget;
       }
 
-      $current_year = date('y');
+      $cur_fin_year = __ict_project_get_current_fin_year();
       $future_expenditure = FALSE;
       foreach (element_children($budget_table) as $item) {
         if (!is_numeric($item)) continue;
@@ -557,12 +557,16 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
           $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#default_value'] = $last_update[$item_year_value];
         }
 
-        $item_year = explode('/', $item_year_value);
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = FALSE;
-        if (reset($item_year) <= $current_year) continue;
+
+        // Updates allow edit only current financial year
+        if ($item_year_value == $cur_fin_year) {
+          // future expenditure
+          $future_expenditure = TRUE;
+          continue;
+        }
 
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
-        $future_expenditure = TRUE;
       }
 
       if ($future_expenditure) {
