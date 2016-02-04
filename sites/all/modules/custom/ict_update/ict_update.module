@@ -257,7 +257,6 @@ function ict_update_all_fields_required_validate_page_preview($node) {
       'field_forecast_level_of_project_',
       'field_actual_level_of_project_co',
       'field_current_financial_benefits',
-      'field_estimated_value_of_benefit',
     ),
     'term' => array(
       'field_project_stage',
@@ -267,6 +266,20 @@ function ict_update_all_fields_required_validate_page_preview($node) {
     foreach($subfields as $field) {
       if ((empty($node->{$field}['und'][0]['tid']) && $type == 'term')
         || (empty($node->{$field}['und'][0]['value']) && $type == 'text')) {
+        $field_info = field_info_instance('node', $field, 'update');
+        $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
+      }
+    }
+  }
+  $fields_zero_allowed = array(
+    'text' => array(
+      'field_estimated_value_of_benefit',
+    ),
+  );
+
+  foreach($fields_zero_allowed as $type => $subfields) {
+    foreach($subfields as $field) {
+      if (is_null($node->{$field}['und'][0]['value']) && $type == 'text') {
         $field_info = field_info_instance('node', $field, 'update');
         $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
       }
