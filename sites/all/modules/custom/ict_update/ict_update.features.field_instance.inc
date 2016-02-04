@@ -418,7 +418,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_entity_comments',
-    'label' => 'Entity comments',
+    'label' => 'Entity Comments',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -528,8 +528,8 @@ function ict_update_field_default_field_instances() {
         'increment' => 15,
         'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
-        'label_position' => 'above',
-        'no_fieldset' => 0,
+        'label_position' => 'none',
+        'no_fieldset' => 1,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
@@ -813,7 +813,7 @@ function ict_update_field_default_field_instances() {
   t('Context, remedial action, changes in project scope or other commentary.');
   t('Current Financial Benefits');
   t('End date');
-  t('Entity comments');
+  t('Entity Comments');
   t('Estimated Value of Benefits Realised');
   t('Expected Completion Date');
   t('Financial');
