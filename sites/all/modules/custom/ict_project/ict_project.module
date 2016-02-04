@@ -66,6 +66,17 @@ function ict_project_preprocess_node(&$vars) {
     if ($project_id) {
       $budget_items = _ict_project_prepare_budget_history($project_id, 'view');
     }
+
+    // should show previous approved values OR current pendong values only
+    $baseline_row = reset($budget_items);
+    $last_update = end($budget_items);
+    if ($last_update['entity_type'] == 'update') {
+      $budget_items = array($baseline_row, $last_update);
+    }
+    else {
+      $budget_items = array($baseline_row);
+    }
+
     $vars['field_original_total_budget'] = theme(
       'field_original_total_budget_table_view', array(
         'rows' => $budget_items,
@@ -407,6 +418,7 @@ function _ict_project_prepare_budget_history($project_id, $mode = 'form') {
     }
 
     $budget_rows[] = array(
+      'entity_type' => $budget_value['type'],
       'type' =>  $row_type,
       'title' => $budget_value['type'] == 'project' ?
         t('Project Budget') :
@@ -510,17 +522,44 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
 
     // restrict entering future expenditure for Updates
     if ($form['type']['#value'] == 'update') {
+      // previous approved values should be shown as default
+      $default_values = array();
+      $baseline_row = reset($budget_rows);
+      $last_row = end($budget_rows);
+      if ($last_row['entity_type'] == 'update') {
+        $default_values = $last_row['budget_items'];
+        $budget_table['#budget_rows'] = array($baseline_row);
+      }
+
+      $last_update = array();
+      foreach ($default_values as $fin_year_value) {
+        $fin_year = $fin_year_value->field_year[LANGUAGE_NONE][0]['value'];
+        $year_budget = !empty($fin_year_value->field_total[LANGUAGE_NONE][0]['value']) ?
+          $fin_year_value->field_total[LANGUAGE_NONE][0]['value'] :
+          NULL;
+
+        $last_update[$fin_year] = $year_budget;
+      }
+
       $current_year = date('y');
       $future_expenditure = FALSE;
       foreach (element_children($budget_table) as $item) {
-        if (!is_numeric($item)) {
-          continue;
+        if (!is_numeric($item)) continue;
+
+        $item_year_value = $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'];
+
+        // previous approved values should be shown as default
+        $item_budget_year = !empty($budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#default_value']) ?
+          $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#default_value'] :
+          NULL;
+        if (!$item_budget_year && !empty($last_update[$item_year_value])) {
+          $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#default_value'] = $last_update[$item_year_value];
         }
-        $item_year = explode('/', $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']);
+
+        $item_year = explode('/', $item_year_value);
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = FALSE;
-        if (reset($item_year) <= $current_year) {
-          continue;
-        }
+        if (reset($item_year) <= $current_year) continue;
+
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
         $future_expenditure = TRUE;
       }
