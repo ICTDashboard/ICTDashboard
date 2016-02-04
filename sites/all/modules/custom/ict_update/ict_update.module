@@ -57,6 +57,17 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
 
+  if (empty($form['#node']->nid)) {
+    $entity_list = ict_update_get_allowed_entity_list($project_id);
+    $last_project_revision_updates = end($entity_list);
+    if(empty($last_project_revision_updates)) {
+      $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $project->field_original_completion_date[LANGUAGE_NONE][0]['value'];
+    }
+    else {
+      $last_update = node_load(end($last_project_revision_updates));
+      $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_original_completion_date[LANGUAGE_NONE][0]['value'];
+    }
+  }
   $form['field_expected_completion_date']['und'][0]['#theme_wrappers'] = array();
   $form['field_expected_completion_date']['und'][0]['#attributes'] = array('class' => array('radio_datepicker'));
   $form['field_expected_completion_date']['radio'] = array(
