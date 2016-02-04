@@ -48,7 +48,7 @@ function ict_pages_home_login_render ($subtype, $conf, $panel_args, $context = N
 						<p>The purpose of the ICT Projects Dashboard is to increase transparency of the performance of major Government ICT-enabled projects by publishing their status against a baseline, focusing on cost, schedule and expected benefits.</p>
             <p>Major ICT-enabled projects are defined as those with a total project cost of $30 million or more, including ICT costs of at least $10 million.</p>
             <p>A dashboard user account is required to report or update project information. If you do not have a user account please contact your ICT Projects Dashboard Departmental Administrator.</p>
-            <p><a href="mailto:ICTProjectDashboard@finance.gov.au">ICTProjectDashboard@finance.gov.au</a> or phone (02) 6215 2091</p>
+            <p>If you require more information please contact the ICT Dashboard team by e-mail <a href="mailto:ICTProjectDashboard@finance.gov.au">ICTProjectDashboard@finance.gov.au</a> or phone (02) 6215 2091</p>
 					</div>
 					' . $form . '
 				</div>
