@@ -165,6 +165,7 @@
       </div>
       <div class="text">
         $<?php print number_format($project_node->field_predicted_project_benefit['und'][0]['value'], 2, '.', ''); ?>m
+      </div>
     </div>
 
     <div class="row">
