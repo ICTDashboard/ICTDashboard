@@ -4,7 +4,6 @@
 	</div>
 </div>
 <div id="inner-content" class="wrap cf">
-	<h2>Baseline Data</h2>
 	<div class="project-update-submission d-all">
 		<form class="node-form node-project-form" action="/node/add/project" method="post" id="project-node-form" accept-charset="UTF-8">
 			<table>

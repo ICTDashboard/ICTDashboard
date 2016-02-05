@@ -5,7 +5,6 @@
 </div>
 
 <div id="inner-content" class="wrap cf">
-  <h2><?php print t('Baseline Data'); ?></h2>
   <h3><?php print t('Basic Project Information'); ?></h3>
   <div class="project-draft-submission d-all ict-view-page">
 
@@ -150,28 +149,28 @@
 
     <div class="dotted-line"></div>
 
-    <h3><?php print t('Costs, Benefits and Timings'); ?></h3>
-
-    <div class="row">
-      <div class="label">
-        <?php print $field_project_stage['meta']['#title']; ?>
-        <?php if (!empty($field_project_stage['meta']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $field_project_stage['meta']['#description']; ?>
-            </span>
-          </a>
-        <?php endif; ?>
-      </div>
-      <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_project_stage) as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
-      </div>
-    </div>
-
     <?php if (!$project_updates_available) : ?>
+      <h3><?php print t('Schedule, Expenditures and Benefits'); ?></h3>
+
+      <div class="row">
+        <div class="label">
+          <?php print $field_project_stage['meta']['#title']; ?>
+          <?php if (!empty($field_project_stage['meta']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $field_project_stage['meta']['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+        </div>
+        <div class="text">
+          <?php foreach (_ict_project_baseline_get_simple_values($field_project_stage) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
       <div class="row">
         <div class="label">
           <?php print t('Project Budget By Financial Year'); ?>
@@ -188,66 +187,64 @@
           <?php print $field_original_total_budget; ?>
         </div>
       </div>
-    <?php endif; ?>
 
-    <div class="row">
-      <div class="label">
-        <?php print $field_start_date['meta']['#title']; ?>
-        <?php if (!empty($field_start_date['meta']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $field_start_date['meta']['#description']; ?>
-            </span>
-          </a>
-        <?php endif; ?>
+      <div class="row">
+        <div class="label">
+          <?php print $field_start_date['meta']['#title']; ?>
+          <?php if (!empty($field_start_date['meta']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $field_start_date['meta']['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+        </div>
+        <div class="text">
+          <?php foreach (_ict_project_baseline_get_simple_values($field_start_date) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        </div>
       </div>
-      <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_start_date) as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="label">
-        <?php print $field_original_completion_date['meta']['#title']; ?>
-        <?php if (!empty($field_original_completion_date['meta']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $field_original_completion_date['meta']['#description']; ?>
-            </span>
-          </a>
-        <?php endif; ?>
+      <div class="row">
+        <div class="label">
+          <?php print $field_original_completion_date['meta']['#title']; ?>
+          <?php if (!empty($field_original_completion_date['meta']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $field_original_completion_date['meta']['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+        </div>
+        <div class="text">
+          <?php foreach (_ict_project_baseline_get_simple_values($field_original_completion_date) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        </div>
       </div>
-      <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_original_completion_date) as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="label">
-        <?php print $field_predicted_project_benefit['meta']['#title'] . ' <em>($m)</em>'; ?>
-        <?php if (!empty($field_predicted_project_benefit['meta']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $field_predicted_project_benefit['meta']['#description']; ?>
-            </span>
-          </a>
-        <?php endif; ?>
+      <div class="row">
+        <div class="label">
+          <?php print $field_predicted_project_benefit['meta']['#title'] . ' <em>($m)</em>'; ?>
+          <?php if (!empty($field_predicted_project_benefit['meta']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $field_predicted_project_benefit['meta']['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+        </div>
+        <div class="text">
+          <?php foreach (_ict_project_baseline_get_simple_values($field_predicted_project_benefit, FALSE, '$', 'm', TRUE) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        </div>
       </div>
-      <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_predicted_project_benefit, FALSE, '$', 'm', TRUE) as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
-      </div>
-    </div>
 
-    <?php if (!$project_updates_available) : ?>
       <div class="row">
         <div class="label">
           <?php print t('Top Benefits'); ?>

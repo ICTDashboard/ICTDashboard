@@ -17,11 +17,11 @@
 
 <div class="row">
   <div class="label">
-    <?php print t('Data Approvers'); ?>
+    <?php print t('Project Approvers'); ?>
     <a href="javascript:void(0);" class="tooltip">
       <i class="tooltip-icon"></i>
       <span class="tooltip-content">
-        <?php print t('Data Approvers can review, approve or reject baseline and update submissions once submitted for approval. They can not be Departmental Administrators or Editors within the same project.'); ?>
+        <?php print t('Project Approvers can review, approve or reject baseline and update submissions once submitted for approval. They can not be Departmental Administrators or Editors within the same project.'); ?>
       </span>
     </a>
   </div>
@@ -34,11 +34,11 @@
 
 <div class="row">
   <div class="label">
-    <?php print t('Data Editors'); ?>
+    <?php print t('Project Editors'); ?>
     <a href="javascript:void(0);" class="tooltip">
       <i class="tooltip-icon"></i>
       <span class="tooltip-content">
-        <?php print t('Data Editors can review, edit and submit baseline and update submissions for approval. They can not be Departmental Administrators or Approvers within the same project.'); ?>
+        <?php print t('Project Editors can review, edit and submit baseline and update submissions for approval. They can not be Departmental Administrators or Approvers within the same project.'); ?>
       </span>
     </a>
   </div>

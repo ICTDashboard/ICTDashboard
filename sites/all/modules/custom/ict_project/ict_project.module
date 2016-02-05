@@ -83,6 +83,7 @@ function ict_project_preprocess_node(&$vars) {
         'diff' => $vars['diff'],
       )
     );
+    $vars['project_node'] = node_load($vars['project_id']);
   }
   if ($vars['type'] == 'project') {
 
