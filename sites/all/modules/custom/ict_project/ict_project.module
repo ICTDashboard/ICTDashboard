@@ -83,6 +83,14 @@ function ict_project_preprocess_node(&$vars) {
         'diff' => $vars['diff'],
       )
     );
+
+    $vars['field_original_total_budge_1'] = theme(
+      'field_original_total_budget_graph_view', array(
+        'rows' => $budget_items,
+        'diff' => $vars['diff'],
+      )
+    );
+
     $vars['project_node'] = node_load($vars['project_id']);
   }
   if ($vars['type'] == 'project') {
@@ -954,6 +962,10 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'field_original_total_budget_table_view',
     ),
+    'field_original_total_budget_graph_view' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'field_original_total_budget_graph_view',
+    ),
   );
 }
 
@@ -1501,6 +1513,9 @@ function ict_project_review_project_submission($form, &$form_state) {
   }
 }
 
+/**
+ * Implements hook_preprocess_template().
+ */
 function ict_project_preprocess_field_original_total_budget_table_view (&$vars) {
   $rows = $vars['rows'];
   $max_columns = 0;
@@ -1513,4 +1528,124 @@ function ict_project_preprocess_field_original_total_budget_table_view (&$vars) 
   $delta_range = range(0, $max_delta);
   $vars['max_item'] = $max_item;
   $vars['delta_range'] = $delta_range;
+}
+
+/**
+ * Implements hook_preprocess_template().
+ */
+function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) {
+  $rows = $vars['rows'];
+  $max_columns = 0;
+  foreach ($rows as $item) {
+    if ($item['count'] <= $max_columns) continue;
+    $max_columns = $item['count'];
+    $max_item = $item;
+  }
+  $max_delta = $max_columns - 1;
+  $delta_range = range(0, $max_delta);
+  $vars['max_item'] = $max_item;
+  $vars['delta_range'] = $delta_range;
+  dsm($vars);
+
+  // chart labels
+  $labels = array();
+  foreach ($max_item['budget_items'] as $budget_item) {
+    $labels[] = $budget_item->field_year[LANGUAGE_NONE][0]['value'];
+  }
+
+  // chart values
+  $original_values = array();
+  $original_row = reset($rows);
+  foreach ($original_row['budget_items'] as $budget_item) {
+    $original_values[] = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
+      (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
+      (float)0;
+  }
+
+  $update_values = array();
+  // if updated provided
+  if (count($rows > 1)) {
+    // chart values
+    $update_row = end($rows);
+    foreach ($update_row['budget_items'] as $budget_item) {
+      $update_values[] = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
+        (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
+        (float)0;
+    }
+  }
+
+  $chart_options = array(
+    'responsive' => TRUE,
+    'scaleLabel' => "$<%=value%>m",
+
+    'scaleBeginAtZero' => TRUE,
+
+    //Boolean - Whether grid lines are shown across the chart
+    'scaleShowGridLines' => TRUE,
+
+    //String - Colour of the grid lines
+    'scaleGridLineColor' => "rgba(0,0,0,.05)",
+
+    //Number - Width of the grid lines
+    'scaleGridLineWidth' => 1,
+
+    //Boolean - Whether to show horizontal lines (except X axis)
+    'scaleShowHorizontalLines' => TRUE,
+
+    //Boolean - Whether to show vertical lines (except Y axis)
+    'scaleShowVerticalLines' => FALSE,
+
+    //Boolean - If there is a stroke on each bar
+    'barShowStroke' => TRUE,
+
+    //Number - Pixel width of the bar stroke
+    'barStrokeWidth' => 1,
+
+    //Number - Spacing between each of the X value sets
+    'barValueSpacing' => 20,
+
+    //Number - Spacing between data sets within X values
+    'barDatasetSpacing' => 4,
+
+    //String - A legend template
+    'legendTemplate' => "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+  );
+
+  $datasets = array(
+    array(
+      'label' => "Spent to Date",
+      'fillColor' => "rgba(220,220,220,0.5)",
+      'strokeColor' => "rgba(220,220,220,0.8)",
+      'highlightFill' => "rgba(220,220,220,0.75)",
+      'highlightStroke' => "rgba(220,220,220,1)",
+      'data' => $update_values
+    ),
+    array(
+      'label' => "My Project Budget dataset",
+      'fillColor' => "rgba(220,220,220,0.5)",
+      'strokeColor' => "rgba(220,220,220,0.8)",
+      'highlightFill' => "rgba(220,220,220,0.75)",
+      'highlightStroke' => "rgba(220,220,220,1)",
+      'data' => $original_values
+    ),
+  );
+
+  drupal_add_js(
+    array(
+      'budget_chart' => array(
+        'options' => $chart_options,
+        'data' => array(
+          'labels' => $labels,
+          'datasets' => $datasets
+        ),
+      )
+    ),
+    'setting'
+  );
+
+  drupal_add_js(
+    'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js',
+    'external'
+  );
+
 }
