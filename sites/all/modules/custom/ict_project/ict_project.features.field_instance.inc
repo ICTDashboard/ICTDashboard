@@ -257,7 +257,7 @@ function ict_project_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 41,
+        'weight' => 47,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -266,7 +266,6 @@ function ict_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
-    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_government_entity_name',
     'label' => 'Government Entity Name',
@@ -279,7 +278,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 0,
+      'weight' => 3,
     ),
   );
 
@@ -459,7 +458,7 @@ function ict_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -547,7 +546,7 @@ function ict_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
