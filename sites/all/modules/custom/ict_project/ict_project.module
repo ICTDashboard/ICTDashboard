@@ -561,12 +561,13 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
 
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = FALSE;
 
-        // Updates allow edit only current financial year and previous ones
-        if ($item_year_value <= $cur_fin_year) {
-          // future expenditure
+        // future expenditure
+        if ($item_year_value == $cur_fin_year) {
           $future_expenditure = TRUE;
-          continue;
         }
+
+        // Updates allow edit only current financial year and previous ones
+        if ($item_year_value <= $cur_fin_year) continue;
 
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
       }
