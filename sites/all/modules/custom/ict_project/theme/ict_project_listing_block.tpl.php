@@ -94,7 +94,10 @@
                   </a>
 
                   <?php if (ict_project_access_project('delete', $user, $project->nid)) : ?>
-                    <a href="<?php print url('node/' . $project->nid . '/delete'); ?>">
+                    <a href="<?php print url('node/' . $project->nid . '/delete', array(
+                        'query' => array('destination' => 'projects')
+                      )
+                    ); ?>">
                       <span><?php print t('Delete Project'); ?></span>
                     </a>
                   <?php endif; ?>
@@ -134,7 +137,10 @@
                   <?php endif; ?>
 
                   <?php if (ict_update_delete_allowed($project->nid, $update_id)) : ?>
-                    <a href="<?php print url('node/' . $update_id .'/delete'); ?>">
+                    <a href="<?php print url('node/' . $update_id .'/delete', array(
+                        'query' => array('destination' => 'projects')
+                      )
+                    ); ?>">
                       <span><?php print t('Delete Update Draft'); ?></span>
                     </a>
                   <?php endif; ?>
