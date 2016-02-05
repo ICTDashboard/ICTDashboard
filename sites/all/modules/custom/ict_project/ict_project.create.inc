@@ -50,6 +50,15 @@ function ict_project_projects_create_form($form, &$form_state) {
     $departments_options[$entity->tid] = $entity->name;
   }
 
+  $form['#attached']['js'] = array(
+      drupal_get_path('theme', 'itdash') . '/js/combobox.js',
+      drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
+  );
+
+  $form['#attached']['css'] = array(
+      drupal_get_path('theme', 'itdash') . '/css/combobox.css',
+  );
+
   $form['field_department'] = array(
     '#type' => 'select',
     '#required' => TRUE,
@@ -66,6 +75,18 @@ function ict_project_projects_create_form($form, &$form_state) {
       $user->field_department[LANGUAGE_NONE][0]['tid']
     );
     $form['field_department']['#disabled'] = TRUE;
+  }
+
+  $department_tid = $user->field_department[LANGUAGE_NONE][0]['tid'];
+  $sql = db_select('users', 'u');
+  $sql->fields('u',array('uid','name','mail'));
+  $sql->fields('d',array('field_department_tid'));
+  $sql->innerJoin('field_data_field_department', 'd', 'd.entity_id = u.uid');
+  $sql->condition('d.field_department_tid', $department_tid);
+  $res =$sql->execute()->fetchAll();
+  $data_approvers_emails = [];
+    foreach ($res as $key => $value) {
+    $data_approvers_emails[$value->mail] = $value->mail;
   }
 
   if (isset($form_state['triggering_element']['#attributes']['data-delete']) &&
@@ -118,14 +139,15 @@ function ict_project_projects_create_form($form, &$form_state) {
       );
 
       $form['approvers']['email_item_' . $i]['email'] = array(
-        '#type' => 'textfield',
-        '#required' => FALSE,
-        '#title' => t('Data Approvers'),
-        '#attributes' => array(
-          'placeholder' => t('Please enter email address'),
-          'class' => array('approver-email')
-        ),
-        '#title_display' => 'invisible',
+          '#type' => 'select',
+          '#required' => TRUE,
+          '#title' => t('Data Approvers'),
+          '#attributes' => array(
+              'placeholder' => t('Please enter email address'),
+              'class' => array('ict-combobox')
+          ),
+          '#title_display' => 'invisible',
+          '#options' => $data_approvers_emails
       );
 
       $form['approvers']['email_item_' . $i]['remove_btn'] = array(
@@ -210,14 +232,15 @@ function ict_project_projects_create_form($form, &$form_state) {
       );
 
       $form['editors']['email_item_' . $i]['email'] = array(
-        '#type' => 'textfield',
-        '#required' => FALSE,
-        '#title' => t('Data Editor'),
-        '#attributes' => array(
-          'placeholder' => t('Please enter email address'),
-          'class' => array('editor-email')
-        ),
-        '#title_display' => 'invisible',
+          '#type' => 'select',
+          '#required' => TRUE,
+          '#title' => t('Data Approvers'),
+          '#attributes' => array(
+              'placeholder' => t('Please enter email address'),
+              'class' => array('ict-combobox')
+          ),
+          '#title_display' => 'invisible',
+          '#options' => $data_approvers_emails
       );
 
       $form['editors']['email_item_' . $i]['remove_btn'] = array(
