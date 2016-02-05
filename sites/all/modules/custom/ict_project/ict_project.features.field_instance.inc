@@ -492,7 +492,7 @@ function ict_project_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_predicted_project_benefit',
-    'label' => 'Financial Benefits',
+    'label' => 'Original Expected Financial Benefits',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -738,11 +738,11 @@ function ict_project_field_default_field_instances() {
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
   t('Demo Buttons');
   t('Department');
-  t('Financial Benefits');
   t('Government Entity Name');
   t('Government Implementation Partner/s');
   t('Original Approved Completion Date ');
   t('Original Approved Start Date');
+  t('Original Expected Financial Benefits');
   t('Portfolio Name');
   t('Programme Name');
   t('Project Budget By Financial Year ');
