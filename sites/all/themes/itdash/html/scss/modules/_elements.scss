@@ -1,5 +1,14 @@
 body,
 #content {
+  .welcome-text {
+    a {
+      color: #d5ff92;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+  }
   #inner-content {
     h3 {
       font-size: 18px;
@@ -230,6 +239,14 @@ body,
           border: none;
           color: #fff;
           text-decoration: underline;
+        }
+        .field-name-field-portfolio-name {
+          position: relative;
+          .ajax-progress-throbber {
+            position: absolute;
+            top: -30px;
+            left: 150px;
+          }
         }
       }
       .form-item {

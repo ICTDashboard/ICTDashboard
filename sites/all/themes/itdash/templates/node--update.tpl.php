@@ -1,5 +1,5 @@
 <div id="inner-content" class="wrap cf">
-  <h3><?php print t('Costs, Benefits and Schedules'); ?></h3>
+  <h3><?php print t('Schedule, Expenditures and Benefits'); ?></h3>
   <div class="project-draft-submission d-all">
     <div class="row">
       <div class="label">
@@ -18,6 +18,40 @@
           <p><?php print $value; ?></p>
         <?php endforeach; ?>
       </div>
+    </div>
+
+    <?php $field_start_date_info = field_info_instance('node', 'field_start_date', 'project');?>
+    <div class="row">
+      <div class="label">
+        <?php print $field_start_date_info['label']; ?>
+        <?php if (!empty($field_start_date_info['description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $field_start_date_info['description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        <?php print format_date(strtotime($project_node->field_start_date['und'][0]['value']), 'medium', 'j M Y'); ?></div>
+    </div>
+
+    <?php $field_original_completion_date_info = field_info_instance('node', 'field_original_completion_date', 'project');?>
+    <div class="row">
+      <div class="label">
+        <?php print $field_original_completion_date_info['label']; ?>
+        <?php if (!empty($field_original_completion_date_info['description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $field_original_completion_date_info['description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        <?php print format_date(strtotime($project_node->field_original_completion_date['und'][0]['value']), 'medium', 'j M Y'); ?></div>
     </div>
 
     <div class="row">
@@ -94,6 +128,9 @@
       </div>
     </div>
 
+
+
+
     <?php if (!empty($project_id)) : ?>
       <div class="row">
         <div class="label">
@@ -112,6 +149,24 @@
         </div>
       </div>
     <?php endif; ?>
+
+    <?php $field_predicted_project_benefit_info = field_info_instance('node', 'field_predicted_project_benefit', 'project');?>
+    <div class="row">
+      <div class="label">
+        <?php print $field_predicted_project_benefit_info['label']; ?>
+        <?php if (!empty($field_predicted_project_benefit_info['description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $field_predicted_project_benefit_info['description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        $<?php print number_format($project_node->field_predicted_project_benefit['und'][0]['value'], 2, '.', ''); ?>m
+      </div>
+    </div>
 
     <div class="row">
       <div class="label">

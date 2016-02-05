@@ -83,6 +83,7 @@ function ict_project_preprocess_node(&$vars) {
         'diff' => $vars['diff'],
       )
     );
+    $vars['project_node'] = node_load($vars['project_id']);
   }
   if ($vars['type'] == 'project') {
 
@@ -360,14 +361,50 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       $form['field_benefits_realised']['und']['#project_id'] = !empty($node->nid) ? $node->nid : NULL;
       $form['field_benefits_realised']['und']['add_more']['#value'] = t('Add another Benefit');
 
-      // portfolio options change
+
+      // portfolio and entity government options change
       $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
       $portfolios = taxonomy_get_tree($portfolio_vocab->vid, 0, 1);
       $portfolio_options = array();
       foreach ($portfolios as $entity) {
         $portfolio_options[$entity->tid] = $entity->name;
       }
+      // update government entity options
       $form['field_portfolio_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
+      $form['field_portfolio_name'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => 'ict_project_update_gov_entity_name',
+        'wrapper' => 'ict-form-government-entity-name',
+        'method' => 'replace',
+        'effect' => 'fade',
+      );
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#prefix'] = '<div id="ict-form-government-entity-name">';
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#suffix'] = '</div>';
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#title_display'] = 'invisible';
+      // if user has inputted portfolio
+      $inputed_portfolio = !empty($form_state['values']['field_portfolio_name'][LANGUAGE_NONE][0]['tid']) ?
+        $form_state['values']['field_portfolio_name'][LANGUAGE_NONE][0]['tid'] :
+        FALSE;
+      // if there is a default value
+      $portfolio_value = !empty($form['field_portfolio_name'][LANGUAGE_NONE]['#default_value']) ?
+        reset($form['field_portfolio_name'][LANGUAGE_NONE]['#default_value']) :
+        FALSE;
+      if ($inputed_portfolio || $portfolio_value) {
+        $current_portfolio = $inputed_portfolio ? $inputed_portfolio : $portfolio_value;
+        $portfolios = taxonomy_get_tree($portfolio_vocab->vid, $current_portfolio, 1);
+        $portfolio_options = array();
+        foreach ($portfolios as $entity) {
+          $portfolio_options[$entity->tid] = $entity->name;
+        }
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#disabled'] = FALSE;
+      }
+      else {
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#options'] = array();
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#disabled'] = TRUE;
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#default_value'] = TRUE;
+      }
+
+
       $form['field_implementation_partners'][LANGUAGE_NONE]['#options']['_none'] = t('Not Applicable');
 
       // alter actions
@@ -386,6 +423,7 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
   if ($form_id == 'node_delete_confirm') {
     global $theme;
     if ($theme = 'itdash') {
+      $form['actions']['cancel']['#href'] = url('projects');
       $form['#theme'] = 'ict_project_node_delete_form';
       $form['actions']['submit']['#attributes']['class'][] = 'submit-button';
       $form['actions']['cancel']['#attributes']['class'][] = 'export-btn';
@@ -448,25 +486,26 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
   if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']) && !$budget_rows) {
     // initial form render with no values
 
-    $items_count = 4;
-    $field_name = 'field_original_total_budget';
-    $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
+// 5 items by default. There were some issues therefore it was commented.drush
+//    $items_count = 4;
+//    $field_name = 'field_original_total_budget';
+//    $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
+//
+//    // Generate required number of fields collection
+//    if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+//      $budget_table_items['items_count'] = $items_count;
+//      $budget_table = field_multiple_value_form(
+//        $budget_table_items['field'],
+//        $budget_table_items['instance'],
+//        LANGUAGE_NONE,
+//        array(),
+//        $form,
+//        $form_state);
+//    }
+//    $budget_table_items['items_count']++;
+//    $budget_table['#after_build'] = 'field_form_element_after_build';
 
-    // Generate required number of fields collection
-    if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
-      $budget_table_items['items_count'] = $items_count;
-      $budget_table = field_multiple_value_form(
-        $budget_table_items['field'],
-        $budget_table_items['instance'],
-        LANGUAGE_NONE,
-        array(),
-        $form,
-        $form_state);
-    }
-    $budget_table_items['items_count']++;
-    $budget_table['#after_build'] = 'field_form_element_after_build';
-
-    $year = variable_get('ict_dashboard_project_start_year', 13);
+    $year = reset(explode('/', __ict_project_get_current_fin_year()));
     $start_year = $year;
     foreach (element_children($budget_table) as $item) {
       if ($item === 'add_more') continue;
@@ -498,7 +537,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
 
     if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
       // Generate required number of fields collection
-      if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+      if ($items_count >= 0 && $budget_table_items['items_count'] != $items_count) {
         $budget_table_items['items_count'] = $items_count;
         $budget_table = field_multiple_value_form(
           $budget_table_items['field'],
@@ -528,8 +567,8 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
       $last_row = end($budget_rows);
       if ($last_row['entity_type'] == 'update') {
         $default_values = $last_row['budget_items'];
-        $budget_table['#budget_rows'] = array($baseline_row);
       }
+      $budget_table['#budget_rows'] = array($baseline_row);
 
       $last_update = array();
       foreach ($default_values as $fin_year_value) {
@@ -541,7 +580,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
         $last_update[$fin_year] = $year_budget;
       }
 
-      $current_year = date('y');
+      $cur_fin_year = __ict_project_get_current_fin_year();
       $future_expenditure = FALSE;
       foreach (element_children($budget_table) as $item) {
         if (!is_numeric($item)) continue;
@@ -556,12 +595,17 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
           $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#default_value'] = $last_update[$item_year_value];
         }
 
-        $item_year = explode('/', $item_year_value);
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = FALSE;
-        if (reset($item_year) <= $current_year) continue;
+
+        // future expenditure
+        if ($item_year_value == $cur_fin_year) {
+          $future_expenditure = TRUE;
+        }
+
+        // Updates allow edit only current financial year and previous ones
+        if ($item_year_value <= $cur_fin_year) continue;
 
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
-        $future_expenditure = TRUE;
       }
 
       if ($future_expenditure) {
