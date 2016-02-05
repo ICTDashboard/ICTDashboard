@@ -361,14 +361,50 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       $form['field_benefits_realised']['und']['#project_id'] = !empty($node->nid) ? $node->nid : NULL;
       $form['field_benefits_realised']['und']['add_more']['#value'] = t('Add another Benefit');
 
-      // portfolio options change
+
+      // portfolio and entity government options change
       $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
       $portfolios = taxonomy_get_tree($portfolio_vocab->vid, 0, 1);
       $portfolio_options = array();
       foreach ($portfolios as $entity) {
         $portfolio_options[$entity->tid] = $entity->name;
       }
+      // update government entity options
       $form['field_portfolio_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
+      $form['field_portfolio_name'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => 'ict_project_update_gov_entity_name',
+        'wrapper' => 'ict-form-government-entity-name',
+        'method' => 'replace',
+        'effect' => 'fade',
+      );
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#prefix'] = '<div id="ict-form-government-entity-name">';
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#suffix'] = '</div>';
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#title_display'] = 'invisible';
+      // if user has inputted portfolio
+      $inputed_portfolio = !empty($form_state['values']['field_portfolio_name'][LANGUAGE_NONE][0]['tid']) ?
+        $form_state['values']['field_portfolio_name'][LANGUAGE_NONE][0]['tid'] :
+        FALSE;
+      // if there is a default value
+      $portfolio_value = !empty($form['field_portfolio_name'][LANGUAGE_NONE]['#default_value']) ?
+        reset($form['field_portfolio_name'][LANGUAGE_NONE]['#default_value']) :
+        FALSE;
+      if ($inputed_portfolio || $portfolio_value) {
+        $current_portfolio = $inputed_portfolio ? $inputed_portfolio : $portfolio_value;
+        $portfolios = taxonomy_get_tree($portfolio_vocab->vid, $current_portfolio, 1);
+        $portfolio_options = array();
+        foreach ($portfolios as $entity) {
+          $portfolio_options[$entity->tid] = $entity->name;
+        }
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#disabled'] = FALSE;
+      }
+      else {
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#options'] = array();
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#disabled'] = TRUE;
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#default_value'] = TRUE;
+      }
+
+
       $form['field_implementation_partners'][LANGUAGE_NONE]['#options']['_none'] = t('Not Applicable');
 
       // alter actions

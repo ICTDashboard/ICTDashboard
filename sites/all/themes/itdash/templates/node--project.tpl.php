@@ -10,6 +10,25 @@
 
     <div class="row">
       <div class="label">
+        <?php print $field_portfolio_name['meta']['#title']; ?>
+        <?php if (!empty($field_portfolio_name['meta']['#description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $field_portfolio_name['meta']['#description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        <?php foreach (_ict_project_baseline_get_simple_values($field_portfolio_name) as $value) : ?>
+          <p><?php print $value; ?></p>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
         <?php print $field_government_entity_name['meta']['#title']; ?>
         <?php if (!empty($field_government_entity_name['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
@@ -41,25 +60,6 @@
       </div>
       <div class="text">
         <?php foreach (_ict_project_baseline_get_simple_values($field_implementation_partners, TRUE) as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="label">
-        <?php print $field_portfolio_name['meta']['#title']; ?>
-        <?php if (!empty($field_portfolio_name['meta']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $field_portfolio_name['meta']['#description']; ?>
-            </span>
-          </a>
-        <?php endif; ?>
-      </div>
-      <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_portfolio_name) as $value) : ?>
           <p><?php print $value; ?></p>
         <?php endforeach; ?>
       </div>

@@ -7,6 +7,24 @@
   <h3><?php print t('Basic Project Information'); ?></h3>
   <div class="project-draft-submission d-all">
 
+
+    <div class="row">
+      <div class="label">
+        <?php print $form['field_portfolio_name']['#title']; ?>
+        <?php if (!empty($form['field_portfolio_name']['#description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $form['field_portfolio_name']['#description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        <?php print render($form['field_portfolio_name']); ?>
+      </div>
+    </div>
+
     <div class="row">
       <div class="label">
         <?php print $form['field_government_entity_name']['#title']; ?>
@@ -39,23 +57,6 @@
       </div>
       <div class="text">
         <?php print render($form['field_implementation_partners']); ?>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="label">
-        <?php print $form['field_portfolio_name']['#title']; ?>
-        <?php if (!empty($form['field_portfolio_name']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $form['field_portfolio_name']['#description']; ?>
-            </span>
-          </a>
-        <?php endif; ?>
-      </div>
-      <div class="text">
-        <?php print render($form['field_portfolio_name']); ?>
       </div>
     </div>
 
