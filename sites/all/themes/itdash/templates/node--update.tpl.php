@@ -122,29 +122,12 @@
               </span>
           </a>
         <?php endif; ?>
+        <?php print $preview_switch; ?>
       </div>
       <div class="text">
         <?php print $field_original_total_budget; ?>
       </div>
     </div>
-
-    <div class="row">
-      <div class="label">
-        <?php print t('Project Budget and Expenditure'); ?>
-        <?php if (!empty($form['field_original_total_budget']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print $form['field_original_total_budget']['#description']; ?>
-              </span>
-          </a>
-        <?php endif; ?>
-      </div>
-      <div class="text">
-        <?php print $field_original_total_budge_1; ?>
-      </div>
-    </div>
-
 
     <?php if (!empty($project_id)) : ?>
       <div class="row">

@@ -173,23 +173,6 @@
 
       <div class="row">
         <div class="label">
-          <?php print t('Project Budget By Financial Year'); ?>
-          <?php if (!empty($field_original_total_budget['meta']['#description'])) : ?>
-            <a href="javascript:void(0);" class="tooltip">
-              <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print $field_original_total_budget['meta']['#description']; ?>
-              </span>
-            </a>
-          <?php endif; ?>
-        </div>
-        <div class="text">
-          <?php print $field_original_total_budget; ?>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="label">
           <?php print $field_start_date['meta']['#title']; ?>
           <?php if (!empty($field_start_date['meta']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
@@ -228,20 +211,19 @@
 
       <div class="row">
         <div class="label">
-          <?php print $field_predicted_project_benefit['meta']['#title'] . ' <em>($m)</em>'; ?>
-          <?php if (!empty($field_predicted_project_benefit['meta']['#description'])) : ?>
+          <?php print t('Project Budget By Financial Year'); ?>
+          <?php if (!empty($field_original_total_budget['meta']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print $field_predicted_project_benefit['meta']['#description']; ?>
+                <?php print $field_original_total_budget['meta']['#description']; ?>
               </span>
             </a>
           <?php endif; ?>
+          <?php print $preview_switch; ?>
         </div>
         <div class="text">
-          <?php foreach (_ict_project_baseline_get_simple_values($field_predicted_project_benefit, FALSE, '$', 'm', TRUE) as $value) : ?>
-            <p><?php print $value; ?></p>
-          <?php endforeach; ?>
+          <?php print $field_original_total_budget; ?>
         </div>
       </div>
 
@@ -261,6 +243,26 @@
           <?php print theme('field_benefits_realised_table_view', array('project_id' => $nid)); ?>
         </div>
       </div>
+
+      <div class="row">
+        <div class="label">
+          <?php print $field_predicted_project_benefit['meta']['#title'] . ' <em>($m)</em>'; ?>
+          <?php if (!empty($field_predicted_project_benefit['meta']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $field_predicted_project_benefit['meta']['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+        </div>
+        <div class="text">
+          <?php foreach (_ict_project_baseline_get_simple_values($field_predicted_project_benefit, FALSE, '$', 'm', TRUE) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
     <?php endif; ?>
     <?php if (!empty($update_node)) : ?>
       <?php print drupal_render(node_view($update_node)); ?>
