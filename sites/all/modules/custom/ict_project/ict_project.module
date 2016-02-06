@@ -1555,11 +1555,18 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
   $vars['max_item'] = $max_item;
   $vars['delta_range'] = $delta_range;
 
+  $current_fin_year = __ict_project_get_current_fin_year();
+
   // chart labels
   $labels = array();
   foreach ($max_item['budget_items'] as $budget_item) {
     $fin_year = explode('/', $budget_item->field_year[LANGUAGE_NONE][0]['value']);
-    $labels[] = '20' . reset($fin_year) . '-' . end($fin_year);
+    $label = '20' . reset($fin_year) . '-' . end($fin_year);
+    $label =
+      $current_fin_year == $budget_item->field_year[LANGUAGE_NONE][0]['value'] ?
+        $label . '*' :
+        $label;
+    $labels[] = $label;
   }
 
   // chart values
