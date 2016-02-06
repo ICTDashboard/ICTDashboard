@@ -171,6 +171,11 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
       $prev_collection = $item->field_previous_collection->raw();
       $budget_table[$key]['field_previous_collection']['und']['#value'] = $prev_collection ? $prev_collection : $item_val['value'];
     }
+    if (!$items_count) {
+      $budget_table[0]['field_removed']['und'][0]['#default_value']['value'] = '';
+      $budget_table[0]['remove_button']['#prefix'] = '<div class="remove-wrap">';
+      $budget_table[0]['remove_button']['#suffix'] = '</div>';
+    }
   }
   else {
     _ict_update_edit_prepopulate_benefit($form, $form_state, $items);
