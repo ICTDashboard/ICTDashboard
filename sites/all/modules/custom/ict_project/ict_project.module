@@ -381,6 +381,8 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
 
       // project budget by financial year
       _ict_project_project_budget_by_year_form ($form, $form_state);
+      // project benefits
+      _ict_update_prepopulate_benefit($form, $form_state, array());
 
       // benefits table
       $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table_form';

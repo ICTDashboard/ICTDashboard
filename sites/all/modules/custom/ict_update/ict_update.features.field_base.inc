@@ -41,11 +41,9 @@ function ict_update_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_benefit_start_date'.
@@ -113,11 +111,9 @@ function ict_update_field_default_field_bases() {
     ),
     'locked' => 0,
     'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_current_financial_benefits'.
@@ -362,6 +358,7 @@ function ict_update_field_default_field_bases() {
         'no' => 'No',
         'on_track' => 'On Track',
         'at_risk' => 'At Risk',
+        'removed' => 'Removed',
       ),
       'allowed_values_function' => '',
     ),
