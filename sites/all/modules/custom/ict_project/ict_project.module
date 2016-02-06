@@ -95,6 +95,16 @@ function ict_project_preprocess_node(&$vars) {
       )
     );
 
+    // viz schedule
+    if ($vars['viz_preview']) {
+      $vars['project_schedule_status_viz'] = theme(
+        'project_schedule_status_viz', array(
+          'actual_level' => $vars['node']->field_actual_level_of_project_co[LANGUAGE_NONE][0]['value'],
+          'forecast_level' =>  $vars['node']->field_forecast_level_of_project_[LANGUAGE_NONE][0]['value'],
+        )
+      );
+    }
+
     $vars['project_node'] = node_load($vars['project_id']);
   }
   if ($vars['type'] == 'project') {
@@ -975,6 +985,10 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'field_original_total_budget_graph_view',
     ),
+    'project_schedule_status_viz' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'project_schedule_status_viz',
+    ),
   );
 }
 
@@ -1537,6 +1551,16 @@ function ict_project_preprocess_field_original_total_budget_table_view (&$vars) 
   $delta_range = range(0, $max_delta);
   $vars['max_item'] = $max_item;
   $vars['delta_range'] = $delta_range;
+}
+
+/**
+ * Implements hook_preprocess_template().
+ */
+function ict_project_preprocess_project_schedule_status_viz (&$vars) {
+  drupal_add_js(
+    'https://www.gstatic.com/charts/loader.js',
+    'external'
+  );
 }
 
 /**

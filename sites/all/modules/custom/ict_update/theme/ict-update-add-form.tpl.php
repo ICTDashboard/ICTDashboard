@@ -19,14 +19,14 @@
       <div class="text popup-radio"><?php print drupal_render($form['field_expected_completion_date']); ?></div>
     </div>
     <div class="row">
-      <div class="label"><?php print $form['field_forecast_level_of_project_']['und']['#title'] . ' <em>(%)</em>'; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The percentage of work forecasted to be completed at the current update.</span></a></div>
-      <div class="text"><?php print drupal_render($form['field_forecast_level_of_project_']); ?></div>
-    </div>
-    <div class="row">
       <div class="label"><?php print $form['field_actual_level_of_project_co']['und']['#title'] . ' <em>(%)</em>'; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The actual percentage of work completed at the current update.</span></a></div>
       <div class="text">
         <?php print drupal_render($form['field_actual_level_of_project_co']); ?>
       </div>
+    </div>
+    <div class="row">
+      <div class="label"><?php print $form['field_forecast_level_of_project_']['und']['#title'] . ' <em>(%)</em>'; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The percentage of work forecasted to be completed at the current update.</span></a></div>
+      <div class="text"><?php print drupal_render($form['field_forecast_level_of_project_']); ?></div>
     </div>
 
     <div class="row">
