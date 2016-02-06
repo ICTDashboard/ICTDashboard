@@ -145,8 +145,8 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
         array(),
         $form,
         $form_state);
+      $budget_table_items['items_count']++;
     }
-    $budget_table_items['items_count']++;
     $budget_table['#after_build'] = 'field_form_element_after_build';
 
     foreach ($items as $key => $item_val) {
@@ -200,6 +200,9 @@ function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = arr
         '#type' => 'hidden',
         '#value' => $form_state['values']['field_benefits_realised']['und'][$key]['current_item_id'],
       );
+    }
+    else {
+      $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
     }
   }
 }
