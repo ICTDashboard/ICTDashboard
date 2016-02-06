@@ -96,7 +96,7 @@ function ict_project_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         0 => array(
-          'vocabulary' => 'funding_source',
+          'vocabulary' => 'portfolio',
           'parent' => 0,
         ),
       ),

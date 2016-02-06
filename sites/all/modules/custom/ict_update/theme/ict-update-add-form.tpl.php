@@ -1,7 +1,7 @@
 <div id="inner-content" class="wrap cf">
   <div class="project-update-submission d-all">
     <?php print drupal_render(node_view($form['#project_node'], 'update')); ?>
-    <h3>Costs, Benefits and Schedules</h3>
+    <h3>Schedule, Expenditures and Benefits</h3>
     <div class="row">
       <div class="label"><?php print $form['field_project_stage']['und']['#title']; ?></div>
       <div class="text"><?php print drupal_render($form['field_project_stage']); ?></div>

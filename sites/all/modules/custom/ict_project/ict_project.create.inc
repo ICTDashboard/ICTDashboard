@@ -138,7 +138,7 @@ function ict_project_projects_create_form($form, &$form_state) {
       $form['approvers']['email_item_' . $i]['email'] = array(
         '#type' => 'textfield',
         '#required' => FALSE,
-        '#title' => t('Data Approvers'),
+        '#title' => t('Project Approvers'),
         '#attributes' => array(
           'placeholder' => t('Please enter email address'),
           'class' => array('approver-email')
@@ -230,7 +230,7 @@ function ict_project_projects_create_form($form, &$form_state) {
       $form['editors']['email_item_' . $i]['email'] = array(
         '#type' => 'textfield',
         '#required' => FALSE,
-        '#title' => t('Data Editor'),
+        '#title' => t('Project Editor'),
         '#attributes' => array(
           'placeholder' => t('Please enter email address'),
           'class' => array('editor-email')
@@ -363,23 +363,23 @@ function ict_project_create_form_validate($form, &$form_state) {
   }
 
   if (!$approver_emails) {
-    form_set_error('approvers', t('At least one Data Approver email is required.'));
+    form_set_error('approvers', t('At least one Project Approver email is required.'));
   }
 
   if (!$editor_emails) {
-    form_set_error('editors', t('At least one Data Editor email is required.'));
+    form_set_error('editors', t('At least one Project Editor email is required.'));
   }
 
   foreach ($approver_emails as $email) {
     if (valid_email_address($email) &&
       endsWith($email, '.gov.au')) continue;
-    form_set_error('editors', t('Data Approver email address should be valid and belonging to Australian government.'));
+    form_set_error('editors', t('Project Approver email address should be valid and belonging to Australian government.'));
   }
 
   foreach ($editor_emails as $email) {
     if (valid_email_address($email) &&
       endsWith($email, '.gov.au')) continue;
-    form_set_error('editors', t('Data Editor address should be valid be associated to Australian government.'));
+    form_set_error('editors', t('Project Editor address should be valid be associated to Australian government.'));
   }
 
   $form_state['approvers'] = $approver_emails;

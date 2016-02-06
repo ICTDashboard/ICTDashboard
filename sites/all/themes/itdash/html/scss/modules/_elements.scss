@@ -240,6 +240,14 @@ body,
           color: #fff;
           text-decoration: underline;
         }
+        .field-name-field-portfolio-name {
+          position: relative;
+          .ajax-progress-throbber {
+            position: absolute;
+            top: -30px;
+            left: 150px;
+          }
+        }
       }
       .form-item {
         float: none;
@@ -463,4 +471,29 @@ body,
 
 .sbOptions {
   z-index: 2;
+}
+
+#expenditure_legend {
+  overflow: hidden;
+  margin-bottom: 25px;
+  .bar-legend {
+    padding-left: 40px;
+    li {
+      float: left;
+      margin-right: 25px;
+      span {
+        margin-right: 7px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.preview_switch {
+  display: inline-block;
+  margin-left: 20px;
+  font-style: italic;
 }

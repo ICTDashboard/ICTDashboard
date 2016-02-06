@@ -506,10 +506,14 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
 
 function ict_project_budget_by_year_validate($form, &$form_state) {
   $budget_values = $form_state['values']['field_original_total_budget'][LANGUAGE_NONE];
+  $current_fin_year = __ict_project_get_current_fin_year();
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
       if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
         $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
+        if ($form['#node']->type == 'update' && $year != $current_fin_year) {
+          continue;
+        }
         form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
           '!year' => $year
         )));
@@ -520,13 +524,12 @@ function ict_project_budget_by_year_validate($form, &$form_state) {
 function ict_project_budget_by_year_preview_page_validate($node, &$errors) {
   $node_wrapper = entity_metadata_wrapper('node', $node);
   $budget_values = $node_wrapper->field_original_total_budget->value();
-  $current_year = date('y');
+  $current_fin_year = __ict_project_get_current_fin_year();
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
     if (empty($value->field_total[LANGUAGE_NONE][0]['value'])) {
       $year = $value->field_year[LANGUAGE_NONE][0]['value'];
-      $item_year = explode('/', $year);
-      if ($node->type == 'update' && reset($item_year) > $current_year) {
+      if ($node->type == 'update' && $year != $current_fin_year) {
         continue;
       }
       $errors[] = t(t('Field <em>Budget Value</em> is required for !year Financial Year', array(
@@ -534,4 +537,22 @@ function ict_project_budget_by_year_preview_page_validate($node, &$errors) {
       )));
     }
   }
+}
+
+/**
+ * Get current Financial Year
+ * @return string
+ */
+function __ict_project_get_current_fin_year () {
+  // current date
+  $current_date = new DateTime();
+
+  // get required current year values
+  $current_year_short = $current_date->format('y');
+  $current_year_long = $current_date->format('Y');
+
+  return
+    $current_date > new DateTime ($current_year_long . '-07-01 00:00:00') ?
+      $current_year_short . '/' . ($current_year_short + 1) :
+      ($current_year_short - 1) . '/' . $current_year_short;
 }

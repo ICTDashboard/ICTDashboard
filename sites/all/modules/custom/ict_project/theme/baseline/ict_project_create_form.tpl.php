@@ -4,7 +4,7 @@
 	</div>
 </div>
 <div id="inner-content" class="wrap cf">
-	<h2>Baseline Data</h2>
+	<h3><?php print t('Basic Project Information'); ?></h3>
 	<div class="project-update-submission d-all">
 		<form class="node-form node-project-form" action="/node/add/project" method="post" id="project-node-form" accept-charset="UTF-8">
 			<table>
@@ -47,7 +47,7 @@
 
 				<tr><td colspan="2"><div class="dotted-line"></div></td></tr>
 
-				<tr><td colspan="2"><h2>User Information</h2></td></tr>
+				<tr><td colspan="2"><h3>User Information</h3></td></tr>
 
         <tr>
           <td class="label">

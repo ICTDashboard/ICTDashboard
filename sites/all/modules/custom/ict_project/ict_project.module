@@ -35,9 +35,16 @@ function ict_project_ctools_plugin_directory($owner, $plugin_type) {
 }
 
 function ict_project_preprocess_node(&$vars) {
+  if (in_array($vars['type'], array('project', 'update'))) {
+    $viz_preview = !empty($_GET['viz']) ? TRUE : FALSE;
+    $viz_only = !user_is_logged_in();
+    $vars['viz_preview'] = $viz_only ? TRUE : $viz_preview;
+
+    $vars['preview_switch'] = __ict_project_get_preview_switch_button($viz_only, $vars['viz_preview']);
+  }
+
   if ($vars['type'] == 'update') {
     $node = $vars['node'];
-    $view_mode = $vars['view_mode'];
     $vars['project_id'] = $vars['field_project'][0]['target_id'];
 
     $vars['diff'] = array();
@@ -77,12 +84,18 @@ function ict_project_preprocess_node(&$vars) {
       $budget_items = array($baseline_row);
     }
 
+    $budget_table_theme = $vars['viz_preview'] ?
+      'field_original_total_budget_graph_view' :
+      'field_original_total_budget_table_view';
+
     $vars['field_original_total_budget'] = theme(
-      'field_original_total_budget_table_view', array(
+      $budget_table_theme, array(
         'rows' => $budget_items,
         'diff' => $vars['diff'],
       )
     );
+
+    $vars['project_node'] = node_load($vars['project_id']);
   }
   if ($vars['type'] == 'project') {
 
@@ -124,14 +137,6 @@ function ict_project_preprocess_node(&$vars) {
       return;
     }
 
-    $budget_items = _ict_project_prepare_budget_history($node->nid, 'view');
-    $vars['field_original_total_budget'] = theme(
-      'field_original_total_budget_table_view', array(
-        'rows' => $budget_items,
-        'diff' => $vars['diff'],
-      )
-    );
-
     if ($updates = ict_update_project_get_list($vars['nid'])) {
       $vars['project_updates_available'] = TRUE;
       $updates = ict_update_project_get_list($vars['nid'], 'draft');
@@ -155,6 +160,19 @@ function ict_project_preprocess_node(&$vars) {
         $vars['update_form'] = drupal_render($form);
       }
 
+    }
+    else {
+      $budget_items = _ict_project_prepare_budget_history($node->nid, 'view');
+      $budget_table_theme = $vars['viz_preview'] ?
+        'field_original_total_budget_graph_view' :
+        'field_original_total_budget_table_view';
+
+      $vars['field_original_total_budget'] = theme(
+        $budget_table_theme, array(
+          'rows' => $budget_items,
+          'diff' => $vars['diff'],
+        )
+      );
     }
 
     if (ict_project_access_project('approve', NULL, $vars['nid'])) {
@@ -360,14 +378,50 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       $form['field_benefits_realised']['und']['#project_id'] = !empty($node->nid) ? $node->nid : NULL;
       $form['field_benefits_realised']['und']['add_more']['#value'] = t('Add another Benefit');
 
-      // portfolio options change
+
+      // portfolio and entity government options change
       $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
       $portfolios = taxonomy_get_tree($portfolio_vocab->vid, 0, 1);
       $portfolio_options = array();
       foreach ($portfolios as $entity) {
         $portfolio_options[$entity->tid] = $entity->name;
       }
+      // update government entity options
       $form['field_portfolio_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
+      $form['field_portfolio_name'][LANGUAGE_NONE]['#ajax'] = array(
+        'callback' => 'ict_project_update_gov_entity_name',
+        'wrapper' => 'ict-form-government-entity-name',
+        'method' => 'replace',
+        'effect' => 'fade',
+      );
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#prefix'] = '<div id="ict-form-government-entity-name">';
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#suffix'] = '</div>';
+      $form['field_government_entity_name'][LANGUAGE_NONE]['#title_display'] = 'invisible';
+      // if user has inputted portfolio
+      $inputed_portfolio = !empty($form_state['values']['field_portfolio_name'][LANGUAGE_NONE][0]['tid']) ?
+        $form_state['values']['field_portfolio_name'][LANGUAGE_NONE][0]['tid'] :
+        FALSE;
+      // if there is a default value
+      $portfolio_value = !empty($form['field_portfolio_name'][LANGUAGE_NONE]['#default_value']) ?
+        reset($form['field_portfolio_name'][LANGUAGE_NONE]['#default_value']) :
+        FALSE;
+      if ($inputed_portfolio || $portfolio_value) {
+        $current_portfolio = $inputed_portfolio ? $inputed_portfolio : $portfolio_value;
+        $portfolios = taxonomy_get_tree($portfolio_vocab->vid, $current_portfolio, 1);
+        $portfolio_options = array();
+        foreach ($portfolios as $entity) {
+          $portfolio_options[$entity->tid] = $entity->name;
+        }
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#options'] = $portfolio_options;
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#disabled'] = FALSE;
+      }
+      else {
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#options'] = array();
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#disabled'] = TRUE;
+        $form['field_government_entity_name'][LANGUAGE_NONE]['#default_value'] = TRUE;
+      }
+
+
       $form['field_implementation_partners'][LANGUAGE_NONE]['#options']['_none'] = t('Not Applicable');
 
       // alter actions
@@ -386,6 +440,7 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
   if ($form_id == 'node_delete_confirm') {
     global $theme;
     if ($theme = 'itdash') {
+      $form['actions']['cancel']['#href'] = url('projects');
       $form['#theme'] = 'ict_project_node_delete_form';
       $form['actions']['submit']['#attributes']['class'][] = 'submit-button';
       $form['actions']['cancel']['#attributes']['class'][] = 'export-btn';
@@ -467,7 +522,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
 //    $budget_table_items['items_count']++;
 //    $budget_table['#after_build'] = 'field_form_element_after_build';
 
-    $year = variable_get('ict_dashboard_project_start_year', 13);
+    $year = reset(explode('/', __ict_project_get_current_fin_year()));
     $start_year = $year;
     foreach (element_children($budget_table) as $item) {
       if ($item === 'add_more') continue;
@@ -499,7 +554,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
 
     if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
       // Generate required number of fields collection
-      if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+      if ($items_count >= 0 && $budget_table_items['items_count'] != $items_count) {
         $budget_table_items['items_count'] = $items_count;
         $budget_table = field_multiple_value_form(
           $budget_table_items['field'],
@@ -529,8 +584,8 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
       $last_row = end($budget_rows);
       if ($last_row['entity_type'] == 'update') {
         $default_values = $last_row['budget_items'];
-        $budget_table['#budget_rows'] = array($baseline_row);
       }
+      $budget_table['#budget_rows'] = array($baseline_row);
 
       $last_update = array();
       foreach ($default_values as $fin_year_value) {
@@ -542,7 +597,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
         $last_update[$fin_year] = $year_budget;
       }
 
-      $current_year = date('y');
+      $cur_fin_year = __ict_project_get_current_fin_year();
       $future_expenditure = FALSE;
       foreach (element_children($budget_table) as $item) {
         if (!is_numeric($item)) continue;
@@ -557,12 +612,17 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
           $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#default_value'] = $last_update[$item_year_value];
         }
 
-        $item_year = explode('/', $item_year_value);
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = FALSE;
-        if (reset($item_year) <= $current_year) continue;
+
+        // future expenditure
+        if ($item_year_value == $cur_fin_year) {
+          $future_expenditure = TRUE;
+        }
+
+        // Updates allow edit only current financial year and previous ones
+        if ($item_year_value <= $cur_fin_year) continue;
 
         $budget_table[$item]['field_total'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
-        $future_expenditure = TRUE;
       }
 
       if ($future_expenditure) {
@@ -910,6 +970,10 @@ function ict_project_theme () {
     'field_original_total_budget_table_view' => array(
       'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'field_original_total_budget_table_view',
+    ),
+    'field_original_total_budget_graph_view' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'field_original_total_budget_graph_view',
     ),
   );
 }
@@ -1458,6 +1522,9 @@ function ict_project_review_project_submission($form, &$form_state) {
   }
 }
 
+/**
+ * Implements hook_preprocess_template().
+ */
 function ict_project_preprocess_field_original_total_budget_table_view (&$vars) {
   $rows = $vars['rows'];
   $max_columns = 0;
@@ -1470,4 +1537,166 @@ function ict_project_preprocess_field_original_total_budget_table_view (&$vars) 
   $delta_range = range(0, $max_delta);
   $vars['max_item'] = $max_item;
   $vars['delta_range'] = $delta_range;
+}
+
+/**
+ * Implements hook_preprocess_template().
+ */
+function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) {
+  $rows = $vars['rows'];
+  $max_columns = 0;
+  foreach ($rows as $item) {
+    if ($item['count'] <= $max_columns) continue;
+    $max_columns = $item['count'];
+    $max_item = $item;
+  }
+  $max_delta = $max_columns - 1;
+  $delta_range = range(0, $max_delta);
+  $vars['max_item'] = $max_item;
+  $vars['delta_range'] = $delta_range;
+
+  $current_fin_year = __ict_project_get_current_fin_year();
+
+  // chart labels
+  $labels = array();
+  foreach ($max_item['budget_items'] as $budget_item) {
+    $fin_year = explode('/', $budget_item->field_year[LANGUAGE_NONE][0]['value']);
+    $label = '20' . reset($fin_year) . '-' . end($fin_year);
+    $label =
+      $current_fin_year == $budget_item->field_year[LANGUAGE_NONE][0]['value'] ?
+        $label . '*' :
+        $label;
+    $labels[] = $label;
+  }
+
+  // chart values
+  $original_values = array();
+  $original_row = reset($rows);
+  foreach ($original_row['budget_items'] as $budget_item) {
+    $original_values[] = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
+      (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
+      (float)0;
+  }
+
+  $update_values = array();
+  // if updated provided
+  if (count($rows) > 1) {
+    // chart values
+    $update_row = end($rows);
+    foreach ($update_row['budget_items'] as $budget_item) {
+      $update_values[] = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
+        (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
+        (float)0;
+    }
+  }
+  else {
+    foreach ($original_row['budget_items'] as $budget_item) {
+      $update_values[] = (float)0;
+    }
+  }
+
+  $chart_options = array(
+    'responsive' => TRUE,
+    'scaleLabel' => "$<%=value%>m",
+    'scaleBeginAtZero' => TRUE,
+    'scaleLineColor' => "#1e2635",
+    'scaleFontFamily' => "'Open Sans', sans-serif",
+    'scaleFontSize' => 13,
+    'scaleFontStyle' =>  "normal",
+    'scaleFontColor' => "#202b3d",
+    'scaleShowGridLines' => TRUE,
+    'scaleGridLineColor' => "#f0f4fa",
+    'scaleGridLineWidth' => 1,
+    'scaleShowHorizontalLines' => TRUE,
+    'scaleShowVerticalLines' => FALSE,
+    'barShowStroke' => FALSE,
+    'barStrokeWidth' => 1,
+    'barValueSpacing' => 20,
+    'barDatasetSpacing' => 1,
+    'legendTemplate' => "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+    'tooltipFillColor' => "#f9fbfe",
+    'tooltipFontFamily' => "'Open Sans', sans-serif",
+    'tooltipFontSize' =>  13,
+    'tooltipFontStyle' => "Bold",
+    'tooltipFontColor' => "#202b3d",
+    'tooltipTitleFontFamily' => "'Open Sans', sans-serif",
+    'tooltipTitleFontSize' => 14,
+    'tooltipTitleFontStyle' => "normal",
+    'tooltipTitleFontColor' => "#202b3d",
+    'tooltipYPadding' => 6,
+    'tooltipXPadding' => 6,
+    'tooltipCaretSize' => 8,
+    'tooltipCornerRadius' => 6,
+    'tooltipXOffset' => 1,
+    'multiTooltipTemplate' => "$<%= value %>m",
+  );
+
+  $datasets = array(
+    array(
+      'label' => 'Spent to Date ($m)',
+      'fillColor' => "#5c46a4",
+      'strokeColor' => "#5c46a4",
+      'highlightFill' => "#5c46a4",
+      'highlightStroke' => "#5c46a4",
+      'data' => $update_values
+    ),
+    array(
+      'label' => 'Total Budget ($m)',
+      'fillColor' => "#f1b525",
+      'strokeColor' => "#f1b525",
+      'highlightFill' => "#f1b525",
+      'highlightStroke' => "#f1b525",
+      'data' => $original_values
+    ),
+  );
+
+  drupal_add_js(
+    array(
+      'budget_chart' => array(
+        'options' => $chart_options,
+        'data' => array(
+          'labels' => $labels,
+          'datasets' => $datasets
+        ),
+      )
+    ),
+    'setting'
+  );
+
+  drupal_add_js(
+    'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js',
+    'external'
+  );
+}
+
+/**
+ * Return preview switch button
+ *
+ * @param $viz_only
+ * @param $viz_preview
+ * @return string
+ */
+function __ict_project_get_preview_switch_button($viz_only, $viz_preview) {
+  if ($viz_only) {
+    return '';
+  }
+
+  if (!$viz_preview) {
+    return l(
+      t('Switch to Viz Preview'),
+      current_path(),
+      array(
+        'query' => array('viz' => 1),
+        'attributes' => array('class' => array('preview_switch'))
+      )
+    );
+  }
+
+  return l(
+    t('Switch to Data Preview'),
+    current_path(),
+    array(
+      'attributes' => array('class' => array('preview_switch'))
+    )
+  );
 }

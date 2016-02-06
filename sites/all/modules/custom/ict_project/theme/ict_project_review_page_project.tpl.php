@@ -4,7 +4,6 @@
   </div>
 </div>
 <div id="inner-content" class="wrap cf">
-  <h2><?php print t('Baseline Data');?></h2>
   <div class="project-view info d-all project-update-submission">
       <table>
         <tbody>
