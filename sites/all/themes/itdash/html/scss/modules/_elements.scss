@@ -325,13 +325,36 @@ body,
 #content .project-draft-submission table#financial-benefits,
 #content .project-update-submission table#financial-benefits {
   border: 0;
+  border-collapse: collapse;
   td {
     border-bottom: 1px solid #abb6cb;
     border-top: 0;
+    .sbHolder,
+    textarea,
+    .grippie {
+      max-width: none;
+      border: 0;
+    }
   }
   th {
+    padding: 0;
+    @include border-radius(0);
+    border-bottom: 1px solid #abb6cb;
     .label {
       color: white;
+    }
+  }
+  tr {
+    &:first-child {
+      th {
+        @include border-radius(4px 0 0);
+      }
+      td {
+        border-top: 1px solid #abb6cb;
+      }
+    }
+    &:last-child th {
+      @include border-radius(0 0 0 4px);
     }
   }
   label {
@@ -350,6 +373,9 @@ body,
   }
   .row-blue td{
     background-color: #dff1f5;
+    textarea {
+      background-color: #dff1f5;
+    }
   }
   .sbHolder {
     background-color: transparent;
@@ -366,16 +392,52 @@ body,
   .date-no-float {
     width: 100%;
   }
+  .last-benefit-row {
+    border-bottom: 2px solid #abb6cb;
+  }
   td.table-remove-button {
-    background-color: transparent;
+    //background-color: transparent;
+    a,
     input {
       background-color: transparent;
       color: #0d6c88;
       border: 0;
-      border-bottom: 1px dotted;
       padding: 0;
+      text-decoration: none;
     }
-    border: 0;
+    .history-button,
+    .remove-wrap {
+      position: relative;
+      padding-left: 20px;
+      display: inline-block;
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 13px;
+        @include sprite-icon(remove-icon-normal);
+      }
+      &:hover {
+        input {
+          text-decoration: underline;
+        }
+        &:before {
+          @include sprite-icon(remove-icon-hover);
+        }
+      }
+    }
+    .history-button {
+      &:before {
+        top: 5px;
+        @include sprite-icon(history-icon);
+      }
+      &:hover {
+        &:before {
+          @include sprite-icon(history-icon);
+        }
+      }
+    }
+    //border: 0;
   }
   .ict-tick {
     display: inline-block;

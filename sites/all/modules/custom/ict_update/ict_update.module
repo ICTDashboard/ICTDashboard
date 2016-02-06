@@ -62,11 +62,16 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $last_project_revision_updates = end($entity_list);
     if(empty($last_project_revision_updates)) {
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $project->field_original_completion_date[LANGUAGE_NONE][0]['value'];
+      _ict_update_prepopulate_benefit($form, $form_state, $project->field_benefits_realised['und']);
     }
     else {
       $last_update = node_load(end($last_project_revision_updates));
+      _ict_update_prepopulate_benefit($form, $form_state, $last_update->field_benefits_realised['und']);
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_expected_completion_date[LANGUAGE_NONE][0]['value'];
     }
+  }
+  else {
+    _ict_update_edit_prepopulate_benefit($form, $form_state);
   }
   $form['field_expected_completion_date']['und'][0]['#theme_wrappers'] = array();
   $form['field_expected_completion_date']['und'][0]['#attributes'] = array('class' => array('radio_datepicker'));
@@ -120,6 +125,78 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
   );
+}
+
+function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
+
+  $budget_table = &$form['field_benefits_realised'][LANGUAGE_NONE];
+  if (!$form_state['submitted']) {
+    $items_count = count($items);
+    $field_name = 'field_benefits_realised';
+    $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
+
+    // Generate required number of fields collection
+    if ($items_count > 1 && $budget_table_items['items_count'] != $items_count) {
+      $budget_table_items['items_count'] = $items_count;
+      $budget_table = field_multiple_value_form(
+        $budget_table_items['field'],
+        $budget_table_items['instance'],
+        LANGUAGE_NONE,
+        array(),
+        $form,
+        $form_state);
+    }
+    $budget_table_items['items_count']++;
+    $budget_table['#after_build'] = 'field_form_element_after_build';
+
+    foreach ($items as $key => $item_val) {
+      $item = entity_metadata_wrapper('field_collection_item', $item_val['value']);
+      $budget_table[$key]['current_item_id'] = array(
+        '#type' => 'hidden',
+        '#value' => $item->item_id->raw(),
+      );
+      $budget_table[$key]['field_commentary']['und'][0]['value']['#default_value'] = $item->field_commentary->value();
+      $budget_table[$key]['field_status']['und']['#default_value'] = $item->field_status->raw();
+      $budget_table[$key]['field_benefit']['und'][0]['value']['#default_value'] = $item->field_benefit->value();
+      $budget_table[$key]['field_benefit_start_date']['und'][0]['#default_value']['value'] = $item->field_benefit_start_date->value();
+      $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = $item->field_removed->value();
+      $budget_table[$key]['field_end_date']['und'][0]['#default_value']['value'] = $item->field_end_date->value();
+      $budget_table[$key]['field_financial']['und']['#default_value'] = $item->field_financial->value();
+      $budget_table[$key]['remove_button']['#access'] = FALSE;
+      $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
+      $budget_table[$key]['remove_button']['#suffix'] = '</div>';
+      $budget_table[$key]['history_button'] = array(
+        '#markup' => '<div class="history-button"><a href="#" class="fancybox-benefit-history">' . t('History') . '</a></div>'
+      );
+      $prev_collection = $item->field_previous_collection->raw();
+      $budget_table[$key]['field_previous_collection']['und']['#value'] = $prev_collection ? $prev_collection : $item_val['value'];
+    }
+  }
+  else {
+    _ict_update_edit_prepopulate_benefit($form, $form_state, $items);
+  }
+}
+function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = array()) {
+  $budget_table = &$form['field_benefits_realised'][LANGUAGE_NONE];
+  foreach(element_children($budget_table) as $key) {
+    if (!is_numeric($key)) continue;
+    $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
+    $budget_table[$key]['remove_button']['#suffix'] = '</div>';
+    $budget_table[$key]['history_button'] = '';
+    if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['field_previous_collection']['und'][0]['target_id'])
+     || !empty($budget_table[$key]['field_previous_collection']['und']['#default_value'])) {
+      $budget_table[$key]['remove_button']['#access'] = FALSE;
+      $budget_table[$key]['history_button'] = array(
+        '#markup' => '<div class="history-button"><a href="#" class="fancybox-benefit-history">' . t('History') . '</a></div>'
+      );
+    }
+    if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['current_item_id'])) {
+      $budget_table[$key]['current_item_id'] = array(
+        '#type' => 'hidden',
+        '#value' => $form_state['values']['field_benefits_realised']['und'][$key]['current_item_id'],
+      );
+    }
+  }
 }
 
 function ict_update_benefits_realised_validate($form, &$form_state) {
@@ -574,6 +651,7 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
   }
   $nid = $form['#update_id'];
   $node = node_load($nid);
+  $node_wrapper = entity_metadata_wrapper('node', $node);
   if (ict_project_get_workflow_state($nid) != 'approved') {
     $node->revision = TRUE;
     node_save($node);
@@ -587,6 +665,13 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
           'name' => $acc['name'],
           'title' => $project->title,
         ));
+      }
+    }
+    $benefits_wrapper = $node_wrapper->field_benefits_realised;
+    foreach($benefits_wrapper as $key => $val) {
+      if ($val->field_status->raw() == 'removed') {
+        $val->field_removed = REQUEST_TIME;
+        $val->save();
       }
     }
   }
@@ -634,16 +719,20 @@ function template_preprocess_field_benefits_realised_table_form(&$vars) {
 
   $vars['element']['add_more']['#attributes']['class'][] = 'export-btn';
 
-  $project_id = $vars['element']['#project_id'];
-  $benefits = array();
-  if ($project_id) {
-    $benefits = _ict_update_load_history_collections($project_id);
-    $last_entity = end($benefits);
-    if (ict_project_get_workflow_state($last_entity['id']) != 'approved') {
-      array_pop($benefits);
+  $table = &$vars['element'];
+  foreach(element_children($table) as $key) {
+    if (!is_numeric($key)) continue;
+    if (!empty($table[$key]['current_item_id']['#value'])) {
+      $item_wrap = entity_metadata_wrapper('field_collection_item', $table[$key]['current_item_id']['#value']);
+      $archived = $item_wrap->field_removed->value();
+      if (!empty($archived)) {
+        $table[$key]['#archived_benefit'] = $archived;
+        $benefit = $table[$key];
+        unset($table[$key]);
+        array_unshift($table, $benefit);
+      }
     }
   }
-  $vars['benefits'] = $benefits;
 }
 
 function template_preprocess_field_benefits_realised_table_view(&$vars) {
