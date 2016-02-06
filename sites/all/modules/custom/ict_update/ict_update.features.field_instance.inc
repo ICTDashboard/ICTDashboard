@@ -23,7 +23,7 @@ function ict_update_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 7,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -39,9 +39,9 @@ function ict_update_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 0,
     ),
   );
@@ -85,7 +85,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'j M Y - g:i:sa',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 1,
@@ -110,7 +110,7 @@ function ict_update_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 8,
       ),
     ),
     'ds_extras_field_template' => '',
@@ -126,9 +126,9 @@ function ict_update_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'rows' => 5,
       ),
-      'type' => 'text_textfield',
+      'type' => 'text_textarea',
       'weight' => 2,
     ),
   );
@@ -172,7 +172,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'm/d/Y - H:i:s',
+        'input_format' => 'j M Y - g:i:sa',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 1,
@@ -526,7 +526,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'd/m/Y - H:i:s',
+        'input_format' => 'j M Y - g:i:sa',
         'input_format_custom' => '',
         'label_position' => 'none',
         'no_fieldset' => 1,
@@ -820,8 +820,8 @@ function ict_update_field_default_field_instances() {
   t('Forecast Level of Project Completion');
   t('Project');
   t('Project Budget By Financial Year ');
-  t('Project revision');
   t('Project Stage');
+  t('Project revision');
   t('Spend To Date By Financial Year ($m)');
   t('Start date');
   t('Status');
