@@ -936,3 +936,23 @@ function ict_update_node_access($node, $op, $account) {
 
   return NODE_ACCESS_IGNORE;
 }
+
+function ict_update_get_actual_benefits($project_id) {
+  $entity_list = ict_update_get_allowed_entity_list($project_id);
+  $last_project_revision_updates = end($entity_list);
+  if(empty($last_project_revision_updates)) {
+    $project_wrap = entity_metadata_wrapper('node', $project_id);
+    $benefits = $project_wrap->field_benefits_realised->value();
+  }
+  else {
+    $last_update = entity_metadata_wrapper('node', end($last_project_revision_updates));
+    $benefits = $last_update->field_benefits_realised->value();
+  }
+  foreach($benefits as $key => $val) {
+    if ($val->field_removed['und'][0]['value']) {
+      unset($benefits[$key]);
+    }
+  }
+
+  return $benefits;
+}
