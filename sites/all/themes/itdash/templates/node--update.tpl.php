@@ -149,6 +149,18 @@
       </div>
     </div>
 
+    <?php if ($viz_preview) : ?>
+      <div class="row">
+        <div class="label">
+          <?php print t('Project Benefits Status'); ?>
+          <?php print $preview_switch; ?>
+        </div>
+        <div class="text">
+          <?php print $project_benefits_pie_chart; ?>
+        </div>
+      </div>
+    <?php endif; ?>
+
     <?php if (!empty($project_id)) : ?>
       <div class="row">
         <div class="label">

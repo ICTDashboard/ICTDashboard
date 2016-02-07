@@ -103,6 +103,13 @@ function ict_project_preprocess_node(&$vars) {
           'forecast_level' =>  $vars['node']->field_forecast_level_of_project_[LANGUAGE_NONE][0]['value'],
         )
       );
+
+      $vars['project_benefits_pie_chart'] = theme(
+        'project_benefits_pie_chart',
+        array(
+          'benefits' => ict_update_get_actual_benefits($project_id),
+        )
+      );
     }
 
     $vars['project_node'] = node_load($vars['project_id']);
@@ -991,6 +998,10 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'project_schedule_status_viz',
     ),
+    'project_benefits_pie_chart' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'project_benefits_pie_chart',
+    ),
   );
 }
 
@@ -1558,6 +1569,74 @@ function ict_project_preprocess_field_original_total_budget_table_view (&$vars) 
 /**
  * Implements hook_preprocess_template().
  */
+function ict_project_preprocess_project_benefits_pie_chart (&$vars) {
+  $status_field_info = field_info_field('field_status');
+  $field_options = list_allowed_values($status_field_info);
+
+  $benefits = $vars['benefits'];
+  $processed_benefits = array();
+  $benefit_counter = 0;
+  foreach ($benefits as $benefit) {
+    if (empty($benefit->field_status[LANGUAGE_NONE][0]['value'])) continue;
+
+    $status = $benefit->field_status[LANGUAGE_NONE][0]['value'];
+    $benefit_counter++;
+
+    if (!isset($processed_benefits[$status])) {
+      $processed_benefits[$status] = array(
+        'label' => $field_options[$status],
+        'counter' => 1
+      );
+      continue;
+    }
+    $processed_benefits[$status]['counter']++;
+  }
+
+  $legend_colours = __ict_project_get_benefit_status_colors();
+
+  $chart_legend = array();
+  $chart_items = array();
+  $slices_settings = array();
+  foreach ($processed_benefits as $status => $item) {
+    $percentage =round($item['counter']*100/$benefit_counter, 1);
+
+    $chart_items[] = array(
+      $item['label'],
+      $item['counter'],
+    );
+
+    $slices_settings[] = array(
+      'color' => $legend_colours[$status]
+    );
+
+    $chart_legend[] = array(
+      'label' => $item['label'],
+      'number' => $item['counter'],
+      'percentage' => $percentage,
+      'color' => $legend_colours[$status]
+    );
+  }
+
+  drupal_add_js(
+    array(
+      'benefits_pie_chart' => array(
+        'legend_items' => $chart_legend,
+        'chart_items' => $chart_items,
+        'slices_settings' => $slices_settings
+      )
+    ),
+    'setting'
+  );
+
+  drupal_add_js(
+    'https://www.gstatic.com/charts/loader.js',
+    'external'
+  );
+}
+
+/**
+ * Implements hook_preprocess_template().
+ */
 function ict_project_preprocess_project_schedule_status_viz (&$vars) {
   drupal_add_js(
     'https://www.gstatic.com/charts/loader.js',
@@ -1724,5 +1803,18 @@ function __ict_project_get_preview_switch_button($viz_only, $viz_preview) {
     array(
       'attributes' => array('class' => array('preview_switch'))
     )
+  );
+}
+
+/**
+ * Benefit Status colors
+ * @return array
+ */
+function __ict_project_get_benefit_status_colors() {
+  return array(
+    'yes' => '#1b56af',
+    'no' => '#c42656',
+    'on_track' => '#1fd063',
+    'at_risk' => '#f6d000'
   );
 }

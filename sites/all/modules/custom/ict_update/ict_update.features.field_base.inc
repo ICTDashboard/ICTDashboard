@@ -354,8 +354,8 @@ function ict_update_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'yes' => 'Yes',
-        'no' => 'No',
+        'yes' => 'Realised',
+        'no' => 'Not Realised',
         'on_track' => 'On Track',
         'at_risk' => 'At Risk',
         'removed' => 'Removed',
