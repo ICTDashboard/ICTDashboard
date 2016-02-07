@@ -88,7 +88,7 @@ body,
     font-size: 14px;
     .row {
       margin-bottom: 15px;
-      overflow: hidden;
+      @include clearfix;
       .label {
         font-weight: 700;
         color: #202b3d;
