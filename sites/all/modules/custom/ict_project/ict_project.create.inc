@@ -113,7 +113,7 @@ function ict_project_projects_create_form($form, &$form_state) {
   $sql->innerJoin('field_data_field_department', 'd', 'd.entity_id = u.uid');
   $sql->condition('d.field_department_tid', $department_tid);
   $res =$sql->execute()->fetchAll();
-  $data_approvers_emails = [];
+  $data_approvers_emails = array();
     foreach ($res as $key => $value) {
     $data_approvers_emails[$value->mail] = $value->mail;
   }
