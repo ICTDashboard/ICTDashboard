@@ -162,7 +162,7 @@ Drupal.behaviors.initSelectbox = {
 		jQuery('.field-multiple-drag', context).remove();
 		jQuery('table[id^="field-implementation-partners-values"] tr th', context).attr('colspan', 1);
 
-		jQuery('.form-select:not([multiple="multiple"])', context).selectbox();
+		jQuery('.form-select:not([multiple="multiple"],.ict-combobox)', context).selectbox();
 		jQuery('.form-select[disabled="disabled"]', context).selectbox("disable");
 		jQuery('.field_implementation_partners-delta-order', context).selectbox();
 	}

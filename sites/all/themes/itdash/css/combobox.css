@@ -1,0 +1,60 @@
+.custom-combobox {
+    position: relative;
+    display: inline-block;
+}
+.custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+}
+.custom-combobox-input {
+    margin: 0;
+    padding: 5px 10px;
+}
+
+span.custom-combobox input{
+    width: 100%;
+    border: solid 1px #b3bdcf;
+    border-radius: 4px;
+}
+
+span.custom-combobox {
+    width: 100%;
+}
+
+span.custom-combobox input.custom-combobox-input.ui-autocomplete-input:focus {
+    border: 1px solid #B3BDCF;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+}
+
+.ui-widget-content{
+    padding: 0 7px;
+}
+.ui-widget-content li {
+    border-bottom: dotted 1px #515151;
+    display: block;
+    outline: none;
+    padding: 7px 0 7px 3px;
+}
+.ui-widget-content li:last-child {
+    border-bottom: none;
+}
+
+.ui-widget-content li:hover a,
+.ui-widget-content a:hover {
+    color: #0d6c88;
+    background: none!important;
+    border: none;
+}
+.ui-widget-content .ui-state-focus{
+    border:none;
+    background: none;
+}
+
+.email-container.form-wrapper {
+    margin-bottom: 15px;
+}
