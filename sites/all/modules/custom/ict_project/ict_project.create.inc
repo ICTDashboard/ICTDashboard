@@ -396,12 +396,12 @@ function ict_project_create_form_validate($form, &$form_state) {
     return (substr($haystack, -$length) === $needle);
   }
 
-  foreach ($values['approvers'] as $key => $approver) {
+  foreach ($values['emails']['approvers'] as $key => $approver) {
     if ($key == 'add_approver' || !$approver['email']) continue;
     $approver_emails[] = $approver['email'];
   }
 
-  foreach ($values['editors'] as $key => $editor) {
+  foreach ($values['emails']['editors'] as $key => $editor) {
     if ($key == 'add_editor' || !$editor['email']) continue;
     $editor_emails[] = $editor['email'];
   }
