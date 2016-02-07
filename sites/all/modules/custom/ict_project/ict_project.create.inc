@@ -6,8 +6,11 @@
 
 
 function ict_project_update_gov_entity_name($form, &$form_state) {
-
   return $form['field_government_entity_name'];
+}
+
+function ict_project_update_email_options($form, &$form_state) {
+  return $form['emails'];
 }
 /**
  * Project create form
@@ -82,7 +85,13 @@ function ict_project_projects_create_form($form, &$form_state) {
     '#required' => TRUE,
     '#title' => t('Department'),
     '#title_display' => 'invisible',
-    '#options' => $departments_options
+    '#options' => $departments_options,
+    '#ajax' => array(
+      'callback' => 'ict_project_update_email_options',
+      'wrapper' => 'ict-project-create-emails',
+      'method' => 'replace',
+      'effect' => 'fade',
+    ),
   );
 
   // if Departmental Admin the department is selected by default
@@ -95,7 +104,9 @@ function ict_project_projects_create_form($form, &$form_state) {
     $form['field_department']['#disabled'] = TRUE;
   }
 
-  $department_tid = $user->field_department[LANGUAGE_NONE][0]['tid'];
+  $department_tid = !empty($form_state['input']['field_department']) ?
+    $form_state['input']['field_department'] :
+    $form['field_department']['#value'];
   $sql = db_select('users', 'u');
   $sql->fields('u',array('uid','name','mail'));
   $sql->fields('d',array('field_department_tid'));
@@ -135,13 +146,21 @@ function ict_project_projects_create_form($form, &$form_state) {
     $form_state['storage']['approvers'] +=1;
   }
   elseif (isset($form_state['storage']['approvers'])) {
-    $form_state['storage']['approvers'] = $form_state['storage']['approvers'];
+    $form_state['storage']['approvers'] = $form_state['storage']['approvers'] ?
+      $form_state['storage']['approvers'] :
+      1;
   }
   else {
     $form_state['storage']['approvers'] = 1;
   }
 
-  $form['approvers'] = array(
+  $form['emails'] = array(
+    '#type' => 'container',
+    '#tree' => TRUE,
+    '#theme' => 'ict_project_create_emails'
+  );
+
+  $form['emails']['approvers'] = array(
     '#type' => 'container',
     '#tree' => TRUE,
     '#prefix' => '<div id="approvers">',
@@ -150,13 +169,13 @@ function ict_project_projects_create_form($form, &$form_state) {
 
   if ($form_state['storage']['approvers']) {
     for ($i = 1; $i <= $form_state['storage']['approvers']; $i++) {
-      $form['approvers']['email_item_' . $i] = array(
+      $form['emails']['approvers']['email_item_' . $i] = array(
         '#type' => 'container',
         '#tree' => TRUE,
         '#attributes' => array('class' => array('email-container'))
       );
 
-      $form['approvers']['email_item_' . $i]['email'] = array(
+      $form['emails']['approvers']['email_item_' . $i]['email'] = array(
           '#type' => 'select',
           '#required' => TRUE,
           '#title' => t('Project Approvers'),
@@ -168,7 +187,7 @@ function ict_project_projects_create_form($form, &$form_state) {
           '#options' => $data_approvers_emails
       );
 
-      $form['approvers']['email_item_' . $i]['remove_btn'] = array(
+      $form['emails']['approvers']['email_item_' . $i]['remove_btn'] = array(
         '#type' => 'button',
         '#value' => t('Remove'),
         '#href' => '',
@@ -188,7 +207,7 @@ function ict_project_projects_create_form($form, &$form_state) {
     }
   }
 
-  $form['approvers']['add_approver'] = array(
+  $form['emails']['approvers']['add_approver'] = array(
     '#type' => 'button',
     '#value' => t('Add Approver'),
     '#href' => '',
@@ -228,13 +247,15 @@ function ict_project_projects_create_form($form, &$form_state) {
     $form_state['storage']['editors']++;
   }
   elseif (!empty($form_state['storage']['editors'])) {
-    $form_state['storage']['editors'] = $form_state['storage']['editors'];
+    $form_state['storage']['editors'] = $form_state['storage']['editors'] ?
+      $form_state['storage']['editors'] :
+      1;
   }
   else {
     $form_state['storage']['editors'] = 1;
   }
 
-  $form['editors'] = array(
+  $form['emails']['editors'] = array(
     '#type' => 'container',
     '#tree' => TRUE,
     '#prefix' => '<div id="editors">',
@@ -243,13 +264,13 @@ function ict_project_projects_create_form($form, &$form_state) {
 
   if ($form_state['storage']['editors']) {
     for ($i = 1; $i <= $form_state['storage']['editors']; $i++) {
-      $form['editors']['email_item_' . $i] = array(
+      $form['emails']['editors']['email_item_' . $i] = array(
         '#type' => 'container',
         '#tree' => TRUE,
         '#attributes' => array('class' => array('email-container'))
       );
 
-      $form['editors']['email_item_' . $i]['email'] = array(
+      $form['emails']['editors']['email_item_' . $i]['email'] = array(
           '#type' => 'select',
           '#required' => TRUE,
           '#title' => t('Project Editor'),
@@ -261,7 +282,7 @@ function ict_project_projects_create_form($form, &$form_state) {
           '#options' => $data_approvers_emails
       );
 
-      $form['editors']['email_item_' . $i]['remove_btn'] = array(
+      $form['emails']['editors']['email_item_' . $i]['remove_btn'] = array(
         '#type' => 'button',
         '#value' => t('Remove'),
         '#button_type' => 'button',
@@ -280,7 +301,7 @@ function ict_project_projects_create_form($form, &$form_state) {
     }
   }
 
-  $form['editors']['add_editor'] = array(
+  $form['emails']['editors']['add_editor'] = array(
     '#type' => 'button',
     '#value' => t('Add Editor'),
     '#href' => '',

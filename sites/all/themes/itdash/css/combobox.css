@@ -24,6 +24,10 @@ span.custom-combobox {
     width: 100%;
 }
 
+span.custom-combobox .sbToggle {
+    cursor: pointer;
+}
+
 span.custom-combobox input.custom-combobox-input.ui-autocomplete-input:focus {
     border: 1px solid #B3BDCF;
     border-radius: 4px;
@@ -33,6 +37,8 @@ span.custom-combobox input.custom-combobox-input.ui-autocomplete-input:focus {
 
 .ui-widget-content{
     padding: 0 7px;
+    position: absolute !important;
+    top: 16px !important;
 }
 .ui-widget-content li {
     border-bottom: dotted 1px #515151;

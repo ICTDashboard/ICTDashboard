@@ -1002,6 +1002,11 @@ function ict_project_theme () {
       'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
       'template' => 'project_benefits_pie_chart',
     ),
+    'ict_project_create_emails' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'ict_project_create_emails',
+      'render element' => 'element'
+    ),
   );
 }
 

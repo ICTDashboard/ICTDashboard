@@ -61,34 +61,8 @@
             ?>
           </td>
         </tr>
-
-				<tr>
-					<td class="label">
-						<?php
-						print t('Data Approvers');
-						?>
-					</td>
-					<td class="text">
-						<?php
-						print render($form['approvers']);
-						?>
-					</td>
-				</tr>
-
-				<tr>
-					<td class="label">
-						<?php
-						print t('Data Editors');
-						?>
-					</td>
-					<td class="text">
-						<?php
-						print render($form['editors']);
-						?>
-					</td>
-				</tr>
-
 			</table>
+			<?php print render($form['emails']); ?>
       <div style="display:none;">
         <?php
         print drupal_render_children($form);

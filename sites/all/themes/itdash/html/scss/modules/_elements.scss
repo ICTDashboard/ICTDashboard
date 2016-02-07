@@ -329,6 +329,15 @@ body,
   .sbHolder {
     max-width: 100% !important;
   }
+  .form-item-field-department,
+  .form-item-field-portfolio-name {
+    position: relative;
+    .ajax-progress-throbber {
+      position: absolute;
+      top: 6px;
+      right: -110px;
+    }
+  }
 }
 
 #content .project-draft-submission table#financial-benefits,
