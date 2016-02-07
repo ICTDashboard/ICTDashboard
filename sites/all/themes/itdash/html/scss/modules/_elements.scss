@@ -22,6 +22,7 @@ body,
     font-size: 14px;
     .row {
       margin-bottom: 15px;
+      overflow: hidden;
       .label {
         font-weight: 700;
         color: #202b3d;
@@ -479,6 +480,7 @@ body,
   .bar-legend {
     padding-left: 40px;
     li {
+      line-height: 20px;
       float: left;
       margin-right: 25px;
       span {
@@ -493,6 +495,15 @@ body,
   &#schedule_legend {
     .bar-legend {
       padding-left: 2px;
+    }
+  }
+  &#benefits_legend {
+    .bar-legend {
+      li {
+        float: none;
+        font-weight: bold;
+        margin-bottom: 25px;
+      }
     }
   }
 }
