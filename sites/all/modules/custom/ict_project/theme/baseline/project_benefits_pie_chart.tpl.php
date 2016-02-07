@@ -1,7 +1,9 @@
-<div id="benefits_chart_div" style="float:left; width: 100%; max-width: 325px;"></div>
-<div class="legend" id="benefits_legend">
-  <ul class="bar-legend">
-  </ul>
+<div style="overflow: hidden;">
+  <div id="benefits_chart_div" style="float:left; width: 100%; max-width: 325px;"></div>
+  <div class="legend" id="benefits_legend">
+    <ul class="bar-legend">
+    </ul>
+  </div>
 </div>
 <script>
   (function ($) {
