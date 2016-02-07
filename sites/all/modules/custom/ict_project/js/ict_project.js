@@ -76,3 +76,10 @@
 
   });
 })(jQuery);
+
+
+Drupal.behaviors.addCombobox = {
+    attach: function(context) {
+        jQuery( ".ict-combobox" ).combobox();
+    }
+}
