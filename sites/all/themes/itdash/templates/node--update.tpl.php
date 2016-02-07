@@ -163,6 +163,7 @@
 
     <?php if (!empty($project_id)) : ?>
       <div class="row">
+        <?php if (!$viz_preview) : ?>
         <div class="label">
           <?php print t('Benefits Realised'); ?>
           <?php print $preview_switch; ?>
@@ -175,8 +176,13 @@
             </a>
           <?php endif; ?>
         </div>
+        <?php endif; ?>
         <div class="text">
-          <?php print theme('field_benefits_realised_table_view', array('project_id' => $project_id)); ?>
+          <?php print theme('field_benefits_realised_table_view', array(
+            'project_id' => $project_id,
+            'diff' => $diff,
+            'viz' => $viz_preview,
+          )); ?>
         </div>
       </div>
     <?php endif; ?>

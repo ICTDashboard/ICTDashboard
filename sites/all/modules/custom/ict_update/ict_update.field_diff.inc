@@ -54,13 +54,29 @@ function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $updat
   );
 
   $project = node_load($project_id, $prev_vid);
+  $project_wrap = entity_metadata_wrapper('node', $project);
   $update = node_load($update_id);
+  $update_wrap = entity_metadata_wrapper('node', $update);
 
   $diff = array();
   foreach($field_list as $key => $val) {
     if ($update->{$key}['und'][0][$val] != $project->{$key}['und'][0][$val]) {
       $diff[] = $key;
     }
+  }
+
+  $prev_financial = $project_wrap->field_original_total_budget->value();
+  $last_financial = $update_wrap->field_original_total_budget->value();
+  $diff_financial = ict_field_diff_compare_financial_year($prev_financial, $last_financial);
+  if (!empty($diff_financial)) {
+    $diff['field_original_total_budget'] = $diff_financial;
+  }
+
+  $prev_benefit = $project_wrap->field_benefits_realised->value();
+  $last_benefit = $update_wrap->field_benefits_realised->value();
+  $diff_benefits = ict_field_diff_compare_benefits($prev_benefit, $last_benefit);
+  if (!empty($diff_benefits)) {
+    $diff['field_benefits_realised'] = $diff_benefits;
   }
 
   return $diff;
@@ -96,6 +112,13 @@ function ict_field_diff_compare_update_update($project_id, $prev_update_id, $las
     $diff['field_original_total_budget'] = $diff_financial;
   }
 
+  $prev_benefit = $prev_update_wrapper->field_benefits_realised->value();
+  $last_benefit = $last_update_wrapper->field_benefits_realised->value();
+  $diff_benefits = ict_field_diff_compare_benefits($prev_benefit, $last_benefit);
+  if (!empty($diff_benefits)) {
+    $diff['field_benefits_realised'] = $diff_benefits;
+  }
+
   return $diff;
 }
 
@@ -114,4 +137,36 @@ function ict_field_diff_compare_financial_year($prev, $last) {
   }
 
   return $diff_year;
+}
+
+function ict_field_diff_compare_benefits($prev, $last) {
+  $field_list = array(
+    'field_status' => 'value',
+    'field_benefit_start_date' => 'value',
+    'field_end_date' => 'value',
+    'field_financial' => 'value',
+    'field_benefit' => 'value',
+    'field_commentary' => 'value',
+  );
+  $diff = array();
+
+  foreach($last as $last_benefit) {
+    if (empty($last_benefit->field_previous_collection['und'][0]['target_id'])) continue;
+    if ($last_benefit->field_removed['und'][0]['value'] == 'removed') continue;
+    $diff[$last_benefit->item_id] = array();
+    foreach($prev as $key => $prev_benefit) {
+      if ($last_benefit->field_previous_collection['und'][0]['target_id'] == $prev_benefit->field_previous_collection['und'][0]['target_id']
+       || $last_benefit->field_previous_collection['und'][0]['target_id'] == $prev_benefit->item_id) {
+        unset($prev[$key]);
+        foreach($field_list as $field_key => $field_val) {
+          if ($prev_benefit->{$field_key}['und'][0][$field_val] != $last_benefit->{$field_key}['und'][0][$field_val]) {
+            $diff[$last_benefit->item_id][$field_key] = $field_key;
+          }
+        }
+        break;
+      }
+    }
+  }
+
+  return $diff;
 }
