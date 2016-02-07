@@ -745,11 +745,8 @@ function template_preprocess_field_benefits_realised_table_form(&$vars) {
 
 function template_preprocess_field_benefits_realised_table_view(&$vars) {
   $project_id = $vars['project_id'];
-  $benefits = array();
-  if ($project_id) {
-    $benefits = _ict_update_load_history_collections($project_id);
-  }
-  $vars['benefits'] = $benefits;
+
+  $vars['benefits'] = ict_update_get_actual_benefits($project_id);
 }
 
 function _ict_update_load_history_collections($project_id) {

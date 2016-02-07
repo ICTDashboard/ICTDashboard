@@ -153,6 +153,7 @@
       <div class="row">
         <div class="label">
           <?php print t('Benefits Realised'); ?>
+          <?php print $preview_switch; ?>
           <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
