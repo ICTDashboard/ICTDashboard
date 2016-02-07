@@ -73,43 +73,63 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="label">
-        <?php print $field_forecast_level_of_project_['meta']['#title']; ?>
-        <?php if (!empty($field_forecast_level_of_project_['meta']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $field_forecast_level_of_project_['meta']['#description']; ?>
-            </span>
-          </a>
-        <?php endif; ?>
+    <?php if (!$viz_preview) : ?>
+      <div class="row">
+        <div class="label">
+          <?php print $field_actual_level_of_project_co['meta']['#title']; ?>
+          <?php if (!empty($field_actual_level_of_project_co['meta']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $field_actual_level_of_project_co['meta']['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+          <?php print $preview_switch; ?>
+        </div>
+        <div class="text">
+          <?php foreach (_ict_project_baseline_get_simple_values($field_actual_level_of_project_co, FALSE, '', '%') as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        </div>
       </div>
-      <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_forecast_level_of_project_, FALSE, '', '%') as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="label">
-        <?php print $field_actual_level_of_project_co['meta']['#title']; ?>
-        <?php if (!empty($field_actual_level_of_project_co['meta']['#description'])) : ?>
+      <div class="row">
+        <div class="label">
+          <?php print $field_forecast_level_of_project_['meta']['#title']; ?>
+          <?php if (!empty($field_forecast_level_of_project_['meta']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $field_forecast_level_of_project_['meta']['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+          <?php print $preview_switch; ?>
+        </div>
+        <div class="text">
+          <?php foreach (_ict_project_baseline_get_simple_values($field_forecast_level_of_project_, FALSE, '', '%') as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    <?php else : ?>
+      <div class="row">
+        <div class="label">
+          <?php print t('Project Schedule Status'); ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
-              <?php print $field_actual_level_of_project_co['meta']['#description']; ?>
+              <?php print t('The actual percentage of work completed at the current update and the percentage of work forecasted to be completed at the current update.'); ?>
             </span>
           </a>
-        <?php endif; ?>
+          <?php print $preview_switch; ?>
+        </div>
+        <div class="text">
+          <?php print $project_schedule_status_viz; ?>
+        </div>
       </div>
-      <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_actual_level_of_project_co, FALSE, '', '%') as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
-      </div>
-    </div>
+    <?php endif; ?>
 
     <div class="row">
       <div class="label">

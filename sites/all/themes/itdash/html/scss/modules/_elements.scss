@@ -473,7 +473,7 @@ body,
   z-index: 2;
 }
 
-#expenditure_legend {
+.legend {
   overflow: hidden;
   margin-bottom: 25px;
   .bar-legend {
@@ -490,10 +490,15 @@ body,
       }
     }
   }
+  &#schedule_legend {
+    .bar-legend {
+      padding-left: 2px;
+    }
+  }
 }
 
 .preview_switch {
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 10px;
   font-style: italic;
 }
