@@ -75,11 +75,12 @@
     }
 
   });
-})(jQuery);
 
-
-Drupal.behaviors.addCombobox = {
-    attach: function(context) {
-        jQuery( ".ict-combobox" ).combobox();
+    if (typeof $().combobox != 'undefined') {
+        Drupal.behaviors.addCombobox = {
+            attach: function (context) {
+                $(".ict-combobox").combobox();
+            }
+        };
     }
-}
+})(jQuery);
