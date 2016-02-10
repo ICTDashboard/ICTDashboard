@@ -16,13 +16,80 @@ body,
       font-weight: 600;
     }
   }
+  .ict-benefits {
+    max-width: 812px;
+    border: 1px solid #d8dee9;
+    .node-faq-item {
+      &.row-blue {
+        background-color: #dff1f5;
+      }
+      .ict-faq-question {
+        position: relative;
+        padding: 10px 155px 10px 50px;
+        &:before {
+          left: 10px;
+          top: 10px;
+        }
+        h4 {
+          margin: 0;
+          font-size: 16px;
+        }
+      }
+      .ict-faq-answer {
+        padding-top: 0;
+        padding-left: 50px;
+        ul {
+          list-style: none;
+          padding:0;
+          margin:0;
+          margin-top: -2px;
+          li {
+            padding-left: 18px;
+            line-height: 22px;
+            position: relative;
+            &:before {
+                position: absolute;
+                content: "• ";
+                color: #17716b;
+                left: -2px;
+                font-size: 24px;
+            }
+            .label {
+              padding: 0;
+              display: inline-block;
+              min-width: 98px;
+            }
+            .benefit {
+              display: inline-block;
+            }
+          }
+        }
+      }
+      .benfit-status {
+        position: absolute;
+        top: 12px;
+        right: 0px;
+        width: 140px;
+        color: black;
+        .status-marker {
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          line-height: 54px;
+          vertical-align: sub;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
   .ict-fancy-content,
   .project-draft-submission,
   .project-update-submission {
     font-size: 14px;
     .row {
       margin-bottom: 15px;
-      overflow: hidden;
+      //@include clearfix;
+      
       .label {
         font-weight: 700;
         color: #202b3d;
@@ -328,6 +395,15 @@ body,
   }
   .sbHolder {
     max-width: 100% !important;
+  }
+  .form-item-field-department,
+  .form-item-field-portfolio-name {
+    position: relative;
+    .ajax-progress-throbber {
+      position: absolute;
+      top: 6px;
+      right: -110px;
+    }
   }
 }
 
