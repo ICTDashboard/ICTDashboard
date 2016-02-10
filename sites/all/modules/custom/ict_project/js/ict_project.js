@@ -80,6 +80,8 @@
 
 Drupal.behaviors.addCombobox = {
     attach: function(context) {
-        jQuery( ".ict-combobox" ).combobox();
+        if (typeof jQuery.fn.combobox != 'undefined') {
+            jQuery( ".ict-combobox" ).combobox();
+        }
     }
 }

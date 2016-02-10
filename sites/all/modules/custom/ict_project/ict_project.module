@@ -154,9 +154,16 @@ function ict_project_preprocess_node(&$vars) {
       return;
     }
 
-    if ($updates = ict_update_project_get_list($vars['nid'])) {
+    $updates = ict_update_project_get_list($vars['nid']);
+    $allowed_states = ict_project_allowed_view_states($vars['nid']);
+    $update_id = reset($updates);
+    $update_state = ict_project_get_workflow_state($update_id);
+    if (!in_array($update_state, $allowed_states)) {
+      // Unset last update if user has not access to this
+      array_shift($updates);
+    }
+    if ($updates) {
       $vars['project_updates_available'] = TRUE;
-      $updates = ict_update_project_get_list($vars['nid'], 'draft');
       $update_id = reset($updates);
       $update = node_load($update_id);
       $vars['update_node'] = $update;
