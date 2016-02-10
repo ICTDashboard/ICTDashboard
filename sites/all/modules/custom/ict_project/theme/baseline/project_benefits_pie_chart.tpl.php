@@ -8,15 +8,12 @@
 <script>
   (function ($) {
     $(document).ready(function () {
-
-//      google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
         var data_items = Drupal.settings.benefits_pie_chart.chart_items,
             slices_settings = Drupal.settings.benefits_pie_chart.slices_settings,
             legend_items = Drupal.settings.benefits_pie_chart.legend_items;
-
 
         data_items.unshift(['Status', 'Percentage']);
 

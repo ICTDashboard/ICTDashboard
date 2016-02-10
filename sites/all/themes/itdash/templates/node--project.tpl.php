@@ -227,18 +227,33 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="label">
-          <?php print t('Top Benefits'); ?>
-          <?php if (!empty($field_benefits_realised['meta']['#description'])) : ?>
-            <a href="javascript:void(0);" class="tooltip">
-              <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $field_benefits_realised['meta']['#description']; ?>
-            </span>
-            </a>
-          <?php endif; ?>
+      <?php if ($viz_preview) : ?>
+        <div class="row">
+          <div class="label">
+            <?php print t('Project Benefits Status'); ?>
+            <?php print $preview_switch; ?>
+          </div>
+          <div class="text">
+            <?php print $project_benefits_pie_chart; ?>
+          </div>
         </div>
+      <?php endif; ?>
+
+      <div class="row">
+        <?php if (!$viz_preview) : ?>
+          <div class="label">
+            <?php print t('Benefits Realised'); ?>
+            <?php print $preview_switch; ?>
+            <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
+              <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+                <span class="tooltip-content">
+                  <?php print $form['field_benefits_realised']['#description']; ?>
+                </span>
+              </a>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
         <div class="text">
           <?php print theme('field_benefits_realised_table_view', array('project_id' => $nid)); ?>
         </div>

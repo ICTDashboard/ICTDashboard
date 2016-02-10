@@ -8,8 +8,6 @@
 <script>
   (function ($) {
     $(document).ready(function () {
-
-      google.charts.load('current', {packages: ['corechart', 'bar']});
       google.charts.setOnLoadCallback(drawBasic);
 
       function drawBasic() {
