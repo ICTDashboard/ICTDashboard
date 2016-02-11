@@ -15,8 +15,6 @@ $diff = !empty($diff['field_benefits_realised']) ? $diff['field_benefits_realise
       <h4>
         <?php if (!empty($diff[$benefit->item_id]['field_benefit'])) : ?>
           <?php print itdash_edited_tooltip_render($diff[$benefit->item_id]['field_benefit']); ?>
-        <?php elseif (!empty($diff[$benefit->item_id])) : ?>
-          <?php print itdash_edited_tooltip_render(); ?>
         <?php endif; ?>
         <?php print $benefit_wrap->field_benefit->value(); ?>
       </h4>
