@@ -61,7 +61,7 @@ function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $updat
   $diff = array();
   foreach($field_list as $key => $val) {
     if ($update->{$key}['und'][0][$val] != $project->{$key}['und'][0][$val]) {
-      $diff[] = $key;
+      $diff[$key] = $project_wrap->{$key}->value();
     }
   }
 
@@ -101,7 +101,7 @@ function ict_field_diff_compare_update_update($project_id, $prev_update_id, $las
   $diff = array();
   foreach($field_list as $key => $val) {
     if ($prev_update->{$key}['und'][0][$val] != $last_update->{$key}['und'][0][$val]) {
-      $diff[] = $key;
+      $diff[$key] = $prev_update_wrapper->{$key}->value();
     }
   }
 
@@ -128,11 +128,11 @@ function ict_field_diff_compare_financial_year($prev, $last) {
   for ($i = 0; max(count($prev), count($last)) > $i; $i++) {
     if (!empty($prev[$i]->field_year['und'][0]['value']) && !empty($last[$i]->field_year['und'][0]['value'])
         && $prev[$i]->field_year['und'][0]['value'] != $last[$i]->field_year['und'][0]['value']) {
-      $diff_year[$last[$i]->field_year['und'][0]['value']] = $last[$i]->field_total['und'][0]['value'];
+      $diff_year[$last[$i]->field_year['und'][0]['value']] = $prev[$i]->field_total['und'][0]['value'];
     }
     if (!empty($prev[$i]->field_total['und'][0]['value']) && !empty($last[$i]->field_total['und'][0]['value'])
       && $prev[$i]->field_total['und'][0]['value'] != $last[$i]->field_total['und'][0]['value']) {
-      $diff_year[$last[$i]->field_year['und'][0]['value']] = $last[$i]->field_total['und'][0]['value'];
+      $diff_year[$last[$i]->field_year['und'][0]['value']] = $prev[$i]->field_total['und'][0]['value'];
     }
   }
 
@@ -158,9 +158,10 @@ function ict_field_diff_compare_benefits($prev, $last) {
       if ($last_benefit->field_previous_collection['und'][0]['target_id'] == $prev_benefit->field_previous_collection['und'][0]['target_id']
        || $last_benefit->field_previous_collection['und'][0]['target_id'] == $prev_benefit->item_id) {
         unset($prev[$key]);
+        $prev_benefit_wrap = entity_metadata_wrapper('field_collection_item', $prev_benefit);
         foreach($field_list as $field_key => $field_val) {
           if ($prev_benefit->{$field_key}['und'][0][$field_val] != $last_benefit->{$field_key}['und'][0][$field_val]) {
-            $diff[$last_benefit->item_id][$field_key] = $field_key;
+            $diff[$last_benefit->item_id][$field_key] = $prev_benefit_wrap->{$field_key}->label() ? $prev_benefit_wrap->{$field_key}->label() : $prev_benefit_wrap->{$field_key}->value();
           }
         }
         break;

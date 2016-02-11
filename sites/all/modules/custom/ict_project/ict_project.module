@@ -73,9 +73,8 @@ function ict_project_preprocess_node(&$vars) {
           $field_info['description'] :
           FALSE;
         $value['meta']['#title'] = $field_info['label'];
-        if (in_array($var_name, $vars['diff'])) {
+        if (isset($vars['diff'][$var_name])) {
           $value['meta']['#changed'] = TRUE;
-          $value['meta']['#title'] .= '<span>*</span>';
         }
       }
     }
@@ -144,9 +143,8 @@ function ict_project_preprocess_node(&$vars) {
           $field_info['description'] :
           FALSE;
         $value['meta']['#title'] = $field_info['label'];
-        if (in_array($var_name, $vars['diff'])) {
+        if (isset($vars['diff'][$var_name])) {
           $value['meta']['#changed'] = TRUE;
-          $value['meta']['#title'] .= '<span>*</span>';
         }
       }
     }

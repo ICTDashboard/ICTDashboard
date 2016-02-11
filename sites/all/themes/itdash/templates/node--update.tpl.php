@@ -1,8 +1,12 @@
+<?php if ($viz_preview) { $diff = array(); } ?>
 <div id="inner-content" class="wrap cf">
   <h3><?php print t('Schedule, Expenditures and Benefits'); ?></h3>
   <div class="project-draft-submission d-all">
     <div class="row">
       <div class="label">
+        <?php if (!empty($diff['field_project_stage'])) : ?>
+          <?php print itdash_edited_tooltip_render($diff['field_project_stage']->name); ?>
+        <?php endif; ?>
         <?php print $field_project_stage['meta']['#title']; ?>
         <?php if (!empty($field_project_stage['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
@@ -56,6 +60,9 @@
 
     <div class="row">
       <div class="label">
+        <?php if (!empty($diff['field_expected_completion_date'])) : ?>
+          <?php print itdash_edited_tooltip_render(format_date($diff['field_expected_completion_date'], 'medium', 'd M Y')); ?>
+        <?php endif; ?>
         <?php print $field_expected_completion_date['meta']['#title']; ?>
         <?php if (!empty($field_expected_completion_date['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
@@ -76,6 +83,9 @@
     <?php if (!$viz_preview) : ?>
       <div class="row">
         <div class="label">
+          <?php if (!empty($diff['field_actual_level_of_project_co'])) : ?>
+            <?php print itdash_edited_tooltip_render($diff['field_actual_level_of_project_co'], '', '%'); ?>
+          <?php endif; ?>
           <?php print $field_actual_level_of_project_co['meta']['#title']; ?>
           <?php if (!empty($field_actual_level_of_project_co['meta']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
@@ -96,6 +106,9 @@
 
       <div class="row">
         <div class="label">
+          <?php if (!empty($diff['field_forecast_level_of_project_'])) : ?>
+            <?php print itdash_edited_tooltip_render($diff['field_forecast_level_of_project_'], '', '%'); ?>
+          <?php endif; ?>
           <?php print $field_forecast_level_of_project_['meta']['#title']; ?>
           <?php if (!empty($field_forecast_level_of_project_['meta']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
@@ -207,6 +220,9 @@
 
     <div class="row">
       <div class="label">
+        <?php if (!empty($diff['field_current_financial_benefits'])) : ?>
+          <?php print itdash_edited_tooltip_render(number_format($diff['field_current_financial_benefits'], 2, '.', ''), '$', 'm'); ?>
+        <?php endif; ?>
         <?php print $field_current_financial_benefits['meta']['#title']; ?>
         <?php if (!empty($field_current_financial_benefits['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
@@ -226,6 +242,9 @@
 
     <div class="row">
       <div class="label">
+        <?php if (!empty($diff['field_estimated_value_of_benefit'])) : ?>
+          <?php print itdash_edited_tooltip_render(number_format($diff['field_estimated_value_of_benefit'], 2, '.', ''), '$', 'm'); ?>
+        <?php endif; ?>
         <?php print $field_estimated_value_of_benefit['meta']['#title']; ?>
         <?php if (!empty($field_estimated_value_of_benefit['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
@@ -245,6 +264,9 @@
 
     <div class="row">
       <div class="label">
+        <?php if (!empty($diff['field_entity_comments'])) : ?>
+          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']); ?>
+        <?php endif; ?>
         <?php print $field_entity_comments['meta']['#title']; ?>
         <?php if (!empty($field_entity_comments['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">

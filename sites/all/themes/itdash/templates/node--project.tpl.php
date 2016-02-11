@@ -1,3 +1,4 @@
+<?php if ($viz_preview) { $diff = array(); } ?>
 <div class="page-title dotbg">
   <div class="inner-title-content wrap cf">
     <h1><?php print $title; ?></h1>
@@ -154,6 +155,9 @@
 
       <div class="row">
         <div class="label">
+          <?php if (!empty($diff['field_project_stage'])) : ?>
+            <?php print itdash_edited_tooltip_render($diff['field_project_stage']->name); ?>
+          <?php endif; ?>
           <?php print $field_project_stage['meta']['#title']; ?>
           <?php if (!empty($field_project_stage['meta']['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
@@ -284,7 +288,7 @@
     <?php endif; ?>
 
     <?php if (!empty($diff)) : ?>
-      <p><em><?php print t('* - fields that was updated.'); ?></em></p>
+      <p><em><?php print itdash_edited_tooltip_render() . ' - ' . t('fields that was updated.'); ?></em></p>
     <?php endif; ?>
 
     <?php if (isset($update_form)) : ?>

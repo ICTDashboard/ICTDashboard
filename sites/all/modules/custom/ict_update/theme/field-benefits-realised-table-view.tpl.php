@@ -13,36 +13,50 @@ $diff = !empty($diff['field_benefits_realised']) ? $diff['field_benefits_realise
   <div class="node-faq-item <?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>">
     <div class="ict-faq-question <?php print !$viz ? 'ict-faq-question-active' : ''; ?>">
       <h4>
+        <?php if (!empty($diff[$benefit->item_id]['field_benefit'])) : ?>
+          <?php print itdash_edited_tooltip_render($diff[$benefit->item_id]['field_benefit']); ?>
+        <?php elseif (!empty($diff[$benefit->item_id])) : ?>
+          <?php print itdash_edited_tooltip_render(); ?>
+        <?php endif; ?>
         <?php print $benefit_wrap->field_benefit->value(); ?>
-        <?php print !empty($diff[$benefit->item_id]) && !$viz ? '*' : '' ?>
       </h4>
       <div class="benfit-status">
+        <?php if (!empty($diff[$benefit->item_id]['field_status'])) : ?>
+          <?php print itdash_edited_tooltip_render($diff[$benefit->item_id]['field_status']); ?>
+        <?php endif; ?>
         <span class="status-marker" style="background-color: <?php print $colors[$benefit_wrap->field_status->raw()]; ?>"></span>
         <?php print $benefit_wrap->field_status->label(); ?>
-        <?php print isset($diff[$benefit->item_id]['field_status']) && !$viz ? '*' : '' ?>
       </div>
     </div>
     <div class="ict-faq-answer" style="display: <?php print !$viz ? 'block' : 'none'; ?>;">
       <ul>
         <li>
           <div class="label"><?php print t('Commentary:'); ?></div>
+          <?php if (!empty($diff[$benefit->item_id]['field_commentary'])) : ?>
+            <?php print itdash_edited_tooltip_render($diff[$benefit->item_id]['field_commentary']); ?>
+          <?php endif; ?>
           <div class="benefit"><?php print $benefit_wrap->field_commentary->value(); ?></div>
-          <?php print isset($diff[$benefit->item_id]['field_commentary']) && !$viz ? '*' : '' ?>
         </li>
         <li>
           <div class="label"><?php print t('Start date:'); ?></div>
+          <?php if (!empty($diff[$benefit->item_id]['field_benefit_start_date'])) : ?>
+            <?php print itdash_edited_tooltip_render(format_date($diff[$benefit->item_id]['field_benefit_start_date'], 'medium', 'd M Y')); ?>
+          <?php endif; ?>
           <div class="benefit"><?php print format_date($benefit_wrap->field_benefit_start_date->value(), 'medium', 'd M Y'); ?></div>
-          <?php print isset($diff[$benefit->item_id]['field_benefit_start_date']) ? '*' : '' ?>
         </li>
         <li>
           <div class="label"><?php print t('End date:'); ?></div>
+          <?php if (!empty($diff[$benefit->item_id]['field_end_date'])) : ?>
+            <?php print itdash_edited_tooltip_render(format_date($diff[$benefit->item_id]['field_end_date'], 'medium', 'd M Y')); ?>
+          <?php endif; ?>
           <div class="benefit"><?php print format_date($benefit_wrap->field_end_date->value(), 'medium', 'd M Y'); ?></div>
-          <?php print isset($diff[$benefit->item_id]['field_end_date']) && !$viz ? '*' : '' ?>
         </li>
         <li>
           <div class="label"><?php print t('Financial:'); ?></div>
+          <?php if (!empty($diff[$benefit->item_id]['field_financial'])) : ?>
+            <?php print itdash_edited_tooltip_render(); ?>
+          <?php endif; ?>
           <div class="benefit"><?php print $benefit_wrap->field_financial->value() ? '<span class="ict-tick"></span>' : '-'; ?></div>
-          <?php print isset($diff[$benefit->item_id]['field_financial']) && !$viz ? '*' : '' ?>
         </li>
       </ul>
     </div>

@@ -176,7 +176,7 @@ Drupal.behaviors.ictFaq = {
 					answer = wrap.find('.ict-faq-answer');
 
 				jQuery(this).removeClass('ict-faq-question-active');
-				answer.slideUp();
+				answer.slideUp(function(){answer.css('overflow', 'visible')});
 			}
 			else {
 				var wrap = jQuery(this).parent(),
@@ -186,9 +186,9 @@ Drupal.behaviors.ictFaq = {
 					activeAnsw = activeWrap.find('.ict-faq-answer');
 
 				activeQuest.removeClass('ict-faq-question-active');
-				activeAnsw.slideUp();
+				activeAnsw.slideUp(function(){answer.css('overflow', 'visible')});
 				jQuery(this).addClass('ict-faq-question-active');
-				answer.slideDown();
+				answer.slideDown(function(){answer.css('overflow', 'visible')});
 			}
 			return false;
 		});
