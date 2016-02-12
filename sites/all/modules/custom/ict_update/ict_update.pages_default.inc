@@ -16,7 +16,10 @@ function ict_update_default_page_manager_pages() {
   $page->admin_title = 'Project update';
   $page->admin_description = '';
   $page->path = 'project/%node/update';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array(
     'node' => array(
@@ -126,7 +129,10 @@ function ict_update_default_page_manager_pages() {
   $page->admin_title = 'Update approve';
   $page->admin_description = '';
   $page->path = 'update/%node/approve';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array(
     'node' => array(
@@ -228,7 +234,10 @@ function ict_update_default_page_manager_pages() {
   $page->admin_title = 'Update edit';
   $page->admin_description = '';
   $page->path = 'update/%node/edit';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array(
     'node' => array(

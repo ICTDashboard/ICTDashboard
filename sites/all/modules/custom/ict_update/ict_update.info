@@ -1,7 +1,7 @@
 name = ICT Update
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.05
+version = 7.x-1.06
 project = ict_update
 dependencies[] = ctools
 dependencies[] = date
@@ -53,6 +53,8 @@ features[field_instance][] = node-update-field_original_total_budget
 features[field_instance][] = node-update-field_project
 features[field_instance][] = node-update-field_project_revision
 features[field_instance][] = node-update-field_project_stage
+features[field_instance][] = node-update-field_resp_officer_position
+features[field_instance][] = node-update-field_responsible_officer_name
 features[field_instance][] = node-update-field_spend_to_date_by_financial
 features[node][] = update
 features[page_manager_pages][] = project_update

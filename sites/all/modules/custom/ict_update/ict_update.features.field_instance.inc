@@ -39,7 +39,7 @@ function ict_update_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'rows' => 1,
       ),
       'type' => 'text_textarea',
       'weight' => 0,
@@ -299,7 +299,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -343,7 +343,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 12,
+      'weight' => 14,
     ),
   );
 
@@ -390,7 +390,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 10,
+      'weight' => 12,
     ),
   );
 
@@ -431,7 +431,7 @@ function ict_update_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 15,
     ),
   );
 
@@ -478,7 +478,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 11,
+      'weight' => 13,
     ),
   );
 
@@ -534,7 +534,7 @@ function ict_update_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 6,
+      'weight' => 8,
     ),
   );
 
@@ -581,7 +581,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -624,7 +624,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -753,6 +753,88 @@ function ict_update_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-update-field_resp_officer_position'.
+  $field_instances['node-update-field_resp_officer_position'] = array(
+    'bundle' => 'update',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_resp_officer_position',
+    'label' => 'Senior Responsible Officer  Position ',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-update-field_responsible_officer_name'.
+  $field_instances['node-update-field_responsible_officer_name'] = array(
+    'bundle' => 'update',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_responsible_officer_name',
+    'label' => 'Senior Responsible Officer Name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
       'weight' => 4,
     ),
   );
@@ -800,7 +882,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
@@ -822,6 +904,8 @@ function ict_update_field_default_field_instances() {
   t('Project Budget By Financial Year ');
   t('Project Stage');
   t('Project revision');
+  t('Senior Responsible Officer  Position ');
+  t('Senior Responsible Officer Name');
   t('Spend To Date By Financial Year ($m)');
   t('Start date');
   t('Status');
