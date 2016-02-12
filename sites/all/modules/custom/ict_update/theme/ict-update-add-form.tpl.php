@@ -29,7 +29,7 @@
     </div>
     <div class="row">
       <div class="label"><?php print $form['field_expected_completion_date']['und']['#title']; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The current expected completion date of the project.</span></a></div>
-      <div class="text popup-radio"><?php print drupal_render($form['field_expected_completion_date']); ?></div>
+      <div class="text"><div class="date-field-wrapper"><?php print drupal_render($form['field_expected_completion_date']); ?></div></div>
     </div>
     <div class="row">
       <div class="label"><?php print $form['field_actual_level_of_project_co']['und']['#title'] . ' <em>(%)</em>'; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The actual percentage of work completed at the current update.</span></a></div>

@@ -75,7 +75,7 @@
       </div>
       <div class="text">
         <?php foreach (_ict_project_baseline_get_simple_values($field_expected_completion_date) as $value) : ?>
-          <p><?php print empty($value) ? 'N/A' : $value; ?></p>
+          <p><?php print $value; ?></p>
         <?php endforeach; ?>
       </div>
     </div>
