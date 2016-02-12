@@ -73,18 +73,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   else {
     _ict_update_edit_prepopulate_benefit($form, $form_state);
   }
-  $form['field_expected_completion_date']['und'][0]['#theme_wrappers'] = array();
-  $form['field_expected_completion_date']['und'][0]['#attributes'] = array('class' => array('radio_datepicker'));
-  $form['field_expected_completion_date']['radio'] = array(
-    '#type' => 'radios',
-    '#options' => array(
-      'time' => '',
-      'na' => 'N/A',
-    ),
-    '#default_value' => 'time',
-    '#weight' => -999,
-  );
-
+  
   foreach(element_children($form['field_benefits_realised']['und']) as $benefit_key) {
     if (!is_numeric($benefit_key)) continue;
     $form['field_benefits_realised']['und'][$benefit_key]['field_benefit_start_date']['und'][0]['#theme_wrappers'] = array();
@@ -309,11 +298,11 @@ function ict_update_all_fields_required_validate($form, &$form_state) {
   }
   ict_update_benefits_realised_validate($form, $form_state);
 
-  if (empty($form_state['values']['field_expected_completion_date']['und'][0]['value']) && $form_state['values']['field_expected_completion_date']['radio'] != 'na') {
+  if (empty($form_state['values']['field_expected_completion_date']['und'][0]['value'])) {
     form_set_error('field_expected_completion_date', 'Field <em>' . $form['field_expected_completion_date']['und'][0]['#title'] . '</em> is required.');
   }
 
-  if ($form_state['values']['field_expected_completion_date']['radio'] != 'na') {
+  if (!empty($form_state['values']['field_expected_completion_date']['und'][0]['value'])) {
     $expected_completition = $form_state['values']['field_expected_completion_date']['und'][0]['value'];
     $original_start = $project->field_start_date['und'][0]['value'];
     if ($expected_completition < $original_start) {
