@@ -50,6 +50,8 @@ function ict_field_diff_compare_rebaseline_update($project_id, $prev_vid, $last_
 
 function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $update_id) {
   $field_list = array(
+    'field_responsible_officer_name' => 'value',
+    'field_resp_officer_position' => 'value',
     'field_project_stage' => 'tid',
   );
 
@@ -84,6 +86,8 @@ function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $updat
 
 function ict_field_diff_compare_update_update($project_id, $prev_update_id, $last_update_id) {
   $field_list = array(
+    'field_responsible_officer_name' => 'value',
+    'field_resp_officer_position' => 'value',
     'field_project_stage' => 'tid',
     'field_expected_completion_date' => 'value',
     'field_forecast_level_of_project_' => 'value',

@@ -110,6 +110,9 @@
 
     <div class="row">
       <div class="label">
+        <?php if (!empty($diff['field_responsible_officer_name'])) : ?>
+          <?php print itdash_edited_tooltip_render($diff['field_responsible_officer_name']); ?>
+        <?php endif; ?>
         <?php print $field_responsible_officer_name['meta']['#title']; ?>
         <?php if (!empty($field_responsible_officer_name['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
@@ -121,14 +124,23 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_responsible_officer_name) as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
+        <?php if (!$project_updates_available) : ?>
+          <?php foreach (_ict_project_baseline_get_simple_values($field_responsible_officer_name) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        <?php else : ?>
+          <?php foreach (_ict_project_baseline_get_simple_values($update_node->field_responsible_officer_name['und']) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
     </div>
 
     <div class="row">
       <div class="label">
+        <?php if (!empty($diff['field_resp_officer_position'])) : ?>
+          <?php print itdash_edited_tooltip_render($diff['field_resp_officer_position']); ?>
+        <?php endif; ?>
         <?php print $field_resp_officer_position['meta']['#title']; ?>
         <?php if (!empty($field_resp_officer_position['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
@@ -140,9 +152,15 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_resp_officer_position) as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
+        <?php if (!$project_updates_available) : ?>
+          <?php foreach (_ict_project_baseline_get_simple_values($field_resp_officer_position) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        <?php else : ?>
+          <?php foreach (_ict_project_baseline_get_simple_values($update_node->field_resp_officer_position['und']) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
     </div>
 

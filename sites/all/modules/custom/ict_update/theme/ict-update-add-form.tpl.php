@@ -1,6 +1,19 @@
 <div id="inner-content" class="wrap cf">
   <div class="project-update-submission d-all">
     <?php print drupal_render(node_view($form['#project_node'], 'update')); ?>
+
+    <h3><?php print t('User Information'); ?></h3>
+    <div class="row">
+      <div class="label"><?php print $form['field_responsible_officer_name']['und']['#title']; ?></div>
+      <div class="text"><?php print drupal_render($form['field_responsible_officer_name']); ?></div>
+    </div>
+    <div class="row">
+      <div class="label"><?php print $form['field_resp_officer_position']['und']['#title']; ?></div>
+      <div class="text"><?php print drupal_render($form['field_resp_officer_position']); ?></div>
+    </div>
+    <?php print $form['#admin_user_details']; ?>
+    <div class="dotted-line"></div>
+
     <h3>Schedule, Expenditures and Benefits</h3>
     <div class="row">
       <div class="label"><?php print $form['field_project_stage']['und']['#title']; ?></div>

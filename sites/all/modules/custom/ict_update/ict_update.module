@@ -55,6 +55,15 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form['#theme'] = 'ict_update_add_form';
 
+  $project_admins = ict_project_baseline_get_admin_user_emails($project);
+  $form['#admin_user_details'] = theme(
+    'ict_project_baseline_admin_user_details', array(
+      'departmental_admins' => $project_admins['departmental_admins'],
+      'data_editors' => $project_admins['data_editors'],
+      'data_approvers' => $project_admins['data_approvers']
+    )
+  );
+
   $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
 
   if (empty($form['#node']->nid)) {
@@ -62,12 +71,16 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $last_project_revision_updates = end($entity_list);
     if(empty($last_project_revision_updates)) {
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $project->field_original_completion_date[LANGUAGE_NONE][0]['value'];
+      $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $project->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
+      $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $project->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
       _ict_update_prepopulate_benefit($form, $form_state, $project->field_benefits_realised['und']);
     }
     else {
       $last_update = node_load(end($last_project_revision_updates));
       _ict_update_prepopulate_benefit($form, $form_state, $last_update->field_benefits_realised['und']);
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_expected_completion_date[LANGUAGE_NONE][0]['value'];
+      $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $last_update->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
+      $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $last_update->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
     }
   }
   else {
