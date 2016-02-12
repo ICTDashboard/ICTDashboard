@@ -70,6 +70,15 @@ function ict_users_user_default_permissions() {
     'module' => 'administerusersbyrole',
   );
 
+  // Exported permission: 'administer filters'.
+  $permissions['administer filters'] = array(
+    'name' => 'administer filters',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'filter',
+  );
+
   // Exported permission: 'administer funding_source vocabulary terms'.
   $permissions['administer funding_source vocabulary terms'] = array(
     'name' => 'administer funding_source vocabulary terms',
@@ -243,6 +252,34 @@ function ict_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'use text format ds_code'.
+  $permissions['use text format ds_code'] = array(
+    'name' => 'use text format ds_code',
+    'roles' => array(),
+    'module' => 'filter',
+  );
+
+  // Exported permission: 'use text format filtered_html'.
+  $permissions['use text format filtered_html'] = array(
+    'name' => 'use text format filtered_html',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: 'use text format full_html'.
+  $permissions['use text format full_html'] = array(
+    'name' => 'use text format full_html',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'filter',
   );
 
   // Exported permission: 'view the administration theme'.
