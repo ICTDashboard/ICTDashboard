@@ -49,13 +49,13 @@ $diff = !empty($diff['field_benefits_realised']) ? $diff['field_benefits_realise
           <?php endif; ?>
           <div class="benefit"><?php print format_date($benefit_wrap->field_end_date->value(), 'medium', 'd M Y'); ?></div>
         </li>
-        <li>
-          <div class="label"><?php print t('Financial:'); ?></div>
-          <?php if (!empty($diff[$benefit->item_id]['field_financial'])) : ?>
-            <?php print itdash_edited_tooltip_render(); ?>
-          <?php endif; ?>
-          <div class="benefit"><?php print $benefit_wrap->field_financial->value() ? '<span class="ict-tick"></span>' : '-'; ?></div>
-        </li>
+<!--        <li>-->
+<!--          <div class="label">--><?php //print t('Financial:'); ?><!--</div>-->
+<!--          --><?php //if (!empty($diff[$benefit->item_id]['field_financial'])) : ?>
+<!--            --><?php //print itdash_edited_tooltip_render(); ?>
+<!--          --><?php //endif; ?>
+<!--          <div class="benefit">--><?php //print $benefit_wrap->field_financial->value() ? '<span class="ict-tick"></span>' : '-'; ?><!--</div>-->
+<!--        </li>-->
       </ul>
     </div>
   </div>

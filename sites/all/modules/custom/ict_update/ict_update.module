@@ -174,7 +174,7 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
       $budget_table[$key]['field_benefit_start_date']['und'][0]['#default_value']['value'] = $item->field_benefit_start_date->value();
       $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = $item->field_removed->value();
       $budget_table[$key]['field_end_date']['und'][0]['#default_value']['value'] = $item->field_end_date->value();
-      $budget_table[$key]['field_financial']['und']['#default_value'] = $item->field_financial->value();
+//      $budget_table[$key]['field_financial']['und']['#default_value'] = $item->field_financial->value();
       $budget_table[$key]['remove_button']['#access'] = FALSE;
       $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
       $budget_table[$key]['remove_button']['#suffix'] = '</div>';

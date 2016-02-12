@@ -52,16 +52,16 @@
         <td><?php print drupal_render($element[$key]['field_benefit_start_date']); ?></td>
         <td><?php print drupal_render($element[$key]['field_end_date']); ?></td>
       </tr>
-      <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
-        <th>
-        <div class="label">
-          <?php print t('Financial'); ?>
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, mark those where the benefit can be measured financially.
-    </span></a>
-        </div>
-      </th>
-        <td colspan="2"><?php print drupal_render($element[$key]['field_financial']); ?></td>
-      </tr>
+<!--      <tr class="--><?php //print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?><!--" >-->
+<!--        <th>-->
+<!--        <div class="label">-->
+<!--          --><?php //print t('Financial'); ?>
+<!--          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, mark those where the benefit can be measured financially.-->
+<!--    </span></a>-->
+<!--        </div>-->
+<!--      </th>-->
+<!--        <td colspan="2">--><?php //print drupal_render($element[$key]['field_financial']); ?><!--</td>-->
+<!--      </tr>-->
 
       <tr class="last-benefit-row <?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
         <th>

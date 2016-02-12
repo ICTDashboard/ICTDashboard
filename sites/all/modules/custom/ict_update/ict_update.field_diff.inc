@@ -148,7 +148,7 @@ function ict_field_diff_compare_benefits($prev, $last) {
     'field_status' => 'value',
     'field_benefit_start_date' => 'value',
     'field_end_date' => 'value',
-    'field_financial' => 'value',
+//    'field_financial' => 'value',
     'field_benefit' => 'value',
     'field_commentary' => 'value',
   );
