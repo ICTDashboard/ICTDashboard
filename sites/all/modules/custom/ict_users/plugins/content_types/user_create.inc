@@ -2,7 +2,7 @@
 
 $plugin = array(
   'single' => TRUE,
-  'title' => t('User create'),
+  'title' => t('Add User'),
   'description' => t('User create form.'),
   'category' => t('ICT'),
   'render callback' => 'ict_user_create_form_render',

@@ -66,7 +66,8 @@ function ict_pages_default_page_manager_handlers() {
 dashboard
 project/*/update
 update/*
-node/*/delete',
+node/*/delete
+user/create',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,
