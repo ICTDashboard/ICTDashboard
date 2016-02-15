@@ -22,6 +22,7 @@ span.custom-combobox input{
 
 span.custom-combobox {
     width: 100%;
+    max-width: 640px;
 }
 
 span.custom-combobox .sbToggle {

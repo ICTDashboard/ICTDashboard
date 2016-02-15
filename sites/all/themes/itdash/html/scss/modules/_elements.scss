@@ -194,7 +194,7 @@ body,
         padding-bottom: 9px;
         .edit-btn {
           display: inline-block;
-          margin-left: 10px;
+          margin-left: 0;
           color: #0d6c88;
           position: relative;
           font-size: 13px;
@@ -365,6 +365,10 @@ body,
             left: 150px;
           }
         }
+        #approvers,
+        #editors {
+          max-width: 720px;
+        }
       }
       .form-item {
         float: none;
@@ -434,25 +438,6 @@ body,
   a.submit-button {
     line-height: 41px;
     text-decoration: none;
-  }
-}
-
-// TEMPORARY
-#ict-project-projects-create-form {
-  input {
-    max-width: 100% !important;
-  }
-  .sbHolder {
-    max-width: 100% !important;
-  }
-  .form-item-field-department,
-  .form-item-field-portfolio-name {
-    position: relative;
-    .ajax-progress-throbber {
-      position: absolute;
-      top: 6px;
-      right: -110px;
-    }
   }
 }
 

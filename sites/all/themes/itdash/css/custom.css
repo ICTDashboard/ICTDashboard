@@ -360,7 +360,3 @@ td.select-no-border .sbHolder {
     top: 0;
     right: 0;
 }
-#approvers .field-add-more-submit,
-#editors .field-add-more-submit {
-    float: left !important;
-}

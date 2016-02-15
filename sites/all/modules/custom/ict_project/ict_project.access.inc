@@ -30,6 +30,24 @@ function ict_project_access_add_approver($email, $nid) {
   return $query;
 }
 
+/**
+ * Removes approver to project
+ *
+ * @param $email
+ * @param $nid
+ */
+function ict_project_access_remove_approver($email, $nid) {
+  $user = user_load_by_mail($email);
+
+  $query = db_delete('project_access')
+    ->condition('uid', $user->uid)
+    ->condition('nid', $nid)
+    ->condition('access_type', ICT_PROJECT_APPROVER_ACCESS)
+    ->execute();
+
+  return $query;
+}
+
 function ict_project_access_project($op, $account = NULL, $nid = NULL) {
   if (!$account) {
     global $user;
@@ -93,6 +111,19 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
   if ($op == 'delete' && $nid) {
     if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account) &&
       ict_project_check_if_baseline_ever_approved($nid)) {
+      $node = node_load($nid);
+      $project_department = ict_department_get_department_tid_of_entity('project', $node);
+      $user_department = ict_department_get_department_tid_of_entity('user', $account);
+      if ($user_department == $project_department) {
+        return TRUE;
+      }
+      return FALSE;
+    }
+    return FALSE;
+  }
+
+  if ($op == 'manage_users' && $nid) {
+    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
       $node = node_load($nid);
       $project_department = ict_department_get_department_tid_of_entity('project', $node);
       $user_department = ict_department_get_department_tid_of_entity('user', $account);
@@ -286,6 +317,24 @@ function ict_project_access_add_editor($email, $nid) {
       'access_type' => ICT_PROJECT_EDITOR_ACCESS,
       'created' => time()
     ))
+    ->execute();
+
+  return $query;
+}
+
+/**
+ * Removes editor from project
+ *
+ * @param $email
+ * @param $nid
+ */
+function ict_project_access_remove_editor($email, $nid) {
+  $user = user_load_by_mail($email);
+
+  $query = db_delete('project_access')
+    ->condition('uid', $user->uid)
+    ->condition('nid', $nid)
+    ->condition('access_type', ICT_PROJECT_EDITOR_ACCESS)
     ->execute();
 
   return $query;

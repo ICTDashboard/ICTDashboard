@@ -1,3 +1,5 @@
+<?php global $user; ?>
+
 <div class="row">
   <div class="label">
     <?php print t('Departmental Administrators'); ?>
@@ -24,6 +26,9 @@
         <?php print t('Project Approvers can review, approve or reject baseline and update submissions once submitted for approval. They can not be Departmental Administrators or Editors within the same project.'); ?>
       </span>
     </a>
+    <?php if (ict_project_access_project('manage_users', $user, $project_id)) : ?>
+      <a href="<?php print url('project/' . $project_id . '/manage-users', array('query' => array('destination' => current_path()))); ?>" class="edit-btn">Edit</a>
+    <?php endif; ?>
   </div>
   <div class="text">
     <?php foreach ($data_approvers as $email) : ?>
@@ -41,6 +46,9 @@
         <?php print t('Project Editors can review, edit and submit baseline and update submissions for approval. They can not be Departmental Administrators or Approvers within the same project.'); ?>
       </span>
     </a>
+    <?php if (ict_project_access_project('manage_users', $user, $project_id)) : ?>
+      <a href="<?php print url('project/' . $project_id . '/manage-users', array('query' => array('destination' => current_path()))); ?>" class="edit-btn">Edit</a>
+    <?php endif; ?>
   </div>
   <div class="text">
     <?php foreach ($data_editors as $email) : ?>
