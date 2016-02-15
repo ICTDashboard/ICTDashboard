@@ -1164,29 +1164,17 @@ CONTENT STYLES
 						}
 					}
 					&.submit {
-					  	border-top: none;
 						text-align: right;
 						margin-top: 30px;
 						padding-top: 30px;
-						background: url(../images/dot-line-bg.png) repeat-x scroll 0 0;
 
-						input[type="submit"] {
-							background: url("../images/create-acc-btn.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-							border: 0 none;
-							height: 44px;
-							overflow: hidden;
-							text-indent: -999em;
-							width: 217px;
-						}
-						input[type="submit"]:hover {
-							background-position: 0 -44px;
-						}
 					}
 				}
 				.description {
 					font-size: 13px;
 					font-weight: 400;
 					font-style: italic;
+				  	display: block;
 				}
 			}
 		}

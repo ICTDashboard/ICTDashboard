@@ -1,3 +1,4 @@
+#user-pass-reset,
 .entity-bean,
 .node-type-page #inner-content{
   margin: 25px auto;
@@ -111,6 +112,7 @@ body,
       }
     }
   }
+  #user-pass-reset,
   .ict-fancy-content,
   .project-draft-submission,
   .project-update-submission {
@@ -401,6 +403,9 @@ body,
     .sbSelector {
       width: 100%;
     }
+  }
+  #edit-actions {
+    width: 100%;
   }
   .submit {
     margin-bottom: 20px;

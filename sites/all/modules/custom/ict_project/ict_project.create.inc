@@ -376,6 +376,21 @@ function ict_project_create_project_remove_editor($form, &$form_state) {
   return $form['editors'];
 }
 
+function ict_project_validate_email_department($email, $term) {
+
+  $allowed_daomains = ict_users_get_allowed_domains($term);
+
+  $valid = FALSE;
+  foreach ($allowed_daomains as $domain) {
+    if (endsWith($email, $domain)) {
+      $valid = TRUE;
+      break;
+    }
+  }
+
+  return $valid;
+}
+
 /**
  * Validate project data before creation
  *
