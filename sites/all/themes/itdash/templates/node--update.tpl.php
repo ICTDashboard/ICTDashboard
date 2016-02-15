@@ -147,11 +147,11 @@
     <div class="row">
       <div class="label">
         <?php print t('Project Budget and Expenditure'); ?>
-        <?php if (!empty($form['field_original_total_budget']['#description'])) : ?>
+        <?php if (!empty($original_total_budget_meta['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print $form['field_original_total_budget']['#description']; ?>
+                <?php print $original_total_budget_meta['#description']; ?>
               </span>
           </a>
         <?php endif; ?>
