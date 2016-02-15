@@ -590,7 +590,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -889,6 +889,7 @@ function ict_update_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Actual Level of Project Completion');
+  t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
   t('Benefit');
   t('Benefits Realised');
   t('Commentary');
