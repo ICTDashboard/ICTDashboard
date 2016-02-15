@@ -14,6 +14,8 @@ $plugin = array(
  * return add project themed form
  */
 function ict_project_project_manage_users_render ($subtype, $conf, $panel_args, $context = NULL) {
+  global $user;
+
   $block = new stdClass;
   $project_id = reset($panel_args);
   $project = node_load($project_id);
@@ -21,6 +23,11 @@ function ict_project_project_manage_users_render ($subtype, $conf, $panel_args, 
   if (!$project || $project->type != 'project') {
     drupal_not_found();
   }
+
+  if (!ict_project_access_project('manage_users', $user, $project_id)) {
+    drupal_access_denied();
+  }
+
   $form = drupal_get_form('ict_project_manage_project_users_form', $project);
   $block->content = drupal_render($form);
   return $block;
