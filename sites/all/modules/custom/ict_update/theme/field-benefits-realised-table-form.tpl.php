@@ -15,16 +15,32 @@
       </tr>
     <?php else : ?>
       <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
-        <th width="30%"><div class="label"><?php print t('Benefits'); ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">List the benefits (quantitative or qualitative) this project will deliver or contribute to, as identified in the business case.
-    </span></a></div></th>
+        <th width="30%">
+          <div class="label"><?php print t('Benefits'); ?>
+            <?php if (!empty($descriptions['field_benefit'])) : ?>
+              <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $descriptions['field_benefit']; ?>
+            </span>
+              </a>
+            <?php endif; ?>
+          </div>
+        </th>
         <td colspan="2"><?php print drupal_render($element[$key]['field_benefit']); ?></td>
       </tr>
       <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
         <th>
         <div class="label">
           <?php print t('Realised Status'); ?>
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, indicate the status of benefit realisation. Realised - The benefit has been realised; Partially - The benefit has been partially realised; On Track – The project is on track to realise the benefit as originally expected; At Risk - The benefit is not likely to be realised as originally expected; Not Realised - The benefit will not be realised.
-    </span></a>
+          <?php if (!empty($descriptions['field_status'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $descriptions['field_status']; ?>
+            </span>
+            </a>
+          <?php endif; ?>
         </div>
       </th>
         <td colspan="2" class="select-no-border"><?php print drupal_render($element[$key]['field_status']); ?></td>
@@ -33,6 +49,14 @@
         <th>
         <div class="label">
           <?php print t('Commentary'); ?>
+          <?php if (!empty($descriptions['field_commentary'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $descriptions['field_commentary']; ?>
+            </span>
+            </a>
+          <?php endif; ?>
         </div>
       </th>
         <td colspan="2" ><?php print drupal_render($element[$key]['field_commentary']); ?></td>
@@ -45,8 +69,14 @@
         <th>
         <div class="label">
           <?php print t('Date Range: Start - End'); ?>
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, the date range when benefit is expected to be realised.
-    </span></a>
+          <?php if (!empty($descriptions['field_benefit_start_date'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $descriptions['field_benefit_start_date']; ?>
+            </span>
+            </a>
+          <?php endif; ?>
         </div>
       </th>
         <td><?php print drupal_render($element[$key]['field_benefit_start_date']); ?></td>

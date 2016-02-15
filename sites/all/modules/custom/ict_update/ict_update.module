@@ -743,6 +743,19 @@ function template_preprocess_field_benefits_realised_table_form(&$vars) {
       }
     }
   }
+  $descriptions = array();
+  if (!empty($table[0])) {
+    foreach ($table[0] as $var_name => &$value) {
+      $element_name = explode('_', $var_name);
+      if (reset($element_name) == 'field') {
+        $field_info = field_info_instance('field_collection_item', $var_name, 'field_benefits_realised');
+        $descriptions[$var_name] = !empty($field_info['description']) ? $field_info['description'] : '';
+      }
+    }
+  }
+
+  $vars['descriptions'] = $descriptions;
+
 }
 
 function template_preprocess_field_benefits_realised_table_view(&$vars) {
