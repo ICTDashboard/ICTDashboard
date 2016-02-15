@@ -145,6 +145,15 @@
                     </a>
                   <?php endif; ?>
 
+                  <?php if (ict_project_access_project('manage_users', $user, $project->nid)) : ?>
+                    <a href="<?php print url('project/' . $project->nid .'/manage-users', array(
+                        'query' => array('destination' => 'projects')
+                      )
+                    ); ?>">
+                      <span><?php print t('Manage Users'); ?></span>
+                    </a>
+                  <?php endif; ?>
+
                 <?php else : ?>
                   <?php foreach ($project->demo_buttons as $key => $button) : ?>
                     <a href="http://sandpit.itdash.lws.links.com.au/?path=<?php print $key; ?>&nid=<?php print $project->nid; ?>">

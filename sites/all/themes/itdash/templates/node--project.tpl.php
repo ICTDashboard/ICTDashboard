@@ -234,11 +234,11 @@
       <div class="row">
         <div class="label">
           <?php print t('Project Budget By Financial Year'); ?>
-          <?php if (!empty($field_original_total_budget['meta']['#description'])) : ?>
+          <?php if (!empty($original_total_budget_meta['#description'])) : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print $field_original_total_budget['meta']['#description']; ?>
+                <?php print $original_total_budget_meta['#description']; ?>
               </span>
             </a>
           <?php endif; ?>
