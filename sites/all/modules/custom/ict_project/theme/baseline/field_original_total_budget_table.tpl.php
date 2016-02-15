@@ -53,12 +53,6 @@
     <td>
       <div class="label">
         <?php print $element['#row_title']; ?>
-        <a class="tooltip" href="javascript:void(0);">
-          <i class="tooltip-icon"></i>
-          <span class="tooltip-content">
-            <?php print $element['#row_description']; ?>
-          </span>
-        </a>
         <em>($m)</em>
         <?php if ($element['#row_type']) : ?>
           <em><?php print $element['#row_type']; ?></em>
