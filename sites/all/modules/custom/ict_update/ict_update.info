@@ -78,3 +78,5 @@ features[variable][] = menu_parent_update
 features[variable][] = node_options_update
 features[variable][] = node_preview_update
 features[variable][] = node_submitted_update
+features_exclude[field_instance][field_collection_item-field_original_total_budget-field_capex] = field_collection_item-field_original_total_budget-field_capex
+features_exclude[field_instance][field_collection_item-field_original_total_budget-field_opex] = field_collection_item-field_original_total_budget-field_opex

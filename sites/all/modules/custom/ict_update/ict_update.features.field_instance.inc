@@ -16,7 +16,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'field_benefits_realised',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'List the benefits (quantitative or qualitative) this project will deliver or contribute to, as identified in the business case.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -51,7 +51,7 @@ function ict_update_field_default_field_instances() {
   $field_instances['field_collection_item-field_benefits_realised-field_benefit_start_date'] = array(
     'bundle' => 'field_benefits_realised',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'For each benefit listed, the date range when benefit is expected to be realised.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -103,7 +103,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'field_benefits_realised',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'You may add a comment to further explain the context for inclusion or update of this benefit.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -229,7 +229,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'field_benefits_realised',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'For each benefit listed, indicate the status of benefit realisation. Realised - The benefit has been realised; Partially - The benefit has been partially realised; On Track – The project is on track to realise the benefit as originally expected; At Risk - The benefit is not likely to be realised as originally expected; Not Realised - The benefit will not be realised.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -900,7 +900,10 @@ function ict_update_field_default_field_instances() {
   t('Estimated Value of Benefits Realised');
   t('Expected Completion Date');
   t('Financial');
+  t('For each benefit listed, indicate the status of benefit realisation. Realised - The benefit has been realised; Partially - The benefit has been partially realised; On Track – The project is on track to realise the benefit as originally expected; At Risk - The benefit is not likely to be realised as originally expected; Not Realised - The benefit will not be realised.');
+  t('For each benefit listed, the date range when benefit is expected to be realised.');
   t('Forecast Level of Project Completion');
+  t('List the benefits (quantitative or qualitative) this project will deliver or contribute to, as identified in the business case.');
   t('Project');
   t('Project Budget By Financial Year ');
   t('Project Stage');
@@ -915,6 +918,7 @@ function ict_update_field_default_field_instances() {
   t('The current financial value of benefits expected by the project. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.');
   t('The estimated financial benefits that have been realised to date.');
   t('The percentage of work forecasted to be completed at the current update.');
+  t('You may add a comment to further explain the context for inclusion or update of this benefit.');
 
   return $field_instances;
 }
