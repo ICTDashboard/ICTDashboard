@@ -8,7 +8,7 @@
       </span>
     </a>
     <span class="form-helptext">
-      <em><?php print t('Users can be <a href="!url">added</a> to departments.', array(
+      <em><?php print t('<a href="!url">Invite a new user</a> or enter the email of an existing user below.', array(
           '!url' => url('user/create', array(
               'query' => array('destination' => current_path()))
           )
@@ -30,7 +30,7 @@
       </span>
     </a>
     <span class="form-helptext">
-      <em><?php print t('Users can be <a href="!url">added</a> to departments.', array(
+     <em><?php print t('<a href="!url">Invite a new user</a> or enter the email of an existing user below.', array(
           '!url' => url('user/create', array(
             'query' => array('destination' => current_path()))
           )
