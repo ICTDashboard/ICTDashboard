@@ -62,8 +62,8 @@ function ict_project_projects_create_form($form, &$form_state) {
     '#disabled' => TRUE,
   );
 
-  if (!empty($form_state['values']['field_portfolio_name'])) {
-    $portfolios = taxonomy_get_tree($portfolio_vocab->vid, $form_state['values']['field_portfolio_name'], 1);
+  if (!empty($form_state['input']['field_portfolio_name'])) {
+    $portfolios = taxonomy_get_tree($portfolio_vocab->vid, $form_state['input']['field_portfolio_name'], 1);
     $portfolio_options = array();
     foreach ($portfolios as $entity) {
       $portfolio_options[$entity->tid] = $entity->name;
