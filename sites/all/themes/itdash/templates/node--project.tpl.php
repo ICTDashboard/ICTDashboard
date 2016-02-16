@@ -249,6 +249,15 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="label">
+          <?php print t('Total Project Budget'); ?>
+        </div>
+        <div class="text">
+          <?php print '$' . $original_total_budget_number . 'm'; ?>
+        </div>
+      </div>
+
       <?php if ($viz_preview) : ?>
         <div class="row">
           <div class="label">
