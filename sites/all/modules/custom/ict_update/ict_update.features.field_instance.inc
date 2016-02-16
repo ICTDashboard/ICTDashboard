@@ -376,7 +376,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_current_financial_benefits',
-    'label' => 'Current Financial Benefits',
+    'label' => 'Current Expected Financial Benefits',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -894,7 +894,7 @@ function ict_update_field_default_field_instances() {
   t('Benefits Realised');
   t('Commentary');
   t('Context, remedial action, changes in project scope or other commentary.');
-  t('Current Financial Benefits');
+  t('Current Expected Financial Benefits');
   t('End date');
   t('Entity Comments');
   t('Estimated Value of Benefits Realised');
