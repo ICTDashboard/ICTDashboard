@@ -25,12 +25,6 @@
       <td>
         <div class="label">
           <?php print $row['title']; ?>
-          <a class="tooltip" href="javascript:void(0);">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $row['description']; ?>
-            </span>
-          </a>
           <em>($m)</em>
           <?php if ($row['type']) : ?>
             <em><?php print $row['type']; ?></em>
@@ -49,7 +43,7 @@
     </tr>
   <?php endforeach; ?>
 
-  <tr class="sum">
+  <tr class="sum expenditure-values">
     <td>
       <div class="label">
         <?php print $element['#row_title']; ?>

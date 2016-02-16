@@ -192,6 +192,15 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="label">
+        <?php print t('Total Project Budget'); ?>
+      </div>
+      <div class="text">
+        <span id="total-project-budget">$0m</span>
+      </div>
+    </div>
+
     <?php $start_date = &$form['field_start_date']; ?>
     <div class="row">
       <div class="label">

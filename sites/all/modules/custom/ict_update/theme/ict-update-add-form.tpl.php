@@ -14,17 +14,17 @@
     <?php print $form['#admin_user_details']; ?>
     <div class="dotted-line"></div>
 
-    <h3>Schedule, Expenditures and Benefits</h3>
+    <h3><?php print t('Schedule, Expenditures and Benefits'); ?></h3>
     <div class="row">
       <div class="label"><?php print $form['field_project_stage']['und']['#title']; ?></div>
       <div class="text"><?php print drupal_render($form['field_project_stage']); ?></div>
     </div>
     <div class="row">
-      <div class="label">Original Approved Start Date </div>
+      <div class="label"><?php print t('Original Approved Start Date'); ?> </div>
       <div class="text"><?php print format_date(strtotime($form['#project_node']->field_start_date['und'][0]['value']), 'medium', 'j M Y'); ?></div>
     </div>
     <div class="row">
-      <div class="label">Original Approved Completion Date </div>
+      <div class="label"><?php print t('Original Approved Completion Date'); ?></div>
       <div class="text"><?php print format_date(strtotime($form['#project_node']->field_original_completion_date['und'][0]['value']), 'medium', 'j M Y'); ?></div>
     </div>
     <div class="row">
@@ -45,17 +45,35 @@
     <div class="row">
       <div class="label">
         <?php print t('Project Budget By Financial Year'); ?>
-        <?php if (!empty($form['field_original_total_budget']['#description'])) : ?>
+        <?php if (!empty($form['field_original_total_budget'][LANGUAGE_NONE]['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
-              <?php print $form['field_original_total_budget']['#description']; ?>
+              <?php print $form['field_original_total_budget'][LANGUAGE_NONE]['#description']; ?>
             </span>
           </a>
         <?php endif; ?>
       </div>
       <div class="text">
         <?php print render($form['field_original_total_budget']); ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
+        <?php print t('Total Project Budget'); ?>
+      </div>
+      <div class="text">
+        <?php print render($form['original_total_budget_number']); ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
+        <?php print t('Total Project Expenditure'); ?>
+      </div>
+      <div class="text">
+        <span id="total-project-expenditure">$0.00m</span>
       </div>
     </div>
 

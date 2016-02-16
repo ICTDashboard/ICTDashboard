@@ -97,6 +97,20 @@ function ict_project_preprocess_node(&$vars) {
       $budget_items = array($baseline_row);
     }
 
+    // total budget and expenditure values
+    $total_budget = 0;
+    $total_expenditure = 0;
+    foreach (reset($budget_items)['budget_items'] as $budget_value) {
+      $total_budget += (float)$budget_value->field_total[LANGUAGE_NONE][0]['value'];
+    }
+    if (count($budget_items) > 1) {
+      foreach (end($budget_items)['budget_items'] as $budget_value) {
+        $total_expenditure += (float)$budget_value->field_total[LANGUAGE_NONE][0]['value'];
+      }
+    }
+    $vars['original_total_budget_number'] = number_format($total_budget, 2, '.', ' ');
+    $vars['total_expenditure_number'] = number_format($total_expenditure, 2, '.', ' ');
+
     $vars['original_total_budget_meta'] = $vars['field_original_total_budget']['meta'];
 
     $budget_table_theme = $vars['viz_preview'] ?
@@ -202,6 +216,14 @@ function ict_project_preprocess_node(&$vars) {
     }
     else {
       $budget_items = _ict_project_prepare_budget_history($node->nid, 'view');
+
+      // total budget and expenditure values
+      $total_budget = 0;
+      foreach (reset($budget_items)['budget_items'] as $budget_value) {
+        $total_budget += (float)$budget_value->field_total[LANGUAGE_NONE][0]['value'];
+      }
+      $vars['original_total_budget_number'] = number_format($total_budget, 2, '.', ' ');
+
       $budget_table_theme = $vars['viz_preview'] ?
         'field_original_total_budget_graph_view' :
         'field_original_total_budget_table_view';

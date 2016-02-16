@@ -124,6 +124,18 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   // project budget by financial year
   _ict_project_project_budget_by_year_form ($form, $form_state);
 
+  $budget_items = _ict_project_prepare_budget_history($project_id, 'view');
+
+  // total budget and expenditure values
+  $total_budget = 0;
+  foreach (reset($budget_items)['budget_items'] as $budget_value) {
+    $total_budget += (float)$budget_value->field_total[LANGUAGE_NONE][0]['value'];
+  }
+  $form['original_total_budget_number'] = array(
+    '#type' => 'markup',
+    '#markup' => '$' . number_format($total_budget, 2, '.', ' ') . 'm',
+  );
+
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
   );
