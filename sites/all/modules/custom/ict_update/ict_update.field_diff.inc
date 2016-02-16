@@ -67,12 +67,12 @@ function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $updat
     }
   }
 
-  $prev_financial = $project_wrap->field_original_total_budget->value();
-  $last_financial = $update_wrap->field_original_total_budget->value();
-  $diff_financial = ict_field_diff_compare_financial_year($prev_financial, $last_financial);
-  if (!empty($diff_financial)) {
-    $diff['field_original_total_budget'] = $diff_financial;
-  }
+//  $prev_financial = $project_wrap->field_original_total_budget->value();
+//  $last_financial = $update_wrap->field_original_total_budget->value();
+//  $diff_financial = ict_field_diff_compare_financial_year($prev_financial, $last_financial);
+//  if (!empty($diff_financial)) {
+//    $diff['field_original_total_budget'] = $diff_financial;
+//  }
 
   $prev_benefit = $project_wrap->field_benefits_realised->value();
   $last_benefit = $update_wrap->field_benefits_realised->value();

@@ -62,8 +62,10 @@ function ict_project_preprocess_node(&$vars) {
     $vars['project_id'] = $vars['field_project'][0]['target_id'];
 
     $vars['diff'] = array();
+    $show_diff = FALSE;
     if (ict_update_approve_allowed($vars['project_id'], $node->nid)) {
       $vars['diff'] = ict_field_diff_list_latest($vars['project_id']);
+      $show_diff = TRUE;
     }
 
     foreach ($vars as $var_name => &$value) {
@@ -107,6 +109,7 @@ function ict_project_preprocess_node(&$vars) {
       $budget_table_theme, array(
         'rows' => $budget_items,
         'diff' => $vars['diff'],
+        'show_diff' => $show_diff && !$viz_preview,
       )
     );
 
