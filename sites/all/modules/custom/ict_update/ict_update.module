@@ -253,7 +253,6 @@ function ict_update_benefits_realised_preview_page_validate($node, &$errors) {
       'field_status',
     ),
     'text' => array(
-      'field_commentary',
       'field_benefit',
     ),
     'date' => array(
