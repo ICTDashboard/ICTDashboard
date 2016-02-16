@@ -23,8 +23,9 @@
       </td>
       <?php  foreach ($delta_range as $delta) : ?>
         <td>
-          <?php if ($row_num == count($rows) && isset($diff['field_original_total_budget'][$row['budget_items'][$delta]->field_year[LANGUAGE_NONE][0]['value']])) : ?>
-            <?php print itdash_edited_tooltip_render($diff['field_original_total_budget'][$row['budget_items'][$delta]->field_year[LANGUAGE_NONE][0]['value']], '$', 'm'); ?>
+          <?php if ($row_num == count($rows) && $show_diff && isset($row['budget_items'][$delta]->field_total[LANGUAGE_NONE][0]['value'])) : ?>
+            <?php $prev_val = !empty($diff['field_original_total_budget'][$row['budget_items'][$delta]->field_year[LANGUAGE_NONE][0]['value']]) ? $diff['field_original_total_budget'][$row['budget_items'][$delta]->field_year[LANGUAGE_NONE][0]['value']] : '0'; ?>
+            <?php print itdash_edited_tooltip_render($prev_val, '$', 'm', TRUE); ?>
           <?php endif; ?>
           <?php if (!empty($row['budget_items'][$delta]->field_total[LANGUAGE_NONE][0]['value'])) : ?>
             <?php print '$' . $row['budget_items'][$delta]->field_total[LANGUAGE_NONE][0]['value'] . 'm'; ?>
