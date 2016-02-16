@@ -180,7 +180,7 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
       $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
       $budget_table[$key]['remove_button']['#suffix'] = '</div>';
       $budget_table[$key]['history_button'] = array(
-        '#markup' => '<div class="history-button"><a href="#" class="fancybox-benefit-history">' . t('History') . '</a></div>'
+        '#markup' => '<div class="history-button"><a href="#" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a></div>'
       );
       $prev_collection = $item->field_previous_collection->raw();
       $budget_table[$key]['field_previous_collection']['und']['#value'] = $prev_collection ? $prev_collection : $item_val['value'];
@@ -750,8 +750,8 @@ function template_preprocess_field_benefits_realised_table_form(&$vars) {
       if (!empty($archived)) {
         $table[$key]['#archived_benefit'] = $archived;
         $benefit = $table[$key];
-        unset($table[$key]);
-        array_unshift($table, $benefit);
+//        unset($table[$key]);
+//        array_unshift($table, $benefit);
       }
     }
   }

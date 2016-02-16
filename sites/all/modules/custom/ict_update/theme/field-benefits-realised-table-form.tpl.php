@@ -5,16 +5,8 @@
   <?php foreach(element_children($element) as $key) : ?>
     <?php if (!is_numeric($key)) continue; ?>
     <?php if (!empty($element[$key]['#archived_benefit'])) : ?>
-      <tr class="row-grey" >
-        <td colspan="2">
-          <?php print t('Archived'); ?>
-          <?php print format_date($element[$key]['#archived_benefit'], 'medium', 'd M Y'); ?>:
-          <?php print $element[$key]['field_benefit']['und'][0]['value']['#default_value']; ?>
-        </td>
-        <td class="table-remove-button"><?php print drupal_render($element[$key]['history_button']); ?></td>
-      </tr>
-    <?php else : ?>
-      <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
+      <tr class="row-yellow">
+        <th rowspan="3" class="benefit-num"><div class="label"><?php print $number; ?>.</div></th>
         <th width="30%">
           <div class="label"><?php print t('Benefits'); ?>
             <?php if (!empty($descriptions['field_benefit'])) : ?>
@@ -27,23 +19,67 @@
             <?php endif; ?>
           </div>
         </th>
-        <td colspan="2"><?php print drupal_render($element[$key]['field_benefit']); ?></td>
+        <td colspan="2"><?php print $element[$key]['field_benefit']['und'][0]['value']['#default_value']; ?></td>
+      </tr>
+      <tr class="row-yellow" >
+        <th>
+          <div class="label">
+            <?php print t('Realised Status'); ?>
+            <?php if (!empty($descriptions['field_status'])) : ?>
+              <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $descriptions['field_status']; ?>
+              </span>
+              </a>
+            <?php endif; ?>
+          </div>
+        </th>
+        <td colspan="2"><strong><em>
+          <?php print t('Archived:'); ?>
+          <?php print format_date($element[$key]['#archived_benefit'], 'medium', 'd M Y'); ?>
+        </em></strong></td>
+      </tr>
+      <tr class="row-yellow last-benefit-row" >
+        <th>
+          <div class="label">
+            <?php print t('Action'); ?>
+          </div>
+        </th>
+        <td colspan="2" class="table-remove-button"><?php print drupal_render($element[$key]['history_button']); ?></td>
+      </tr>
+    <?php else : ?>
+      <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
+        <th rowspan="5" class="benefit-num"><div class="label"><?php print $number; ?>.</div></th>
+        <th width="30%">
+          <div class="label"><?php print t('Benefits'); ?>
+            <?php if (!empty($descriptions['field_benefit'])) : ?>
+              <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $descriptions['field_benefit']; ?>
+            </span>
+              </a>
+            <?php endif; ?>
+          </div>
+        </th>
+        <td colspan="2" class="no-padding"><?php print drupal_render($element[$key]['field_benefit']); ?></td>
       </tr>
       <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
         <th>
-        <div class="label">
-          <?php print t('Realised Status'); ?>
-          <?php if (!empty($descriptions['field_status'])) : ?>
-            <a href="javascript:void(0);" class="tooltip">
-              <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $descriptions['field_status']; ?>
-            </span>
-            </a>
-          <?php endif; ?>
-        </div>
-      </th>
-        <td colspan="2" class="select-no-border"><?php print drupal_render($element[$key]['field_status']); ?></td>
+          <div class="label">
+            <?php print t('Realised Status'); ?>
+            <?php if (!empty($descriptions['field_status'])) : ?>
+              <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $descriptions['field_status']; ?>
+              </span>
+              </a>
+            <?php endif; ?>
+          </div>
+        </th>
+        <td colspan="2" class="select-no-border no-padding"><?php print drupal_render($element[$key]['field_status']); ?></td>
       </tr>
       <tr class="<?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>" >
         <th>
@@ -59,7 +95,7 @@
           <?php endif; ?>
         </div>
       </th>
-        <td colspan="2" ><?php print drupal_render($element[$key]['field_commentary']); ?></td>
+        <td colspan="2" class="no-padding"><?php print drupal_render($element[$key]['field_commentary']); ?></td>
       </tr>
       <?php $element[$key]['field_benefit_start_date']['und'][0]['value']['date']['#title'] =
             $element[$key]['field_benefit_start_date']['und'][0]['value']['date']['#description'] =
