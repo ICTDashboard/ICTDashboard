@@ -1848,12 +1848,14 @@ function __ict_project_get_preview_switch_button($viz_only, $viz_preview) {
   }
 
   $link = '<a href="';
-  $link .= url(current_path(), array('query' => array('viz' => 1)));
-  $link .= '" class="preview_switch submit-button">';
   if (!$viz_preview) {
+    $link .= url(current_path(), array('query' => array('viz' => 1)));
+    $link .= '" class="preview_switch submit-button">';
     $link .= '<span class="viz-ico"></span>' . t('Switch to Visualisation Preview');
   }
   else {
+    $link .= url(current_path());
+    $link .= '" class="preview_switch submit-button">';
     $link .= '<span class="table-ico"></span>' . t('Switch to Data Preview');
   }
   $link .= '</a>';

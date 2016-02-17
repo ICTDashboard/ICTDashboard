@@ -476,6 +476,7 @@ body,
     &.benefit-num {
       width: 42px;
       border-bottom: 2px solid #025468;
+      border-right: 1px solid #0a5f74;
       .label {
         padding-left: 0;
         padding-right: 0;
@@ -495,7 +496,7 @@ body,
       }
     }
     &:last-child th {
-      @include border-radius(0 0 0 4px);
+      //@include border-radius(0 0 0 4px);
     }
   }
   label {
