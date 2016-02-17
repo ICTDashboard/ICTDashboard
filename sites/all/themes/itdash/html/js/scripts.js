@@ -134,7 +134,6 @@ jQuery(document).ready(function($) {
 	$('.field-multiple-drag').remove();
 	$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 1);
 	$('.tabledrag-toggle-weight').click(function(){
-		console.log('test');
 		if( $('.delta-order.tabledrag-hide').is(':visible') ) {
 			// Visible
 			$('.tabledrag-hide').prev('td').css({
@@ -144,8 +143,7 @@ jQuery(document).ready(function($) {
 				'border-radius': '4px 0 0 0'
 			});
 		} else {
-			// Invisible 
-			console.log('invisible');
+			// Invisible
 			$('.tabledrag-hide').prev('td').css({
 				'border-right': '1px solid #abb6cb'
 			});
@@ -162,9 +160,31 @@ Drupal.behaviors.initSelectbox = {
 		jQuery('.field-multiple-drag', context).remove();
 		jQuery('table[id^="field-implementation-partners-values"] tr th', context).attr('colspan', 1);
 
-		jQuery('.form-select:not([multiple="multiple"],.ict-combobox)', context).selectbox();
+		var ictSelects = jQuery('.form-select:not([multiple="multiple"],.ict-combobox)', context);
+		ictSelects.selectbox({onChange: function(value, inst){
+			var holder = jQuery(inst.input).parent().find('.sbHolder');
+			holder.removeClass().addClass('sbHolder ' + value);
+		}});
+
+		ictSelects.each(function(){
+			var selected = jQuery(this).find('option:selected').val();
+			jQuery(this).parent().find('.sbHolder').addClass(selected);
+		});
+
+
 		jQuery('.form-select[disabled="disabled"]', context).selectbox("disable");
 		jQuery('.field_implementation_partners-delta-order', context).selectbox();
+	}
+}
+
+Drupal.behaviors.textareaBenefits = {
+	attach: function(context) {
+		var textarea = jQuery("#financial-benefits textarea", context);
+		var heightLimit = 200; /* Maximum height: 200px */
+
+		textarea.on('input', function() {
+			jQuery(this).height(Math.min(jQuery(this)[0].scrollHeight, heightLimit));
+		});
 	}
 }
 
