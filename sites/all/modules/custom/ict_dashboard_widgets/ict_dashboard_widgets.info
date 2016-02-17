@@ -1,23 +1,12 @@
 name = ICT Dashboard Widgets
 core = 7.x
-package = ICT Dashboard
-version = 7.x-1.3
+package = Legacy
+version = 7.x-1.4
 project = ict_dashboard_widgets
 dependencies[] = dashboard
 dependencies[] = features
-dependencies[] = node_export_features
-dependencies[] = text
-__drupal_alter_by_ref[][node][page] = page
-features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
-features[field_instance][] = node-page-body
-features[node][] = page
 features[uuid_node][] = 5436dc7d-c224-44a2-9db4-02091f155065
 features[uuid_node][] = 8754ca37-1410-4671-bb58-ce670b640f5d
 features[uuid_node][] = ff1441b5-255b-465e-ba64-21149cc90807
-features[variable][] = comment_page
-features[variable][] = node_options_page
-features[variable][] = node_submitted_page
-features_exclude[dependencies][ict_project] = ict_project
-features_exclude[dependencies][strongarm] = strongarm
-mtime = 1420529575
+

@@ -1,6 +1,6 @@
 name = ICT Dashboard Data Push Rules
 core = 7.x
-package = ICT Dashboard
+package = Legacy
 dependencies[] = ckan_remote_post
 dependencies[] = ctools
 dependencies[] = entity
