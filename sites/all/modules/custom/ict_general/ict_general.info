@@ -1,0 +1,4 @@
+name=ICT general
+description=ICT general
+core=7.x
+package = ICT Dashboard

@@ -1,0 +1,155 @@
+<?php
+
+function ict_general_menu () {
+	$items['form_csv_export/%node'] = array(
+		'title' => 'Export form CSV',
+		'page callback' => 'ict_general_export_form_csv',
+		'page arguments' => array(1),
+		'access callback' => TRUE,
+    'access arguments' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+	);
+
+	return $items;
+}
+
+function ict_general_export_form_csv($node) {
+	if (isset($node->webform['components'])) {
+		$components_data = array();
+		$header_data = array();
+		foreach ($node->webform['components'] as $component) {
+			if ($component['type'] != 'markup') {
+				$header_data[$component['form_key']] = $component['form_key'];
+				switch ($component['type']) {
+					case 'number':
+						$components_data[$component['form_key']] = '"Number values should be here"';
+						break;
+					case 'textarea':
+						$components_data[$component['form_key']] = '"Text should be here"';
+						break;
+					case 'select':
+						if ($component['form_key'] == 'project') {
+							$components_data[$component['form_key']] = '"Node id of the Project should be here"';
+						} else {
+							if (isset($component['extra']['items'])) {
+								$select_items = explode("\r\n", $component['extra']['items']);
+								foreach ($select_items as &$select_item) {
+									$select_item = preg_replace('@.*[\|]@Uis', '', $select_item);
+								}
+								$components_data[$component['form_key']] = '"Choose one of these values: ' . implode(', ', $select_items) . '"';
+							}
+						}
+						break;
+					case 'date':
+						$components_data[$component['form_key']] = '"Enter date according to this format yyyy-mm-dd: ' . date('Y-m-d') . '"';
+						break;
+				}
+				
+			}
+		}
+		drupal_add_http_header('Content-Type', 'text/csv; utf-8');
+		drupal_add_http_header('Content-Disposition', 'attachment;filename=test.csv');
+
+		$output = '';
+
+		$output .= implode(",", $header_data) . "\n";
+		$output .= implode(",", $components_data) . "\n";
+
+		print $output;
+
+		drupal_exit();
+	}
+}
+
+
+function ict_general_form_alter(&$form, &$form_state, $form_id) {
+	if ($form_id == 'webform_client_form_1662') {
+		$form['export_csv'] = array(
+			'#markup' => l('Export', 'form_csv_export/1662'),
+		);
+		$form['csv_file'] = array(
+			'#type' => 'file',
+		    '#title' => t('CSV file'),
+		    '#size' => 15,
+		    '#title_display' => 'invisible',
+		    // '#description' => t('Enter path to CSV file'),
+		    '#default_value' => '',
+		);
+		$form['actions']['submit']['#submit'] = $form['#submit'];
+		$form['actions']['submit_csv'] = array(
+			'#type' => 'submit',
+			'#value' => t('Submit CSV'),
+			'#submit' => array('ict_general_csv_submit_form_submit')
+		);
+		unset($form['#submit']);
+		$form['#theme'] = 'ict_general_update_project_form';
+	}
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ict_general_theme () {
+  return array(
+    'ict_general_update_project_form' => array(
+      'template' => 'ict_general_update_project_form',
+      'path' => drupal_get_path('module', 'ict_general') . '/theme',
+      'render element' => 'form',
+    ),
+    'user_profile_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'user-profile-form',
+      'path' =>  drupal_get_path('theme', 'itdash') . '/templates',
+      'render element' => 'form'
+    ),
+  );
+}
+
+
+function ict_general_csv_submit_form_submit($form, &$form_state) {
+	global $user;
+	module_load_include('inc', 'webform', 'includes/webform.submissions');
+
+	if (isset($_FILES['files']['tmp_name']['csv_file']) && !empty($_FILES['files']['tmp_name']['csv_file'])) {
+		$nid = arg(1);
+		$node = node_load($nid);
+
+		$csv_file_name = $_FILES['files']['tmp_name']['csv_file'];
+		$csv_content = file_get_contents($csv_file_name);
+
+		$rows = array_filter(explode("\n", $csv_content));
+
+		$header_data = explode(",", $rows[0]);
+		$components_data = explode(",", $rows[1]);
+
+		$submission_data = array();
+
+		if (isset($node->webform['components'])) {
+			foreach ($node->webform['components'] as $key => $component) {
+				if ($component['type'] != 'markup' && in_array($component['form_key'], $header_data)) {
+					$header_key = array_search($component['form_key'], $header_data);
+					$submission_data[$key] = array($components_data[$header_key]);
+				}
+			}
+		}
+
+		$is_preview = FALSE;
+
+		$submission = (object) array(
+			'nid' => $nid,
+		    'uid' => $user->uid,
+		    'submitted' => REQUEST_TIME,
+		    'remote_addr' => ip_address(),
+		    'is_draft' => FALSE,
+		    'data' => $submission_data,
+		    'preview' => $is_preview,
+		    'serial' => _webform_submission_serial_next_value($node->nid, !$is_preview),
+		);
+
+		webform_submission_insert($node, $submission);
+
+		drupal_set_message(t('You\'ve successfully submitted form via CSV'));
+	} else {
+		drupal_set_message(t("You didn't choose CSV file or error occured while uploading file"), 'error');
+	}
+}

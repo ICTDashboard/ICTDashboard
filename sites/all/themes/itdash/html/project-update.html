@@ -1,0 +1,240 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="Emergency Medicine Education and Training">
+	<meta name="author" content="SitePoint">
+	
+	<title>IT Dashboard</title>
+
+	<link rel="stylesheet" id="icon-stylesheet-css"  href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/base/jquery-ui.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/slicknav.css" type="text/css" media="all" />
+	<script type="text/javascript" src="js/libs/modernizr.custom.min.js"></script>
+
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" id="bones-ie-only-css"  href="css/ie.css" type="text/css" media="all" />
+	<![endif]-->
+</head>
+
+<body class="login">
+	<div id="container">
+		
+		<header class="header" role="banner">
+			<div id="inner-header" class="wrap cf">
+				<p id="logo" class="h1"><a href="/" rel="nofollow">
+					<img src="images/agdof-logo.png" alt="ICT Dashboard"/>
+					<span><strong>IT</strong> Dashboard</span></a>
+				</p>
+				<nav role="navigation" id="navigation">
+					<ul id="main-menu" class="nav">
+						<li class="blue"><a href="#">Home</a></li>
+						<li class="green"><a href="#">Projects</a></li>
+						<li class="yellow-green"><a href="#">Dashboard</a></li>
+					</ul>
+				</nav>
+				<div class="user-tools">
+					<div>
+						<span>Username</span>
+						<div class="user-option">
+							<a class="arrowdown" href="#"><i class="fa fa-sort-down"></i></a>
+							<ul>
+								<li><a href="#">Acccount</a></li>
+								<li><a href="#">Sign out</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		
+		<div id="content">
+			<div class="page-title dotbg">
+				<div class="inner-title-content wrap cf">
+					<h1>ICT Project Update Form</h1>
+				</div>
+			</div>
+			
+			<div id="inner-content" class="wrap cf">
+				<h2>Regular reporting data</h2>
+				<div class="project-update-submission d-all">
+					<form name="project-update-form">
+						<table>
+							<tr>
+								<td class="label">Current Total Expected budget <em>($m)</em></td>
+								<td class="text"><input type="text" /></td>
+							</tr>
+							<tr>
+								<td class="label">Current Total Expected Spend for Current Financial Year <em>($m)</em></td>
+								<td class="text"><input type="text" /></td>
+							</tr>
+							<tr>
+								<td class="label">Current Expected Completion Date</td>
+								<td class="text date">
+									<input type="hidden" id="expected-date" class="add_datepicker" />
+									<div class="d-1of3 t-1of3">
+										<span class="select">
+											<select id="expected-date-day">
+												<option value="0">Day</option>
+												<option value="01">1</option>
+												<option value="02">2</option>
+												<option value="03">3</option>
+												<option value="04">4</option>
+												<option value="05">5</option>
+												<option value="06">6</option>
+												<option value="07">7</option>
+												<option value="08">8</option>
+												<option value="09">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+												<option value="13">13</option>
+												<option value="14">14</option>
+												<option value="15">15</option>
+												<option value="16">16</option>
+												<option value="17">17</option>
+												<option value="18">18</option>
+												<option value="19">19</option>
+												<option value="20">20</option>
+												<option value="21">21</option>
+												<option value="22">22</option>
+												<option value="23">23</option>
+												<option value="24">24</option>
+												<option value="25">25</option>
+												<option value="26">26</option>
+												<option value="27">27</option>
+												<option value="28">28</option>
+												<option value="29">29</option>
+												<option value="30">30</option>
+												<option value="31">31</option>
+											</select>
+										</span>
+									</div>
+									<div class="d-1of3 t-1of3">
+										<span class="select">
+											<select id="expected-date-month">
+												<option value="0">Month</option>
+												<option value="01">January</option> 
+												<option value="02">February</option>
+												<option value="03">March</option>
+												<option value="04">April</option>
+												<option value="05">May</option>
+												<option value="06">June</option>
+												<option value="07">July</option>
+												<option value="08">August</option>
+												<option value="09">September</option>
+												<option value="10">October</option>
+												<option value="11">November</option>
+												<option value="12">December</option>
+											</select>
+										</span>
+									</div>
+									<div class="d-1of3 t-1of3 last-col">
+										<span class="select">
+											<select id="expected-date-year">
+												<option value="0">Year</option>
+												<option value="2014">2014</option>
+												<option value="2013">2013</option>
+												<option value="2012">2012</option>
+												<option value="2011">2011</option>
+												<option value="2010">2010</option>
+											</select>
+										</span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="label">Current Estimated Level of Project Completion <em>(%)</em></td>
+								<td class="text"><input type="text" /></td>
+							</tr>
+							<tr>
+								<td class="label">Current Estimate of Value To Be Realised <em>(% value of project cost)</em></td>
+								<td class="text"><input type="text" /></td>
+							</tr>
+							<tr>
+								<td class="label">Current Number of Government FTEs</td>
+								<td class="text"><input type="text" /></td>
+							</tr>
+							<tr>
+								<td class="label">Current Number of Contractors
+									<span>Individual contractors, not implementation partners.</span>
+								</td>
+								<td class="text"><input type="text" /></td>
+							</tr>
+							<tr>
+								<td class="label vtop">Current Project Rating <em>(Green, Amber, Red)</em></td>
+								<td class="text">
+									<p><input type="radio" name="color" id="green" /><label for="green">Green</label></p>
+									<p><input type="radio" name="color" id="amber" /><label for="amber">Amber</label></p>
+									<p><input type="radio" name="color" id="red" /><label for="red">Red</label></p>
+								</td>
+							</tr>
+							<tr>
+								<td class="label vtop">Agency Comments <em>(including changes in project scope)</em></td>
+								<td class="text"><textarea></textarea></td>
+							</tr>
+							<tr>
+								<td class="label vtop">Any Changes to Project Baseline Data</td>
+								<td class="text"><textarea placeholder="Any changes of project manager, implementation partners, summary, status, etc."></textarea></td>
+							</tr>
+							<tr>
+								<td class="label">Total Spent in Previous Financial Year ($m) - Yearly only</td>
+								<td class="text"><input type="text" /></td>
+							</tr>
+						</table>
+						
+						<h2>Submit CSV</h2>
+						<table cellspacing="0" cellpadding="0" border="0">
+							<tr>
+								<td class="label">Export from fields from CSV file</td>
+								<td class="text">
+									<a href="#" class="export-btn">Export</a>         
+								</td>
+							</tr>
+							<tr>
+								<td class="label">CSV File <span>Enter path to CSV file.</span></td>
+								<td class="text">
+									<div class="field-type-file field-name-field-mid-csv-file field-widget-file-generic form-wrapper" id="edit-field-mid-csv-file">
+									  <div id="edit-field-mid-csv-file-und-0-ajax-wrapper">
+										<div class="form-item form-type-managed-file form-item-field-mid-csv-file-und-0">
+										  <div class="file-widget form-managed-file clearfix">
+											<div class="fileUpload btn btn-primary">
+												<span>Choose file</span>
+												<input type="file" id="edit-field-mid-csv-file-und-0-upload" name="files[field_mid_csv_file_und_0]" size="22" class="form-file upload">
+											</div>
+
+											<input type="submit" id="edit-field-mid-csv-file-und-0-upload-button" name="field_mid_csv_file_und_0_upload_button" value="Upload" class="form-submit ajax-processed">
+											<input type="hidden" name="field_mid_csv_file[und][0][fid]" value="0">
+											<input type="hidden" name="field_mid_csv_file[und][0][display]" value="1">
+										  </div>
+										</div>
+									  </div>
+									</div>
+								</td>
+							</tr>
+						</table>
+						<p class="submit"><input type="submit" /></p>
+						
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<footer class="footer" role="contentinfo">
+		<div id="inner-footer">
+			<div class="wrap cf">
+				<p class="copy">&copy; ICT Dashboard 2014</p>
+			</div>
+		</div>
+	</footer>
+	
+	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/jquery.slicknav.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+</body>
+</html>

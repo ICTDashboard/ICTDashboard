@@ -1,0 +1,15 @@
+name = ICT Dashboard Data Push Rules
+core = 7.x
+package = ICT Dashboard
+dependencies[] = ckan_remote_post
+dependencies[] = ctools
+dependencies[] = entity
+dependencies[] = entityform
+dependencies[] = rules
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[rules_config][] = rules_create_project
+features[rules_config][] = rules_update_project
+features[views_view][] = ckan_submission_result
+mtime = 1418679784

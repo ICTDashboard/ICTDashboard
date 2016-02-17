@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ICT Dashboard Data Push Rules feature.
+ */
+
+include_once 'ict_dashboard_data_push_rules.features.inc';

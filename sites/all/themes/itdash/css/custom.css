@@ -1,0 +1,362 @@
+.page-user .tabs {display: none;}
+#content #inner-content .signin-request .tab-content .tab form p input[type="password"] {
+    background-color: #fff;
+    border: 1px solid #b3bdcf;
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+}
+ul#main-menu li {list-style: none;}
+.header {position: relative;z-index: 99;}
+#content #project-listings .project-lists table tr td.title,
+#content #project-listings .project-lists table tr th:first-child {width: 500px;}
+.profile h3 {border: none;}
+
+#content #inner-content .register-form form p input[type="password"],
+input.password-field,
+input.password-confirm,
+input.password-field:focus,
+input.password-confirm:focus
+
+{
+  background-color: #fff;
+  border: 1px solid #b3bdcf;
+  width: 100%;
+  max-width: 100%;
+  font-size: 14px;
+}
+
+
+.form-type-password label{
+  font-size: 14px;
+  font-weight: 700;
+  color: #202b3d;
+}
+
+#user-profile-form .form-submit {
+  background: url("../html/images/submit-btn.png") no-repeat scroll 0 0 transparent;
+  border: 0 none;
+  height: 44px;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 130px;
+}
+
+.confirm-parent, .password-parent {
+  width: 100%;
+}
+
+/*.user-tools>div span {
+  width: 85px;
+  word-wrap: break-word;
+}*/
+
+.date .form-item {
+  float: left;
+  padding-right: 0.75em;
+  width: 33.33%;
+}
+
+.date .form-item label {display: none;}
+
+#edit-field-original-total-budget input,
+#edit-field-rebaselined-total-budget input {
+  background-color: #fff;
+
+}
+
+#project-node-form select#edit-field-project-users-und {
+  height: 128px;
+  padding: 5px 0;
+}
+
+
+#edit-field-rebaselined-total-budget table, #edit-field-rebaselined-total-budget th,  div#edit-field-rebaselined-total-budget td,
+#edit-field-original-total-budget table, #edit-field-original-total-budget th,  div#edit-field-original-total-budget td {
+
+}
+
+.field-name-field-total input {
+
+}
+
+div#edit-field-original-total-budget td,
+div#edit-field-rebaselined-total-budget td {
+  text-align: center;
+}
+
+.field-widget-number input {
+  margin: 0;
+  padding: 0;
+  height: 54px;
+}
+
+.page-dashboard h2 {
+    color: #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    border-bottom: 1px solid #d6ddeb;
+    padding-bottom: 10px;
+}
+.page-dashboard .field {
+    max-width: none;
+    line-height: 25px;
+}
+#content .project-categories .box .inner-box .text {min-height: 105px;}
+
+#user-register-form .form-text {
+  max-width: 100%;
+  border: 1px solid #b3bdcf;
+}
+
+#user-register-form .form-required {
+  color: #ee2a24;
+}
+
+#user-register-form label{
+  font-size: 14px;
+  font-weight: 700;
+  color: #202b3d;
+}
+.page-node .tabs {display: none;}
+
+.pager li a {
+  color: #0d6c88;
+  text-decoration: none;
+}
+.pager li {
+  float: left;
+  padding: 10px;
+}
+.tooltipster-icon {
+    cursor: help;
+    margin-left: 4px;
+    background: #137992;
+    border: 1px solid #137992;
+    padding: 0 2px 2px;
+    border-radius: 100%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 11px;
+    position: relative;
+    behavior: url(PIE.php);
+}
+.tooltipster-icon:hover {background-color: #0a5f74;}
+/*.radio-description .form-item {float: left;}*/
+.header #logo {font-size: 34px;}
+
+#content .project-update-submission .submit input.form-submit,
+#content .project-update-submission .submit input#edit-preview,
+#content .project-update-submission .submit input#edit-preview--2,
+#content .project-update-submission .submit input#edit-submit {
+  background: url(../html/images/general-btn.png) repeat-x scroll 0 0 transparent;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-indent: 0px;
+  height: 41px;
+  margin: 0 10px;
+  vertical-align: top;
+  display: inline-block;
+  font-weight: 600;
+  width: auto;
+  /*min-width: 130px;*/
+  padding: 2px 15px;
+}
+
+#content .project-update-submission #edit-actions,
+.project-update-submission a.back,
+.project-update-submission form
+{
+  display: inline-block;
+  vertical-align: top;
+}
+
+#content .project-update-submission .submit input#edit-preview:hover,
+#content .project-update-submission .submit input#edit-preview--2:hover,
+#content .project-update-submission .submit input#edit-submit:hover
+{
+  background-position: 0 -41px;
+}
+
+.page-review-submission .submit a {
+  width: 130px;
+}
+
+.page-review-submission .submit {
+  margin-top: 20px;
+}
+
+.project-view .back {
+  margin: 0 10px;
+  text-transform: uppercase;
+}
+
+.footer #inner-footer .copy {width: 70%;}
+#contact_link {
+    color: #363a41;
+    margin: 1.5em 0;
+    float: left;
+}
+.tabledrag-toggle-weight {display: none;}
+#project-node-form .tabledrag-hide {display: none;}
+#edit-field-brief-project-summary-fake-format {display: none;}
+input.error[type="text"],
+input.is-invalid[type="text"],
+input.error[type="password"],
+input.is-invalid[type="password"],
+input.error[type="datetime"],
+input.is-invalid[type="datetime"],
+input.error[type="datetime-local"],
+input.is-invalid[type="datetime-local"],
+input.error[type="date"],
+input.is-invalid[type="date"],
+input.error[type="month"],
+input.is-invalid[type="month"],
+input.error[type="time"],
+input.is-invalid[type="time"],
+input.error[type="week"],
+input.is-invalid[type="week"],
+input.error[type="number"],
+input.is-invalid[type="number"],
+input.error[type="email"],
+input.is-invalid[type="email"],
+input.error[type="url"],
+input.is-invalid[type="url"],
+input.error[type="search"],
+input.is-invalid[type="search"],
+input.error[type="tel"],
+input.is-invalid[type="tel"],
+input.error[type="color"],
+input.is-invalid[type="color"],
+select.error,
+select.is-invalid,
+textarea.error,
+textarea.is-invalid,
+.field.error,
+.field.is-invalid {
+    color: #5c6b80;
+}
+
+.view-id-faq {
+    padding: 50px 0;
+}
+.view-id-faq .view-content {
+    border: 1px solid #a7b0bd;
+}
+.ict-faq-question {
+    color: #0d6c88;
+    position: relative;
+    padding: 15px 15px 15px 60px;
+    cursor: pointer;
+}
+.ict-faq-question.ict-faq-question-active:before,
+.ict-faq-question:hover:before {
+    background-image: url(../html/images/minus.png);
+}
+.views-row-odd .ict-faq-question {
+    background-color: white;
+}
+.views-row-even .ict-faq-question {
+    background-color: #dff1f5;
+}
+.ict-faq-question h2 {
+    margin: 0;
+}
+.ict-faq-question:before {
+    content: ' ';
+    background-image: url(../html/images/plus.png);
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+}
+.ict-faq-answer {
+    display: none;
+    padding: 15px 15px 15px 60px;
+    font-size: 14px;
+}
+.sbHolderDisabled {
+    background-color: #ced6e6;
+    /*border: inherit;*/
+    border-color: #b3bdcf;
+}
+input.editor-email,
+input.approver-email {margin-bottom: 10px !important;}
+.ict-faq-answer ul {
+    margin-left: 35px;
+    list-style-type: disc;
+}
+.fancybox-inner .fancybox-title {
+    padding: 13px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #137992;
+    margin: 0;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.fancybox-actions {
+    padding: 20px 0 25px;
+    text-align: right;
+    border-top: 1px solid #b3bccd;
+    margin: 0 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.ict-fancy-content {
+    padding: 0 20px;
+    overflow: scroll;
+    position: relative;
+}
+.project-list-content {
+    overflow: hidden;
+}
+#content #project-listings .project-lists table tr td.update a {
+    display: inline-block;
+    max-width: 200px;
+}
+#content #project-listings .project-lists table tr th:last-child {
+    text-align: center;
+}
+.select-no-border .sbHolder,
+#content .project-update-submission table tr td.select-no-border select {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border: 0;
+    width: 100%;
+    height: 100%;
+}
+#content .project-update-submission table tr td.select-no-border div {
+    height: 100%;
+}
+td.select-no-border .sbHolder {
+    height: 38px;
+}
+.email-container {
+    padding-right: 80px;
+    position: relative;
+}
+.email-container input[type="submit"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

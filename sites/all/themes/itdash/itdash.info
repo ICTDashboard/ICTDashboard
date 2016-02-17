@@ -1,0 +1,12 @@
+name = IT Dashboard
+description = IT Dashboard Them
+core = 7.x
+
+plugins[panels][layouts] = layouts
+
+stylesheets[all][] = html/css/style.css
+stylesheets[all][] = css/custom.css
+stylesheets[all][] = html/vendor/fancybox/jquery.fancybox.css
+
+scripts[] = html/vendor/fancybox/jquery.fancybox.pack.js
+scripts[] = html/js/ict-fancybox.js

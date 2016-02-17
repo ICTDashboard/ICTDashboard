@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ICT Entity forms feature.
+ */
+
+include_once 'ict_entity_forms.features.inc';
