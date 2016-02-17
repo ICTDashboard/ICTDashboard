@@ -487,7 +487,7 @@ body,
   }
   tr {
     &:first-child {
-      th {
+      th:first-child {
         @include border-radius(4px 0 0);
       }
       td {
@@ -531,13 +531,28 @@ body,
     background-color: transparent;
     &.hasDatepicker {
       padding-right: 30px;
+      text-align: left;
+      padding-left: 0;
     }
   }
   textarea {
     padding-left: 18px;
+    min-height: 0;
+    line-height: 28px;
+    margin-top: 5px;
   }
   .sbSelector {
-    text-indent: 18px;
+    text-indent: 48px;
+    line-height: 40px;
+  }
+  .sbOptions {
+    li {
+      padding-left: 0;
+    }
+    a {
+      border-bottom: dotted 1px #cad4e7;
+      padding-left: 48px;
+    }
   }
   .date-no-float {
     width: 100%;
@@ -597,6 +612,48 @@ body,
   .ict-tick {
     display: inline-block;
   }
+  .field-name-field-status {
+    .sbHolder,
+    .sbOptions a {
+      position: relative;
+      &:before {
+        content: "";
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        line-height: 54px;
+        vertical-align: sub;
+        margin-right: 5px;
+        position: absolute;
+        top: 11px;
+        left: 18px;
+      }
+    }
+    .sbHolder.yes:before,
+    a[rel=yes]:before {
+      background-color: #1b56af;
+    }
+    .sbHolder.no:before,
+    a[rel=no]:before {
+      background-color: #c42656;
+    }
+    .sbHolder.on_track:before,
+    a[rel=on_track]:before {
+      background-color: #1fd063;
+    }
+    .sbHolder.at_risk:before,
+    a[rel=at_risk]:before {
+      background-color: #f6d000;
+    }
+    .sbHolder.removed:before,
+    a[rel=removed]:before {
+      @include sprite-icon(remove-icon-normal);
+      top: 11px;
+    }
+  }
+}
+.benefits-action {
+  text-align: right;
 }
 .ict-tick {
   @include sprite-icon('tick');
@@ -657,5 +714,18 @@ body,
 .preview_switch {
   display: inline-block;
   margin-left: 10px;
-  font-style: italic;
+  vertical-align: middle!important;
+  min-width: 312px!important;
+  .viz-ico {
+    @include sprite-icon(pie-ico);
+  }
+  .table-ico {
+    @include sprite-icon(table-ico);
+  }
+  .viz-ico,
+  .table-ico {
+    display: inline-block;
+    vertical-align: sub;
+    margin-right: 15px;
+  }
 }

@@ -144,7 +144,9 @@
     <?php $number ++ ?>
   <?php endforeach; ?>
 </table>
+<div class="benefits-action">
 <?php print drupal_render($element['add_more']); ?>
+</div>
 <div class="element-invisible">
   <?php print drupal_render_children($element); ?>
 </div>
