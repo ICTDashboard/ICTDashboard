@@ -56,7 +56,7 @@
 
   <?php print $styles; ?>
   <?php print $scripts; ?>
-  <link rel="stylesheet" id="icon-stylesheet-css"  href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" type="text/css" media="all" />
+  <link rel="stylesheet" id="icon-stylesheet-css"  href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" type="text/css" media="all" />
 
   <?php if (arg(0) != 'project' && arg(1) != 'add') : ?>
     <!--[if lte IE 8]>  <!--<script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/r2d3.js"></script>--><![endif]-->
