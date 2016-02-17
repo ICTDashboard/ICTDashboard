@@ -72,3 +72,65 @@ and it will create a button dependant on those variables.
   } // end active
 
 } // end blue button
+
+.delete-btn {
+  @extend %btn; // here we load the btn defaults
+  position: relative;
+  font-size: 13px;
+  background-color: transparent;
+  color: #0d6c88;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: right;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    @include sprite-icon('remove-icon-normal');
+  }
+  &:hover {
+    color: #0d6c88;
+    &:after {
+      @include sprite-icon('remove-icon-normal');
+    }
+  }
+}
+
+.export-btn {
+  color: #202b3d !important;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  min-height: 41px;
+  border: 1px solid #99a8c2;
+  border-radius: 4px;
+  min-width: 128px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  background: #d0d8e5;
+  padding: 10px 15px;
+  background: -moz-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d0d8e5), color-stop(100%, #c9d1de));
+  background: -webkit-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
+  background: -o-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
+  background: -ms-linear-gradient(top, #d0d8e5 0%, #c9d1de 100%);
+  background: linear-gradient(to bottom, #d0d8e5 0%, #c9d1de 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0d8e5', endColorstr='#c9d1de',GradientType=0 );
+  @include box-shadow(0 3px 2px #ccd1db);
+  margin-bottom: 3px;
+  &:hover {
+    color: #fff !important;
+    border: 1px solid #0e6872;
+    background: #157a86;
+    background: -moz-linear-gradient(top, #157a86 0%, #0e6872 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #157a86), color-stop(100%, #0e6872));
+    background: -webkit-linear-gradient(top, #157a86 0%, #0e6872 100%);
+    background: -o-linear-gradient(top, #157a86 0%, #0e6872 100%);
+    background: -ms-linear-gradient(top, #157a86 0%, #0e6872 100%);
+    background: linear-gradient(to bottom, #157a86 0%, #0e6872 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#157a86', endColorstr='#0e6872',GradientType=0 );
+  }
+}

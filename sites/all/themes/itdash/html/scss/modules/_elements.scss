@@ -1,0 +1,661 @@
+#user-pass-reset,
+.entity-bean,
+.node-type-page #inner-content{
+  margin: 25px auto;
+  .field {
+    height: auto;
+    line-height: 2.5em;
+    max-width: none;
+  }
+
+  ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+    margin-top: -2px;
+    padding-left: 28px;
+    li {
+      padding-left: 18px;
+      line-height: 22px;
+      position: relative;
+      &:before {
+        position: absolute;
+        content: "• ";
+        color: #17716b;
+        left: -2px;
+        font-size: 24px;
+      }
+    }
+  }
+}
+body,
+#content {
+  .welcome-text {
+    a {
+      color: #d5ff92;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+  }
+  #inner-content {
+    h3 {
+      font-size: 18px;
+      color: #202b3d;
+      font-weight: 600;
+    }
+  }
+  .ict-benefits {
+    max-width: 812px;
+    border: 1px solid #d8dee9;
+    .node-faq-item {
+      &.row-blue {
+        background-color: #dff1f5;
+      }
+      .ict-faq-question {
+        position: relative;
+        padding: 10px 155px 10px 50px;
+        &:before {
+          left: 10px;
+          top: 10px;
+        }
+        h4 {
+          margin: 0;
+          font-size: 16px;
+        }
+      }
+      .ict-faq-answer {
+        padding-top: 0;
+        padding-left: 50px;
+        ul {
+          list-style: none;
+          padding:0;
+          margin:0;
+          margin-top: -2px;
+          li {
+            padding-left: 18px;
+            line-height: 22px;
+            position: relative;
+            &:before {
+                position: absolute;
+                content: "• ";
+                color: #17716b;
+                left: -2px;
+                font-size: 24px;
+            }
+            .label {
+              padding: 0;
+              display: inline-block;
+              min-width: 98px;
+            }
+            .benefit {
+              display: inline-block;
+            }
+          }
+        }
+      }
+      .benfit-status {
+        position: absolute;
+        top: 12px;
+        right: 0px;
+        width: 140px;
+        color: black;
+        .status-marker {
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          line-height: 54px;
+          vertical-align: sub;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  #user-pass-reset,
+  .ict-fancy-content,
+  .project-draft-submission,
+  .project-update-submission {
+    font-size: 14px;
+    .tooltip-edit,
+    .tooltip {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      margin-bottom: -3px;
+      margin-left: 10px;
+      margin-right: 10px;
+      z-index: 1;
+      @include sprite-icon('tooltip-icon-normal');
+      display: inline-block;
+      &:hover {
+        @include sprite-icon('tooltip-icon-hover');
+        display:inline-block;
+      }
+      span.tooltip-content {
+        position: absolute;
+        display: none;
+        color: #fff;
+        font-size: 13px;
+        line-height: 22px;
+        background-color: #1e2635;
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-style: normal;
+        bottom: 30px;
+        right: -150px;
+        width: 300px;
+        &:after {
+          content: '';
+          width: 0;
+          height: 0;
+          position: absolute;
+          display: block;
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+          border-top: 20px solid #1e2635;
+          bottom: -10px;
+          left: 50%;
+          margin-left: -25px;
+        }
+      }
+      &:hover {
+        span.tooltip-content {
+          display: block;
+        }
+      }
+    }
+    .tooltip-edit {
+      margin-left: 0;
+      margin-right: 5px;
+      text-align: center;
+      @include sprite-icon('edit-highlight');
+      display: inline-block;
+      &:hover {
+        @include sprite-icon('edit-highlight');
+        display: inline-block;
+      }
+      span.tooltip-content {
+        color: #1e2635;
+        background-color: #f0b629;
+        font-weight: normal;
+        &:after {
+          border-top: 20px solid #f0b629;
+        }
+      }
+    }
+    .row {
+      margin-bottom: 15px;
+      //@include clearfix;
+      
+      .label {
+        font-weight: 700;
+        color: #202b3d;
+        padding-right: 15px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+        .edit-btn {
+          display: inline-block;
+          margin-left: 0;
+          color: #0d6c88;
+          position: relative;
+          font-size: 13px;
+          font-weight: 500;
+          padding-left: 25px;
+          text-decoration: none;
+          &:hover {
+            text-decoration: none;
+          }
+          &:before {
+            display: block;
+            width: 16px;
+            height: 16px;
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 0;
+            @include sprite-icon('edit-icon');
+          }
+        }
+        .start-year-select {
+          select {
+            display: inline;
+            width: 80px;
+            -webkit-appearance: menulist;
+            padding: 0 10px;
+            height: 20px;
+            line-height: 14px;
+            margin: 0;
+            border: 1px solid #a6a6a6;
+            background-image: none;
+            color: #202b3d;
+          }
+        }
+        .form-helptext {
+          font-weight: normal;
+        }
+      }
+      .text {
+        .description {
+          display: none;
+        }
+        select,
+        input[type="text"],
+        textarea {
+          border: 1px solid #b3bdcf;
+          background-color: #fff;
+          background-image: none;
+          color: #4d586a;
+          width: 100%;
+          max-width: 640px;
+          margin: 0;
+          height: 36px;
+          line-height: 36px;
+          padding: 0 10px;
+
+          #field-expected-completion-date-add-more-wrapper input,
+          &.add_datepicker {
+            max-width: 607px;
+          }
+        }
+        select[multiple="multiple"] {
+          height: auto;
+        }
+        .grippie {
+          max-width: 640px;
+        }
+        table {
+          width: 100%;
+          max-width: 640px;
+          border-bottom: 1px solid #abb6cb;
+          border-collapse: separate;
+          font-size: 14px;
+          &#financial-benefits {
+            max-width: none;
+          }
+        }
+        #edit-field-benefits-realised table{
+          max-width: none;
+        }
+        tr {
+          th {
+            padding: 8px;
+            background-color: #137992;
+            border-left: 1px solid #0a5f74;
+            font-size: 15px;
+            font-weight: 500;
+            color: #fff;
+            vertical-align: top;
+            text-shadow: 0 0 0;
+            text-align: center;
+            &:first-child {
+              border-radius: 4px 0 0;
+              border-left: 0 none;
+            }
+            &:last-child {
+              border-radius: 0 4px 0 0;
+            }
+          }
+          td {
+            border-left: 1px solid #abb6cb;
+            border-top: 1px solid #abb6cb;
+            padding: 0;
+            color: #202b3d;
+            background: #c8d0de;
+            width: 110px;
+            height: 38px;
+            text-align: center;
+            vertical-align: middle;
+            &.number-cell {
+              background-color: #fff;
+            }
+          }
+        }
+        p {
+          margin: 0 0 5px;
+        }
+        table.table_field_collection {
+          margin-bottom: 10px;
+          tr {
+            td {
+              border-top: none;
+              border-bottom: 1px solid #abb6cb;
+              input {
+                text-align: center;
+                border-radius: 0;
+                height: 39px;
+                border: none;
+              }
+              .label {
+                font-weight: normal;
+              }
+              &:last-child {
+                border-right: 1px solid #abb6cb;
+              }
+            }
+            &:last-child {
+              td {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+        .date-field-wrapper {
+          .form-item {
+            min-width: 640px;
+            width: auto;
+            position: relative;
+            .ui-datepicker-trigger {
+              position: absolute;
+              top: 4px;
+              right: -38px;
+            }
+          }
+        }
+        .remove-column-button {
+          background: none;
+          outline: none;
+          border: none;
+          color: #fff;
+          text-decoration: underline;
+        }
+        .field-name-field-portfolio-name {
+          position: relative;
+          .ajax-progress-throbber {
+            position: absolute;
+            top: -30px;
+            left: 150px;
+          }
+        }
+        #approvers,
+        #editors {
+          max-width: 720px;
+        }
+      }
+      .form-item {
+        float: none;
+        width: 100%;
+        margin-bottom: 0;
+        .date-padding {
+          float: none;
+          padding: 0;
+          input[type="text"] {
+            width: 100%;
+            max-width: 640px;
+          }
+        }
+      }
+    }
+    .email-value {
+      text-decoration: none;
+      display: block;
+      color: #0d6c88;
+      padding-left: 15px;
+      width: auto;
+      margin-bottom: 15px;
+    }
+    .dotted-line {
+      margin-top: 30px;
+      display: block;
+      background: transparent url("../images/dot-line-bg.png") repeat-x scroll 0 0;
+      height: 1px;
+      width: 100%;
+    }
+    .sbHolder {
+      max-width: 640px;
+    }
+    .sbSelector {
+      width: 100%;
+    }
+  }
+  #edit-actions {
+    width: 100%;
+  }
+  .submit {
+    margin-bottom: 20px;
+    border-top: 1px solid #f0f4fa;
+    padding-top: 20px;
+    text-align: right;
+    margin-top: 30px;
+  }
+  .submit-button {
+    background: url(../images/general-btn.png) repeat-x scroll 0 0 transparent;
+    min-width: 275px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    text-indent: 0px;
+    height: 41px;
+    margin: 0 10px;
+    vertical-align: top;
+    display: inline-block;
+    font-weight: bold;
+    border: 0 none;
+    overflow: hidden;
+    @include box-shadow(0 3px 0 #b1b7c1);
+    margin-bottom: 3px;
+    &:hover {
+      background-position: 0 -41px;
+    }
+  }
+  a.submit-button {
+    line-height: 41px;
+    text-decoration: none;
+  }
+}
+
+#content .project-draft-submission table#financial-benefits,
+#content .project-update-submission table#financial-benefits {
+  border: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  td {
+    border-bottom: 1px solid #abb6cb;
+    border-top: 0;
+    width: auto;
+    text-align: left;
+    padding-left: 18px;
+    &.no-padding {
+      padding: 0;
+    }
+    .sbHolder,
+    textarea,
+    .grippie {
+      max-width: none;
+      border: 0;
+    }
+  }
+  th {
+    padding: 0;
+    @include border-radius(0);
+    border-bottom: 1px solid #0a5f74;
+    text-align: left;
+    padding-left: 16px;
+    &.benefit-num {
+      width: 42px;
+      border-bottom: 2px solid #025468;
+      .label {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    .label {
+      color: white;
+    }
+  }
+  tr {
+    &:first-child {
+      th {
+        @include border-radius(4px 0 0);
+      }
+      td {
+        border-top: 1px solid #abb6cb;
+      }
+    }
+    &:last-child th {
+      @include border-radius(0 0 0 4px);
+    }
+  }
+  label {
+    display: none;
+  }
+  .field-widget-date-popup {
+    position: relative;
+    img {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+    }
+  }
+  .row-white td{
+    background-color: white;
+  }
+  .row-blue td{
+    background-color: #dff1f5;
+    textarea {
+      background-color: #dff1f5;
+    }
+  }
+  .row-yellow td {
+    background-color: #f5f2d7;
+  }
+  .sbHolder {
+    background-color: transparent;
+  }
+  input[type=text] {
+    height: 38px;
+    @include border-radius(0);
+    border: 0;
+    background-color: transparent;
+    &.hasDatepicker {
+      padding-right: 30px;
+    }
+  }
+  textarea {
+    padding-left: 18px;
+  }
+  .sbSelector {
+    text-indent: 18px;
+  }
+  .date-no-float {
+    width: 100%;
+  }
+  .last-benefit-row {
+    th {
+      border-bottom: 2px solid #025468;
+    }
+    td {
+      border-bottom: 2px solid #808da6;
+    }
+  }
+  td.table-remove-button {
+    //background-color: transparent;
+    a,
+    input {
+      background-color: transparent;
+      color: #0d6c88;
+      border: 0;
+      padding: 0;
+      text-decoration: none;
+    }
+    .history-button,
+    .remove-wrap {
+      position: relative;
+      padding-left: 20px;
+      display: inline-block;
+      &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 13px;
+        @include sprite-icon(remove-icon-normal);
+      }
+      &:hover {
+        input {
+          text-decoration: underline;
+        }
+        &:before {
+          @include sprite-icon(remove-icon-hover);
+        }
+      }
+    }
+    .history-button {
+      &:before {
+        top: 5px;
+        @include sprite-icon(history-icon);
+      }
+      &:hover {
+        &:before {
+          @include sprite-icon(history-icon);
+        }
+      }
+    }
+    //border: 0;
+  }
+  .ict-tick {
+    display: inline-block;
+  }
+}
+.ict-tick {
+  @include sprite-icon('tick');
+}
+.ict-align-center {
+  text-align: center;
+}
+
+.field-name-field-guide{
+  background-color: transparent;
+}
+
+.node-basic-page, .bean-admin-editable{
+  .field{
+    max-width: none;
+    background-color: transparent;
+  }
+}
+
+.sbOptions {
+  z-index: 2;
+}
+
+.legend {
+  overflow: hidden;
+  margin-bottom: 25px;
+  .bar-legend {
+    padding-left: 40px;
+    li {
+      line-height: 20px;
+      float: left;
+      margin-right: 25px;
+      span {
+        margin-right: 7px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+      }
+    }
+  }
+  &#schedule_legend {
+    .bar-legend {
+      padding-left: 2px;
+    }
+  }
+  &#benefits_legend {
+    .bar-legend {
+      li {
+        float: none;
+        font-weight: bold;
+        margin-bottom: 25px;
+      }
+    }
+  }
+}
+
+.preview_switch {
+  display: inline-block;
+  margin-left: 10px;
+  font-style: italic;
+}

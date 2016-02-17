@@ -73,30 +73,36 @@ jQuery(document).ready(function($) {
 
   if ($(".add_datepicker").length) {
 
-    $(document).click(function (e)
-    {
-      if (!$(this).hasClass('ui-datepicker-trigger'))
-      {
-        $('.add_datepicker').datepicker("hide");
-      }
-    });
+    //$(document).click(function (e)
+    //{
+    //  if (!$(this).hasClass('ui-datepicker-trigger'))
+    //  {
+    //    $('.add_datepicker').datepicker("hide");
+    //  }
+    //});
 
     $(".add_datepicker").each(function () {
-      var id = $(this).attr('id');
-
-      $(this).datepicker({
-        buttonImage: "/sites/all/themes/itdash/html/images/calendar-icon.png",
-        buttonImageOnly: true,
-        showOn: 'button',
-        onClose: function(dateText, inst) {
-          $('#' + id + '-und-0-value-year').val(Number(dateText.split('/')[2]));
-          $('#' + id + '-und-0-value-month').val(Number(dateText.split('/')[0]));
-          $('#' + id + '-und-0-value-day').val(Number(dateText.split('/')[1]));
-		    $('.form-select').selectbox('detach');
-		    $('.form-select').selectbox('attach');
-        }
-      });
-    });
+      	var id = $(this).attr('id');
+		var parent = $(this).parents('.popup-radio');
+		var dateinput = $('.form-type-date-popup input[type=text]', parent);
+		var opts = {
+			buttonImage: "/sites/all/themes/itdash/html/images/calendar-icon.png",
+			buttonImageOnly: true,
+			showOn: 'button',
+			onClose: function(dateText, inst) {
+				dateinput.val(dateText);
+			}
+		};
+		var dateFormat = $(this).attr('data-dateFormat');
+		if (dateFormat) {
+			opts.dateFormat = dateFormat;
+		}
+		if (dateinput.length > 0) {
+			var defaultDate = dateinput.val();
+		}
+      	$(this).datepicker(opts);
+		$(this).val(defaultDate);
+	});
 
   }
 
@@ -131,7 +137,6 @@ jQuery(document).ready(function($) {
 		console.log('test');
 		if( $('.delta-order.tabledrag-hide').is(':visible') ) {
 			// Visible
-			console.log('visible');
 			$('.tabledrag-hide').prev('td').css({
 				'border-right': '0'
 			});
@@ -149,13 +154,52 @@ jQuery(document).ready(function($) {
 			});
 		}
 	});
-	
-	$("body").bind("ajaxComplete", function(e, xhr, settings){
-		$('.field_implementation_partners-delta-order').selectbox('attach');
-		$('.field-multiple-drag').remove();
-		$('table[id^="field-implementation-partners-values"] tr th').attr('colspan', 1);
-    });
-	
-	$('.form-select').selectbox();
-	$('.field_implementation_partners-delta-order').selectbox();
 }); /* end of as page load scripts */
+
+Drupal.behaviors.initSelectbox = {
+	attach: function(context) {
+		jQuery('.field_implementation_partners-delta-order', context).selectbox('attach');
+		jQuery('.field-multiple-drag', context).remove();
+		jQuery('table[id^="field-implementation-partners-values"] tr th', context).attr('colspan', 1);
+
+		jQuery('.form-select:not([multiple="multiple"],.ict-combobox)', context).selectbox();
+		jQuery('.form-select[disabled="disabled"]', context).selectbox("disable");
+		jQuery('.field_implementation_partners-delta-order', context).selectbox();
+	}
+}
+
+Drupal.behaviors.ictFaq = {
+	attach: function(context) {
+		jQuery('.ict-faq-question', context).click(function(){
+			if (jQuery(this).hasClass('ict-faq-question-active')) {
+				var wrap = jQuery(this).parent(),
+					answer = wrap.find('.ict-faq-answer');
+
+				jQuery(this).removeClass('ict-faq-question-active');
+				answer.slideUp(function(){answer.css('overflow', 'visible')});
+			}
+			else {
+				var wrap = jQuery(this).parent(),
+					answer = wrap.find('.ict-faq-answer'),
+					activeQuest = jQuery('.ict-faq-question-active'),
+					activeWrap = activeQuest.parent(),
+					activeAnsw = activeWrap.find('.ict-faq-answer');
+
+				activeQuest.removeClass('ict-faq-question-active');
+				activeAnsw.slideUp(function(){answer.css('overflow', 'visible')});
+				jQuery(this).addClass('ict-faq-question-active');
+				answer.slideDown(function(){answer.css('overflow', 'visible')});
+			}
+			return false;
+		});
+	}
+}
+
+Drupal.behaviors.atepickerIcon = {
+	attach: function(context) {
+		for (id in Drupal.settings.datePopup) {
+			jQuery('#' + id).datepicker(Drupal.settings.datePopup[id].settings)
+			.addClass('date-popup-init');
+		}
+	}
+}
