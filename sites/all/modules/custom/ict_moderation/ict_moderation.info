@@ -1,6 +1,6 @@
 name = ICT Moderation
 core = 7.x
-package = ICT Dashboard
+package = Legacy
 version = 7.x-1.41
 project = ict_moderation
 dependencies[] = ctools

@@ -19,7 +19,6 @@ function ict_dashboard_widgets_uuid_features_default_content() {
   'promote' => 0,
   'sticky' => 0,
   'vuuid' => '2bc7d7bc-d1ef-4384-b46f-bb042cff32f0',
-  'ds_switch' => '',
   'type' => 'page',
   'language' => 'und',
   'created' => 1418733726,
@@ -33,8 +32,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
         'value' => '<p class="dashboard-description">The ICT Project Treemap compares how each of the major projects compare with each other according to either the total project value or number of projects being delivered by agencies.</p>
 
     <style type="text/css">
-
-        #chart {
+        #treemap {
             width: 960px;
             height: 500px;
             background: #ddd;
@@ -83,7 +81,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
 </head>
 <body>
 
-<div id="chart"></div>
+<div id="treemap"></div>
 
 <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -104,7 +102,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
                     innerArray.push({name: property, value:0, children: datum[property]});
                 }
                 var root = {
-                    "name": "Project Budget By Organisation",
+                    "name": "Projects by organisation",
                     "value": 0,
                     "children": innerArray
                 };
@@ -133,7 +131,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
                     .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
                     .round(false);
 
-                var svg = d3.select("#chart").append("svg")
+                var svg = d3.select("#treemap").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.bottom + margin.top)
                     .style("margin-left", -margin.left + "px")
@@ -233,7 +231,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
 
                     g.append("rect")
                         .attr("class", "parent")
-                        .call(rect).on("click", transition)
+                        .call(rect)
                         .style("fill",function(d,i){return color(d.name);})
                         .append("title")
                         .text(function (d) {
@@ -332,8 +330,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
 <style type="text/css">
 <!--/*--><![CDATA[/* ><!--*/
 
-
-        #chart {
+        #treemap {
             width: 960px;
             height: 500px;
             background: #ddd;
@@ -381,7 +378,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
     
 /*--><!]]>*/
 </style><p><br /></p>
-<div id="chart"></div>
+<div id="treemap"></div>
 <script type="text/javascript">
 <!--//--><![CDATA[// ><!--
 
@@ -403,7 +400,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
                     innerArray.push({name: property, value:0, children: datum[property]});
                 }
                 var root = {
-                    "name": "Project Budget By Organisation",
+                    "name": "Projects by organisation",
                     "value": 0,
                     "children": innerArray
                 };
@@ -432,7 +429,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
                     .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
                     .round(false);
 
-                var svg = d3.select("#chart").append("svg")
+                var svg = d3.select("#treemap").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.bottom + margin.top)
                     .style("margin-left", -margin.left + "px")
@@ -532,7 +529,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
 
                     g.append("rect")
                         .attr("class", "parent")
-                        .call(rect).on("click", transition)
+                        .call(rect)
                         .style("fill",function(d,i){return color(d.name);})
                         .append("title")
                         .text(function (d) {
@@ -691,7 +688,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
   'comment_count' => 0,
   'name' => 'admin',
   'picture' => 0,
-  'data' => 'b:0;',
+  'data' => 'a:5:{s:16:"ckeditor_default";s:1:"t";s:20:"ckeditor_show_toggle";s:1:"t";s:14:"ckeditor_width";s:4:"100%";s:13:"ckeditor_lang";s:2:"en";s:18:"ckeditor_auto_lang";s:1:"t";}',
   'date' => '2014-12-16 23:42:06 +1100',
 );
   $nodes[] = array(
@@ -703,7 +700,6 @@ function ict_dashboard_widgets_uuid_features_default_content() {
   'promote' => 0,
   'sticky' => 0,
   'vuuid' => 'e9808e16-4fe8-43be-8a0d-b716c0d3bd61',
-  'ds_switch' => '',
   'type' => 'page',
   'language' => 'und',
   'created' => 1418733726,
@@ -896,7 +892,7 @@ function ict_dashboard_widgets_uuid_features_default_content() {
   'comment_count' => 0,
   'name' => 'admin',
   'picture' => 0,
-  'data' => 'b:0;',
+  'data' => 'a:5:{s:16:"ckeditor_default";s:1:"t";s:20:"ckeditor_show_toggle";s:1:"t";s:14:"ckeditor_width";s:4:"100%";s:13:"ckeditor_lang";s:2:"en";s:18:"ckeditor_auto_lang";s:1:"t";}',
   'date' => '2014-12-16 23:42:06 +1100',
 );
   $nodes[] = array(
@@ -908,7 +904,6 @@ function ict_dashboard_widgets_uuid_features_default_content() {
   'promote' => 0,
   'sticky' => 0,
   'vuuid' => '358e5d58-366e-4add-9672-418e6ccafb80',
-  'ds_switch' => '',
   'type' => 'page',
   'language' => 'und',
   'created' => 1418733726,
@@ -949,7 +944,7 @@ height: 400px;
 
 jQuery(document).ready(function()
 {
-    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+total_value%2C+expected_total_value++FROM+%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+p+full+outer+JOIN+++++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp+++++from+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp+++++where+d.metric+%3D+%27total_project_current%27%29+b+on+p.name+%3D+b.name%3B",
+    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+total_value%2C+expected_total_value++FROM+%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+p+full+outer+JOIN+%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp+++++from+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp+++++where+d.metric+%3D+%27total_project_current%27%29+b+on+p.name+%3D+b.name%3B",
         function(error, data) {
             project_names = [];
             project_orig_budget = [];
@@ -1033,7 +1028,7 @@ height: 400px;
 
 jQuery(document).ready(function()
 {
-    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+total_value%2C+expected_total_value++FROM+%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+p+full+outer+JOIN+++++%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp+++++from+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp+++++where+d.metric+%3D+%27total_project_current%27%29+b+on+p.name+%3D+b.name%3B",
+    d3.json("/datastore_search_sql.js.php?sql=select+distinct+p.name%2C+total_value%2C+expected_total_value++FROM+%28select+name%2C+value+as+total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+where+metric+%3D+%27total_project_budget%27+%29+p+full+outer+JOIN+%28select+DISTINCT+d.name%2C+d.value+as+expected_total_value+from+%222133eaed-150b-4c73-a314-67a0bde04115%22+d+join+%28select+name%2Cmetric%2C+max%28timestamp%29+as+timestamp+++++from+%222133eaed-150b-4c73-a314-67a0bde04115%22+GROUP+BY+name%2Cmetric%29+s+on+d.metric%3Ds.metric+and+d.timestamp%3Ds.timestamp+++++where+d.metric+%3D+%27total_project_current%27%29+b+on+p.name+%3D+b.name%3B",
         function(error, data) {
             project_names = [];
             project_orig_budget = [];
@@ -1150,7 +1145,7 @@ noTicks: project_names.length,
   'comment_count' => 0,
   'name' => 'admin',
   'picture' => 0,
-  'data' => 'b:0;',
+  'data' => 'a:5:{s:16:"ckeditor_default";s:1:"t";s:20:"ckeditor_show_toggle";s:1:"t";s:14:"ckeditor_width";s:4:"100%";s:13:"ckeditor_lang";s:2:"en";s:18:"ckeditor_auto_lang";s:1:"t";}',
   'date' => '2014-12-16 23:42:06 +1100',
 );
   return $nodes;
