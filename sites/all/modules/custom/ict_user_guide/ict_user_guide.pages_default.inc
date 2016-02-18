@@ -62,7 +62,7 @@ function ict_user_guide_default_page_manager_pages() {
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
     'body_classes_to_add' => '',
-    'css_id' => '',
+    'css_id' => 'ict-basic-page',
     'css' => '',
     'contexts' => array(),
     'relationships' => array(),
@@ -105,6 +105,32 @@ function ict_user_guide_default_page_manager_pages() {
     $pane->uuid = 'e5a0782c-a0cd-4267-9f83-d9a916e824e8';
     $display->content['new-e5a0782c-a0cd-4267-9f83-d9a916e824e8'] = $pane;
     $display->panels['middle'][0] = 'new-e5a0782c-a0cd-4267-9f83-d9a916e824e8';
+    $pane = new stdClass();
+    $pane->pid = 'new-36565bdf-ed7d-4a53-87c9-6722a7c0c162';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'entityform_block-feedback';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'wrap project-update-submission',
+    );
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '36565bdf-ed7d-4a53-87c9-6722a7c0c162';
+    $display->content['new-36565bdf-ed7d-4a53-87c9-6722a7c0c162'] = $pane;
+    $display->panels['middle'][1] = 'new-36565bdf-ed7d-4a53-87c9-6722a7c0c162';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-e5a0782c-a0cd-4267-9f83-d9a916e824e8';
   $handler->conf['display'] = $display;
