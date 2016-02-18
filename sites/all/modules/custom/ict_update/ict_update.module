@@ -186,9 +186,12 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
       $budget_table[$key]['field_previous_collection']['und']['#value'] = $prev_collection ? $prev_collection : $item_val['value'];
     }
     if (!$items_count) {
-      $budget_table[0]['field_removed']['und'][0]['#default_value']['value'] = '';
-      $budget_table[0]['remove_button']['#prefix'] = '<div class="remove-wrap">';
-      $budget_table[0]['remove_button']['#suffix'] = '</div>';
+      foreach(element_children($budget_table) as $key) {
+        if (!is_numeric($key)) continue;
+        $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
+        $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
+        $budget_table[$key]['remove_button']['#suffix'] = '</div>';
+      }
     }
   }
   else {
