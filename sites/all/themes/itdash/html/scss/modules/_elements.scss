@@ -651,6 +651,9 @@ body,
       @include sprite-icon(remove-icon-normal);
       top: 11px;
     }
+    .sbHolder.removed:before {
+      top: 14px;
+    }
   }
 }
 .benefits-action {
