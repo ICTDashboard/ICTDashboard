@@ -55,7 +55,6 @@ function ict_user_guide_default_entityform_type() {
       "resubmit_action" : "new",
       "redirect_path" : "feedback",
       "instruction_pre" : { "value" : "", "format" : "filtered_html" },
-      "current_type" : "feedback",
       "enable_block" : 1
     },
     "weight" : "0",
