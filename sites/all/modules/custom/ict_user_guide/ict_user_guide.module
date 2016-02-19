@@ -5,3 +5,25 @@
  */
 
 include_once 'ict_user_guide.features.inc';
+
+/**
+ * Implements hook_form_alter().
+ */
+function ict_user_guide_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if ($form_id == 'feedback_entityform_edit_form') {
+    if (!empty($user->uid)) {
+      $user = user_load($user->uid);
+      $name_parts = array();
+      if (!empty($user->field_first_name['und'][0]['value'])) {
+        $name_parts[] = $user->field_first_name['und'][0]['value'];
+      }
+      if (!empty($user->field_last_name['und'][0]['value'])) {
+        $name_parts[] = $user->field_last_name['und'][0]['value'];
+      }
+      $name = implode(' ', $name_parts);
+      $form['field_feedback_name']['und'][0]['value']['#default_value'] = $name;
+      $form['field_feedback_email']['und'][0]['value']['#default_value'] = $user->mail;
+    }
+  }
+}

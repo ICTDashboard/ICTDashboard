@@ -69,6 +69,7 @@ function ict_user_guide_user_default_permissions() {
     'name' => 'view any user_guide bean',
     'roles' => array(
       'Finance Admin' => 'Finance Admin',
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'bean',

@@ -17,18 +17,7 @@ function ict_user_guide_default_page_manager_pages() {
   $page->admin_description = '';
   $page->path = 'feedback';
   $page->access = array(
-    'plugins' => array(
-      0 => array(
-        'name' => 'role',
-        'settings' => array(
-          'rids' => array(
-            0 => 2,
-          ),
-        ),
-        'context' => 'logged-in-user',
-        'not' => FALSE,
-      ),
-    ),
+    'plugins' => array(),
     'logic' => 'and',
   );
   $page->menu = array(
@@ -159,6 +148,8 @@ function ict_user_guide_default_page_manager_pages() {
       ),
     ),
     'logic' => 'and',
+    'type' => 'none',
+    'settings' => NULL,
   );
   $page->menu = array(
     'type' => 'normal',
