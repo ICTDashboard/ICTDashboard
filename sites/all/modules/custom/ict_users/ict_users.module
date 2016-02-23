@@ -88,6 +88,23 @@ function ict_users_form_alter (&$form, &$form_state, $form_id) {
   if ($form_id == 'user_register_form') {
     $form['#validate'][] = 'ict_users_register_form_email_validation';
     $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
+
+    $department_id = $form_state['values']['field_department']['und'][0]['tid'];
+    $form['field_department']['und']['#required'] = TRUE;
+    $form['field_department']['und']['#ajax'] = array(
+      'callback' => 'ict_user_update_department_mail',
+      'wrapper' => 'ict-user-update-department-mail-wrap',
+      'method' => 'replace',
+      'effect' => 'fade',
+    );
+    $form['account']['mail']['#prefix'] = '<div id="ict-user-update-department-mail-wrap">';
+    $form['account']['mail']['#suffix'] = '</div>';
+    $department_term = taxonomy_term_load($department_id);
+    $allowed_domains = ict_users_get_allowed_domains($department_term);
+    $form['account']['mail']['#description'] = '';
+    if (!empty($allowed_domains[0])) {
+      $form['account']['mail']['#description'] = t('Accepted email domains for this department:') . ' <strong>' . implode(', ', $allowed_domains) . '</strong>';
+    }
   }
   else if ($form_id == 'user_profile_form') {
     $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
