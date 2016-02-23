@@ -15,6 +15,17 @@ function ict_users_email_registration_name($edit, $account) {
 }
 
 /**
+ * Implements hook_forms().
+ */
+function ict_users_forms($form_id, $args) {
+  return array(
+    'ict_users_register_form' => array(
+      'callback' => 'user_register_form',
+    ),
+  );
+}
+
+/**
  * Implements hook_form_alter().
  */
 function ict_users_form_alter (&$form, &$form_state, $form_id) {
@@ -26,44 +37,57 @@ function ict_users_form_alter (&$form, &$form_state, $form_id) {
     $form['#suffix'] = '</div>';
     $form['actions']['#attributes']['class'][] = 'submit';
   }
+  if ($form_id == 'ict_users_register_form') {
+    $form['#validate'][] = 'ict_users_register_form_email_validation';
+    $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
+
+    $form['#prefix'] = '<div id="inner-content" class="wrap cf">
+          <h2>' . t('Create a new account') . '</h2>
+          <div class="register-form d-1of2">';
+    $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
+    $form['field_department']['#empty_value'] = FALSE;
+    $form['actions']['submit']['#value'] = t('Invite User');
+
+    $department_id = $form_state['values']['field_department']['und'][0]['tid'];
+    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE)) {
+      $user = user_load($user->uid);
+      $department_id = $user->field_department['und'][0]['tid'];
+      $form['field_department']['und']['#value'] = $department_id;
+      $form['field_department']['#disabled'] = TRUE;
+    }
+    else {
+      $form['field_department']['und']['#required'] = TRUE;
+      $form['field_department']['und']['#ajax'] = array(
+        'callback' => 'ict_user_update_department_mail',
+        'wrapper' => 'ict-user-update-department-mail-wrap',
+        'method' => 'replace',
+        'effect' => 'fade',
+      );
+      $form['account']['mail']['#prefix'] = '<div id="ict-user-update-department-mail-wrap">';
+      $form['account']['mail']['#suffix'] = '</div>';
+    }
+    $department_term = taxonomy_term_load($department_id);
+    $allowed_domains = ict_users_get_allowed_domains($department_term);
+    $form['account']['mail']['#description'] = '';
+    if (!empty($allowed_domains[0])) {
+      $form['account']['mail']['#description'] = t('Accepted email domains for this department:') . ' <strong>' . implode(', ', $allowed_domains) . '</strong>';
+    }
+    unset($form['account']['pass']);
+    $form['account']['notify']['#value'] = TRUE;
+
+    $form['account']['name']['#description'] = '';
+    $form['account']['name']['#custom_structure'] = TRUE;
+    $form['account']['mail']['#custom_structure'] = TRUE;
+    $form['account']['mail']['#title'] = t('Email address');
+
+    $form['actions']['submit']['#prefix'] = '<p class="submit">';
+    $form['actions']['submit']['#suffix'] = '</p>';
+
+    $form['#suffix'] = '</div></div>';
+  }
   if ($form_id == 'user_register_form') {
     $form['#validate'][] = 'ict_users_register_form_email_validation';
     $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
-    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE) || user_has_role(ICT_FINANCE_ADMIN_ROLE) || (arg(0) == 'user' && arg(1) == 'create')) {
-      $form['#prefix'] = '<div id="inner-content" class="wrap cf">
-            <h2>' . t('Create a new account') . '</h2>
-            <div class="register-form d-1of2">';
-      $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
-      $form['field_department']['#empty_value'] = FALSE;
-      $form['actions']['submit']['#value'] = t('Invite User');
-
-      $department_id = $form_state['values']['field_department']['und'][0]['tid'];
-      if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE)) {
-        $user = user_load($user->uid);
-        $department_id = $user->field_department['und'][0]['tid'];
-        $form['field_department']['und']['#value'] = $department_id;
-        $form['field_department']['#disabled'] = TRUE;
-      }
-      else {
-        $form['field_department']['und']['#required'] = TRUE;
-        $form['field_department']['und']['#ajax'] = array(
-          'callback' => 'ict_user_update_department_mail',
-          'wrapper' => 'ict-user-update-department-mail-wrap',
-          'method' => 'replace',
-          'effect' => 'fade',
-        );
-        $form['account']['mail']['#prefix'] = '<div id="ict-user-update-department-mail-wrap">';
-        $form['account']['mail']['#suffix'] = '</div>';
-      }
-      $department_term = taxonomy_term_load($department_id);
-      $allowed_domains = ict_users_get_allowed_domains($department_term);
-      $form['account']['mail']['#description'] = '';
-      if (!empty($allowed_domains[0])) {
-        $form['account']['mail']['#description'] = t('Accepted email domains for this department:') . ' <strong>' . implode(', ', $allowed_domains) . '</strong>';
-      }
-      unset($form['account']['pass']);
-      $form['account']['notify']['#value'] = TRUE;
-    }
   }
   else if ($form_id == 'user_profile_form') {
     $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
