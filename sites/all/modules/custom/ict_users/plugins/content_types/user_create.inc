@@ -13,7 +13,7 @@ $plugin = array(
  */
 function ict_user_create_form_render($subtype, $conf, $panel_args, $context = NULL) {
 
-  $form = drupal_get_form('user_register_form');
+  $form = drupal_get_form('ict_users_register_form');
 
   $form['#theme'] = 'ict_users_add_new_form';
 
