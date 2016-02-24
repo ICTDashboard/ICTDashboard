@@ -160,7 +160,8 @@ Drupal.behaviors.initSelectbox = {
 		jQuery('.field-multiple-drag', context).remove();
 		jQuery('table[id^="field-implementation-partners-values"] tr th', context).attr('colspan', 1);
 
-		var ictSelects = jQuery('.form-select:not([multiple="multiple"],.ict-combobox)', context);
+		jQuery('.form-select:not([multiple="multiple"],.ict-combobox, #financial-benefits select)', context).selectbox();
+		var ictSelects = jQuery('#financial-benefits select', context);
 		ictSelects.selectbox({onChange: function(value, inst){
 			var holder = jQuery(inst.input).parent().find('.sbHolder');
 			holder.removeClass().addClass('sbHolder ' + value);
