@@ -1846,3 +1846,66 @@ GENERAL STYLES
 		}
 	}
 }
+#ict-basic-page {
+  .field {
+	padding-left: 0;
+  }
+  form {
+	label {
+	  font-weight: 700;
+	  color: #202b3d;
+	  padding-right: 15px;
+	  padding-top: 9px;
+	  padding-bottom: 9px;
+	  display: block;
+	}
+	textarea,
+	input[type=text] {
+	  border: 1px solid #b3bdcf;
+	  background-color: #fff;
+	  background-image: none;
+	  color: #4d586a;
+	  width: 100%;
+	  max-width: 640px;
+	  margin: 0;
+	  height: 36px;
+	  line-height: 36px;
+	  padding: 0 10px;
+	}
+	.form-actions {
+	  font-size: 14px;
+	  margin-bottom: 20px;
+	  border-top: 1px solid #f0f4fa;
+	  margin-top: 30px;
+	  padding-top: 20px;
+	  text-align: right;
+	  .form-submit {
+		@include box-shadow(0 3px 0 #b1b7c1);
+		min-width: 275px;
+		border: 0 none;
+		overflow: hidden;
+		background: url(../images/general-btn.png) repeat-x scroll 0 0 transparent;
+		text-align: center;
+		color: #fff;
+		font-size: 14px;
+		text-transform: uppercase;
+		border-radius: 4px;
+		text-indent: 0px;
+		height: 41px;
+		margin: 0 10px;
+		vertical-align: top;
+		display: inline-block;
+		font-weight: 600;
+		width: auto;
+		padding: 2px 15px;
+		margin-right: 0;
+		&:hover {
+		  background-position: 0 -41px;
+		}
+	  }
+	}
+	.form-required {
+	  display: none;
+	}
+  }
+}
