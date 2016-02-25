@@ -110,9 +110,6 @@ function ict_pages_form_alter (&$form, &$form_alter, $form_id) {
       $form['field_organisations'][LANGUAGE_NONE]['#title_display'] = 'invisible';
       $form['field_organisations'][LANGUAGE_NONE]['#custom_structure'] = '<p><label>Organisations <span>*</span></label><span class="select">  </span></p>';
 
-      $form['actions']['submit']['#prefix'] = '<p class="submit">';
-      $form['actions']['submit']['#suffix'] = '</p>';
-
       $form['#suffix'] = '</div></div>';
       break;
     case 'user_profile_form':
