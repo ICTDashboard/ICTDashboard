@@ -16,7 +16,7 @@
     <div class="text"><?php  print drupal_render($form['field_department']); ?></div>
   </div>
 
-  <?php print drupal_render($form['actions']['submit']); ?>
+  <?php print drupal_render($form['actions']); ?>
 
 </div>
 

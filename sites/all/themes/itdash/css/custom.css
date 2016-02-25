@@ -33,15 +33,6 @@ input.password-confirm:focus
   color: #202b3d;
 }
 
-#user-profile-form .form-submit {
-  background: url("../html/images/submit-btn.png") no-repeat scroll 0 0 transparent;
-  border: 0 none;
-  height: 44px;
-  overflow: hidden;
-  text-indent: -999em;
-  width: 130px;
-}
-
 .confirm-parent, .password-parent {
   width: 100%;
 }
