@@ -506,7 +506,7 @@ CONTENT STYLES
 			}
 		}
 	}
-
+	.register-form,
 	.project-update-submission {
 		margin-bottom: 25px;
 
@@ -1109,13 +1109,17 @@ CONTENT STYLES
 			padding-bottom: 20px;
 
 			form {
-				p {
 					label {
 						font-size: 14px;
 						font-weight: 700;
 						color: #202b3d;
-
+					  	margin: 5px 0 5px;
+					  	display: inline-block;
 						span { color: #ee2a24; }
+					}
+					.password-confirm,
+					.password-strength {
+					  margin: 0;
 					}
 					input[type="text"],
 					input[type="email"] {
@@ -1125,8 +1129,11 @@ CONTENT STYLES
 						max-width: 100%;
 						font-size: 14px;
 						height: 36px;
+					  	margin-bottom: 14px;
 					}
-
+					fieldset {
+					  margin-bottom: 14px;
+					}
 					span.select {
 						display: block;
 						height: 36px;
@@ -1162,11 +1169,32 @@ CONTENT STYLES
 							option { font-style: normal; }
 						}
 					}
-					&.submit {
-						text-align: right;
-						margin-top: 30px;
-						padding-top: 30px;
-
+			  #edit-actions {
+				margin-bottom: 20px;
+				border-top: 1px solid #f0f4fa;
+				text-align: right;
+				margin-top: 30px;
+				padding-top: 30px;
+					.form-submit {
+					  border: 0;
+					  background: url(../images/general-btn.png) repeat-x scroll 0 0 transparent;
+					  text-align: center;
+					  color: #fff;
+					  font-size: 14px;
+					  text-transform: uppercase;
+					  border-radius: 4px;
+					  text-indent: 0px;
+					  height: 41px;
+					  margin: 0 10px;
+					  vertical-align: top;
+					  display: inline-block;
+					  font-weight: 600;
+					  width: auto;
+					  margin: 0;
+					  padding: 2px 15px;
+					  &:hover {
+						background-position: 0 -41px;
+					  }
 					}
 				}
 				.description {

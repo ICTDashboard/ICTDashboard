@@ -80,9 +80,6 @@ function ict_users_form_alter (&$form, &$form_state, $form_id) {
     $form['account']['mail']['#custom_structure'] = TRUE;
     $form['account']['mail']['#title'] = t('Email address');
 
-    $form['actions']['submit']['#prefix'] = '<p class="submit">';
-    $form['actions']['submit']['#suffix'] = '</p>';
-
     $form['#suffix'] = '</div></div>';
   }
   if ($form_id == 'user_register_form') {
@@ -107,7 +104,12 @@ function ict_users_form_alter (&$form, &$form_state, $form_id) {
     }
   }
   else if ($form_id == 'user_profile_form') {
+    $form['#validate'][] = 'ict_users_register_form_email_validation';
     $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
+    if (!user_has_role(ICT_FINANCE_ADMIN_ROLE) && $user->uid != 1) {
+
+      $form['field_department']['#disabled'] = TRUE;
+    }
   }
 }
 
