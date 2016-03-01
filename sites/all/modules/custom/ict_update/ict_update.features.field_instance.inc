@@ -16,7 +16,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'field_benefits_realised',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'List the benefits (quantitative or qualitative) this project will deliver or contribute to, as identified in the business case.',
+    'description' => 'Briefly describe benefit.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -229,7 +229,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'field_benefits_realised',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'For each benefit listed, indicate the status of benefit realisation. Realised - The benefit has been realised; Partially - The benefit has been partially realised; On Track – The project is on track to realise the benefit as originally expected; At Risk - The benefit is not likely to be realised as originally expected; Not Realised - The benefit will not be realised.',
+    'description' => 'Indicate the status of benefit realisation. Yes – The benefit has been realised. No – The benefit has not been realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -900,10 +900,10 @@ function ict_update_field_default_field_instances() {
   t('Estimated Value of Benefits Realised');
   t('Expected Completion Date');
   t('Financial');
-  t('For each benefit listed, indicate the status of benefit realisation. Realised - The benefit has been realised; Partially - The benefit has been partially realised; On Track – The project is on track to realise the benefit as originally expected; At Risk - The benefit is not likely to be realised as originally expected; Not Realised - The benefit will not be realised.');
+  t('Indicate the status of benefit realisation. Yes – The benefit has been realised. No – The benefit has not been realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.');
   t('For each benefit listed, the date range when benefit is expected to be realised.');
   t('Forecast Level of Project Completion');
-  t('List the benefits (quantitative or qualitative) this project will deliver or contribute to, as identified in the business case.');
+  t('Briefly describe benefit.');
   t('Project');
   t('Project Budget By Financial Year ');
   t('Project Stage');
