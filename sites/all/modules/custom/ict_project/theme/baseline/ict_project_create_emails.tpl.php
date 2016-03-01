@@ -4,7 +4,7 @@
     <a class="tooltip" href="javascript:void(0);">
       <i class="tooltip-icon"></i>
       <span class="tooltip-content">
-        Project Approvers can review, approve or reject baseline and update submissions once submitted for approval. They can not be Departmental Administrators or Editors within the same project.
+        Project Approvers can review, approve or reject baseline and update submissions once submitted for approval. They cannot be Departmental Administrators or Project Editors within the same project.
       </span>
     </a>
     <span class="form-helptext">
@@ -26,7 +26,7 @@
     <a class="tooltip" href="javascript:void(0);">
       <i class="tooltip-icon"></i>
       <span class="tooltip-content">
-        Project Editors can review, edit and submit baseline and update submissions for approval. They can not be Departmental Administrators or Approvers within the same project.
+        Project Editors can review, edit and submit baseline and update submissions for approval. They cannot be Project Approvers within the same project.
       </span>
     </a>
     <span class="form-helptext">

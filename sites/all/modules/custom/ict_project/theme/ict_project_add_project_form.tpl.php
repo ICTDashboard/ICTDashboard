@@ -76,7 +76,7 @@
             <?php
             print $form['field_implementation_partners']['und']['#title'];
             ?>
-            <span>A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.</span>
+            <span>A list of government entities that are involved with the project.</span>
           </td>
           <td class="text">
             <?php
