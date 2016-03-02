@@ -377,7 +377,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.',
+    'description' => 'A list of government entities that are involved with the project.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -604,7 +604,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'The official government programme that the project supports. ',
+    'description' => 'The official government programme that the project supports. Can be the same as the Project Title.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -823,7 +823,7 @@ function ict_project_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('A list of any implementation partners for the project. This includes primary contractors and any formally supporting Government entities.');
+  t('A list of government entities that are involved with the project.');
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
   t('Demo Buttons');
   t('Department');
@@ -845,7 +845,7 @@ function ict_project_field_default_field_instances() {
   t('The Portfolio for which the department or entity belongs.');
   t('The financial value of benefits expected by the project as identified in the business case. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.');
   t('The name of the Senior Responsible Officer (SRO) for the delivery of the project. ');
-  t('The official government programme that the project supports. ');
+  t('The official government programme that the project supports. Can be the same as the Project Title.');
   t('The position (including group, division & branch) of the Senior Responsible Officer.');
   t('Top Realised');
   t('Total');
