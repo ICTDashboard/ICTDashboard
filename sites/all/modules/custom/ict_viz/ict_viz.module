@@ -27,5 +27,9 @@ function ict_viz_theme($existing, $type, $theme, $path) {
       'template' => 'ict-viz-home-projects',
       'path' => drupal_get_path('module', 'ict_viz') . '/theme',
     ),
+    'ict_viz_number_indicators' => array(
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+      'template' => 'ict-viz-number-indicators',
+    ),
   );
 }
