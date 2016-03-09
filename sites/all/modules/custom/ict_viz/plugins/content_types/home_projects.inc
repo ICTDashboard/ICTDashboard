@@ -11,10 +11,9 @@ $plugin = array(
  * return add project themed form
  */
 function ict_viz_home_projects_render($subtype, $conf, $panel_args, $context = NULL) {
-  module_load_include('inc', 'node', 'node.pages');
-  $form = drupal_get_form('update_node_form', $context[0]->data);
-
   $block = new stdClass;
-  $block->content = drupal_render($form);
+
+  $block->content = theme('ict_viz_home_projects');
+  
   return $block;
 }
