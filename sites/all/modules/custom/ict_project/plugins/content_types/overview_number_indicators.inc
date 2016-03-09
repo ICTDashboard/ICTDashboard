@@ -13,8 +13,8 @@ $plugin = array(
 function ict_projects_overview_number_indicators_render ($subtype, $conf, $panel_args, $context = NULL) {
   $block = new stdClass;
 
-  $block->content = theme('ict_projects_dashboard_overview_number_indicators');
-
+  $block->content = theme('ict_projects_dashboard_overview_number_indicators');;
+  ict_project_get_all_active_projects();
   return $block;
 }
 
