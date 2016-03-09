@@ -130,73 +130,6 @@ body,
   .project-draft-submission,
   .project-update-submission {
     font-size: 14px;
-    .tooltip-edit,
-    .tooltip {
-      position: relative;
-      width: 16px;
-      height: 16px;
-      margin-bottom: -3px;
-      margin-left: 10px;
-      margin-right: 10px;
-      z-index: 1;
-      @include sprite-icon('tooltip-icon-normal');
-      display: inline-block;
-      &:hover {
-        @include sprite-icon('tooltip-icon-hover');
-        display:inline-block;
-      }
-      span.tooltip-content {
-        position: absolute;
-        display: none;
-        color: #fff;
-        font-size: 13px;
-        line-height: 22px;
-        background-color: #1e2635;
-        padding: 10px 15px;
-        border-radius: 10px;
-        font-style: normal;
-        bottom: 30px;
-        right: -150px;
-        width: 300px;
-        &:after {
-          content: '';
-          width: 0;
-          height: 0;
-          position: absolute;
-          display: block;
-          border-left: 20px solid transparent;
-          border-right: 20px solid transparent;
-          border-top: 20px solid #1e2635;
-          bottom: -10px;
-          left: 50%;
-          margin-left: -25px;
-        }
-      }
-      &:hover {
-        span.tooltip-content {
-          display: block;
-        }
-      }
-    }
-    .tooltip-edit {
-      margin-left: 0;
-      margin-right: 5px;
-      text-align: center;
-      @include sprite-icon('edit-highlight');
-      display: inline-block;
-      &:hover {
-        @include sprite-icon('edit-highlight');
-        display: inline-block;
-      }
-      span.tooltip-content {
-        color: #1e2635;
-        background-color: #f0b629;
-        font-weight: normal;
-        &:after {
-          border-top: 20px solid #f0b629;
-        }
-      }
-    }
     .row {
       margin-bottom: 15px;
       //@include clearfix;
@@ -744,5 +677,91 @@ body,
     display: inline-block;
     vertical-align: sub;
     margin-right: 15px;
+  }
+}
+
+.tooltip-edit,
+.tooltip {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-bottom: -3px;
+  margin-left: 10px;
+  margin-right: 10px;
+  z-index: 1;
+  @include sprite-icon('tooltip-icon-normal');
+  display: inline-block;
+  &:hover {
+    @include sprite-icon('tooltip-icon-hover');
+    display:inline-block;
+  }
+  span.tooltip-content {
+    position: absolute;
+    display: none;
+    color: #fff;
+    font-size: 13px;
+    line-height: 22px;
+    background-color: #1e2635;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-style: normal;
+    bottom: 30px;
+    right: -150px;
+    width: 300px;
+    &:after {
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      display: block;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #1e2635;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -25px;
+    }
+  }
+  &:hover {
+    span.tooltip-content {
+      display: block;
+    }
+  }
+}
+.tooltip-edit {
+  margin-left: 0;
+  margin-right: 5px;
+  text-align: center;
+  @include sprite-icon('edit-highlight');
+  display: inline-block;
+  &:hover {
+    @include sprite-icon('edit-highlight');
+    display: inline-block;
+  }
+  span.tooltip-content {
+    color: #1e2635;
+    background-color: #f0b629;
+    font-weight: normal;
+    &:after {
+      border-top: 20px solid #f0b629;
+    }
+  }
+}
+
+#ict-dashboard-overview-number-indicators {
+  background-color: #e5eaf3;
+  padding-top: 35px;
+  .label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #202b3d;
+    line-height: 20px;
+    .tooltip {
+      margin-left: 5px;
+      vertical-align: baseline;
+    }
+  }
+  #ict-dashboard-numbers {
+
   }
 }

@@ -1071,6 +1071,10 @@ function ict_project_theme () {
       'template' => 'ict_project_manage_project_users_form',
       'render element' => 'form'
     ),
+    'ict_projects_dashboard_overview_number_indicators' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/dashboard_overview',
+      'template' => 'ict_projects_dashboard_overview_number_indicators',
+    ),
   );
 }
 
