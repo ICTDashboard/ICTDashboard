@@ -11,6 +11,7 @@ dependencies[] = ds
 dependencies[] = elfinder
 dependencies[] = features
 dependencies[] = ict_project
+dependencies[] = ict_viz
 dependencies[] = menu
 dependencies[] = page_manager
 dependencies[] = strongarm
