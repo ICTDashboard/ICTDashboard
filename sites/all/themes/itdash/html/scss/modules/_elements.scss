@@ -751,6 +751,7 @@ body,
 #ict-dashboard-overview-number-indicators {
   background-color: #e5eaf3;
   padding-top: 35px;
+  padding-bottom: 35px;
   .label {
     font-size: 18px;
     font-weight: 600;
@@ -762,6 +763,15 @@ body,
     }
   }
   #ict-dashboard-numbers {
-
+    .row {
+      &:first-child {
+        margin-bottom: 50px;
+      }
+      .big-number {
+        font-size: 70px;
+        font-weight: 600;
+        color: #202b3d;
+      }
+    }
   }
 }
