@@ -5,16 +5,15 @@ $plugin = array(
   'title' => t('Overview Description and Number Indicators'),
   'description' => t('Overview Description and Number Indicators.'),
   'category' => t('ICT'),
-  'render callback' => 'ict_projects_overview_number_indicators_render',
-  'admin info' => 'ict_projects_overview_number_indicators_admin_info',
+  'render callback' => 'ict_viz_overview_number_indicators_render',
+  'admin info' => 'ict_viz_overview_number_indicators_admin_info',
   'defaults' => array()
 );
 
-function ict_projects_overview_number_indicators_render ($subtype, $conf, $panel_args, $context = NULL) {
+function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args, $context = NULL) {
   $block = new stdClass;
-
-  $block->content = theme('ict_projects_dashboard_overview_number_indicators');
-
+  $block->content = theme('ict_viz_number_indicators');
+  ict_project_get_all_active_projects();
   return $block;
 }
 
@@ -22,7 +21,7 @@ function ict_projects_overview_number_indicators_render ($subtype, $conf, $panel
 /**
  * 'admin info' callback for panel pane.
  */
-function ict_projects_overview_number_indicators_admin_info ($subtype, $conf, $contexts) {
+function ict_viz_overview_number_indicators_admin_info ($subtype, $conf, $contexts) {
   $block = new stdClass;
   $block->title = t('Overview Description and Number Indicators');
   $block->content = t('Overview Description and Number Indicators');

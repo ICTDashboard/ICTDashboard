@@ -1071,10 +1071,6 @@ function ict_project_theme () {
       'template' => 'ict_project_manage_project_users_form',
       'render element' => 'form'
     ),
-    'ict_projects_dashboard_overview_number_indicators' => array(
-      'path' => drupal_get_path('module', 'ict_project') . '/theme/dashboard_overview',
-      'template' => 'ict_projects_dashboard_overview_number_indicators',
-    ),
   );
 }
 
@@ -1878,4 +1874,26 @@ function __ict_project_get_benefit_status_colors() {
     'on_track' => '#1fd063',
     'at_risk' => '#f6d000'
   );
+}
+
+/**
+ * Get all Active Projects
+ * @return array
+ */
+function ict_project_get_all_active_projects() {
+  $query = db_select('node', 'project')
+    ->fields('project', array('nid'))
+    ->condition('project.type', 'project');
+
+  // check if Project have at least one approved Update
+  $query->join('field_data_field_project', 'update_node', 'project.nid = update_node.field_project_target_id');
+  $query->join('project_workflow', 'workflow', 'update_node.entity_id = workflow.nid');
+  $query->condition('workflow.state', 'approved');
+  $query->groupBy('project.nid');
+
+  $results = $query
+    ->execute()
+    ->fetchCol();
+
+  return $results;
 }
