@@ -1,7 +1,7 @@
 name = ICT Pages
 core = 7.x
 package = ICT Dashboard
-version = 7.x-2.35
+version = 7.x-2.36
 project = ict_pages
 dependencies[] = bean
 dependencies[] = bean_admin_ui
