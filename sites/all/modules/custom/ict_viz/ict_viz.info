@@ -1,0 +1,6 @@
+name = ICT VIZ
+core = 7.x
+package = ICT VIZ
+version = 7.x-1.00
+project = ict_viz
+features[features_api][] = api:2

@@ -1,0 +1,31 @@
+<?php
+/**
+ * @file
+ * Code for the ICT Update feature.
+ */
+
+/**
+ * @file
+ * Code for the ICT VIZ feature.
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ict_viz_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && in_array($plugin_type, array('content_types', 'access'))) {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ict_viz_theme($existing, $type, $theme, $path) {
+  return array(
+    'ict_viz_home_projects' => array(
+      'template' => 'ict-viz-home-projects',
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+    ),
+  );
+}
