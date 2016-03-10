@@ -706,6 +706,11 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
   }
 }
 
+function ict_update_calculate_project_fields_by_id($project_id) {
+  $update_id = reset(ict_update_project_get_list($project_id, 'approved'));
+  ict_update_calculate_project_fields($project_id, $update_id);
+}
+
 function ict_update_calculate_project_fields($project_id, $update_id) {
   $project_wrapper = entity_metadata_wrapper('node', $project_id);
   $upd_wrap = entity_metadata_wrapper('node', $update_id);
