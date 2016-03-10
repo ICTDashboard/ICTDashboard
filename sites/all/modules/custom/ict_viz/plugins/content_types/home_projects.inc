@@ -14,6 +14,6 @@ function ict_viz_home_projects_render($subtype, $conf, $panel_args, $context = N
   $block = new stdClass;
 
   $block->content = theme('ict_viz_home_projects');
-  
+
   return $block;
 }
