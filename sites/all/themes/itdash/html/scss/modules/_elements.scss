@@ -750,18 +750,44 @@ body,
 
 #ict-dashboard-overview-number-indicators {
   background-color: #e5eaf3;
-  padding-top: 35px;
+  padding-top: 31px;
+  padding-bottom: 30px;
   .label {
     font-size: 18px;
     font-weight: 600;
     color: #202b3d;
-    line-height: 20px;
+    line-height: 18px;
     .tooltip {
-      margin-left: 5px;
-      vertical-align: baseline;
+      margin-left: 2px;
+      vertical-align: top;
     }
   }
   #ict-dashboard-numbers {
+    padding-left: 5px;
+    .row {
+      margin-bottom: 55px;
+      &:first-child {
+        margin-bottom: 140px;
+      }
+      &:last-child {
 
+      }
+      .big-number {
+        font-size: 70px;
+        line-height: 80px;
+        font-weight: 600;
+        color: #202b3d;
+      }
+    }
+    .general-button {
+      display: block;
+      span {
+        text-align: left;
+        padding-left: 16px;
+        font-weight: 600;
+        line-height: 34px;
+        height: 35px;
+      }
+    }
   }
 }
