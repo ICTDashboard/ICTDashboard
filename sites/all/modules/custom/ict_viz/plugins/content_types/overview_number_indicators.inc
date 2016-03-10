@@ -13,11 +13,21 @@ $plugin = array(
 function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args, $context = NULL) {
   $block = new stdClass;
 
+  // all active projects
   $all_projects = ict_project_get_all_active_projects();
+
+  // get the number of benefits
+  $query = db_select('field_data_field_number_of_benefits_calc', 'benefit');
+  $query->join('project_workflow', 'workflow', 'benefit.entity_id = workflow.nid AND benefit.revision_id = workflow.vid');
+  $query->condition('workflow.state', 'approved');
+  $query->condition('benefit.entity_id', $all_projects, 'IN');
+  $query->fields('benefit', array('field_number_of_benefits_calc_value'));
+  $results = $query->execute()
+    ->fetchCol();
 
   $block->content = theme('ict_viz_number_indicators', array(
     'number_of_projects' => count($all_projects),
-    'total_number_of_benefits' => 66
+    'total_number_of_benefits' => array_sum($results),
   ));
 
   return $block;
