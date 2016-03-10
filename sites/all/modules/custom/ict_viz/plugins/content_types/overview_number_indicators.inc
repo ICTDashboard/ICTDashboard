@@ -13,6 +13,8 @@ $plugin = array(
 function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args, $context = NULL) {
   $block = new stdClass;
 
+  drupal_add_js('http://d3js.org/d3.v3.min.js', 'external');
+
   // all active projects
   $all_projects = ict_project_get_all_active_projects();
 
