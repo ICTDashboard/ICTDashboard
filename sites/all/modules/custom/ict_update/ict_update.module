@@ -4,6 +4,10 @@
  * Code for the ICT Update feature.
  */
 
+define('ICT_SCHEDULE_STATUS_BEHIND', 0);
+define('ICT_SCHEDULE_STATUS_ON_TRACK', 1);
+define('ICT_SCHEDULE_STATUS_AHEAD', 2);
+
 include_once 'ict_update.features.inc';
 include_once 'ict_update.field_diff.inc';
 /**
@@ -698,7 +702,43 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
         $val->save();
       }
     }
+    ict_update_calculate_project_fields($form['#nid'], $nid);
   }
+}
+
+function ict_update_calculate_project_fields_by_id($project_id) {
+  $update_id = reset(ict_update_project_get_list($project_id, 'approved'));
+  ict_update_calculate_project_fields($project_id, $update_id);
+}
+
+function ict_update_calculate_project_fields($project_id, $update_id) {
+  $project_wrapper = entity_metadata_wrapper('node', $project_id);
+  $upd_wrap = entity_metadata_wrapper('node', $update_id);
+  $budget_sum = 0;
+  foreach ($project_wrapper->field_original_total_budget as $budget) {
+    $budget_sum += $budget->field_total->value();
+  }
+  $todate_sum = 0;
+  foreach ($upd_wrap->field_original_total_budget as $budget) {
+    $todate_sum += $budget->field_total->value();
+  }
+  $benefits = $upd_wrap->field_benefits_realised->raw();
+  $actual_compl = $upd_wrap->field_actual_level_of_project_co->value();
+  $forecast_compl = $upd_wrap->field_forecast_level_of_project_->value();
+
+  $project_wrapper->field_expenditure_budget_calc = $budget_sum;
+  $project_wrapper->field_expenditure_to_date_calc = $todate_sum;
+  $project_wrapper->field_number_of_benefits_calc = count($benefits);
+  if ($actual_compl > $forecast_compl) {
+    $project_wrapper->field_schedule_status_calc = ICT_SCHEDULE_STATUS_AHEAD;
+  }
+  elseif ($actual_compl < $forecast_compl) {
+    $project_wrapper->field_schedule_status_calc = ICT_SCHEDULE_STATUS_BEHIND;
+  }
+  else {
+    $project_wrapper->field_schedule_status_calc = ICT_SCHEDULE_STATUS_ON_TRACK;
+  }
+  $project_wrapper->save();
 }
 
 function ict_update_review_workflow_set_draft($form, &$form_state) {
