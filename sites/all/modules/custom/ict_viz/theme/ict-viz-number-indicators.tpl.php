@@ -35,6 +35,8 @@
           <?php print $total_number_of_benefits; ?>
         </div>
       </div>
+
+      <a href="" class="general-button arrow-right"><span><?php print t('View Detailed Overview'); ?></span></a>
     </div>
 
   </div>
