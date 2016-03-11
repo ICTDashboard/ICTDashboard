@@ -178,7 +178,37 @@ function ict_project_default_page_manager_pages() {
   $page->admin_title = 'Project List';
   $page->admin_description = '';
   $page->path = 'projects';
-  $page->access = array();
+  $page->access = array(
+    'plugins' => array(
+      0 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 2,
+            1 => 3,
+            2 => 41888116,
+            3 => 153917155,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+      1 => array(
+        'name' => 'role',
+        'settings' => array(
+          'rids' => array(
+            0 => 2,
+            1 => 3,
+            2 => 41888116,
+            3 => 153917155,
+          ),
+        ),
+        'context' => 'logged-in-user',
+        'not' => FALSE,
+      ),
+    ),
+    'logic' => 'and',
+  );
   $page->menu = array(
     'type' => 'none',
     'title' => '',
