@@ -1,0 +1,31 @@
+.pager {
+  li {
+    font-size: 14px;
+    color: #202b3d;
+    background-color: #f9fafc;
+    border: 1px solid #dfe5ef;
+    @include border-radius(3px);
+    padding: 0;
+    float: left;
+    margin-left: 5px;
+    a:focus,
+    a:hover,
+    &.pager-current {
+      padding: 6px 16px;
+      background-color: #dfe5ef;
+      font-weight: bold;
+      color: #027e9c;
+    }
+    a {
+      display: block;
+      color: #202b3d;
+      padding: 6px 16px;
+      text-decoration: none;
+      &:focus,
+      &:hover {
+        font-weight: normal;
+        text-decoration: none;
+      }
+    }
+  }
+}
