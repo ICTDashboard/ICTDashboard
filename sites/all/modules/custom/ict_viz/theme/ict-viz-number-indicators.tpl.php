@@ -24,7 +24,7 @@
         <div id="current-fin-year-budget-graph" class="overview-expenditure-graphs">
           <div class="graph-container"></div>
           <div class="expenditure-budget-value">
-            <?php print '<strong>$56.7m</strong> / $82.1m'; ?>
+            <?php print '<strong>$' . number_format($current_year_expenditure, 1)  . 'm</strong> / $' . number_format($current_year_budget, 1) . 'm'; ?>
           </div>
           <div class="legend" id="expenditure_legend">
             <ul class="bar-legend">
@@ -43,7 +43,7 @@
         <div id="total-budget-graph" class="overview-expenditure-graphs" style="display: none;">
           <div class="graph-container"></div>
           <div class="expenditure-budget-value">
-            <?php print '<strong>$319.5m</strong> / $513.2m'; ?>
+            <?php print '<strong>$' . number_format($total_expenditure, 1)  . 'm</strong> / $' . number_format($total_budget, 1) . 'm'; ?>
           </div>
           <div class="legend" id="expenditure_legend">
             <ul class="bar-legend">
@@ -110,8 +110,14 @@
         $('#'+activeItem).show();
       });
 
-      var currentFinYearData = [32, 42],
-        totalData = [23, 42],
+      var currentFinYearData = [
+          Drupal.settings.budget_expenditure_settings.current_year_expenditure,
+          Drupal.settings.budget_expenditure_settings.current_year_budget
+        ],
+        totalData = [
+          Drupal.settings.budget_expenditure_settings.total_expenditure,
+          Drupal.settings.budget_expenditure_settings.total_budget
+        ],
         width = $("#overview-graphs").width();
 
       initBudgetGraphs(
@@ -165,9 +171,9 @@
 
         chart
           .append("svg:line")
-          .attr('x1', x(data[1]))
+          .attr('x1', width)
           .attr('y1', 0)
-          .attr('x2', x(data[1]))
+          .attr('x2', width)
           .attr('y2', 60)
           .attr("style", 'stroke:#cdd8ec;stroke-width:1');
 
