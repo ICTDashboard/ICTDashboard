@@ -39,7 +39,6 @@
 			</div>
 		</div>
 
-		<div class="dotted-line"></div>
 
 		<div class="user-information"><h2><?php print t('User Information'); ?></h2></div>
 

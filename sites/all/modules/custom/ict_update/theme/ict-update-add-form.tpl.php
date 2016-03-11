@@ -12,7 +12,6 @@
       <div class="text"><?php print drupal_render($form['field_resp_officer_position']); ?></div>
     </div>
     <?php print $form['#admin_user_details']; ?>
-    <div class="dotted-line"></div>
 
     <h2><?php print t('Project Expenditure and Budget'); ?></h2>
     <div class="row">

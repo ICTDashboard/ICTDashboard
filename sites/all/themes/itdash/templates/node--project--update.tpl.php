@@ -109,5 +109,3 @@
         <?php endforeach; ?>
       </div>
     </div>
-
-    <div class="dotted-line"></div>

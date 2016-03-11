@@ -104,7 +104,6 @@
       </div>
     </div>
   <?php  if(!user_is_anonymous()) : ?>
-    <div class="dotted-line"></div>
 
     <div class="user-information"><h2><?php print t('User Information'); ?></h2></div>
 
@@ -165,7 +164,6 @@
 
     <?php print $admin_user_details; ?>
 
-    <div class="dotted-line"></div>
     <?php endif; ?>
 
     <?php if (!$project_updates_available) : ?>
