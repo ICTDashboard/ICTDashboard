@@ -9,13 +9,21 @@
           <div >
             <label><?php print t('Display'); ?></label>
             <select>
-              <option value="current-fin-year-budget-graph"><?php print t('Current Financial Year Total Expenditure and Budget'); ?></option>
-              <option value="total-budget-graph"><?php print t('Total Expenditure and Budget'); ?></option>
+              <option value="current-fin-year-budget"><?php print t('Current Financial Year Total Expenditure and Budget'); ?></option>
+              <option value="total-budget"><?php print t('Total Expenditure and Budget'); ?></option>
             </select>
-            <a href="javascript:void(0);" class="tooltip">
+
+            <a href="javascript:void(0);" class="tooltip budget-tooltip" id="current-fin-year-budget-tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print t('Some text'); ?>
+                <?php print t('Current Financial Year Total Expenditure and Budget help text...'); ?>
+              </span>
+            </a>
+
+            <a href="javascript:void(0);" class="tooltip budget-tooltip" id="total-budget-tooltip" style="display: none;">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print t('Total Expenditure and Budget help text...'); ?>
               </span>
             </a>
           </div>
@@ -106,8 +114,12 @@
 
       $('#overview-expenditure-switch select').change(function() {
         var activeItem = $(this).val();
+
         $('.overview-expenditure-graphs').hide();
-        $('#'+activeItem).show();
+        $('#'+activeItem+'-graph').show();
+
+        $('.budget-tooltip').hide();
+        $('#'+activeItem+'-tooltip').show();
       });
 
       var currentFinYearData = [
