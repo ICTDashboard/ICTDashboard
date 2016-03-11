@@ -76,7 +76,7 @@
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
-              <?php print t('Some text'); ?>
+              <?php print t('The number of ICT-enabled projects with a total project cost of $30 million or more, including ICT costs of at least $10 million.'); ?>
             </span>
           </a>
         </div>
@@ -91,7 +91,7 @@
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
-              <?php print t('Some text'); ?>
+              <?php print t('The number of benefits over all active projects.'); ?>
             </span>
           </a>
         </div>
