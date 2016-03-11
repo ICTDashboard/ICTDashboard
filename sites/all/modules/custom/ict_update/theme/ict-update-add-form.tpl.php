@@ -2,7 +2,7 @@
   <div class="project-update-submission d-all">
     <?php print drupal_render(node_view($form['#project_node'], 'update')); ?>
 
-    <h3><?php print t('User Information'); ?></h3>
+    <div class="user-information"><h2><?php print t('User Information'); ?></h2></div>
     <div class="row">
       <div class="label"><?php print $form['field_responsible_officer_name']['und']['#title']; ?></div>
       <div class="text"><?php print drupal_render($form['field_responsible_officer_name']); ?></div>
@@ -14,18 +14,18 @@
     <?php print $form['#admin_user_details']; ?>
     <div class="dotted-line"></div>
 
-    <h3><?php print t('Schedule, Expenditures and Benefits'); ?></h3>
+    <h2><?php print t('Project Expenditure and Budget'); ?></h2>
     <div class="row">
       <div class="label"><?php print $form['field_project_stage']['und']['#title']; ?></div>
       <div class="text"><?php print drupal_render($form['field_project_stage']); ?></div>
     </div>
     <div class="row">
       <div class="label"><?php print t('Original Approved Start Date'); ?> </div>
-      <div class="text"><?php print format_date(strtotime($form['#project_node']->field_start_date['und'][0]['value']), 'medium', 'j M Y'); ?></div>
+      <div class="text"><?php print format_date(strtotime($form['#project_node']->field_start_date['und'][0]['value']), 'medium', 'j F Y'); ?></div>
     </div>
     <div class="row">
       <div class="label"><?php print t('Original Approved Completion Date'); ?></div>
-      <div class="text"><?php print format_date(strtotime($form['#project_node']->field_original_completion_date['und'][0]['value']), 'medium', 'j M Y'); ?></div>
+      <div class="text"><?php print format_date(strtotime($form['#project_node']->field_original_completion_date['und'][0]['value']), 'medium', 'j F Y'); ?></div>
     </div>
     <div class="row">
       <div class="label"><?php print $form['field_expected_completion_date']['und']['#title']; ?><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The current expected completion date of the project.</span></a></div>

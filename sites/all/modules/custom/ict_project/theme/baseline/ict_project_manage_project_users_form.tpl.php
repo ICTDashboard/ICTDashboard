@@ -4,7 +4,7 @@
 	</div>
 </div>
 <div id="inner-content" class="wrap cf">
-	<h3><?php print t('Basic Project Information'); ?></h3>
+	<h2><?php print t('Project Information'); ?></h2>
 	<div class="project-update-submission d-all">
 
 		<div class="row">
@@ -41,7 +41,7 @@
 
 		<div class="dotted-line"></div>
 
-		<h3><?php print t('User Information'); ?></h3>
+		<div class="user-information"><h2><?php print t('User Information'); ?></h2></div>
 
 		<?php print render($form['emails']); ?>
 

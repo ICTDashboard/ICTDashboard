@@ -85,7 +85,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'j M Y - g:i:sa',
+        'input_format' => 'd F Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 1,
@@ -172,7 +172,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'j M Y - g:i:sa',
+        'input_format' => 'd F Y',
         'input_format_custom' => '',
         'label_position' => 'above',
         'no_fieldset' => 1,
@@ -526,7 +526,7 @@ function ict_update_field_default_field_instances() {
       'module' => 'date',
       'settings' => array(
         'increment' => 15,
-        'input_format' => 'j M Y - g:i:sa',
+        'input_format' => 'site-wide',
         'input_format_custom' => '',
         'label_position' => 'none',
         'no_fieldset' => 1,
@@ -892,6 +892,7 @@ function ict_update_field_default_field_instances() {
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
   t('Benefit');
   t('Benefits Realised');
+  t('Briefly describe benefit.');
   t('Commentary');
   t('Context, remedial action, changes in project scope or other commentary.');
   t('Current Expected Financial Benefits');
@@ -900,10 +901,9 @@ function ict_update_field_default_field_instances() {
   t('Estimated Value of Benefits Realised');
   t('Expected Completion Date');
   t('Financial');
-  t('Indicate the status of benefit realisation. Yes – The benefit has been realised. No – The benefit has not been realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.');
   t('For each benefit listed, the date range when benefit is expected to be realised.');
   t('Forecast Level of Project Completion');
-  t('Briefly describe benefit.');
+  t('Indicate the status of benefit realisation. Yes – The benefit has been realised. No – The benefit has not been realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.');
   t('Project');
   t('Project Budget By Financial Year ');
   t('Project Stage');

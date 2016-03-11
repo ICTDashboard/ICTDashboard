@@ -1800,18 +1800,18 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
   $datasets = array(
     array(
       'label' => 'Spent to Date ($m)',
-      'fillColor' => "#5c46a4",
-      'strokeColor' => "#5c46a4",
-      'highlightFill' => "#5c46a4",
-      'highlightStroke' => "#5c46a4",
+      'fillColor' => "#ff6161",
+      'strokeColor' => "#ff6161",
+      'highlightFill' => "#ff6161",
+      'highlightStroke' => "#ff6161",
       'data' => $update_values
     ),
     array(
       'label' => 'Total Budget ($m)',
-      'fillColor' => "#f1b525",
-      'strokeColor' => "#f1b525",
-      'highlightFill' => "#f1b525",
-      'highlightStroke' => "#f1b525",
+      'fillColor' => "#5c46a4",
+      'strokeColor' => "#5c46a4",
+      'highlightFill' => "#5c46a4",
+      'highlightStroke' => "#5c46a4",
       'data' => $original_values
     ),
   );

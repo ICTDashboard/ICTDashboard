@@ -6,7 +6,7 @@
 </div>
 
 <div id="inner-content" class="wrap cf">
-  <h3><?php print t('Basic Project Information'); ?></h3>
+  <h2><?php print t('Project Information'); ?></h2>
   <div class="project-draft-submission d-all ict-view-page">
 
     <div class="row">
@@ -103,10 +103,10 @@
         <?php endforeach; ?>
       </div>
     </div>
-
+  <?php  if(!user_is_anonymous()) : ?>
     <div class="dotted-line"></div>
 
-    <h3><?php print t('User Information'); ?></h3>
+    <div class="user-information"><h2><?php print t('User Information'); ?></h2></div>
 
     <div class="row">
       <div class="label">
@@ -135,7 +135,6 @@
         <?php endif; ?>
       </div>
     </div>
-
     <div class="row">
       <div class="label">
         <?php if (!empty($diff['field_resp_officer_position'])) : ?>
@@ -167,6 +166,7 @@
     <?php print $admin_user_details; ?>
 
     <div class="dotted-line"></div>
+    <?php endif; ?>
 
     <?php if (!$project_updates_available) : ?>
       <h3><?php print t('Schedule, Expenditures and Benefits'); ?></h3>

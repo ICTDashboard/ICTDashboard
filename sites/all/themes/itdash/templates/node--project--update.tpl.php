@@ -1,4 +1,4 @@
-    <h3><?php print t('Basic Project Information'); ?></h3>
+    <h2><?php print t('Project Information'); ?></h2>
 
     <div class="row">
       <div class="label">

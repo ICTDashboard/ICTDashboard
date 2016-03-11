@@ -388,7 +388,7 @@ function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALS
     elseif (isset($item['timezone'])) {
       // date fields
       $date = strtotime($item['value']);
-      $val = format_date($date, 'medium', 'j M Y');
+      $val = format_date($date, 'medium', 'j F Y');
     }
     elseif (isset($item['value'])) {
       // number fields
