@@ -354,7 +354,7 @@ body,
       width: 100%;
     }
   }
-  #ict-home-parojects-table-id {
+  #ict-home-projects-table-id {
     h2 {
       font-weight: 600;
       color: #0d6c88;
@@ -422,7 +422,7 @@ body,
         }
       }
       th {
-        padding: 11px 14px 6px;
+        padding: 11px 25px 6px 14px;
         background-color: #137992;
         border-left: 1px solid #0a5f74;
         color: #fff;
@@ -436,9 +436,7 @@ body,
           position: relative;
           margin: 0px;
           z-index: 1;
-          background-position: 0 -133px;
-          width: 16px;
-          height: 17px;
+          @include sprite-icon(tooltip-icon-normal);
           display: block;
         }
         .ict-sort-link {
@@ -484,17 +482,19 @@ body,
         &.schedule-status-2,
         &.schedule-status-col {
           position: relative;
+          padding: 12px 14px 0 40px;
           &:before {
             content: "";
             width: 16px;
             height: 16px;
-            display: inline-block;
+            display: block;
             line-height: 54px;
             vertical-align: sub;
             margin-right: 5px;
-            top: 11px;
-            left: 18px;
+            top: 46%;
+            left: 15px;
             background-color: #f6d000;
+            position: absolute;
           }
         }
         &.schedule-status-1 {
@@ -511,6 +511,8 @@ body,
           height: 30px;
           width: 100%;
           position: relative;
+          .graph-level,
+          .graph-bg,
           .graph-to-date,
           .graph-budget {
             width: 0%;
@@ -525,6 +527,21 @@ body,
             margin: 5px 0 0;
             height: 20px;
           }
+        }
+        .graph-container-level {
+          margin-top: 2px;
+          height: 18px;
+          .graph-level {
+            background-color: #10d5db;
+          }
+          .graph-bg {
+            background-color: #034657;
+            width: 100%;
+          }
+        }
+        .graph-value {
+          text-align: center;
+          margin-top: 2px;
         }
       }
       &.sort-direction-asc {
@@ -548,6 +565,21 @@ body,
             &:after {
               border-bottom-color: #3ac3cf;
             }
+          }
+        }
+      }
+    }
+  }
+  #ict-home-projects-table-id.ict-filtered-projects-table {
+    tr {
+      td {
+        height: 67px;
+        vertical-align: top;
+        padding: 12px 14px 0;
+        &.schedule-status-col {
+          padding: 12px 14px 0 40px;
+          &:before {
+            top: 15px;
           }
         }
       }
@@ -835,6 +867,7 @@ body,
       line-height: 20px;
       float: left;
       margin-right: 25px;
+      font-size: 14px;
       span {
         margin-right: 7px;
         display: inline-block;
@@ -976,6 +1009,15 @@ body,
         line-height: 80px;
         font-weight: 600;
         color: #202b3d;
+        a {
+          color: #202b3d;
+          text-decoration: none;
+          &:focus,
+          &:hover {
+            color: #202b3d;
+            text-decoration: underline;
+          }
+        }
       }
     }
     .general-button {

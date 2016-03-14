@@ -201,3 +201,34 @@ and it will create a button dependant on those variables.
     }
   }
 }
+
+.ict-project-button {
+  a {
+    display: block;
+    text-indent: -9999em;
+    min-height: 31px;
+    @include border-radius(5px);
+    position: relative;
+    background-color: #f9fafc;
+    border: 1px solid #dfe5ef;
+    &:focus,
+    &:hover {
+      border-color: #027e9c;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      top: 20%;
+      left: 38%;
+      @include sprite-icon(proj_arr_r);
+    }
+    &:active {
+      background-color: #086783;
+      border-color: #034559;
+      &:before {
+        @include sprite-icon(proj_arr_r_hover);
+      }
+    }
+  }
+}
+

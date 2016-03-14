@@ -68,7 +68,9 @@ project/*/update
 update/*
 node/*/delete
 user/create
-detailed-overview',
+detailed-overview
+user/create,
+dashboard-projects',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,

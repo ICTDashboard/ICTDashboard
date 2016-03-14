@@ -1,6 +1,12 @@
 <?php
 /**
  * @file
+ * Code for the ICT VIZ feature.
+ */
+
+include_once 'ict_viz.features.inc';
+/**
+ * @file
  * Code for the ICT Update feature.
  */
 
@@ -27,6 +33,10 @@ function ict_viz_theme($existing, $type, $theme, $path) {
   return array(
     'ict_viz_home_projects' => array(
       'template' => 'ict-viz-home-projects',
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+    ),
+    'ict_viz_filtered_projects' => array(
+      'template' => 'ict-viz-filtered-projects',
       'path' => drupal_get_path('module', 'ict_viz') . '/theme',
     ),
     'ict_viz_number_indicators' => array(
@@ -68,7 +78,7 @@ function template_preprocess_ict_viz_home_projects(&$vars) {
   $query->leftJoin('field_data_field_department', 'dep', 'project.nid = dep.entity_id');
   $query->leftJoin('taxonomy_term_data', 'term', 'dep.field_department_tid = term.tid');
   $query->leftJoin('field_data_field_abbreviation', 'abbr', 'term.tid = abbr.entity_id');
-  $query->leftJoin('project_workflow', 'workflow', 'update_node.entity_id = workflow.nid');
+  $query->join('project_workflow', 'workflow', 'update_node.entity_id = workflow.nid');
   $query->fields('project');
   $query->addField('term', 'tid', 'dep_tid');
   $query->addField('budget', 'field_expenditure_budget_calc_value');
@@ -150,6 +160,107 @@ function template_preprocess_ict_viz_home_projects(&$vars) {
   $tmp_get = $get;
   unset($tmp_get['per_page']);
   drupal_add_js(array('ict' => array('base_path' => url(current_path(), array('query' => $tmp_get)))), 'setting');
+
+  $direction = isset($get['direction']) && $get['direction'] == 'desc' ? 'asc' : 'desc';
+  $get['direction'] = $direction;
+  $vars['query'] = $get;
+}
+
+function template_preprocess_ict_viz_filtered_projects(&$vars) {
+  $get = $_GET;
+  unset($get['q']);
+  $col_classes = array(
+    array(),
+    array(),
+    array(),
+    array(),
+    array(),
+    array(),
+    array(),
+    array(),
+  );
+
+  // Get available statuses
+  $statuses_info = field_info_field('field_schedule_status_calc');
+  $vars['statuses'] = $statuses_info['settings']['allowed_values'];
+
+  $subquery = db_select('field_data_field_project', 'pr');
+  $subquery->addField('pr', 'field_project_target_id', 'project_id');
+  $subquery->addExpression('MAX(entity_id)', 'update_id');
+  $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));
+  $subquery->groupBy('field_project_target_id');
+
+  // Project query
+  $query = db_select('node', 'project');
+  $query->join($subquery, 'last_upd', 'last_upd.project_id = project.nid');
+  $query->leftJoin('field_data_field_expenditure_budget_calc', 'budget', 'project.nid = budget.entity_id');
+  $query->leftJoin('field_data_field_original_completion_date', 'o_comp_date', 'project.nid = o_comp_date.entity_id');
+  $query->leftJoin('field_data_field_schedule_status_calc', 'status', 'project.nid = status.entity_id');
+  $query->leftJoin('field_data_field_actual_level_of_project_co', 'level', 'update_id = level.entity_id');
+  $query->leftJoin('field_data_field_expected_completion_date', 'exp_comp_date', 'update_id = exp_comp_date.entity_id');
+  $query->leftJoin('field_data_field_department', 'dep', 'project.nid = dep.entity_id');
+  $query->leftJoin('taxonomy_term_data', 'term', 'dep.field_department_tid = term.tid');
+  $query->leftJoin('field_data_field_abbreviation', 'abbr', 'term.tid = abbr.entity_id');
+  $query->join('project_workflow', 'workflow', 'project.nid = workflow.nid AND state = :state', array(':state' => 'approved'));
+  $query->fields('project');
+  $query->addField('term', 'tid', 'dep_tid');
+  $query->addField('budget', 'field_expenditure_budget_calc_value');
+  $query->addField('level', 'field_actual_level_of_project_co_value');
+  $query->addField('status', 'field_schedule_status_calc_value');
+  $query->addField('exp_comp_date', 'field_expected_completion_date_value');
+  $query->addField('o_comp_date', 'field_original_completion_date_value');
+  $query->addExpression('IF(LENGTH(abbr.field_abbreviation_value) > 0, field_abbreviation_value, term.name)', 'dep_name');
+  $query->condition('workflow.state', 'approved');
+  $query->condition('project.type', 'project');
+
+  // Sorting options
+  $sorting = array(
+    'dep_name' => 'dep_name',
+    'title' => 'title',
+    'status' => 'status.field_schedule_status_calc_value',
+    'level' => 'level.field_actual_level_of_project_co_value',
+    'budget' => 'budget.field_expenditure_budget_calc_value',
+    'o_comp_date' => 'o_comp_date.field_original_completion_date_value',
+    'exp_comp_date' => 'exp_comp_date.field_expected_completion_date_value',
+  );
+
+  $direction = isset($get['direction']) ? $get['direction'] : 'desc';
+  if (isset($sorting[$get['order']])) {
+    $query->orderBy($sorting[$get['order']], $direction);
+    $col_classes[array_search($get['order'], array_keys($sorting))][] = 'current_sort';
+  }
+  else {
+    $query->orderBy('created', $direction);
+  }
+
+  // Filtering
+  $filters = array(
+    'dep_name' => 'term.tid',
+    'status' => 'status.field_schedule_status_calc_value',
+  );
+  drupal_set_title(t('Projects'));
+  if (isset($get['filter_by']) && isset($get['filter_by']) && isset($filters[$get['filter_by']])) {
+    $query->condition($filters[$get['filter_by']], $get['filter']);
+  }
+
+  // Get results
+  $results = $query->execute()->fetchAll();
+  $vars['results'] = $results;
+
+  $filters_val = array(
+    'dep_name' => 'dep_name',
+    'status' => 'field_schedule_status_calc_value',
+  );
+  if (isset($get['filter_by']) && isset($get['filter_by']) && isset($filters_val[$get['filter_by']])) {
+    $first_row = reset($results);
+    $label = $first_row->{$filters_val[$get['filter_by']]};
+    if ($get['filter_by'] == 'status' && isset($vars['statuses'][$label])) {
+      $label = $vars['statuses'][$label];
+    }
+    drupal_set_title($label . ' ' . t('Projects'));
+  }
+
+  $vars['col_classes'] = array_map(function($var) { return implode(' ', $var); }, $col_classes);
 
   $direction = isset($get['direction']) && $get['direction'] == 'desc' ? 'asc' : 'desc';
   $get['direction'] = $direction;
