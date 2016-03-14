@@ -19,27 +19,27 @@
       <th class="<?php print $col_classes[0] ?>">
         <?php print t('Entity'); ?>
         <?php $query['order'] = 'dep_name'; ?>
-        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
+        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query, 'fragment' => 'ict-home-projects-table-id')); ?>"><span></span></a>
       </th>
       <th class="<?php print $col_classes[1] ?>">
         <?php print t('Project Title'); ?>
         <?php $query['order'] = 'title'; ?>
-        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
+        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query, 'fragment' => 'ict-home-projects-table-id')); ?>"><span></span></a>
       </th>
       <th colspan="2" class="<?php print $col_classes[2] ?>">
         <?php print t('Expenditure to Date/Budget'); ?>
         <?php $query['order'] = 'budget'; ?>
-        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
+        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query, 'fragment' => 'ict-home-projects-table-id')); ?>"><span></span></a>
       </>
       <th class="<?php print $col_classes[3] ?>">
         <?php print t('No. of Benefits'); ?>
         <?php $query['order'] = 'benefits'; ?>
-        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
+        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query, 'fragment' => 'ict-home-projects-table-id')); ?>"><span></span></a>
       </th>
       <th class="<?php print $col_classes[4] ?>">
         <?php print t('Project Schedule Status'); ?>
         <?php $query['order'] = 'status'; ?>
-        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
+        <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query, 'fragment' => 'ict-home-projects-table-id')); ?>"><span></span></a>
       </th>
     </tr>
     <tr class="tooltips-row">
