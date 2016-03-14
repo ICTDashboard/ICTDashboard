@@ -1,0 +1,35 @@
+<div id="ict-dashboard-detailed-overview">
+  <div class="wrap cf">
+    <div class="section-title">
+      <h2>
+        <?php print t('Project Expenditure and Budget'); ?>
+        <a href="javascript:void(0);" class="tooltip">
+          <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print t('Project Expenditure and Budget help text'); ?>
+              </span>
+        </a>
+      </h2>
+    </div>
+    <div id="detailed-view-expenditure" style="margin-left: 25px; max-width: 945px;">
+        <canvas id="detailed_budget_chart" width="945" height="360"></canvas>
+        <div id="expenditure_legend" class="legend"></div>
+  </div>
+</div>
+
+<script>
+  (function ($){
+    $(document).ready(function () {
+      var ctx = document.getElementById("detailed_budget_chart").getContext("2d");
+      var ExpenditureChart = new Chart(ctx).Bar(
+        Drupal.settings.detailed_budget_chart.data,
+        Drupal.settings.detailed_budget_chart.options
+      );
+
+      document
+        .getElementById("expenditure_legend")
+        .innerHTML = ExpenditureChart.generateLegend();
+
+    });
+  })(jQuery);
+</script>
