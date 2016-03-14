@@ -51,7 +51,7 @@
       </span></a></th>
       <th class="<?php print $col_classes[2] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
             Briefly describe benefit.
-      </span></a></>
+      </span></a></th>
       <th class="<?php print $col_classes[3] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
             Briefly describe benefit.
       </span></a></th>
