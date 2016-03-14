@@ -1,4 +1,5 @@
 <?php
+  $get = $query;
   $pager_tags = array(
     t('First'),
     t('Previous'),
@@ -7,7 +8,7 @@
     t('Last'),
   );
 ?>
-<div class="wrap cf"><div class="ict-home-parojects-table" id="ict-home-parojects-table-id">
+<div class="wrap cf"><div class="ict-home-projects-table" id="ict-home-projects-table-id">
   <h2><?php print $table_header; ?></h2>
   <div class="table-config-bar">
     <?php print theme('pager', array('tags' => $pager_tags)); ?>
@@ -61,7 +62,10 @@
     <?php foreach($results as $row) : ?>
       <tr>
         <td class="<?php print $col_classes[0] ?>">
-          <?php print $row->dep_name; ?>
+          <?php $query = $get;
+                $query['filter_by'] = 'dep_name';
+                $query['filter'] = $row->dep_tid; ?>
+          <?php print l($row->dep_name, 'dashboard-projects', array('query' => $query)); ?>
         </td>
         <td class="<?php print $col_classes[1] ?>">
           <?php print l($row->title, 'node/' . $row->nid); ?>
@@ -80,8 +84,11 @@
         <td class="<?php print $col_classes[3] ?>">
           <?php print l($row->field_number_of_benefits_calc_value, 'node/' . $row->nid, array('fragment' => 'project-benefits')); ?>
         </td>
-        <td class="<?php print $col_classes[4] ?> chedule-status-col schedule-status-<?php print $row->field_schedule_status_calc_value; ?>">
-          <?php print $statuses[$row->field_schedule_status_calc_value]; ?>
+        <td class="<?php print $col_classes[4] ?> schedule-status-col schedule-status-<?php print $row->field_schedule_status_calc_value; ?>">
+          <?php $query = $get;
+                $query['filter_by'] = 'status';
+                $query['filter'] = $row->field_schedule_status_calc_value; ?>
+          <?php print l($statuses[$row->field_schedule_status_calc_value], 'dashboard-projects', array('query' => $query)); ?>
         </td>
       </tr>
     <?php endforeach; ?>

@@ -447,9 +447,9 @@ function ict_project_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'Behind schedule',
-        1 => 'On track',
-        2 => 'Ahead of schedule',
+        0 => 'Behind Schedule',
+        1 => 'On Track',
+        2 => 'Ahead of Schedule',
       ),
       'allowed_values_function' => '',
     ),

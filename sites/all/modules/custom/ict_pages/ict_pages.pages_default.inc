@@ -67,7 +67,8 @@ dashboard
 project/*/update
 update/*
 node/*/delete
-user/create',
+user/create
+dashboard-projects',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,
