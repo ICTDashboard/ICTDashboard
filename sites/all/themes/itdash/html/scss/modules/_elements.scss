@@ -1008,6 +1008,15 @@ body,
         line-height: 80px;
         font-weight: 600;
         color: #202b3d;
+        a {
+          color: #202b3d;
+          text-decoration: none;
+          &:focus,
+          &:hover {
+            color: #202b3d;
+            text-decoration: underline;
+          }
+        }
       }
     }
     .general-button {

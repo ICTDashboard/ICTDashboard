@@ -113,7 +113,7 @@
           </a>
         </div>
         <div class="big-number">
-          <?php print $number_of_projects ?>
+          <?php print l($number_of_projects, 'dashboard-projects') ?>
         </div>
       </div>
 
