@@ -24,17 +24,39 @@ function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args
   $total_budget = 0;
   $current_year_budget = 0;
   $current_year_expenditure = 0;
+  $project_statuses = array(
+    'behind_schedule' => array(
+      'value' => 0,
+      'color' => '#f6d000',
+      'filter_value' => ICT_SCHEDULE_STATUS_BEHIND,
+      'title_text' => t('View all projects with Behind Schedule status')
+    ),
+    'on_track' => array(
+      'value' => 0,
+      'color' => '#1fd063',
+      'filter_value' => ICT_SCHEDULE_STATUS_ON_TRACK,
+      'title_text' => t('View all projects with On Track status')
+    ),
+    'ahead_schedule' => array(
+      'value' => 0,
+      'color' => '#75a2df',
+      'filter_value' => ICT_SCHEDULE_STATUS_AHEAD,
+      'title_text' => t('View all projects with Ahead of Schedule status')
+    )
+  );
   if ($all_projects) {
     // get all required data
     $query = db_select('field_data_field_number_of_benefits_calc', 'benefits');
     $query->join('field_data_field_expenditure_budget_calc', 'budget', 'budget.entity_id = benefits.entity_id AND budget.revision_id = benefits.revision_id');
     $query->join('field_data_field_expenditure_to_date_calc', 'expenditure', 'expenditure.entity_id = benefits.entity_id AND expenditure.revision_id = benefits.revision_id');
+    $query->join('field_data_field_schedule_status_calc', 'status', 'status.entity_id = benefits.entity_id AND status.revision_id = benefits.revision_id');
     $query->join('project_workflow', 'workflow', 'benefits.entity_id = workflow.nid AND benefits.revision_id = workflow.vid');
     $query->condition('workflow.state', 'approved');
     $query->condition('benefits.entity_id', $all_projects, 'IN');
     $query->fields('benefits', array('field_number_of_benefits_calc_value'));
     $query->fields('budget', array('field_expenditure_budget_calc_value'));
     $query->fields('expenditure', array('field_expenditure_to_date_calc_value'));
+    $query->fields('status', array('field_schedule_status_calc_value'));
     $projects = $query->execute()
       ->fetchAll();
 
@@ -42,8 +64,10 @@ function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args
       $benefits += (int)$project->field_number_of_benefits_calc_value;
       $total_expenditure += (float)$project->field_expenditure_to_date_calc_value;
       $total_budget += (float)$project->field_expenditure_budget_calc_value;
+      $all_schedule_statuses[] = $project->field_schedule_status_calc_value;
     }
 
+    $counted_statuses = array_count_values($all_schedule_statuses);
     $current_fin_year = __ict_project_get_current_fin_year();
 
     // current year budget
@@ -64,8 +88,8 @@ function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args
 
     // current year expenditure
     $subquery = db_select('field_data_field_project', 'update_entity');
-    $query->join('project_workflow', 'workflow', 'update_entity.entity_id = workflow.nid AND update_entity.revision_id = workflow.vid');
-    $query->condition('workflow.state', 'approved');
+    $subquery->join('project_workflow', 'workflow', 'update_entity.entity_id = workflow.nid AND update_entity.revision_id = workflow.vid');
+    $subquery->condition('workflow.state', 'approved');
     $subquery->fields('update_entity', array('field_project_target_id'));
     $subquery->condition('update_entity.field_project_target_id', $all_projects, 'IN');
     $subquery->addExpression('MAX(update_entity.revision_id)', 'max_revision');
@@ -87,6 +111,17 @@ function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args
     }
   }
 
+  // set status values
+  $project_statuses['behind_schedule']['value'] = isset($counted_statuses[ICT_SCHEDULE_STATUS_BEHIND]) ?
+      $counted_statuses[ICT_SCHEDULE_STATUS_BEHIND] :
+      0;
+  $project_statuses['on_track']['value'] = isset($counted_statuses[ICT_SCHEDULE_STATUS_ON_TRACK]) ?
+      $counted_statuses[ICT_SCHEDULE_STATUS_ON_TRACK] :
+      0;
+  $project_statuses['ahead_schedule']['value'] = isset($counted_statuses[ICT_SCHEDULE_STATUS_AHEAD]) ?
+      $counted_statuses[ICT_SCHEDULE_STATUS_AHEAD] :
+      0;
+
   // add required settings for expenditure graphs
   drupal_add_js(
     array(
@@ -94,7 +129,8 @@ function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args
         'total_expenditure' => $total_expenditure,
         'total_budget' => $total_budget,
         'current_year_expenditure' => $current_year_expenditure,
-        'current_year_budget' => $current_year_budget
+        'current_year_budget' => $current_year_budget,
+        'project_statuses' => $project_statuses
       )
     ),
     'setting'
@@ -106,7 +142,8 @@ function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args
     'total_expenditure' => $total_expenditure,
     'total_budget' => $total_budget,
     'current_year_expenditure' => $current_year_expenditure,
-    'current_year_budget' => $current_year_budget
+    'current_year_budget' => $current_year_budget,
+    'project_statuses' => $project_statuses
   ));
 
   return $block;

@@ -1022,7 +1022,7 @@ body,
     }
   }
   #overview-graphs {
-    padding-right: 120px;
+    padding-right: 90px;
     #overview-expenditure-switch {
       position: relative;
       margin-top: 15px;
@@ -1062,6 +1062,18 @@ body,
     .expenditure-budget-value {
       text-align: center;
       font-size: 16px;
+    }
+    #project-schedule-status-graph {
+      margin-top: 12px;
+    }
+    #statuses_legend {
+      .bar-legend {
+        margin: 0;
+        li {
+          margin-right: 20px;
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 }
