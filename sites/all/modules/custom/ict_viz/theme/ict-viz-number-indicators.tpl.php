@@ -67,6 +67,38 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="label">
+            <?php print t('Project Schedule Status'); ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print t('Project Schedule Status help text...'); ?>
+            </span>
+            </a>
+          </div>
+          <div id="project-schedule-status-graph"></div>
+          <div class="legend" id="statuses_legend">
+            <ul class="bar-legend">
+              <li>
+                <span style="background-color:<?php print $project_statuses['behind_schedule']['color']; ?>"></span>
+                <?php print t('Behind Schedule'); ?>
+              </li>
+              <li>
+                <span style="background-color:<?php print $project_statuses['on_track']['color']; ?>"></span>
+                <?php print t('On Track'); ?>
+              </li>
+              <li>
+                <span style="background-color:<?php print $project_statuses['ahead_schedule']['color']; ?>"></span>
+                <?php print t('Ahead of Schedule'); ?>
+              </li>
+              <li>
+                <b>#</b> <?php print t('No. of Projects'); ?>
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="t-1of3 d-1of3" id="ict-dashboard-numbers">
@@ -197,6 +229,81 @@
           .attr('y2', 60)
           .attr("style", 'stroke:#cdd8ec;stroke-width:1');
       }
+
+      function initScheduleStatusesGraph () {
+        var data = Drupal.settings.budget_expenditure_settings.project_statuses;
+
+        var chart = d3.select('#project-schedule-status-graph')
+          .append("svg:svg")
+          .attr("class", "chart")
+          .attr("width", width)
+          .attr("height", 66);
+
+        var sum_of_values = d3.sum([
+              data.behind_schedule.value,
+              data.on_track.value,
+              data.ahead_schedule.value
+            ]);
+
+        x = d3.scale.linear()
+          .domain([0, sum_of_values])
+          .range([0, width - 1]);
+
+        // initial line on the left
+        chart.append("svg:line")
+          .attr('x1', 0)
+          .attr('y1', 0)
+          .attr('x2', 0)
+          .attr('y2', 66)
+          .attr("style", 'stroke:#cdd8ec;stroke-width:1');
+
+        var y = 8,
+            height = 50,
+            current_x = 1;
+
+        var statuses = ['behind_schedule', 'on_track', 'ahead_schedule'];
+        for (i in statuses) {
+          var current_item = statuses[i],
+              current_value = data[current_item],
+              current_width = x(current_value.value);
+
+          // draw only status that have at least one project
+          if (!current_width) continue;
+
+          chart.append('svg:a')
+            .attr('id', current_item)
+            .attr('xlink:href', '/dashboard-projects?filter_by=status&filter='+current_value.filter_value)
+            .attr('xlink:title', current_value.title_text)
+            .append("svg:rect")
+            .attr("y", y)
+            .attr("x", current_x)
+            .attr("width", current_width)
+            .attr("height", 50)
+            .attr("style", 'fill:'+current_value.color);
+
+          chart.select('a#'+statuses[i])
+            .append('svg:text')
+            .attr("x", current_x)
+            .attr("y", y)
+            .attr('font-size', '16px')
+            .attr('font-weight', '600')
+            .attr('font-family', 'Open Sans')
+            .attr('dy', height/2 + 5)
+            .attr('dx', current_width/2)
+            .attr('text-anchor', 'middle')
+            .text(current_value.value);
+
+          current_x += current_width;
+
+          chart.append("svg:line")
+            .attr('x1', current_x)
+            .attr('y1', 58)
+            .attr('x2', current_x)
+            .attr('y2', 66)
+            .attr("style", 'stroke:#cdd8ec;stroke-width:1');
+        }
+      }
+      initScheduleStatusesGraph();
     });
 
   })(jQuery);
