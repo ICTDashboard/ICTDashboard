@@ -4,6 +4,8 @@
  * Code for the ICT Update feature.
  */
 
+include_once 'ict_viz.inc';
+
 /**
  * @file
  * Code for the ICT VIZ feature.
@@ -30,6 +32,10 @@ function ict_viz_theme($existing, $type, $theme, $path) {
     'ict_viz_number_indicators' => array(
       'path' => drupal_get_path('module', 'ict_viz') . '/theme',
       'template' => 'ict-viz-number-indicators',
+    ),
+    'ict_viz_detailed_overview' => array(
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+      'template' => 'ict-viz-detailed-overview',
     ),
   );
 }

@@ -132,7 +132,7 @@
         </div>
       </div>
 
-      <a href="" class="general-button arrow-right"><span><?php print t('View Detailed Overview'); ?></span></a>
+      <a href="<?php print url('detailed-overview'); ?>" title="<?php print t('View Detailed Overview'); ?>" class="general-button arrow-right"><span><?php print t('View Detailed Overview'); ?></span></a>
     </div>
 
   </div>

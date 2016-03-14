@@ -1010,7 +1010,7 @@ body,
       .tooltip {
         position: absolute;
         top: 10px;
-        right: 21px;
+        right: 50px;
       }
     }
     .legend {
@@ -1042,6 +1042,30 @@ body,
           margin-bottom: 10px;
         }
       }
+    }
+  }
+}
+
+#ict-dashboard-detailed-overview {
+  h2 {
+    font-size: 26px;
+    line-height: 58px;
+    border-bottom: 1px solid #f0f4fa;
+    color: #0d6c88;
+    font-weight: 600;
+    margin-bottom: 30px;
+    .tooltip {
+      margin-left: 0;
+      vertical-align: baseline;
+      margin-bottom: -1px;
+    }
+  }
+  #detailed-view-expenditure {
+    padding-top: 15px;
+  }
+  #expenditure_legend {
+    .bar-legend {
+      overflow: hidden;
     }
   }
 }
