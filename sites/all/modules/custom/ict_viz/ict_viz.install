@@ -3,7 +3,7 @@
 /**
  * Update calculated fields for existing projects
  */
-function ict_viz_update_7000(&$context) {
+function ict_viz_update_7002(&$context) {
   if (!isset($context['total'])) {
     $context['project_ids'] = ict_project_get_all_active_projects();
     $context['total'] = count($context['project_ids']);

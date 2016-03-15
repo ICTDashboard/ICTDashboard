@@ -51,7 +51,7 @@ function ict_viz_overview_number_indicators_render ($subtype, $conf, $panel_args
     $query->join('field_data_field_expenditure_to_date_calc', 'expenditure', 'expenditure.entity_id = benefits.entity_id AND expenditure.revision_id = benefits.revision_id');
     $query->join('field_data_field_schedule_status_calc', 'status', 'status.entity_id = benefits.entity_id AND status.revision_id = benefits.revision_id');
     $query->join('project_workflow', 'workflow', 'benefits.entity_id = workflow.nid AND benefits.revision_id = workflow.vid');
-    $query->condition('workflow.state', 'approved');
+//    $query->condition('workflow.state', 'approved');
     $query->condition('benefits.entity_id', $all_projects, 'IN');
     $query->fields('benefits', array('field_number_of_benefits_calc_value'));
     $query->fields('budget', array('field_expenditure_budget_calc_value'));

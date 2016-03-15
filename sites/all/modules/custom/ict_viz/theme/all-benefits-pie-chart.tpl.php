@@ -19,6 +19,7 @@
 
         var data = google.visualization.arrayToDataTable(data_items, false);
 
+
         var options = {
           titlePosition: 'none',
           height: 325,
