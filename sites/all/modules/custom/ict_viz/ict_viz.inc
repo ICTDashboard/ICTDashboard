@@ -118,7 +118,7 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
       'data' => array_values($year_expenditure)
     ),
     array(
-      'label' => 'Total Expenditure to Date ($m)',
+      'label' => 'Total Budget ($m)',
       'fillColor' => "#5c46a4",
       'strokeColor' => "#5c46a4",
       'highlightFill' => "#5c46a4",

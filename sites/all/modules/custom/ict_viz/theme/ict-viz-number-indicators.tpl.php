@@ -4,28 +4,20 @@
       <div  id="overview-graphs">
         <div class="label">
           <?php print t('Expenditure and Budget'); ?>
+          <a href="javascript:void(0);" class="tooltip budget-tooltip">
+            <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print t('Expenditure to date and budget across all active projects, by current financial year or total across all years.'); ?>
+              </span>
+          </a>
         </div>
         <div id="overview-expenditure-switch">
           <div >
             <label><?php print t('Display'); ?></label>
             <select>
-              <option value="current-fin-year-budget"><?php print t('Current Financial Year Total Expenditure and Budget'); ?></option>
+              <option value="current-fin-year-budget"><?php print t('Current Financial Year Expenditure and Budget'); ?></option>
               <option value="total-budget"><?php print t('Total Expenditure and Budget'); ?></option>
             </select>
-
-            <a href="javascript:void(0);" class="tooltip budget-tooltip" id="current-fin-year-budget-tooltip">
-              <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print t('Current Financial Year Total Expenditure and Budget help text...'); ?>
-              </span>
-            </a>
-
-            <a href="javascript:void(0);" class="tooltip budget-tooltip" id="total-budget-tooltip" style="display: none;">
-              <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print t('Total Expenditure and Budget help text...'); ?>
-              </span>
-            </a>
           </div>
         </div>
 
@@ -69,11 +61,11 @@
 
         <div class="row">
           <div class="label">
-            <?php print t('Project Schedule Status'); ?>
+            <?php print t('Projects Schedule Status'); ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
             <span class="tooltip-content">
-              <?php print t('Project Schedule Status help text...'); ?>
+              <?php print t('A summary of schedule status for all active projects compared to their planned schedule.'); ?>
             </span>
             </a>
           </div>
@@ -149,9 +141,6 @@
 
         $('.overview-expenditure-graphs').hide();
         $('#'+activeItem+'-graph').show();
-
-        $('.budget-tooltip').hide();
-        $('#'+activeItem+'-tooltip').show();
       });
 
       var currentFinYearData = [
