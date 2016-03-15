@@ -2,11 +2,11 @@
   <div class="wrap cf">
     <div class="section-title">
       <h2>
-        <?php print t('Project Expenditure and Budget'); ?>
+        <?php print t('Projects Expenditure and Budget'); ?>
         <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print t('Project Expenditure and Budget help text'); ?>
+                <?php print t('Expenditure to date and budget across all active projects by financial year.'); ?>
               </span>
         </a>
       </h2>

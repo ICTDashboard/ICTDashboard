@@ -35,7 +35,6 @@ features[menu_links][] = menu-header-menu_home:<front>
 features[node][] = page
 features[page_manager_handlers][] = site_template_panel_context
 features[page_manager_pages][] = dashboard
-features[page_manager_pages][] = dashboard_detailed_overview
 features[page_manager_pages][] = home_page
 features[page_manager_pages][] = project_add
 features[user_permission][] = access bean overview
