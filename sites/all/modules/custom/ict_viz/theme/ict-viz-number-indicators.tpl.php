@@ -61,11 +61,11 @@
 
         <div class="row">
           <div class="label">
-            <?php print t('Project Schedule Status'); ?>
+            <?php print t('Projects Schedule Status'); ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
             <span class="tooltip-content">
-              <?php print t('Project Schedule Status help text...'); ?>
+              <?php print t('A summary of schedule status for all active projects compared to their planned schedule.'); ?>
             </span>
             </a>
           </div>
