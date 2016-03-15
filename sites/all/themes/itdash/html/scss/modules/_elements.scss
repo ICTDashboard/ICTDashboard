@@ -1015,7 +1015,7 @@ body,
           &:focus,
           &:hover {
             color: #202b3d;
-            text-decoration: underline;
+            text-decoration: none;
           }
         }
       }
@@ -1045,14 +1045,9 @@ body,
         line-height: 34px;
       }
       .sbHolder {
-        max-width: 400px;
+        max-width: 360px;
         margin-left: 60px;
         margin-right: 60px;
-      }
-      .tooltip {
-        position: absolute;
-        top: 10px;
-        right: 50px;
       }
     }
     .legend {

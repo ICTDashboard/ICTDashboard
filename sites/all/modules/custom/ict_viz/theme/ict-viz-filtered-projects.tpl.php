@@ -96,7 +96,7 @@
           $<?php print number_format($row->field_expenditure_budget_calc_value, 2, '.', ''); ?>m
         </td>
         <td class="<?php print $col_classes[5] ?>">
-          <?php print format_date(strtotime($row->field_original_completion_date_value), 'medium', 'd F Y') ?>
+          <?php print format_date(strtotime($row->field_start_date_value), 'medium', 'd F Y') ?>
         </td>
         <td class="<?php print $col_classes[6] ?>">
           <?php print format_date(strtotime($row->field_expected_completion_date_value), 'medium', 'd F Y') ?>

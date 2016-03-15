@@ -194,7 +194,7 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
   $query = db_select('node', 'project');
   $query->join($subquery, 'last_upd', 'last_upd.project_id = project.nid');
   $query->leftJoin('field_data_field_expenditure_budget_calc', 'budget', 'project.nid = budget.entity_id');
-  $query->leftJoin('field_data_field_original_completion_date', 'o_comp_date', 'project.nid = o_comp_date.entity_id');
+  $query->leftJoin('field_data_field_start_date', 'o_comp_date', 'project.nid = o_comp_date.entity_id');
   $query->leftJoin('field_data_field_schedule_status_calc', 'status', 'project.nid = status.entity_id');
   $query->leftJoin('field_data_field_actual_level_of_project_co', 'level', 'update_id = level.entity_id');
   $query->leftJoin('field_data_field_expected_completion_date', 'exp_comp_date', 'update_id = exp_comp_date.entity_id');
@@ -208,7 +208,7 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
   $query->addField('level', 'field_actual_level_of_project_co_value');
   $query->addField('status', 'field_schedule_status_calc_value');
   $query->addField('exp_comp_date', 'field_expected_completion_date_value');
-  $query->addField('o_comp_date', 'field_original_completion_date_value');
+  $query->addField('o_comp_date', 'field_start_date_value');
   $query->addExpression('IF(LENGTH(abbr.field_abbreviation_value) > 0, field_abbreviation_value, term.name)', 'dep_name');
   $query->condition('workflow.state', 'approved');
   $query->condition('project.type', 'project');
@@ -220,7 +220,7 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
     'status' => 'status.field_schedule_status_calc_value',
     'level' => 'level.field_actual_level_of_project_co_value',
     'budget' => 'budget.field_expenditure_budget_calc_value',
-    'o_comp_date' => 'o_comp_date.field_original_completion_date_value',
+    'o_comp_date' => 'o_comp_date.field_start_date_value',
     'exp_comp_date' => 'exp_comp_date.field_expected_completion_date_value',
   );
 
