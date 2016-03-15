@@ -21,6 +21,7 @@ function ict_viz_detailed_overview_graphs_render ($subtype, $conf, $panel_args, 
 
   // detailed expenditure graph
   ict_viz_prepare_detailed_project_expenditure_data($all_projects);
+  ict_viz_prepare_detailed_project_schedule_data($all_projects);
 
   // add required settings
   drupal_add_js(
