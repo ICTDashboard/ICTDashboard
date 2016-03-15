@@ -134,6 +134,40 @@ dashboard-projects',
     $pane->uuid = '459b4dca-0c70-43c6-810d-2fba68be2949';
     $display->content['new-459b4dca-0c70-43c6-810d-2fba68be2949'] = $pane;
     $display->panels['content'][2] = 'new-459b4dca-0c70-43c6-810d-2fba68be2949';
+    $pane = new stdClass();
+    $pane->pid = 'new-37cb3bb8-10d8-44ac-ad9f-ff772069368b';
+    $pane->panel = 'content';
+    $pane->type = 'last_updated';
+    $pane->subtype = 'last_updated';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => '<front>
+node/*
+detailed-overview
+dashboard-projects',
+          ),
+          'context' => 'argument_string_1',
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '37cb3bb8-10d8-44ac-ad9f-ff772069368b';
+    $display->content['new-37cb3bb8-10d8-44ac-ad9f-ff772069368b'] = $pane;
+    $display->panels['content'][3] = 'new-37cb3bb8-10d8-44ac-ad9f-ff772069368b';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = 'new-459b4dca-0c70-43c6-810d-2fba68be2949';
   $handler->conf['display'] = $display;

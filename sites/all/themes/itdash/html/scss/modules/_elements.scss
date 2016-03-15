@@ -433,6 +433,13 @@ body,
         font-size: 15px;
         position: relative;
         vertical-align: middle;
+        &.col-num-entity,
+        &.col-num-benefits {
+          width: 110px;
+        }
+        &.col-num-budget {
+          width: 320px;
+        }
         .tooltip {
           position: relative;
           margin: 0px;
@@ -474,6 +481,9 @@ body,
         font-size: 14px;
         text-align: left;
         border-bottom: 1px dotted #d9dfe9;
+        &.col-num-benefits {
+          text-align: center;
+        }
         &.current_sort {
           background-color: #d4f2f5;
           font-weight: 600;
@@ -621,6 +631,15 @@ body,
   a.submit-button {
     line-height: 41px;
     text-decoration: none;
+  }
+}
+.wrap.last-updated-on {
+  margin: 25px auto 38px;
+  p {
+    margin: 0;
+    strong {
+      font-size: 14px;
+    }
   }
 }
 
