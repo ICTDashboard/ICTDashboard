@@ -722,13 +722,13 @@ function ict_update_calculate_project_fields($project_id, $update_id) {
   foreach ($upd_wrap->field_original_total_budget as $budget) {
     $todate_sum += $budget->field_total->value();
   }
-  $benefits = $upd_wrap->field_benefits_realised->raw();
+  $benefits = ict_update_get_benefits_count(array('removed'), $project_id);
   $actual_compl = $upd_wrap->field_actual_level_of_project_co->value();
   $forecast_compl = $upd_wrap->field_forecast_level_of_project_->value();
 
   $project_wrapper->field_expenditure_budget_calc = $budget_sum;
   $project_wrapper->field_expenditure_to_date_calc = $todate_sum;
-  $project_wrapper->field_number_of_benefits_calc = count($benefits);
+  $project_wrapper->field_number_of_benefits_calc = $benefits['count'];
   if ($actual_compl > $forecast_compl) {
     $project_wrapper->field_schedule_status_calc = ICT_SCHEDULE_STATUS_AHEAD;
   }
@@ -1021,4 +1021,37 @@ function ict_update_get_actual_benefits($project_id) {
   }
 
   return $benefits;
+}
+
+function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
+  $subquery = db_select('field_data_field_project');
+  $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));
+  $subquery->addField('field_data_field_project', 'field_project_target_id', 'project_id');
+  $subquery->addExpression('MAX(entity_id)', 'last_upd_id');
+  $subquery->groupBy('field_project_target_id');
+
+  $query = db_select('node', 'project');
+  $query->join($subquery, 'last_upd', 'last_upd.project_id = project.nid');
+  $query->join('field_data_field_benefits_realised', 'benefit', 'benefit.bundle = :bundle AND benefit.entity_id = last_upd_id', array(':bundle' => 'update'));
+  $query->join('field_data_field_status', 'status', 'benefit.field_benefits_realised_value = status.entity_id');
+  $query->addField('benefit', 'field_benefits_realised_value', 'benefit_id');
+  $query->addField('status', 'field_status_value', 'st');
+  $query->condition('project.type', 'project');
+  if (!empty($exclude) && is_array($exclude)) {
+    $query->condition('status.field_status_value', $exclude, 'NOT IN');
+  }
+  if (is_numeric($project_id)) {
+    $query->condition('project.nid', $project_id);
+  }
+  $count = $query->execute()->rowCount();
+
+  $query->addExpression('COUNT(status.field_status_value)', 'count');
+  $query->groupBy('status.field_status_value');
+
+  $results = $query->execute()->fetchAll();
+
+  return array(
+    'count' => $count,
+    'benefits' => $results,
+  );
 }

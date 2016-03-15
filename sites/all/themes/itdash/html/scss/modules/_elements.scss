@@ -390,6 +390,7 @@ body,
     table {
       width: 100%;
       max-width: none;
+      table-layout: fixed;
       a {
         display: block;
         color: #027e9c;
