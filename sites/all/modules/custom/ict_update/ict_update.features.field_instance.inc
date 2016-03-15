@@ -376,7 +376,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_current_financial_benefits',
-    'label' => 'Current Expected Financial Benefits',
+    'label' => 'Expected Financial Benefits',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -464,7 +464,7 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_estimated_value_of_benefit',
-    'label' => 'Estimated Value of Benefits Realised',
+    'label' => 'Expected Value of Financial Benefits Realised',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -895,11 +895,11 @@ function ict_update_field_default_field_instances() {
   t('Briefly describe benefit.');
   t('Commentary');
   t('Context, remedial action, changes in project scope or other commentary.');
-  t('Current Expected Financial Benefits');
   t('End date');
   t('Entity Comments');
-  t('Estimated Value of Benefits Realised');
   t('Expected Completion Date');
+  t('Expected Financial Benefits');
+  t('Expected Value of Financial Benefits Realised');
   t('Financial');
   t('For each benefit listed, the date range when benefit is expected to be realised.');
   t('Forecast Level of Project Completion');

@@ -1,10 +1,26 @@
 <?php if ($viz_preview) { $diff = array(); } ?>
 <div id="inner-content" class="wrap cf">
-  <h2><?php print t(' Project Expenditure and Budget'); ?></h2>
+  <h2><?php print t(' Project Expenditure and Budget'); ?>
+    <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print variable_get('ict_project_expenditure_and_budget_text', "This tooltip"); ?>
+              </span>
+              </a>
+  </h2>
   <div class="project-draft-submission d-all">
-      <div class="row">
+    <div class="row">
       <div class="label">
-        <?php print t('Total Project Budget'); ?>
+        <?php print t('Total Expenditure To Date'); ?>
+      </div>
+      <div class="text">
+          <?php print '$' . $total_expenditure_number . 'm'; ?>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
+        <?php print t('Original Total Project Budget'); ?>
       </div>
       <div class="text">
         <?php print '$' . $original_total_budget_number . 'm'; ?>
@@ -13,15 +29,7 @@
 
     <div class="row">
       <div class="label">
-        <?php print t('Total Project Expenditure'); ?>
-      </div>
-      <div class="text">
-        <?php print '$' . $total_expenditure_number . 'm'; ?>
-      </div>
-    </div>
-    <div class="row">
-      <div class="label">
-        <?php print t('Project Budget and Expenditure'); ?>
+        <?php print t('Project Expenditure and Budget'); ?>
         <?php if (!empty($original_total_budget_meta['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
@@ -36,7 +44,14 @@
         <?php print $field_original_total_budget; ?>
       </div>
     </div> 
-    <div class="project-timings"><h2><?php print t('Project Timings'); ?></h2></div>
+    <div class="project-timings"><h2><?php print t('Project Timings'); ?>
+      <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print variable_get('ict_project_timings_tooltip_text', "This tooltip"); ?>
+              </span>
+              </a>
+    </h2></div>
     <?php if (!$viz_preview) : ?>
       <div class="row">
         <div class="label">
@@ -178,6 +193,17 @@
       </div>
     </div>
     <?php $field_predicted_project_benefit_info = field_info_instance('node', 'field_predicted_project_benefit', 'project');?>
+
+    <div class="project-benefits">
+      <h2 id="project-benefits"><?php print t('Project Benefits'); ?>
+      <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print variable_get('ict_project_benefits_tooltip_text', "This tooltip"); ?>
+              </span>
+              </a>
+              </h2>
+    </div>
     <div class="row">
       <div class="label">
         <?php print $field_predicted_project_benefit_info['label']; ?>
@@ -193,9 +219,6 @@
       <div class="text">
         $<?php print number_format($project_node->field_predicted_project_benefit['und'][0]['value'], 2, '.', ''); ?>m
       </div>
-    </div>
-    <div class="project-benefits">
-      <h2 id="project-benefits"><?php print t('Project Benefits'); ?></h2>
     </div>
     <div class="row">
       <div class="label">
