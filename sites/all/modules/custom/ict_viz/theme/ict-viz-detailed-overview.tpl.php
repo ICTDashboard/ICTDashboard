@@ -28,7 +28,7 @@
     </div>
     <div id="detailed-view-schedule-status">
       <div id="detailed_schedule_chart_current"></div>
-      <div id="detailed_schedule_chart_previous"></div>
+      <div style="display: none;" id="detailed_schedule_chart_previous"></div>
       <div class="legend" id="statuses_legend">
         <ul class="bar-legend">
           <li>
@@ -48,6 +48,12 @@
           </li>
         </ul>
       </div>
+      <a href="javascript:void(0);" title="<?php print t('View All Previous Quarters'); ?>" id="schedule-expand" class="general-button plus expand-collapse-button">
+        <span><?php print t('View All Previous Quarters');?></span>
+      </a>
+      <a href="javascript:void(0);" title="<?php print t('View Current Quarters'); ?>" id="schedule-collapse" style="display: none;" class="general-button minus expand-collapse-button">
+        <span><?php print t('View Current Quarters'); ?></span>
+      </a>
     </div>
     <div class="section-title">
       <h2>
@@ -85,10 +91,41 @@
 
       // align legend with graph
       $('#statuses_legend .bar-legend').css('padding-left', left_padding+'px');
+      $('#detailed-view-schedule-status .expand-collapse-button').css('margin-left', left_padding+'px');
+
+      // expand/collapse buttons
+      if (typeof data.data['previous'] == 'undefined') {
+        $('#detailed-view-schedule-status .expand-collapse-button').hide();
+      }
+      else {
+        $('#detailed-view-schedule-status .expand-collapse-button').click(function() {
+          $('#detailed-view-schedule-status .expand-collapse-button')
+            .show()
+            .addClass('visible');
+
+          $(this)
+            .hide()
+            .removeClass('visible');
+
+          if (!$('#schedule-collapse').hasClass('visible')) {
+            $('#detailed_schedule_chart_previous').hide();
+          }
+          else {
+            $('#detailed_schedule_chart_previous').show();
+          }
+        });
+      }
 
       x = d3.scale.linear()
         .domain([0, data.max_number])
         .range([0, max_bar - 1]);
+
+      // get ordinal for quarter
+      getGetOrdinal = function (n) {
+        var s=["th","st","nd","rd"],
+            v=n%100;
+        return n+(s[(v-20)%10]||s[v]||s[0]);
+      };
 
       var years = ['current', 'previous'];
       for (i in years) {
@@ -122,22 +159,22 @@
           // add text on the left
           var quarter_text = quarter_g
             .append("svg:text")
-            .attr("x", 14)
-            .attr("y", y + height/3 + 3)
+            .attr("x", 13)
+            .attr("y", y + height/3 + 2)
             .attr("font-size", '13px')
             .attr("font-family", 'Open Sans')
             .attr("color", '#202b3d');
           // quarter number
           quarter_text
             .append("svg:tspan")
-            .text(quarter+"th Quarter");
+            .text(getGetOrdinal(quarter)+" Quarter");
           // year
           quarter_text
             .append("svg:tspan")
             .attr("font-weight", 'bold')
-            .attr("x", 14)
-            .attr("dy", 16)
-            .attr("dx", 22)
+            .attr("x", 13)
+            .attr("dy", 22)
+            .attr("dx", 23)
             .attr("text-anchor", 'right')
             .text(data[year]);
 
@@ -153,8 +190,7 @@
           var statuses = ['behind_schedule', 'on_track', 'ahead_schedule'];
           for (i in statuses) {
             var current_item = statuses[i],
-              current_value = data.data[year][quarter][current_item]
-
+              current_value = data.data[year][quarter][current_item];
 
             // draw only status that have at least one project
             if (typeof data.data[year][quarter][current_item] == 'undefined') continue;

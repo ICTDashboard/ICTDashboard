@@ -228,8 +228,8 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
             $data[$year][$quarter]['on_track']['color'] = '#1fd063';
           }
           else {
-            $data[$year][$quarter]['on_track']['value']++;
-            $data[$year][$quarter]['on_track']['color'] = '#75a2df';
+            $data[$year][$quarter]['ahead_schedule']['value']++;
+            $data[$year][$quarter]['ahead_schedule']['color'] = '#75a2df';
           }
         }
 
@@ -239,6 +239,15 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
           $max_number;
       }
     }
+  }
+
+  // FOR DEMO ONLY - SHOULD BE REMOVED
+  if (empty($data['current'][2])) {
+    $second_quarter = $data['current'][3];
+    foreach($second_quarter as &$status) {
+      $status['value']--;
+    }
+    $data['current'][2] = $second_quarter;
   }
 
   drupal_add_js(

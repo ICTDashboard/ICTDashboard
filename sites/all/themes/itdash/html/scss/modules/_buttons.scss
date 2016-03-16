@@ -175,6 +175,21 @@ and it will create a button dependant on those variables.
     }
   }
 
+  &.minus {
+    span { padding-right: 20px; }
+    span:after {
+      content: "\2013";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 15px;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 30px;
+      color: $yellow-text;
+    }
+  }
+
   &.arrow-left {
     span:after {
       font-family: FontAwesome;
