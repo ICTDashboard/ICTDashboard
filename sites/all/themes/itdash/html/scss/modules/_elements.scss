@@ -465,6 +465,10 @@ body,
             position: absolute;
             right: 15px;
             top: 36px;
+            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+              top: auto;
+              margin-top: 3px;
+            }
           }
           &:after {
             border-color: transparent transparent white transparent;
