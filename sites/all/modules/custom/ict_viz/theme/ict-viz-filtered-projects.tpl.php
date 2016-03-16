@@ -19,7 +19,7 @@
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
       </th>
       <th class="<?php print $col_classes[3] ?>">
-        <?php print t('Project Level of Completion'); ?>
+        <?php print t('Level of Completion'); ?>
         <?php $query['order'] = 'level'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
       </th>
@@ -29,7 +29,7 @@
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
       </th>
       <th class="<?php print $col_classes[5] ?>">
-        <?php print t('Original Approved Start Date'); ?>
+        <?php print t('Start Date'); ?>
         <?php $query['order'] = 'o_comp_date'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
       </th>
@@ -44,28 +44,28 @@
     </tr>
     <tr class="tooltips-row">
       <th class="<?php print $col_classes[0] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
-            Briefly describe benefit.
+            <?php print t('The Government entity responsible for the project.'); ?>
       </span></a></th>
       <th class="<?php print $col_classes[1] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
-            Briefly describe benefit.
+            <?php print t('The official full name of the project.'); ?>
       </span></a></th>
       <th class="<?php print $col_classes[2] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
-            Briefly describe benefit.
+            <?php print t('A status of the project compared to its planned schedule.'); ?>
       </span></a></th>
       <th class="<?php print $col_classes[3] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
-            Briefly describe benefit.
+            <?php print t('The percentage of work completed to date.'); ?>
       </span></a></th>
       <th class="<?php print $col_classes[4] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
-            Briefly describe benefit.
+            <?php print t('The total funding for the project.'); ?>
       </span></a></th>
       <th class="<?php print $col_classes[5] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
-            Briefly describe benefit.
+            <?php print t('The date when the project commenced.'); ?>
       </span></a></th>
       <th class="<?php print $col_classes[6] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
-            Briefly describe benefit.
+            <?php print t('The forecasted date when the project will be completed.'); ?>
       </span></a></th>
       <th class="<?php print $col_classes[7] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
-            Briefly describe benefit.
+            <?php print t('The overview of the project’s current performance against the baseline.'); ?>
       </span></a></th>
     </tr>
     <?php foreach($results as $row) : ?>
