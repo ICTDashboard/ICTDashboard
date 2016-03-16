@@ -85,6 +85,7 @@
           <?php print l($row->field_number_of_benefits_calc_value, 'node/' . $row->nid, array('fragment' => 'project-benefits')); ?>
         </td>
         <td class="<?php print $col_classes[4] ?> schedule-status-col schedule-status-<?php print $row->field_schedule_status_calc_value; ?>">
+          <div class="schedule-status-marker-wrap" ></div>
           <?php $query = $get;
                 $query['filter_by'] = 'status';
                 $query['filter'] = $row->field_schedule_status_calc_value; ?>
