@@ -465,10 +465,6 @@ body,
             position: absolute;
             right: 15px;
             top: 36px;
-            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-              top: auto;
-              margin-top: 3px;
-            }
           }
           &:after {
             border-color: transparent transparent white transparent;
@@ -510,6 +506,10 @@ body,
             left: 15px;
             background-color: #f6d000;
             position: absolute;
+            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+              top: auto;
+              margin-top: 3px;
+            }
           }
         }
         &.schedule-status-1 {
