@@ -6,5 +6,6 @@ body #ict-home-projects-table-id tr td.schedule-status-col:before,
 #content #ict-home-projects-table-id tr td.schedule-status-1:before,
 #content #ict-home-projects-table-id tr td.schedule-status-2:before,
 #content #ict-home-projects-table-id tr td.schedule-status-col:before {
-
+    top:auto!important;
+    margin-top: 3px!important;
 }
