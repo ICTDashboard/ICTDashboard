@@ -21,7 +21,7 @@
         <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print t('Project Benefits help text'); ?>
+                <?php print t('Benefits over all active projects.'); ?>
               </span>
         </a>
       </h2>
