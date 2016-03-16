@@ -876,6 +876,9 @@ body,
         height: 16px;
         vertical-align: middle;
       }
+      b {
+        color: #202b3d;
+      }
     }
   }
   &#schedule_legend {
@@ -1104,6 +1107,27 @@ body,
   #expenditure_legend {
     .bar-legend {
       overflow: hidden;
+    }
+  }
+  #detailed-view-schedule-status {
+    .bar-legend {
+      overflow: hidden;
+      margin: 17px 0 4px;
+      li {
+        margin-right: 40px;
+      }
+    }
+  }
+  .expand-collapse-button {
+    display: block;
+    max-width: 305px;
+    height: 39px;
+    line-height: 35px;
+    span {
+      text-align: left;
+      padding: 0 15px;
+      height: 36px;
+      line-height: 35px;
     }
   }
 }
