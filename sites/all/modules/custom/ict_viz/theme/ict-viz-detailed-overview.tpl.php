@@ -15,7 +15,7 @@
         <canvas id="detailed_budget_chart" width="945" height="360"></canvas>
         <div id="expenditure_legend" class="legend"></div>
     </div>
-    <div class="section-title">
+    <div id="ict-all-benefits-setion" class="section-title">
       <h2>
         <?php print t('Project Benefits'); ?>
         <a href="javascript:void(0);" class="tooltip">
