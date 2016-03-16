@@ -10,41 +10,6 @@
 function ict_departments_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'taxonomy_term-department-field_abbreviation'.
-  $field_instances['taxonomy_term-department-field_abbreviation'] = array(
-    'bundle' => 'department',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'taxonomy_term',
-    'field_name' => 'field_abbreviation',
-    'label' => 'Abbreviation',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 33,
-    ),
-  );
-
   // Exported field_instance:
   // 'taxonomy_term-department-field_acceptable_email_domains'.
   $field_instances['taxonomy_term-department-field_acceptable_email_domains'] = array(
@@ -83,7 +48,6 @@ function ict_departments_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Abbreviation');
   t('Acceptable email domains');
   t('Please enter a comma separated list of acceptable email domains such as <em>finance.gov.au</em>, <em>health.gov.au</em>.');
 

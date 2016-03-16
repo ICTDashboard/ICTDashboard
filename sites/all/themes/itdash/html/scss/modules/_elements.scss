@@ -1049,9 +1049,16 @@ body,
         line-height: 34px;
       }
       .sbHolder {
-        max-width: 360px;
+        max-width: 185px;
         margin-left: 60px;
         margin-right: 60px;
+      }
+      .sbToggle {
+        background-position: 0 -115px;
+      }
+      .sbSelector {
+        height: 32px;
+        line-height: 32px;
       }
     }
     .legend {

@@ -1000,9 +1000,44 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-portfolio-field_abbreviation'.
+  $field_instances['taxonomy_term-portfolio-field_abbreviation'] = array(
+    'bundle' => 'portfolio',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_abbreviation',
+    'label' => 'Abbreviation',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('A list of government entities that are involved with the project.');
+  t('Abbreviation');
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
   t('Demo Buttons');
   t('Department');

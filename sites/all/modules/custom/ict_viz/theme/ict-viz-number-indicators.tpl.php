@@ -15,8 +15,8 @@
           <div >
             <label><?php print t('Display'); ?></label>
             <select>
-              <option value="current-fin-year-budget"><?php print t('Current Financial Year Expenditure and Budget'); ?></option>
-              <option value="total-budget"><?php print t('Total Expenditure and Budget'); ?></option>
+              <option value="current-fin-year-budget"><?php print t('Current Financial Year'); ?></option>
+              <option value="total-budget"><?php print t('All years'); ?></option>
             </select>
           </div>
         </div>
