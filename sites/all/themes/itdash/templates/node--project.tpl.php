@@ -331,3 +331,4 @@
     <?php endif; ?>
   </div>
 </div>
+<?php print theme('ict_pages_last_update', array('nid' => $nid));

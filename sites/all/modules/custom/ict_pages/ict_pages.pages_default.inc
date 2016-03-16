@@ -147,7 +147,6 @@ dashboard-projects',
           'settings' => array(
             'visibility_setting' => '1',
             'paths' => '<front>
-node/*
 detailed-overview
 dashboard-projects',
           ),
@@ -155,6 +154,7 @@ dashboard-projects',
           'not' => FALSE,
         ),
       ),
+      'logic' => 'or',
     );
     $pane->configuration = array();
     $pane->cache = array();
