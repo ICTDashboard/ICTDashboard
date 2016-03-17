@@ -27,6 +27,9 @@ function ict_project_access_add_approver($email, $nid) {
     ))
     ->execute();
 
+  $node_wrapper = entity_metadata_wrapper('node', $nid);
+  drupal_mail('ict_project', 'approver_add', $email, LANGUAGE_NONE, array('title' => $node_wrapper->title->value()));
+
   return $query;
 }
 
@@ -44,6 +47,9 @@ function ict_project_access_remove_approver($email, $nid) {
     ->condition('nid', $nid)
     ->condition('access_type', ICT_PROJECT_APPROVER_ACCESS)
     ->execute();
+
+  $node_wrapper = entity_metadata_wrapper('node', $nid);
+  drupal_mail('ict_project', 'approver_remove', $email, LANGUAGE_NONE, array('title' => $node_wrapper->title->value()));
 
   return $query;
 }
@@ -319,6 +325,9 @@ function ict_project_access_add_editor($email, $nid) {
     ))
     ->execute();
 
+  $node_wrapper = entity_metadata_wrapper('node', $nid);
+  drupal_mail('ict_project', 'editor_add', $email, LANGUAGE_NONE, array('title' => $node_wrapper->title->value()));
+
   return $query;
 }
 
@@ -336,6 +345,9 @@ function ict_project_access_remove_editor($email, $nid) {
     ->condition('nid', $nid)
     ->condition('access_type', ICT_PROJECT_EDITOR_ACCESS)
     ->execute();
+
+  $node_wrapper = entity_metadata_wrapper('node', $nid);
+  drupal_mail('ict_project', 'editor_remove', $email, LANGUAGE_NONE, array('title' => $node_wrapper->title->value()));
 
   return $query;
 }

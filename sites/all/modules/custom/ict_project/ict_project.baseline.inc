@@ -240,8 +240,8 @@ function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been approved.'));
 
   $accs = ict_project_prepare_mail($node);
-  foreach($accs as $acc) {
-    drupal_mail('ict_project', 'baseline_approve', $acc['mail'], LANGUAGE_NONE, array('name' => $acc['name'], 'title' => $node->title));
+  foreach($accs['mails'] as $mail) {
+    drupal_mail('ict_project', 'baseline_approve', $mail, LANGUAGE_NONE, array('name' => $accs['name'], 'title' => $node->title));
   }
 
   $benefits_wrapper = $node_wrapper->field_benefits_realised;
@@ -275,8 +275,8 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been declined.'));
 
   $accs = ict_project_prepare_mail($node);
-  foreach($accs as $acc) {
-    drupal_mail('ict_project', 'baseline_decline', $acc['mail'], LANGUAGE_NONE, array('name' => $acc['name'], 'title' => $node->title, 'comment' => $comment));
+  foreach($accs['mails'] as $mail) {
+    drupal_mail('ict_project', 'baseline_decline', $mail, LANGUAGE_NONE, array('name' => $accs['name'], 'title' => $node->title, 'comment' => $comment));
   }
 
   // redirect user to projects page
@@ -284,17 +284,18 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
 }
 
 function ict_project_prepare_mail($node) {
-  $accs = array();
+  global $user;
+  $user = user_load($user->uid);
+
+  $accs = array(
+    'mails' => '',
+  );
+  $accs['name'] = !empty($user->field_first_name['und'][0]['value']) ? $user->field_first_name['und'][0]['value'] : '';
+  $accs['name'] .= !empty($user->field_last_name['und'][0]['value']) ? ' ' . $user->field_last_name['und'][0]['value'] : '';
   $mails = ict_project_baseline_get_admin_user_emails($node);
   foreach($mails as $val) {
     foreach($val as $mail) {
-      $acc = user_load_by_mail($mail);
-      $name = !empty($acc->field_first_name['und'][0]['value']) ? $acc->field_first_name['und'][0]['value'] : '';
-      $name .= !empty($acc->field_last_name['und'][0]['value']) ? ' ' . $acc->field_last_name['und'][0]['value'] : '';
-      $accs[$mail] = array(
-        'mail' => $mail,
-        'name' => $name,
-      );
+      $accs['mails'][] = $mail;
     }
   }
 
@@ -303,8 +304,32 @@ function ict_project_prepare_mail($node) {
 
 function ict_project_mail($key, &$message, $params) {
   switch($key) {
+    case 'approver_add':
+      $message['body'] = array(t("You have been added to the project @project_title as approver.", array('@project_title' => $params['title'])));
+      break;
+
+    case 'approver_remove':
+      $message['body'] = array(t("You have been removed from the project @project_title as approver.", array('@project_title' => $params['title'])));
+      break;
+
+    case 'editor_add':
+      $message['body'] = array(t("You have been added to the project @project_title as editor.", array('@project_title' => $params['title'])));
+      break;
+
+    case 'editor_remove':
+      $message['body'] = array(t("You have been removed from the project @project_title as editor.", array('@project_title' => $params['title'])));
+      break;
+
     case 'baseline_approve':
       $message['body'] = array(t("@username has approved the baseline submission for @project_title.", array('@username' => $params['name'], '@project_title' => $params['title'])));
+      break;
+
+    case 'baseline_request_approve':
+      $message['body'] = array(t("@username has requested approve of the baseline submission for @project_title.", array('@username' => $params['name'], '@project_title' => $params['title'])));
+      break;
+
+    case 'update_request_approve':
+      $message['body'] = array(t("@username has requested approve of the update submission for @project_title.", array('@username' => $params['name'], '@project_title' => $params['title'])));
       break;
 
     case 'baseline_decline':
