@@ -71,35 +71,6 @@ function ict_project_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_demo_buttons'.
-  $field_bases['field_demo_buttons'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_demo_buttons',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'create_baseline_draft' => 'Create Baseline Draft',
-        'edit_baseline_draft' => 'Edit Baseline Draft',
-        'approve_baseline' => 'Approve Baseline',
-        'create_update_draft' => 'Create Update Draft',
-        'edit_update_draft' => 'Edit Update Draft',
-        'approve_update' => 'Approve Update',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
   // Exported field_base: 'field_expenditure_budget_calc'.
   $field_bases['field_expenditure_budget_calc'] = array(
     'active' => 1,

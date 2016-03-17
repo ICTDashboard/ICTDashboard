@@ -260,44 +260,6 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_demo_buttons'.
-  $field_instances['node-project-field_demo_buttons'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 42,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_demo_buttons',
-    'label' => 'Demo Buttons',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 15,
-    ),
-  );
-
   // Exported field_instance: 'node-project-field_department'.
   $field_instances['node-project-field_department'] = array(
     'bundle' => 'project',
@@ -1039,7 +1001,6 @@ function ict_project_field_default_field_instances() {
   t('A list of government entities that are involved with the project.');
   t('Abbreviation');
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
-  t('Demo Buttons');
   t('Department');
   t('Expenditure budget calc');
   t('Expenditure to date calc');

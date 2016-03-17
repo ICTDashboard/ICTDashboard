@@ -241,15 +241,6 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
     }
   }
 
-  // FOR DEMO ONLY - SHOULD BE REMOVED
-  if (empty($data['current'][2])) {
-    $second_quarter = $data['current'][3];
-    foreach($second_quarter as &$status) {
-      $status['value']--;
-    }
-    $data['current'][2] = $second_quarter;
-  }
-
   drupal_add_js(
     array(
       'detailed_schedule_chart' => array(
