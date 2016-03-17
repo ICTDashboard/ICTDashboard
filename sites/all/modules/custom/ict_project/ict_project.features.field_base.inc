@@ -31,6 +31,27 @@ function ict_project_field_default_field_bases() {
     'type' => 'text_with_summary',
   );
 
+  // Exported field_base: 'field_abbreviation'.
+  $field_bases['field_abbreviation'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_abbreviation',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_brief_project_summary'.
   $field_bases['field_brief_project_summary'] = array(
     'active' => 1,
@@ -50,33 +71,42 @@ function ict_project_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_demo_buttons'.
-  $field_bases['field_demo_buttons'] = array(
+  // Exported field_base: 'field_expenditure_budget_calc'.
+  $field_bases['field_expenditure_budget_calc'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_demo_buttons',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
+    'field_name' => 'field_expenditure_budget_calc',
+    'indexes' => array(),
     'locked' => 0,
-    'module' => 'list',
+    'module' => 'number',
     'settings' => array(
-      'allowed_values' => array(
-        'create_baseline_draft' => 'Create Baseline Draft',
-        'edit_baseline_draft' => 'Edit Baseline Draft',
-        'approve_baseline' => 'Approve Baseline',
-        'create_update_draft' => 'Create Update Draft',
-        'edit_update_draft' => 'Edit Update Draft',
-        'approve_update' => 'Approve Update',
-      ),
-      'allowed_values_function' => '',
+      'decimal_separator' => '.',
+      'precision' => 10,
+      'scale' => 2,
     ),
     'translatable' => 0,
-    'type' => 'list_text',
+    'type' => 'number_decimal',
+  );
+
+  // Exported field_base: 'field_expenditure_to_date_calc'.
+  $field_bases['field_expenditure_to_date_calc'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_expenditure_to_date_calc',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'decimal_separator' => '.',
+      'precision' => 10,
+      'scale' => 2,
+    ),
+    'translatable' => 0,
+    'type' => 'number_decimal',
   );
 
   // Exported field_base: 'field_government_entity_name'.
@@ -129,6 +159,21 @@ function ict_project_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'taxonomy_term_reference',
+  );
+
+  // Exported field_base: 'field_number_of_benefits_calc'.
+  $field_bases['field_number_of_benefits_calc'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_number_of_benefits_calc',
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
   );
 
   // Exported field_base: 'field_original_completion_date'.
@@ -376,6 +421,32 @@ function ict_project_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_schedule_status_calc'.
+  $field_bases['field_schedule_status_calc'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_schedule_status_calc',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'Behind Schedule',
+        1 => 'On Track',
+        2 => 'Ahead of Schedule',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_start_date'.

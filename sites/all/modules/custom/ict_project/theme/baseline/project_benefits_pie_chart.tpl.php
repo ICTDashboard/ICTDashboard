@@ -17,7 +17,7 @@
 
         data_items.unshift(['Status', 'Percentage']);
 
-        var data = google.visualization.arrayToDataTable(data_items);
+        var data = google.visualization.arrayToDataTable(data_items, false);
 
         var options = {
           titlePosition: 'none',

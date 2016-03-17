@@ -195,7 +195,8 @@ function itdash_preprocess_html(&$vars) {
   drupal_add_js('//select-box.googlecode.com/svn/tags/0.2/jquery.selectbox-0.2.min.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/scripts.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/js/respond.js', array('type' => 'file', 'scope' => 'header'));
-  drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/ie.css', array('weight' => 999, 'browsers' => array('IE' => 'lte IE 8', '!IE' => FALSE), 'preprocess' => FALSE));
+  drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/ie8.css', array('weight' => 999, 'browsers' => array('IE' => 'lte IE 8', '!IE' => FALSE), 'preprocess' => FALSE));
+  drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/ie.css', array('weight' => 999, 'browsers' => array('IE' => 'IE', '!IE' => FALSE), 'preprocess' => FALSE));
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/slicknav.css');
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/jquery.selectbox.css');
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/css/jquery.multiSelect.css');

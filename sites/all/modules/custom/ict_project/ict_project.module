@@ -1799,19 +1799,19 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
 
   $datasets = array(
     array(
-      'label' => 'Spent to Date ($m)',
-      'fillColor' => "#5c46a4",
-      'strokeColor' => "#5c46a4",
-      'highlightFill' => "#5c46a4",
-      'highlightStroke' => "#5c46a4",
+      'label' => 'Total Expenditure To Date ($m)',
+      'fillColor' => "#ff6161",
+      'strokeColor' => "#ff6161",
+      'highlightFill' => "#ff6161",
+      'highlightStroke' => "#ff6161",
       'data' => $update_values
     ),
     array(
       'label' => 'Total Budget ($m)',
-      'fillColor' => "#f1b525",
-      'strokeColor' => "#f1b525",
-      'highlightFill' => "#f1b525",
-      'highlightStroke' => "#f1b525",
+      'fillColor' => "#5c46a4",
+      'strokeColor' => "#5c46a4",
+      'highlightFill' => "#5c46a4",
+      'highlightStroke' => "#5c46a4",
       'data' => $original_values
     ),
   );
@@ -1874,4 +1874,26 @@ function __ict_project_get_benefit_status_colors() {
     'on_track' => '#1fd063',
     'at_risk' => '#f6d000'
   );
+}
+
+/**
+ * Get all Active Projects
+ * @return array
+ */
+function ict_project_get_all_active_projects() {
+  $query = db_select('node', 'project')
+    ->fields('project', array('nid'))
+    ->condition('project.type', 'project');
+
+  // check if Project have at least one approved Update
+  $query->join('field_data_field_project', 'update_node', 'project.nid = update_node.field_project_target_id');
+  $query->join('project_workflow', 'workflow', 'update_node.entity_id = workflow.nid');
+  $query->condition('workflow.state', 'approved');
+  $query->groupBy('project.nid');
+
+  $results = $query
+    ->execute()
+    ->fetchCol();
+
+  return $results;
 }

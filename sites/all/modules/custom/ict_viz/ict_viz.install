@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Update calculated fields for existing projects
+ */
+function ict_viz_update_7002(&$context) {
+  if (!isset($context['total'])) {
+    $context['project_ids'] = ict_project_get_all_active_projects();
+    $context['total'] = count($context['project_ids']);
+    $context['current'] = 0;
+  }
+  $per_op = 3;
+  $op_ids = array_slice($context['project_ids'], $context['current'], $per_op);
+  $context['current'] += $per_op;
+  foreach ($op_ids as $id) {
+    ict_update_calculate_project_fields_by_id($id);
+  }
+  $context['#finished'] = (($context['current'] / $context['total']) >= 1);
+}
