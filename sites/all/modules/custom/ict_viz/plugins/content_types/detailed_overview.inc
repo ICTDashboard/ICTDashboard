@@ -14,7 +14,7 @@ function ict_viz_detailed_overview_graphs_render ($subtype, $conf, $panel_args, 
   $block = new stdClass;
 
   // D3 js library
-  drupal_add_js('http://d3js.org/d3.v3.min.js', 'external');
+  drupal_add_js('https://d3js.org/d3.v3.min.js', 'external');
 
   // all active projects
   $all_projects = ict_project_get_all_active_projects();
