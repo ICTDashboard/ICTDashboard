@@ -134,3 +134,116 @@ and it will create a button dependant on those variables.
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#157a86', endColorstr='#0e6872',GradientType=0 );
   }
 }
+
+.general-button {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 70px;
+  padding-bottom: 3px;
+  text-decoration: none;
+
+  span {
+    background: url(../images/general-btn.png) repeat-x scroll 0 0 transparent;
+    height: 41px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    color: $white;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 4px;
+    line-height: 40px;
+    position: relative;
+  }
+
+  &:hover {
+    span { background-position: 0 -41px; }
+  }
+
+  &.plus {
+    span { padding-right: 20px; }
+    span:after {
+      content: "+";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 15px;
+      font-weight: 400;
+      font-size: 28px;
+      color: $yellow-text;
+    }
+  }
+
+  &.minus {
+    span { padding-right: 20px; }
+    span:after {
+      content: "\2013";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 15px;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 30px;
+      color: $yellow-text;
+    }
+  }
+
+  &.arrow-left {
+    span:after {
+      font-family: FontAwesome;
+      content: "\f105";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 20px;
+      font-size: 24px;
+      color: $yellow-text;
+    }
+  }
+
+  &.arrow-right {
+    span:after {
+      font-family: FontAwesome;
+      content: "\f105";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 17px;
+      font-size: 20px;
+      color: $yellow-text;
+    }
+  }
+}
+
+.ict-project-button {
+  a {
+    display: block;
+    text-indent: -9999em;
+    min-height: 31px;
+    @include border-radius(5px);
+    position: relative;
+    background-color: #f9fafc;
+    border: 1px solid #dfe5ef;
+    &:focus,
+    &:hover {
+      border-color: #027e9c;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      top: 20%;
+      left: 38%;
+      @include sprite-icon(proj_arr_r);
+    }
+    &:active {
+      background-color: #086783;
+      border-color: #034559;
+      &:before {
+        @include sprite-icon(proj_arr_r_hover);
+      }
+    }
+  }
+}
+

@@ -260,44 +260,6 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_demo_buttons'.
-  $field_instances['node-project-field_demo_buttons'] = array(
-    'bundle' => 'project',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 42,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_demo_buttons',
-    'label' => 'Demo Buttons',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 15,
-    ),
-  );
-
   // Exported field_instance: 'node-project-field_department'.
   $field_instances['node-project-field_department'] = array(
     'bundle' => 'project',
@@ -332,6 +294,100 @@ function ict_project_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance: 'node-project-field_expenditure_budget_calc'.
+  $field_instances['node-project-field_expenditure_budget_calc'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 48,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_expenditure_budget_calc',
+    'label' => 'Expenditure budget calc',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance: 'node-project-field_expenditure_to_date_calc'.
+  $field_instances['node-project-field_expenditure_to_date_calc'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 49,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_expenditure_to_date_calc',
+    'label' => 'Expenditure to date calc',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 32,
     ),
   );
 
@@ -410,6 +466,53 @@ function ict_project_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-project-field_number_of_benefits_calc'.
+  $field_instances['node-project-field_number_of_benefits_calc'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 50,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_number_of_benefits_calc',
+    'label' => 'Number of benefits calc',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 33,
     ),
   );
 
@@ -764,6 +867,44 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-project-field_schedule_status_calc'.
+  $field_instances['node-project-field_schedule_status_calc'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 51,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_schedule_status_calc',
+    'label' => 'Schedule status calc',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-project-field_start_date'.
   $field_instances['node-project-field_start_date'] = array(
     'bundle' => 'project',
@@ -821,14 +962,51 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-portfolio-field_abbreviation'.
+  $field_instances['taxonomy_term-portfolio-field_abbreviation'] = array(
+    'bundle' => 'portfolio',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_abbreviation',
+    'label' => 'Abbreviation',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('A list of government entities that are involved with the project.');
+  t('Abbreviation');
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
-  t('Demo Buttons');
   t('Department');
+  t('Expenditure budget calc');
+  t('Expenditure to date calc');
   t('Government Entity Name');
   t('Government Implementation Partner/s');
+  t('Number of benefits calc');
   t('Original Approved Completion Date ');
   t('Original Approved Start Date');
   t('Original Expected Financial Benefits');
@@ -839,6 +1017,7 @@ function ict_project_field_default_field_instances() {
   t('Project Stage');
   t('Project Summary and Objectives ');
   t('Removed');
+  t('Schedule status calc');
   t('Senior Responsible Officer  Position ');
   t('Senior Responsible Officer Name');
   t('The Government department or entity responsible for leading the project.');

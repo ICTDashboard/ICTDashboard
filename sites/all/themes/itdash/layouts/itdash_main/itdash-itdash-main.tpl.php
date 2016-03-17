@@ -29,8 +29,7 @@
       <?php else : ?>
       <div class="login-register">
         <ul>
-          <li class="reg"><a href="<?php print url('user/register'); ?>">Register</a></li>
-          <li class="log"><a href="<?php print url('user'); ?>">Sign in</a></li>
+          <li class="log"><a href="<?php print url('user'); ?>"><?php print t('Sign in'); ?></a></li>
         </ul>
       </div>
       <?php endif; ?>

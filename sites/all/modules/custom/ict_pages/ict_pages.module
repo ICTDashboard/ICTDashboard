@@ -17,6 +17,32 @@ function ict_pages_ctools_plugin_directory($owner, $plugin_type) {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function ict_pages_theme($existing, $type, $theme, $path) {
+  return array(
+    'ict_pages_last_update' => array(
+      'template' => 'ict-pages-last-update',
+      'path' => drupal_get_path('module', 'ict_pages') . '/theme',
+    ),
+  );
+}
+
+function template_preprocess_ict_pages_last_update(&$vars) {
+  $query = db_select('project_workflow', 'wf');
+  $query->addField('wf', 'created');
+  $query->condition('wf.state', 'approved');
+  if (!empty($vars['nid']) && is_numeric($vars['nid'])) {
+    $query->condition('wf.nid', $vars['nid']);
+  }
+  $query->orderBy('created', 'DESC');
+  $query->range(0, 1);
+  $result = $query->execute()->fetchField();
+
+  $vars['result'] = $result;
+}
+
+/**
  * Implements hook_form_alter().
  */
 function ict_pages_form_alter (&$form, &$form_alter, $form_id) {

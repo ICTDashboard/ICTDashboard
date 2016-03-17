@@ -43,6 +43,11 @@
 }
 body,
 #content {
+  #ict-dashboard-detailed-overview {
+    #benefits_legend {
+      margin: -19px 0 0 397px;
+    }
+  }
   .welcome-text {
     a {
       color: #d5ff92;
@@ -130,73 +135,6 @@ body,
   .project-draft-submission,
   .project-update-submission {
     font-size: 14px;
-    .tooltip-edit,
-    .tooltip {
-      position: relative;
-      width: 16px;
-      height: 16px;
-      margin-bottom: -3px;
-      margin-left: 5px;
-      margin-right: 10px;
-      z-index: 1;
-      @include sprite-icon('tooltip-icon-normal');
-      display: inline-block;
-      &:hover {
-        @include sprite-icon('tooltip-icon-hover');
-        display:inline-block;
-      }
-      span.tooltip-content {
-        position: absolute;
-        display: none;
-        color: #fff;
-        font-size: 13px;
-        line-height: 22px;
-        background-color: #1e2635;
-        padding: 10px 15px;
-        border-radius: 10px;
-        font-style: normal;
-        bottom: 30px;
-        right: -150px;
-        width: 300px;
-        &:after {
-          content: '';
-          width: 0;
-          height: 0;
-          position: absolute;
-          display: block;
-          border-left: 20px solid transparent;
-          border-right: 20px solid transparent;
-          border-top: 20px solid #1e2635;
-          bottom: -10px;
-          left: 50%;
-          margin-left: -25px;
-        }
-      }
-      &:hover {
-        span.tooltip-content {
-          display: block;
-        }
-      }
-    }
-    .tooltip-edit {
-      margin-left: 0;
-      margin-right: 5px;
-      text-align: center;
-      @include sprite-icon('edit-highlight');
-      display: inline-block;
-      &:hover {
-        @include sprite-icon('edit-highlight');
-        display: inline-block;
-      }
-      span.tooltip-content {
-        color: #1e2635;
-        background-color: #f0b629;
-        font-weight: normal;
-        &:after {
-          border-top: 20px solid #f0b629;
-        }
-      }
-    }
     .row {
       margin-bottom: 15px;
       //@include clearfix;
@@ -421,6 +359,253 @@ body,
       width: 100%;
     }
   }
+  #ict-home-projects-table-id {
+    h2 {
+      font-weight: 600;
+      color: #0d6c88;
+      font-size: 26px;
+      border-bottom: 1px solid #f0f4fa;
+      margin: 21px 0 30px;
+      padding: 0 0 8px;
+    }
+    .table-config-bar {
+      margin: 30px 0 18px;
+      .form-type-select {
+        label {
+          display: inline-block;
+          font-weight: bold;
+          font-size: 14px;
+          margin-right: 6px;
+          vertical-align: middle;
+        }
+        .sbHolder {
+          width: auto;
+          min-width: 79px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+      .item-list {
+        float: right;
+      }
+      .pager {
+        margin: 0;
+      }
+    }
+    table {
+      width: 100%;
+      max-width: none;
+      table-layout: fixed;
+      a {
+        display: block;
+        color: #027e9c;
+        text-decoration: none;
+        &:focus,
+        &:hover {
+          color: #027e9c;
+          text-decoration: none;
+        }
+      }
+    }
+    tr {
+      &.tooltips-row {
+        th {
+          padding: 0 14px 15px;
+          position: relative;
+          &.current_sort {
+            &:after {
+              content: "";
+              height: 5px;
+              width: 100%;
+              background-color: #3ac3cf;
+              border: 1px solid #3ac3cf;
+              border-right: 0;
+              position: absolute;
+              bottom: 0;
+              left: -1px;
+            }
+          }
+        }
+      }
+      th {
+        padding: 11px 25px 6px 14px;
+        background-color: #137992;
+        border-left: 1px solid #0a5f74;
+        color: #fff;
+        text-shadow: 0 0 0;
+        text-align: left;
+        font-weight: bold;
+        font-size: 15px;
+        position: relative;
+        vertical-align: middle;
+        &.col-num-entity,
+        &.col-num-benefits {
+          width: 110px;
+        }
+        &.col-num-budget {
+          width: 320px;
+        }
+        .tooltip {
+          position: relative;
+          margin: 0px;
+          z-index: 1;
+          @include sprite-icon(tooltip-icon-normal);
+          display: block;
+        }
+        .ict-sort-link {
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          &:after,
+          &:before {
+            content: "";
+            width: 0;
+            height: 0;
+            border: 4px solid;
+            border-color: white transparent transparent transparent;
+            display: inline-block;
+            position: absolute;
+            right: 15px;
+            top: 36px;
+          }
+          &:after {
+            border-color: transparent transparent white transparent;
+            top: 26px;
+          }
+        }
+      }
+      td {
+        padding: 18px 14px;
+        color: #202b3d;
+        width: 110px;
+        vertical-align: middle;
+        font-size: 14px;
+        text-align: left;
+        border-bottom: 1px dotted #d9dfe9;
+        &.col-num-benefits {
+          text-align: center;
+        }
+        &.current_sort {
+          background-color: #d4f2f5;
+          font-weight: 600;
+        }
+        &.schedule-status-0,
+        &.schedule-status-1,
+        &.schedule-status-2,
+        &.schedule-status-col {
+          padding: 18px 14px 18px 40px;
+          position: relative;
+          &:before {
+            content: "";
+            width: 16px;
+            height: 16px;
+            display: block;
+            line-height: 54px;
+            vertical-align: sub;
+            margin-right: 5px;
+            margin-top: -8px;
+            top: 50%;
+            left: 15px;
+            background-color: #f6d000;
+            position: absolute;
+            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+              top: auto;
+              margin-top: 3px;
+            }
+          }
+        }
+        &.schedule-status-1 {
+          &:before {
+            background-color: #1fd063;
+          }
+        }
+        &.schedule-status-2 {
+          &:before {
+            background-color: #75a2df;
+          }
+        }
+        .graph-container {
+          height: 30px;
+          width: 100%;
+          position: relative;
+          .graph-level,
+          .graph-bg,
+          .graph-to-date,
+          .graph-budget {
+            width: 0%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #5c46a4;
+          }
+          .graph-to-date {
+            background-color: #ff6161;
+            margin: 5px 0 0;
+            height: 20px;
+          }
+        }
+        .graph-container-level {
+          margin-top: 2px;
+          height: 18px;
+          .graph-level {
+            background-color: #10d5db;
+          }
+          .graph-bg {
+            background-color: #034657;
+            width: 100%;
+          }
+        }
+        .graph-value {
+          text-align: center;
+          margin-top: 2px;
+        }
+      }
+      &.sort-direction-asc {
+        .current_sort {
+          .ict-sort-link {
+            &:before {
+              border-top-color: #3ac3cf;
+            }
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
+      &.sort-direction-desc {
+        .current_sort {
+          .ict-sort-link {
+            &:before {
+              display: none;
+            }
+            &:after {
+              border-bottom-color: #3ac3cf;
+            }
+          }
+        }
+      }
+    }
+  }
+  #ict-home-projects-table-id.ict-filtered-projects-table {
+    tr {
+      td {
+        height: 67px;
+        vertical-align: top;
+        padding: 12px 14px 0;
+        &.schedule-status-col {
+          padding: 12px 14px 0 40px;
+          &:before {
+            top: 15px;
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
   #edit-actions {
     width: 100%;
   }
@@ -456,6 +641,16 @@ body,
   a.submit-button {
     line-height: 41px;
     text-decoration: none;
+  }
+}
+.wrap.last-updated-on {
+  margin: 25px auto 38px;
+  p {
+    margin: 0;
+    font-size: 14px;
+    strong {
+      font-size: 14px;
+    }
   }
 }
 
@@ -703,12 +898,16 @@ body,
       line-height: 20px;
       float: left;
       margin-right: 25px;
+      font-size: 14px;
       span {
         margin-right: 7px;
         display: inline-block;
         width: 16px;
         height: 16px;
         vertical-align: middle;
+      }
+      b {
+        color: #202b3d;
       }
     }
   }
@@ -746,6 +945,231 @@ body,
     margin-right: 15px;
   }
 }
+.tooltip-edit,
+.tooltip {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-bottom: -3px;
+  margin-left: 5px;
+  margin-right: 10px;
+  z-index: 1;
+  @include sprite-icon('tooltip-icon-normal');
+  display: inline-block;
+  &:hover {
+    @include sprite-icon('tooltip-icon-hover');
+    display:inline-block;
+  }
+  span.tooltip-content {
+    position: absolute;
+    display: none;
+    color: #fff;
+    font-size: 13px;
+    line-height: 22px;
+    background-color: #1e2635;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-style: normal;
+    bottom: 30px;
+    right: -150px;
+    width: 300px;
+    &:after {
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      display: block;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #1e2635;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -25px;
+    }
+  }
+  &:hover {
+    span.tooltip-content {
+      display: block;
+    }
+  }
+}
+.tooltip-edit {
+  margin-left: 0;
+  margin-right: 5px;
+  text-align: center;
+  @include sprite-icon('edit-highlight');
+  display: inline-block;
+  &:hover {
+    @include sprite-icon('edit-highlight');
+    display: inline-block;
+  }
+  span.tooltip-content {
+    color: #1e2635;
+    background-color: #f0b629;
+    font-weight: normal;
+    &:after {
+      border-top: 20px solid #f0b629;
+    }
+  }
+}
+
+#ict-dashboard-overview-number-indicators {
+  background-color: #e5eaf3;
+  padding-top: 31px;
+  padding-bottom: 30px;
+  .label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #202b3d;
+    line-height: 18px;
+    .tooltip {
+      margin-left: 2px;
+      vertical-align: top;
+    }
+  }
+  #ict-dashboard-numbers {
+    padding-left: 5px;
+    .row {
+      margin-bottom: 55px;
+      &:first-child {
+        margin-bottom: 140px;
+      }
+      &:last-child {
+
+      }
+      .big-number {
+        font-size: 70px;
+        line-height: 80px;
+        font-weight: 600;
+        color: #202b3d;
+        a {
+          color: #202b3d;
+          text-decoration: none;
+          &:focus,
+          &:hover {
+            color: #202b3d;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    .general-button {
+      display: block;
+      span {
+        text-align: left;
+        padding-left: 16px;
+        font-weight: 600;
+        line-height: 34px;
+        height: 35px;
+      }
+    }
+  }
+  #overview-graphs {
+    padding-right: 90px;
+    #overview-expenditure-switch {
+      position: relative;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      label {
+        font-weight: bold;
+        float: left;
+        color: #202b3d;
+        font-size: 14px;
+        line-height: 34px;
+      }
+      .sbHolder {
+        max-width: 185px;
+        margin-left: 60px;
+        margin-right: 60px;
+      }
+      .sbToggle {
+        background-position: 0 -115px;
+      }
+      .sbSelector {
+        height: 32px;
+        line-height: 32px;
+      }
+    }
+    .legend {
+      .bar-legend {
+        padding-left: 0;
+        font-size: 14px;
+        margin: 11px 0;
+        overflow: hidden;
+        li {
+          color: #202b3d;
+          margin-right: 30px;
+          span {
+            margin-right: 2px;
+          }
+        }
+      }
+    }
+    .expenditure-budget-value {
+      text-align: center;
+      font-size: 16px;
+      color: #202b3d;
+    }
+    #project-schedule-status-graph {
+      margin-top: 12px;
+    }
+    #statuses_legend {
+      .bar-legend {
+        margin: 0;
+        li {
+          margin-right: 20px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+#ict-dashboard-detailed-overview {
+  h2 {
+    font-size: 26px;
+    line-height: 58px;
+    border-bottom: 1px solid #f0f4fa;
+    color: #0d6c88;
+    font-weight: 600;
+    margin-bottom: 30px;
+    .tooltip {
+      margin-left: 0;
+      vertical-align: baseline;
+      margin-bottom: -1px;
+    }
+  }
+  #detailed-view-expenditure {
+    padding-top: 15px;
+  }
+  #expenditure_legend {
+    .bar-legend {
+      overflow: hidden;
+    }
+  }
+  #detailed-view-schedule-status {
+    .bar-legend {
+      overflow: hidden;
+      margin: 17px 0 4px;
+      li {
+        margin-right: 40px;
+      }
+    }
+  }
+  .expand-collapse-button {
+    display: block;
+    max-width: 305px;
+    height: 39px;
+    line-height: 35px;
+    span {
+      text-align: left;
+      padding: 0 15px;
+      height: 36px;
+      line-height: 35px;
+    }
+  }
+}
+
 .project-timings h2{
     color: #0d6c88;
     font-size: 26px;

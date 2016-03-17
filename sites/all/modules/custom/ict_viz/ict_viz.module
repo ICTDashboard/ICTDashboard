@@ -1,0 +1,338 @@
+<?php
+/**
+ * @file
+ * Code for the ICT VIZ feature.
+ */
+
+include_once 'ict_viz.features.inc';
+/**
+ * @file
+ * Code for the ICT Update feature.
+ */
+
+include_once 'ict_viz.inc';
+
+/**
+ * @file
+ * Code for the ICT VIZ feature.
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ict_viz_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'ctools' && in_array($plugin_type, array('content_types', 'access'))) {
+    return 'plugins/' . $plugin_type;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ict_viz_theme($existing, $type, $theme, $path) {
+  return array(
+    'all_benefits_pie_chart' => array(
+      'template' => 'all-benefits-pie-chart',
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+    ),
+    'ict_viz_home_projects' => array(
+      'template' => 'ict-viz-home-projects',
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+    ),
+    'ict_viz_filtered_projects' => array(
+      'template' => 'ict-viz-filtered-projects',
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+    ),
+    'ict_viz_number_indicators' => array(
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+      'template' => 'ict-viz-number-indicators',
+    ),
+    'ict_viz_detailed_overview' => array(
+      'path' => drupal_get_path('module', 'ict_viz') . '/theme',
+      'template' => 'ict-viz-detailed-overview',
+    ),
+  );
+}
+
+function template_preprocess_ict_viz_home_projects(&$vars) {
+  $get = $_GET;
+  unset($get['q']);
+  $col_classes = array(
+    array('col-num-entity'),
+    array(),
+    array('col-num-budget'),
+    array('col-num-benefits'),
+    array(),
+  );
+
+  drupal_add_js(drupal_get_path('module', 'ict_viz') . '/js/projects_viz_table.js');
+
+  // Get available statuses
+  $statuses_info = field_info_field('field_schedule_status_calc');
+  $vars['statuses'] = $statuses_info['settings']['allowed_values'];
+
+  // Project query
+  $query = db_select('node', 'project');
+  $query->distinct();
+  $query->join('field_data_field_project', 'update_node', 'project.nid = update_node.field_project_target_id');
+  $query->leftJoin('field_data_field_expenditure_budget_calc', 'budget', 'project.nid = budget.entity_id');
+  $query->leftJoin('field_data_field_expenditure_to_date_calc', 'to_date', 'project.nid = to_date.entity_id');
+  $query->leftJoin('field_data_field_number_of_benefits_calc', 'benefits', 'project.nid = benefits.entity_id');
+  $query->leftJoin('field_data_field_schedule_status_calc', 'status', 'project.nid = status.entity_id');
+  $query->leftJoin('field_data_field_government_entity_name', 'eg', 'project.nid = eg.entity_id');
+  $query->leftJoin('taxonomy_term_data', 'term', 'eg.field_government_entity_name_tid = term.tid');
+  $query->leftJoin('field_data_field_abbreviation', 'abbr', 'term.tid = abbr.entity_id');
+  $query->join('project_workflow', 'workflow', 'update_node.entity_id = workflow.nid');
+  $query->fields('project');
+  $query->addField('term', 'tid', 'eg_tid');
+  $query->addField('budget', 'field_expenditure_budget_calc_value');
+  $query->addField('to_date', 'field_expenditure_to_date_calc_value');
+  $query->addField('benefits', 'field_number_of_benefits_calc_value');
+  $query->addField('status', 'field_schedule_status_calc_value');
+  $query->addExpression('IF(LENGTH(abbr.field_abbreviation_value) > 0, field_abbreviation_value, term.name)', 'eg_name');
+  $query->condition('workflow.state', 'approved');
+  $query->condition('project.type', 'project');
+
+  // Sorting options
+  $sorting = array(
+    'eg_name' => 'eg_name',
+    'title' => 'title',
+    'budget' => 'to_date.field_expenditure_to_date_calc_value',
+    'benefits' => 'benefits.field_number_of_benefits_calc_value',
+    'status' => 'status.field_schedule_status_calc_value',
+  );
+
+  $sorting_labels = array(
+    'eg_name' => t('Entity'),
+    'title' => t('Title'),
+    'budget' => t('Expenditure to Date'),
+    'benefits' => t('No. of Benefits'),
+    'status' => t('Project Schedule Status'),
+  );
+
+  $direction = isset($get['direction']) ? $get['direction'] : 'desc';
+  if (isset($sorting[$get['order']])) {
+    $table_header = t('Projects by @LABEL', array('@LABEL' => $sorting_labels[$get['order']]));
+    $query->orderBy($sorting[$get['order']], $direction);
+    $col_classes[array_search($get['order'], array_keys($sorting))][] = 'current_sort';
+  }
+  else {
+    $table_header = t('Current Projects');
+    $query->orderBy('created', $direction);
+  }
+  $vars['table_header'] = $table_header;
+
+  // Pager configs
+  $count = $query->execute()->rowCount();
+  $pager = array(
+    '10' => '10',
+    '25' => '25',
+    '50' => '50',
+    '0' => '0',
+  );
+  $per_page = isset($get['per_page']) && isset($pager[$get['per_page']]) ? $pager[$get['per_page']] : reset($pager);
+  $page = pager_default_initialize($count, $per_page);
+  $vars['pager'] = array(
+    '#title' => t('Display'),
+    '#type' => 'select',
+    '#options' => $pager,
+    '#value' => $per_page,
+    '#attributes' => array('class' => array('ict-projects-table-perpage')),
+  );
+  $vars['pager']['#options']['0'] = 'All';
+  if ($per_page) {
+    $query->range($page * $per_page,$per_page);
+  }
+
+  // Get results
+  $results = $query->execute()->fetchAll();
+  foreach ($results as &$row) {
+    $div = $row->field_expenditure_to_date_calc_value/$row->field_expenditure_budget_calc_value;
+    if ($div <= 1) {
+      $row->to_date_percent = $div * 100;
+      $row->budget_percent = 100;
+    }
+    else {
+      $row->to_date_percent = 100;
+      $row->budget_percent = 100 / $div;
+    }
+  }
+  $vars['results'] = $results;
+
+  $vars['col_classes'] = array_map(function($var) { return implode(' ', $var); }, $col_classes);
+
+  $tmp_get = $get;
+  unset($tmp_get['per_page']);
+  if (empty($tmp_get)) {
+    drupal_add_js(array('ict' => array('base_path' => url(current_path()) . '?')), 'setting');
+  }
+  else {
+    drupal_add_js(array('ict' => array('base_path' => url(current_path(), array('query' => $tmp_get)))), 'setting');
+  }
+
+  $direction = isset($get['direction']) && $get['direction'] == 'desc' ? 'asc' : 'desc';
+  $get['direction'] = $direction;
+  $vars['query'] = $get;
+}
+
+function template_preprocess_ict_viz_filtered_projects(&$vars) {
+  $get = $_GET;
+  unset($get['q']);
+  $col_classes = array(
+    array(),
+    array(),
+    array(),
+    array(),
+    array(),
+    array(),
+    array(),
+    array(),
+  );
+
+  // Get available statuses
+  $statuses_info = field_info_field('field_schedule_status_calc');
+  $vars['statuses'] = $statuses_info['settings']['allowed_values'];
+
+  $subquery = db_select('field_data_field_project', 'pr');
+  $subquery->addField('pr', 'field_project_target_id', 'project_id');
+  $subquery->addExpression('MAX(entity_id)', 'update_id');
+  $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));
+  $subquery->groupBy('field_project_target_id');
+
+  // Project query
+  $query = db_select('node', 'project');
+  $query->join($subquery, 'last_upd', 'last_upd.project_id = project.nid');
+  $query->leftJoin('field_data_field_expenditure_budget_calc', 'budget', 'project.nid = budget.entity_id');
+  $query->leftJoin('field_data_field_start_date', 'o_comp_date', 'project.nid = o_comp_date.entity_id');
+  $query->leftJoin('field_data_field_schedule_status_calc', 'status', 'project.nid = status.entity_id');
+  $query->leftJoin('field_data_field_actual_level_of_project_co', 'level', 'update_id = level.entity_id');
+  $query->leftJoin('field_data_field_expected_completion_date', 'exp_comp_date', 'update_id = exp_comp_date.entity_id');
+  $query->leftJoin('field_data_field_government_entity_name', 'eg', 'project.nid = eg.entity_id');
+  $query->leftJoin('taxonomy_term_data', 'term', 'eg.field_government_entity_name_tid = term.tid');
+  $query->leftJoin('field_data_field_abbreviation', 'abbr', 'term.tid = abbr.entity_id');
+  $query->join('project_workflow', 'workflow', 'project.nid = workflow.nid AND state = :state', array(':state' => 'approved'));
+  $query->fields('project');
+  $query->addField('term', 'tid', 'eg_tid');
+  $query->addField('budget', 'field_expenditure_budget_calc_value');
+  $query->addField('level', 'field_actual_level_of_project_co_value');
+  $query->addField('status', 'field_schedule_status_calc_value');
+  $query->addField('exp_comp_date', 'field_expected_completion_date_value');
+  $query->addField('o_comp_date', 'field_start_date_value');
+  $query->addExpression('IF(LENGTH(abbr.field_abbreviation_value) > 0, field_abbreviation_value, term.name)', 'eg_name');
+  $query->condition('workflow.state', 'approved');
+  $query->condition('project.type', 'project');
+
+  // Sorting options
+  $sorting = array(
+    'eg_name' => 'eg_name',
+    'title' => 'title',
+    'status' => 'status.field_schedule_status_calc_value',
+    'level' => 'level.field_actual_level_of_project_co_value',
+    'budget' => 'budget.field_expenditure_budget_calc_value',
+    'o_comp_date' => 'o_comp_date.field_start_date_value',
+    'exp_comp_date' => 'exp_comp_date.field_expected_completion_date_value',
+  );
+
+  $direction = isset($get['direction']) ? $get['direction'] : 'desc';
+  if (isset($sorting[$get['order']])) {
+    $query->orderBy($sorting[$get['order']], $direction);
+    $col_classes[array_search($get['order'], array_keys($sorting))][] = 'current_sort';
+  }
+  else {
+    $query->orderBy('created', $direction);
+  }
+
+  // Filtering
+  $filters = array(
+    'eg_name' => 'term.tid',
+    'status' => 'status.field_schedule_status_calc_value',
+  );
+  drupal_set_title(t('Projects'));
+  if (isset($get['filter_by']) && isset($get['filter_by']) && isset($filters[$get['filter_by']])) {
+    $query->condition($filters[$get['filter_by']], $get['filter']);
+  }
+
+  // Get results
+  $results = $query->execute()->fetchAll();
+  $vars['results'] = $results;
+
+  $filters_val = array(
+    'eg_name' => 'eg_name',
+    'status' => 'field_schedule_status_calc_value',
+  );
+  if (isset($get['filter_by']) && isset($get['filter_by']) && isset($filters_val[$get['filter_by']])) {
+    $first_row = reset($results);
+    $label = $first_row->{$filters_val[$get['filter_by']]};
+    if ($get['filter_by'] == 'status' && isset($vars['statuses'][$label])) {
+      $label = $vars['statuses'][$label];
+    }
+    drupal_set_title($label . ' ' . t('Projects'));
+  }
+
+  $vars['col_classes'] = array_map(function($var) { return implode(' ', $var); }, $col_classes);
+
+  $direction = isset($get['direction']) && $get['direction'] == 'desc' ? 'asc' : 'desc';
+  $get['direction'] = $direction;
+  $vars['query'] = $get;
+}
+
+/**
+ * Implements hook_preprocess_template().
+ */
+function ict_project_preprocess_all_benefits_pie_chart (&$vars) {
+  drupal_add_js(
+    'https://www.gstatic.com/charts/loader.js',
+    array('type' => 'external', 'scope' => 'header', 'weight' => 10)
+  );
+  $google_charts_loaded = &drupal_static('google_charts_loaded', FALSE);
+  if (!$google_charts_loaded) {
+    drupal_add_js(
+      "google.charts.load('current', {'packages':['corechart', 'bar']});",
+      array('type' => 'inline', 'scope' => 'header', 'weight' => 11)
+    );
+    $google_charts_loaded = TRUE;
+  }
+
+  $benefits = ict_update_get_benefits_count(array('removed'));
+  $benefit_counter = $benefits['count'];
+  $benefits = $benefits['benefits'];
+
+  $status_field_info = field_info_field('field_status');
+  $field_options = list_allowed_values($status_field_info);
+
+  $legend_colours = __ict_project_get_benefit_status_colors();
+
+  $chart_legend = array();
+  $chart_items = array();
+  $slices_settings = array();
+  foreach ($benefits as $status => $item) {
+    $percentage =round($item->count*100/$benefit_counter, 1);
+
+    $chart_items[] = array(
+      $field_options[$item->st],
+      (int)$item->count,
+    );
+
+    $slices_settings[] = array(
+      'color' => $legend_colours[$item->st]
+    );
+
+    $chart_legend[] = array(
+      'label' => $field_options[$item->st],
+      'number' => $item->count,
+      'percentage' => $percentage,
+      'color' => $legend_colours[$item->st]
+    );
+  }
+
+  drupal_add_js(
+    array(
+      'benefits_pie_chart' => array(
+        'legend_items' => $chart_legend,
+        'chart_items' => $chart_items,
+        'slices_settings' => $slices_settings
+      )
+    ),
+    'setting'
+  );
+}

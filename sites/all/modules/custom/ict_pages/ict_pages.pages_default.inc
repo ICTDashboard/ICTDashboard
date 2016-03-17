@@ -67,7 +67,10 @@ dashboard
 project/*/update
 update/*
 node/*/delete
-user/create',
+user/create
+detailed-overview
+user/create,
+dashboard-projects',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,
@@ -131,6 +134,40 @@ user/create',
     $pane->uuid = '459b4dca-0c70-43c6-810d-2fba68be2949';
     $display->content['new-459b4dca-0c70-43c6-810d-2fba68be2949'] = $pane;
     $display->panels['content'][2] = 'new-459b4dca-0c70-43c6-810d-2fba68be2949';
+    $pane = new stdClass();
+    $pane->pid = 'new-37cb3bb8-10d8-44ac-ad9f-ff772069368b';
+    $pane->panel = 'content';
+    $pane->type = 'last_updated';
+    $pane->subtype = 'last_updated';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => '<front>
+detailed-overview
+dashboard-projects',
+          ),
+          'context' => 'argument_string_1',
+          'not' => FALSE,
+        ),
+      ),
+      'logic' => 'or',
+    );
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 3;
+    $pane->locks = array();
+    $pane->uuid = '37cb3bb8-10d8-44ac-ad9f-ff772069368b';
+    $display->content['new-37cb3bb8-10d8-44ac-ad9f-ff772069368b'] = $pane;
+    $display->panels['content'][3] = 'new-37cb3bb8-10d8-44ac-ad9f-ff772069368b';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = 'new-459b4dca-0c70-43c6-810d-2fba68be2949';
   $handler->conf['display'] = $display;
@@ -151,7 +188,10 @@ function ict_pages_default_page_manager_pages() {
   $page->admin_title = 'Dashboard';
   $page->admin_description = '';
   $page->path = 'dashboard';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(
@@ -360,25 +400,43 @@ function ict_pages_default_page_manager_pages() {
     $display->content['new-e7723f9c-65e9-4882-b8e2-f67e5af656d2'] = $pane;
     $display->panels['middle'][0] = 'new-e7723f9c-65e9-4882-b8e2-f67e5af656d2';
     $pane = new stdClass();
-    $pane->pid = 'new-06e6e0f1-dd79-45bd-a627-eecb9f5ba2e2';
+    $pane->pid = 'new-2cbf2c4c-d156-4058-8574-78e6f47af7a9';
     $pane->panel = 'middle';
-    $pane->type = 'home_bottom';
-    $pane->subtype = 'home_bottom';
-    $pane->shown = FALSE;
+    $pane->type = 'overview_number_indicators';
+    $pane->subtype = 'overview_number_indicators';
+    $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array();
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
-      'style' => 'naked',
     );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = '06e6e0f1-dd79-45bd-a627-eecb9f5ba2e2';
-    $display->content['new-06e6e0f1-dd79-45bd-a627-eecb9f5ba2e2'] = $pane;
-    $display->panels['middle'][1] = 'new-06e6e0f1-dd79-45bd-a627-eecb9f5ba2e2';
+    $pane->uuid = '2cbf2c4c-d156-4058-8574-78e6f47af7a9';
+    $display->content['new-2cbf2c4c-d156-4058-8574-78e6f47af7a9'] = $pane;
+    $display->panels['middle'][1] = 'new-2cbf2c4c-d156-4058-8574-78e6f47af7a9';
+    $pane = new stdClass();
+    $pane->pid = 'new-e83ec894-d70b-434e-8670-4e33c5351d04';
+    $pane->panel = 'middle';
+    $pane->type = 'home_projects';
+    $pane->subtype = 'home_projects';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = 'e83ec894-d70b-434e-8670-4e33c5351d04';
+    $display->content['new-e83ec894-d70b-434e-8670-4e33c5351d04'] = $pane;
+    $display->panels['middle'][2] = 'new-e83ec894-d70b-434e-8670-4e33c5351d04';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-e7723f9c-65e9-4882-b8e2-f67e5af656d2';
   $handler->conf['display'] = $display;
