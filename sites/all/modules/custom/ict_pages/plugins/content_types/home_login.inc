@@ -17,7 +17,7 @@ function ict_pages_home_login_render ($subtype, $conf, $panel_args, $context = N
     <div class="welcome dotbg">
 				<div class="wrap cf">
 					<div class="welcome-text d-all">
-						<p>' . t('The purpose of the ICT Projects Dashboard is to increase transparency of the performance of major Government ICT-enabled projects by publishing their status against a baseline, focusing on cost, schedule and expected benefits.') . '</p>
+						<p>' . t('The purpose of the ICT Projects Dashboard is to increase transparency of the performance of major Government ICT-enabled projects by publishing their status against a baseline, focusing on expenditure, budget, schedule and expected benefits.') . '</p>
             <p>' . t('Major ICT-enabled projects are defined as those with a total project cost of $30 million or more, including ICT costs of at least $10 million.') . '</p>
 					</div>
 				</div>
