@@ -18,7 +18,7 @@
     <tr class="<?php print !empty($query['direction']) ? 'sort-direction-' . $query['direction'] : ''; ?>">
       <th class="<?php print $col_classes[0] ?>">
         <?php print t('Entity'); ?>
-        <?php $query['order'] = 'dep_name'; ?>
+        <?php $query['order'] = 'eg_name'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query, 'fragment' => 'ict-home-projects-table-id')); ?>"><span></span></a>
       </th>
       <th class="<?php print $col_classes[1] ?>">
@@ -63,9 +63,9 @@
       <tr>
         <td class="<?php print $col_classes[0] ?>">
           <?php $query = $get;
-                $query['filter_by'] = 'dep_name';
-                $query['filter'] = $row->dep_tid; ?>
-          <?php print l($row->dep_name, 'dashboard-projects', array('query' => $query)); ?>
+                $query['filter_by'] = 'eg_name';
+                $query['filter'] = $row->eg_tid; ?>
+          <?php print l($row->eg_name, 'dashboard-projects', array('query' => $query)); ?>
         </td>
         <td class="<?php print $col_classes[1] ?>">
           <?php print l($row->title, 'node/' . $row->nid); ?>

@@ -145,3 +145,111 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
     'external'
   );
 }
+
+function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
+  $years = array('current', 'previous');
+  $years_to_process = explode('/', __ict_project_get_current_fin_year());
+  $quarter_deadlines = array(
+    1 => '09-30',
+    2 => '12-31',
+    3 => '03-31',
+    4 => '06-30'
+  );
+
+  // data to collect
+  $year_label = array();
+  $data = array();
+  $max_number = 0;
+
+  if ($all_projects) {
+    foreach ($years as $year) {
+      // start year
+      $start_year = $year == 'current' ?
+        reset($years_to_process) :
+        reset($years_to_process) - 1;
+
+      // end year
+      $end_year = $year == 'current' ?
+        end($years_to_process) :
+        end($years_to_process) - 1;
+
+      // set year label
+      $year_label[$year] = '20' . $start_year . '-' . $end_year;
+
+      for ($quarter = 4; $quarter > 0; $quarter--) {
+        $max_date = $quarter < 3 ?
+          '20' . $start_year . '-' .$quarter_deadlines[$quarter] :
+          '20' . $end_year . '-' .$quarter_deadlines[$quarter];
+
+        // if deadline in future we need to request current snapshot
+        $timestamp = strtotime($max_date);
+        if ($timestamp > time()) {
+          $prev_quarter = $quarter - 1;
+
+          // next quarter cannot be found
+          if (!isset($quarter_deadlines[$prev_quarter]))  continue;
+
+          // next quarter hasn't started
+          $prevmax_date = $prev_quarter < 3 ?
+            '20' . $start_year . '-' .$quarter_deadlines[$prev_quarter] :
+            '20' . $end_year . '-' .$quarter_deadlines[$prev_quarter];
+          if (strtotime($prevmax_date) > time()) continue;
+
+          // current snapshot will be requested
+          $timestamp = time();
+        }
+
+        // quarter expenditure
+        $subquery = db_select('field_data_field_project', 'update_entity');
+        $subquery->join('project_workflow', 'workflow', 'update_entity.entity_id = workflow.nid AND update_entity.revision_id = workflow.vid');
+        $subquery->condition('workflow.state', 'approved');
+        $subquery->fields('update_entity', array('field_project_target_id'));
+        $subquery->condition('update_entity.field_project_target_id', $all_projects, 'IN');
+        $subquery->condition('workflow.created', $timestamp, '<');
+        $subquery->addExpression('MAX(update_entity.revision_id)', 'max_revision');
+        $subquery->addExpression('MAX(update_entity.entity_id)', 'max_entity');
+        $subquery->groupBy('update_entity.field_project_target_id');
+
+        $query = db_select('field_data_field_actual_level_of_project_co', 'actual_comp');
+        $query->join($subquery, 'update_entity', 'update_entity.max_entity = actual_comp.entity_id AND update_entity.max_revision = actual_comp.revision_id');
+        $query->join('field_data_field_forecast_level_of_project_', 'forecast_comp', 'update_entity.max_entity = forecast_comp.entity_id AND update_entity.max_revision = forecast_comp.revision_id');
+        $query->fields('actual_comp', array('field_actual_level_of_project_co_value'));
+        $query->fields('forecast_comp', array('field_forecast_level_of_project__value'));
+        $current_status_items = $query->execute()
+          ->fetchAll();
+
+        foreach ($current_status_items as $project) {
+          if ($project->field_actual_level_of_project_co_value < $project->field_forecast_level_of_project__value) {
+            $data[$year][$quarter]['behind_schedule']['value']++;
+            $data[$year][$quarter]['behind_schedule']['color'] = '#f6d000';
+          }
+          elseif ($project->field_actual_level_of_project_co_value == $project->field_forecast_level_of_project__value) {
+            $data[$year][$quarter]['on_track']['value']++;
+            $data[$year][$quarter]['on_track']['color'] = '#1fd063';
+          }
+          else {
+            $data[$year][$quarter]['ahead_schedule']['value']++;
+            $data[$year][$quarter]['ahead_schedule']['color'] = '#75a2df';
+          }
+        }
+
+        // update max_number
+        $max_number = count($current_status_items) > $max_number ?
+          count($current_status_items) :
+          $max_number;
+      }
+    }
+  }
+
+  drupal_add_js(
+    array(
+      'detailed_schedule_chart' => array(
+        'current' => $year_label['current'],
+        'previous' => $year_label['previous'],
+        'data' => $data,
+        'max_number' => $max_number
+      )
+    ),
+    'setting'
+  );
+}

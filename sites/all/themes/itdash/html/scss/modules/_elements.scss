@@ -906,6 +906,9 @@ body,
         height: 16px;
         vertical-align: middle;
       }
+      b {
+        color: #202b3d;
+      }
     }
   }
   &#schedule_legend {
@@ -942,14 +945,13 @@ body,
     margin-right: 15px;
   }
 }
-
 .tooltip-edit,
 .tooltip {
   position: relative;
   width: 16px;
   height: 16px;
   margin-bottom: -3px;
-  margin-left: 10px;
+  margin-left: 5px;
   margin-right: 10px;
   z-index: 1;
   @include sprite-icon('tooltip-icon-normal');
@@ -1076,9 +1078,16 @@ body,
         line-height: 34px;
       }
       .sbHolder {
-        max-width: 360px;
+        max-width: 185px;
         margin-left: 60px;
         margin-right: 60px;
+      }
+      .sbToggle {
+        background-position: 0 -115px;
+      }
+      .sbSelector {
+        height: 32px;
+        line-height: 32px;
       }
     }
     .legend {
@@ -1088,6 +1097,7 @@ body,
         margin: 11px 0;
         overflow: hidden;
         li {
+          color: #202b3d;
           margin-right: 30px;
           span {
             margin-right: 2px;
@@ -1098,6 +1108,7 @@ body,
     .expenditure-budget-value {
       text-align: center;
       font-size: 16px;
+      color: #202b3d;
     }
     #project-schedule-status-graph {
       margin-top: 12px;
@@ -1134,6 +1145,65 @@ body,
   #expenditure_legend {
     .bar-legend {
       overflow: hidden;
+    }
+  }
+  #detailed-view-schedule-status {
+    .bar-legend {
+      overflow: hidden;
+      margin: 17px 0 4px;
+      li {
+        margin-right: 40px;
+      }
+    }
+  }
+  .expand-collapse-button {
+    display: block;
+    max-width: 305px;
+    height: 39px;
+    line-height: 35px;
+    span {
+      text-align: left;
+      padding: 0 15px;
+      height: 36px;
+      line-height: 35px;
+    }
+  }
+}
+
+.project-timings h2{
+    color: #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f4fa;
+    padding-bottom: 10px;
+    a {
+      margin-left: 2px!important;
+      height: 19px!important;
+    }
+}
+.project-benefits h2{
+    color: #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f4fa;
+    padding-bottom: 10px;
+    a {
+      margin-left: 2px!important;
+      height: 19px!important;
+    }
+}
+.user-information h2{
+      color: #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f4fa;
+    padding-bottom: 10px;
+}
+#inner-content {
+  h2 {
+    a {
+      margin-left: 2px!important;
+      height: 19px!important;
     }
   }
 }
