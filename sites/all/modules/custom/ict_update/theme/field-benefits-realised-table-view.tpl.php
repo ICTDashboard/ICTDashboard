@@ -38,16 +38,16 @@ $diff = !empty($diff['field_benefits_realised']) ? $diff['field_benefits_realise
         <li>
           <div class="label"><?php print t('Start date:'); ?></div>
           <?php if (!empty($diff[$benefit->item_id]['field_benefit_start_date'])) : ?>
-            <?php print itdash_edited_tooltip_render(format_date($diff[$benefit->item_id]['field_benefit_start_date'], 'medium', 'd M Y')); ?>
+            <?php print itdash_edited_tooltip_render(format_date($diff[$benefit->item_id]['field_benefit_start_date'], 'medium', 'd F Y')); ?>
           <?php endif; ?>
-          <div class="benefit"><?php print format_date($benefit_wrap->field_benefit_start_date->value(), 'medium', 'd M Y'); ?></div>
+          <div class="benefit"><?php print format_date($benefit_wrap->field_benefit_start_date->value(), 'medium', 'd F Y'); ?></div>
         </li>
         <li>
           <div class="label"><?php print t('End date:'); ?></div>
           <?php if (!empty($diff[$benefit->item_id]['field_end_date'])) : ?>
-            <?php print itdash_edited_tooltip_render(format_date($diff[$benefit->item_id]['field_end_date'], 'medium', 'd M Y')); ?>
+            <?php print itdash_edited_tooltip_render(format_date($diff[$benefit->item_id]['field_end_date'], 'medium', 'd F Y')); ?>
           <?php endif; ?>
-          <div class="benefit"><?php print format_date($benefit_wrap->field_end_date->value(), 'medium', 'd M Y'); ?></div>
+          <div class="benefit"><?php print format_date($benefit_wrap->field_end_date->value(), 'medium', 'd F Y'); ?></div>
         </li>
 <!--        <li>-->
 <!--          <div class="label">--><?php //print t('Financial:'); ?><!--</div>-->

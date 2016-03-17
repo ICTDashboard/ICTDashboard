@@ -37,7 +37,7 @@
         </th>
         <td colspan="2"><strong><em>
           <?php print t('Archived:'); ?>
-          <?php print format_date($element[$key]['#archived_benefit'], 'medium', 'd M Y'); ?>
+          <?php print format_date($element[$key]['#archived_benefit'], 'medium', 'd F Y'); ?>
         </em></strong></td>
       </tr>
       <tr class="row-yellow last-benefit-row" >
