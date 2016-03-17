@@ -87,79 +87,69 @@
                 <?php print format_date($project->changed, 'medium', 'j M Y h:i A'); ?>
               </td>
               <td class="update">
-                <?php if (!isset($project->demo_buttons)) : ?>
+                <a href="<?php print url('node/' . $project->nid); ?>">
+                  <span><?php print t('View Project'); ?></span>
+                </a>
 
-                  <a href="<?php print url('node/' . $project->nid); ?>">
-                    <span><?php print t('View Project'); ?></span>
+                <?php if (ict_project_access_project('delete', $user, $project->nid)) : ?>
+                  <a href="<?php print url('node/' . $project->nid . '/delete', array(
+                      'query' => array('destination' => 'projects')
+                    )
+                  ); ?>">
+                    <span><?php print t('Delete Project'); ?></span>
                   </a>
+                <?php endif; ?>
 
-                  <?php if (ict_project_access_project('delete', $user, $project->nid)) : ?>
-                    <a href="<?php print url('node/' . $project->nid . '/delete', array(
-                        'query' => array('destination' => 'projects')
-                      )
-                    ); ?>">
-                      <span><?php print t('Delete Project'); ?></span>
-                    </a>
-                  <?php endif; ?>
+                <?php // create or edit draft ?>
+                <?php if (ict_project_access_project('edit', $user, $project->nid)) : ?>
+                  <a href="<?php print url('baseline/' . $project->nid . '/edit-draft'); ?>">
+                    <span><?php print t('Edit Baseline Draft'); ?></span>
+                  </a>
+                <?php endif; ?>
 
-                  <?php // create or edit draft ?>
-                  <?php if (ict_project_access_project('edit', $user, $project->nid)) : ?>
-                    <a href="<?php print url('baseline/' . $project->nid . '/edit-draft'); ?>">
-                      <span><?php print t('Edit Baseline Draft'); ?></span>
-                    </a>
-                  <?php endif; ?>
+                <?php // create or edit draft ?>
+                <?php if (ict_project_access_project('approve', $user, $project->nid)) : ?>
+                  <a href="<?php print url('node/' . $project->nid); ?>">
+                    <span><?php print t('Review Baseline Draft'); ?></span>
+                  </a>
+                <?php endif; ?>
 
-                  <?php // create or edit draft ?>
-                  <?php if (ict_project_access_project('approve', $user, $project->nid)) : ?>
-                    <a href="<?php print url('node/' . $project->nid); ?>">
-                      <span><?php print t('Review Baseline Draft'); ?></span>
-                    </a>
-                  <?php endif; ?>
+                <?php $updates = ict_update_project_get_list($project->nid); ?>
+                <?php $update_id = reset($updates); ?>
+                <?php if (ict_update_creation_allowed($project->nid)) : ?>
+                  <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
+                    <span><?php print t('Create Update Draft'); ?></span>
+                  </a>
+                <?php endif; ?>
 
-                  <?php $updates = ict_update_project_get_list($project->nid); ?>
-                  <?php $update_id = reset($updates); ?>
-                  <?php if (ict_update_creation_allowed($project->nid)) : ?>
-                    <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
-                      <span><?php print t('Create Update Draft'); ?></span>
-                    </a>
-                  <?php endif; ?>
+                <?php if (ict_update_edit_allowed($project->nid, $update_id)) : ?>
+                  <a href="<?php print url('update/' . $update_id . '/edit'); ?>">
+                    <span><?php print t('Edit Update Draft'); ?></span>
+                  </a>
+                <?php endif; ?>
 
-                  <?php if (ict_update_edit_allowed($project->nid, $update_id)) : ?>
-                    <a href="<?php print url('update/' . $update_id . '/edit'); ?>">
-                      <span><?php print t('Edit Update Draft'); ?></span>
-                    </a>
-                  <?php endif; ?>
+                <?php if (ict_update_approve_allowed($project->nid, $update_id)) : ?>
+                  <a href="<?php print url('node/' . $project->nid); ?>">
+                    <span><?php print t('Review Update Draft'); ?></span>
+                  </a>
+                <?php endif; ?>
 
-                  <?php if (ict_update_approve_allowed($project->nid, $update_id)) : ?>
-                    <a href="<?php print url('node/' . $project->nid); ?>">
-                      <span><?php print t('Review Update Draft'); ?></span>
-                    </a>
-                  <?php endif; ?>
+                <?php if (ict_update_delete_allowed($project->nid, $update_id)) : ?>
+                  <a href="<?php print url('node/' . $update_id .'/delete', array(
+                      'query' => array('destination' => 'projects')
+                    )
+                  ); ?>">
+                    <span><?php print t('Delete Update Draft'); ?></span>
+                  </a>
+                <?php endif; ?>
 
-                  <?php if (ict_update_delete_allowed($project->nid, $update_id)) : ?>
-                    <a href="<?php print url('node/' . $update_id .'/delete', array(
-                        'query' => array('destination' => 'projects')
-                      )
-                    ); ?>">
-                      <span><?php print t('Delete Update Draft'); ?></span>
-                    </a>
-                  <?php endif; ?>
-
-                  <?php if (ict_project_access_project('manage_users', $user, $project->nid)) : ?>
-                    <a href="<?php print url('project/' . $project->nid .'/manage-users', array(
-                        'query' => array('destination' => 'projects')
-                      )
-                    ); ?>">
-                      <span><?php print t('Manage Users'); ?></span>
-                    </a>
-                  <?php endif; ?>
-
-                <?php else : ?>
-                  <?php foreach ($project->demo_buttons as $key => $button) : ?>
-                    <a href="http://sandpit.itdash.lws.links.com.au/?path=<?php print $key; ?>&nid=<?php print $project->nid; ?>">
-                      <span><?php print $button ?></span>
-                    </a>
-                  <?php endforeach; ?>
+                <?php if (ict_project_access_project('manage_users', $user, $project->nid)) : ?>
+                  <a href="<?php print url('project/' . $project->nid .'/manage-users', array(
+                      'query' => array('destination' => 'projects')
+                    )
+                  ); ?>">
+                    <span><?php print t('Manage Users'); ?></span>
+                  </a>
                 <?php endif; ?>
               </td>
             </tr>
