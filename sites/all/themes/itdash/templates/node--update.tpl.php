@@ -1,12 +1,6 @@
 <?php if ($viz_preview) { $diff = array(); } ?>
 <div id="inner-content" class="wrap cf">
   <h2><?php print t(' Project Expenditure and Budget'); ?>
-    <a href="javascript:void(0);" class="tooltip">
-                <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print variable_get('ict_project_expenditure_and_budget_text', "This tooltip"); ?>
-              </span>
-              </a>
   </h2>
   <div class="project-draft-submission d-all">
     <div class="row">
@@ -44,13 +38,7 @@
         <?php print $field_original_total_budget; ?>
       </div>
     </div> 
-    <div class="project-timings"><h2><?php print t('Project Timings'); ?>
-      <a href="javascript:void(0);" class="tooltip">
-                <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print variable_get('ict_project_timings_tooltip_text', "This tooltip"); ?>
-              </span>
-              </a>
+    <div class="project-timings"><h2><?php print t('Project Schedule'); ?>
     </h2></div>
     <?php if (!$viz_preview) : ?>
       <div class="row">
@@ -199,7 +187,7 @@
       <a href="javascript:void(0);" class="tooltip">
                 <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print variable_get('ict_project_benefits_tooltip_text', "This tooltip"); ?>
+                <?php print variable_get('ict_project_benefits_tooltip_text', "This section presents information about the various project benefits, as most recently updated for the project"); ?>
               </span>
               </a>
               </h2>
