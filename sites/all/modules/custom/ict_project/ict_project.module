@@ -608,7 +608,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     }
   }
   elseif ($budget_rows) {
-    if (empty($form_state['triggering_element'])) {
+    if (empty($form_state['triggering_element'])  || $form_state['triggering_element']['#parents'][0] != 'field_original_total_budget') {
       // remove unnecessary last item on edit form
       $max_delta = $budget_table['#max_delta'];
       unset($budget_table[$max_delta]);
@@ -709,7 +709,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     }
   }
   else { // if any data is set
-    if (empty($form_state['triggering_element'])) {
+    if (empty($form_state['triggering_element']) || $form_state['triggering_element']['#parents'][0] != 'field_original_total_budget') {
       // remove unnecessary last item on edit form
       $max_delta = $budget_table['#max_delta'];
       unset($budget_table[$max_delta]);
