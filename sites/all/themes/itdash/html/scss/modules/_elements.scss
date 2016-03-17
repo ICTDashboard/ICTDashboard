@@ -136,7 +136,7 @@ body,
       width: 16px;
       height: 16px;
       margin-bottom: -3px;
-      margin-left: 10px;
+      margin-left: 5px;
       margin-right: 10px;
       z-index: 1;
       @include sprite-icon('tooltip-icon-normal');
@@ -744,5 +744,42 @@ body,
     display: inline-block;
     vertical-align: sub;
     margin-right: 15px;
+  }
+}
+.project-timings h2{
+    color: #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f4fa;
+    padding-bottom: 10px;
+    a {
+      margin-left: 2px!important;
+      height: 19px!important;
+    }
+}
+.project-benefits h2{
+    color: #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f4fa;
+    padding-bottom: 10px;
+    a {
+      margin-left: 2px!important;
+      height: 19px!important;
+    }
+}
+.user-information h2{
+      color: #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f4fa;
+    padding-bottom: 10px;
+}
+#inner-content {
+  h2 {
+    a {
+      margin-left: 2px!important;
+      height: 19px!important;
+    }
   }
 }
