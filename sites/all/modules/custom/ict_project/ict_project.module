@@ -608,14 +608,6 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     }
   }
   elseif ($budget_rows) {
-    if (empty($form_state['triggering_element'])  || $form_state['triggering_element']['#parents'][0] != 'field_original_total_budget') {
-      // remove unnecessary last item on edit form
-      $max_delta = $budget_table['#max_delta'];
-      unset($budget_table[$max_delta]);
-      $budget_table['#max_delta']--;
-      $form_state['field']['field_original_total_budget'][LANGUAGE_NONE]['items_count']--;
-    }
-
     $first_fin_year = $budget_rows[0]['budget_items'][0]->field_year[LANGUAGE_NONE][0]['value'];
 
     $min_columns = 0;
@@ -626,11 +618,11 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
       $min_columns = $row['count'];
     }
 
-    $items_count = $min_columns - 1;
+    $items_count = $min_columns;
     $field_name = 'field_original_total_budget';
     $budget_table_items = &$form_state['field'][$field_name][LANGUAGE_NONE];
 
-    if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+    if (empty($budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']) && !$form_state['submitted']) {
       // Generate required number of fields collection
       if ($items_count >= 0 && $budget_table_items['items_count'] != $items_count) {
         $budget_table_items['items_count'] = $items_count;
@@ -642,10 +634,10 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
           $form,
           $form_state);
       }
-      $budget_table_items['items_count']++;
+//      $budget_table_items['items_count']++;
       $budget_table['#after_build'] = 'field_form_element_after_build';
     }
-    $budget_table['#min_index'] = $min_columns - 1;
+    $budget_table['#min_index'] = $min_columns;
     $budget_table['#budget_rows'] = $budget_rows;
 
     $year = reset(explode('/', $first_fin_year));
@@ -709,13 +701,6 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     }
   }
   else { // if any data is set
-    if (empty($form_state['triggering_element']) || $form_state['triggering_element']['#parents'][0] != 'field_original_total_budget') {
-      // remove unnecessary last item on edit form
-      $max_delta = $budget_table['#max_delta'];
-      unset($budget_table[$max_delta]);
-      $budget_table['#max_delta']--;
-      $form_state['field']['field_original_total_budget'][LANGUAGE_NONE]['items_count']--;
-    }
 
     // set years
     $year = end(explode('/', $budget_table[0]['field_year'][LANGUAGE_NONE][0]['value']['#default_value']));
