@@ -109,9 +109,9 @@
       </div>
     </div>
 
-    <div class="dotted-line"></div>
-
-    <h2><?php print t('User Information'); ?></h2>
+    <div class="user-information">
+      <h2><?php print t('User Information'); ?></h2>
+    </div>
 
     <div class="row">
       <div class="label">
