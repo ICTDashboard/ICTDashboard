@@ -419,10 +419,17 @@ function ict_update_workflow_set_wait_approve($form, &$form_state) {
     $form_state['node']->revision = TRUE;
     node_save($form_state['node']);
     ict_project_set_workflow_state('waiting_approval', $nid);
-    $accs = __ict_project_prepare_approver_mails($form_state['node']);
-    foreach ($accs['mails'] as $mail) {
-      drupal_mail('ict_project', 'update_request_approve', $mail, LANGUAGE_NONE, array('name' => $accs['name'], 'title' => $form_state['node']->title));
-    }
+
+//    $editor_name = _ict_project_get_user_name();
+//    $accs = __ict_project_prepare_approver_mails($project);
+//    foreach ($accs['approvers'] as $acc) {
+//      drupal_mail('ict_project', 'update_request_approve', $acc['mail'], LANGUAGE_NONE, array(
+//        'name' => $acc['name'],
+//        'title' => $project->title,
+//        'editor_name' => $editor_name,
+//        'dep_admins' => $accs['departmental_admins'],
+//      ));
+//    }
   }
   $form_state['redirect'] = url('node/'. $form['#project_id']);
 }
@@ -437,9 +444,16 @@ function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) 
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('waiting_approval', $node->nid);
+
+    $editor_name = _ict_project_get_user_name();
     $accs = __ict_project_prepare_approver_mails($project);
-    foreach ($accs['mails'] as $mail) {
-      drupal_mail('ict_project', 'update_request_approve', $mail, LANGUAGE_NONE, array('name' => $accs['name'], 'title' => $project->title));
+    foreach ($accs['approvers'] as $acc) {
+      drupal_mail('ict_project', 'update_request_approve', $acc['mail'], LANGUAGE_NONE, array(
+        'name' => $acc['name'],
+        'title' => $project->title,
+        'editor_name' => $editor_name,
+        'dep_admins' => $accs['departmental_admins'],
+      ));
     }
   }
   $form_state['redirect'] = url('node/'. $form['#nid']);
@@ -696,11 +710,14 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
 
     $project_id = $node->field_project['und'][0]['target_id'];
     if ($project = node_load($project_id)) {
-      $accs = ict_project_prepare_mail($project);
-      foreach ($accs['mails'] as $mail) {
-        drupal_mail('ict_project', 'update_approve', $mail, LANGUAGE_NONE, array(
-          'name' => $accs['name'],
+      $approver_name = _ict_project_get_user_name();
+      $accs = ict_project_prepare_editor_mails($project);
+      foreach($accs['editors'] as $acc) {
+        drupal_mail('ict_project', 'update_approve', $acc['mail'], LANGUAGE_NONE, array(
+          'name' => $acc['name'],
           'title' => $project->title,
+          'approver_name' => $approver_name,
+          'dep_admins' => $accs['departmental_admins'],
         ));
       }
     }
@@ -764,12 +781,15 @@ function ict_update_review_workflow_set_draft($form, &$form_state) {
     $project_id = $node->field_project['und'][0]['target_id'];
     $comment = $form_state['values']['comment'];
     if ($project = node_load($project_id)) {
-      $accs = ict_project_prepare_mail($project);
-      foreach ($accs['mails'] as $mail) {
-        drupal_mail('ict_project', 'update_decline', $mail, LANGUAGE_NONE, array(
-          'name' => $accs['name'],
+      $approver_name = _ict_project_get_user_name();
+      $accs = ict_project_prepare_editor_mails($project);
+      foreach($accs['editors'] as $acc) {
+        drupal_mail('ict_project', 'update_decline', $acc['mail'], LANGUAGE_NONE, array(
+          'name' => $acc['name'],
           'title' => $project->title,
+          'approver_name' => $approver_name,
           'comment' => $comment,
+          'dep_admins' => $accs['departmental_admins'],
         ));
       }
     }

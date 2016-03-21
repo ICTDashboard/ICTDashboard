@@ -421,26 +421,18 @@ function ict_project_workflow_set_wait_approve_preview_page($form, &$form_state)
     node_save($node);
     ict_project_set_workflow_state('waiting_approval', $nid);
     drupal_set_message(t('The baseline Draft has been sent for approval'));
+
+    $editor_name = _ict_project_get_user_name();
     $accs = __ict_project_prepare_approver_mails($node);
-    foreach ($accs['mails'] as $mail) {
-      drupal_mail('ict_project', 'baseline_request_approve', $mail, LANGUAGE_NONE, array('name' => $accs['name'], 'title' => $node->title));
+    foreach ($accs['approvers'] as $acc) {
+      drupal_mail('ict_project', 'baseline_request_approve', $acc['mail'], LANGUAGE_NONE, array(
+        'name' => $acc['name'],
+        'title' => $node->title,
+        'editor_name' => $editor_name,
+        'dep_admins' => $accs['departmental_admins'],
+      ));
     }
   }
-}
-
-function __ict_project_prepare_approver_mails($node) {
-  global $user;
-  $user = user_load($user->uid);
-
-  $approvers = array();
-  foreach (ict_project_get_users($node->nid, ICT_PROJECT_APPROVER_ACCESS) as $uid) {
-    $approvers[] = user_load($uid)->mail;
-  }
-  $accs = array('mails' => $approvers);
-  $accs['name'] = !empty($user->field_first_name['und'][0]['value']) ? $user->field_first_name['und'][0]['value'] : '';
-  $accs['name'] .= !empty($user->field_last_name['und'][0]['value']) ? ' ' . $user->field_last_name['und'][0]['value'] : '';
-
-  return $accs;
 }
 
 function ict_project_workflow_set_draft($form, &$form_state) {
