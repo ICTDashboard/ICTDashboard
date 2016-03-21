@@ -396,8 +396,8 @@ function ict_project_mail($key, &$message, $params) {
       $message['body'][] = t('@APPROVER_NAME has approved the baseline submission for the project @TITLE.', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
       $message['body'][] = t('@TITLE is not publicly available on the dashboard until the project\'s first update is approved.', array('@TITLE' => $params['title']));
       $plus_three_month = format_date(strtotime('+3 month'), 'medium', 'd/m/Y');
-      $plus_one_month = format_date(strtotime('+1 month'), 'medium', 'd/m/Y');
-      $message['body'][] = t('You will need to update project details and submit it for approval before @3_MONTH. An update project e-mail reminder will be sent to you 1 month prior the lapse date @1_MONTH.', array('@1_MONTH' => $plus_one_month, '@3_MONTH' => $plus_three_month));
+      $plus_two_month = format_date(strtotime('+2 month'), 'medium', 'd/m/Y');
+      $message['body'][] = t('You will need to update project details and submit it for approval before @3_MONTH. An update project e-mail reminder will be sent to you 1 month prior the lapse date @2_MONTH.', array('@2_MONTH' => $plus_two_month, '@3_MONTH' => $plus_three_month));
       $message['body'][] = t('Please log into your ICT Projects Dashboard account to update and submit the project data. !URL', array('!URL' => $base_url));
       $message['body'][] = t('Please contact your Departmental Administrator @DEP_NAME if you have any queries.', array('@DEP_NAME' => $dep_name));
       break;
@@ -443,9 +443,9 @@ function ict_project_mail($key, &$message, $params) {
       $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
       $message['body'][] = t('@APPROVER_NAME has approved the recent update submission for the project @TITLE.', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
       $plus_three_month = format_date(strtotime('+3 month'), 'medium', 'd/m/Y');
-      $plus_one_month = format_date(strtotime('+1 month'), 'medium', 'd/m/Y');
+      $plus_two_month = format_date(strtotime('+2 month'), 'medium', 'd/m/Y');
       $message['body'][] = t('@TITLE is publicly available on the dashboard. No further action is require until your next scheduled update @3_MONTH.', array('@3_MONTH' => $plus_three_month, '@TITLE' => $params['title']));
-      $message['body'][] = t('An update project e-mail reminder will be sent to you 1 month prior the lapse date @1_MONTH.', array('@1_MONTH' => $plus_one_month));
+      $message['body'][] = t('An update project e-mail reminder will be sent to you 1 month prior the lapse date @2_MONTH.', array('@2_MONTH' => $plus_two_month));
       $message['body'][] = t('Please log into your ICT Projects Dashboard account to update and submit the project data. !URL', array('!URL' => $base_url));
       $message['body'][] = t('Please contact your Departmental Administrator @DEP_NAME if you have any queries.', array('@DEP_NAME' => $dep_name));
       break;
