@@ -125,7 +125,7 @@ function ict_mail_mail($key, &$message, $params) {
       }
       if ($key == 'update_decline_data_editors') {
         $message['body'][] = t('Please log into your ICT Projects Dashboard account to edit and resubmit the project. !URL', array('!URL' => $base_url));
-        $message['body'][] = t('Please note that once approved, this update data will be published on the Dashboard.');
+        $message['body'][] = t('It is highly recommended that you enter and re-submit the project updates for approval as soon as possible after receiving this e-mail.');
       }
       elseif ($key == 'update_decline_data_approvers') {
         $message['body'][] = t('Please log into your ICT Projects Dashboard account to review the project. !URL', array('!URL' => $base_url));
