@@ -423,7 +423,7 @@ function ict_update_workflow_set_wait_approve($form, &$form_state) {
 //    $editor_name = _ict_project_get_user_name();
 //    $accs = __ict_project_prepare_approver_mails($project);
 //    foreach ($accs['approvers'] as $acc) {
-//      drupal_mail('ict_project', 'update_request_approve', $acc['mail'], LANGUAGE_NONE, array(
+//      drupal_mail('ict_mail', 'update_request_approve', $acc['mail'], LANGUAGE_NONE, array(
 //        'name' => $acc['name'],
 //        'title' => $project->title,
 //        'editor_name' => $editor_name,
@@ -446,7 +446,7 @@ function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) 
     ict_project_set_workflow_state('waiting_approval', $node->nid);
 
     $editor_name = _ict_project_get_user_name();
-    __ict_project_process_mails('ict_project', 'update_request_approve', $project, array('data_approvers', 'data_editors'), array('editor_name' => $editor_name));
+    __ict_mail_process_mails('ict_mail', 'update_request_approve', $project, array('data_approvers', 'data_editors'), array('editor_name' => $editor_name));
   }
   $form_state['redirect'] = url('node/'. $form['#nid']);
 }
@@ -703,7 +703,7 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
     $project_id = $node->field_project['und'][0]['target_id'];
     if ($project = node_load($project_id)) {
       $approver_name = _ict_project_get_user_name();
-      __ict_project_process_mails('ict_project', 'update_approve', $project, array('data_approvers', 'data_editors'), array('approver_name' => $approver_name));
+      __ict_mail_process_mails('ict_mail', 'update_approve', $project, array('data_approvers', 'data_editors'), array('approver_name' => $approver_name));
     }
     $benefits_wrapper = $node_wrapper->field_benefits_realised;
     foreach($benefits_wrapper as $key => $val) {
@@ -766,7 +766,7 @@ function ict_update_review_workflow_set_draft($form, &$form_state) {
     $comment = $form_state['values']['comment'];
     if ($project = node_load($project_id)) {
       $approver_name = _ict_project_get_user_name();
-      __ict_project_process_mails('ict_project', 'update_decline', $project, array('data_approvers', 'data_editors'), array('approver_name' => $approver_name, 'comment' => $comment));
+      __ict_mail_process_mails('ict_mail', 'update_decline', $project, array('data_approvers', 'data_editors'), array('approver_name' => $approver_name, 'comment' => $comment));
     }
   }
 }

@@ -28,7 +28,7 @@ function ict_project_access_add_approver($email, $nid) {
     ->execute();
 
   $node_wrapper = entity_metadata_wrapper('node', $nid);
-  drupal_mail('ict_project', 'approver_add', $email, LANGUAGE_NONE, array(
+  drupal_mail('ict_mail', 'approver_add', $email, LANGUAGE_NONE, array(
     'title' => $node_wrapper->title->value(),
     'name' => _ict_project_get_user_name($user),
     'admin_name' => _ict_project_get_user_name(),
@@ -53,7 +53,7 @@ function ict_project_access_remove_approver($email, $nid) {
     ->execute();
 
   $node_wrapper = entity_metadata_wrapper('node', $nid);
-  drupal_mail('ict_project', 'approver_remove', $email, LANGUAGE_NONE, array(
+  drupal_mail('ict_mail', 'approver_remove', $email, LANGUAGE_NONE, array(
     'title' => $node_wrapper->title->value(),
     'name' => _ict_project_get_user_name($user),
     'admin_name' => _ict_project_get_user_name(),
@@ -334,7 +334,7 @@ function ict_project_access_add_editor($email, $nid) {
     ->execute();
 
   $node_wrapper = entity_metadata_wrapper('node', $nid);
-  drupal_mail('ict_project', 'editor_add', $email, LANGUAGE_NONE, array(
+  drupal_mail('ict_mail', 'editor_add', $email, LANGUAGE_NONE, array(
     'title' => $node_wrapper->title->value(),
     'name' => _ict_project_get_user_name($user),
     'admin_name' => _ict_project_get_user_name(),
@@ -377,7 +377,7 @@ function ict_project_access_remove_editor($email, $nid) {
     ->execute();
 
   $node_wrapper = entity_metadata_wrapper('node', $nid);
-  drupal_mail('ict_project', 'editor_remove', $email, LANGUAGE_NONE, array(
+  drupal_mail('ict_mail', 'editor_remove', $email, LANGUAGE_NONE, array(
     'title' => $node_wrapper->title->value(),
     'name' => _ict_project_get_user_name($user),
     'admin_name' => _ict_project_get_user_name(),

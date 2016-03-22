@@ -1,0 +1,13 @@
+name = ICT mail
+description = ICT mail
+core = 7.x
+package = ICT Dashboard
+version = 7.x-1.00
+dependencies[] = ctools
+dependencies[] = htmlmail
+dependencies[] = mailsystem
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = mail_system
+features[variable][] = mailsystem_theme
