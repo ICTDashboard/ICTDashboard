@@ -240,15 +240,7 @@ function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been approved.'));
 
   $approver_name = _ict_project_get_user_name();
-  $accs = ict_project_prepare_editor_mails($node);
-  foreach($accs['editors'] as $acc) {
-    drupal_mail('ict_project', 'baseline_approve', $acc['mail'], LANGUAGE_NONE, array(
-      'name' => $acc['name'],
-      'title' => $node->title,
-      'approver_name' => $approver_name,
-      'dep_admins' => $accs['departmental_admins'],
-    ));
-  }
+  __ict_project_process_mails('ict_project', 'baseline_approve', $node, array('data_approvers', 'data_editors'), array('approver_name' => $approver_name));
 
   $benefits_wrapper = $node_wrapper->field_benefits_realised;
   foreach($benefits_wrapper as $key => $val) {
@@ -281,87 +273,67 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
   drupal_set_message(t('Baseline Data has been declined.'));
 
   $approver_name = _ict_project_get_user_name();
-  $accs = ict_project_prepare_editor_mails($node);
-  foreach($accs['editors'] as $acc) {
-    drupal_mail('ict_project', 'baseline_decline', $acc['mail'], LANGUAGE_NONE, array(
-      'name' => $acc['name'],
-      'title' => $node->title,
-      'approver_name' => $approver_name,
-      'comment' => $comment,
-      'dep_admins' => $accs['departmental_admins'],
-    ));
-  }
+  __ict_project_process_mails('ict_project', 'baseline_decline', $node, array('data_approvers', 'data_editors'), array('comment' => $comment, 'approver_name' => $approver_name));
 
   // redirect user to projects page
   $form_state['redirect'] = 'node/' . $nid;
 }
 
-function ict_project_prepare_editor_mails($node) {
-  $emails = ict_project_baseline_get_admin_user_emails($node);
-  $editors = array();
-  $dep_admins = array();
+function __ict_project_process_mails($module, $hook, $node, $acc_types, $params = array()) {
+  global $user;
 
-  // get only first departmental admin
-  $emails['departmental_admins'] = array(array_shift($emails['departmental_admins']));
-
-  foreach ($emails['data_editors'] as $mail) {
-    $acc = user_load_by_mail($mail);
-    $editors[] = array(
-      'mail' => $acc->mail,
-      'name' => _ict_project_get_user_name($acc),
-    );
+  $accs = __ict_project_prepare_mails($node);
+  foreach($acc_types as $type) {
+    foreach ($accs[$type] as $acc) {
+      if ($user->mail == $acc['mail']) continue;
+      drupal_mail($module, $hook . '_' . $type, $acc['mail'], LANGUAGE_NONE, array_merge(
+        array(
+          'name' => $acc['name'],
+          'title' => $node->title,
+          'dep_admins' => $accs['departmental_admins'],
+        ),
+        $params
+      ));
+    }
   }
-
-  foreach ($emails['departmental_admins'] as $mail) {
-    $acc = user_load_by_mail($mail);
-    $dep_admins[] = array(
-      'mail' => $acc->mail,
-      'name' => _ict_project_get_user_name($acc),
-    );
-  }
-
-  return array(
-    'departmental_admins' => $dep_admins,
-    'editors' => $editors,
-  );
 }
 
-function __ict_project_prepare_approver_mails($node) {
+function __ict_project_prepare_mails($node) {
   $emails = ict_project_baseline_get_admin_user_emails($node);
-  $approvers = array();
-  $dep_admins = array();
+  $accs = array();
 
   // get only first departmental admin
-  $emails['departmental_admins'] = array(array_shift($emails['departmental_admins']));
-
-  foreach ($emails['data_approvers'] as $mail) {
-    $acc = user_load_by_mail($mail);
-    $approvers[] = array(
-      'mail' => $acc->mail,
-      'name' => _ict_project_get_user_name($acc),
-    );
+  $creator = user_load($node->uid);
+  if (in_array($creator->mail)) {
+    $emails['departmental_admins'] = array($creator->mail);
+  }
+  else {
+    $emails['departmental_admins'] = array(array_shift($emails['departmental_admins']));
   }
 
-  foreach ($emails['departmental_admins'] as $mail) {
-    $acc = user_load_by_mail($mail);
-    $dep_admins[] = array(
-      'mail' => $acc->mail,
-      'name' => _ict_project_get_user_name($acc),
-    );
+  foreach($emails as $type => $mails) {
+    foreach ($mails as $mail) {
+      $acc = user_load_by_mail($mail);
+      $accs[$type][] = array(
+        'mail' => $acc->mail,
+        'name' => _ict_project_get_user_name($acc),
+      );
+    }
   }
 
-  return array(
-    'departmental_admins' => $dep_admins,
-    'approvers' => $approvers,
-  );
+  return $accs;
 }
 
 function ict_project_mail($key, &$message, $params) {
   global $base_url;
+
+  if (!empty($params['dep_admins'])) {
+    $dep_name = implode(', ', array_map(function($val){ return $val['name']; }, $params['dep_admins']));
+  }
+  $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
   switch($key) {
     case 'approver_add':
       $message['subject'] = t('ICT Projects Dashboard - Assigned as Project Approver');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
       $message['body'][] = t("You have been assigned to the project @PROJ_TITLE as the Project Approver.", array('@PROJ_TITLE' => $params['title']));
       $message['body'][] = t("You will receive an e-mail notification when the baseline is ready for your approval. To view who is the assigned Project Editor please log into your ICT Projects Dashboard account. !URL", array('!URL' => $base_url));
       $message['body'][] = t("Please contact your Departmental Administrator @ADMIN_NAME if you have any queries.", array('@ADMIN_NAME' => $params['admin_name']));
@@ -369,100 +341,114 @@ function ict_project_mail($key, &$message, $params) {
 
     case 'approver_remove':
       $message['subject'] = t('ICT Projects Dashboard - Remove as Project Approver');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
       $message['body'][] = t("You have been removed from the project @PROJ_TITLE as the Project Approver.", array('@PROJ_TITLE' => $params['title']));
       $message['body'][] = t("Please contact your Departmental Administrator @ADMIN_NAME if you have any queries.", array('@ADMIN_NAME' => $params['admin_name']));
       break;
 
     case 'editor_add':
       $message['subject'] = t('ICT Projects Dashboard - Assigned as Project Editor');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
-      $message['body'][] = t("You have been assigned to the project @PROJ_TITLE as the Project Editor. Please log into your ICT Projects Dashboard account to enter the project baseline data. !URL", array('@PROJ_TITLE' => $params['title'], '!URL' => $base_url));
-      $message['body'][] = t("It is highly recommended that you enter and submit the baseline for approval within 3 weeks of receiving this e-mail.");
+      $message['body'][] = t("You have been assigned to the project @TITLE as the Project Editor. Please log into your ICT Projects Dashboard account to enter the project baseline data. !URL", array('@TITLE' => $params['title'], '!URL' => $base_url));
+      $message['body'][] = t("It is highly recommended that you enter and submit the baseline for approval as soon as possible after receiving this e-mail.");
       $message['body'][] = t("Please contact your Departmental Administrator @ADMIN_NAME if you have any queries.", array('@ADMIN_NAME' => $params['admin_name']));
       break;
 
     case 'editor_remove':
       $message['subject'] = t('ICT Projects Dashboard - Remove as Project Editor');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
       $message['body'][] = t("You have been removed from the project @PROJ_TITLE as the Project Editor.", array('@PROJ_TITLE' => $params['title']));
       $message['body'][] = t("Please contact your Departmental Administrator @ADMIN_NAME if you have any queries.", array('@ADMIN_NAME' => $params['admin_name']));
       break;
 
-    case 'baseline_approve':
-      $dep_name = implode(', ', array_map(function($val){ return $val['name']; }, $params['dep_admins']));
+    case in_array($key, array('baseline_approve_data_approvers', 'baseline_approve_data_editors')):
       $message['subject'] = t('ICT Projects Dashboard - Project Baseline Approved');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
-      $message['body'][] = t('@APPROVER_NAME has approved the baseline submission for the project @TITLE.', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
-      $message['body'][] = t('@TITLE is not publicly available on the dashboard until the project\'s first update is approved.', array('@TITLE' => $params['title']));
-      $plus_three_month = format_date(strtotime('+3 month'), 'medium', 'd/m/Y');
-      $plus_two_month = format_date(strtotime('+2 month'), 'medium', 'd/m/Y');
-      $message['body'][] = t('You will need to update project details and submit it for approval before @3_MONTH. An update project e-mail reminder will be sent to you 1 month prior the lapse date @2_MONTH.', array('@2_MONTH' => $plus_two_month, '@3_MONTH' => $plus_three_month));
-      $message['body'][] = t('Please log into your ICT Projects Dashboard account to update and submit the project data. !URL', array('!URL' => $base_url));
-      $message['body'][] = t('Please contact your Departmental Administrator @DEP_NAME if you have any queries.', array('@DEP_NAME' => $dep_name));
+      $message['body'][] = t('@APPROVER_NAME has <strong>approved</strong> the baseline submission for the project @TITLE.', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
+      $message['body'][] = t('@TITLE is <strong>not publicly available</strong> on the dashboard until the project\'s first update is approved.', array('@TITLE' => $params['title']));
+      if ($key == 'baseline_approve_data_editors') {
+        $plus_three_month = format_date(strtotime('+3 month'), 'medium', 'd/m/Y');
+        $message['body'][] = t('You will need to update project details and submit it for approval before @3_MONTH. An update project e-mail reminder will be sent to you 1 month prior to this date.', array('@3_MONTH' => $plus_three_month));
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to update and submit the project data. !URL', array('!URL' => $base_url));
+      }
+      elseif ($key == 'baseline_approve_data_approvers') {
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to review the project data. !URL', array('!URL' => $base_url));
+      }
+      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
-    case 'baseline_request_approve':
-      $dep_name = implode(', ', array_map(function($val){ return $val['name']; }, $params['dep_admins']));
+    case in_array($key, array('baseline_request_approve_data_approvers', 'baseline_request_approve_data_editors')):
       $message['subject'] = t('ICT Projects Dashboard - Project Baseline Waiting for Approval');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
-      $message['body'][] = t('@EDITOR has requested your approval for the baseline submission for the project @TITLE.', array('@EDITOR' => $params['editor_name'], '@TITLE' => $params['title']));
-      $message['body'][] = t('Please log into your ICT Projects Dashboard account to review and approve the submitted project. !URL', array('!URL' => $base_url));
-      $message['body'][] = t('It is highly recommended that you review and approve or submit your feedback within 3 weeks of receiving this e-mail.');
-      $message['body'][] = t('Please contact your Departmental Administrator @DEP_NAME if you have any queries.', array('@DEP_NAME' => $dep_name));
+      if ($key == 'baseline_request_approve_data_approvers') {
+        $message['body'][] = t('@EDITOR has requested your approval for the baseline submission for the project @TITLE.', array('@EDITOR' => $params['editor_name'], '@TITLE' => $params['title']));
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to review and approve the submitted project. !URL', array('!URL' => $base_url));
+        $message['body'][] = t('It is highly recommended that you review and approve or submit your feedback as soon as possible after receiving this e-mail. <strong>Please note that once approved, some baseline data such as budget and original dates, cannot be changed.</strong>');
+      }
+      elseif ($key == 'baseline_request_approve_data_editors') {
+        $message['body'][] = t('@EDITOR has requested approval for the baseline submission for the project @TITLE.', array('@EDITOR' => $params['editor_name'], '@TITLE' => $params['title']));
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to review the submitted project. !URL', array('!URL' => $base_url));
+      }
+      $message['body'][] = t('Please contact your @EDITOR or Departmental Administrator @DEP_ADMIN if you have any queries. ', array('@EDITOR' => $params['editor_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
-    case 'update_request_approve':
-      $dep_name = implode(', ', array_map(function($val){ return $val['name']; }, $params['dep_admins']));
+    case in_array($key, array('update_request_approve_data_approvers', 'update_request_approve_data_editors')):
       $message['subject'] = t('ICT Projects Dashboard - Project Update Waiting for Approval');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
-      $message['body'][] = t('@EDITOR has requested your approval for the update submission for the project @TITLE.', array('@EDITOR' => $params['editor_name'], '@TITLE' => $params['title']));
-      $message['body'][] = t('Please log into your ICT Projects Dashboard account to review and approve the submitted project. !URL', array('!URL' => $base_url));
-      $message['body'][] = t('It is highly recommended that you review and approve or submit your feedback within 3 weeks of receiving this e-mail.');
-      $message['body'][] = t('Please contact your Departmental Administrator @DEP_NAME if you have any queries.', array('@DEP_NAME' => $dep_name));
+      if ($key == 'update_request_approve_data_approvers') {
+        $message['body'][] = t('@EDITOR has requested your approval for the update submission for the project @TITLE.', array('@EDITOR' => $params['editor_name'], '@TITLE' => $params['title']));
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to review and approve the submitted project. !URL', array('!URL' => $base_url));
+        $message['body'][] = t('It is highly recommended that you review and approve or submit your feedback as soon as possible after receiving this e-mail. <strong>Please note that once approved, this update data will be published on the Dashboard.</strong>');
+      }
+      elseif ($key == 'update_request_approve_data_editors') {
+        $message['body'][] = t('@EDITOR has requested approval for the update submission for the project @TITLE.', array('@EDITOR' => $params['editor_name'], '@TITLE' => $params['title']));
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to review the submitted project. !URL', array('!URL' => $base_url));
+      }
+      $message['body'][] = t('Please contact your @EDITOR or Departmental Administrator @DEP_ADMIN if you have any queries. ', array('@EDITOR' => $params['editor_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
-    case 'baseline_decline':
-      $dep_name = implode(', ', array_map(function($val){ return $val['name']; }, $params['dep_admins']));
+    case in_array($key, array('baseline_decline_data_editors', 'baseline_decline_data_approvers')):
       $message['subject'] = t('ICT Projects Dashboard - Project Baseline Not Approved');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
-      $msg = t('@APPROVER_NAME has not approved the baseline submission for the project @TITLE', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
+      $msg = t('@APPROVER_NAME has <strong>not approved</strong> the baseline submission for the project @TITLE', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
       $msg .= !empty($params['comment']) ? t(' for the following reasons') : '.';
       $message['body'][] = $msg;
       if (!empty($params['comment'])) {
-        $message['body'][] = $params['comment'];
+        $message['body'][] = nl2br($params['comment']);
       }
-      $message['body'][] = t('Please log into your ICT Projects Dashboard account to edit and resubmit the project baseline. !URL', array('!URL' => $base_url));
-      $message['body'][] = t('It is highly recommended that you enter and submit the baseline for approval within 2 weeks of receiving this e-mail.');
-      $message['body'][] = t('Please contact your Departmental Administrator @DEP_NAME if you have any queries.', array('@DEP_NAME' => $dep_name));
+      if ($key == 'baseline_decline_data_editors') {
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to edit and resubmit the project baseline. !URL', array('!URL' => $base_url));
+        $message['body'][] = t('It is highly recommended that you enter and re-submit the project updates for approval as soon as possible after receiving this e-mail.');
+      }
+      elseif ($key == 'baseline_decline_data_approvers') {
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to review the project baseline. !URL', array('!URL' => $base_url));
+      }
+      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
-    case 'update_approve':
-      $dep_name = implode(', ', array_map(function($val){ return $val['name']; }, $params['dep_admins']));
+    case in_array($key, array('update_approve_data_approvers', 'update_approve_data_editors')):
       $message['subject'] = t('ICT Projects Dashboard - Project Update Approved');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
-      $message['body'][] = t('@APPROVER_NAME has approved the recent update submission for the project @TITLE.', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
-      $plus_three_month = format_date(strtotime('+3 month'), 'medium', 'd/m/Y');
-      $plus_two_month = format_date(strtotime('+2 month'), 'medium', 'd/m/Y');
-      $message['body'][] = t('@TITLE is publicly available on the dashboard. No further action is require until your next scheduled update @3_MONTH.', array('@3_MONTH' => $plus_three_month, '@TITLE' => $params['title']));
-      $message['body'][] = t('An update project e-mail reminder will be sent to you 1 month prior the lapse date @2_MONTH.', array('@2_MONTH' => $plus_two_month));
-      $message['body'][] = t('Please log into your ICT Projects Dashboard account to update and submit the project data. !URL', array('!URL' => $base_url));
-      $message['body'][] = t('Please contact your Departmental Administrator @DEP_NAME if you have any queries.', array('@DEP_NAME' => $dep_name));
+      $message['body'][] = t('@APPROVER_NAME has <strong>approved</strong> the recent update submission for the project @TITLE.', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
+      if ($key == 'update_approve_data_editors') {
+        $plus_three_month = format_date(strtotime('+3 month'), 'medium', 'd/m/Y');
+        $message['body'][] = t('@TITLE is <strong>publicly available</strong> on the dashboard. No further action is require until your next scheduled update @3_MONTH. An update project e-mail reminder will be sent to you 1 month prior this date.', array('@3_MONTH' => $plus_three_month, '@TITLE' => $params['title']));
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to update and submit the project data. !URL', array('!URL' => $base_url));
+      }
+      elseif ($key == 'update_approve_data_approvers') {
+        $message['body'][] = t('@TITLE is <strong>publicly available</strong> on the dashboard.', array('@TITLE' => $params['title']));
+      }
+      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
-    case 'update_decline':
-      $dep_name = implode(', ', array_map(function($val){ return $val['name']; }, $params['dep_admins']));
+    case in_array($key, array('update_decline_data_approvers', 'update_decline_data_editors')):
       $message['subject'] = t('ICT Projects Dashboard - Project Update Not Approved');
-      $message['body'] = array(t("Dear @NAME,", array('@NAME' => $params['name'])));
-      $msg = t('@APPROVER_NAME has not approved the recent update submission for the project @TITLE', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
+      $msg = t('@APPROVER_NAME has <strong>not approved</strong> the recent update submission for the project @TITLE', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
       $msg .= !empty($params['comment']) ? t(' for the following reasons') : '.';
       $message['body'][] = $msg;
       if (!empty($params['comment'])) {
-        $message['body'][] = $params['comment'];
+        $message['body'][] = nl2br($params['comment']);
       }
-      $message['body'][] = t('Please log into your ICT Projects Dashboard account to edit and resubmit the project baseline. !URL', array('!URL' => $base_url));
-      $message['body'][] = t('It is highly recommended that you enter and submit the baseline for approval within 2 weeks of receiving this e-mail.');
-      $message['body'][] = t('Please contact your Departmental Administrator @DEP_NAME if you have any queries.', array('@DEP_NAME' => $dep_name));
+      if ($key == 'update_decline_data_editors') {
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to edit and resubmit the project. !URL', array('!URL' => $base_url));
+        $message['body'][] = t('Please note that once approved, this update data will be published on the Dashboard.');
+      }
+      elseif ($key == 'update_decline_data_approvers') {
+        $message['body'][] = t('Please log into your ICT Projects Dashboard account to review the project. !URL', array('!URL' => $base_url));
+      }
+      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
       break;
   }
 }
