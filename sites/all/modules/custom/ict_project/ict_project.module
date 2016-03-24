@@ -711,6 +711,8 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     }
   }
 
+  // Fix triggering element nested level
+  $budget_table['#language'] = LANGUAGE_NONE;
   // Add More button label
   $budget_table['add_more']['#value'] = t('Add another Financial Year', array(
     '!year' => $year . '/' . ++$year
