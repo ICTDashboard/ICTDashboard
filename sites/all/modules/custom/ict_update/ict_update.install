@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Code for the ICT Project install functions.
+ */
+
+/**
+ * Entity Comment field converted to textarea
+ */
+function ict_update_update_7100() {
+  // Get current settings
+  $query = db_select('field_config', 'conf')
+    ->fields('conf')
+    ->condition('conf.field_name', 'field_entity_comments')
+    ->execute()->fetchObject();
+  $data = unserialize($query->data);
+  $data['settings'] = array();
+
+  // Manual database changes.
+  db_update('field_config')
+    ->fields(array(
+      'type' => 'text_long',
+      'data' => serialize($data)
+    ))
+    ->condition('field_name', 'field_entity_comments')
+    ->execute();
+
+  // From text.install for long text fields
+  $textarea_spec = array(
+    'type' => 'text',
+    'size' => 'big',
+    'not null' => FALSE,
+  );
+  // Update field settings
+  db_change_field('field_data_field_entity_comments', 'field_entity_comments_value', 'field_entity_comments_value', $textarea_spec);
+  db_change_field('field_revision_field_entity_comments', 'field_entity_comments_value', 'field_entity_comments_value', $textarea_spec);
+
+  // Clear caches.
+  field_cache_clear(TRUE);
+
+  // Apply the new field instance configuration.
+  $feature = features_get_features('ict_update');
+  $components = array_keys($feature->info['features']);
+  features_revert(array('ict_update' => $components));
+
+  return 'Entity Comment field converted into textarea';
+}
