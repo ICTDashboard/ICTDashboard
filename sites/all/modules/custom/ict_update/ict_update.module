@@ -72,6 +72,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $entity_list = ict_update_get_allowed_entity_list($project_id);
     $last_project_revision_updates = end($entity_list);
     if(empty($last_project_revision_updates)) {
+      // from project
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $project->field_original_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $project->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $project->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
@@ -79,12 +80,17 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       _ict_update_prepopulate_benefit($form, $form_state, $project->field_benefits_realised['und']);
     }
     else {
+      // from previous update
       $last_update = node_load(end($last_project_revision_updates));
       _ict_update_prepopulate_benefit($form, $form_state, $last_update->field_benefits_realised['und']);
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_expected_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $last_update->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $last_update->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
       $form['field_project_stage']['und']['#default_value'] = $last_update->field_project_stage[LANGUAGE_NONE][0]['tid'];
+      $form['field_actual_level_of_project_co']['und'][0]['value']['#default_value'] = $last_update->field_actual_level_of_project_co[LANGUAGE_NONE][0]['value'];
+      $form['field_forecast_level_of_project_']['und'][0]['value']['#default_value'] = $last_update->field_forecast_level_of_project_[LANGUAGE_NONE][0]['value'];
+      $form['field_current_financial_benefits']['und'][0]['value']['#default_value'] = $last_update->field_current_financial_benefits[LANGUAGE_NONE][0]['value'];
+      $form['field_estimated_value_of_benefit']['und'][0]['value']['#default_value'] = $last_update->field_estimated_value_of_benefit[LANGUAGE_NONE][0]['value'];
     }
   }
   else {
