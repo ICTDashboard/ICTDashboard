@@ -10,11 +10,11 @@ jQuery(document).ready(function(){
             setTimeout(function(){
                 var topPadding = jQuery('.fancybox-inner .fancybox-title').outerHeight(),
                     bottomPadding = jQuery('.fancybox-inner .fancybox-actions').outerHeight(),
-                    fancyHeight = jQuery('.fancybox-inner').outerHeight();
+                    fancyHeight = jQuery('.fancybox-inner').outerHeight(),
+                    marginTop = parseInt(jQuery('.fancybox-inner .ict-fancy-content').css('margin-top')),
+                    marginBottom = parseInt(jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom'));
 
-                jQuery('.fancybox-inner .ict-fancy-content').height(fancyHeight - topPadding - bottomPadding);
-                jQuery('.fancybox-inner .ict-fancy-content').css('margin-top', topPadding);
-                jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom', bottomPadding);
+                jQuery('.fancybox-inner .ict-fancy-content').css('max-height', fancyHeight - bottomPadding - topPadding - marginTop - marginBottom);
             }, 0);
         }
     });
@@ -28,42 +28,35 @@ jQuery(document).ready(function(){
             setTimeout(function(){
                 var topPadding = jQuery('.fancybox-inner .fancybox-title').outerHeight(),
                     bottomPadding = jQuery('.fancybox-inner .fancybox-actions').outerHeight(),
-                    fancyHeight = jQuery('.fancybox-inner').outerHeight();
+                    fancyHeight = jQuery('.fancybox-inner').outerHeight(),
+                    marginTop = parseInt(jQuery('.fancybox-inner .ict-fancy-content').css('margin-top')),
+                    marginBottom = parseInt(jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom'));
 
-                jQuery('.fancybox-inner .ict-fancy-content').height(fancyHeight - topPadding - bottomPadding);
-                jQuery('.fancybox-inner .ict-fancy-content').css('margin-top', topPadding);
-                jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom', bottomPadding);
-                jQuery('.fancybox-wrap').appendTo('form');
+                jQuery('.fancybox-inner .ict-fancy-content').css('max-height', fancyHeight - bottomPadding - topPadding - marginTop - marginBottom);
             }, 0);
         }
     });
     jQuery('.fancybox-benefit-history').fancybox({
-        type: 'inline',
-        maxWidth: 700,
-        // TEMPORARY SOLUTION
+        type: 'ajax',
+        maxWidth: 970,
         minWidth: 700,
-        minHeight: 320,
+        //maxHeight: 600,
+        height: 'auto',
         padding: 0,
         closeBtn: false,
         afterShow: function() {
             setTimeout(function(){
                 var topPadding = jQuery('.fancybox-inner .fancybox-title').outerHeight(),
                     bottomPadding = jQuery('.fancybox-inner .fancybox-actions').outerHeight(),
-                    fancyHeight = jQuery('.fancybox-inner').outerHeight();
+                    fancyHeight = jQuery('.fancybox-inner').outerHeight(),
+                    marginTop = parseInt(jQuery('.fancybox-inner .ict-fancy-content').css('margin-top')),
+                    marginBottom = parseInt(jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom'));
 
-                jQuery('.fancybox-inner .ict-fancy-content').height(fancyHeight - topPadding - bottomPadding);
-                jQuery('.fancybox-inner .ict-fancy-content').css('margin-top', topPadding);
-                jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom', bottomPadding);
-                // TEMPORARY SOLUTION
-                Drupal.attachBehaviors();
+                jQuery('.fancybox-inner .ict-fancy-content').css('max-height', fancyHeight - bottomPadding - topPadding - marginTop - marginBottom);
             }, 0);
-        },
-        content: '<div id="ict-policy">' +
-                    '<h2 class="fancybox-title">Benefit history</h2>' +
-                    '<div class="ict-fancy-content"><h2>History view will be available soon...</h2></div>' +
-                    '<div class="fancybox-actions">' +
-                    '<a class="ict-fancybox-close general-button" href="#"><span>Close</span></a>' +
-                    '</div></div>'
+
+            Drupal.attachBehaviors(document.getElementById('ict-policy'));
+        }
     });
 });
 

@@ -289,25 +289,26 @@ input.approver-email {margin-bottom: 10px !important;}
     -moz-border-radius-topright: 4px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
 }
 .fancybox-actions {
     padding: 20px 0 25px;
     text-align: right;
     border-top: 1px solid #b3bccd;
     margin: 0 20px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
 }
 .ict-fancy-content {
     padding: 0 20px;
     overflow: scroll;
     position: relative;
+    margin: 20px 0;
 }
 .project-list-content {
     overflow: hidden;
