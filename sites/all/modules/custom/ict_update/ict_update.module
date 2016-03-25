@@ -306,10 +306,13 @@ function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = arr
     $budget_table[$key]['remove_button']['#suffix'] = '</div>';
     $budget_table[$key]['history_button'] = '';
     if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['field_previous_collection']['und'][0]['target_id'])
-     || !empty($budget_table[$key]['field_previous_collection']['und']['#default_value'])) {
+      || !empty($budget_table[$key]['field_previous_collection']['und']['#default_value'][0])) {
+      $prev_collection = !empty($budget_table[$key]['field_previous_collection']['und']['#default_value'][0]) ? $budget_table[$key]['field_previous_collection']['und']['#default_value'][0] : $form_state['values']['field_benefits_realised']['und'][$key]['field_previous_collection']['und'][0]['target_id'];
       $budget_table[$key]['remove_button']['#access'] = FALSE;
       $budget_table[$key]['history_button'] = array(
-        '#markup' => '<div class="history-button"><a href="#" class="fancybox-benefit-history">' . t('History') . '</a></div>'
+        '#markup' => '<div class="history-button">
+          <a href="' . url('benefit/history/' . $prev_collection) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
+          </div>'
       );
     }
     if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['current_item_id'])) {
