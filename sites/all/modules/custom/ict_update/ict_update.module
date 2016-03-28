@@ -58,7 +58,6 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   $form['#project_node'] = $project;
 
   $form['#theme'] = 'ict_update_add_form';
-
   $project_admins = ict_project_baseline_get_admin_user_emails($project);
   $form['#admin_user_details'] = theme(
     'ict_project_baseline_admin_user_details', array(
@@ -69,7 +68,6 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   );
 
   $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
-
   if (empty($form['#node']->nid)) {
     $entity_list = ict_update_get_allowed_entity_list($project_id);
     $last_project_revision_updates = end($entity_list);
@@ -77,6 +75,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $project->field_original_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $project->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $project->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
+      $form['field_project_stage']['und']['#default_value'] = $project->field_project_stage[LANGUAGE_NONE][0]['tid'];
       _ict_update_prepopulate_benefit($form, $form_state, $project->field_benefits_realised['und']);
     }
     else {
@@ -85,6 +84,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_expected_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $last_update->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $last_update->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
+      $form['field_project_stage']['und']['#default_value'] = $last_update->field_project_stage[LANGUAGE_NONE][0]['tid'];
     }
   }
   else {
