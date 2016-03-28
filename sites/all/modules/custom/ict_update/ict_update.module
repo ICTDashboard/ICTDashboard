@@ -60,19 +60,21 @@ function ict_update_benefit_print_history($field_collection) {
   $stack = array();
   foreach($entity_list as $vid => $update_ids) {
     // Add to stack Benefit if there is Benefit fits in project_id and revision_id
-    $filter_benefit = array_filter($res, function($val) use ($vid, $project_id) {
-      return $val->entity_id == $project_id && $val->revision_id == $vid;
-    });
-    $item = array('bundle' => 'baseline');
-    if (!empty($filter_benefit)) {
-      $filter_benefit = reset($filter_benefit);
-      $benefit = field_collection_item_revision_load($filter_benefit->field_benefits_realised_revision_id);
-      $item['benefit'] = $benefit;
+    if (ict_project_get_workflow_state($project_id, $vid) == 'approved') {
+      $filter_benefit = array_filter($res, function ($val) use ($vid, $project_id) {
+        return $val->entity_id == $project_id && $val->revision_id == $vid;
+      });
+      $item = array('bundle' => 'baseline');
+      if (!empty($filter_benefit)) {
+        $filter_benefit = reset($filter_benefit);
+        $benefit = field_collection_item_revision_load($filter_benefit->field_benefits_realised_revision_id);
+        $item['benefit'] = $benefit;
+      }
+      $stack[] = $item;
     }
-    $stack[] = $item;
-
     foreach($update_ids as $update_id) {
       // Add to stack Benefit if there is Benefit fits in update_id
+      if (ict_project_get_workflow_state($update_id) != 'approved') continue;
       $filter_benefit = array_filter($res, function($val) use ($update_id) {
         return $val->entity_id == $update_id;
       });
