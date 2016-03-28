@@ -129,7 +129,7 @@ function ict_mail_mail($key, &$message, $params) {
         $message['subject'] = t('ICT Projects Dashboard - Update to the Project @TITLE is Approved', array('@TITLE' => $params['title']));
         $message['body'][] = t('@APPROVER_NAME has <strong>approved</strong> the updates to the project @TITLE.', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
         $message['body'][] = t('Please log into your ICT Projects Dashboard account to view the submitted information. !URL', array('!URL' => $base_url));
-        $message['body'][] = t('@TITLE is <strong>publicly available</strong> on the dashboard. No further action is require until your next scheduled update @3_MONTH. An update project e-mail reminder will be sent to you 1 month prior this date.', array('@3_MONTH' => $plus_three_month, '@TITLE' => $params['title']));
+        $message['body'][] = t('@TITLE is <strong>publicly available</strong> on the dashboard. No further action is require until the next scheduled update @3_MONTH. An update project e-mail reminder will be sent to you 1 month prior this date.', array('@3_MONTH' => $plus_three_month, '@TITLE' => $params['title']));
       }
       $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
       break;
