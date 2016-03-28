@@ -427,6 +427,7 @@ function ict_update_workflow_set_wait_approve($form, &$form_state) {
     node_save($form_state['node']);
     ict_project_set_workflow_state('waiting_approval', $nid);
 
+
 //    $editor_name = _ict_project_get_user_name();
 //    $accs = __ict_project_prepare_approver_mails($project);
 //    foreach ($accs['approvers'] as $acc) {
@@ -437,8 +438,9 @@ function ict_update_workflow_set_wait_approve($form, &$form_state) {
 //        'dep_admins' => $accs['departmental_admins'],
 //      ));
 //    }
+    drupal_set_message(t('Update data has been sent for approval.'));
   }
-  $form_state['redirect'] = url('node/'. $form['#project_id']);
+  //$form_state['redirect'] = 'node/'. $form['#project_id'];
 }
 
 function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) {
@@ -451,11 +453,11 @@ function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) 
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('waiting_approval', $node->nid);
-
     $editor_name = _ict_project_get_user_name();
     __ict_mail_process_mails('ict_mail', 'update_request_approve', $project, array('data_approvers', 'data_editors'), array('editor_name' => $editor_name));
+    drupal_set_message(t('Update data has been sent for approval.'));
   }
-  $form_state['redirect'] = url('node/'. $form['#nid']);
+//  $form_state['redirect'] = 'node/'. $form['#nid'];
 }
 
 function ict_update_workflow_set_approve($form, &$form_state) {
@@ -706,6 +708,7 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('approved', $nid);
+    drupal_set_message(t('Update data has been approved.'));
 
     $project_id = $node->field_project['und'][0]['target_id'];
     if ($project = node_load($project_id)) {
@@ -768,6 +771,7 @@ function ict_update_review_workflow_set_draft($form, &$form_state) {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('draft', $nid);
+    drupal_set_message(t('Update data has been rejected.'));
 
     $project_id = $node->field_project['und'][0]['target_id'];
     $comment = $form_state['values']['comment'];
