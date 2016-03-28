@@ -199,7 +199,7 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
     if (!$items_count) {
       foreach(element_children($budget_table) as $key) {
         if (!is_numeric($key)) continue;
-        $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
+//        $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
         $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
         $budget_table[$key]['remove_button']['#suffix'] = '</div>';
       }
@@ -230,7 +230,7 @@ function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = arr
       );
     }
     else {
-      $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
+//      $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
     }
   }
 }
@@ -801,12 +801,15 @@ function template_preprocess_field_benefits_realised_table_form(&$vars) {
   $table = &$vars['element'];
   foreach(element_children($table) as $key) {
     if (!is_numeric($key)) continue;
+    if (!empty($table[$key]['field_removed']['und'][0]['#default_value']['value'])) {
+      $table[$key]['#archived_benefit'] = strtotime($table[$key]['field_removed']['und'][0]['#default_value']['value']);
+    }
     if (!empty($table[$key]['current_item_id']['#value'])) {
       $item_wrap = entity_metadata_wrapper('field_collection_item', $table[$key]['current_item_id']['#value']);
       $archived = $item_wrap->field_removed->value();
       if (!empty($archived)) {
         $table[$key]['#archived_benefit'] = $archived;
-        $benefit = $table[$key];
+//        $benefit = $table[$key];
 //        unset($table[$key]);
 //        array_unshift($table, $benefit);
       }
@@ -1030,7 +1033,7 @@ function ict_update_get_actual_benefits($project_id) {
     $benefits = $last_update->field_benefits_realised->value();
   }
   foreach($benefits as $key => $val) {
-    if ($val->field_removed['und'][0]['value']) {
+    if ($val->field_removed['und'][0]['value'] || $val->field_status['und'][0]['value'] == 'removed') {
       unset($benefits[$key]);
     }
   }
