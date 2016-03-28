@@ -187,6 +187,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       $form['field_forecast_level_of_project_']['und'][0]['value']['#default_value'] = $last_update->field_forecast_level_of_project_[LANGUAGE_NONE][0]['value'];
       $form['field_current_financial_benefits']['und'][0]['value']['#default_value'] = $last_update->field_current_financial_benefits[LANGUAGE_NONE][0]['value'];
       $form['field_estimated_value_of_benefit']['und'][0]['value']['#default_value'] = $last_update->field_estimated_value_of_benefit[LANGUAGE_NONE][0]['value'];
+      $form['field_entity_comments']['und'][0]['value']['#default_value'] = $last_update->field_entity_comments[LANGUAGE_NONE][0]['value'];
     }
   }
   else {
