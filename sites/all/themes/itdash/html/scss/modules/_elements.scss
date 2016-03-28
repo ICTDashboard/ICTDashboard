@@ -840,47 +840,61 @@ body,
   .ict-tick {
     display: inline-block;
   }
-  .field-name-field-status {
-    .sbHolder,
-    .sbOptions a {
-      position: relative;
-      &:before {
-        content: "";
-        width: 16px;
-        height: 16px;
-        display: inline-block;
-        line-height: 54px;
-        vertical-align: sub;
-        margin-right: 5px;
-        position: absolute;
-        top: 11px;
-        left: 18px;
-      }
-    }
-    .sbHolder.yes:before,
-    a[rel=yes]:before {
-      background-color: #1b56af;
-    }
-    .sbHolder.no:before,
-    a[rel=no]:before {
-      background-color: #c42656;
-    }
-    .sbHolder.on_track:before,
-    a[rel=on_track]:before {
-      background-color: #1fd063;
-    }
-    .sbHolder.at_risk:before,
-    a[rel=at_risk]:before {
-      background-color: #f6d000;
-    }
-    .sbHolder.removed:before,
-    a[rel=removed]:before {
-      @include sprite-icon(remove-icon-normal);
+
+}
+.field-name-field-status {
+  td.field-status,
+  .sbHolder,
+  .sbOptions a {
+    position: relative;
+    &:before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      line-height: 54px;
+      vertical-align: sub;
+      margin-right: 5px;
+      position: absolute;
       top: 11px;
+      left: 18px;
     }
-    .sbHolder.removed:before {
-      top: 14px;
-    }
+  }
+  td.field-status.yes:before,
+  .sbHolder.yes:before,
+  a[rel=yes]:before {
+    background-color: #1b56af;
+  }
+  td.field-status.no:before,
+  .sbHolder.no:before,
+  a[rel=no]:before {
+    background-color: #c42656;
+  }
+  td.field-status.on_track:before,
+  .sbHolder.on_track:before,
+  a[rel=on_track]:before {
+    background-color: #1fd063;
+  }
+  td.field-status.at_risk:before,
+  .sbHolder.at_risk:before,
+  a[rel=at_risk]:before {
+    background-color: #f6d000;
+  }
+  td.field-status.removed:before,
+  .sbHolder.removed:before,
+  a[rel=removed]:before {
+    @include sprite-icon(remove-icon-normal);
+    top: 11px;
+  }
+  td.field-status.removed:before {
+    display: inline-block;
+  }
+  td.field-status:before {
+    position: static;
+    display: inline-block;
+  }
+  .sbHolder.removed:before {
+    top: 14px;
   }
 }
 .benefits-action {
