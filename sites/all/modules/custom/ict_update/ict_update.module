@@ -871,6 +871,7 @@ function ict_update_review_workflow_set_draft($form, &$form_state) {
 }
 
 function template_preprocess_field_benefits_realised_table_form(&$vars) {
+  drupal_add_css('.fancybox-margin.fancybox-lock {overflow: visible!important;}', 'inline');
   $settings = &drupal_static('drupal_add_js', array());
   foreach($settings['settings']['data'] as &$setting) {
     if (isset($setting['datePopup'])) {

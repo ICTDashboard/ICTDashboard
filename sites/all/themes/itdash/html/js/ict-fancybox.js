@@ -33,6 +33,7 @@ jQuery(document).ready(function(){
                     marginBottom = parseInt(jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom'));
 
                 jQuery('.fancybox-inner .ict-fancy-content').css('max-height', fancyHeight - bottomPadding - topPadding - marginTop - marginBottom);
+                jQuery('.fancybox-wrap').appendTo('form');
             }, 0);
         }
     });
