@@ -95,21 +95,21 @@ function ict_mail_mail($key, &$message, $params) {
       $message['subject'] = t('ICT Projects Dashboard - Project Baseline Not Approved');
       if ($key == 'baseline_decline_data_editors') {
         $msg = t('@APPROVER_NAME has <strong>not approved</strong> the baseline submission for the project @TITLE', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
-        $msg .= !empty($params['comment']) ? t(' for the following reasons') : '.';
-        $message['body'][] = $msg;
+        $msg .= !empty($params['comment']) ? t(' for the following reasons ') : '.';
         if (!empty($params['comment'])) {
-          $message['body'][] = nl2br($params['comment']);
+          $msg .= '<em>' . nl2br($params['comment']) . '</em>';
         }
+        $message['body'][] = $msg;
         $message['body'][] = t('Please log into your ICT Projects Dashboard account to edit and resubmit the project baseline. !URL', array('!URL' => $base_url));
         $message['body'][] = t('It is highly recommended that you enter and re-submit the project updates for approval as soon as possible after receiving this e-mail.');
       }
       elseif ($key == 'baseline_decline_data_approvers') {
         $msg = t('@APPROVER_NAME has <strong>not approved</strong> the baseline for the project @TITLE', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
-        $msg .= !empty($params['comment']) ? t(' for the following reasons') : '.';
-        $message['body'][] = $msg;
+        $msg .= !empty($params['comment']) ? t(' for the following reasons ') : '.';
         if (!empty($params['comment'])) {
-          $message['body'][] = nl2br($params['comment']);
+          $msg .= '<em>' . nl2br($params['comment']) . '</em>';
         }
+        $message['body'][] = $msg;
         $message['subject'] = t('ICT Projects Dashboard - Baseline for the Project @TITLE is Not Approved', array('@TITLE' => $params['title']));
         $message['body'][] = t('Please log into your ICT Projects Dashboard account to view the submitted information !URL', array('!URL' => $base_url));
         $message['body'][] = t('No further action is required until a Project Editor re-submits the project baseline for approval.');
@@ -137,11 +137,11 @@ function ict_mail_mail($key, &$message, $params) {
     case 'update_decline_data_editors':
       $message['subject'] = t('ICT Projects Dashboard - Project Update Not Approved');
       $msg = t('@APPROVER_NAME has <strong>not approved</strong> the recent update submission for the project @TITLE', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
-      $msg .= !empty($params['comment']) ? t(' for the following reasons') : '.';
-      $message['body'][] = $msg;
+      $msg .= !empty($params['comment']) ? t(' for the following reasons ') : '.';
       if (!empty($params['comment'])) {
-        $message['body'][] = nl2br($params['comment']);
+        $msg .= '<em>' . nl2br($params['comment']) . '</em>';
       }
+      $message['body'][] = $msg;
       $message['body'][] = t('Please log into your ICT Projects Dashboard account to edit and resubmit the project. !URL', array('!URL' => $base_url));
       $message['body'][] = t('It is highly recommended that you enter and re-submit the project updates for approval as soon as possible after receiving this e-mail.');
       $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
@@ -150,11 +150,11 @@ function ict_mail_mail($key, &$message, $params) {
     case 'update_decline_data_approvers':
       $message['subject'] = t('ICT Projects Dashboard - Update to the Project @TITLE is Not Approved', array('@TITLE' => $params['title']));
       $msg = t('@APPROVER_NAME has <strong>not approved</strong> the updates to the project @TITLE', array('@APPROVER_NAME' => $params['approver_name'], '@TITLE' => $params['title']));
-      $msg .= !empty($params['comment']) ? t(' for the following reasons') : '.';
-      $message['body'][] = $msg;
+      $msg .= !empty($params['comment']) ? t(' for the following reasons ') : '.';
       if (!empty($params['comment'])) {
-        $message['body'][] = nl2br($params['comment']);
+        $msg .= '<em>' . nl2br($params['comment']) . '</em>';
       }
+      $message['body'][] = $msg;
       $message['body'][] = t('Please log into your ICT Projects Dashboard account to view the submitted information. !URL', array('!URL' => $base_url));
       $message['body'][] = t('No further action is required until a Project Editor re-submits updates to @TITLE for approval.', array('@TITLE' => $params['title']));
       $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
