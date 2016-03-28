@@ -142,6 +142,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
+    drupal_get_path('module', 'ict_update') . '/js/jQuery.textareaCounter.min.js',
   );
 }
 
