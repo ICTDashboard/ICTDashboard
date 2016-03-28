@@ -239,10 +239,8 @@ function ict_project_baseline_approve_form_submit_approve ($form, &$form_state) 
   ict_project_set_workflow_state('approved', $node->nid, $node->vid);
   drupal_set_message(t('Baseline Data has been approved.'));
 
-  $accs = ict_project_prepare_mail($node);
-  foreach($accs as $acc) {
-    drupal_mail('ict_project', 'baseline_approve', $acc['mail'], LANGUAGE_NONE, array('name' => $acc['name'], 'title' => $node->title));
-  }
+  $approver_name = _ict_project_get_user_name();
+  __ict_mail_process_mails('ict_mail', 'baseline_approve', $node, array('data_approvers', 'data_editors'), array('approver_name' => $approver_name));
 
   $benefits_wrapper = $node_wrapper->field_benefits_realised;
   foreach($benefits_wrapper as $key => $val) {
@@ -274,61 +272,11 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
   ict_project_set_workflow_state('draft', $node->nid, $node->vid, $comment);
   drupal_set_message(t('Baseline Data has been declined.'));
 
-  $accs = ict_project_prepare_mail($node);
-  foreach($accs as $acc) {
-    drupal_mail('ict_project', 'baseline_decline', $acc['mail'], LANGUAGE_NONE, array('name' => $acc['name'], 'title' => $node->title, 'comment' => $comment));
-  }
+  $approver_name = _ict_project_get_user_name();
+  __ict_mail_process_mails('ict_mail', 'baseline_decline', $node, array('data_approvers', 'data_editors'), array('comment' => $comment, 'approver_name' => $approver_name));
 
   // redirect user to projects page
   $form_state['redirect'] = 'node/' . $nid;
-}
-
-function ict_project_prepare_mail($node) {
-  $accs = array();
-  $mails = ict_project_baseline_get_admin_user_emails($node);
-  foreach($mails as $val) {
-    foreach($val as $mail) {
-      $acc = user_load_by_mail($mail);
-      $name = !empty($acc->field_first_name['und'][0]['value']) ? $acc->field_first_name['und'][0]['value'] : '';
-      $name .= !empty($acc->field_last_name['und'][0]['value']) ? ' ' . $acc->field_last_name['und'][0]['value'] : '';
-      $accs[$mail] = array(
-        'mail' => $mail,
-        'name' => $name,
-      );
-    }
-  }
-
-  return $accs;
-}
-
-function ict_project_mail($key, &$message, $params) {
-  switch($key) {
-    case 'baseline_approve':
-      $message['body'] = array(t("@username has approved the baseline submission for @project_title.", array('@username' => $params['name'], '@project_title' => $params['title'])));
-      break;
-
-    case 'baseline_decline':
-      $msg = t("@username has rejected the baseline submission for @project_title", array('@username' => $params['name'], '@project_title' => $params['title']));
-      $msg .= !empty($params['comment']) ? t(' with the following comment:') : '.';
-      $message['body'] = array($msg);
-      if (!empty($params['comment'])) {
-        $message['body'][] = $params['comment'];
-      }
-      break;
-
-    case 'update_approve':
-      $message['body'] = array(t("@username has approved the update submission for @project_title.", array('@username' => $params['name'], '@project_title' => $params['title'])));
-      break;
-
-    case 'update_decline':
-      $msg = t("@username has rejected the update submission for @project_title", array('@username' => $params['name'], '@project_title' => $params['title']));
-      $msg .= !empty($params['comment']) ? t(' with the following comment:') : '.';
-      $message['body'] = array($msg);
-      if (!empty($params['comment'])) {
-        $message['body'][] = $params['comment'];
-      }
-      break;
-  }
 }
 
 /**

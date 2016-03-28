@@ -421,6 +421,9 @@ function ict_project_workflow_set_wait_approve_preview_page($form, &$form_state)
     node_save($node);
     ict_project_set_workflow_state('waiting_approval', $nid);
     drupal_set_message(t('The baseline Draft has been sent for approval'));
+
+    $editor_name = _ict_project_get_user_name();
+    __ict_mail_process_mails('ict_mail', 'baseline_request_approve', $node, array('data_approvers', 'data_editors'), array('editor_name' => $editor_name));
   }
 }
 
@@ -1159,6 +1162,16 @@ function ict_project_bracket_italics ($string) {
 function ict_project_node_insert ($node) {
   if ($node->type == 'project') {
     ict_project_set_workflow_state('draft', $node->nid, $node->vid);
+    __ict_mail_process_mails('ict_mail', 'project_create', $node, array('departmental_admins'), array('dep_admins' => array(array('name' => _ict_project_get_user_name()))), FALSE);
+  }
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function ict_project_node_delete($node) {
+  if ($node->type == 'project') {
+    __ict_mail_process_mails('ict_mail', 'project_remove', $node, array('departmental_admins'), array('dep_admins' => array(array('name' => _ict_project_get_user_name()))), FALSE);
   }
 }
 
