@@ -58,7 +58,6 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   $form['#project_node'] = $project;
 
   $form['#theme'] = 'ict_update_add_form';
-
   $project_admins = ict_project_baseline_get_admin_user_emails($project);
   $form['#admin_user_details'] = theme(
     'ict_project_baseline_admin_user_details', array(
@@ -69,22 +68,29 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   );
 
   $form = ict_update_update_form_recursive('#title_display', 'invisible', $form);
-
   if (empty($form['#node']->nid)) {
     $entity_list = ict_update_get_allowed_entity_list($project_id);
     $last_project_revision_updates = end($entity_list);
     if(empty($last_project_revision_updates)) {
+      // from project
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $project->field_original_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $project->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $project->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
+      $form['field_project_stage']['und']['#default_value'] = $project->field_project_stage[LANGUAGE_NONE][0]['tid'];
       _ict_update_prepopulate_benefit($form, $form_state, $project->field_benefits_realised['und']);
     }
     else {
+      // from previous update
       $last_update = node_load(end($last_project_revision_updates));
       _ict_update_prepopulate_benefit($form, $form_state, $last_update->field_benefits_realised['und']);
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_expected_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $last_update->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $last_update->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
+      $form['field_project_stage']['und']['#default_value'] = $last_update->field_project_stage[LANGUAGE_NONE][0]['tid'];
+      $form['field_actual_level_of_project_co']['und'][0]['value']['#default_value'] = $last_update->field_actual_level_of_project_co[LANGUAGE_NONE][0]['value'];
+      $form['field_forecast_level_of_project_']['und'][0]['value']['#default_value'] = $last_update->field_forecast_level_of_project_[LANGUAGE_NONE][0]['value'];
+      $form['field_current_financial_benefits']['und'][0]['value']['#default_value'] = $last_update->field_current_financial_benefits[LANGUAGE_NONE][0]['value'];
+      $form['field_estimated_value_of_benefit']['und'][0]['value']['#default_value'] = $last_update->field_estimated_value_of_benefit[LANGUAGE_NONE][0]['value'];
     }
   }
   else {
@@ -142,6 +148,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
+    drupal_get_path('module', 'ict_update') . '/js/jQuery.textareaCounter.min.js',
   );
 }
 
@@ -419,8 +426,21 @@ function ict_update_workflow_set_wait_approve($form, &$form_state) {
     $form_state['node']->revision = TRUE;
     node_save($form_state['node']);
     ict_project_set_workflow_state('waiting_approval', $nid);
+
+
+//    $editor_name = _ict_project_get_user_name();
+//    $accs = __ict_project_prepare_approver_mails($project);
+//    foreach ($accs['approvers'] as $acc) {
+//      drupal_mail('ict_mail', 'update_request_approve', $acc['mail'], LANGUAGE_NONE, array(
+//        'name' => $acc['name'],
+//        'title' => $project->title,
+//        'editor_name' => $editor_name,
+//        'dep_admins' => $accs['departmental_admins'],
+//      ));
+//    }
+    drupal_set_message(t('Update data has been sent for approval.'));
   }
-  $form_state['redirect'] = url('node/'. $form['#project_id']);
+  //$form_state['redirect'] = 'node/'. $form['#project_id'];
 }
 
 function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) {
@@ -428,12 +448,16 @@ function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) 
     return;
   }
   $node = $form['#node'];
+  $project = node_load($form['#nid']);
   if (ict_project_get_workflow_state($node->nid) != 'waiting_approval') {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('waiting_approval', $node->nid);
+    $editor_name = _ict_project_get_user_name();
+    __ict_mail_process_mails('ict_mail', 'update_request_approve', $project, array('data_approvers', 'data_editors'), array('editor_name' => $editor_name));
+    drupal_set_message(t('Update data has been sent for approval.'));
   }
-  $form_state['redirect'] = url('node/'. $form['#nid']);
+//  $form_state['redirect'] = 'node/'. $form['#nid'];
 }
 
 function ict_update_workflow_set_approve($form, &$form_state) {
@@ -684,16 +708,12 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('approved', $nid);
+    drupal_set_message(t('Update data has been approved.'));
 
     $project_id = $node->field_project['und'][0]['target_id'];
     if ($project = node_load($project_id)) {
-      $accs = ict_project_prepare_mail($project);
-      foreach ($accs as $acc) {
-        drupal_mail('ict_project', 'update_approve', $acc['mail'], LANGUAGE_NONE, array(
-          'name' => $acc['name'],
-          'title' => $project->title,
-        ));
-      }
+      $approver_name = _ict_project_get_user_name();
+      __ict_mail_process_mails('ict_mail', 'update_approve', $project, array('data_approvers', 'data_editors'), array('approver_name' => $approver_name));
     }
     $benefits_wrapper = $node_wrapper->field_benefits_realised;
     foreach($benefits_wrapper as $key => $val) {
@@ -751,18 +771,13 @@ function ict_update_review_workflow_set_draft($form, &$form_state) {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('draft', $nid);
+    drupal_set_message(t('Update data has been rejected.'));
 
     $project_id = $node->field_project['und'][0]['target_id'];
     $comment = $form_state['values']['comment'];
     if ($project = node_load($project_id)) {
-      $accs = ict_project_prepare_mail($project);
-      foreach ($accs as $acc) {
-        drupal_mail('ict_project', 'update_decline', $acc['mail'], LANGUAGE_NONE, array(
-          'name' => $acc['name'],
-          'title' => $project->title,
-          'comment' => $comment,
-        ));
-      }
+      $approver_name = _ict_project_get_user_name();
+      __ict_mail_process_mails('ict_mail', 'update_decline', $project, array('data_approvers', 'data_editors'), array('approver_name' => $approver_name, 'comment' => $comment));
     }
   }
 }

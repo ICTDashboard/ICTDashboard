@@ -186,3 +186,10 @@ function ict_users_profile_departmental_admin_validate ($form, &$form_state) {
     form_set_error('field_department][und', t('Departmental Admin should be assigned to a department.'));
   }
 }
+
+/**
+ * Implements hook_user_login().
+ */
+function ict_users_user_login(&$edit, $account) {
+  $edit['redirect'] = '/projects';
+}
