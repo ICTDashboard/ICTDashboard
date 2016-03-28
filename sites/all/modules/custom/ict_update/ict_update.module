@@ -15,6 +15,102 @@ include_once 'ict_update.field_diff.inc';
  * Code for the ICT Project feature.
  */
 
+
+/**
+ * Implements hook_menu().
+ */
+function ict_update_menu() {
+  $items = array();
+  $items['benefit/history/%field_collection_item'] = array(
+    'page callback' => 'ict_update_benefit_print_history',
+    'page arguments' => array(2),
+    'access callback' => 'ict_update_benefit_get_history_access',
+    'access arguments' => array(2),
+  );
+  return $items;
+}
+
+function ict_update_benefit_print_history($field_collection) {
+  $host_entity = $field_collection->hostEntity();
+
+  //Get projects ID from Benefit
+  if (!empty($host_entity->nid) && !empty($host_entity->type)) {
+    if ($host_entity->type == 'project') {
+      $project_id = $host_entity->nid;
+    }
+    if ($host_entity->type == 'update' && !empty($host_entity->field_project['und'][0]['target_id'])) {
+      $project_id = $host_entity->field_project['und'][0]['target_id'];
+    }
+  }
+  if (empty($project_id)) return;
+
+  // Select all current Benefit history items
+  $query = db_select('field_data_field_benefits_realised', 'br');
+  $query->fields('br');
+  $query->leftJoin('field_data_field_previous_collection', 'pc', 'br.field_benefits_realised_value = pc.entity_id');
+  $or = db_or();
+  $or->condition('pc.field_previous_collection_target_id', $field_collection->item_id);
+  $or->condition('br.field_benefits_realised_value', $field_collection->item_id);
+  $query->condition($or);
+  $query->orderBy('br.field_benefits_realised_value', 'ASC');
+  $res = $query->execute()->fetchAll();
+
+  // Sort items according to projects iterations
+  $entity_list = ict_update_get_allowed_entity_list($project_id);
+  $stack = array();
+  foreach($entity_list as $vid => $update_ids) {
+    // Add to stack Benefit if there is Benefit fits in project_id and revision_id
+    if (ict_project_get_workflow_state($project_id, $vid) == 'approved') {
+      $filter_benefit = array_filter($res, function ($val) use ($vid, $project_id) {
+        return $val->entity_id == $project_id && $val->revision_id == $vid;
+      });
+      $item = array('bundle' => 'baseline');
+      if (!empty($filter_benefit)) {
+        $filter_benefit = reset($filter_benefit);
+        $benefit = field_collection_item_revision_load($filter_benefit->field_benefits_realised_revision_id);
+        $item['benefit'] = $benefit;
+      }
+      $stack[] = $item;
+    }
+    foreach($update_ids as $update_id) {
+      // Add to stack Benefit if there is Benefit fits in update_id
+      if (ict_project_get_workflow_state($update_id) != 'approved') continue;
+      $filter_benefit = array_filter($res, function($val) use ($update_id) {
+        return $val->entity_id == $update_id;
+      });
+      $item = array('bundle' => 'update');
+      if (!empty($filter_benefit)) {
+        $filter_benefit = reset($filter_benefit);
+        $benefit = field_collection_item_load($filter_benefit->field_benefits_realised_value);
+        $item['benefit'] = $benefit;
+      }
+      $stack[] = $item;
+    }
+  }
+
+  print theme('field_benefits_history', array('benefits' => $stack));
+  die();
+}
+
+/**
+ * Check whether user has access to benefits history
+ */
+function ict_update_benefit_get_history_access($field_collection) {
+  global $user;
+
+  $host_entity = $field_collection->hostEntity();
+  if (!empty($host_entity->nid) && !empty($host_entity->type)) {
+    if ($host_entity->type == 'project') {
+      return in_array($user->uid, ict_project_get_users($host_entity->nid, ICT_PROJECT_EDITOR_ACCESS));
+    }
+    if ($host_entity->type == 'update' && !empty($host_entity->field_project['und'][0]['target_id'])) {
+      return in_array($user->uid, ict_project_get_users($host_entity->field_project['und'][0]['target_id'], ICT_PROJECT_EDITOR_ACCESS));
+    }
+  }
+
+  return FALSE;
+}
+
 /**
  * Implements hook_ctools_plugin_directory().
  */
@@ -190,16 +286,18 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
       $budget_table[$key]['remove_button']['#access'] = FALSE;
       $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
       $budget_table[$key]['remove_button']['#suffix'] = '</div>';
-      $budget_table[$key]['history_button'] = array(
-        '#markup' => '<div class="history-button"><a href="#" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a></div>'
-      );
       $prev_collection = $item->field_previous_collection->raw();
       $budget_table[$key]['field_previous_collection']['und']['#value'] = $prev_collection ? $prev_collection : $item_val['value'];
+      $budget_table[$key]['history_button'] = array(
+        '#markup' => '<div class="history-button">
+          <a href="' . url('benefit/history/' . $budget_table[$key]['field_previous_collection']['und']['#value']) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
+          </div>'
+      );
     }
     if (!$items_count) {
       foreach(element_children($budget_table) as $key) {
         if (!is_numeric($key)) continue;
-        $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
+//        $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
         $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
         $budget_table[$key]['remove_button']['#suffix'] = '</div>';
       }
@@ -217,10 +315,13 @@ function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = arr
     $budget_table[$key]['remove_button']['#suffix'] = '</div>';
     $budget_table[$key]['history_button'] = '';
     if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['field_previous_collection']['und'][0]['target_id'])
-     || !empty($budget_table[$key]['field_previous_collection']['und']['#default_value'])) {
+      || !empty($budget_table[$key]['field_previous_collection']['und']['#default_value'][0])) {
+      $prev_collection = !empty($budget_table[$key]['field_previous_collection']['und']['#default_value'][0]) ? $budget_table[$key]['field_previous_collection']['und']['#default_value'][0] : $form_state['values']['field_benefits_realised']['und'][$key]['field_previous_collection']['und'][0]['target_id'];
       $budget_table[$key]['remove_button']['#access'] = FALSE;
       $budget_table[$key]['history_button'] = array(
-        '#markup' => '<div class="history-button"><a href="#" class="fancybox-benefit-history">' . t('History') . '</a></div>'
+        '#markup' => '<div class="history-button">
+          <a href="' . url('benefit/history/' . $prev_collection) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
+          </div>'
       );
     }
     if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['current_item_id'])) {
@@ -230,7 +331,7 @@ function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = arr
       );
     }
     else {
-      $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
+//      $budget_table[$key]['field_removed']['und'][0]['#default_value']['value'] = '';
     }
   }
 }
@@ -513,6 +614,10 @@ function ict_update_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'ict_update') . '/theme',
       'render element' => 'element',
     ),
+    'field_benefits_history' => array(
+      'template' => 'field-benefits-history',
+      'path' => drupal_get_path('module', 'ict_update') . '/theme',
+    ),
   );
 }
 
@@ -783,6 +888,7 @@ function ict_update_review_workflow_set_draft($form, &$form_state) {
 }
 
 function template_preprocess_field_benefits_realised_table_form(&$vars) {
+  drupal_add_css('.fancybox-margin.fancybox-lock {overflow: visible!important;}', 'inline');
   $settings = &drupal_static('drupal_add_js', array());
   foreach($settings['settings']['data'] as &$setting) {
     if (isset($setting['datePopup'])) {
@@ -801,12 +907,15 @@ function template_preprocess_field_benefits_realised_table_form(&$vars) {
   $table = &$vars['element'];
   foreach(element_children($table) as $key) {
     if (!is_numeric($key)) continue;
+    if (!empty($table[$key]['field_removed']['und'][0]['#default_value']['value'])) {
+      $table[$key]['#archived_benefit'] = strtotime($table[$key]['field_removed']['und'][0]['#default_value']['value']);
+    }
     if (!empty($table[$key]['current_item_id']['#value'])) {
       $item_wrap = entity_metadata_wrapper('field_collection_item', $table[$key]['current_item_id']['#value']);
       $archived = $item_wrap->field_removed->value();
       if (!empty($archived)) {
         $table[$key]['#archived_benefit'] = $archived;
-        $benefit = $table[$key];
+//        $benefit = $table[$key];
 //        unset($table[$key]);
 //        array_unshift($table, $benefit);
       }
@@ -1030,7 +1139,7 @@ function ict_update_get_actual_benefits($project_id) {
     $benefits = $last_update->field_benefits_realised->value();
   }
   foreach($benefits as $key => $val) {
-    if ($val->field_removed['und'][0]['value']) {
+    if ($val->field_removed['und'][0]['value'] || $val->field_status['und'][0]['value'] == 'removed') {
       unset($benefits[$key]);
     }
   }
