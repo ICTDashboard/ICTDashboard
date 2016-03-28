@@ -27,6 +27,13 @@ function ict_project_access_add_approver($email, $nid) {
     ))
     ->execute();
 
+  $node_wrapper = entity_metadata_wrapper('node', $nid);
+  drupal_mail('ict_mail', 'approver_add', $email, LANGUAGE_NONE, array(
+    'title' => $node_wrapper->title->value(),
+    'name' => _ict_project_get_user_name($user),
+    'admin_name' => _ict_project_get_user_name(),
+  ));
+
   return $query;
 }
 
@@ -44,6 +51,13 @@ function ict_project_access_remove_approver($email, $nid) {
     ->condition('nid', $nid)
     ->condition('access_type', ICT_PROJECT_APPROVER_ACCESS)
     ->execute();
+
+  $node_wrapper = entity_metadata_wrapper('node', $nid);
+  drupal_mail('ict_mail', 'approver_remove', $email, LANGUAGE_NONE, array(
+    'title' => $node_wrapper->title->value(),
+    'name' => _ict_project_get_user_name($user),
+    'admin_name' => _ict_project_get_user_name(),
+  ));
 
   return $query;
 }
@@ -319,7 +333,32 @@ function ict_project_access_add_editor($email, $nid) {
     ))
     ->execute();
 
+  $node_wrapper = entity_metadata_wrapper('node', $nid);
+  drupal_mail('ict_mail', 'editor_add', $email, LANGUAGE_NONE, array(
+    'title' => $node_wrapper->title->value(),
+    'name' => _ict_project_get_user_name($user),
+    'admin_name' => _ict_project_get_user_name(),
+  ));
+
   return $query;
+}
+
+function _ict_project_get_user_name($acc = NULL) {
+  if (is_null($acc)) {
+    global $user;
+    $acc = user_load($user->uid);
+  }
+
+  $name_p = array();
+  if (!empty($acc->field_first_name['und'][0]['value'])) {
+    $name_p[] = $acc->field_first_name['und'][0]['value'];
+  }
+  if (!empty($acc->field_last_name['und'][0]['value'])) {
+    $name_p[] = $acc->field_last_name['und'][0]['value'];
+  }
+  $name = implode(' ', $name_p);
+
+  return !empty($name) ? $name : $acc->name;
 }
 
 /**
@@ -336,6 +375,13 @@ function ict_project_access_remove_editor($email, $nid) {
     ->condition('nid', $nid)
     ->condition('access_type', ICT_PROJECT_EDITOR_ACCESS)
     ->execute();
+
+  $node_wrapper = entity_metadata_wrapper('node', $nid);
+  drupal_mail('ict_mail', 'editor_remove', $email, LANGUAGE_NONE, array(
+    'title' => $node_wrapper->title->value(),
+    'name' => _ict_project_get_user_name($user),
+    'admin_name' => _ict_project_get_user_name(),
+  ));
 
   return $query;
 }
