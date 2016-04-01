@@ -204,6 +204,15 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
 }
 function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = array()) {
   $budget_table = &$form['field_benefits_realised'][LANGUAGE_NONE];
+
+  if (isset($form_state['triggering_element']['#parents'][0]) && $form_state['triggering_element']['#parents'][0] != 'field_benefits_realised') {
+    // remove unnecessary last item on edit form
+    $max_delta = $budget_table['#max_delta'];
+    unset($budget_table[$max_delta]);
+    $budget_table['#max_delta']--;
+    $form_state['field']['field_benefits_realised'][LANGUAGE_NONE]['items_count']--;
+  }
+
   foreach(element_children($budget_table) as $key) {
     if (!is_numeric($key)) continue;
     $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
