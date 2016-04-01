@@ -178,3 +178,20 @@ select {
     }
   }
 }
+
+#content {
+  .project-draft-submission,
+  .project-update-submission {
+    .row .text {
+      .field-name-field-brief-project-summary,
+      .field-name-field-entity-comments {
+        textarea {
+          line-height: 24px;
+        }
+        .grippie {
+          display: none;
+        }
+      }
+    }
+  }
+}
