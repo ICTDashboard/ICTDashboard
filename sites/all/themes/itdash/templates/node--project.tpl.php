@@ -105,7 +105,16 @@
     </div>
   <?php  if(!user_is_anonymous()) : ?>
 
-    <div class="user-information"><h2><?php print t('User Information'); ?></h2></div>
+    <div class="user-information"><h2>
+    <?php print t('User Information'); ?>
+      <a href="javascript:void(0);" class="tooltip">
+        <i class="tooltip-icon"></i>
+        <span class="tooltip-content">
+          <?php print variable_get('ict_project_user_information_text', "All User Information are not publicly available"); ?>
+        </span>
+      </a>
+    </h2>
+    </div>
 
     <div class="row">
       <div class="label">
