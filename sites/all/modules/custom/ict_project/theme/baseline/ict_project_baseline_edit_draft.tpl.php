@@ -109,8 +109,15 @@
       </div>
     </div>
 
-    <div class="user-information">
-      <h2><?php print t('User Information'); ?></h2>
+    <div class="user-information"><h2>
+      <?php print t('User Information'); ?>
+        <a href="javascript:void(0);" class="tooltip">
+          <i class="tooltip-icon"></i>
+          <span class="tooltip-content">
+            <?php print variable_get('ict_project_user_information_text', "No user information is made publicly available."); ?>
+          </span>
+        </a>
+    </h2>
     </div>
 
     <div class="row">
