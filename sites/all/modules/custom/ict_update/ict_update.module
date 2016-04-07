@@ -267,7 +267,7 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
         array(),
         $form,
         $form_state);
-      $budget_table_items['items_count']++;
+//      $budget_table_items['items_count']++;
     }
     $budget_table['#after_build'] = 'field_form_element_after_build';
 
@@ -307,9 +307,12 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
   else {
     _ict_update_edit_prepopulate_benefit($form, $form_state, $items);
   }
+  // Fix triggering element nested level
+  $budget_table['#language'] = LANGUAGE_NONE;
 }
 function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = array()) {
   $budget_table = &$form['field_benefits_realised'][LANGUAGE_NONE];
+
   foreach(element_children($budget_table) as $key) {
     if (!is_numeric($key)) continue;
     $budget_table[$key]['remove_button']['#prefix'] = '<div class="remove-wrap">';
