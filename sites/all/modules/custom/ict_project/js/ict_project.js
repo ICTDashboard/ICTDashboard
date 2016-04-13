@@ -54,9 +54,14 @@
 
     if ($('.start-year-select').length) {
         var select_box = $('.start-year-select select');
+
+        function n(n){
+            return ("0" + n).slice(-2);;
+        }
+
         for (index in Drupal.settings.year_range.year_range) {
             var value = Drupal.settings.year_range.year_range[index],
-                year_str = value+'/'+(value+1);
+                year_str = n(value)+'/'+n(value+1);
             select_box.append($('<option>', {
                 value: year_str,
                 text: year_str
@@ -67,7 +72,7 @@
             var value = select_box.val(),
                 start_year = value.split('/')[0];
             $('#field_end_predicted_budget th.year_header').each(function() {
-                var new_val = start_year+'/'+(++start_year);
+                var new_val = n(start_year)+'/'+n(++start_year);
                 $(this).find('input[type="text"]').val(new_val);
                 $(this).find('.year_value').text(new_val);
             });
