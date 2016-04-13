@@ -607,7 +607,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     $start_year = $year;
     foreach (element_children($budget_table) as $item) {
       if ($item === 'add_more') continue;
-      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
+      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = sprintf('%02d', $year) . '/' . sprintf('%02d', ++$year);
     }
   }
   elseif ($budget_rows) {
@@ -646,7 +646,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     $year = reset(explode('/', $first_fin_year));
     foreach (element_children($budget_table) as $item) {
       if (!is_numeric($item)) continue;
-      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
+      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = sprintf('%02d', $year) . '/' . sprintf('%02d', ++$year);
     }
 
     // restrict entering future expenditure for Updates
@@ -710,7 +710,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     $start_year = $year - 1;
     foreach (element_children($budget_table) as $item) {
       if (!$item || !is_numeric($item)) continue;
-      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $year . '/' . ++$year;
+      $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = sprintf("%02d", $year) . '/' . sprintf("%02d", ++$year);
     }
   }
 
@@ -718,7 +718,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
   $budget_table['#language'] = LANGUAGE_NONE;
   // Add More button label
   $budget_table['add_more']['#value'] = t('Add another Financial Year', array(
-    '!year' => $year . '/' . ++$year
+    '!year' => sprintf("%02d", $year) . '/' . sprintf("%02d", ++$year)
   ));
 
   // theming stuff
