@@ -751,7 +751,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
 
   $budget_table['#year_range_settings'] = array(
     'start_year' => $start_year . '/' . ++$start_year,
-    'year_range' => range(date('y') - 5, date('y') + 10)
+    'year_range' => range(date('y') - 10, date('y') + 10)
   );
 
   $form['#after_build'][] = '_ict_project_budget_table_after_build';
