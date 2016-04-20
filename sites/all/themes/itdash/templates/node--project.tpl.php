@@ -176,7 +176,37 @@
     <?php endif; ?>
 
     <?php if (!$project_updates_available) : ?>
-      <h3><?php print t('Schedule, Expenditures and Benefits'); ?></h3>
+
+        <h2><?php print t(' Project Expenditure and Budget'); ?></h2>
+
+      <div class="row">
+        <div class="label">
+          <?php print t('Total Project Budget'); ?>
+        </div>
+        <div class="text">
+          <?php print '$' . $original_total_budget_number . 'm'; ?>
+        </div>
+      </div>        
+
+      <div class="row">
+        <div class="label">
+          <?php print t('Project Budget By Financial Year'); ?>
+          <?php if (!empty($original_total_budget_meta['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $original_total_budget_meta['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+          <?php print $preview_switch; ?>
+        </div>
+        <div class="text">
+          <?php print $field_original_total_budget; ?>
+        </div>
+      </div>
+
+      <div class="project-timings"><h2><?php print t('Project Schedule'); ?></h2></div>
 
       <div class="row">
         <div class="label">
@@ -238,33 +268,6 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="label">
-          <?php print t('Project Budget By Financial Year'); ?>
-          <?php if (!empty($original_total_budget_meta['#description'])) : ?>
-            <a href="javascript:void(0);" class="tooltip">
-              <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print $original_total_budget_meta['#description']; ?>
-              </span>
-            </a>
-          <?php endif; ?>
-          <?php print $preview_switch; ?>
-        </div>
-        <div class="text">
-          <?php print $field_original_total_budget; ?>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="label">
-          <?php print t('Total Project Budget'); ?>
-        </div>
-        <div class="text">
-          <?php print '$' . $original_total_budget_number . 'm'; ?>
-        </div>
-      </div>
-
       <?php if ($viz_preview) : ?>
         <div class="row">
           <div class="label">
@@ -276,6 +279,17 @@
           </div>
         </div>
       <?php endif; ?>
+
+    <div class="project-benefits">
+      <h2 id="project-benefits"><?php print t('Project Benefits'); ?>
+      <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print variable_get('ict_project_benefits_tooltip_text', "The measurable advantage to stakeholders, realised during or after the project has finished, as a result of the new capabilities produced."); ?>
+              </span>
+              </a>
+              </h2>
+    </div>
 
       <div class="row">
         <?php if (!$viz_preview) : ?>
