@@ -762,7 +762,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The position (including group, division & branch) of the Senior Responsible Officer.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -803,7 +803,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The name of the Senior Responsible Officer (SRO) for the delivery of the project.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -917,7 +917,9 @@ function ict_update_field_default_field_instances() {
   t('The current expected completion date of the project.');
   t('The current financial value of benefits expected by the project. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.');
   t('The estimated financial benefits that have been realised to date.');
+  t('The name of the Senior Responsible Officer (SRO) for the delivery of the project.');
   t('The percentage of work forecasted to be completed at the current update.');
+  t('The position (including group, division & branch) of the Senior Responsible Officer.');
   t('You may add a comment to further explain the context for inclusion or update of this benefit.');
 
   return $field_instances;

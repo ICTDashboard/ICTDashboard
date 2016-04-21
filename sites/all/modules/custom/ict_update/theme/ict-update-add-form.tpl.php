@@ -13,11 +13,31 @@
     </h2>
     </div>
     <div class="row">
-      <div class="label"><?php print $form['field_responsible_officer_name']['und']['#title']; ?></div>
+      <div class="label">
+        <?php print $form['field_responsible_officer_name']['und']['#title']; ?>
+        <?php if (!empty($form['field_responsible_officer_name']['und']['#description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $form['field_responsible_officer_name']['und']['#description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
       <div class="text"><?php print drupal_render($form['field_responsible_officer_name']); ?></div>
     </div>
     <div class="row">
-      <div class="label"><?php print $form['field_resp_officer_position']['und']['#title']; ?></div>
+      <div class="label">
+      <?php print $form['field_resp_officer_position']['und']['#title']; ?>
+      <?php if (!empty($form['field_resp_officer_position']['und']['#description'])) : ?>
+        <a href="javascript:void(0);" class="tooltip">
+          <i class="tooltip-icon"></i>
+          <span class="tooltip-content">
+            <?php print $form['field_resp_officer_position']['und']['#description']; ?>
+          </span>
+        </a>
+      <?php endif; ?>
+      </div>
       <div class="text"><?php print drupal_render($form['field_resp_officer_position']); ?></div>
     </div>
     <?php print $form['#admin_user_details']; ?>
