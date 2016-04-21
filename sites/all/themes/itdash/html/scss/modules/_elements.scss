@@ -191,7 +191,7 @@ body,
           display: none;
         }
         select,
-        input[type="text"],
+        input[type="text"]:not(.form-autocomplete),
         textarea {
           border: 1px solid #b3bdcf;
           background-color: #fff;
@@ -208,6 +208,16 @@ body,
           &.add_datepicker {
             max-width: 607px;
           }
+        }
+        input[type="text"].form-autocomplete {
+          border: 1px solid #b3bdcf;
+          color: #4d586a;
+          width: 100%;
+          max-width: 640px;
+          margin: 0;
+          height: 36px;
+          line-height: 36px;
+          padding: 0 10px;
         }
         select[multiple="multiple"] {
           height: auto;
