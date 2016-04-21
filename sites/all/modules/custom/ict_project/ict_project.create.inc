@@ -100,7 +100,9 @@ function ict_project_projects_create_form($form, &$form_state) {
     $form['field_department']['#value'] = array(
       $user->field_department[LANGUAGE_NONE][0]['tid']
     );
-    $form['field_department']['#disabled'] = TRUE;
+    if (!in_array('Finance Admin', $user->roles)) {
+      $form['field_department']['#disabled'] = TRUE;
+    }
   }
 
   $department_tid = !empty($form_state['input']['field_department']) ?
