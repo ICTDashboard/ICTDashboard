@@ -73,7 +73,7 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
 //    return TRUE;
   }
   if ($op == 'view' && $nid) {
-    if (array_key_exists(ICT_FINANCE_ADMIN_ROLE, $user->roles)) {
+    if (array_key_exists(ICT_FINANCE_ADMIN_ROLE, $account->roles)) {
       return TRUE;
     }
     $state = ict_project_get_workflow_state($nid);
