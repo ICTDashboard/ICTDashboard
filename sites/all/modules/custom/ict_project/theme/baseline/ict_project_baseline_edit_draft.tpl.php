@@ -94,7 +94,7 @@
 
     <div class="row">
       <div class="label">
-        <?php print $form['field_brief_project_summary']['#title']; ?>
+        <?php print $form['field_brief_project_summary']['und'][0]['#title']; ?>
         <?php if (!empty($form['field_brief_project_summary']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>

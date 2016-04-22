@@ -42,9 +42,9 @@
         }
     };
 
-    $(document).ready(function () {
-        $(".field-name-field-entity-comments textarea").textareaCounter({
-            limit: 500
-        });
-    });
+    // $(document).ready(function () {
+    //     $(".field-name-field-entity-comments textarea").textareaCounter({
+    //         limit: 500
+    //     });
+    // });
 })(jQuery);

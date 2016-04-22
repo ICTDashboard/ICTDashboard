@@ -132,6 +132,7 @@ function ict_update_update_form_recursive($key, $value, $array) {
  * Implements hook_form_FORM_ID_alter().
  */
 function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#after_build'][] = 'ict_update_node_form_after_build';
   $update = $form['#node'];
   if (empty($update->nid)) {
     $project_id = !empty($_REQUEST['project_id']) && is_numeric($_REQUEST['project_id']) ? check_plain($_REQUEST['project_id']) : arg(1);
@@ -247,6 +248,11 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
     drupal_get_path('module', 'ict_update') . '/js/jQuery.textareaCounter.min.js',
   );
+}
+
+function ict_update_node_form_after_build($form) {
+    $form['field_entity_comments']['und']['0']['format']['#access'] = FALSE;
+    return $form;
 }
 
 function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
