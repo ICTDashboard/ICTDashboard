@@ -368,7 +368,7 @@ function ict_project_manage_users_emails_validate($form, &$form_state) {
   $dep_data = taxonomy_term_load($current_department);
   foreach ($approver_editor_users as $role_user) {
     $department_tid = ict_department_get_department_tid_of_entity('user', $role_user);
-    if ((!$department_tid || $department_tid != $current_department) && (!in_array('Finance Admin', $user->roles))) {
+    if ((!$department_tid || $department_tid != $current_department) && (!array_key_exists(ICT_FINANCE_ADMIN_ROLE,$user->roles))) {
       form_set_error(
         'editors',
         t('Project Editors and Project Approvers should be associated to !dep_name', array(

@@ -97,7 +97,7 @@ function ict_project_projects_create_form($form, &$form_state) {
   if (in_array('Departmental Admin', $user->roles)) {
     $user = user_load($user->uid);
 
-    if (!in_array('Finance Admin', $user->roles)) {
+    if (!array_key_exists(ICT_FINANCE_ADMIN_ROLE,$user->roles)) {
       $form['field_department']['#disabled'] = TRUE;
       $form['field_department']['#default_value'] =
       $form['field_department']['#value'] = array(
