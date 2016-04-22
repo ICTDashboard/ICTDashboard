@@ -72,8 +72,10 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
 //  FOR DEVELOPMENT PURPOSES ONLY!!!
 //    return TRUE;
   }
-
   if ($op == 'view' && $nid) {
+    if (in_array('Finance Admin', $user->roles)) {
+      return TRUE;
+    }
     $state = ict_project_get_workflow_state($nid);
     if (empty($account->uid)) {
       $updates = ict_update_project_get_list($nid);

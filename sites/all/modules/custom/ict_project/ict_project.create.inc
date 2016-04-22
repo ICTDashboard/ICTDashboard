@@ -96,12 +96,13 @@ function ict_project_projects_create_form($form, &$form_state) {
   // if Departmental Admin the department is selected by default
   if (in_array('Departmental Admin', $user->roles)) {
     $user = user_load($user->uid);
-    $form['field_department']['#default_value'] =
-    $form['field_department']['#value'] = array(
-      $user->field_department[LANGUAGE_NONE][0]['tid']
-    );
+
     if (!in_array('Finance Admin', $user->roles)) {
       $form['field_department']['#disabled'] = TRUE;
+      $form['field_department']['#default_value'] =
+      $form['field_department']['#value'] = array(
+          $user->field_department[LANGUAGE_NONE][0]['tid']
+      );
     }
   }
 
