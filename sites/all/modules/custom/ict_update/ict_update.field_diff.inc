@@ -53,17 +53,31 @@ function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $updat
     'field_responsible_officer_name' => 'value',
     'field_resp_officer_position' => 'value',
     'field_project_stage' => 'tid',
+    'field_implementation_partners' => ''
   );
 
   $project = node_load($project_id, $prev_vid);
   $project_wrap = entity_metadata_wrapper('node', $project);
   $update = node_load($update_id);
   $update_wrap = entity_metadata_wrapper('node', $update);
-
   $diff = array();
+
   foreach($field_list as $key => $val) {
-    if ($update->{$key}['und'][0][$val] != $project->{$key}['und'][0][$val]) {
-      $diff[$key] = $project_wrap->{$key}->value();
+   if ($key != 'field_implementation_partners') {
+      if ($update->{$key}['und'][0][$val] != $project->{$key}['und'][0][$val]) {
+        $diff[$key] = $project_wrap->{$key}->value();
+      }
+    }
+    else {
+      $array_project = _ict_update_generate_default_multiple_select_terms_array($project->{$key}['und']);
+      $array_update = _ict_update_generate_default_multiple_select_terms_array($update->{$key}['und']);
+      $array_difference = array_diff_assoc($array_project, $array_update);
+      if (!empty($array_difference)) {
+        $diff[$key] = $project->{$key}['und'];
+      }
+      else if (empty($array_project)) {
+        $diff[$key] = '-';
+      }
     }
   }
 
@@ -96,6 +110,7 @@ function ict_field_diff_compare_update_update($project_id, $prev_update_id, $las
     'field_current_financial_benefits' => 'value',
     'field_estimated_value_of_benefit' => 'value',
     'field_entity_comments' => 'value',
+    'field_implementation_partners' => ''
   );
 
   $prev_update = node_load($prev_update_id);
@@ -105,8 +120,21 @@ function ict_field_diff_compare_update_update($project_id, $prev_update_id, $las
 
   $diff = array();
   foreach($field_list as $key => $val) {
-    if ($prev_update->{$key}['und'][0][$val] != $last_update->{$key}['und'][0][$val]) {
-      $diff[$key] = $prev_update_wrapper->{$key}->value();
+    if ($key != 'field_implementation_partners') {
+      if ($prev_update->{$key}['und'][0][$val] != $last_update->{$key}['und'][0][$val]) {
+        $diff[$key] = $prev_update_wrapper->{$key}->value();
+      }
+    }
+    else {
+      $array_prev_update = _ict_update_generate_default_multiple_select_terms_array($prev_update->{$key}['und']);
+      $array_last_update = _ict_update_generate_default_multiple_select_terms_array($last_update->{$key}['und']);
+      $array_difference = array_diff_assoc($array_prev_update, $array_last_update);
+      if (!empty($array_difference)) {
+        $diff[$key] = $prev_update->{$key}['und'];
+      }
+      else if (empty($array_prev_update)) {
+        $diff[$key] = '-';
+      }
     }
   }
 
