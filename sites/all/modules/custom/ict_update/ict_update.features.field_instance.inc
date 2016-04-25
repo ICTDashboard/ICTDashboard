@@ -397,7 +397,13 @@ function ict_update_field_default_field_instances() {
   // Exported field_instance: 'node-update-field_entity_comments'.
   $field_instances['node-update-field_entity_comments'] = array(
     'bundle' => 'update',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => '<p>TMP placeholder</p>
+',
+        'format' => 'filtered_html_plus_word_count',
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Context, remedial action, changes in project scope or other commentary.',
     'display' => array(
@@ -421,7 +427,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Entity Comments',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(

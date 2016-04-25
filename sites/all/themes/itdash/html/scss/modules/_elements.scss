@@ -189,6 +189,14 @@ body,
       .text {
         .description {
           display: none;
+
+        }
+        #edit-field-entity-comments {
+          max-width: 640px;
+          #cke_1_bottom {
+            background: none;
+            border-top: none;
+          }
         }
         select,
         input[type="text"],
@@ -1261,19 +1269,6 @@ body,
         list-style-type: disc;
       }
       #edit-field-brief-project-summary {
-        max-width: 640px;
-        #cke_1_bottom {
-          background: none;
-          border-top: none;
-        }
-      }
-    }
-  }
-}
-.project-update-submission {
-  .row {
-    .text {
-      #edit-field-entity-comments {
         max-width: 640px;
         #cke_1_bottom {
           background: none;
