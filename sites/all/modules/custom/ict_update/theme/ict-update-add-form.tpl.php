@@ -12,7 +12,6 @@
             </span>
           </a>
         <?php endif; ?>
-        <em class="form-helptext">Ctrl+click to select multiple</em>
       </div>
       <div class="text">
         <?php foreach (_ict_project_baseline_get_simple_values($form['#project_node']->field_government_entity_name['und']) as $value) : ?>
@@ -51,6 +50,7 @@
             </span>
           </a>
         <?php endif; ?>
+        <em class="form-helptext">Ctrl+click to select multiple</em>
       </div>
       <div class="text">
         <?php print drupal_render($form['field_implementation_partners']); ?>
