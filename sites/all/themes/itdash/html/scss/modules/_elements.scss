@@ -281,7 +281,7 @@ body,
             td {
               border-top: none;
               border-bottom: 1px solid #abb6cb;
-              input {
+              input:not(.form-autocomplete) {
                 text-align: center;
                 border-radius: 0;
                 height: 39px;
@@ -1248,6 +1248,36 @@ body,
     a {
       margin-left: 2px!important;
       height: 19px!important;
+    }
+  }
+}
+#autocomplete {
+  border: none;
+  margin-top: 2px;
+  & ul {
+    background-color: #fff;
+    border: solid 1px #b3bdcf;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 8px;
+    width: 100%;
+    overflow: hidden;
+    li {
+      /*padding: 0 7px;*/
+      border-bottom: dotted 1px #515151;
+      display: block;
+      outline: none;
+      padding: 7px 0 7px 3px;
+      &.selected {
+        color: #0d6c88;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+      &:focus, &:hover{
+        color: #0d6c88;
+        cursor: pointer;
+      }
     }
   }
 }

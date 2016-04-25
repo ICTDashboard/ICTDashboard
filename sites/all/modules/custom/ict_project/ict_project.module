@@ -1107,7 +1107,7 @@ function ict_project_baseline_program_name_autocomplete($string) {
     $result = db_select('field_data_field_program_name', 'pn')
       ->fields('pn', array('field_program_name_value'))
       ->condition('field_program_name_value', '%' . db_like($string) . '%', 'LIKE')
-      ->range(0, 10)
+      ->range(0, 5)
       ->execute();
 
     foreach ($result as $row) {
