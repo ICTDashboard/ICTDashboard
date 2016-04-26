@@ -176,9 +176,9 @@
     <?php endif; ?>
 
     <?php if (!$project_updates_available) : ?>
-
+      <div id="inner-content" class="wrap cf">
         <h2><?php print t(' Project Expenditure and Budget'); ?></h2>
-
+      </div>
       <div class="row">
         <div class="label">
           <?php print t('Total Project Budget'); ?>
@@ -292,6 +292,25 @@
     </div>
 
       <div class="row">
+        <div class="label">
+          <?php print $field_predicted_project_benefit['meta']['#title'] . ' <em>($m)</em>'; ?>
+          <?php if (!empty($field_predicted_project_benefit['meta']['#description'])) : ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print $field_predicted_project_benefit['meta']['#description']; ?>
+              </span>
+            </a>
+          <?php endif; ?>
+        </div>
+        <div class="text">
+          <?php foreach (_ict_project_baseline_get_simple_values($field_predicted_project_benefit, FALSE, '$', 'm', TRUE) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
+      <div class="row">
         <?php if (!$viz_preview) : ?>
           <div class="label">
             <?php print t('Benefits Realised'); ?>
@@ -308,25 +327,6 @@
         <?php endif; ?>
         <div class="text">
           <?php print theme('field_benefits_realised_table_view', array('project_id' => $nid)); ?>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="label">
-          <?php print $field_predicted_project_benefit['meta']['#title'] . ' <em>($m)</em>'; ?>
-          <?php if (!empty($field_predicted_project_benefit['meta']['#description'])) : ?>
-            <a href="javascript:void(0);" class="tooltip">
-              <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print $field_predicted_project_benefit['meta']['#description']; ?>
-              </span>
-            </a>
-          <?php endif; ?>
-        </div>
-        <div class="text">
-          <?php foreach (_ict_project_baseline_get_simple_values($field_predicted_project_benefit, FALSE, '$', 'm', TRUE) as $value) : ?>
-            <p><?php print $value; ?></p>
-          <?php endforeach; ?>
         </div>
       </div>
 
