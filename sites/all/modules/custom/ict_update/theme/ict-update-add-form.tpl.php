@@ -1,7 +1,114 @@
 <div id="inner-content" class="wrap cf">
   <div class="project-update-submission d-all">
-    <?php print drupal_render(node_view($form['#project_node'], 'update')); ?>
+  <h2><?php print t('Project Information'); ?></h2>
+    <div class="row">
+      <div class="label">
+        <?php print $form['#project_instances']['field_government_entity_name']['label']; ?>
+        <?php if (!empty($form['#project_instances']['field_government_entity_name']['description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $form['#project_instances']['field_government_entity_name']['description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        <?php foreach (_ict_project_baseline_get_simple_values($form['#project_node']->field_government_entity_name['und']) as $value) : ?>
+          <p><?php print $value; ?></p>
+        <?php endforeach; ?>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="label">
+        <?php print $form['#project_instances']['field_portfolio_name']['label']; ?>
+        <?php if (!empty($form['#project_instances']['field_portfolio_name']['description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $form['#project_instances']['field_portfolio_name']['description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        <?php foreach (_ict_project_baseline_get_simple_values($form['#project_node']->field_portfolio_name['und']) as $value) : ?>
+          <p><?php print $value; ?></p>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
+        <?php print $form['field_implementation_partners']['und']['#title']; ?>
+        <?php if (!empty($form['field_implementation_partners']['und']['#description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $form['field_implementation_partners']['und']['#description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+        <em class="form-helptext">Ctrl+click to select multiple</em>
+      </div>
+      <div class="text">
+        <?php print drupal_render($form['field_implementation_partners']); ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
+        <?php print t('Project Title'); ?>
+        <a href="javascript:void(0);" class="tooltip">
+          <i class="tooltip-icon"></i>
+          <span class="tooltip-content">
+            <?php print t('The official full name of the project, excluding acronyms.'); ?>
+          </span>
+        </a>
+      </div>
+      <div class="text">
+        <?php print $form['#project_node']->title; ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
+        <?php print $form['#project_instances']['field_program_name']['label']; ?>
+        <?php if (!empty($form['#project_instances']['field_program_name']['description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $form['#project_instances']['field_program_name']['description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text">
+        <?php foreach (_ict_project_baseline_get_simple_values($form['#project_node']->field_program_name['und']) as $value) : ?>
+          <p><?php print $value; ?></p>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="label">
+        <?php print $form['#project_instances']['field_brief_project_summary']['label']; ?>
+        <?php if (!empty($form['#project_instances']['field_brief_project_summary']['description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $form['#project_instances']['field_brief_project_summary']['description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </div>
+      <div class="text object_and_summary">
+        <?php foreach (_ict_project_baseline_get_simple_values($form['#project_node']->field_brief_project_summary['und']) as $value) : ?>
+          <?php print $value; ?>
+        <?php endforeach; ?>
+      </div>
+    </div>
     <div class="user-information"><h2>
       <?php print t('User Information'); ?> 
         <a href="javascript:void(0);" class="tooltip">
