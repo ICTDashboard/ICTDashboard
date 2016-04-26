@@ -105,7 +105,7 @@
       </div>
       <div class="text">
         <?php foreach (_ict_project_baseline_get_simple_values($field_brief_project_summary) as $value) : ?>
-          <p><?php print $value; ?></p>
+          <?php print $value; ?>
         <?php endforeach; ?>
       </div>
     </div>

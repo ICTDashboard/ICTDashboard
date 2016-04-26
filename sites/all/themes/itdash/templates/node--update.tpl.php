@@ -307,7 +307,7 @@
       </div>
       <div class="text">
         <?php foreach (_ict_project_baseline_get_simple_values($field_entity_comments) as $value) : ?>
-          <p><?php print $value; ?></p>
+          <?php print $value; ?>
         <?php endforeach; ?>
       </div>
     </div>

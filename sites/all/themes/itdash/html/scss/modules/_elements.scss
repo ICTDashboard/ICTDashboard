@@ -191,6 +191,22 @@ body,
           display: none;
 
         }
+        p {
+          color: #202b3d;
+        }
+        ol,ul {
+          padding-left: 17px;
+          margin: 0.5em 0;
+          ol,ul {
+            padding-left: 15px; 
+          }         
+        }
+        ol {
+          list-style-type: decimal;
+        }
+        ul {
+          list-style-type: disc;
+        }        
         #edit-field-entity-comments {
           max-width: 640px;
           #cke_1_bottom {

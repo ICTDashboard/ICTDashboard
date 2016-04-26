@@ -175,7 +175,6 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $project->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
       $form['field_project_stage']['und']['#default_value'] = $project->field_project_stage[LANGUAGE_NONE][0]['tid'];
       _ict_update_prepopulate_benefit($form, $form_state, $project->field_benefits_realised['und']);
-      $form['field_entity_comments']['und'][0]['#default_value'] = '';
     }
     else {
       // from previous update
