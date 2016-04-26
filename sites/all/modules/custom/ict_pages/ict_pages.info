@@ -66,6 +66,7 @@ features[user_permission][] = paste from clipboard
 features[user_permission][] = rename files and directories
 features[user_permission][] = resize images
 features[user_permission][] = use file manager
+features[user_permission][] = use text format filtered_html_plus_word_count
 features[user_permission][] = view any opt_out_policy bean
 features[user_permission][] = view bean page
 features[user_permission][] = view bean revisions
