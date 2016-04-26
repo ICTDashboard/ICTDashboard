@@ -190,23 +190,7 @@ body,
         .description {
           display: none;
 
-        }
-        p {
-          color: #202b3d;
-        }
-        ol,ul {
-          padding-left: 17px;
-          margin: 0.5em 0;
-          ol,ul {
-            padding-left: 15px; 
-          }         
-        }
-        ol {
-          list-style-type: decimal;
-        }
-        ul {
-          list-style-type: disc;
-        }        
+        }  
         #edit-field-entity-comments {
           max-width: 640px;
           #cke_1_bottom {
@@ -1268,22 +1252,6 @@ body,
 .project-draft-submission {
   .row {
     .text {
-      p {
-        color: #202b3d;
-      }
-      ol,ul {
-        padding-left: 17px;
-        margin: 0.5em 0;
-        ol,ul {
-          padding-left: 15px; 
-        }         
-      }
-      ol {
-        list-style-type: decimal;
-      }
-      ul {
-        list-style-type: disc;
-      }
       #edit-field-brief-project-summary {
         max-width: 640px;
         #cke_1_bottom {
@@ -1293,4 +1261,22 @@ body,
       }
     }
   }
+}
+.object_and_summary, .entity_comments {
+  ul {
+    list-style-type: disc;
+  }
+  p {
+    color: #202b3d;
+  }
+  ol,ul {
+    padding-left: 17px;
+    margin: 0.5em 0;
+    ol,ul {
+      padding-left: 15px; 
+    }         
+  }
+  ol {
+    list-style-type: decimal;
+  }    
 }

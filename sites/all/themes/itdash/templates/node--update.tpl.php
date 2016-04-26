@@ -305,7 +305,7 @@
           </a>
         <?php endif; ?>
       </div>
-      <div class="text">
+      <div class="text entity_comments">
         <?php foreach (_ict_project_baseline_get_simple_values($field_entity_comments) as $value) : ?>
           <?php print $value; ?>
         <?php endforeach; ?>

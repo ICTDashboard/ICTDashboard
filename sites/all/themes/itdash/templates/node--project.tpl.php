@@ -97,7 +97,7 @@
           </a>
         <?php endif; ?>
       </div>
-      <div class="text">
+      <div class="text object_and_summary">
         <?php foreach (_ict_project_baseline_get_simple_values($field_brief_project_summary) as $value) : ?>
           <?php print $value; ?>
         <?php endforeach; ?>
