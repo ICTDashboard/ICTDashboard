@@ -84,7 +84,16 @@ function ict_pages_ckeditor_profile_defaults() {
     'CKEditor Global Profile' => array(
       'name' => 'CKEditor Global Profile',
       'settings' => array(
-        'ckeditor_path' => '//cdn.ckeditor.com/4.4.3/full-all',
+        'skin' => 'moono',
+        'ckeditor_path' => '//cdn.ckeditor.com/4.5.4/full-all',
+        'ckeditor_local_path' => '',
+        'ckeditor_plugins_path' => '%m/plugins',
+        'ckeditor_plugins_local_path' => '',
+        'ckfinder_path' => '%m/ckfinder',
+        'ckfinder_local_path' => '',
+        'ckeditor_aggregate' => 'f',
+        'toolbar_wizard' => 't',
+        'loadPlugins' => array(),
       ),
       'input_formats' => array(),
     ),
@@ -135,13 +144,6 @@ function ict_pages_ckeditor_profile_defaults() {
         'theme_config_js' => 'f',
         'js_conf' => '',
         'loadPlugins' => array(
-          'autogrow' => array(
-            'name' => 'autogrow',
-            'desc' => 'Auto Grow plugin. See <a href="http://ckeditor.com/addon/autogrow">addon page</a> for more details.',
-            'path' => '//cdn.ckeditor.com/4.4.3/full-all/plugins/autogrow/',
-            'buttons' => FALSE,
-            'default' => 'f',
-          ),
           'drupalbreaks' => array(
             'name' => 'drupalbreaks',
             'desc' => 'Plugin for inserting Drupal teaser and page breaks.',

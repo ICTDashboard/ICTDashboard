@@ -1263,17 +1263,37 @@ body,
   }
 }
 .object_and_summary, .entity_comments {
+  a {
+    color: #0d6c88;
+    text-decoration: none;
+    &:hover {
+      color: #0d6c88;
+    }
+    &:visited {
+      color: #0d6c88;
+    }
+    &:focus {
+      color: #0d6c88;
+    }
+  }
   ul {
     list-style-type: disc;
+    ul{ 
+    list-style-type: circle;
+      ul {
+        list-style-type: square;
+      }
+    }
   }
   p {
     color: #202b3d;
   }
   ol,ul {
-    padding-left: 17px;
+    color: #202b3d;
+    padding-left: 40px;
     margin: 0.5em 0;
     ol,ul {
-      padding-left: 15px; 
+      padding-left: 40px; 
     }         
   }
   ol {
