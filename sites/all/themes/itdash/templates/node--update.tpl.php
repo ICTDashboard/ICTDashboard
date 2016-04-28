@@ -293,7 +293,7 @@
     <div class="row">
       <div class="label">
         <?php if (!empty($diff['field_entity_comments'])) : ?>
-          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']); ?>
+          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']['value'], '', '', FALSE, TRUE); ?>
         <?php endif; ?>
         <?php print $field_entity_comments['meta']['#title']; ?>
         <?php if (!empty($field_entity_comments['meta']['#description'])) : ?>

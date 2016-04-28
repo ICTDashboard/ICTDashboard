@@ -140,6 +140,7 @@ body,
       //@include clearfix;
       
       .label {
+        position: relative;
         font-weight: 700;
         color: #202b3d;
         padding-right: 15px;
@@ -1262,7 +1263,7 @@ body,
     }
   }
 }
-.object_and_summary, .entity_comments {
+.object_and_summary, .entity_comments, span.tooltip-content {
   a {
     color: #0d6c88;
     text-decoration: none;
@@ -1298,5 +1299,22 @@ body,
   }
   ol {
     list-style-type: decimal;
+  }    
+}
+div.tooltip-edit {
+  cursor: pointer;
+  position: static;
+  span.tooltip-content {
+    &::after {
+      border-left: none;
+      border-right: 30px solid transparent;
+      left: 40px;
+    }
+    z-index: 1;
+    width: auto;
+    text-align: left;
+    right: auto;
+    left: 0;
+    bottom: 40px;
   }    
 }

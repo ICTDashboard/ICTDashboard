@@ -218,21 +218,28 @@ function itdash_js_alter(&$javascript) {
   }
 }
 
-function itdash_edited_tooltip_render($text = '', $prefix = '', $suffix = '', $force_empty = FALSE) {
-  if (!is_array($text)) {
-    $html = '<a href="javascript:void(0);" class="tooltip-edit">';
-    $html .= !empty($text) || $force_empty ? '<span class="tooltip-content">' . t('Changed from') . '<br/>' . ' <em><strong>' . $prefix . $text . $suffix . '</strong></em></span>' : '';
-    $html .= '</a>';
+function itdash_edited_tooltip_render($text = '', $prefix = '', $suffix = '', $force_empty = FALSE, $html = FALSE) {
+  if ($html) {
+      $html = '<div class="tooltip-edit">';
+      $html .= !empty($text) || $force_empty ? '<span class="tooltip-content">' . t('Changed from') . '<br/>' . $text . '</span>' : '';
+      $html .= '</div>';
   }
   else {
-    $html = '<a href="javascript:void(0);" class="tooltip-edit">';
-    $html .= '<span class="tooltip-content">' . t('Changed from') . '<br/>';
-    foreach ($text as $value) {
-      $term = taxonomy_term_load($value['tid']);
-      $html .= ' <em><strong>' . $prefix . $term->name . $suffix . '</strong></em><br/>';
+    if (!is_array($text)) {
+      $html = '<a href="javascript:void(0);" class="tooltip-edit">';
+      $html .= !empty($text) || $force_empty ? '<span class="tooltip-content">' . t('Changed from') . '<br/>' . ' <em><strong>' . $prefix . $text . $suffix . '</strong></em></span>' : '';
+      $html .= '</a>';
     }
-    $html .= '</span>';
-    $html .= '</a>';
+    else {
+      $html = '<a href="javascript:void(0);" class="tooltip-edit">';
+      $html .= '<span class="tooltip-content">' . t('Changed from') . '<br/>';
+      foreach ($text as $value) {
+        $term = taxonomy_term_load($value['tid']);
+        $html .= ' <em><strong>' . $prefix . $term->name . $suffix . '</strong></em><br/>';
+      }
+      $html .= '</span>';
+      $html .= '</a>';
+    }
   }
   return $html;
 }
