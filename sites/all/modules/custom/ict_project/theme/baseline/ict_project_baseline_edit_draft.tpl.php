@@ -155,25 +155,15 @@
     </div>
 
     <?php print render($form['admin_user_details']); ?>
-
-    <div class="dotted-line"></div>
-
-    <h3><?php print t('Schedule, Expenditures and Benefits'); ?></h3>
-
+    <div id="inner-content" class="wrap cf">
+      <h2><?php print t(' Project Expenditure and Budget'); ?></h2>
+    </div>    
     <div class="row">
       <div class="label">
-        <?php print $form['field_project_stage']['#title']; ?>
-        <?php if (!empty($form['field_project_stage']['#description'])) : ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print $form['field_project_stage']['#description']; ?>
-            </span>
-          </a>
-        <?php endif; ?>
+        <?php print t('Total Project Budget'); ?>
       </div>
       <div class="text">
-        <?php print render($form['field_project_stage']); ?>
+        <span id="total-project-budget">$0m</span>
       </div>
     </div>
 
@@ -198,13 +188,23 @@
         <?php print render($form['field_original_total_budget']); ?>
       </div>
     </div>
+    
+    <div class="project-timings"><h2><?php print t('Project Schedule'); ?></h2></div>
 
     <div class="row">
       <div class="label">
-        <?php print t('Total Project Budget'); ?>
+        <?php print $form['field_project_stage']['#title']; ?>
+        <?php if (!empty($form['field_project_stage']['#description'])) : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print $form['field_project_stage']['#description']; ?>
+            </span>
+          </a>
+        <?php endif; ?>
       </div>
       <div class="text">
-        <span id="total-project-budget">$0m</span>
+        <?php print render($form['field_project_stage']); ?>
       </div>
     </div>
 
@@ -246,6 +246,17 @@
           <?php print render($end_date); ?>
         </div>
       </div>
+    </div>
+
+    <div class="project-benefits">
+      <h2 id="project-benefits"><?php print t('Project Benefits'); ?>
+      <a href="javascript:void(0);" class="tooltip">
+                <i class="tooltip-icon"></i>
+              <span class="tooltip-content">
+                <?php print variable_get('ict_project_benefits_tooltip_text', "The measurable advantage to stakeholders, realised during or after the project has finished, as a result of the new capabilities produced."); ?>
+              </span>
+              </a>
+              </h2>
     </div>
 
     <div class="row">

@@ -196,12 +196,13 @@
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
-              <?php print variable_get('ict_project_benefits_tooltip_text', "This section presents information about the various project benefits, as most recently updated for the project"); ?>
+              <?php print variable_get('ict_project_benefits_tooltip_text', "The measurable advantage to stakeholders, realised during or after the project has finished, as a result of the new capabilities produced."); ?>
             </span>
           </a>
         <?php endif; ?>
       </h2>
     </div>
+    
     <div class="row">
       <div class="label">
         <?php print $field_predicted_project_benefit_info['label']; ?>
