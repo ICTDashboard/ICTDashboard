@@ -117,7 +117,7 @@ function print_pdf_dompdf_print_pdf_generate($html, $meta, $paper_size = NULL, $
  * @ingroup themeable
  * @ingroup print_themeable
  */
-function theme_print_pdf_dompdf_footer($vars) { var_dump($tpl_footer);die;
+function theme_print_pdf_dompdf_footer($vars) {
   preg_match('!<div class="print-footer">(.*?)</div>!si', $vars['html'], $tpl_footer);
   if (isset($tpl_footer[1])) {
     $html = str_replace($tpl_footer[0], '', $vars['html']);
