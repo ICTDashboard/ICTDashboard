@@ -1241,3 +1241,14 @@ body,
     }
   }
 }
+
+#print-links-container {
+  text-align: right;
+  & .pdf_button {
+    max-width: 812px;
+    margin-bottom: 38px;
+    & .print_pdf {
+      margin-left: 0px;
+    }
+  }
+}

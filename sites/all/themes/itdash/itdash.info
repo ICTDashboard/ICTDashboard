@@ -8,5 +8,7 @@ stylesheets[all][] = html/css/style.css
 stylesheets[all][] = css/custom.css
 stylesheets[all][] = html/vendor/fancybox/jquery.fancybox.css
 
+stylesheets[print][] = html/css/print.css
+
 scripts[] = html/vendor/fancybox/jquery.fancybox.pack.js
 scripts[] = html/js/ict-fancybox.js
