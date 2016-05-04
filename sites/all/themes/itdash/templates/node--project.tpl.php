@@ -386,25 +386,22 @@
     <?php endif; ?>
 
     <?php if (!empty($diff)) : ?>
-      <p><em><?php print itdash_edited_tooltip_render() . ' - ' . t('fields that was updated.'); ?></em></p>
+      <p class="diffs-provided"><em><?php print itdash_edited_tooltip_render() . ' - ' . t('fields that were updated.'); ?></em></p>
     <?php endif; ?>
 
     <?php if (isset($update_form)) : ?>
       <?php print $update_form; ?>
-    <?php endif; ?>
-
-    <?php if (isset($edit_form)) : ?>
+    <?php elseif (isset($edit_form)) : ?>
       <?php print $edit_form; ?>
-    <?php endif; ?>
-
-    <?php if (isset($approve_form)) : ?>
+    <?php elseif (isset($approve_form)) : ?>
       <?php print $approve_form; ?>
+    <?php else: ?>
+      <div id="print-links-container" class="wrap cf">
+        <div class="pdf_button submit">
+          <?php print print_pdf_insert_link(); ?>
+        </div>
+      </div>
     <?php endif; ?>
   </div>
 </div>
 <?php print theme('ict_pages_last_update', array('nid' => $nid)); ?>
-<div id="print-links-container" class="wrap cf">
-  <div class="pdf_button">
-    <?php print print_pdf_insert_link(); ?>
-  </div>
-</div>

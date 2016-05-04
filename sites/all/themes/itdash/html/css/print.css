@@ -161,3 +161,15 @@ color: black;
 #footer-copyright {
   font-size: 12px !important;
 }
+
+.diffs-provided {
+  display: none;
+}
+
+.tooltip-edit {
+  display: none;
+}
+
+form#ict-update-approve-form, form#ict-project-baseline-approve-form {
+  display: none;
+}
