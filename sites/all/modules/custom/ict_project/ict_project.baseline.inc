@@ -104,6 +104,108 @@ function ict_project_baseline_edit_draft_block ($nid) {
 }
 
 /**
+ * Baseline Edit Draft block
+ * @param $nid
+ * @return string
+ */
+function ict_project_rebaseline_create_block ($parent_project) {
+  global $user;
+
+  $parent_project = node_load($parent_project);
+  $node = clone $parent_project;
+
+  if (!$parent_project) {
+    drupal_not_found();
+  }
+
+  if (!ict_project_access_project('rebaseline', NULL, $parent_project->nid)) {
+    drupal_access_denied();
+  }
+
+  // main IDs
+  $node->nid = NULL;
+  $node->vid = NULL;
+  $node->tnid = NULL;
+  $node->log = NULL;
+
+  // Also handle modules that attach a UUID to the node.
+  $node->uuid = NULL;
+  $node->vuuid = NULL;
+
+  // user
+  $node->name = $user->name;
+  $node->uid = $user->uid;
+
+  // other stuff
+  $node->created = NULL;
+  if (isset($node->book['mlid'])) {
+    $node->book['mlid'] = NULL;
+    $node->book['has_children'] = 0;
+  }
+  $node->path = NULL;
+  $node->files = array();
+
+  // calc fields removed
+  $node->field_expenditure_budget_calc = NULL;
+  $node->field_expenditure_to_date_calc = NULL;
+  $node->field_number_of_benefits_calc = NULL;
+  $node->field_schedule_status_calc = NULL;
+
+  // assign parent project
+  $node->field_project[LANGUAGE_NONE][0]['target_id'] = $parent_project->nid;
+
+  // get form
+  module_load_include('inc', 'node', 'node.pages');
+  $form = drupal_get_form('project_node_form', $node);
+
+  // makes form elements titles
+  function prepare_for_display(&$elem, &$form) {
+    foreach (element_children($elem) as $element) {
+      $elem[$element]['#title_display'] = 'invisible';
+      $parent_element = &$form[reset($elem[$element]['#array_parents'])];
+      if (!empty($elem[$element]['#description'])) {
+        $parent_element['#description'] = $elem[$element]['#description'];
+        $elem[$element]['#description'] = NULL;
+      }
+      if (!empty($elem[$element]['#title'])) {
+        $parent_element['#title'] = $elem[$element]['#title'];
+      }
+      prepare_for_display($elem[$element], $form);
+    }
+  }
+
+  foreach (element_children($form) as $element) {
+    $element_name = explode('_', $element);
+    if (reset($element_name) == 'field' || $element == 'title') {
+      $form[$element]['#title_display'] = 'invisible';
+      prepare_for_display($form[$element], $form);
+    }
+  }
+
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
+  );
+
+  // PROJECT ADMIN USERS
+  $project_admins = ict_project_baseline_get_admin_user_emails($parent_project);
+  $form['admin_user_details'] = array(
+    '#type' => 'markup',
+    '#markup' => theme('ict_project_baseline_admin_user_details', array(
+      'departmental_admins' => $project_admins['departmental_admins'],
+      'data_editors' => $project_admins['data_editors'],
+      'data_approvers' => $project_admins['data_approvers']
+    ))
+  );
+
+  $form['actions']['submit']['#attributes']['class'][] = 'submit-button';
+  $form['actions']['submit']['#value'] = t('Create re-baseline');
+  $form['actions']['submit_request']['#attributes']['class'][] = 'submit-button';
+  $form['#theme'] = 'ict_project_baseline_edit_draft';
+
+  return drupal_render($form);
+}
+
+/**
  * Baseline Approve block
  * @param $nid
  * @return string
@@ -503,4 +605,23 @@ function __ict_project_get_current_fin_year () {
     $current_date > new DateTime ($current_year_long . '-07-01 00:00:00') ?
       $current_year_short . '/' . ($current_year_short + 1) :
       ($current_year_short - 1) . '/' . $current_year_short;
+}
+
+/**
+ * Checks if project is published
+ * @param $nid
+ * @return bool
+ */
+function ict_project_is_published_project($nid) {
+  $updates = ict_update_project_get_list($nid);
+  $project_state = ict_project_get_workflow_state($nid);
+  $update_id = end($updates);
+
+  if ($update_id) {
+    $update_state = ict_project_get_workflow_state($update_id);
+    if (in_array($update_state, array('approved')) && in_array($project_state, array('approved'))) {
+      return TRUE;
+    }
+  }
+  return FALSE;
 }

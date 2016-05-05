@@ -445,7 +445,7 @@ function ict_project_workflow_set_draft($form, &$form_state) {
 function ict_project_form_alter( &$form, &$form_state, $form_id) {
   if ($form_id == 'project_node_form') {
     $node = $form['#node'];
-    if (!empty($node->nid)) {
+    if (!empty($node->nid) || !empty($node->field_project)) {
 //      $entity_list = ict_update_get_allowed_entity_list($node->nid);
 
       // project budget by financial year
