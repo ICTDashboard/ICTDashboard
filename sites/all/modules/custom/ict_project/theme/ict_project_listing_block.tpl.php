@@ -165,7 +165,10 @@
     <?php endif; ?>
 
     <?php if ($pager) : ?>
-      <?php print $pager; ?>
+      <div class="table-config-bar">
+        <?php print theme('pager', array('tags' => $pager_tags)); ?>
+        <?php print render($pager); ?>
+      </div>
     <?php endif; ?>
   </div>
 </div>
