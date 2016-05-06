@@ -60,3 +60,17 @@ function ict_update_update_7101() {
 
   return 'Entity Comment field text format was changed';
 }
+
+function ict_update_update_7102() {
+  // Manual database changes.
+  db_update('field_data_field_brief_project_summary')
+    ->fields(array(
+      'field_brief_project_summary_format' => 'filtered_html',
+    ))
+    ->execute();
+
+  // Clear caches.
+  field_cache_clear(TRUE);
+
+  return 'Brief project summary field text format was changed';
+}
