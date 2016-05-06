@@ -23,26 +23,33 @@ h2 {
 .row {
   margin-bottom: 15px;
 }
+.row p, .row a{
+  margin: 0px;
+}
+.row a{
+  margin-bottom: 5px;
+}
 
 div.page-title h1 {
   font-size: 32px !important;
   font-weight:normal !important;
 }
 
-div.print-logo {
-  text-transform: uppercase;
-  font-size: 26px !important;
-}
-
 div.print-logo img {
-  width: 110px;
+  width: 80px;
 }
 
-table tr td.print-logo-title {
-  width: 300px;
-  padding-left: 15px;
-  padding-top: 25px;
-  line-height: 30px;
+#logo {
+  margin-bottom: 10px;
+}
+
+#footer-copyright {
+  margin-top: 10px;
+}
+
+table tr td.print-logo-title img{
+  width: 160px;
+  padding-left: 5px;
 }
 
 div.ict-faq-answer ul li .label, div.ict-faq-answer ul li .benefit {
@@ -114,12 +121,12 @@ color: black;
   line-height: 22px;
   position: relative;
 }
-.ict-faq-answer ul li:before {
-/*  position: absolute;
+.ict-faq-answer ul li .label:before {
+  position: absolute;
   content: "• ";
   color: #17716b;
   left: -2px;
-  font-size: 24px;*/
+  font-size: 26px;
 }
 .ict-faq-answer ul li .label {
   padding: 0;

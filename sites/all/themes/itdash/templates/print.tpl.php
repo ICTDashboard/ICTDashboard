@@ -95,7 +95,7 @@
               <?php print $print_logo; ?>
             </td>
             <td class="print-logo-title">
-              <span><strong><?php print t('ICT Projects'); ?></strong><br><?php print t('Dashboard'); ?></span>
+              <img src="<?php print path_to_theme() .'/html/images/ict-text-pdf.png'; ?>">
             </td>
           </tr>
         </table> 
