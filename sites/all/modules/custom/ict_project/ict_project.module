@@ -750,7 +750,7 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
   $budget_table['#theme'] = 'field_original_total_budget_table';
 
   $budget_table['#year_range_settings'] = array(
-    'start_year' => $start_year . '/' . ++$start_year,
+    'start_year' => sprintf("%02d", $start_year) . '/' . sprintf("%02d", ++$start_year),
     'year_range' => range(date('y') - 10, date('y') + 10)
   );
 
@@ -1163,6 +1163,10 @@ function ict_project_node_insert ($node) {
   if ($node->type == 'project') {
     ict_project_set_workflow_state('draft', $node->nid, $node->vid);
     __ict_mail_process_mails('ict_mail', 'project_create', $node, array('departmental_admins'), array('dep_admins' => array(array('name' => _ict_project_get_user_name()))), FALSE);
+    if (ict_project_is_rebaseline($node)) {
+      // copy editors from parent project when re-baseline is created
+      ict_project_copy_editors_and_approvers($node);
+    }
   }
 }
 

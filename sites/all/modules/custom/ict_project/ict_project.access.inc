@@ -79,7 +79,7 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
      return ict_project_is_published_project($nid);
     }
     if (in_array($state, array('draft', 'waiting_approval'))) {
-      return __ict_project_user_is_dep_admin_for_project($nid, $account);
+      return __ict_project_user_is_dep_member_for_project($nid, $account);
     }
     if (in_array($state, array('approved'))) {
       return TRUE;
@@ -95,39 +95,43 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
   }
 
   if ($op == 'edit' && $nid) {
-    if (in_array(ict_project_get_workflow_state($nid), array('draft')) && in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_EDITOR_ACCESS))) {
+    if (in_array(ict_project_get_workflow_state($nid), array('draft')) &&
+      in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_EDITOR_ACCESS))) {
       return TRUE;
     }
     return FALSE;
   }
 
   if ($op == 'approve' && $nid) {
-    if (in_array(ict_project_get_workflow_state($nid), array('waiting_approval')) && in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_APPROVER_ACCESS))) {
+    if (in_array(ict_project_get_workflow_state($nid), array('waiting_approval')) &&
+      in_array($account->uid, ict_project_get_users($nid, ICT_PROJECT_APPROVER_ACCESS))) {
       return TRUE;
     }
     return FALSE;
   }
 
   if ($op == 'delete' && $nid) {
-    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account) &&
-      ict_project_check_if_baseline_ever_approved($nid)) {
-      return __ict_project_user_is_dep_admin_for_project($nid, $account);
+    if (__ict_project_user_is_dep_admin_for_project($nid, $account) &&
+      ict_project_check_if_baseline_ever_approved($nid) &&
+      !ict_project_get_project_rebaseline($nid)) {
+      return TRUE;
     }
     return FALSE;
   }
 
   if ($op == 'manage_users' && $nid) {
-    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
-      return __ict_project_user_is_dep_admin_for_project($nid, $account);
+    if (!ict_project_get_project_rebaseline($nid) &&
+      __ict_project_user_is_dep_admin_for_project($nid, $account)) {
+      return TRUE;
     }
     return FALSE;
   }
 
   if ($op == 'rebaseline' && $nid) {
-    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
-      if (__ict_project_user_is_dep_admin_for_project($nid, $account)) {
-        return ict_project_is_published_project($nid);
-      }
+    if (__ict_project_user_is_dep_admin_for_project($nid, $account) &&
+      ict_project_is_published_project($nid) &&
+      !ict_project_get_project_rebaseline($nid)) {
+      return TRUE;
     }
     return FALSE;
   }
@@ -164,31 +168,46 @@ function ict_project_access_update($op, $project_id, $account = NULL, $nid = NUL
   }
 
   if ($op == 'create' && $project_id) {
+    if (ict_project_get_project_rebaseline($project_id)) {
+      return FALSE;
+    }
     $approved_vid = ict_project_get_last_transaction_by_state($project_id, 'approved');
-    if ($approved_vid->vid && in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_EDITOR_ACCESS))) {
+    if ($approved_vid->vid &&
+      in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_EDITOR_ACCESS))) {
       return TRUE;
     }
     return FALSE;
   }
 
   if ($op == 'edit' && $nid && $project_id) {
-    if (in_array(ict_project_get_workflow_state($nid), array('draft')) && in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_EDITOR_ACCESS))) {
+    if (ict_project_get_project_rebaseline($project_id)) {
+      return FALSE;
+    }
+    if (in_array(ict_project_get_workflow_state($nid), array('draft')) &&
+      in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_EDITOR_ACCESS))) {
       return TRUE;
     }
     return FALSE;
   }
 
   if ($op == 'approve' && $nid && $project_id) {
-    if (in_array(ict_project_get_workflow_state($nid), array('waiting_approval')) && in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_APPROVER_ACCESS))) {
+    if (ict_project_get_project_rebaseline($project_id)) {
+      return FALSE;
+    }
+    if (in_array(ict_project_get_workflow_state($nid), array('waiting_approval')) &&
+      in_array($account->uid, ict_project_get_users($project_id, ICT_PROJECT_APPROVER_ACCESS))) {
       return TRUE;
     }
     return FALSE;
   }
 
   if ($op == 'delete' && $nid) {
-    if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account) &&
+    if (ict_project_get_project_rebaseline($project_id)) {
+      return FALSE;
+    }
+    if (__ict_project_user_is_dep_admin_for_project($nid, $account) &&
       in_array(ict_project_get_workflow_state($nid), array('draft', 'waiting_approval'))) {
-      return __ict_project_user_is_dep_admin_for_project($nid, $account);
+      return TRUE;
     }
     return FALSE;
   }
@@ -328,6 +347,22 @@ function ict_project_allowed_view_states($project_id, $account = NULL) {
  * @return bool
  */
 function __ict_project_user_is_dep_admin_for_project($node, $account) {
+  // user should have Departmental Admin role
+  if (!user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
+    return FALSE;
+  }
+
+  return __ict_project_user_is_dep_member_for_project($node, $account);
+}
+
+/**
+ * Checks if user is Department member for the project
+ *
+ * @param $node
+ * @param $account
+ * @return bool
+ */
+function __ict_project_user_is_dep_member_for_project($node, $account) {
   $node = !empty($node->nid) ? $node : node_load($node);
   $project_department = ict_department_get_department_tid_of_entity('project', $node);
   $user_department = ict_department_get_department_tid_of_entity('user', $account);

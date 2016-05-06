@@ -151,6 +151,15 @@ function ict_project_rebaseline_create_block ($parent_project) {
   $node->field_number_of_benefits_calc = NULL;
   $node->field_schedule_status_calc = NULL;
 
+  // field collections should be cloned
+  foreach (field_info_fields() as $field_name => $field) {
+    if ($field['type'] == 'field_collection' && isset($node->$field_name)) {
+      foreach ($node->$field_name as $language => $values) {
+        ict_project_field_collection_clone_items('node', $node, $field_name, $language);
+      }
+    }
+  }
+
   // assign parent project
   $node->field_project[LANGUAGE_NONE][0]['target_id'] = $parent_project->nid;
 
@@ -201,8 +210,24 @@ function ict_project_rebaseline_create_block ($parent_project) {
   $form['actions']['submit']['#value'] = t('Create re-baseline');
   $form['actions']['submit_request']['#attributes']['class'][] = 'submit-button';
   $form['#theme'] = 'ict_project_baseline_edit_draft';
+  $form['#page_title'] = t('ICT Project Re-baseline Submission Form');
 
   return drupal_render($form);
+}
+
+/**
+ * Copy editors and approvers from parent project
+ * @param $node
+ */
+function ict_project_copy_editors_and_approvers($node) {
+  $parent_project = ict_project_get_parent_project($node);
+  $project_users = ict_project_baseline_get_admin_user_emails($parent_project);
+  foreach ($project_users['data_approvers'] as $approver_email) {
+    ict_project_access_add_approver($approver_email, $node->nid);
+  }
+  foreach ($project_users['data_editors'] as $editor_email) {
+    ict_project_access_add_editor($editor_email, $node->nid);
+  }
 }
 
 /**
@@ -388,6 +413,8 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
  * @return array
  */
 function ict_project_baseline_get_admin_user_emails ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
   $project_department = ict_department_get_department_tid_of_entity('project', $node);
   $query = db_select('users', 'u');
   $query->join('field_data_field_department', 'd', 'd.entity_id = u.uid');
@@ -623,5 +650,96 @@ function ict_project_is_published_project($nid) {
       return TRUE;
     }
   }
+  return FALSE;
+}
+
+/**
+ * Clone a Field Collection. Helper function for hook_node_clone_alter().
+ * Taken from field_collection_clone_items() - https://www.drupal.org/project/field_collection_node_clone
+ */
+function ict_project_field_collection_clone_items($entity_type, &$entity, $fc_field, $language = LANGUAGE_NONE) {
+  $entity_wrapper = entity_metadata_wrapper($entity_type, $entity);
+  $old_items = $entity_wrapper->{$fc_field}->value();
+  if (!is_array($old_items)) {
+    $old_items = array($old_items);
+  }
+
+  $field_info_instances = field_info_instances();
+  $field_names = element_children($field_info_instances['field_collection_item'][$fc_field]);
+
+  unset($entity->{$fc_field}[$language]);
+
+  foreach ($old_items as $old_item) {
+    $new_item = entity_create('field_collection_item', array('field_name' => $fc_field));
+    $new_item->setHostEntity($entity_type, $entity);
+
+    foreach ($field_names as $field_name) {
+      if (!empty($old_item->{$field_name})) {
+        $new_item->{$field_name} = $old_item->{$field_name};
+      }
+    }
+
+    // Now check if any of the fields in the newly cloned fc item is a field
+    // collection and recursively call this function to properly clone it.
+    foreach ($field_names as $field_name) {
+      if (!empty($new_item->{$field_name})) {
+        $field_info = field_info_field($field_name);
+        if ($field_info['type'] == 'field_collection') {
+          field_collection_clone_items('field_collection_item', $new_item, $field_name, $language);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Gets re-baseline of the project
+ * @param $nid
+ * @return array
+ */
+function ict_project_get_project_rebaseline ($project_id) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));
+  $query->join('field_data_field_project', 'baseline', 'baseline.entity_id = n.nid');
+  $query->condition('n.type', 'project');
+  $query->condition('baseline.field_project_target_id', $project_id);
+  return $query->execute()->fetchAssoc();
+}
+
+/**
+ * Checks if project is a re-baseline
+ * @param $node|$nid
+ * @return bol
+ */
+function ict_project_is_rebaseline ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
+  if ($node->type != 'project') {
+    return FALSE;
+  }
+
+  if (!empty($node->field_project[LANGUAGE_NONE][0]['target_id'])) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Gets parent project
+ * @param $node|$nid
+ * @return int
+ */
+function ict_project_get_parent_project ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
+  if ($node->type != 'project') {
+    return FALSE;
+  }
+
+  if (!empty($node->field_project[LANGUAGE_NONE][0]['target_id'])) {
+    return $node->field_project[LANGUAGE_NONE][0]['target_id'];
+  }
+
   return FALSE;
 }
