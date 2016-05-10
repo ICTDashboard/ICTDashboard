@@ -73,17 +73,15 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
 //    return TRUE;
   }
   if ($op == 'view' && $nid) {
+    if (ict_project_is_published_project($nid)) {
+      return TRUE;
+    }
     if (array_key_exists(ICT_FINANCE_ADMIN_ROLE, $account->roles)) {
       return TRUE;
     }
     $state = ict_project_get_workflow_state($nid);
-    if (empty($account->uid)) {
-     return ict_project_is_published_project($nid);
-    }
-    if (in_array($state, array('draft', 'waiting_approval'))) {
-      return __ict_project_user_is_dep_member_for_project($nid, $account);
-    }
-    if (in_array($state, array('approved'))) {
+    if (in_array($state, array('draft', 'waiting_approval')) &&
+      __ict_project_user_is_dep_member_for_project($nid, $account)) {
       return TRUE;
     }
     return FALSE;
