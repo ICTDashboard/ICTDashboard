@@ -21,7 +21,6 @@ function ict_project_project_list_block() {
   // unpublished project should be excluded
   $unpublished_projects = ict_project_get_all_unpublished_projects();
   if ($unpublished_projects) {
-    dsm($unpublished_projects);
     $query->condition('n.nid', $unpublished_projects, 'NOT IN');
   }
 
