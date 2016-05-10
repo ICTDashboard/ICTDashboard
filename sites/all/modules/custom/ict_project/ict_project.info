@@ -1,7 +1,7 @@
 name = ICT Project
 core = 7.x
 package = ICT Dashboard
-version = 7.x-3.61
+version = 7.x-3.62
 project = ict_project
 dependencies[] = ckeditor
 dependencies[] = ctools
@@ -74,6 +74,7 @@ features[node][] = project
 features[page_manager_pages][] = baseline_create_draft
 features[page_manager_pages][] = baseline_edit
 features[page_manager_pages][] = create_re_baseline
+features[page_manager_pages][] = project_history
 features[page_manager_pages][] = project_list
 features[page_manager_pages][] = project_manage_users
 features[page_manager_pages][] = review_baseline

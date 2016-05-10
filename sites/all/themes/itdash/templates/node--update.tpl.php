@@ -187,11 +187,12 @@
       <a href="javascript:void(0);" class="tooltip">
                 <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print variable_get('ict_project_benefits_tooltip_text', "This section presents information about the various project benefits, as most recently updated for the project"); ?>
+                <?php print variable_get('ict_project_benefits_tooltip_text', "The measurable advantage to stakeholders, realised during or after the project has finished, as a result of the new capabilities produced."); ?>
               </span>
               </a>
               </h2>
     </div>
+    
     <div class="row">
       <div class="label">
         <?php print $field_predicted_project_benefit_info['label']; ?>
@@ -293,7 +294,7 @@
     <div class="row">
       <div class="label">
         <?php if (!empty($diff['field_entity_comments'])) : ?>
-          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']); ?>
+          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']['value'], '', '', FALSE, TRUE); ?>
         <?php endif; ?>
         <?php print $field_entity_comments['meta']['#title']; ?>
         <?php if (!empty($field_entity_comments['meta']['#description'])) : ?>
@@ -305,9 +306,9 @@
           </a>
         <?php endif; ?>
       </div>
-      <div class="text">
+      <div class="text entity_comments">
         <?php foreach (_ict_project_baseline_get_simple_values($field_entity_comments) as $value) : ?>
-          <p><?php print $value; ?></p>
+          <?php print $value; ?>
         <?php endforeach; ?>
       </div>
     </div>

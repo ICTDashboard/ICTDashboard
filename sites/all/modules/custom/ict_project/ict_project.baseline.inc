@@ -462,6 +462,11 @@ function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALS
       // term reference fields
       $val = $item['taxonomy_term']->name;
     }
+    elseif (!isset($item['taxonomy_term']) && isset($item['tid'])) {
+      // term reference fields
+      $term = taxonomy_term_load($item['tid']);
+      $val = $term->name;
+    }
     elseif (isset($item['timezone'])) {
       // date fields
       $date = strtotime($item['value']);
@@ -742,4 +747,167 @@ function ict_project_get_parent_project ($node) {
   }
 
   return FALSE;
+}
+
+function ict_project_get_last_rebaseline_project($nid) {
+  $rebaseline = '';
+  $parent = ict_project_get_project_rebaseline ($nid);
+  $last_baseline = FALSE;
+
+  if(!empty($parent) && isset($parent['nid'])) {
+    do {
+      $last_nid = $parent['nid'];
+      $parent = ict_project_get_project_rebaseline($last_nid);
+      if (!isset($parent['nid'])) {
+        $last_baseline = TRUE;
+        $rebaseline = $last_nid;
+      }
+    } while(!$last_baseline);
+  }
+  return $rebaseline;
+}
+
+/**
+ * Get project first approve date
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_approve_date($nid) {
+  $query = db_select('project_workflow', 'pw');
+  $query->fields('pw', array('created'));
+  $query->condition('pw.nid', $nid, '=');
+  $query->condition('state', 'approved');
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get project unpublished date
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_unpublished_date($nid) {
+  $query = db_select('project_workflow', 'pw');
+  $query->fields('pw', array('created'));
+  $query->condition('pw.nid', $nid, '=');
+  $query->condition('state', 'unpublished');
+
+  return $query->execute()->fetchField();
+}
+
+
+/**
+ * Gets all project relatives
+ * @param $node|$nid
+ * @return int
+ */
+function ict_project_get_all_parents_project($node) {
+  $relatives = array();
+  $parent = ict_project_get_parent_project ($node);
+
+  if ($parent) {
+    array_push($relatives, $parent);
+    do {
+      $nid = $parent;
+      $parent = ict_project_get_parent_project ($nid);
+      if ($parent) {
+        array_push($relatives, $parent);
+      }
+    } while($parent);
+  }
+
+  return $relatives;
+}
+
+/**
+ * Gets total budget
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_total_budget($nid) {
+  if ($nid) {
+    $budget_items = _ict_project_prepare_budget_history($nid, 'view');
+  }
+
+  // should show previous approved values OR current pendong values only
+  $baseline_row = reset($budget_items);
+  $last_update = end($budget_items);
+
+  if ($last_update['entity_type'] == 'update') {
+    $budget_items = array($baseline_row, $last_update);
+  }
+  else {
+    $budget_items = array($baseline_row);
+  }
+
+  // total budget and expenditure values
+  $total_budget = 0;
+  foreach ($budget_items[0]['budget_items'] as $budget_value) {
+    $total_budget += (float)$budget_value->field_total[LANGUAGE_NONE][0]['value'];
+  }
+
+  return $total_budget;
+}
+
+/**
+ * Get project first update
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_first_update($nid) {
+  $update_nids = array();
+  $updates = ict_update_get_allowed_entity_list($nid);
+
+  foreach ($updates as $update) {
+    $update_nids = $update;
+  }
+
+  if (!empty($update_nids)) {
+    $query = db_select('project_workflow', 'pw');
+    $query->fields('pw', array('created'));
+    $query->condition('pw.nid', $update_nids, 'IN');
+    $query->condition('state', 'approved');
+    $query->orderBy('pw.created', 'ASC');
+    $query->range(0 ,1);
+
+    return $query->execute()->fetchField();
+  }
+
+  return '';
+}
+
+/**
+ * Get project baseline history block
+ * @param $nid
+ * @return theme
+ */
+function ict_project_project_history ($nid) {
+
+  if (!ict_project_access_project('view', NULL, $nid)) {
+    drupal_access_denied();
+  }
+
+  $current_baseline = node_load($nid);
+
+  if ($current_baseline->type != 'project') {
+    drupal_not_found();
+  }
+  $old_baselines = array();
+  $projects = ict_project_get_all_parents_project($nid);
+  $budget_items = array();
+  $current_baseline->approved_on = ict_project_get_approve_date($nid);
+  $current_baseline->field_original_total_budget = number_format(ict_project_get_total_budget($nid), 2, '.', ' ');
+  $current_baseline->first_update = ict_project_get_first_update($nid);
+
+  if (is_array($projects) && !empty($projects)) {
+    $old_baselines = node_load_multiple($projects);
+    foreach ($projects as $project_id) {
+      $old_baselines[$project_id]->approved_on = ict_project_get_approve_date($project_id);
+      $old_baselines[$project_id]->unpublished_on = ict_project_get_unpublished_date($project_id);
+      $old_baselines[$project_id]->field_original_total_budget = number_format(ict_project_get_total_budget($project_id), 2, '.', ' ');
+      $old_baselines[$project_id]->first_update = ict_project_get_first_update($project_id);
+    }
+  }
+
+  return theme('project_baseline_history', array('current_baseline' => $current_baseline, 'old_baselines' => $old_baselines, 'count_baslines' => count($old_baselines)));
 }

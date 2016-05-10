@@ -154,3 +154,28 @@ function ict_pages_form_alter (&$form, &$form_alter, $form_id) {
       break;
   }
 }
+
+/**
+ * Hook to register the CKEditor plugin - it would appear in the plugins list on the profile setting page.
+ */
+function ict_pages_ckeditor_plugin() {
+  return array(
+    'word_count' => array(
+      // Name of the plugin used to write it.
+      'name' => 'wordcount',
+      // Description of the plugin - it would be displayed in the plugins management section of profile settings.
+      'desc' => t('This is a word count plugin'),
+      // The full path to the CKEditor plugins directory, with the trailing slash.
+      'path' => drupal_get_path('module', 'ict_pages') . '/plugins/ckeditor/wordcount/',
+    ),
+    'notification' => array(
+      // Name of the plugin used to write it.
+      'name' => 'notification',
+      // Description of the plugin - it would be displayed in the plugins management section of profile settings.
+      'desc' => t('This is a notification plugin'),
+      // The full path to the CKEditor plugins directory, with the trailing slash.
+      'path' => drupal_get_path('module', 'ict_pages') . '/plugins/ckeditor/notification/',
+    ),
+
+  );
+}

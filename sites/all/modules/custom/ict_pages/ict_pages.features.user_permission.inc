@@ -188,6 +188,17 @@ function ict_pages_user_default_permissions() {
     'module' => 'elfinder',
   );
 
+  // Exported permission: 'use text format filtered_html_plus_word_count'.
+  $permissions['use text format filtered_html_plus_word_count'] = array(
+    'name' => 'use text format filtered_html_plus_word_count',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'filter',
+  );
+
   // Exported permission: 'view any opt_out_policy bean'.
   $permissions['view any opt_out_policy bean'] = array(
     'name' => 'view any opt_out_policy bean',
