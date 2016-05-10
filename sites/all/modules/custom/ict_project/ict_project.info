@@ -1,7 +1,7 @@
 name = ICT Project
 core = 7.x
 package = ICT Dashboard
-version = 7.x-3.60
+version = 7.x-3.61
 project = ict_project
 dependencies[] = ckeditor
 dependencies[] = ctools
