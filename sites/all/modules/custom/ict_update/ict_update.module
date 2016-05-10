@@ -132,6 +132,9 @@ function ict_update_update_form_recursive($key, $value, $array) {
  * Implements hook_form_FORM_ID_alter().
  */
 function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) {
+  
+  $form['#after_build'][] = 'ict_update_node_form_after_build';
+  global $user;
   $update = $form['#node'];
   if (empty($update->nid)) {
     $project_id = !empty($_REQUEST['project_id']) && is_numeric($_REQUEST['project_id']) ? check_plain($_REQUEST['project_id']) : arg(1);
@@ -150,8 +153,10 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $project = node_load($project_id);
     $form['#update_id'] = $update->nid;
   }
+  $field_instances = field_info_instances('node', 'project');
   $form['project_id'] = array('#type' => 'hidden', '#value' => $project_id);
   $form['#project_node'] = $project;
+  $form['#project_instances'] = $field_instances;
 
   $form['#theme'] = 'ict_update_add_form';
   $project_admins = ict_project_baseline_get_admin_user_emails($project);
@@ -169,6 +174,12 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $last_project_revision_updates = end($entity_list);
     if(empty($last_project_revision_updates)) {
       // from project
+      if (isset($project->field_implementation_partners[LANGUAGE_NONE]) && !empty($project->field_implementation_partners[LANGUAGE_NONE])) {
+        $form['field_implementation_partners']['und']['#default_value'] = _ict_update_generate_default_multiple_select_terms_array($project->field_implementation_partners[LANGUAGE_NONE]);
+      }
+      else {
+        $form['field_implementation_partners']['und']['#default_value'] = array('_none');
+      }
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $project->field_original_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $project->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $project->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
@@ -179,6 +190,12 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       // from previous update
       $last_update = node_load(end($last_project_revision_updates));
       _ict_update_prepopulate_benefit($form, $form_state, $last_update->field_benefits_realised['und']);
+      if (isset($last_update->field_implementation_partners[LANGUAGE_NONE]) && !empty($last_update->field_implementation_partners[LANGUAGE_NONE])) {
+        $form['field_implementation_partners']['und']['#default_value'] = _ict_update_generate_default_multiple_select_terms_array($last_update->field_implementation_partners[LANGUAGE_NONE]);
+      }
+      else {
+        $form['field_implementation_partners']['und']['#default_value'] = array('_none');
+      }
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_expected_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $last_update->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $last_update->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
@@ -187,7 +204,8 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       $form['field_forecast_level_of_project_']['und'][0]['value']['#default_value'] = $last_update->field_forecast_level_of_project_[LANGUAGE_NONE][0]['value'];
       $form['field_current_financial_benefits']['und'][0]['value']['#default_value'] = $last_update->field_current_financial_benefits[LANGUAGE_NONE][0]['value'];
       $form['field_estimated_value_of_benefit']['und'][0]['value']['#default_value'] = $last_update->field_estimated_value_of_benefit[LANGUAGE_NONE][0]['value'];
-      $form['field_entity_comments']['und'][0]['value']['#default_value'] = $last_update->field_entity_comments[LANGUAGE_NONE][0]['value'];
+      $form['field_entity_comments']['und'][0]['#default_value'] = $last_update->field_entity_comments[LANGUAGE_NONE][0]['value'];
+      $form['field_entity_comments']['und'][0]['#format'] = $last_update->field_entity_comments[LANGUAGE_NONE][0]['format'];
     }
   }
   else {
@@ -227,7 +245,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
     $form['actions']['submit']['#submit'][] = 'ict_update_workflow_set_draft';
   }
-
+  $form['field_implementation_partners'][LANGUAGE_NONE]['#options']['_none'] = t('Not Applicable');
   // project budget by financial year
   _ict_project_project_budget_by_year_form ($form, $form_state);
 
@@ -245,8 +263,20 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
-    drupal_get_path('module', 'ict_update') . '/js/jQuery.textareaCounter.min.js',
   );
+
+  if(!array_key_exists(ICT_FINANCE_ADMIN_ROLE,$user->roles)) {  
+    foreach ($form['field_benefits_realised']['und'] as $key => $value) {
+      if(is_numeric($key)) {
+        unset($form['field_benefits_realised']['und'][$key]['field_status']['und']['#options']['removed']);
+      }
+    }
+  }
+}
+
+function ict_update_node_form_after_build($form) {
+    $form['field_entity_comments']['und']['0']['format']['#access'] = FALSE;
+    return $form;
 }
 
 function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
@@ -310,6 +340,16 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
   // Fix triggering element nested level
   $budget_table['#language'] = LANGUAGE_NONE;
 }
+
+function _ict_update_generate_default_multiple_select_terms_array($data = array()) {
+  $generated = array();
+  foreach($data as $value) {
+    array_push($generated, $value['tid']);
+  }
+
+  return $generated;
+}
+
 function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = array()) {
   $budget_table = &$form['field_benefits_realised'][LANGUAGE_NONE];
 
