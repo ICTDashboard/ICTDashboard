@@ -4,31 +4,34 @@
 	  <p><strong><?php print t('Information Last Updated on'); ?></strong></p>
 	  <p><span><?php print format_date($result, 'medium', 'd F Y'); ?></span></p>
 	</div>
+	<?php if (!empty($nid)) : ?>
   	<div class= "view-baseline-history">
-  		<?php if(ict_project_is_rebaseline($nid)) { 
-  			if(ict_project_get_last_rebaseline_project($nid)) { 
-  				$rebaseline = (ict_project_get_last_rebaseline_project($nid)); ?>
+  		<?php if(ict_project_is_rebaseline($nid)) : ?>
+  			<?php if(ict_project_get_last_rebaseline_project($nid)) : ?>
+  				<?php $rebaseline = (ict_project_get_last_rebaseline_project($nid)); ?>
 	  			<a href="<?php print url('project/' . $rebaseline. '/history'); ?>" class="view-baseline-link">View Baseline History</a>
-	  		<?php }else { ?>
+	  		<?php else : ?>
 	  			<a href="<?php print url('project/' . $nid . '/history'); ?>" class="view-baseline-link">View Baseline History</a>
-	  	<?php }; ?>
+	  		<?php endif; ?>
   	  		<a href="javascript:void(0);" class="tooltip view-baseline-tooltip">
 		        <i class="tooltip-icon"></i>
 		      	<span class="tooltip-content">
 		        	<?php print variable_get('ict_project_last_updated_tooltip_text', "Click to view the previous Baselines for this project."); ?>
 		      	</span>
-    		</a>
-  		<?php }else { ?>	
-	  	<?php if(ict_project_get_last_rebaseline_project($nid)) {
-	  		$rebaseline = (ict_project_get_last_rebaseline_project($nid)); ?>
-	  		<a href="<?php print url('project/' . $rebaseline . '/history'); ?>" class="view-baseline-link">View Baseline History</a>
-	  		<a href="javascript:void(0);" class="tooltip view-baseline-tooltip">
-		        <i class="tooltip-icon"></i>
-		      	<span class="tooltip-content">
-		        	<?php print variable_get('ict_project_last_updated_tooltip_text', "Click to view the previous Baselines for this project."); ?>
-		      	</span>
-	    	</a>
-	  	<?php }}; ?>	
+    			</a>
+  		<?php else : ?>
+				<?php if(ict_project_get_last_rebaseline_project($nid)) : ?>
+					<?php $rebaseline = (ict_project_get_last_rebaseline_project($nid)); ?>
+					<a href="<?php print url('project/' . $rebaseline . '/history'); ?>" class="view-baseline-link">View Baseline History</a>
+					<a href="javascript:void(0);" class="tooltip view-baseline-tooltip">
+							<i class="tooltip-icon"></i>
+							<span class="tooltip-content">
+								<?php print variable_get('ict_project_last_updated_tooltip_text', "Click to view the previous Baselines for this project."); ?>
+							</span>
+					</a>
+				<?php endif; ?>
+			<?php endif; ?>
     </div>
+	<?php endif; ?>
 </div>              
 <?php endif; ?>

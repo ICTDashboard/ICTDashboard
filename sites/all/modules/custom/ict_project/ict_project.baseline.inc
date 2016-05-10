@@ -754,7 +754,7 @@ function ict_project_get_last_rebaseline_project($nid) {
   $parent = ict_project_get_project_rebaseline ($nid);
   $last_baseline = FALSE;
 
-  if(!empty($parent) && isset($parent['nid'])) {
+  if(!empty($parent['nid']) && ict_project_access_project('view', NULL, $parent['nid'])) {
     do {
       $last_nid = $parent['nid'];
       $parent = ict_project_get_project_rebaseline($last_nid);

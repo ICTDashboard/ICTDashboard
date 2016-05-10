@@ -78,6 +78,7 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
     }
     $state = ict_project_get_workflow_state($nid);
     if (empty($account->uid)) {
+      dvm(ict_project_is_published_project($nid));
      return ict_project_is_published_project($nid);
     }
     if (in_array($state, array('draft', 'waiting_approval'))) {
