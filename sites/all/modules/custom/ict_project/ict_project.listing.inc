@@ -19,8 +19,11 @@ function ict_project_project_list_block() {
     ->condition('n.type', 'project');
 
   // unpublished project should be excluded
-  $query->join('project_workflow', 'workflow', 'n.nid = workflow.nid');
-  $query->condition('workflow.state', 'unpublished', '<>');
+  $unpublished_projects = ict_project_get_all_unpublished_projects();
+  if ($unpublished_projects) {
+    dsm($unpublished_projects);
+    $query->condition('n.nid', $unpublished_projects, 'NOT IN');
+  }
 
   $tid = !empty($user->field_department[LANGUAGE_NONE][0]['tid']) ?
     $user->field_department[LANGUAGE_NONE][0]['tid'] :
