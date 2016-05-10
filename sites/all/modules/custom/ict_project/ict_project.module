@@ -444,6 +444,7 @@ function ict_project_workflow_set_draft($form, &$form_state) {
  */
 function ict_project_form_alter( &$form, &$form_state, $form_id) {
   if ($form_id == 'project_node_form') {
+    $form['#after_build'][] = 'ict_project_node_form_after_build';
     $node = $form['#node'];
     if (!empty($node->nid) || !empty($node->field_project)) {
 //      $entity_list = ict_update_get_allowed_entity_list($node->nid);
@@ -452,7 +453,8 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       _ict_project_project_budget_by_year_form ($form, $form_state);
       // project benefits
       _ict_update_prepopulate_benefit($form, $form_state, array());
-
+      // autocomplete for program name field
+      $form['field_program_name']['und'][0]['value']['#autocomplete_path'] = 'baseline-program-name/autocomplete';
       // benefits table
       $form['field_benefits_realised']['und']['#theme'] = 'field_benefits_realised_table_form';
       $form['field_benefits_realised']['und']['#baseline'] = TRUE;
@@ -527,6 +529,11 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       $form['actions']['cancel']['#attributes']['class'][] = 'export-btn';
     }
   }
+}
+
+function ict_project_node_form_after_build($form) {
+    $form['field_brief_project_summary']['und']['0']['format']['#access'] = FALSE;
+    return $form;
 }
 
 function _ict_project_prepare_budget_history($project_id, $mode = 'form') {
@@ -1091,8 +1098,34 @@ function ict_project_menu() {
     'page arguments' => array(1),
   );
 
+  $items['baseline-program-name/autocomplete'] = array(
+    'page callback' => 'ict_project_baseline_program_name_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
+}
+
+/**
+ * Autocomplete callback.
+ */
+function ict_project_baseline_program_name_autocomplete($string) {
+  $matches = array();
+
+  if (isset($string) &&!empty($string)) {
+    $result = db_select('field_data_field_program_name', 'pn')
+      ->fields('pn', array('field_program_name_value'))
+      ->condition('field_program_name_value', '%' . db_like($string) . '%', 'LIKE')
+      ->range(0, 5)
+      ->execute();
+
+    foreach ($result as $row) {
+      $matches[$row->field_program_name_value] = check_plain($row->field_program_name_value);
+    }
+  }
+
+  drupal_json_output($matches);
 }
 
 
