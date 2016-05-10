@@ -754,9 +754,19 @@ function ict_project_get_parent_project ($node) {
  * @return mixed
  */
 function ict_project_get_all_unpublished_projects() {
+
+  $unpublished = &drupal_static(__FUNCTION__);
+
+  if (isset($unpublished)) {
+    return $unpublished;
+  }
+
   $query = db_select('node', 'project');
+  $query->condition('project.type', 'project');
   $query->join('project_workflow', 'wf', 'wf.nid = project.nid AND state = :state', array(':state' => 'unpublished'));
   $query->addField('project', 'nid');
   $query->groupBy('project.nid');
-  return $query->execute()->fetchAllKeyed(0, 0);
+  $unpublished = $query->execute()->fetchAllKeyed(0, 0);
+  
+  return $unpublished;
 }

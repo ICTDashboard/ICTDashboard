@@ -1678,9 +1678,21 @@ function __ict_project_get_benefit_status_colors() {
  * @return array
  */
 function ict_project_get_all_active_projects() {
+  $active = &drupal_static(__FUNCTION__);
+
+  if (isset($active)) {
+    return $active;
+  }
+
   $query = db_select('node', 'project')
     ->fields('project', array('nid'))
     ->condition('project.type', 'project');
+
+  // exclude unpublished projects
+  $unpublished_projects = ict_project_get_all_unpublished_projects();
+  if ($unpublished_projects) {
+    $query->condition('project.nid', $unpublished_projects, 'NOT IN');
+  }
 
   // check if Project have at least one approved Update
   $query->join('field_data_field_project', 'update_node', 'project.nid = update_node.field_project_target_id');
@@ -1688,9 +1700,9 @@ function ict_project_get_all_active_projects() {
   $query->condition('workflow.state', 'approved');
   $query->groupBy('project.nid');
 
-  $results = $query
+  $active = $query
     ->execute()
     ->fetchCol();
 
-  return $results;
+  return $active;
 }
