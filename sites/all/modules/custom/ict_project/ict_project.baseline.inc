@@ -709,7 +709,7 @@ function ict_project_get_project_rebaseline ($project_id) {
 /**
  * Checks if project is a re-baseline
  * @param $node|$nid
- * @return bol
+ * @return bool
  */
 function ict_project_is_rebaseline ($node) {
   $node = !empty($node->nid) ? $node : node_load($node);
@@ -742,4 +742,16 @@ function ict_project_get_parent_project ($node) {
   }
 
   return FALSE;
+}
+
+/**
+ * Gets all unpublished projects
+ * @return mixed
+ */
+function ict_project_get_all_unpublished_projects() {
+  $query = db_select('node', 'project');
+  $query->join('project_workflow', 'wf', 'wf.nid = project.nid AND state = :state', array(':state' => 'unpublished'));
+  $query->addField('project', 'nid');
+  $query->groupBy('project.nid');
+  return $query->execute()->fetchAllKeyed(0, 0);
 }

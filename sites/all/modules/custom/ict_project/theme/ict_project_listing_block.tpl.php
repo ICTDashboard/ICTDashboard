@@ -157,7 +157,7 @@
                       'query' => array('destination' => 'projects')
                     )
                   ); ?>">
-                    <span><?php print t('Create re-baseline'); ?></span>
+                    <span><?php print t('Create Re-baseline Draft'); ?></span>
                   </a>
                 <?php endif; ?>
               </td>

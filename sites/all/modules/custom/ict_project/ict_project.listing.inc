@@ -18,6 +18,10 @@ function ict_project_project_list_block() {
     ->fields('n', array('nid', 'title', 'changed'))
     ->condition('n.type', 'project');
 
+  // unpublished project should be excluded
+  $query->join('project_workflow', 'workflow', 'n.nid = workflow.nid');
+  $query->condition('workflow.state', 'unpublished', '<>');
+
   $tid = !empty($user->field_department[LANGUAGE_NONE][0]['tid']) ?
     $user->field_department[LANGUAGE_NONE][0]['tid'] :
     NULL;
@@ -37,6 +41,8 @@ function ict_project_project_list_block() {
     );
 
   }
+
+  $query->groupBy('n.nid');
 
   $results = $query
     ->orderBy('n.title', 'ASC')
