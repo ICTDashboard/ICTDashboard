@@ -444,6 +444,7 @@ function ict_project_workflow_set_draft($form, &$form_state) {
  */
 function ict_project_form_alter( &$form, &$form_state, $form_id) {
   if ($form_id == 'project_node_form') {
+    $form['#after_build'][] = 'ict_project_node_form_after_build';
     $node = $form['#node'];
     if (!empty($node->nid)) {
 //      $entity_list = ict_update_get_allowed_entity_list($node->nid);
@@ -528,6 +529,11 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       $form['actions']['cancel']['#attributes']['class'][] = 'export-btn';
     }
   }
+}
+
+function ict_project_node_form_after_build($form) {
+    $form['field_brief_project_summary']['und']['0']['format']['#access'] = FALSE;
+    return $form;
 }
 
 function _ict_project_prepare_budget_history($project_id, $mode = 'form') {

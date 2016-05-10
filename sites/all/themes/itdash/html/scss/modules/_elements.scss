@@ -140,6 +140,7 @@ body,
       //@include clearfix;
       
       .label {
+        position: relative;
         font-weight: 700;
         color: #202b3d;
         padding-right: 15px;
@@ -189,6 +190,14 @@ body,
       .text {
         .description {
           display: none;
+
+        }  
+        #edit-field-entity-comments {
+          max-width: 640px;
+          #cke_1_bottom {
+            background: none;
+            border-top: none;
+          }
         }
         select,
         input[type="text"]:not(.form-autocomplete),
@@ -1250,6 +1259,74 @@ body,
       height: 19px!important;
     }
   }
+}
+.project-draft-submission {
+  .row {
+    .text {
+      #edit-field-brief-project-summary {
+        max-width: 640px;
+        #cke_1_bottom {
+          background: none;
+          border-top: none;
+        }
+      }
+    }
+  }
+}
+.object_and_summary, .entity_comments, span.tooltip-content {
+  a {
+    color: #0d6c88;
+    text-decoration: none;
+    &:hover {
+      color: #0d6c88;
+    }
+    &:visited {
+      color: #0d6c88;
+    }
+    &:focus {
+      color: #0d6c88;
+    }
+  }
+  ul {
+    list-style-type: disc;
+    ul{ 
+    list-style-type: circle;
+      ul {
+        list-style-type: square;
+      }
+    }
+  }
+  p {
+    color: #202b3d;
+  }
+  ol,ul {
+    color: #202b3d;
+    padding-left: 40px;
+    margin: 0.5em 0;
+    ol,ul {
+      padding-left: 40px; 
+    }         
+  }
+  ol {
+    list-style-type: decimal;
+  }    
+}
+div.tooltip-edit {
+  cursor: pointer;
+  position: static;
+  span.tooltip-content {
+    &::after {
+      border-left: none;
+      border-right: 30px solid transparent;
+      left: 40px;
+    }
+    z-index: 1;
+    width: auto;
+    text-align: left;
+    right: auto;
+    left: 0;
+    bottom: 40px;
+  }    
 }
 #autocomplete {
   border: none;

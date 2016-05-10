@@ -294,7 +294,7 @@
     <div class="row">
       <div class="label">
         <?php if (!empty($diff['field_entity_comments'])) : ?>
-          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']); ?>
+          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']['value'], '', '', FALSE, TRUE); ?>
         <?php endif; ?>
         <?php print $field_entity_comments['meta']['#title']; ?>
         <?php if (!empty($field_entity_comments['meta']['#description'])) : ?>
@@ -306,9 +306,9 @@
           </a>
         <?php endif; ?>
       </div>
-      <div class="text">
+      <div class="text entity_comments">
         <?php foreach (_ict_project_baseline_get_simple_values($field_entity_comments) as $value) : ?>
-          <p><?php print $value; ?></p>
+          <?php print $value; ?>
         <?php endforeach; ?>
       </div>
     </div>

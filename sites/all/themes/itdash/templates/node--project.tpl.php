@@ -49,6 +49,9 @@
 
     <div class="row">
       <div class="label">
+        <?php if (!empty($diff['field_implementation_partners'])) : ?>
+          <?php print itdash_edited_tooltip_render($diff['field_implementation_partners']); ?>
+        <?php endif; ?>
         <?php print $field_implementation_partners['meta']['#title']; ?>
         <?php if (!empty($field_implementation_partners['meta']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
@@ -60,9 +63,15 @@
         <?php endif; ?>
       </div>
       <div class="text">
-        <?php foreach (_ict_project_baseline_get_simple_values($field_implementation_partners, TRUE) as $value) : ?>
-          <p><?php print $value; ?></p>
-        <?php endforeach; ?>
+        <?php if (!$project_updates_available) : ?>
+          <?php foreach (_ict_project_baseline_get_simple_values($field_implementation_partners, TRUE) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        <?php else : ?>
+          <?php foreach (_ict_project_baseline_get_simple_values($update_node->field_implementation_partners['und']) as $value) : ?>
+            <p><?php print $value; ?></p>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
     </div>
 
@@ -97,9 +106,9 @@
           </a>
         <?php endif; ?>
       </div>
-      <div class="text">
+      <div class="text object_and_summary">
         <?php foreach (_ict_project_baseline_get_simple_values($field_brief_project_summary) as $value) : ?>
-          <p><?php print $value; ?></p>
+          <?php print $value; ?>
         <?php endforeach; ?>
       </div>
     </div>
