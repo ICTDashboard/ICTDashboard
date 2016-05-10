@@ -713,7 +713,7 @@ function ict_project_get_project_rebaseline ($project_id) {
 /**
  * Checks if project is a re-baseline
  * @param $node|$nid
- * @return bol
+ * @return bool
  */
 function ict_project_is_rebaseline ($node) {
   $node = !empty($node->nid) ? $node : node_load($node);
@@ -891,4 +891,27 @@ function ict_project_project_history ($nid) {
   }
 
   return theme('project_baseline_history', array('current_baseline' => $current_baseline, 'old_baselines' => $old_baselines, 'count_baslines' => count($old_baselines)));
+}
+
+
+/**
+ * Gets all unpublished projects
+ * @return mixed
+ */
+function ict_project_get_all_unpublished_projects() {
+
+  $unpublished = &drupal_static(__FUNCTION__);
+
+  if (isset($unpublished)) {
+    return $unpublished;
+  }
+
+  $query = db_select('node', 'project');
+  $query->condition('project.type', 'project');
+  $query->join('project_workflow', 'wf', 'wf.nid = project.nid AND state = :state', array(':state' => 'unpublished'));
+  $query->addField('project', 'nid');
+  $query->groupBy('project.nid');
+  $unpublished = $query->execute()->fetchAllKeyed(0, 0);
+  
+  return $unpublished;
 }
