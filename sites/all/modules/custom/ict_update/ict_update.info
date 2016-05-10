@@ -1,7 +1,7 @@
 name = ICT Update
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.08
+version = 7.x-1.09
 project = ict_update
 dependencies[] = ctools
 dependencies[] = date
