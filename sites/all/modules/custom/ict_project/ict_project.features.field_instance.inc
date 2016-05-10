@@ -224,7 +224,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Describe the project through a summary of the delivery method, key outputs, strategic objectives and/or outcomes.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1002,6 +1002,7 @@ function ict_project_field_default_field_instances() {
   t('Abbreviation');
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
   t('Department');
+  t('Describe the project through a summary of the delivery method, key outputs, strategic objectives and/or outcomes.');
   t('Expenditure budget calc');
   t('Expenditure to date calc');
   t('Government Entity Name');

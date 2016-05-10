@@ -868,7 +868,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The position (including group, division & branch) of the Senior Responsible Officer.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -909,7 +909,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'update',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The name of the Senior Responsible Officer (SRO) for the delivery of the project.',
     'display' => array(
       'default' => array(
         'label' => 'above',
