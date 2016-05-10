@@ -646,12 +646,11 @@ function __ict_project_get_current_fin_year () {
  */
 function ict_project_is_published_project($nid) {
   $updates = ict_update_project_get_list($nid);
-  $project_state = ict_project_get_workflow_state($nid);
   $update_id = end($updates);
 
   if ($update_id) {
     $update_state = ict_project_get_workflow_state($update_id);
-    if (in_array($update_state, array('approved')) && in_array($project_state, array('approved'))) {
+    if (in_array($update_state, array('approved'))) {
       return TRUE;
     }
   }
