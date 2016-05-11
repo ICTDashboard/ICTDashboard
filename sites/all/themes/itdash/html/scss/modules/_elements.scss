@@ -1264,6 +1264,56 @@ body,
   }
 }
 
+#print-links-container {
+  text-align: right;
+  & .pdf_button {
+    margin-bottom: 38px;
+    & .print_pdf {
+      margin-left: 0px;
+      text-transform: uppercase;
+      & a.print-pdf {
+        min-width: 275px !important;
+        margin: 10px 10px 3px;
+      }
+    }
+  }
+}
+
+#project-listings{
+  h2 {
+    font-weight: 600;
+    color: #0d6c88;
+    font-size: 26px;
+    border-bottom: 1px solid #f0f4fa;
+    margin: 21px 0 30px;
+    padding: 0 0 8px;
+  }
+  .table-config-bar {
+    margin: 30px 0 18px;
+    .form-type-select {
+      label {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 6px;
+        vertical-align: middle;
+      }
+      .sbHolder {
+        width: auto;
+        min-width: 79px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .item-list {
+      float: right;
+    }
+    .pager {
+      margin: 0;
+    }
+  }
+}
+
 #project-baseline-history {
   & .project-history {
     border-bottom: 1px solid #f0f4fa;
@@ -1304,6 +1354,20 @@ body,
     }
   }
 }
+
+.other-option-buttons {
+  display: inline-block;
+  & .print_pdf {
+    margin-left: 0px;
+    text-transform: uppercase;
+    display: block;
+    & a.print-pdf {
+      min-width: 275px !important;
+      margin: 10px 10px 3px;
+    }
+  }
+}
+
 .object_and_summary, .entity_comments, span.tooltip-content {
   a {
     color: #0d6c88;

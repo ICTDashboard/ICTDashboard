@@ -10,6 +10,15 @@
 function ict_project_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'access PDF version'.
+  $permissions['access PDF version'] = array(
+    'name' => 'access PDF version',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'print_pdf',
+  );
+
   // Exported permission: 'create project content'.
   $permissions['create project content'] = array(
     'name' => 'create project content',
