@@ -73,8 +73,10 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
 //  FOR DEVELOPMENT PURPOSES ONLY!!!
 //    return TRUE;
   }
-
   if ($op == 'view' && $nid) {
+    if (array_key_exists(ICT_FINANCE_ADMIN_ROLE, $account->roles)) {
+      return TRUE;
+    }
     $state = ict_project_get_workflow_state($nid);
     $roles = array(ICT_ADMINISTRATOR_ROLE, ICT_FINANCE_ADMIN_ROLE);
 
