@@ -17,27 +17,6 @@
           <div class="expenditure-budget-value">
             <?php print '<strong>$' . number_format($current_year_expenditure, 1)  . 'm</strong> / $' . number_format($current_year_budget, 1) . 'm'; ?>
           </div>
-          <div id="overview-expenditure-switch">
-            <div >
-              <label><?php print t('Display'); ?></label>
-              <select>
-                <option value="current-fin-year-budget"><?php print t('Current Financial Year'); ?></option>
-                <option value="total-budget"><?php print t('All years'); ?></option>
-              </select>
-            </div>
-          </div>
-          <div class="legend" id="expenditure_legend">
-            <ul class="bar-legend">
-              <li>
-                <span style="background-color:#ff6161"></span>
-                <?php print t('Total Expenditure To Date ($m)'); ?>
-              </li>
-              <li>
-                <span style="background-color:#5c46a4"></span>
-                <?php print t('Total Budget ($m)'); ?>
-              </li>
-            </ul>
-          </div>
         </div>
 
         <div id="total-budget-graph" class="overview-expenditure-graphs" style="display: none;">
@@ -45,27 +24,28 @@
           <div class="expenditure-budget-value">
             <?php print '<strong>$' . number_format($total_expenditure, 1)  . 'm</strong> / $' . number_format($total_budget, 1) . 'm'; ?>
           </div>
-           <div id="overview-expenditure-switch">
-            <div >
-              <label><?php print t('Display'); ?></label>
-              <select>
-                <option value="current-fin-year-budget"><?php print t('Current Financial Year'); ?></option>
-                <option value="total-budget"><?php print t('All years'); ?></option>
-              </select>
-            </div>
+        </div>
+        
+        <div id="overview-expenditure-switch">
+          <div >
+            <label><?php print t('Display'); ?></label>
+            <select>
+              <option value="current-fin-year-budget"><?php print t('Current Financial Year'); ?></option>
+              <option value="total-budget"><?php print t('All years'); ?></option>
+            </select>
           </div>
-          <div class="legend" id="expenditure_legend">
-            <ul class="bar-legend">
-              <li>
-                <span style="background-color:#ff6161"></span>
-                <?php print t('Total Expenditure To Date ($m)'); ?>
-              </li>
-              <li>
-                <span style="background-color:#5c46a4"></span>
-                <?php print t('Total Budget ($m)'); ?>
-              </li>
-            </ul>
-          </div>
+        </div>
+        <div class="legend" id="expenditure_legend">
+          <ul class="bar-legend">
+            <li>
+              <span style="background-color:#ff6161"></span>
+              <?php print t('Total Expenditure To Date ($m)'); ?>
+            </li>
+            <li>
+              <span style="background-color:#5c46a4"></span>
+              <?php print t('Total Budget ($m)'); ?>
+            </li>
+          </ul>
         </div>
 
         <div class="row">
