@@ -333,6 +333,11 @@ function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALS
       // term reference fields
       $val = $item['taxonomy_term']->name;
     }
+    elseif (!isset($item['taxonomy_term']) && isset($item['tid'])) {
+      // term reference fields
+      $term = taxonomy_term_load($item['tid']);
+      $val = $term->name;
+    }
     elseif (isset($item['timezone'])) {
       // date fields
       $date = strtotime($item['value']);
