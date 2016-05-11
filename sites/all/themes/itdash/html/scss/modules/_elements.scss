@@ -1261,6 +1261,21 @@ body,
   }
 }
 
+#print-links-container {
+  text-align: right;
+  & .pdf_button {
+    margin-bottom: 38px;
+    & .print_pdf {
+      margin-left: 0px;
+      text-transform: uppercase;
+      & a.print-pdf {
+        min-width: 275px !important;
+        margin: 10px 10px 3px;
+      }
+    }
+  }
+}
+
 #project-listings{
   h2 {
     font-weight: 600;
@@ -1336,6 +1351,20 @@ body,
     }
   }
 }
+
+.other-option-buttons {
+  display: inline-block;
+  & .print_pdf {
+    margin-left: 0px;
+    text-transform: uppercase;
+    display: block;
+    & a.print-pdf {
+      min-width: 275px !important;
+      margin: 10px 10px 3px;
+    }
+  }
+}
+
 .object_and_summary, .entity_comments, span.tooltip-content {
   a {
     color: #0d6c88;

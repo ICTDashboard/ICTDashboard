@@ -12,7 +12,7 @@
     <div class="row">
       <div class="label">
         <?php print $field_government_entity_name['meta']['#title']; ?>
-        <?php if (!empty($field_government_entity_name['meta']['#description'])) : ?>
+        <?php if (!empty($field_government_entity_name['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -31,7 +31,7 @@
     <div class="row">
       <div class="label">
         <?php print $field_portfolio_name['meta']['#title']; ?>
-        <?php if (!empty($field_portfolio_name['meta']['#description'])) : ?>
+        <?php if (!empty($field_portfolio_name['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -53,7 +53,7 @@
           <?php print itdash_edited_tooltip_render($diff['field_implementation_partners']); ?>
         <?php endif; ?>
         <?php print $field_implementation_partners['meta']['#title']; ?>
-        <?php if (!empty($field_implementation_partners['meta']['#description'])) : ?>
+        <?php if (!empty($field_implementation_partners['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -78,7 +78,7 @@
     <div class="row">
       <div class="label">
         <?php print $field_program_name['meta']['#title']; ?>
-        <?php if (!empty($field_program_name['meta']['#description'])) : ?>
+        <?php if (!empty($field_program_name['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -97,7 +97,7 @@
     <div class="row">
       <div class="label">
         <?php print $field_brief_project_summary['meta']['#title']; ?>
-        <?php if (!empty($field_brief_project_summary['meta']['#description'])) : ?>
+        <?php if (!empty($field_brief_project_summary['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -116,12 +116,14 @@
 
     <div class="user-information"><h2>
     <?php print t('User Information'); ?>
-      <a href="javascript:void(0);" class="tooltip">
-        <i class="tooltip-icon"></i>
-        <span class="tooltip-content">
-          <?php print variable_get('ict_project_user_information_text', "No user information is made publicly available."); ?>
-        </span>
-      </a>
+      <?php if($view_mode != 'print'): ?>
+        <a href="javascript:void(0);" class="tooltip">
+          <i class="tooltip-icon"></i>
+          <span class="tooltip-content">
+            <?php print variable_get('ict_project_user_information_text', "No user information is made publicly available."); ?>
+          </span>
+        </a>
+      <?php endif; ?>
     </h2>
     </div>
 
@@ -131,7 +133,7 @@
           <?php print itdash_edited_tooltip_render($diff['field_responsible_officer_name']); ?>
         <?php endif; ?>
         <?php print $field_responsible_officer_name['meta']['#title']; ?>
-        <?php if (!empty($field_responsible_officer_name['meta']['#description'])) : ?>
+        <?php if (!empty($field_responsible_officer_name['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -158,7 +160,7 @@
           <?php print itdash_edited_tooltip_render($diff['field_resp_officer_position']); ?>
         <?php endif; ?>
         <?php print $field_resp_officer_position['meta']['#title']; ?>
-        <?php if (!empty($field_resp_officer_position['meta']['#description'])) : ?>
+        <?php if (!empty($field_resp_officer_position['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -200,7 +202,7 @@
       <div class="row">
         <div class="label">
           <?php print t('Project Budget By Financial Year'); ?>
-          <?php if (!empty($original_total_budget_meta['#description'])) : ?>
+          <?php if (!empty($original_total_budget_meta['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -208,7 +210,9 @@
               </span>
             </a>
           <?php endif; ?>
-          <?php print $preview_switch; ?>
+          <?php if ($view_mode != 'print'): ?>
+            <?php print $preview_switch; ?>
+          <?php endif; ?>
         </div>
         <div class="text">
           <?php print $field_original_total_budget; ?>
@@ -223,7 +227,7 @@
             <?php print itdash_edited_tooltip_render($diff['field_project_stage']->name); ?>
           <?php endif; ?>
           <?php print $field_project_stage['meta']['#title']; ?>
-          <?php if (!empty($field_project_stage['meta']['#description'])) : ?>
+          <?php if (!empty($field_project_stage['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -242,7 +246,7 @@
       <div class="row">
         <div class="label">
           <?php print $field_start_date['meta']['#title']; ?>
-          <?php if (!empty($field_start_date['meta']['#description'])) : ?>
+          <?php if (!empty($field_start_date['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -261,7 +265,7 @@
       <div class="row">
         <div class="label">
           <?php print $field_original_completion_date['meta']['#title']; ?>
-          <?php if (!empty($field_original_completion_date['meta']['#description'])) : ?>
+          <?php if (!empty($field_original_completion_date['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -281,7 +285,9 @@
         <div class="row">
           <div class="label">
             <?php print t('Project Benefits Status'); ?>
-            <?php print $preview_switch; ?>
+            <?php if ($view_mode != 'print'): ?>
+              <?php print $preview_switch; ?>
+            <?php endif; ?>
           </div>
           <div class="text">
             <?php print $project_benefits_pie_chart; ?>
@@ -291,19 +297,21 @@
 
     <div class="project-benefits">
       <h2 id="project-benefits"><?php print t('Project Benefits'); ?>
-      <a href="javascript:void(0);" class="tooltip">
-                <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print variable_get('ict_project_benefits_tooltip_text', "The measurable advantage to stakeholders, realised during or after the project has finished, as a result of the new capabilities produced."); ?>
-              </span>
-              </a>
-              </h2>
+        <?php if ($view_mode != 'print'): ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print variable_get('ict_project_benefits_tooltip_text', "The measurable advantage to stakeholders, realised during or after the project has finished, as a result of the new capabilities produced."); ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </h2>
     </div>
 
       <div class="row">
         <div class="label">
           <?php print $field_predicted_project_benefit['meta']['#title'] . ' <em>($m)</em>'; ?>
-          <?php if (!empty($field_predicted_project_benefit['meta']['#description'])) : ?>
+          <?php if (!empty($field_predicted_project_benefit['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -323,8 +331,10 @@
         <?php if (!$viz_preview) : ?>
           <div class="label">
             <?php print t('Benefits Realised'); ?>
-            <?php print $preview_switch; ?>
-            <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
+            <?php if ($view_mode != 'print'): ?>
+              <?php print $preview_switch; ?>
+            <?php endif; ?>
+            <?php if (!empty($form['field_benefits_realised']['#description']) && $view_mode != 'print') : ?>
               <a href="javascript:void(0);" class="tooltip">
                 <i class="tooltip-icon"></i>
                 <span class="tooltip-content">
@@ -341,24 +351,37 @@
 
     <?php endif; ?>
     <?php if (!empty($update_node)) : ?>
-      <?php print drupal_render(node_view($update_node)); ?>
+      <?php if ($view_mode == 'print') : ?>
+        <?php
+          $up_node = node_view($update_node, 'print');
+          print drupal_render($up_node); 
+        ?>
+      <?php else : ?>
+        <?php
+          $up_node = node_view($update_node);
+          print drupal_render($up_node);
+        ?>
+      <?php endif; ?>
+
     <?php endif; ?>
 
     <?php if (!empty($diff)) : ?>
-      <p><em><?php print itdash_edited_tooltip_render() . ' - ' . t('fields that was updated.'); ?></em></p>
+      <p class="diffs-provided"><em><?php print itdash_edited_tooltip_render() . ' - ' . t('fields that were updated.'); ?></em></p>
     <?php endif; ?>
 
     <?php if (isset($update_form)) : ?>
       <?php print $update_form; ?>
-    <?php endif; ?>
-
-    <?php if (isset($edit_form)) : ?>
+    <?php elseif (isset($edit_form)) : ?>
       <?php print $edit_form; ?>
-    <?php endif; ?>
-
-    <?php if (isset($approve_form)) : ?>
+    <?php elseif (isset($approve_form)) : ?>
       <?php print $approve_form; ?>
+    <?php else: ?>
+      <div id="print-links-container" class="wrap cf">
+        <div class="pdf_button submit">
+          <?php print print_pdf_insert_link(); ?>
+        </div>
+      </div>
     <?php endif; ?>
   </div>
 </div>
-<?php print theme('ict_pages_last_update', array('nid' => $nid));
+<?php print theme('ict_pages_last_update', array('nid' => $nid)); ?>
