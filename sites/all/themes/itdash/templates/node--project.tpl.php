@@ -281,35 +281,6 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="label">
-          <?php print t('Project Budget By Financial Year'); ?>
-          <?php if (!empty($original_total_budget_meta['#description']) && $view_mode != 'print') : ?>
-            <a href="javascript:void(0);" class="tooltip">
-              <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print $original_total_budget_meta['#description']; ?>
-              </span>
-            </a>
-          <?php endif; ?>
-          <?php if ($view_mode != 'print'): ?>
-            <?php print $preview_switch; ?>
-          <?php endif; ?>
-        </div>
-        <div class="text">
-          <?php print $field_original_total_budget; ?>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="label">
-          <?php print t('Total Project Budget'); ?>
-        </div>
-        <div class="text">
-          <?php print '$' . $original_total_budget_number . 'm'; ?>
-        </div>
-      </div>
-
       <?php if ($viz_preview) : ?>
         <div class="row">
           <div class="label">
