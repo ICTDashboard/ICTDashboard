@@ -52,7 +52,7 @@ body,
     a {
       color: #d5ff92;
       &:hover {
-        text-decoration: none;
+        text-decoration: underline;
       }
     }
 
@@ -154,9 +154,9 @@ body,
           font-size: 13px;
           font-weight: 500;
           padding-left: 25px;
-          text-decoration: none;
+          text-decoration: underline;
           &:hover {
-            text-decoration: none;
+            text-decoration: underline;
           }
           &:before {
             display: block;
@@ -357,7 +357,7 @@ body,
       }
     }
     .email-value {
-      text-decoration: none;
+      text-decoration: underline;
       display: block;
       color: #0d6c88;
       padding-left: 15px;
@@ -437,11 +437,11 @@ body,
       a {
         display: block;
         color: #027e9c;
-        text-decoration: none;
+        text-decoration: underline;
         &:focus,
         &:hover {
           color: #027e9c;
-          text-decoration: none;
+          text-decoration: underline;
         }
       }
     }
@@ -810,7 +810,7 @@ body,
       color: #0d6c88;
       border: 0;
       padding: 0;
-      text-decoration: none;
+      text-decoration: underline;
     }
     .history-button,
     .remove-wrap {
@@ -1100,11 +1100,11 @@ body,
         color: #202b3d;
         a {
           color: #202b3d;
-          text-decoration: none;
+          text-decoration: underline;
           &:focus,
           &:hover {
             color: #202b3d;
-            text-decoration: none;
+            text-decoration: underline;
           }
         }
       }
@@ -1171,6 +1171,9 @@ body,
     }
     #project-schedule-status-graph {
       margin-top: 12px;
+      a {
+        text-decoration: underline;
+      }
     }
     #statuses_legend {
       .bar-legend {
@@ -1385,7 +1388,7 @@ body,
 .object_and_summary, .entity_comments, span.tooltip-content {
   a {
     color: #0d6c88;
-    text-decoration: none;
+    text-decoration: underline;
     &:hover {
       color: #0d6c88;
     }
