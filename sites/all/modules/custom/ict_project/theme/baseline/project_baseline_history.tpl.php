@@ -59,7 +59,7 @@
 						</div>
 						<div class="text">
 							<?php print date('d M Y', $project->first_update); ?> - 
-							<?php print $old_baselines->unpublished_date ? date('d M Y', $old_baselines->unpublished_date) : t('Still active'); ?>
+							<?php print $project->unpublished_on ? date('d M Y', $project->unpublished_on) : t('Still active'); ?>
 						</div>
 					</div>
 					<div class="row">
