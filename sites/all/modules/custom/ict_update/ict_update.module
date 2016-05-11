@@ -1112,6 +1112,7 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
   $query->addField('p', 'entity_id', 'update_nid');
   $query->addField('pr', 'field_project_revision_value', 'project_vid');
   $query->condition('field_project_target_id', $project_id);
+  $query->condition('p.bundle', 'update');
   $query->join('field_data_field_project_revision', 'pr', 'pr.entity_id = p.entity_id');
   $query->orderBy('p.entity_id', 'ASC');
   $updates_res = $query->execute()->fetchAllAssoc('update_nid');
