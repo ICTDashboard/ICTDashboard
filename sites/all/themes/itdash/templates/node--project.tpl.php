@@ -5,6 +5,8 @@
   </div>
 </div>
 
+<?php print theme('ict_pages_last_update', array('nid' => $nid)); ?>
+
 <div id="inner-content" class="wrap cf">
   <h2><?php print t('Project Information'); ?></h2>
   <div class="project-draft-submission d-all ict-view-page">
@@ -384,4 +386,3 @@
     <?php endif; ?>
   </div>
 </div>
-<?php print theme('ict_pages_last_update', array('nid' => $nid)); ?>
