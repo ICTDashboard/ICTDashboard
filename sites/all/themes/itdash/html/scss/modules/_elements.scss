@@ -1261,6 +1261,41 @@ body,
   }
 }
 
+#project-listings{
+  h2 {
+    font-weight: 600;
+    color: #0d6c88;
+    font-size: 26px;
+    border-bottom: 1px solid #f0f4fa;
+    margin: 21px 0 30px;
+    padding: 0 0 8px;
+  }
+  .table-config-bar {
+    margin: 30px 0 18px;
+    .form-type-select {
+      label {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 6px;
+        vertical-align: middle;
+      }
+      .sbHolder {
+        width: auto;
+        min-width: 79px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .item-list {
+      float: right;
+    }
+    .pager {
+      margin: 0;
+    }
+  }
+}
+
 #project-baseline-history {
   & .project-history {
     border-bottom: 1px solid #f0f4fa;

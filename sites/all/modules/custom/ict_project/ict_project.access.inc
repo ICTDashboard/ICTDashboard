@@ -8,6 +8,7 @@ define ('ICT_PROJECT_APPROVER_ACCESS', 'approve');
 define ('ICT_PROJECT_EDITOR_ACCESS', 'edit');
 define ('ICT_DEPARTMENT_ADMIN_ROLE', '153917155');
 define ('ICT_FINANCE_ADMIN_ROLE', '41888116');
+define ('ICT_ADMINISTRATOR_ROLE', '30037204');
 
 /**
  * Adds approver to project
@@ -76,10 +77,11 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
     if (ict_project_is_published_project($nid)) {
       return TRUE;
     }
-    if (array_key_exists(ICT_FINANCE_ADMIN_ROLE, $account->roles)) {
-      return TRUE;
-    }
     $state = ict_project_get_workflow_state($nid);
+    $roles = array(ICT_ADMINISTRATOR_ROLE, ICT_FINANCE_ADMIN_ROLE);
+    if (array_intersect_key($account->roles, array_flip($roles))) {
+      return TRUE;
+    }    
     if (in_array($state, array('draft', 'waiting_approval', 'approved')) &&
       __ict_project_user_is_dep_member_for_project($nid, $account)) {
       return TRUE;
