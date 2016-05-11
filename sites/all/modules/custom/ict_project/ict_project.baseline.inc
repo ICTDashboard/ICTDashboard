@@ -756,6 +756,10 @@ function ict_project_get_parent_project ($node) {
 function ict_project_get_last_rebaseline_project($nid) {
   $rebaseline = '';
   $parent = ict_project_get_project_rebaseline ($nid);
+  if (!$parent && ict_project_get_parent_project($nid)) {
+    return $nid;
+  }
+
   $last_baseline = FALSE;
 
   if(!empty($parent['nid']) && ict_project_access_project('view', NULL, $parent['nid'])) {
@@ -911,13 +915,26 @@ function ict_project_project_history ($nid) {
   if ($current_baseline->type != 'project') {
     drupal_not_found();
   }
-  $old_baselines = array();
-  $projects = ict_project_get_all_parents_project($nid);
-  $budget_items = array();
   $current_baseline->approved_on = ict_project_get_approve_date($nid);
   $current_baseline->field_original_total_budget = number_format(ict_project_get_total_budget($nid), 2, '.', ' ');
   $current_baseline->first_update = ict_project_get_first_update($nid);
 
+  $old_baselines = ict_project_get_old_baselines($nid);
+
+  return theme('project_baseline_history', array(
+    'current_baseline' => $current_baseline,
+    'old_baselines' => $old_baselines,
+    'count_baselines' => count($old_baselines))
+  );
+}
+
+/**
+ * Gets old baselines for specified project
+ * @param $nid
+ */
+function ict_project_get_old_baselines($nid) {
+  $old_baselines = array();
+  $projects = ict_project_get_all_parents_project($nid);
   if (is_array($projects) && !empty($projects)) {
     $old_baselines = node_load_multiple($projects);
     foreach ($projects as $project_id) {
@@ -927,8 +944,7 @@ function ict_project_project_history ($nid) {
       $old_baselines[$project_id]->first_update = ict_project_get_first_update($project_id);
     }
   }
-
-  return theme('project_baseline_history', array('current_baseline' => $current_baseline, 'old_baselines' => $old_baselines, 'count_baslines' => count($old_baselines)));
+  return $old_baselines;
 }
 
 /**
