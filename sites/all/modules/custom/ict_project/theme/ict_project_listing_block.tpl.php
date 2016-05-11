@@ -151,6 +151,15 @@
                     <span><?php print t('Manage Users'); ?></span>
                   </a>
                 <?php endif; ?>
+
+                <?php if (ict_project_access_project('rebaseline', $user, $project->nid)) : ?>
+                  <a href="<?php print url('project/' . $project->nid .'/rebaseline', array(
+                      'query' => array('destination' => 'projects')
+                    )
+                  ); ?>">
+                    <span><?php print t('Create Re-baseline Draft'); ?></span>
+                  </a>
+                <?php endif; ?>
               </td>
             </tr>
           <?php endforeach; ?>
@@ -165,7 +174,10 @@
     <?php endif; ?>
 
     <?php if ($pager) : ?>
-      <?php print $pager; ?>
+      <div class="table-config-bar">
+        <?php print theme('pager', array('tags' => $pager_tags)); ?>
+        <?php print render($pager); ?>
+      </div>
     <?php endif; ?>
   </div>
 </div>
