@@ -104,6 +104,133 @@ function ict_project_baseline_edit_draft_block ($nid) {
 }
 
 /**
+ * Baseline Edit Draft block
+ * @param $nid
+ * @return string
+ */
+function ict_project_rebaseline_create_block ($parent_project) {
+  global $user;
+
+  $parent_project = node_load($parent_project);
+  $node = clone $parent_project;
+
+  if (!$parent_project) {
+    drupal_not_found();
+  }
+
+  if (!ict_project_access_project('rebaseline', NULL, $parent_project->nid)) {
+    drupal_access_denied();
+  }
+
+  // main IDs
+  $node->nid = NULL;
+  $node->vid = NULL;
+  $node->tnid = NULL;
+  $node->log = NULL;
+
+  // Also handle modules that attach a UUID to the node.
+  $node->uuid = NULL;
+  $node->vuuid = NULL;
+
+  // user
+  $node->name = $user->name;
+  $node->uid = $user->uid;
+
+  // other stuff
+  $node->created = NULL;
+  if (isset($node->book['mlid'])) {
+    $node->book['mlid'] = NULL;
+    $node->book['has_children'] = 0;
+  }
+  $node->path = NULL;
+  $node->files = array();
+
+  // calc fields removed
+  $node->field_expenditure_budget_calc = NULL;
+  $node->field_expenditure_to_date_calc = NULL;
+  $node->field_number_of_benefits_calc = NULL;
+  $node->field_schedule_status_calc = NULL;
+
+  // field collections should be cloned
+  foreach (field_info_fields() as $field_name => $field) {
+    if ($field['type'] == 'field_collection' && isset($node->$field_name)) {
+      foreach ($node->$field_name as $language => $values) {
+        ict_project_field_collection_clone_items('node', $node, $field_name, $language);
+      }
+    }
+  }
+
+  // assign parent project
+  $node->field_project[LANGUAGE_NONE][0]['target_id'] = $parent_project->nid;
+
+  // get form
+  module_load_include('inc', 'node', 'node.pages');
+  $form = drupal_get_form('project_node_form', $node);
+
+  // makes form elements titles
+  function prepare_for_display(&$elem, &$form) {
+    foreach (element_children($elem) as $element) {
+      $elem[$element]['#title_display'] = 'invisible';
+      $parent_element = &$form[reset($elem[$element]['#array_parents'])];
+      if (!empty($elem[$element]['#description'])) {
+        $parent_element['#description'] = $elem[$element]['#description'];
+        $elem[$element]['#description'] = NULL;
+      }
+      if (!empty($elem[$element]['#title'])) {
+        $parent_element['#title'] = $elem[$element]['#title'];
+      }
+      prepare_for_display($elem[$element], $form);
+    }
+  }
+
+  foreach (element_children($form) as $element) {
+    $element_name = explode('_', $element);
+    if (reset($element_name) == 'field' || $element == 'title') {
+      $form[$element]['#title_display'] = 'invisible';
+      prepare_for_display($form[$element], $form);
+    }
+  }
+
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'ict_project') . '/js/ict_project.js',
+  );
+
+  // PROJECT ADMIN USERS
+  $project_admins = ict_project_baseline_get_admin_user_emails($parent_project);
+  $form['admin_user_details'] = array(
+    '#type' => 'markup',
+    '#markup' => theme('ict_project_baseline_admin_user_details', array(
+      'departmental_admins' => $project_admins['departmental_admins'],
+      'data_editors' => $project_admins['data_editors'],
+      'data_approvers' => $project_admins['data_approvers']
+    ))
+  );
+
+  $form['actions']['submit']['#attributes']['class'][] = 'submit-button';
+  $form['actions']['submit']['#value'] = t('Create re-baseline');
+  $form['actions']['submit_request']['#attributes']['class'][] = 'submit-button';
+  $form['#theme'] = 'ict_project_baseline_edit_draft';
+  $form['#page_title'] = t('ICT Project Re-baseline Submission Form');
+
+  return drupal_render($form);
+}
+
+/**
+ * Copy editors and approvers from parent project
+ * @param $node
+ */
+function ict_project_copy_editors_and_approvers($node) {
+  $parent_project = ict_project_get_parent_project($node);
+  $project_users = ict_project_baseline_get_admin_user_emails($parent_project);
+  foreach ($project_users['data_approvers'] as $approver_email) {
+    ict_project_access_add_approver($approver_email, $node->nid);
+  }
+  foreach ($project_users['data_editors'] as $editor_email) {
+    ict_project_access_add_editor($editor_email, $node->nid);
+  }
+}
+
+/**
  * Baseline Approve block
  * @param $nid
  * @return string
@@ -286,6 +413,8 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
  * @return array
  */
 function ict_project_baseline_get_admin_user_emails ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
   $project_department = ict_department_get_department_tid_of_entity('project', $node);
   $query = db_select('users', 'u');
   $query->join('field_data_field_department', 'd', 'd.entity_id = u.uid');
@@ -508,4 +637,281 @@ function __ict_project_get_current_fin_year () {
     $current_date > new DateTime ($current_year_long . '-07-01 00:00:00') ?
       $current_year_short . '/' . ($current_year_short + 1) :
       ($current_year_short - 1) . '/' . $current_year_short;
+}
+
+/**
+ * Checks if project is published
+ * @param $nid
+ * @return bool
+ */
+function ict_project_is_published_project($nid) {
+  $updates = ict_update_project_get_list($nid);
+  $update_id = end($updates);
+
+  if ($update_id) {
+    $update_state = ict_project_get_workflow_state($update_id);
+    if (in_array($update_state, array('approved'))) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Clone a Field Collection. Helper function for hook_node_clone_alter().
+ * Taken from field_collection_clone_items() - https://www.drupal.org/project/field_collection_node_clone
+ */
+function ict_project_field_collection_clone_items($entity_type, &$entity, $fc_field, $language = LANGUAGE_NONE) {
+  $entity_wrapper = entity_metadata_wrapper($entity_type, $entity);
+  $old_items = $entity_wrapper->{$fc_field}->value();
+  if (!is_array($old_items)) {
+    $old_items = array($old_items);
+  }
+
+  $field_info_instances = field_info_instances();
+  $field_names = element_children($field_info_instances['field_collection_item'][$fc_field]);
+
+  unset($entity->{$fc_field}[$language]);
+
+  foreach ($old_items as $old_item) {
+    $new_item = entity_create('field_collection_item', array('field_name' => $fc_field));
+    $new_item->setHostEntity($entity_type, $entity);
+
+    foreach ($field_names as $field_name) {
+      if (!empty($old_item->{$field_name})) {
+        $new_item->{$field_name} = $old_item->{$field_name};
+      }
+    }
+
+    // Now check if any of the fields in the newly cloned fc item is a field
+    // collection and recursively call this function to properly clone it.
+    foreach ($field_names as $field_name) {
+      if (!empty($new_item->{$field_name})) {
+        $field_info = field_info_field($field_name);
+        if ($field_info['type'] == 'field_collection') {
+          field_collection_clone_items('field_collection_item', $new_item, $field_name, $language);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Gets re-baseline of the project
+ * @param $nid
+ * @return array
+ */
+function ict_project_get_project_rebaseline ($project_id) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));
+  $query->join('field_data_field_project', 'baseline', 'baseline.entity_id = n.nid');
+  $query->condition('n.type', 'project');
+  $query->condition('baseline.field_project_target_id', $project_id);
+  return $query->execute()->fetchAssoc();
+}
+
+/**
+ * Checks if project is a re-baseline
+ * @param $node|$nid
+ * @return bool
+ */
+function ict_project_is_rebaseline ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
+  if ($node->type != 'project') {
+    return FALSE;
+  }
+
+  if (!empty($node->field_project[LANGUAGE_NONE][0]['target_id'])) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Gets parent project
+ * @param $node|$nid
+ * @return int
+ */
+function ict_project_get_parent_project ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
+  if ($node->type != 'project') {
+    return FALSE;
+  }
+
+  if (!empty($node->field_project[LANGUAGE_NONE][0]['target_id'])) {
+    return $node->field_project[LANGUAGE_NONE][0]['target_id'];
+  }
+
+  return FALSE;
+}
+
+/**
+ * Get project first approve date
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_approve_date($nid) {
+  $query = db_select('project_workflow', 'pw');
+  $query->fields('pw', array('created'));
+  $query->condition('pw.nid', $nid, '=');
+  $query->condition('state', 'approved');
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get project unpublished date
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_unpublished_date($nid) {
+  $query = db_select('project_workflow', 'pw');
+  $query->fields('pw', array('created'));
+  $query->condition('pw.nid', $nid, '=');
+  $query->condition('state', 'unpublished');
+
+  return $query->execute()->fetchField();
+}
+
+
+/**
+ * Gets all project relatives
+ * @param $node|$nid
+ * @return int
+ */
+function ict_project_get_all_parents_project($node) {
+  $relatives = array();
+  $parent = ict_project_get_parent_project ($node);
+
+  if ($parent) {
+    array_push($relatives, $parent);
+    do {
+      $nid = $parent;
+      $parent = ict_project_get_parent_project ($nid);
+      if ($parent) {
+        array_push($relatives, $parent);
+      }
+    } while($parent);
+  }
+
+  return $relatives;
+}
+
+/**
+ * Gets total budget
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_total_budget($nid) {
+  if ($nid) {
+    $budget_items = _ict_project_prepare_budget_history($nid, 'view');
+  }
+
+  // should show previous approved values OR current pendong values only
+  $baseline_row = reset($budget_items);
+  $last_update = end($budget_items);
+
+  if ($last_update['entity_type'] == 'update') {
+    $budget_items = array($baseline_row, $last_update);
+  }
+  else {
+    $budget_items = array($baseline_row);
+  }
+
+  // total budget and expenditure values
+  $total_budget = 0;
+  foreach ($budget_items[0]['budget_items'] as $budget_value) {
+    $total_budget += (float)$budget_value->field_total[LANGUAGE_NONE][0]['value'];
+  }
+
+  return $total_budget;
+}
+
+/**
+ * Get project first update
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_first_update($nid) {
+  $update_nids = array();
+  $updates = ict_update_get_allowed_entity_list($nid);
+
+  foreach ($updates as $update) {
+    $update_nids = $update;
+  }
+
+  if (!empty($update_nids)) {
+    $query = db_select('project_workflow', 'pw');
+    $query->fields('pw', array('created'));
+    $query->condition('pw.nid', $update_nids, 'IN');
+    $query->condition('state', 'approved');
+    $query->orderBy('pw.created', 'ASC');
+    $query->range(0 ,1);
+
+    return $query->execute()->fetchField();
+  }
+
+  return '';
+}
+
+/**
+ * Get project baseline history block
+ * @param $nid
+ * @return theme
+ */
+function ict_project_project_history ($nid) {
+
+  if (!ict_project_access_project('view', NULL, $nid)) {
+    drupal_access_denied();
+  }
+
+  $current_baseline = node_load($nid);
+
+  if ($current_baseline->type != 'project') {
+    drupal_not_found();
+  }
+  $old_baselines = array();
+  $projects = ict_project_get_all_parents_project($nid);
+  $budget_items = array();
+  $current_baseline->approved_on = ict_project_get_approve_date($nid);
+  $current_baseline->field_original_total_budget = number_format(ict_project_get_total_budget($nid), 2, '.', ' ');
+  $current_baseline->first_update = ict_project_get_first_update($nid);
+
+  if (is_array($projects) && !empty($projects)) {
+    $old_baselines = node_load_multiple($projects);
+    foreach ($projects as $project_id) {
+      $old_baselines[$project_id]->approved_on = ict_project_get_approve_date($project_id);
+      $old_baselines[$project_id]->unpublished_on = ict_project_get_unpublished_date($project_id);
+      $old_baselines[$project_id]->field_original_total_budget = number_format(ict_project_get_total_budget($project_id), 2, '.', ' ');
+      $old_baselines[$project_id]->first_update = ict_project_get_first_update($project_id);
+    }
+  }
+
+  return theme('project_baseline_history', array('current_baseline' => $current_baseline, 'old_baselines' => $old_baselines, 'count_baslines' => count($old_baselines)));
+}
+
+
+/**
+ * Gets all unpublished projects
+ * @return mixed
+ */
+function ict_project_get_all_unpublished_projects() {
+
+  $unpublished = &drupal_static(__FUNCTION__);
+
+  if (isset($unpublished)) {
+    return $unpublished;
+  }
+
+  $query = db_select('node', 'project');
+  $query->condition('project.type', 'project');
+  $query->join('project_workflow', 'wf', 'wf.nid = project.nid AND state = :state', array(':state' => 'unpublished'));
+  $query->addField('project', 'nid');
+  $query->groupBy('project.nid');
+  $unpublished = $query->execute()->fetchAllKeyed(0, 0);
+  
+  return $unpublished;
 }

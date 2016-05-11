@@ -71,10 +71,17 @@ function template_preprocess_ict_viz_home_projects(&$vars) {
   $statuses_info = field_info_field('field_schedule_status_calc');
   $vars['statuses'] = $statuses_info['settings']['allowed_values'];
 
+  // unpublished projects
+  $unpublished_projects = ict_project_get_all_unpublished_projects();
+
   // Project query
   $query = db_select('node', 'project');
   $query->distinct();
   $query->join('field_data_field_project', 'update_node', 'project.nid = update_node.field_project_target_id');
+  $query->condition('update_node.bundle', 'update');
+  if ($unpublished_projects) {
+    $query->condition('project.nid', $unpublished_projects, 'NOT IN');
+  }
   $query->leftJoin('field_data_field_expenditure_budget_calc', 'budget', 'project.nid = budget.entity_id');
   $query->leftJoin('field_data_field_expenditure_to_date_calc', 'to_date', 'project.nid = to_date.entity_id');
   $query->leftJoin('field_data_field_number_of_benefits_calc', 'benefits', 'project.nid = benefits.entity_id');
@@ -189,6 +196,9 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
     array(),
   );
 
+  // unpublished projects
+  $unpublished_projects = ict_project_get_all_unpublished_projects();
+
   // Get available statuses
   $statuses_info = field_info_field('field_schedule_status_calc');
   $vars['statuses'] = $statuses_info['settings']['allowed_values'];
@@ -202,6 +212,9 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
   // Project query
   $query = db_select('node', 'project');
   $query->join($subquery, 'last_upd', 'last_upd.project_id = project.nid');
+  if ($unpublished_projects) {
+    $query->condition('project.nid', $unpublished_projects, 'NOT IN');
+  }
   $query->leftJoin('field_data_field_expenditure_budget_calc', 'budget', 'project.nid = budget.entity_id');
   $query->leftJoin('field_data_field_start_date', 'o_comp_date', 'project.nid = o_comp_date.entity_id');
   $query->leftJoin('field_data_field_schedule_status_calc', 'status', 'project.nid = status.entity_id');
