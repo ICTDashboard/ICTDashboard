@@ -52,7 +52,7 @@ body,
     a {
       color: #d5ff92;
       &:hover {
-        text-decoration: none;
+        text-decoration: underline;
       }
     }
 
@@ -154,9 +154,9 @@ body,
           font-size: 13px;
           font-weight: 500;
           padding-left: 25px;
-          text-decoration: none;
+          text-decoration: underline;
           &:hover {
-            text-decoration: none;
+            text-decoration: underline;
           }
           &:before {
             display: block;
@@ -357,7 +357,7 @@ body,
       }
     }
     .email-value {
-      text-decoration: none;
+      text-decoration: underline;
       display: block;
       color: #0d6c88;
       padding-left: 15px;
@@ -437,11 +437,11 @@ body,
       a {
         display: block;
         color: #027e9c;
-        text-decoration: none;
+        text-decoration: underline;
         &:focus,
         &:hover {
           color: #027e9c;
-          text-decoration: none;
+          text-decoration: underline;
         }
       }
     }
@@ -810,7 +810,7 @@ body,
       color: #0d6c88;
       border: 0;
       padding: 0;
-      text-decoration: none;
+      text-decoration: underline;
     }
     .history-button,
     .remove-wrap {
@@ -1100,11 +1100,11 @@ body,
         color: #202b3d;
         a {
           color: #202b3d;
-          text-decoration: none;
+          text-decoration: underline;
           &:focus,
           &:hover {
             color: #202b3d;
-            text-decoration: none;
+            text-decoration: underline;
           }
         }
       }
@@ -1122,10 +1122,12 @@ body,
   }
   #overview-graphs {
     padding-right: 90px;
+    .label {
+      margin-bottom: 11px;
+    }
     #overview-expenditure-switch {
       position: relative;
-      margin-top: 15px;
-      margin-bottom: 15px;
+      margin-top: 5px;
       label {
         font-weight: bold;
         float: left;
@@ -1169,6 +1171,9 @@ body,
     }
     #project-schedule-status-graph {
       margin-top: 12px;
+      a {
+        text-decoration: underline;
+      }
     }
     #statuses_legend {
       .bar-legend {
@@ -1292,6 +1297,40 @@ body,
     }
 }
 
+#project-listings{
+  h2 {
+    font-weight: 600;
+    color: #0d6c88;
+    font-size: 26px;
+    border-bottom: 1px solid #f0f4fa;
+    margin: 21px 0 30px;
+    padding: 0 0 8px;
+  }
+  .table-config-bar {
+    margin: 30px 0 18px;
+    .form-type-select {
+      label {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 6px;
+        vertical-align: middle;
+      }
+      .sbHolder {
+        width: auto;
+        min-width: 79px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .item-list {
+      float: right;
+    }
+    .pager {
+      margin: 0;
+    }
+  }
+}
 #project-baseline-history {
   & .project-history {
     border-bottom: 1px solid #f0f4fa;
@@ -1349,7 +1388,7 @@ body,
 .object_and_summary, .entity_comments, span.tooltip-content {
   a {
     color: #0d6c88;
-    text-decoration: none;
+    text-decoration: underline;
     &:hover {
       color: #0d6c88;
     }

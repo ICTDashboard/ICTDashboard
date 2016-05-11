@@ -348,7 +348,7 @@ CONTENT STYLES
 								font-size: 14px;
 								font-weight: 600;
 								color: #0d6c88;
-								text-decoration: none;
+								text-decoration: underline;
 							}
 
 						}
@@ -1785,7 +1785,7 @@ mobile. Make sure to double check these!
 				}
 				a{
 					color: #363a41;
-					text-decoration: none;
+					text-decoration: underline;
 					&:hover{
 						text-decoration: underline;
 					}
