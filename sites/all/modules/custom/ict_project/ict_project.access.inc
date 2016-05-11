@@ -80,7 +80,7 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
       return TRUE;
     }
     $state = ict_project_get_workflow_state($nid);
-    if (in_array($state, array('draft', 'waiting_approval')) &&
+    if (in_array($state, array('draft', 'waiting_approval', 'approved')) &&
       __ict_project_user_is_dep_member_for_project($nid, $account)) {
       return TRUE;
     }
