@@ -749,6 +749,11 @@ function ict_project_get_parent_project ($node) {
   return FALSE;
 }
 
+/**
+ * Gets last rebaseline project
+ * @param $node|$nid
+ * @return int
+ */
 function ict_project_get_last_rebaseline_project($nid) {
   $rebaseline = '';
   $parent = ict_project_get_project_rebaseline ($nid);
@@ -766,6 +771,21 @@ function ict_project_get_last_rebaseline_project($nid) {
   }
   return $rebaseline;
 }
+
+/**
+ * Gets all rebaseline projects
+ * @param $node|$nid
+ * @return int
+ */
+ function ict_project_get_all_rebaselines($nid) {
+  $rebaseline = ict_project_get_last_rebaseline_project($nid);
+  $check_rebaseline = ict_project_is_rebaseline ($rebaseline);
+
+  if(!empty($check_rebaseline) && $check_rebaseline == TRUE) {
+    $rebaselines = ict_project_get_all_parents_project($rebaseline);
+  }
+  return $rebaselines;
+ }
 
 /**
  * Get project first approve date
