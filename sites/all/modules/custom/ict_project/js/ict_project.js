@@ -82,28 +82,30 @@
   });
 
 // overriding autocomplete popup behevior
-Drupal.jsAC.prototype.populatePopup = function () {
-  var $input = $(this.input);
-  var position = $input.position();
-  // Show popup.
-  if (this.popup) {
-    $(this.popup).remove();
-  }
-  this.selected = false;
-  this.popup = $('<div id="autocomplete"></div>')[0];
-  this.popup.owner = this;
-  $(this.popup).css({
-    top: parseInt(position.top + this.input.offsetHeight, 10) + 'px',
-    left: parseInt(position.left, 10) + 'px',
-    width: $input.innerWidth() + 2 + 'px',
-    display: 'none'
-  });
-  $input.before(this.popup);
+if (Drupal.jsAC) {
+  Drupal.jsAC.prototype.populatePopup = function () {
+    var $input = $(this.input);
+    var position = $input.position();
+    // Show popup.
+    if (this.popup) {
+      $(this.popup).remove();
+    }
+    this.selected = false;
+    this.popup = $('<div id="autocomplete"></div>')[0];
+    this.popup.owner = this;
+    $(this.popup).css({
+      top: parseInt(position.top + this.input.offsetHeight, 10) + 'px',
+      left: parseInt(position.left, 10) + 'px',
+      width: $input.innerWidth() + 2 + 'px',
+      display: 'none'
+    });
+    $input.before(this.popup);
 
-  // Do search.
-  this.db.owner = this;
-  this.db.search(this.input.value);
-};
+    // Do search.
+    this.db.owner = this;
+    this.db.search(this.input.value);
+  };
+}
 
 Drupal.behaviors.totalExpenditure = {
         attach: function(context) {
