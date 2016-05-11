@@ -151,6 +151,15 @@
                     <span><?php print t('Manage Users'); ?></span>
                   </a>
                 <?php endif; ?>
+
+                <?php if (ict_project_access_project('rebaseline', $user, $project->nid)) : ?>
+                  <a href="<?php print url('project/' . $project->nid .'/rebaseline', array(
+                      'query' => array('destination' => 'projects')
+                    )
+                  ); ?>">
+                    <span><?php print t('Create Re-baseline Draft'); ?></span>
+                  </a>
+                <?php endif; ?>
               </td>
             </tr>
           <?php endforeach; ?>

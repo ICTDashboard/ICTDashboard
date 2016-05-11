@@ -20,6 +20,12 @@ function ict_project_project_list_block() {
     ->fields('n', array('nid', 'title', 'changed'))
     ->condition('n.type', 'project');
 
+  // unpublished project should be excluded
+  $unpublished_projects = ict_project_get_all_unpublished_projects();
+  if ($unpublished_projects) {
+    $query->condition('n.nid', $unpublished_projects, 'NOT IN');
+  }
+
   $tid = !empty($user->field_department[LANGUAGE_NONE][0]['tid']) ?
     $user->field_department[LANGUAGE_NONE][0]['tid'] :
     NULL;
@@ -70,6 +76,8 @@ function ict_project_project_list_block() {
   if ($per_page) {
     $query->range($page * $per_page, $per_page);
   }
+
+  $query->groupBy('n.nid');
 
   $results = $query
     ->orderBy('n.changed', 'DESC')

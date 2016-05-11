@@ -742,6 +742,7 @@ function ict_update_project_get_list($project_id, $state = NULL) {
   $query = db_select('field_data_field_project', 'p');
   $query->addField('p', 'entity_id');
   $query->condition('field_project_target_id', $project_id);
+  $query->condition('bundle', 'update');
   if ($state) {
     $query->join('project_workflow', 'w', "w.state = '" . $state . "' AND w.nid = p.entity_id");
   }
@@ -857,7 +858,6 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('approved', $nid);
-    drupal_set_message(t('Update data has been approved.'));
 
     $project_id = $node->field_project['und'][0]['target_id'];
     if ($project = node_load($project_id)) {
@@ -871,6 +871,27 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
         $val->save();
       }
     }
+
+    $status_message = t('Update data has been approved.');
+
+    // unpublish parent project if first update approved
+    if (ict_project_is_rebaseline($project_id)) {
+      $parent_project = ict_project_get_parent_project($project_id);
+
+      // if first update
+      if (!ict_update_project_get_list($parent_project, 'unpublished')) {
+        $baseline_node = node_load($parent_project);
+        $baseline_node->revision = TRUE;
+        node_save($baseline_node);
+
+        ict_project_set_workflow_state('unpublished', $baseline_node->nid);
+
+        $status_message = t('Update Data has been approved. Previous baseline has been unpublished.');
+      }
+    }
+
+    drupal_set_message($status_message);
+    
     ict_update_calculate_project_fields($form['#nid'], $nid);
   }
 }

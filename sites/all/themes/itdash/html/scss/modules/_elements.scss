@@ -1296,6 +1296,33 @@ body,
   }
 }
 
+#project-baseline-history {
+  & .project-history {
+    border-bottom: 1px solid #f0f4fa;
+    padding-bottom: 10px;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  & .project-history > .label {
+    color: #202b3d;
+    font-weight: 700;
+    font-size: 16px;
+    padding-bottom: 9px;
+    padding-right: 15px;
+    padding-top: 9px;
+  }
+  & .project-history .sub-content {
+    padding-left: 15px;
+  }
+  & .pbh-buttons {
+    & a {
+      width: 180px;
+    }
+    margin-bottom: 50px;
+  }
+}
+
 .project-draft-submission {
   .row {
     .text {
