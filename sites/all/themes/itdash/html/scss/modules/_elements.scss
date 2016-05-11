@@ -1122,10 +1122,12 @@ body,
   }
   #overview-graphs {
     padding-right: 90px;
+    .label {
+      margin-bottom: 11px;
+    }
     #overview-expenditure-switch {
       position: relative;
-      margin-top: 15px;
-      margin-bottom: 15px;
+      margin-top: 5px;
       label {
         font-weight: bold;
         float: left;
