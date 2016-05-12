@@ -135,3 +135,43 @@ function ict_project_update_7304() {
   );
   db_add_field( 'project_workflow', 'comment', $spec);
 }
+
+/**
+ * Removes orphaned project_access and project_workflow records
+ */
+function ict_project_update_7305() {
+  $query = db_select('node', 'n');
+  $query->distinct();
+  $query->addField('n', 'nid');
+  $query->condition('n.type', array('project', 'update'), 'IN');
+  $nodes = $query->execute()->fetchAllKeyed(0, 0);
+
+  $query = db_select('project_access', 'a');
+  $query->addField('a', 'nid');
+  if ($nodes) {
+    $query->condition('a.nid', $nodes, 'NOT IN');
+  }
+  $orphaned_access_records = $query->execute()->fetchAllKeyed(0, 0);
+
+  if ($orphaned_access_records) {
+    // delete workflow records
+    $num_deleted = db_delete('project_access')
+      ->condition('nid', $orphaned_access_records, 'IN')
+      ->execute();
+  }
+
+  $query = db_select('project_workflow', 'w');
+  $query->addField('w', 'nid');
+  if ($nodes) {
+    $query->condition('w.nid', $nodes, 'NOT IN');
+  }
+  $orphaned_workflow_records = $query->execute()->fetchAllKeyed(0, 0);
+
+  if ($orphaned_workflow_records) {
+    // remove approvers and editors
+    $num_deleted = db_delete('project_workflow')
+      ->condition('nid', $orphaned_workflow_records, 'IN')
+      ->execute();
+  }
+  return 'Orphaned records removed';
+}

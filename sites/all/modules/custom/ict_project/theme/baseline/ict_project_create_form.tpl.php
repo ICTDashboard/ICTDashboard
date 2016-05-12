@@ -1,6 +1,6 @@
 <div class="page-title dotbg">
 	<div class="inner-title-content wrap cf">
-		<h1><?php print t('Create Project'); ?></h1>
+		<h1><?php print empty($form['#page_title']) ? t('Create Project') : $form['#page_title']; ?></h1>
 	</div>
 </div>
 <div id="inner-content" class="wrap cf project-update-submission">
