@@ -265,6 +265,9 @@ textarea.is-invalid,
     padding: 15px 15px 15px 60px;
     font-size: 14px;
 }
+.ict-faq-answer a:hover{
+  text-decoration: none;
+}
 .sbHolderDisabled {
     background-color: #ced6e6;
     /*border: inherit;*/
