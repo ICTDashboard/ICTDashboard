@@ -176,12 +176,14 @@ function ict_project_preprocess_node(&$vars) {
         'departmental_admins' => $project_admins['departmental_admins'],
         'data_editors' => $project_admins['data_editors'],
         'data_approvers' => $project_admins['data_approvers'],
-        'project_id' => $node->nid
+        'project_id' => $node->nid,
+        'view_mode' => $view_mode
       )
     );
 
     // Set up template suggestions for non-standard view modes
-    if ($view_mode !== 'full') {
+    $modes = array('full', 'PDF', 'print');
+    if (!in_array($view_mode, $modes)) {
       $vars['theme_hook_suggestions'][] = 'node__' . $node->type . '__' . $view_mode;
       return;
     }

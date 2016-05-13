@@ -46,11 +46,11 @@
 				</a>
 			</div>
 		</div>
-		<h2><?php print t('Previous Baselines (!count)', array('!count' => $count_baslines)); ?></h2>
+		<h2><?php print t('Previous Baselines (!count)', array('!count' => $count_baselines)); ?></h2>
 		<?php foreach($old_baselines as $key => $project): ?>
 			<div class="project-history">
 				<div class="label">
-					<?php print $count_baslines--; ?>.
+					<?php print $count_baselines--; ?>.
 				</div>
 				<div class="project-draft-submission ict-view-page sub-content">
 					<div class="row">

@@ -24,7 +24,7 @@
     <div class="row">
       <div class="label">
         <?php print t('Project Expenditure and Budget'); ?>
-        <?php if (!empty($original_total_budget_meta['#description'])) : ?>
+        <?php if (!empty($original_total_budget_meta['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -32,7 +32,9 @@
               </span>
           </a>
         <?php endif; ?>
-        <?php print $preview_switch; ?>
+        <?php if ($view_mode != 'print'): ?>
+          <?php print $preview_switch; ?>
+        <?php endif; ?>
       </div>
       <div class="text">
         <?php print $field_original_total_budget; ?>
@@ -47,7 +49,7 @@
             <?php print itdash_edited_tooltip_render($diff['field_actual_level_of_project_co'], '', '%'); ?>
           <?php endif; ?>
           <?php print $field_actual_level_of_project_co['meta']['#title']; ?>
-          <?php if (!empty($field_actual_level_of_project_co['meta']['#description'])) : ?>
+          <?php if (!empty($field_actual_level_of_project_co['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -55,7 +57,9 @@
               </span>
             </a>
           <?php endif; ?>
-          <?php print $preview_switch; ?>
+          <?php if ($view_mode != 'print'): ?>
+            <?php print $preview_switch; ?>
+          <?php endif; ?>
         </div>
         <div class="text">
           <?php foreach (_ict_project_baseline_get_simple_values($field_actual_level_of_project_co, FALSE, '', '%') as $value) : ?>
@@ -70,7 +74,7 @@
             <?php print itdash_edited_tooltip_render($diff['field_forecast_level_of_project_'], '', '%'); ?>
           <?php endif; ?>
           <?php print $field_forecast_level_of_project_['meta']['#title']; ?>
-          <?php if (!empty($field_forecast_level_of_project_['meta']['#description'])) : ?>
+          <?php if (!empty($field_forecast_level_of_project_['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -78,7 +82,9 @@
               </span>
             </a>
           <?php endif; ?>
-          <?php print $preview_switch; ?>
+          <?php if ($view_mode != 'print'): ?>
+            <?php print $preview_switch; ?>
+          <?php endif; ?>
         </div>
         <div class="text">
           <?php foreach (_ict_project_baseline_get_simple_values($field_forecast_level_of_project_, FALSE, '', '%') as $value) : ?>
@@ -96,7 +102,9 @@
               <?php print t('The actual percentage of work completed at the current update and the percentage of work forecasted to be completed at the current update.'); ?>
             </span>
           </a>
-          <?php print $preview_switch; ?>
+          <?php if ($view_mode != 'print'): ?>
+            <?php print $preview_switch; ?>
+          <?php endif; ?>
         </div>
         <div class="text">
           <?php print $project_schedule_status_viz; ?>
@@ -109,7 +117,7 @@
           <?php print itdash_edited_tooltip_render($diff['field_project_stage']->name); ?>
         <?php endif; ?>
         <?php print $field_project_stage['meta']['#title']; ?>
-        <?php if (!empty($field_project_stage['meta']['#description'])) : ?>
+        <?php if (!empty($field_project_stage['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -129,7 +137,7 @@
     <div class="row">
       <div class="label">
         <?php print $field_start_date_info['label']; ?>
-        <?php if (!empty($field_start_date_info['description'])) : ?>
+        <?php if (!empty($field_start_date_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -146,7 +154,7 @@
     <div class="row">
       <div class="label">
         <?php print $field_original_completion_date_info['label']; ?>
-        <?php if (!empty($field_original_completion_date_info['description'])) : ?>
+        <?php if (!empty($field_original_completion_date_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -165,7 +173,7 @@
           <?php print itdash_edited_tooltip_render(format_date($diff['field_expected_completion_date'], 'medium', 'd M Y')); ?>
         <?php endif; ?>
         <?php print $field_expected_completion_date['meta']['#title']; ?>
-        <?php if (!empty($field_expected_completion_date['meta']['#description'])) : ?>
+        <?php if (!empty($field_expected_completion_date['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -184,19 +192,21 @@
 
     <div class="project-benefits">
       <h2 id="project-benefits"><?php print t('Project Benefits'); ?>
-      <a href="javascript:void(0);" class="tooltip">
-                <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
-                <?php print variable_get('ict_project_benefits_tooltip_text', "The measurable advantage to stakeholders, realised during or after the project has finished, as a result of the new capabilities produced."); ?>
-              </span>
-              </a>
-              </h2>
+        <?php if ($view_mode != 'print') : ?>
+          <a href="javascript:void(0);" class="tooltip">
+            <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print variable_get('ict_project_benefits_tooltip_text', "The measurable advantage to stakeholders, realised during or after the project has finished, as a result of the new capabilities produced."); ?>
+            </span>
+          </a>
+        <?php endif; ?>
+      </h2>
     </div>
     
     <div class="row">
       <div class="label">
         <?php print $field_predicted_project_benefit_info['label']; ?>
-        <?php if (!empty($field_predicted_project_benefit_info['description'])) : ?>
+        <?php if (!empty($field_predicted_project_benefit_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -215,7 +225,7 @@
           <?php print itdash_edited_tooltip_render(number_format($diff['field_current_financial_benefits'], 2, '.', ''), '$', 'm'); ?>
         <?php endif; ?>
         <?php print $field_current_financial_benefits['meta']['#title']; ?>
-        <?php if (!empty($field_current_financial_benefits['meta']['#description'])) : ?>
+        <?php if (!empty($field_current_financial_benefits['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -237,7 +247,7 @@
           <?php print itdash_edited_tooltip_render(number_format($diff['field_estimated_value_of_benefit'], 2, '.', ''), '$', 'm'); ?>
         <?php endif; ?>
         <?php print $field_estimated_value_of_benefit['meta']['#title']; ?>
-        <?php if (!empty($field_estimated_value_of_benefit['meta']['#description'])) : ?>
+        <?php if (!empty($field_estimated_value_of_benefit['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">
@@ -256,7 +266,9 @@
       <div class="row">
         <div class="label">
           <?php print t('Project Benefits Status'); ?>
-          <?php print $preview_switch; ?>
+          <?php if ($view_mode != 'print'): ?>
+            <?php print $preview_switch; ?>
+          <?php endif; ?>
         </div>
         <div class="text">
           <?php print $project_benefits_pie_chart; ?>
@@ -269,8 +281,10 @@
         <?php if (!$viz_preview) : ?>
         <div class="label">
           <?php print t('Benefits Realised'); ?>
-          <?php print $preview_switch; ?>
-          <?php if (!empty($form['field_benefits_realised']['#description'])) : ?>
+          <?php if ($view_mode != 'print'): ?>
+            <?php print $preview_switch; ?>
+          <?php endif; ?>
+          <?php if (!empty($form['field_benefits_realised']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
                 <span class="tooltip-content">
@@ -297,7 +311,7 @@
           <?php print itdash_edited_tooltip_render($diff['field_entity_comments']['value'], '', '', FALSE, TRUE); ?>
         <?php endif; ?>
         <?php print $field_entity_comments['meta']['#title']; ?>
-        <?php if (!empty($field_entity_comments['meta']['#description'])) : ?>
+        <?php if (!empty($field_entity_comments['meta']['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
             <span class="tooltip-content">

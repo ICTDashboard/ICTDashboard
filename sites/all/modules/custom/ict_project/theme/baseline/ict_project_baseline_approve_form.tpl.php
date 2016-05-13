@@ -1,6 +1,9 @@
 <div class="submit">
   <div style="margin-bottom: 20px; text-align: right;" class="text">
+  <div class="other-option-buttons">
     <a href="#ict-baseline-decline-form" class="general-button submit-button fancybox-baseline-decline-form"><span><?php print t('Reject Submission'); ?></span></a>
+    <?php print print_pdf_insert_link(); ?>
+  </div>
     <?php print render($form['approve']); ?>
   </div>
 </div>

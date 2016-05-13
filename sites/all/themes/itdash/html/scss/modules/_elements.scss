@@ -154,7 +154,7 @@ body,
           font-size: 13px;
           font-weight: 500;
           padding-left: 25px;
-          text-decoration: none;
+          text-decoration: underline;
           &:hover {
             text-decoration: none;
           }
@@ -185,6 +185,9 @@ body,
         }
         .form-helptext {
           font-weight: normal;
+          a:hover {
+            text-decoration: none;
+          }
         }
       }
       .text {
@@ -357,12 +360,15 @@ body,
       }
     }
     .email-value {
-      text-decoration: none;
+      text-decoration: underline;
       display: block;
       color: #0d6c88;
       padding-left: 15px;
       width: auto;
       margin-bottom: 15px;
+      &:hover {
+        text-decoration: none;
+      }
     }
     .dotted-line {
       margin-top: 30px;
@@ -437,7 +443,7 @@ body,
       a {
         display: block;
         color: #027e9c;
-        text-decoration: none;
+        text-decoration: underline;
         &:focus,
         &:hover {
           color: #027e9c;
@@ -810,6 +816,9 @@ body,
       color: #0d6c88;
       border: 0;
       padding: 0;
+      text-decoration: underline;
+    }
+    a:hover {
       text-decoration: none;
     }
     .history-button,
@@ -826,7 +835,7 @@ body,
       }
       &:hover {
         input {
-          text-decoration: underline;
+          text-decoration: none;
         }
         &:before {
           @include sprite-icon(remove-icon-hover);
@@ -924,6 +933,9 @@ body,
   .field{
     max-width: none;
     background-color: transparent;
+  }
+  a:hover {
+    text-decoration: none;
   }
 }
 
@@ -1100,7 +1112,7 @@ body,
         color: #202b3d;
         a {
           color: #202b3d;
-          text-decoration: none;
+          text-decoration: underline;
           &:focus,
           &:hover {
             color: #202b3d;
@@ -1171,6 +1183,12 @@ body,
     }
     #project-schedule-status-graph {
       margin-top: 12px;
+      a {
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
     #statuses_legend {
       .bar-legend {
@@ -1254,80 +1272,6 @@ body,
   }
 }
 
-.last-updated-block {
-    width: 970px;
-    margin: 0 auto;
-    display: table;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    .wrap.last-updated-on {
-      width: 50%!important;
-      max-width: 970px;
-      float: left;
-      min-width: 0;
-      p {
-        margin: 0;
-        font-size: 14px;
-        strong {
-          font-size: 14px;
-        }
-      }
-    }
-    .view-baseline-history {
-      width: 50%;
-      text-align: right;
-      float: right;
-      display: block;
-      margin: 0;
-      .view-baseline-link {
-        color: #0d6c88;
-        font-weight: 400;
-        font-size: 14px;
-        text-decoration: none;
-      }
-      .view-baseline-tooltip {
-        margin-right: 0;
-        .tooltip-content {
-          text-align: left;
-        }
-      }
-    }
-}
-#project-listings{
-  h2 {
-    font-weight: 600;
-    color: #0d6c88;
-    font-size: 26px;
-    border-bottom: 1px solid #f0f4fa;
-    margin: 21px 0 30px;
-    padding: 0 0 8px;
-  }
-  .table-config-bar {
-    margin: 30px 0 18px;
-    .form-type-select {
-      label {
-        display: inline-block;
-        font-weight: bold;
-        font-size: 14px;
-        margin-right: 6px;
-        vertical-align: middle;
-      }
-      .sbHolder {
-        width: auto;
-        min-width: 79px;
-        display: inline-block;
-        vertical-align: middle;
-      }
-    }
-    .item-list {
-      float: right;
-    }
-    .pager {
-      margin: 0;
-    }
-  }
-}
-
 #project-baseline-history {
   & .project-history {
     border-bottom: 1px solid #f0f4fa;
@@ -1368,12 +1312,27 @@ body,
     }
   }
 }
+
+.other-option-buttons {
+  display: inline-block;
+  & .print_pdf {
+    margin-left: 0px;
+    text-transform: uppercase;
+    display: block;
+    & a.print-pdf {
+      min-width: 275px !important;
+      margin: 10px 10px 3px;
+    }
+  }
+}
+
 .object_and_summary, .entity_comments, span.tooltip-content {
   a {
     color: #0d6c88;
-    text-decoration: none;
+    text-decoration: underline;
     &:hover {
       color: #0d6c88;
+      text-decoration: none;
     }
     &:visited {
       color: #0d6c88;
@@ -1435,19 +1394,6 @@ div.tooltip-edit {
         min-width: 275px !important;
         margin: 10px 10px 3px;
       }
-    }
-  }
-}
-
-.other-option-buttons {
-  display: inline-block;
-  & .print_pdf {
-    margin-left: 0px;
-    text-transform: uppercase;
-    display: block;
-    & a.print-pdf {
-      min-width: 275px !important;
-      margin: 10px 10px 3px;
     }
   }
 }
@@ -1516,6 +1462,9 @@ div.tooltip-edit {
       font-weight: 400;
       font-size: 14px;
       text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
     }
     .view-baseline-tooltip {
       margin-right: 0;

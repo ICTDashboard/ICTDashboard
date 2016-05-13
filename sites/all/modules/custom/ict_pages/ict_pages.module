@@ -33,7 +33,14 @@ function template_preprocess_ict_pages_last_update(&$vars) {
   $query->addField('wf', 'created');
   $query->condition('wf.state', 'approved');
   if (!empty($vars['nid']) && is_numeric($vars['nid'])) {
-    $query->condition('wf.nid', $vars['nid']);
+    $nid = $vars['nid'];
+
+    $query->condition('wf.nid', $nid);
+
+    $last_rebaseline = ict_project_get_last_rebaseline_project($nid);
+    $old_rebaselines = ict_project_get_old_baselines($last_rebaseline);
+    $vars['last_rebaseline'] = $last_rebaseline;
+    $vars['projects'] = count($old_rebaselines) + 1;
   }
   $query->orderBy('created', 'DESC');
   $query->range(0, 1);
