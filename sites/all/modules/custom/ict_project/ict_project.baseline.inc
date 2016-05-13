@@ -847,9 +847,11 @@ function ict_project_project_history ($nid) {
     FALSE;
 
   $total_expenditure = 0;
-  $upd_wrap = entity_metadata_wrapper('node', $current_baseline->last_update->nid);
-  foreach ($upd_wrap->field_original_total_budget as $budget) {
-    $total_expenditure += $budget->field_total->value();
+  if ($current_baseline->last_update) {
+    $upd_wrap = entity_metadata_wrapper('node', $current_baseline->last_update->nid);
+    foreach ($upd_wrap->field_original_total_budget as $budget) {
+      $total_expenditure += $budget->field_total->value();
+    }
   }
   $current_baseline->total_expenditure = number_format($total_expenditure, 2, '.', ' ');
 
