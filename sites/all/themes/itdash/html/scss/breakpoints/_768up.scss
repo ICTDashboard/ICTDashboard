@@ -291,6 +291,9 @@ CONTENT STYLES
 					width: 140px;
 					margin: 20px 0;
 				}
+				div a:hover {
+					text-decoration: none;
+				}
 			}
 
 		}
@@ -348,7 +351,10 @@ CONTENT STYLES
 								font-size: 14px;
 								font-weight: 600;
 								color: #0d6c88;
-								text-decoration: none;
+								text-decoration: underline;
+								&:hover {
+									text-decoration: none;
+								}
 							}
 
 						}
@@ -1785,9 +1791,9 @@ mobile. Make sure to double check these!
 				}
 				a{
 					color: #363a41;
-					text-decoration: none;
+					text-decoration: underline;
 					&:hover{
-						text-decoration: underline;
+						text-decoration: none;
 					}
 				}
 			}
