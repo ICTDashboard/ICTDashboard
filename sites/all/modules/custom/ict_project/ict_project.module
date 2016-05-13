@@ -1202,6 +1202,11 @@ function ict_project_node_insert ($node) {
   if ($node->type == 'project') {
     ict_project_set_workflow_state('draft', $node->nid, $node->vid);
     __ict_mail_process_mails('ict_mail', 'project_create', $node, array('departmental_admins'), array('dep_admins' => array(array('name' => _ict_project_get_user_name()))), FALSE);
+
+    if (ict_project_is_rebaseline($node)) {
+      $baseline = ict_project_get_parent_project($node);
+      __ict_mail_process_mails('ict_mail', 'project_rebaselined', $baseline , array('data_approvers', 'data_editors', 'departmental_admins'), array('dep_admins' => array(array('name' => _ict_project_get_user_name()))), FALSE);
+    }
   }
 }
 

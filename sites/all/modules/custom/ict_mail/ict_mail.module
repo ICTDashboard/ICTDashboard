@@ -16,7 +16,7 @@ function ict_mail_mail($key, &$message, $params) {
   switch($key) {
     case 'approver_add':
       $message['subject'] = t('ICT Projects Dashboard - Assigned as Project Approver');
-      $message['body'][] = t("You have been assigned to the project @PROJ_TITLE as the Project Approver.", array('@PROJ_TITLE' => $params['title']));
+      $message['body'][] = t("You have been assigned to the @BASELINE_TYPE @PROJ_TITLE as the Project Approver.", array('@PROJ_TITLE' => $params['title'], '@BASELINE_TYPE' => !empty($param['rebaseline']) ? 're-baselined project' : 'project'));
       $message['body'][] = t("You will receive an e-mail notification when the baseline is ready for your approval. To view who is the assigned Project Editor please log into your ICT Projects Dashboard account. !URL", array('!URL' => $base_url));
       $message['body'][] = t("Please contact your Departmental Administrator @ADMIN_NAME if you have any queries.", array('@ADMIN_NAME' => $params['admin_name']));
       break;
@@ -29,7 +29,7 @@ function ict_mail_mail($key, &$message, $params) {
 
     case 'editor_add':
       $message['subject'] = t('ICT Projects Dashboard - Assigned as Project Editor');
-      $message['body'][] = t("You have been assigned to the project @TITLE as the Project Editor. Please log into your ICT Projects Dashboard account to enter the project baseline data. !URL", array('@TITLE' => $params['title'], '!URL' => $base_url));
+      $message['body'][] = t("You have been assigned to the @BASELINE_TYPE @TITLE as the Project Editor. Please log into your ICT Projects Dashboard account to enter the project baseline data. !URL", array('@TITLE' => $params['title'], '!URL' => $base_url, '@BASELINE_TYPE' => !empty($param['rebaseline']) ? 're-baselined project' : 'project'));
       $message['body'][] = t("It is highly recommended that you enter and submit the baseline for approval as soon as possible after receiving this e-mail.");
       $message['body'][] = t("Please contact your Departmental Administrator @ADMIN_NAME if you have any queries.", array('@ADMIN_NAME' => $params['admin_name']));
       break;
@@ -171,6 +171,15 @@ function ict_mail_mail($key, &$message, $params) {
       $message['subject'] = t('ICT Projects Dashboard - Project @TITLE is removed', array('@TITLE' => $params['title']));
       $message['body'][] = t('@DEP_ADMIN has removed the project @TITLE on the dashboard.', array('@DEP_ADMIN' => $dep_name, '@TITLE' => $params['title']));
       $message['body'][] = t('No further action is required. Please contact @DEP_ADMIN if you have any queries.', array('@DEP_ADMIN' => $dep_name));
+      break;
+
+    case in_array($key, array('project_rebaselined_data_approvers', 'project_rebaselined_data_editors', 'project_rebaselined_departmental_admins')):
+      $message['subject'] = t('ICT Projects Dashboard - @TITLE has been re-baselined', array('@TITLE' => $params['title']));
+      $message['body'][] = t('@DEP_ADMIN has re-baselined project @TITLE.', array('@DEP_ADMIN' => $dep_name, '@TITLE' => $params['title']));
+      $message['body'][] = t('Please note that project @TITLE’s details <strong>can no longer be edited</strong>.', array('@TITLE' => $params['title']));
+      $message['body'][] = t('<strong>This project will remain publicly available on the dashboard until the first re-baselined project update is approved</strong>.');
+      $message['body'][] = t('No further action is required.');
+      $message['body'][] = t('Please contact @DEP_ADMIN if you have any queries.', array('@DEP_ADMIN' => $dep_name));
       break;
   }
 }
