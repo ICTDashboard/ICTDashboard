@@ -13,7 +13,22 @@
     </div>
     <div id="detailed-view-expenditure" style="margin-left: 25px; max-width: 945px;">
         <canvas id="detailed_budget_chart" width="945" height="360"></canvas>
-        <div id="expenditure_legend" class="legend"></div>
+        <div id="expenditure_legend" class="legend">
+          <ul class="bar-legend">
+            <li>
+              <span style="background-color:#ff6161"></span>
+              <?php print t('Expenditure to Date ($m)'); ?>
+            </li>
+            <li>
+              <span style="background-color:#5c46a4"></span>
+              <?php print t('Total Budget ($m)'); ?>
+            </li>
+            <li>
+              <span class="required">*</span>
+              <?php print t('Current Financial Year'); ?>
+            </li>
+          </ul>
+        </div>
     </div>
     <div id="ict-all-benefits-setion" class="section-title">
       <h2>
@@ -78,9 +93,6 @@
         Drupal.settings.detailed_budget_chart.data,
         Drupal.settings.detailed_budget_chart.options
       );
-      document
-        .getElementById("expenditure_legend")
-        .innerHTML = ExpenditureChart.generateLegend();
 
       // *** Schedule Status Graph ***
       var data = Drupal.settings.detailed_schedule_chart,
