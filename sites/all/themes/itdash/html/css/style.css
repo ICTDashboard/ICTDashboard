@@ -3464,49 +3464,49 @@ body a.submit-button,
   height: 16px;
   vertical-align: middle;
 }
-/* line 972, ../scss/modules/_elements.scss */
+/* line 973, ../scss/modules/_elements.scss */
 .legend .bar-legend li span.required {
   width: auto;
   vertical-align: top;
   margin: 0;
 }
-/* line 978, ../scss/modules/_elements.scss */
+/* line 979, ../scss/modules/_elements.scss */
 .legend .bar-legend li b {
   color: #202b3d;
 }
-/* line 984, ../scss/modules/_elements.scss */
+/* line 985, ../scss/modules/_elements.scss */
 .legend#schedule_legend .bar-legend {
   padding-left: 2px;
 }
-/* line 990, ../scss/modules/_elements.scss */
+/* line 991, ../scss/modules/_elements.scss */
 .legend#benefits_legend .bar-legend li {
   float: none;
   font-weight: bold;
   margin-bottom: 25px;
 }
 
-/* line 999, ../scss/modules/_elements.scss */
+/* line 1000, ../scss/modules/_elements.scss */
 .preview_switch {
   display: inline-block;
   margin-left: 10px;
   vertical-align: middle !important;
   min-width: 312px !important;
 }
-/* line 1004, ../scss/modules/_elements.scss */
+/* line 1005, ../scss/modules/_elements.scss */
 .preview_switch .viz-ico {
   background-position: 0 -48px;
   width: 17px;
   height: 17px;
   display: block;
 }
-/* line 1007, ../scss/modules/_elements.scss */
+/* line 1008, ../scss/modules/_elements.scss */
 .preview_switch .table-ico {
   background-position: 0 -129px;
   width: 20px;
   height: 16px;
   display: block;
 }
-/* line 1010, ../scss/modules/_elements.scss */
+/* line 1011, ../scss/modules/_elements.scss */
 .preview_switch .viz-ico,
 .preview_switch .table-ico {
   display: inline-block;
@@ -3514,7 +3514,7 @@ body a.submit-button,
   margin-right: 15px;
 }
 
-/* line 1017, ../scss/modules/_elements.scss */
+/* line 1018, ../scss/modules/_elements.scss */
 .tooltip-bottom,
 .tooltip-edit,
 .tooltip {
@@ -3531,7 +3531,7 @@ body a.submit-button,
   display: block;
   display: inline-block;
 }
-/* line 1029, ../scss/modules/_elements.scss */
+/* line 1030, ../scss/modules/_elements.scss */
 .tooltip-bottom:hover,
 .tooltip-edit:hover,
 .tooltip:hover {
@@ -3541,7 +3541,7 @@ body a.submit-button,
   display: block;
   display: inline-block;
 }
-/* line 1033, ../scss/modules/_elements.scss */
+/* line 1034, ../scss/modules/_elements.scss */
 .tooltip-bottom span.tooltip-content,
 .tooltip-edit span.tooltip-content,
 .tooltip span.tooltip-content {
@@ -3558,7 +3558,7 @@ body a.submit-button,
   right: -150px;
   width: 300px;
 }
-/* line 1046, ../scss/modules/_elements.scss */
+/* line 1047, ../scss/modules/_elements.scss */
 .tooltip-bottom span.tooltip-content:after,
 .tooltip-edit span.tooltip-content:after,
 .tooltip span.tooltip-content:after {
@@ -3574,20 +3574,20 @@ body a.submit-button,
   left: 50%;
   margin-left: -25px;
 }
-/* line 1061, ../scss/modules/_elements.scss */
+/* line 1062, ../scss/modules/_elements.scss */
 .tooltip-bottom:hover span.tooltip-content,
 .tooltip-edit:hover span.tooltip-content,
 .tooltip:hover span.tooltip-content {
   display: block;
 }
 
-/* line 1067, ../scss/modules/_elements.scss */
+/* line 1068, ../scss/modules/_elements.scss */
 .tooltip-bottom span.tooltip-content {
   top: 30px;
   right: -147px;
   bottom: auto;
 }
-/* line 1071, ../scss/modules/_elements.scss */
+/* line 1072, ../scss/modules/_elements.scss */
 .tooltip-bottom span.tooltip-content:after {
   border-top: 20px solid transparent;
   border-bottom: 20px solid #1e2635;
@@ -3595,7 +3595,7 @@ body a.submit-button,
   bottom: auto;
 }
 
-/* line 1079, ../scss/modules/_elements.scss */
+/* line 1080, ../scss/modules/_elements.scss */
 .tooltip-edit {
   margin-left: 0;
   margin-right: 5px;
@@ -3606,7 +3606,7 @@ body a.submit-button,
   display: block;
   display: inline-block;
 }
-/* line 1085, ../scss/modules/_elements.scss */
+/* line 1086, ../scss/modules/_elements.scss */
 .tooltip-edit:hover {
   background-position: 0 0;
   width: 21px;
@@ -3614,69 +3614,69 @@ body a.submit-button,
   display: block;
   display: inline-block;
 }
-/* line 1089, ../scss/modules/_elements.scss */
+/* line 1090, ../scss/modules/_elements.scss */
 .tooltip-edit span.tooltip-content {
   color: #1e2635;
   background-color: #f0b629;
   font-weight: normal;
 }
-/* line 1093, ../scss/modules/_elements.scss */
+/* line 1094, ../scss/modules/_elements.scss */
 .tooltip-edit span.tooltip-content:after {
   border-top: 20px solid #f0b629;
 }
 
-/* line 1099, ../scss/modules/_elements.scss */
+/* line 1100, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators {
   background-color: #e5eaf3;
   padding-top: 31px;
   padding-bottom: 30px;
 }
-/* line 1103, ../scss/modules/_elements.scss */
+/* line 1104, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators .label {
   font-size: 18px;
   font-weight: 600;
   color: #202b3d;
   line-height: 18px;
 }
-/* line 1108, ../scss/modules/_elements.scss */
+/* line 1109, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators .label .tooltip {
   margin-left: 2px;
   vertical-align: top;
 }
-/* line 1113, ../scss/modules/_elements.scss */
+/* line 1114, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
   padding-left: 5px;
 }
-/* line 1115, ../scss/modules/_elements.scss */
+/* line 1116, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row {
   margin-bottom: 55px;
 }
-/* line 1117, ../scss/modules/_elements.scss */
+/* line 1118, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row:first-child {
   margin-bottom: 140px;
 }
-/* line 1123, ../scss/modules/_elements.scss */
+/* line 1124, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number {
   font-size: 70px;
   line-height: 80px;
   font-weight: 600;
   color: #202b3d;
 }
-/* line 1128, ../scss/modules/_elements.scss */
+/* line 1129, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a {
   color: #202b3d;
   text-decoration: underline;
 }
-/* line 1131, ../scss/modules/_elements.scss */
+/* line 1132, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a:focus, #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a:hover {
   color: #202b3d;
   text-decoration: none;
 }
-/* line 1139, ../scss/modules/_elements.scss */
+/* line 1140, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
   display: block;
 }
-/* line 1141, ../scss/modules/_elements.scss */
+/* line 1142, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button span {
   text-align: left;
   padding-left: 16px;
@@ -3684,20 +3684,20 @@ body a.submit-button,
   line-height: 34px;
   height: 35px;
 }
-/* line 1150, ../scss/modules/_elements.scss */
+/* line 1151, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs {
   padding-right: 90px;
 }
-/* line 1152, ../scss/modules/_elements.scss */
+/* line 1153, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .label {
   margin-bottom: 11px;
 }
-/* line 1155, ../scss/modules/_elements.scss */
+/* line 1156, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
   position: relative;
   margin-top: 5px;
 }
-/* line 1158, ../scss/modules/_elements.scss */
+/* line 1159, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch label {
   font-weight: bold;
   float: left;
@@ -3705,67 +3705,67 @@ body a.submit-button,
   font-size: 14px;
   line-height: 34px;
 }
-/* line 1165, ../scss/modules/_elements.scss */
+/* line 1166, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
   max-width: 100%;
   width: 89%;
   margin-left: 60px;
   margin-right: 60px;
 }
-/* line 1171, ../scss/modules/_elements.scss */
+/* line 1172, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbToggle {
   background-position: 0 -115px;
 }
-/* line 1174, ../scss/modules/_elements.scss */
+/* line 1175, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbSelector {
   height: 32px;
   line-height: 32px;
 }
-/* line 1180, ../scss/modules/_elements.scss */
+/* line 1181, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend {
   padding-left: 0;
   font-size: 14px;
   margin: 11px 0;
   overflow: hidden;
 }
-/* line 1185, ../scss/modules/_elements.scss */
+/* line 1186, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li {
   color: #202b3d;
   margin-right: 30px;
 }
-/* line 1188, ../scss/modules/_elements.scss */
+/* line 1189, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li span {
   margin-right: 2px;
 }
-/* line 1194, ../scss/modules/_elements.scss */
+/* line 1195, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .expenditure-budget-value {
   text-align: center;
   font-size: 16px;
   color: #202b3d;
 }
-/* line 1199, ../scss/modules/_elements.scss */
+/* line 1200, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph {
   margin-top: 12px;
 }
-/* line 1201, ../scss/modules/_elements.scss */
+/* line 1202, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a {
   text-decoration: underline;
 }
-/* line 1203, ../scss/modules/_elements.scss */
+/* line 1204, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a:hover {
   text-decoration: none;
 }
-/* line 1209, ../scss/modules/_elements.scss */
+/* line 1210, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend {
   margin: 0;
 }
-/* line 1211, ../scss/modules/_elements.scss */
+/* line 1212, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend li {
   margin-right: 20px;
   margin-bottom: 10px;
 }
 
-/* line 1221, ../scss/modules/_elements.scss */
+/* line 1222, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview h2 {
   font-size: 26px;
   line-height: 58px;
@@ -3774,37 +3774,37 @@ body a.submit-button,
   font-weight: 600;
   margin-bottom: 30px;
 }
-/* line 1228, ../scss/modules/_elements.scss */
+/* line 1229, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview h2 .tooltip {
   margin-left: 0;
   vertical-align: baseline;
   margin-bottom: -1px;
 }
-/* line 1234, ../scss/modules/_elements.scss */
+/* line 1235, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview #detailed-view-expenditure {
   padding-top: 15px;
 }
-/* line 1238, ../scss/modules/_elements.scss */
+/* line 1239, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview #expenditure_legend .bar-legend {
   overflow: hidden;
 }
-/* line 1243, ../scss/modules/_elements.scss */
+/* line 1244, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview #detailed-view-schedule-status .bar-legend {
   overflow: hidden;
   margin: 17px 0 4px;
 }
-/* line 1246, ../scss/modules/_elements.scss */
+/* line 1247, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview #detailed-view-schedule-status .bar-legend li {
   margin-right: 40px;
 }
-/* line 1251, ../scss/modules/_elements.scss */
+/* line 1252, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview .expand-collapse-button {
   display: block;
   max-width: 305px;
   height: 39px;
   line-height: 35px;
 }
-/* line 1256, ../scss/modules/_elements.scss */
+/* line 1257, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview .expand-collapse-button span {
   text-align: left;
   padding: 0 15px;
@@ -3812,7 +3812,7 @@ body a.submit-button,
   line-height: 35px;
 }
 
-/* line 1268, ../scss/modules/_elements.scss */
+/* line 1269, ../scss/modules/_elements.scss */
 .project-benefits h2,
 .project-timings h2,
 .project-timings h2,
@@ -3823,7 +3823,7 @@ body a.submit-button,
   border-bottom: 1px solid #f0f4fa;
   padding-bottom: 10px;
 }
-/* line 1274, ../scss/modules/_elements.scss */
+/* line 1275, ../scss/modules/_elements.scss */
 .project-benefits h2 a,
 .project-timings h2 a,
 .project-timings h2 a,
@@ -3832,22 +3832,22 @@ body a.submit-button,
   height: 19px !important;
 }
 
-/* line 1283, ../scss/modules/_elements.scss */
+/* line 1284, ../scss/modules/_elements.scss */
 #inner-content h2 a {
   margin-left: 2px !important;
   height: 19px !important;
 }
 
-/* line 1291, ../scss/modules/_elements.scss */
+/* line 1292, ../scss/modules/_elements.scss */
 #project-baseline-history .project-history {
   border-bottom: 1px solid #f0f4fa;
   padding-bottom: 10px;
 }
-/* line 1294, ../scss/modules/_elements.scss */
+/* line 1295, ../scss/modules/_elements.scss */
 #project-baseline-history .project-history:last-child {
   border-bottom: none;
 }
-/* line 1298, ../scss/modules/_elements.scss */
+/* line 1299, ../scss/modules/_elements.scss */
 #project-baseline-history .project-history > .label {
   color: #202b3d;
   font-weight: 700;
@@ -3856,100 +3856,100 @@ body a.submit-button,
   padding-right: 15px;
   padding-top: 9px;
 }
-/* line 1306, ../scss/modules/_elements.scss */
+/* line 1307, ../scss/modules/_elements.scss */
 #project-baseline-history .project-history .sub-content {
   padding-left: 15px;
 }
-/* line 1309, ../scss/modules/_elements.scss */
+/* line 1310, ../scss/modules/_elements.scss */
 #project-baseline-history .pbh-buttons {
   margin-bottom: 50px;
 }
-/* line 1310, ../scss/modules/_elements.scss */
+/* line 1311, ../scss/modules/_elements.scss */
 #project-baseline-history .pbh-buttons a {
   width: 180px;
 }
 
-/* line 1320, ../scss/modules/_elements.scss */
+/* line 1321, ../scss/modules/_elements.scss */
 .project-draft-submission .row .text #edit-field-brief-project-summary {
   max-width: 640px;
 }
-/* line 1322, ../scss/modules/_elements.scss */
+/* line 1323, ../scss/modules/_elements.scss */
 .project-draft-submission .row .text #edit-field-brief-project-summary #cke_1_bottom {
   background: none;
   border-top: none;
 }
 
-/* line 1331, ../scss/modules/_elements.scss */
+/* line 1332, ../scss/modules/_elements.scss */
 .other-option-buttons {
   display: inline-block;
 }
-/* line 1333, ../scss/modules/_elements.scss */
+/* line 1334, ../scss/modules/_elements.scss */
 .other-option-buttons .print_pdf {
   margin-left: 0px;
   text-transform: uppercase;
   display: block;
 }
-/* line 1337, ../scss/modules/_elements.scss */
+/* line 1338, ../scss/modules/_elements.scss */
 .other-option-buttons .print_pdf a.print-pdf {
   min-width: 275px !important;
   margin: 10px 10px 3px;
 }
 
-/* line 1345, ../scss/modules/_elements.scss */
+/* line 1346, ../scss/modules/_elements.scss */
 .object_and_summary a, .entity_comments a, span.tooltip-content a {
   color: #0d6c88;
   text-decoration: underline;
 }
-/* line 1348, ../scss/modules/_elements.scss */
+/* line 1349, ../scss/modules/_elements.scss */
 .object_and_summary a:hover, .entity_comments a:hover, span.tooltip-content a:hover {
   color: #0d6c88;
   text-decoration: none;
 }
-/* line 1352, ../scss/modules/_elements.scss */
+/* line 1353, ../scss/modules/_elements.scss */
 .object_and_summary a:visited, .entity_comments a:visited, span.tooltip-content a:visited {
   color: #0d6c88;
 }
-/* line 1355, ../scss/modules/_elements.scss */
+/* line 1356, ../scss/modules/_elements.scss */
 .object_and_summary a:focus, .entity_comments a:focus, span.tooltip-content a:focus {
   color: #0d6c88;
 }
-/* line 1359, ../scss/modules/_elements.scss */
+/* line 1360, ../scss/modules/_elements.scss */
 .object_and_summary ul, .entity_comments ul, span.tooltip-content ul {
   list-style-type: disc;
 }
-/* line 1361, ../scss/modules/_elements.scss */
+/* line 1362, ../scss/modules/_elements.scss */
 .object_and_summary ul ul, .entity_comments ul ul, span.tooltip-content ul ul {
   list-style-type: circle;
 }
-/* line 1363, ../scss/modules/_elements.scss */
+/* line 1364, ../scss/modules/_elements.scss */
 .object_and_summary ul ul ul, .entity_comments ul ul ul, span.tooltip-content ul ul ul {
   list-style-type: square;
 }
-/* line 1368, ../scss/modules/_elements.scss */
+/* line 1369, ../scss/modules/_elements.scss */
 .object_and_summary p, .entity_comments p, span.tooltip-content p {
   color: #202b3d;
 }
-/* line 1371, ../scss/modules/_elements.scss */
+/* line 1372, ../scss/modules/_elements.scss */
 .object_and_summary ol, .object_and_summary ul, .entity_comments ol, .entity_comments ul, span.tooltip-content ol, span.tooltip-content ul {
   color: #202b3d;
   padding-left: 40px;
   margin: 0.5em 0;
 }
-/* line 1375, ../scss/modules/_elements.scss */
+/* line 1376, ../scss/modules/_elements.scss */
 .object_and_summary ol ol, .object_and_summary ol ul, .object_and_summary ul ol, .object_and_summary ul ul, .entity_comments ol ol, .entity_comments ol ul, .entity_comments ul ol, .entity_comments ul ul, span.tooltip-content ol ol, span.tooltip-content ol ul, span.tooltip-content ul ol, span.tooltip-content ul ul {
   padding-left: 40px;
 }
-/* line 1379, ../scss/modules/_elements.scss */
+/* line 1380, ../scss/modules/_elements.scss */
 .object_and_summary ol, .entity_comments ol, span.tooltip-content ol {
   list-style-type: decimal;
 }
 
-/* line 1383, ../scss/modules/_elements.scss */
+/* line 1384, ../scss/modules/_elements.scss */
 div.tooltip-edit {
   cursor: pointer;
   position: static;
 }
-/* line 1386, ../scss/modules/_elements.scss */
+/* line 1387, ../scss/modules/_elements.scss */
 div.tooltip-edit span.tooltip-content {
   z-index: 1;
   width: auto;
@@ -3958,33 +3958,33 @@ div.tooltip-edit span.tooltip-content {
   left: 0;
   bottom: 40px;
 }
-/* line 1387, ../scss/modules/_elements.scss */
+/* line 1388, ../scss/modules/_elements.scss */
 div.tooltip-edit span.tooltip-content::after {
   border-left: none;
   border-right: 30px solid transparent;
   left: 40px;
 }
 
-/* line 1401, ../scss/modules/_elements.scss */
+/* line 1402, ../scss/modules/_elements.scss */
 #print-links-container {
   text-align: right;
 }
-/* line 1403, ../scss/modules/_elements.scss */
+/* line 1404, ../scss/modules/_elements.scss */
 #print-links-container .pdf_button {
   margin-bottom: 38px;
 }
-/* line 1405, ../scss/modules/_elements.scss */
+/* line 1406, ../scss/modules/_elements.scss */
 #print-links-container .pdf_button .print_pdf {
   margin-left: 0px;
   text-transform: uppercase;
 }
-/* line 1408, ../scss/modules/_elements.scss */
+/* line 1409, ../scss/modules/_elements.scss */
 #print-links-container .pdf_button .print_pdf a.print-pdf {
   min-width: 275px !important;
   margin: 10px 10px 3px;
 }
 
-/* line 1417, ../scss/modules/_elements.scss */
+/* line 1418, ../scss/modules/_elements.scss */
 #project-listings h2 {
   font-weight: 600;
   color: #0d6c88;
@@ -3993,11 +3993,11 @@ div.tooltip-edit span.tooltip-content::after {
   margin: 21px 0 30px;
   padding: 0 0 8px;
 }
-/* line 1425, ../scss/modules/_elements.scss */
+/* line 1426, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar {
   margin: 30px 0 18px;
 }
-/* line 1428, ../scss/modules/_elements.scss */
+/* line 1429, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar .form-type-select label {
   display: inline-block;
   font-weight: bold;
@@ -4005,23 +4005,23 @@ div.tooltip-edit span.tooltip-content::after {
   margin-right: 6px;
   vertical-align: middle;
 }
-/* line 1435, ../scss/modules/_elements.scss */
+/* line 1436, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar .form-type-select .sbHolder {
   width: auto;
   min-width: 79px;
   display: inline-block;
   vertical-align: middle;
 }
-/* line 1442, ../scss/modules/_elements.scss */
+/* line 1443, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar .item-list {
   float: right;
 }
-/* line 1445, ../scss/modules/_elements.scss */
+/* line 1446, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar .pager {
   margin: 0;
 }
 
-/* line 1450, ../scss/modules/_elements.scss */
+/* line 1451, ../scss/modules/_elements.scss */
 .last-updated-block {
   width: 970px;
   margin: 0 auto;
@@ -4029,23 +4029,23 @@ div.tooltip-edit span.tooltip-content::after {
   margin-top: 25px;
   margin-bottom: 10px;
 }
-/* line 1456, ../scss/modules/_elements.scss */
+/* line 1457, ../scss/modules/_elements.scss */
 .last-updated-block .wrap.last-updated-on {
   width: 50% !important;
   max-width: 970px;
   float: left;
   min-width: 0;
 }
-/* line 1461, ../scss/modules/_elements.scss */
+/* line 1462, ../scss/modules/_elements.scss */
 .last-updated-block .wrap.last-updated-on p {
   margin: 0;
   font-size: 14px;
 }
-/* line 1464, ../scss/modules/_elements.scss */
+/* line 1465, ../scss/modules/_elements.scss */
 .last-updated-block .wrap.last-updated-on p strong {
   font-size: 14px;
 }
-/* line 1469, ../scss/modules/_elements.scss */
+/* line 1470, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history {
   width: 50%;
   text-align: right;
@@ -4053,32 +4053,32 @@ div.tooltip-edit span.tooltip-content::after {
   display: block;
   margin: 0;
 }
-/* line 1475, ../scss/modules/_elements.scss */
+/* line 1476, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history .view-baseline-link {
   color: #0d6c88;
   font-weight: 400;
   font-size: 14px;
   text-decoration: underline;
 }
-/* line 1480, ../scss/modules/_elements.scss */
+/* line 1481, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history .view-baseline-link:hover {
   text-decoration: none;
 }
-/* line 1484, ../scss/modules/_elements.scss */
+/* line 1485, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history .view-baseline-tooltip {
   margin-right: 0;
 }
-/* line 1486, ../scss/modules/_elements.scss */
+/* line 1487, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history .view-baseline-tooltip .tooltip-content {
   text-align: left;
 }
 
-/* line 1493, ../scss/modules/_elements.scss */
+/* line 1494, ../scss/modules/_elements.scss */
 #autocomplete {
   border: none;
   margin-top: 2px;
 }
-/* line 1496, ../scss/modules/_elements.scss */
+/* line 1497, ../scss/modules/_elements.scss */
 #autocomplete ul {
   background-color: #fff;
   border: solid 1px #b3bdcf;
@@ -4088,7 +4088,7 @@ div.tooltip-edit span.tooltip-content::after {
   width: 100%;
   overflow: hidden;
 }
-/* line 1504, ../scss/modules/_elements.scss */
+/* line 1505, ../scss/modules/_elements.scss */
 #autocomplete ul li {
   /*padding: 0 7px;*/
   border-bottom: dotted 1px #515151;
@@ -4096,15 +4096,15 @@ div.tooltip-edit span.tooltip-content::after {
   outline: none;
   padding: 7px 0 7px 3px;
 }
-/* line 1510, ../scss/modules/_elements.scss */
+/* line 1511, ../scss/modules/_elements.scss */
 #autocomplete ul li.selected {
   color: #0d6c88;
 }
-/* line 1513, ../scss/modules/_elements.scss */
+/* line 1514, ../scss/modules/_elements.scss */
 #autocomplete ul li:last-child {
   border-bottom: none;
 }
-/* line 1516, ../scss/modules/_elements.scss */
+/* line 1517, ../scss/modules/_elements.scss */
 #autocomplete ul li:focus, #autocomplete ul li:hover {
   color: #0d6c88;
   cursor: pointer;
