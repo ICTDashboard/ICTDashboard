@@ -18,18 +18,10 @@
 			</div>
 			<div class="row">
 				<div class="label">
-					<?php print t('Original Approved Start Date'); ?>
+					<?php print t('Project Title'); ?>
 				</div>
 				<div class="text">
-					<?php print date('d M Y', strtotime($current_baseline->field_start_date['und'][0]['value'])); ?>
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">
-					<?php print t('Original Approved Completion Date'); ?>
-				</div>
-				<div class="text">
-					<?php print date('d M Y', strtotime($current_baseline->field_original_completion_date['und'][0]['value'])); ?>
+					<?php print $current_baseline->title; ?>
 				</div>
 			</div>
 			<div class="row">
@@ -38,6 +30,44 @@
 				</div>
 				<div class="text">
 					<?php print '$' . $current_baseline->field_original_total_budget . 'm'; ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">
+					<?php print t('Total Expenditure'); ?>
+				</div>
+				<div class="text">
+					<?php print '$' . $current_baseline->total_expenditure . 'm'; ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">
+					<?php print t('Original Approved Start Date'); ?>
+				</div>
+				<div class="text">
+					<?php print !empty($current_baseline->field_start_date['und'][0]['value']) ?
+													date('d M Y', strtotime($current_baseline->field_start_date['und'][0]['value'])) :
+													'-'; ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">
+					<?php print t('Original Approved Completion Date'); ?>
+				</div>
+				<div class="text">
+					<?php print !empty($current_baseline->field_original_completion_date['und'][0]['value']) ?
+						date('d M Y', strtotime($current_baseline->field_original_completion_date['und'][0]['value'])) :
+						'-'; ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">
+					<?php print t('Entity Сomments'); ?>
+				</div>
+				<div class="text">
+					<?php print !empty($current_baseline->last_update->field_entity_comments[LANGUAGE_NONE][0]['value']) ?
+						$current_baseline->last_update->field_entity_comments[LANGUAGE_NONE][0]['value'] :
+						'-' ?>
 				</div>
 			</div>
 			<div class="pbh-buttons">
@@ -64,6 +94,30 @@
 					</div>
 					<div class="row">
 						<div class="label">
+							<?php print t('Project Title'); ?>
+						</div>
+						<div class="text">
+							<?php print $project->title; ?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="label">
+							<?php print t('Total Project Budget'); ?>
+						</div>
+						<div class="text">
+							<?php print '$' . $project->field_original_total_budget . 'm'; ?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="label">
+							<?php print t('Total Expenditure'); ?>
+						</div>
+						<div class="text">
+							<?php print '$' . $project->total_expenditure . 'm'; ?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="label">
 							<?php print t('Original Approved Start Date'); ?>
 						</div>
 						<div class="text">
@@ -80,10 +134,12 @@
 					</div>
 					<div class="row">
 						<div class="label">
-							<?php print t('Total Project Budget'); ?>
+							<?php print t('Entity Сomments'); ?>
 						</div>
 						<div class="text">
-							<?php print '$' . $project->field_original_total_budget . 'm'; ?>
+							<?php print !empty($project->last_update->field_entity_comments[LANGUAGE_NONE][0]['value']) ?
+								$project->last_update->field_entity_comments[LANGUAGE_NONE][0]['value'] :
+								'-' ?>
 						</div>
 					</div>
 					<div class="pbh-buttons">

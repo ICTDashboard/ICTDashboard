@@ -782,11 +782,11 @@ function ict_project_get_total_budget($nid) {
 }
 
 /**
- * Get project first update
+ * Get project first approved update
  * @param $nid
  * @return int
  */
-function ict_project_get_first_update($nid) {
+function ict_project_get_first_approved_update($nid) {
   $update_nids = array();
   $updates = ict_update_get_allowed_entity_list($nid);
 
@@ -809,9 +809,23 @@ function ict_project_get_first_update($nid) {
 }
 
 /**
+ * Get project last update
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_last_update($nid) {
+  $updates = ict_update_project_get_list($nid);
+  if ($updates) {
+    return reset($updates);
+  }
+
+  return '';
+}
+
+/**
  * Get project baseline history block
  * @param $nid
- * @return theme
+ * @return string
  */
 function ict_project_project_history ($nid) {
 
@@ -826,7 +840,20 @@ function ict_project_project_history ($nid) {
   }
   $current_baseline->approved_on = ict_project_get_approve_date($nid);
   $current_baseline->field_original_total_budget = number_format(ict_project_get_total_budget($nid), 2, '.', ' ');
-  $current_baseline->first_update = ict_project_get_first_update($nid);
+  $current_baseline->first_update = ict_project_get_first_approved_update($nid);
+  $last_update = ict_project_get_last_update($nid);
+  $current_baseline->last_update = $last_update ?
+    node_load($last_update) :
+    FALSE;
+
+  $total_expenditure = 0;
+  if ($current_baseline->last_update) {
+    $upd_wrap = entity_metadata_wrapper('node', $current_baseline->last_update->nid);
+    foreach ($upd_wrap->field_original_total_budget as $budget) {
+      $total_expenditure += $budget->field_total->value();
+    }
+  }
+  $current_baseline->total_expenditure = number_format($total_expenditure, 2, '.', ' ');
 
   $old_baselines = ict_project_get_old_baselines($nid);
 
@@ -850,7 +877,18 @@ function ict_project_get_old_baselines($nid) {
       $old_baselines[$project_id]->approved_on = ict_project_get_approve_date($project_id);
       $old_baselines[$project_id]->unpublished_on = ict_project_get_unpublished_date($project_id);
       $old_baselines[$project_id]->field_original_total_budget = number_format(ict_project_get_total_budget($project_id), 2, '.', ' ');
-      $old_baselines[$project_id]->first_update = ict_project_get_first_update($project_id);
+
+      $last_update = ict_project_get_last_update($project_id);
+      $old_baselines[$project_id]->last_update = $last_update ?
+        node_load($last_update) :
+        FALSE;
+
+      $total_expenditure = 0;
+      $upd_wrap = entity_metadata_wrapper('node', $old_baselines[$project_id]->last_update->nid);
+      foreach ($upd_wrap->field_original_total_budget as $budget) {
+        $total_expenditure += $budget->field_total->value();
+      }
+      $old_baselines[$project_id]->total_expenditure = number_format($total_expenditure, 2, '.', ' ');
     }
   }
   return $old_baselines;
