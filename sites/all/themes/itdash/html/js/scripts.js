@@ -219,6 +219,8 @@ Drupal.behaviors.ictFaq = {
 Drupal.behaviors.atepickerIcon = {
 	attach: function(context) {
 		for (id in Drupal.settings.datePopup) {
+			Drupal.settings.datePopup[id].settings.changeMonth = true;
+			Drupal.settings.datePopup[id].settings.changeYear = true;
 			jQuery('#' + id).datepicker(Drupal.settings.datePopup[id].settings)
 			.addClass('date-popup-init');
 		}
