@@ -153,12 +153,27 @@
                 <?php endif; ?>
 
                 <?php if (ict_project_access_project('rebaseline', $user, $project->nid)) : ?>
-                  <a href="<?php print url('project/' . $project->nid .'/rebaseline', array(
-                      'query' => array('destination' => 'projects')
-                    )
-                  ); ?>">
+                  <a href="#ict-rebaseline-<?php print $project->nid; ?>" class="fancybox-inline">
                     <span><?php print t('Create Re-baseline Draft'); ?></span>
                   </a>
+                  <div style="display: none;" id="ict-rebaseline-<?php print $project->nid; ?>" class="ict-rebaseline-warn">
+                    <?php $bean = bean_load_delta('opt-out-policy'); ?>
+                    <h2 class="fancybox-title"><?php print t('Warning'); ?></h2>
+                    <div class="ict-fancy-content entity-bean">
+                      <div class="field">
+                        <p>
+                          <?php print t('Rebaselining a project requires approval of the project’s highest governance body and potentially the Government. <strong>Only proceed if this is the case.</strong>'); ?>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="fancybox-actions">
+                      <a class="ict-fancybox-close export-btn" href="#"><span><?php print t('Cancel'); ?></span></a>
+                      <a class="general-button arrow-right confirm-proceed" href="<?php print url('project/' . $project->nid .'/rebaseline', array(
+                          'query' => array('destination' => 'projects')
+                        )
+                      ); ?>"><span><?php print t('Confirm and proceed'); ?></span></a>
+                    </div>
+                  </div>
                 <?php endif; ?>
               </td>
             </tr>

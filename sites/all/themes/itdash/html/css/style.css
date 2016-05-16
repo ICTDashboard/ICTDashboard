@@ -1365,6 +1365,10 @@ and it will create a button dependant on those variables.
   color: #d5ff92;
 }
 /* line 207, ../scss/modules/_buttons.scss */
+.general-button.arrow-right span {
+  margin-right: 20px;
+}
+/* line 208, ../scss/modules/_buttons.scss */
 .general-button.arrow-right span:after {
   font-family: FontAwesome;
   content: "\f105";
@@ -1375,8 +1379,13 @@ and it will create a button dependant on those variables.
   font-size: 20px;
   color: #d5ff92;
 }
+/* line 220, ../scss/modules/_buttons.scss */
+.general-button.confirm-proceed {
+  width: 220px;
+  margin-left: 10px;
+}
 
-/* line 221, ../scss/modules/_buttons.scss */
+/* line 227, ../scss/modules/_buttons.scss */
 .ict-project-button a {
   display: block;
   text-indent: -9999em;
@@ -1388,11 +1397,11 @@ and it will create a button dependant on those variables.
   background-color: #f9fafc;
   border: 1px solid #dfe5ef;
 }
-/* line 229, ../scss/modules/_buttons.scss */
+/* line 235, ../scss/modules/_buttons.scss */
 .ict-project-button a:focus, .ict-project-button a:hover {
   border-color: #027e9c;
 }
-/* line 233, ../scss/modules/_buttons.scss */
+/* line 239, ../scss/modules/_buttons.scss */
 .ict-project-button a:before {
   content: "";
   position: absolute;
@@ -1407,12 +1416,12 @@ and it will create a button dependant on those variables.
 .ict-project-button a:before:hover, .ict-project-button a:before.proj_arr_r-hover {
   background-position: 0 -83px;
 }
-/* line 240, ../scss/modules/_buttons.scss */
+/* line 246, ../scss/modules/_buttons.scss */
 .ict-project-button a:active {
   background-color: #086783;
   border-color: #034559;
 }
-/* line 243, ../scss/modules/_buttons.scss */
+/* line 249, ../scss/modules/_buttons.scss */
 .ict-project-button a:active:before {
   background-position: 0 -83px;
   width: 23px;
@@ -1884,6 +1893,16 @@ select {
 }
 
 /* line 33, ../scss/modules/_elements.scss */
+.entity-bean .field {
+  overflow: hidden;
+}
+
+/* line 38, ../scss/modules/_elements.scss */
+.ict-rebaseline-warn .field {
+  min-height: 130px;
+}
+
+/* line 43, ../scss/modules/_elements.scss */
 .page-entityform #content {
   min-width: 970px;
   width: 970px;
@@ -1892,69 +1911,69 @@ select {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 39, ../scss/modules/_elements.scss */
+/* line 49, ../scss/modules/_elements.scss */
 .page-entityform #content .tabs {
   display: none;
 }
 
-/* line 47, ../scss/modules/_elements.scss */
+/* line 57, ../scss/modules/_elements.scss */
 body #ict-dashboard-detailed-overview #benefits_legend,
 #content #ict-dashboard-detailed-overview #benefits_legend {
   margin: -19px 0 0 397px;
 }
-/* line 52, ../scss/modules/_elements.scss */
+/* line 62, ../scss/modules/_elements.scss */
 body .welcome-text a,
 #content .welcome-text a {
   color: #d5ff92;
 }
-/* line 54, ../scss/modules/_elements.scss */
+/* line 64, ../scss/modules/_elements.scss */
 body .welcome-text a:hover,
 #content .welcome-text a:hover {
   text-decoration: none;
 }
-/* line 61, ../scss/modules/_elements.scss */
+/* line 71, ../scss/modules/_elements.scss */
 body #inner-content h3,
 #content #inner-content h3 {
   font-size: 18px;
   color: #202b3d;
   font-weight: 600;
 }
-/* line 67, ../scss/modules/_elements.scss */
+/* line 77, ../scss/modules/_elements.scss */
 body .ict-benefits,
 #content .ict-benefits {
   max-width: 812px;
   border: 1px solid #d8dee9;
 }
-/* line 71, ../scss/modules/_elements.scss */
+/* line 81, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item.row-blue,
 #content .ict-benefits .node-faq-item.row-blue {
   background-color: #dff1f5;
 }
-/* line 74, ../scss/modules/_elements.scss */
+/* line 84, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-question,
 #content .ict-benefits .node-faq-item .ict-faq-question {
   position: relative;
   padding: 10px 155px 10px 50px;
 }
-/* line 77, ../scss/modules/_elements.scss */
+/* line 87, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-question:before,
 #content .ict-benefits .node-faq-item .ict-faq-question:before {
   left: 10px;
   top: 10px;
 }
-/* line 81, ../scss/modules/_elements.scss */
+/* line 91, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-question h4,
 #content .ict-benefits .node-faq-item .ict-faq-question h4 {
   margin: 0;
   font-size: 16px;
 }
-/* line 86, ../scss/modules/_elements.scss */
+/* line 96, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-answer,
 #content .ict-benefits .node-faq-item .ict-faq-answer {
   padding-top: 0;
   padding-left: 50px;
 }
-/* line 89, ../scss/modules/_elements.scss */
+/* line 99, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-answer ul,
 #content .ict-benefits .node-faq-item .ict-faq-answer ul {
   list-style: none;
@@ -1962,14 +1981,14 @@ body .ict-benefits .node-faq-item .ict-faq-answer ul,
   margin: 0;
   margin-top: -2px;
 }
-/* line 94, ../scss/modules/_elements.scss */
+/* line 104, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-answer ul li,
 #content .ict-benefits .node-faq-item .ict-faq-answer ul li {
   padding-left: 18px;
   line-height: 22px;
   position: relative;
 }
-/* line 98, ../scss/modules/_elements.scss */
+/* line 108, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-answer ul li:before,
 #content .ict-benefits .node-faq-item .ict-faq-answer ul li:before {
   position: absolute;
@@ -1978,19 +1997,19 @@ body .ict-benefits .node-faq-item .ict-faq-answer ul li:before,
   left: -2px;
   font-size: 24px;
 }
-/* line 105, ../scss/modules/_elements.scss */
+/* line 115, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-answer ul li .label,
 #content .ict-benefits .node-faq-item .ict-faq-answer ul li .label {
   padding: 0;
   display: inline-block;
   min-width: 98px;
 }
-/* line 110, ../scss/modules/_elements.scss */
+/* line 120, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .ict-faq-answer ul li .benefit,
 #content .ict-benefits .node-faq-item .ict-faq-answer ul li .benefit {
   display: inline-block;
 }
-/* line 116, ../scss/modules/_elements.scss */
+/* line 126, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .benfit-status,
 #content .ict-benefits .node-faq-item .benfit-status {
   position: absolute;
@@ -1999,7 +2018,7 @@ body .ict-benefits .node-faq-item .benfit-status,
   width: 140px;
   color: black;
 }
-/* line 122, ../scss/modules/_elements.scss */
+/* line 132, ../scss/modules/_elements.scss */
 body .ict-benefits .node-faq-item .benfit-status .status-marker,
 #content .ict-benefits .node-faq-item .benfit-status .status-marker {
   width: 16px;
@@ -2009,7 +2028,7 @@ body .ict-benefits .node-faq-item .benfit-status .status-marker,
   vertical-align: sub;
   margin-right: 5px;
 }
-/* line 133, ../scss/modules/_elements.scss */
+/* line 143, ../scss/modules/_elements.scss */
 body #user-pass-reset,
 body .ict-fancy-content,
 body .project-draft-submission,
@@ -2020,7 +2039,7 @@ body .project-update-submission,
 #content .project-update-submission {
   font-size: 14px;
 }
-/* line 138, ../scss/modules/_elements.scss */
+/* line 148, ../scss/modules/_elements.scss */
 body #user-pass-reset .row,
 body .ict-fancy-content .row,
 body .project-draft-submission .row,
@@ -2031,7 +2050,7 @@ body .project-update-submission .row,
 #content .project-update-submission .row {
   margin-bottom: 15px;
 }
-/* line 142, ../scss/modules/_elements.scss */
+/* line 152, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .label,
 body .ict-fancy-content .row .label,
 body .project-draft-submission .row .label,
@@ -2047,7 +2066,7 @@ body .project-update-submission .row .label,
   padding-top: 9px;
   padding-bottom: 9px;
 }
-/* line 149, ../scss/modules/_elements.scss */
+/* line 159, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .label .edit-btn,
 body .ict-fancy-content .row .label .edit-btn,
 body .project-draft-submission .row .label .edit-btn,
@@ -2065,7 +2084,7 @@ body .project-update-submission .row .label .edit-btn,
   padding-left: 25px;
   text-decoration: underline;
 }
-/* line 158, ../scss/modules/_elements.scss */
+/* line 168, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .label .edit-btn:hover,
 body .ict-fancy-content .row .label .edit-btn:hover,
 body .project-draft-submission .row .label .edit-btn:hover,
@@ -2076,7 +2095,7 @@ body .project-update-submission .row .label .edit-btn:hover,
 #content .project-update-submission .row .label .edit-btn:hover {
   text-decoration: none;
 }
-/* line 161, ../scss/modules/_elements.scss */
+/* line 171, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .label .edit-btn:before,
 body .ict-fancy-content .row .label .edit-btn:before,
 body .project-draft-submission .row .label .edit-btn:before,
@@ -2097,7 +2116,7 @@ body .project-update-submission .row .label .edit-btn:before,
   height: 16px;
   display: block;
 }
-/* line 173, ../scss/modules/_elements.scss */
+/* line 183, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .label .start-year-select select,
 body .ict-fancy-content .row .label .start-year-select select,
 body .project-draft-submission .row .label .start-year-select select,
@@ -2117,7 +2136,7 @@ body .project-update-submission .row .label .start-year-select select,
   background-image: none;
   color: #202b3d;
 }
-/* line 186, ../scss/modules/_elements.scss */
+/* line 196, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .label .form-helptext,
 body .ict-fancy-content .row .label .form-helptext,
 body .project-draft-submission .row .label .form-helptext,
@@ -2128,7 +2147,7 @@ body .project-update-submission .row .label .form-helptext,
 #content .project-update-submission .row .label .form-helptext {
   font-weight: normal;
 }
-/* line 188, ../scss/modules/_elements.scss */
+/* line 198, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .label .form-helptext a:hover,
 body .ict-fancy-content .row .label .form-helptext a:hover,
 body .project-draft-submission .row .label .form-helptext a:hover,
@@ -2139,7 +2158,7 @@ body .project-update-submission .row .label .form-helptext a:hover,
 #content .project-update-submission .row .label .form-helptext a:hover {
   text-decoration: none;
 }
-/* line 194, ../scss/modules/_elements.scss */
+/* line 204, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text .description,
 body .ict-fancy-content .row .text .description,
 body .project-draft-submission .row .text .description,
@@ -2150,7 +2169,7 @@ body .project-update-submission .row .text .description,
 #content .project-update-submission .row .text .description {
   display: none;
 }
-/* line 198, ../scss/modules/_elements.scss */
+/* line 208, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text #edit-field-entity-comments,
 body .ict-fancy-content .row .text #edit-field-entity-comments,
 body .project-draft-submission .row .text #edit-field-entity-comments,
@@ -2161,7 +2180,7 @@ body .project-update-submission .row .text #edit-field-entity-comments,
 #content .project-update-submission .row .text #edit-field-entity-comments {
   max-width: 640px;
 }
-/* line 200, ../scss/modules/_elements.scss */
+/* line 210, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text #edit-field-entity-comments #cke_1_bottom,
 body .ict-fancy-content .row .text #edit-field-entity-comments #cke_1_bottom,
 body .project-draft-submission .row .text #edit-field-entity-comments #cke_1_bottom,
@@ -2173,7 +2192,7 @@ body .project-update-submission .row .text #edit-field-entity-comments #cke_1_bo
   background: none;
   border-top: none;
 }
-/* line 205, ../scss/modules/_elements.scss */
+/* line 215, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text select,
 body #user-pass-reset .row .text input[type="text"]:not(.form-autocomplete),
 body #user-pass-reset .row .text textarea,
@@ -2209,7 +2228,7 @@ body .project-update-submission .row .text textarea,
   line-height: 36px;
   padding: 0 10px;
 }
-/* line 219, ../scss/modules/_elements.scss */
+/* line 229, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text select #field-expected-completion-date-add-more-wrapper input, body #user-pass-reset .row .text select.add_datepicker,
 body #user-pass-reset .row .text input[type="text"]:not(.form-autocomplete) #field-expected-completion-date-add-more-wrapper input,
 body #user-pass-reset .row .text input[type="text"]:not(.form-autocomplete).add_datepicker,
@@ -2259,7 +2278,7 @@ body .project-update-submission .row .text textarea.add_datepicker,
 #content .project-update-submission .row .text textarea.add_datepicker {
   max-width: 607px;
 }
-/* line 224, ../scss/modules/_elements.scss */
+/* line 234, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text input[type="text"].form-autocomplete,
 body .ict-fancy-content .row .text input[type="text"].form-autocomplete,
 body .project-draft-submission .row .text input[type="text"].form-autocomplete,
@@ -2277,7 +2296,7 @@ body .project-update-submission .row .text input[type="text"].form-autocomplete,
   line-height: 36px;
   padding: 0 10px;
 }
-/* line 234, ../scss/modules/_elements.scss */
+/* line 244, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text select[multiple="multiple"],
 body .ict-fancy-content .row .text select[multiple="multiple"],
 body .project-draft-submission .row .text select[multiple="multiple"],
@@ -2288,7 +2307,7 @@ body .project-update-submission .row .text select[multiple="multiple"],
 #content .project-update-submission .row .text select[multiple="multiple"] {
   height: auto;
 }
-/* line 237, ../scss/modules/_elements.scss */
+/* line 247, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text .grippie,
 body .ict-fancy-content .row .text .grippie,
 body .project-draft-submission .row .text .grippie,
@@ -2299,7 +2318,7 @@ body .project-update-submission .row .text .grippie,
 #content .project-update-submission .row .text .grippie {
   max-width: 640px;
 }
-/* line 240, ../scss/modules/_elements.scss */
+/* line 250, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text table,
 body .ict-fancy-content .row .text table,
 body .project-draft-submission .row .text table,
@@ -2314,7 +2333,7 @@ body .project-update-submission .row .text table,
   border-collapse: separate;
   font-size: 14px;
 }
-/* line 246, ../scss/modules/_elements.scss */
+/* line 256, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text table#financial-benefits,
 body .ict-fancy-content .row .text table#financial-benefits,
 body .project-draft-submission .row .text table#financial-benefits,
@@ -2325,7 +2344,7 @@ body .project-update-submission .row .text table#financial-benefits,
 #content .project-update-submission .row .text table#financial-benefits {
   max-width: none;
 }
-/* line 250, ../scss/modules/_elements.scss */
+/* line 260, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text #edit-field-benefits-realised table,
 body .ict-fancy-content .row .text #edit-field-benefits-realised table,
 body .project-draft-submission .row .text #edit-field-benefits-realised table,
@@ -2336,7 +2355,7 @@ body .project-update-submission .row .text #edit-field-benefits-realised table,
 #content .project-update-submission .row .text #edit-field-benefits-realised table {
   max-width: none;
 }
-/* line 254, ../scss/modules/_elements.scss */
+/* line 264, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text tr th,
 body .ict-fancy-content .row .text tr th,
 body .project-draft-submission .row .text tr th,
@@ -2355,7 +2374,7 @@ body .project-update-submission .row .text tr th,
   text-shadow: 0 0 0;
   text-align: center;
 }
-/* line 264, ../scss/modules/_elements.scss */
+/* line 274, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text tr th:first-child,
 body .ict-fancy-content .row .text tr th:first-child,
 body .project-draft-submission .row .text tr th:first-child,
@@ -2367,7 +2386,7 @@ body .project-update-submission .row .text tr th:first-child,
   border-radius: 4px 0 0;
   border-left: 0 none;
 }
-/* line 268, ../scss/modules/_elements.scss */
+/* line 278, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text tr th:last-child,
 body .ict-fancy-content .row .text tr th:last-child,
 body .project-draft-submission .row .text tr th:last-child,
@@ -2378,7 +2397,7 @@ body .project-update-submission .row .text tr th:last-child,
 #content .project-update-submission .row .text tr th:last-child {
   border-radius: 0 4px 0 0;
 }
-/* line 272, ../scss/modules/_elements.scss */
+/* line 282, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text tr td,
 body .ict-fancy-content .row .text tr td,
 body .project-draft-submission .row .text tr td,
@@ -2397,7 +2416,7 @@ body .project-update-submission .row .text tr td,
   text-align: center;
   vertical-align: middle;
 }
-/* line 282, ../scss/modules/_elements.scss */
+/* line 292, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text tr td.number-cell,
 body .ict-fancy-content .row .text tr td.number-cell,
 body .project-draft-submission .row .text tr td.number-cell,
@@ -2408,7 +2427,7 @@ body .project-update-submission .row .text tr td.number-cell,
 #content .project-update-submission .row .text tr td.number-cell {
   background-color: #fff;
 }
-/* line 287, ../scss/modules/_elements.scss */
+/* line 297, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text p,
 body .ict-fancy-content .row .text p,
 body .project-draft-submission .row .text p,
@@ -2419,7 +2438,7 @@ body .project-update-submission .row .text p,
 #content .project-update-submission .row .text p {
   margin: 0 0 5px;
 }
-/* line 290, ../scss/modules/_elements.scss */
+/* line 300, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text table.table_field_collection,
 body .ict-fancy-content .row .text table.table_field_collection,
 body .project-draft-submission .row .text table.table_field_collection,
@@ -2430,7 +2449,7 @@ body .project-update-submission .row .text table.table_field_collection,
 #content .project-update-submission .row .text table.table_field_collection {
   margin-bottom: 10px;
 }
-/* line 293, ../scss/modules/_elements.scss */
+/* line 303, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text table.table_field_collection tr td,
 body .ict-fancy-content .row .text table.table_field_collection tr td,
 body .project-draft-submission .row .text table.table_field_collection tr td,
@@ -2442,7 +2461,7 @@ body .project-update-submission .row .text table.table_field_collection tr td,
   border-top: none;
   border-bottom: 1px solid #abb6cb;
 }
-/* line 296, ../scss/modules/_elements.scss */
+/* line 306, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text table.table_field_collection tr td input:not(.form-autocomplete),
 body .ict-fancy-content .row .text table.table_field_collection tr td input:not(.form-autocomplete),
 body .project-draft-submission .row .text table.table_field_collection tr td input:not(.form-autocomplete),
@@ -2456,7 +2475,7 @@ body .project-update-submission .row .text table.table_field_collection tr td in
   height: 39px;
   border: none;
 }
-/* line 302, ../scss/modules/_elements.scss */
+/* line 312, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text table.table_field_collection tr td .label,
 body .ict-fancy-content .row .text table.table_field_collection tr td .label,
 body .project-draft-submission .row .text table.table_field_collection tr td .label,
@@ -2467,7 +2486,7 @@ body .project-update-submission .row .text table.table_field_collection tr td .l
 #content .project-update-submission .row .text table.table_field_collection tr td .label {
   font-weight: normal;
 }
-/* line 305, ../scss/modules/_elements.scss */
+/* line 315, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text table.table_field_collection tr td:last-child,
 body .ict-fancy-content .row .text table.table_field_collection tr td:last-child,
 body .project-draft-submission .row .text table.table_field_collection tr td:last-child,
@@ -2478,7 +2497,7 @@ body .project-update-submission .row .text table.table_field_collection tr td:la
 #content .project-update-submission .row .text table.table_field_collection tr td:last-child {
   border-right: 1px solid #abb6cb;
 }
-/* line 310, ../scss/modules/_elements.scss */
+/* line 320, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text table.table_field_collection tr:last-child td,
 body .ict-fancy-content .row .text table.table_field_collection tr:last-child td,
 body .project-draft-submission .row .text table.table_field_collection tr:last-child td,
@@ -2489,7 +2508,7 @@ body .project-update-submission .row .text table.table_field_collection tr:last-
 #content .project-update-submission .row .text table.table_field_collection tr:last-child td {
   border-bottom: none;
 }
-/* line 317, ../scss/modules/_elements.scss */
+/* line 327, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text .date-field-wrapper .form-item,
 body .ict-fancy-content .row .text .date-field-wrapper .form-item,
 body .project-draft-submission .row .text .date-field-wrapper .form-item,
@@ -2502,7 +2521,7 @@ body .project-update-submission .row .text .date-field-wrapper .form-item,
   width: auto;
   position: relative;
 }
-/* line 321, ../scss/modules/_elements.scss */
+/* line 331, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text .date-field-wrapper .form-item .ui-datepicker-trigger,
 body .ict-fancy-content .row .text .date-field-wrapper .form-item .ui-datepicker-trigger,
 body .project-draft-submission .row .text .date-field-wrapper .form-item .ui-datepicker-trigger,
@@ -2515,7 +2534,7 @@ body .project-update-submission .row .text .date-field-wrapper .form-item .ui-da
   top: 4px;
   right: -38px;
 }
-/* line 328, ../scss/modules/_elements.scss */
+/* line 338, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text .remove-column-button,
 body .ict-fancy-content .row .text .remove-column-button,
 body .project-draft-submission .row .text .remove-column-button,
@@ -2530,7 +2549,7 @@ body .project-update-submission .row .text .remove-column-button,
   color: #fff;
   text-decoration: underline;
 }
-/* line 335, ../scss/modules/_elements.scss */
+/* line 345, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text .field-name-field-portfolio-name,
 body .ict-fancy-content .row .text .field-name-field-portfolio-name,
 body .project-draft-submission .row .text .field-name-field-portfolio-name,
@@ -2541,7 +2560,7 @@ body .project-update-submission .row .text .field-name-field-portfolio-name,
 #content .project-update-submission .row .text .field-name-field-portfolio-name {
   position: relative;
 }
-/* line 337, ../scss/modules/_elements.scss */
+/* line 347, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text .field-name-field-portfolio-name .ajax-progress-throbber,
 body .ict-fancy-content .row .text .field-name-field-portfolio-name .ajax-progress-throbber,
 body .project-draft-submission .row .text .field-name-field-portfolio-name .ajax-progress-throbber,
@@ -2554,7 +2573,7 @@ body .project-update-submission .row .text .field-name-field-portfolio-name .aja
   top: -30px;
   left: 150px;
 }
-/* line 343, ../scss/modules/_elements.scss */
+/* line 353, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .text #approvers,
 body #user-pass-reset .row .text #editors,
 body .ict-fancy-content .row .text #approvers,
@@ -2573,7 +2592,7 @@ body .project-update-submission .row .text #editors,
 #content .project-update-submission .row .text #editors {
   max-width: 720px;
 }
-/* line 348, ../scss/modules/_elements.scss */
+/* line 358, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .form-item,
 body .ict-fancy-content .row .form-item,
 body .project-draft-submission .row .form-item,
@@ -2586,7 +2605,7 @@ body .project-update-submission .row .form-item,
   width: 100%;
   margin-bottom: 0;
 }
-/* line 352, ../scss/modules/_elements.scss */
+/* line 362, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .form-item .date-padding,
 body .ict-fancy-content .row .form-item .date-padding,
 body .project-draft-submission .row .form-item .date-padding,
@@ -2598,7 +2617,7 @@ body .project-update-submission .row .form-item .date-padding,
   float: none;
   padding: 0;
 }
-/* line 355, ../scss/modules/_elements.scss */
+/* line 365, ../scss/modules/_elements.scss */
 body #user-pass-reset .row .form-item .date-padding input[type="text"],
 body .ict-fancy-content .row .form-item .date-padding input[type="text"],
 body .project-draft-submission .row .form-item .date-padding input[type="text"],
@@ -2610,7 +2629,7 @@ body .project-update-submission .row .form-item .date-padding input[type="text"]
   width: 100%;
   max-width: 640px;
 }
-/* line 362, ../scss/modules/_elements.scss */
+/* line 372, ../scss/modules/_elements.scss */
 body #user-pass-reset .email-value,
 body .ict-fancy-content .email-value,
 body .project-draft-submission .email-value,
@@ -2626,7 +2645,7 @@ body .project-update-submission .email-value,
   width: auto;
   margin-bottom: 15px;
 }
-/* line 369, ../scss/modules/_elements.scss */
+/* line 379, ../scss/modules/_elements.scss */
 body #user-pass-reset .email-value:hover,
 body .ict-fancy-content .email-value:hover,
 body .project-draft-submission .email-value:hover,
@@ -2637,7 +2656,7 @@ body .project-update-submission .email-value:hover,
 #content .project-update-submission .email-value:hover {
   text-decoration: none;
 }
-/* line 373, ../scss/modules/_elements.scss */
+/* line 383, ../scss/modules/_elements.scss */
 body #user-pass-reset .dotted-line,
 body .ict-fancy-content .dotted-line,
 body .project-draft-submission .dotted-line,
@@ -2652,7 +2671,7 @@ body .project-update-submission .dotted-line,
   height: 1px;
   width: 100%;
 }
-/* line 380, ../scss/modules/_elements.scss */
+/* line 390, ../scss/modules/_elements.scss */
 body #user-pass-reset .sbHolder,
 body .ict-fancy-content .sbHolder,
 body .project-draft-submission .sbHolder,
@@ -2663,7 +2682,7 @@ body .project-update-submission .sbHolder,
 #content .project-update-submission .sbHolder {
   max-width: 640px;
 }
-/* line 383, ../scss/modules/_elements.scss */
+/* line 393, ../scss/modules/_elements.scss */
 body #user-pass-reset .sbSelector,
 body .ict-fancy-content .sbSelector,
 body .project-draft-submission .sbSelector,
@@ -2674,22 +2693,22 @@ body .project-update-submission .sbSelector,
 #content .project-update-submission .sbSelector {
   width: 100%;
 }
-/* line 389, ../scss/modules/_elements.scss */
+/* line 399, ../scss/modules/_elements.scss */
 body .ict-fancy-content .row:last-child,
 #content .ict-fancy-content .row:last-child {
   margin-bottom: 0;
 }
-/* line 395, ../scss/modules/_elements.scss */
+/* line 405, ../scss/modules/_elements.scss */
 body .ict-fancy-content .row table tr th div.label,
 #content .ict-fancy-content .row table tr th div.label {
   color: white !important;
 }
-/* line 400, ../scss/modules/_elements.scss */
+/* line 410, ../scss/modules/_elements.scss */
 body .ict-fancy-content .row table td,
 #content .ict-fancy-content .row table td {
   padding: 3px;
 }
-/* line 407, ../scss/modules/_elements.scss */
+/* line 417, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id h2,
 #content #ict-home-projects-table-id h2 {
   font-weight: 600;
@@ -2699,12 +2718,12 @@ body #ict-home-projects-table-id h2,
   margin: 21px 0 30px;
   padding: 0 0 8px;
 }
-/* line 415, ../scss/modules/_elements.scss */
+/* line 425, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id .table-config-bar,
 #content #ict-home-projects-table-id .table-config-bar {
   margin: 30px 0 18px;
 }
-/* line 418, ../scss/modules/_elements.scss */
+/* line 428, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id .table-config-bar .form-type-select label,
 #content #ict-home-projects-table-id .table-config-bar .form-type-select label {
   display: inline-block;
@@ -2713,7 +2732,7 @@ body #ict-home-projects-table-id .table-config-bar .form-type-select label,
   margin-right: 6px;
   vertical-align: middle;
 }
-/* line 425, ../scss/modules/_elements.scss */
+/* line 435, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id .table-config-bar .form-type-select .sbHolder,
 #content #ict-home-projects-table-id .table-config-bar .form-type-select .sbHolder {
   width: auto;
@@ -2721,44 +2740,44 @@ body #ict-home-projects-table-id .table-config-bar .form-type-select .sbHolder,
   display: inline-block;
   vertical-align: middle;
 }
-/* line 432, ../scss/modules/_elements.scss */
+/* line 442, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id .table-config-bar .item-list,
 #content #ict-home-projects-table-id .table-config-bar .item-list {
   float: right;
 }
-/* line 435, ../scss/modules/_elements.scss */
+/* line 445, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id .table-config-bar .pager,
 #content #ict-home-projects-table-id .table-config-bar .pager {
   margin: 0;
 }
-/* line 439, ../scss/modules/_elements.scss */
+/* line 449, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id table,
 #content #ict-home-projects-table-id table {
   width: 100%;
   max-width: none;
   table-layout: fixed;
 }
-/* line 443, ../scss/modules/_elements.scss */
+/* line 453, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id table a,
 #content #ict-home-projects-table-id table a {
   display: block;
   color: #027e9c;
   text-decoration: underline;
 }
-/* line 447, ../scss/modules/_elements.scss */
+/* line 457, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id table a:focus, body #ict-home-projects-table-id table a:hover,
 #content #ict-home-projects-table-id table a:focus,
 #content #ict-home-projects-table-id table a:hover {
   color: #027e9c;
   text-decoration: none;
 }
-/* line 456, ../scss/modules/_elements.scss */
+/* line 466, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr.tooltips-row th,
 #content #ict-home-projects-table-id tr.tooltips-row th {
   padding: 0 14px 15px;
   position: relative;
 }
-/* line 460, ../scss/modules/_elements.scss */
+/* line 470, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr.tooltips-row th.current_sort:after,
 #content #ict-home-projects-table-id tr.tooltips-row th.current_sort:after {
   content: "";
@@ -2771,7 +2790,7 @@ body #ict-home-projects-table-id tr.tooltips-row th.current_sort:after,
   bottom: 0;
   left: -1px;
 }
-/* line 474, ../scss/modules/_elements.scss */
+/* line 484, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr th,
 #content #ict-home-projects-table-id tr th {
   padding: 11px 25px 6px 14px;
@@ -2785,18 +2804,18 @@ body #ict-home-projects-table-id tr th,
   position: relative;
   vertical-align: middle;
 }
-/* line 485, ../scss/modules/_elements.scss */
+/* line 495, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr th.col-num-entity, body #ict-home-projects-table-id tr th.col-num-benefits,
 #content #ict-home-projects-table-id tr th.col-num-entity,
 #content #ict-home-projects-table-id tr th.col-num-benefits {
   width: 110px;
 }
-/* line 489, ../scss/modules/_elements.scss */
+/* line 499, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr th.col-num-budget,
 #content #ict-home-projects-table-id tr th.col-num-budget {
   width: 320px;
 }
-/* line 492, ../scss/modules/_elements.scss */
+/* line 502, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr th .tooltip,
 #content #ict-home-projects-table-id tr th .tooltip {
   position: relative;
@@ -2808,7 +2827,7 @@ body #ict-home-projects-table-id tr th .tooltip,
   display: block;
   display: block;
 }
-/* line 499, ../scss/modules/_elements.scss */
+/* line 509, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr th .ict-sort-link,
 #content #ict-home-projects-table-id tr th .ict-sort-link {
   display: block;
@@ -2818,7 +2837,7 @@ body #ict-home-projects-table-id tr th .ict-sort-link,
   top: 0;
   left: 0;
 }
-/* line 506, ../scss/modules/_elements.scss */
+/* line 516, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr th .ict-sort-link:after, body #ict-home-projects-table-id tr th .ict-sort-link:before,
 #content #ict-home-projects-table-id tr th .ict-sort-link:after,
 #content #ict-home-projects-table-id tr th .ict-sort-link:before {
@@ -2832,13 +2851,13 @@ body #ict-home-projects-table-id tr th .ict-sort-link:after, body #ict-home-proj
   right: 15px;
   top: 36px;
 }
-/* line 518, ../scss/modules/_elements.scss */
+/* line 528, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr th .ict-sort-link:after,
 #content #ict-home-projects-table-id tr th .ict-sort-link:after {
   border-color: transparent transparent white transparent;
   top: 26px;
 }
-/* line 524, ../scss/modules/_elements.scss */
+/* line 534, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td,
 #content #ict-home-projects-table-id tr td {
   padding: 18px 14px;
@@ -2849,18 +2868,18 @@ body #ict-home-projects-table-id tr td,
   text-align: left;
   border-bottom: 1px dotted #d9dfe9;
 }
-/* line 532, ../scss/modules/_elements.scss */
+/* line 542, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td.col-num-benefits,
 #content #ict-home-projects-table-id tr td.col-num-benefits {
   text-align: center;
 }
-/* line 535, ../scss/modules/_elements.scss */
+/* line 545, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td.current_sort,
 #content #ict-home-projects-table-id tr td.current_sort {
   background-color: #d4f2f5;
   font-weight: 600;
 }
-/* line 539, ../scss/modules/_elements.scss */
+/* line 549, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td.schedule-status-0, body #ict-home-projects-table-id tr td.schedule-status-1, body #ict-home-projects-table-id tr td.schedule-status-2, body #ict-home-projects-table-id tr td.schedule-status-col,
 #content #ict-home-projects-table-id tr td.schedule-status-0,
 #content #ict-home-projects-table-id tr td.schedule-status-1,
@@ -2869,7 +2888,7 @@ body #ict-home-projects-table-id tr td.schedule-status-0, body #ict-home-project
   padding: 18px 14px 18px 40px;
   position: relative;
 }
-/* line 545, ../scss/modules/_elements.scss */
+/* line 555, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td.schedule-status-0:before, body #ict-home-projects-table-id tr td.schedule-status-1:before, body #ict-home-projects-table-id tr td.schedule-status-2:before, body #ict-home-projects-table-id tr td.schedule-status-col:before,
 #content #ict-home-projects-table-id tr td.schedule-status-0:before,
 #content #ict-home-projects-table-id tr td.schedule-status-1:before,
@@ -2889,7 +2908,7 @@ body #ict-home-projects-table-id tr td.schedule-status-0:before, body #ict-home-
   position: absolute;
 }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  /* line 545, ../scss/modules/_elements.scss */
+  /* line 555, ../scss/modules/_elements.scss */
   body #ict-home-projects-table-id tr td.schedule-status-0:before, body #ict-home-projects-table-id tr td.schedule-status-1:before, body #ict-home-projects-table-id tr td.schedule-status-2:before, body #ict-home-projects-table-id tr td.schedule-status-col:before,
   #content #ict-home-projects-table-id tr td.schedule-status-0:before,
   #content #ict-home-projects-table-id tr td.schedule-status-1:before,
@@ -2899,24 +2918,24 @@ body #ict-home-projects-table-id tr td.schedule-status-0:before, body #ict-home-
     margin-top: 3px;
   }
 }
-/* line 565, ../scss/modules/_elements.scss */
+/* line 575, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td.schedule-status-1:before,
 #content #ict-home-projects-table-id tr td.schedule-status-1:before {
   background-color: #1fd063;
 }
-/* line 570, ../scss/modules/_elements.scss */
+/* line 580, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td.schedule-status-2:before,
 #content #ict-home-projects-table-id tr td.schedule-status-2:before {
   background-color: #75a2df;
 }
-/* line 574, ../scss/modules/_elements.scss */
+/* line 584, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td .graph-container,
 #content #ict-home-projects-table-id tr td .graph-container {
   height: 30px;
   width: 100%;
   position: relative;
 }
-/* line 578, ../scss/modules/_elements.scss */
+/* line 588, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td .graph-container .graph-level,
 body #ict-home-projects-table-id tr td .graph-container .graph-bg,
 body #ict-home-projects-table-id tr td .graph-container .graph-to-date,
@@ -2932,80 +2951,80 @@ body #ict-home-projects-table-id tr td .graph-container .graph-budget,
   left: 0;
   background-color: #5c46a4;
 }
-/* line 589, ../scss/modules/_elements.scss */
+/* line 599, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td .graph-container .graph-to-date,
 #content #ict-home-projects-table-id tr td .graph-container .graph-to-date {
   background-color: #ff6161;
   margin: 5px 0 0;
   height: 20px;
 }
-/* line 595, ../scss/modules/_elements.scss */
+/* line 605, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td .graph-container-level,
 #content #ict-home-projects-table-id tr td .graph-container-level {
   margin-top: 2px;
   height: 18px;
 }
-/* line 598, ../scss/modules/_elements.scss */
+/* line 608, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td .graph-container-level .graph-level,
 #content #ict-home-projects-table-id tr td .graph-container-level .graph-level {
   background-color: #10d5db;
 }
-/* line 601, ../scss/modules/_elements.scss */
+/* line 611, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td .graph-container-level .graph-bg,
 #content #ict-home-projects-table-id tr td .graph-container-level .graph-bg {
   background-color: #034657;
   width: 100%;
 }
-/* line 606, ../scss/modules/_elements.scss */
+/* line 616, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr td .graph-value,
 #content #ict-home-projects-table-id tr td .graph-value {
   text-align: center;
   margin-top: 2px;
 }
-/* line 614, ../scss/modules/_elements.scss */
+/* line 624, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:before,
 #content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:before {
   border-top-color: #3ac3cf;
 }
-/* line 617, ../scss/modules/_elements.scss */
+/* line 627, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:after,
 #content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:after {
   display: none;
 }
-/* line 626, ../scss/modules/_elements.scss */
+/* line 636, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:before,
 #content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:before {
   display: none;
 }
-/* line 629, ../scss/modules/_elements.scss */
+/* line 639, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:after,
 #content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:after {
   border-bottom-color: #3ac3cf;
 }
-/* line 639, ../scss/modules/_elements.scss */
+/* line 649, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id.ict-filtered-projects-table tr td,
 #content #ict-home-projects-table-id.ict-filtered-projects-table tr td {
   height: 67px;
   vertical-align: top;
   padding: 12px 14px 0;
 }
-/* line 643, ../scss/modules/_elements.scss */
+/* line 653, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id.ict-filtered-projects-table tr td.schedule-status-col,
 #content #ict-home-projects-table-id.ict-filtered-projects-table tr td.schedule-status-col {
   padding: 12px 14px 0 40px;
 }
-/* line 645, ../scss/modules/_elements.scss */
+/* line 655, ../scss/modules/_elements.scss */
 body #ict-home-projects-table-id.ict-filtered-projects-table tr td.schedule-status-col:before,
 #content #ict-home-projects-table-id.ict-filtered-projects-table tr td.schedule-status-col:before {
   top: 15px;
   margin-top: 0;
 }
-/* line 653, ../scss/modules/_elements.scss */
+/* line 663, ../scss/modules/_elements.scss */
 body #edit-actions,
 #content #edit-actions {
   width: 100%;
 }
-/* line 656, ../scss/modules/_elements.scss */
+/* line 666, ../scss/modules/_elements.scss */
 body .submit,
 #content .submit {
   margin-bottom: 20px;
@@ -3014,7 +3033,7 @@ body .submit,
   text-align: right;
   margin-top: 30px;
 }
-/* line 663, ../scss/modules/_elements.scss */
+/* line 673, ../scss/modules/_elements.scss */
 body .submit-button,
 #content .submit-button {
   background: url(../images/general-btn.png) repeat-x scroll 0 0 transparent;
@@ -3037,26 +3056,26 @@ body .submit-button,
   box-shadow: 0 3px 0 #b1b7c1;
   margin-bottom: 3px;
 }
-/* line 681, ../scss/modules/_elements.scss */
+/* line 691, ../scss/modules/_elements.scss */
 body .submit-button:hover,
 #content .submit-button:hover {
   background-position: 0 -41px;
 }
-/* line 685, ../scss/modules/_elements.scss */
+/* line 695, ../scss/modules/_elements.scss */
 body a.submit-button,
 #content a.submit-button {
   line-height: 41px;
   text-decoration: none;
 }
 
-/* line 691, ../scss/modules/_elements.scss */
+/* line 701, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits,
 #content .project-update-submission table#financial-benefits {
   border: 0;
   border-collapse: collapse;
   table-layout: fixed;
 }
-/* line 696, ../scss/modules/_elements.scss */
+/* line 706, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td,
 #content .project-update-submission table#financial-benefits td {
   border-bottom: 1px solid #abb6cb;
@@ -3065,12 +3084,12 @@ body a.submit-button,
   text-align: left;
   padding-left: 18px;
 }
-/* line 702, ../scss/modules/_elements.scss */
+/* line 712, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.no-padding,
 #content .project-update-submission table#financial-benefits td.no-padding {
   padding: 0;
 }
-/* line 705, ../scss/modules/_elements.scss */
+/* line 715, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td .sbHolder,
 #content .project-draft-submission table#financial-benefits td textarea,
 #content .project-draft-submission table#financial-benefits td .grippie,
@@ -3080,7 +3099,7 @@ body a.submit-button,
   max-width: none;
   border: 0;
 }
-/* line 712, ../scss/modules/_elements.scss */
+/* line 722, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits th,
 #content .project-update-submission table#financial-benefits th {
   padding: 0;
@@ -3091,79 +3110,79 @@ body a.submit-button,
   text-align: left;
   padding-left: 16px;
 }
-/* line 718, ../scss/modules/_elements.scss */
+/* line 728, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits th.benefit-num,
 #content .project-update-submission table#financial-benefits th.benefit-num {
   width: 42px;
   border-bottom: 2px solid #025468;
   border-right: 1px solid #0a5f74;
 }
-/* line 722, ../scss/modules/_elements.scss */
+/* line 732, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits th.benefit-num .label,
 #content .project-update-submission table#financial-benefits th.benefit-num .label {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 727, ../scss/modules/_elements.scss */
+/* line 737, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits th .label,
 #content .project-update-submission table#financial-benefits th .label {
   color: white;
 }
-/* line 733, ../scss/modules/_elements.scss */
+/* line 743, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits tr:first-child th:first-child,
 #content .project-update-submission table#financial-benefits tr:first-child th:first-child {
   -moz-border-radius: 4px 0 0;
   -webkit-border-radius: 4px;
   border-radius: 4px 0 0;
 }
-/* line 736, ../scss/modules/_elements.scss */
+/* line 746, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits tr:first-child td,
 #content .project-update-submission table#financial-benefits tr:first-child td {
   border-top: 1px solid #abb6cb;
 }
-/* line 744, ../scss/modules/_elements.scss */
+/* line 754, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits label,
 #content .project-update-submission table#financial-benefits label {
   display: none;
 }
-/* line 747, ../scss/modules/_elements.scss */
+/* line 757, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .field-widget-date-popup,
 #content .project-update-submission table#financial-benefits .field-widget-date-popup {
   position: relative;
 }
-/* line 749, ../scss/modules/_elements.scss */
+/* line 759, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .field-widget-date-popup img,
 #content .project-update-submission table#financial-benefits .field-widget-date-popup img {
   position: absolute;
   top: 5px;
   right: 8px;
 }
-/* line 755, ../scss/modules/_elements.scss */
+/* line 765, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .row-white td,
 #content .project-update-submission table#financial-benefits .row-white td {
   background-color: white;
 }
-/* line 758, ../scss/modules/_elements.scss */
+/* line 768, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .row-blue td,
 #content .project-update-submission table#financial-benefits .row-blue td {
   background-color: #dff1f5;
 }
-/* line 760, ../scss/modules/_elements.scss */
+/* line 770, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .row-blue td textarea,
 #content .project-update-submission table#financial-benefits .row-blue td textarea {
   background-color: #dff1f5;
 }
-/* line 764, ../scss/modules/_elements.scss */
+/* line 774, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .row-yellow td,
 #content .project-update-submission table#financial-benefits .row-yellow td {
   background-color: #f5f2d7;
 }
-/* line 767, ../scss/modules/_elements.scss */
+/* line 777, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .sbHolder,
 #content .project-update-submission table#financial-benefits .sbHolder {
   background-color: transparent;
 }
-/* line 770, ../scss/modules/_elements.scss */
+/* line 780, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits input[type=text],
 #content .project-update-submission table#financial-benefits input[type=text] {
   height: 38px;
@@ -3173,14 +3192,14 @@ body a.submit-button,
   border: 0;
   background-color: transparent;
 }
-/* line 775, ../scss/modules/_elements.scss */
+/* line 785, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits input[type=text].hasDatepicker,
 #content .project-update-submission table#financial-benefits input[type=text].hasDatepicker {
   padding-right: 30px;
   text-align: left;
   padding-left: 0;
 }
-/* line 781, ../scss/modules/_elements.scss */
+/* line 791, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits textarea,
 #content .project-update-submission table#financial-benefits textarea {
   padding-left: 18px;
@@ -3188,39 +3207,39 @@ body a.submit-button,
   line-height: 28px;
   margin-top: 5px;
 }
-/* line 787, ../scss/modules/_elements.scss */
+/* line 797, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .sbSelector,
 #content .project-update-submission table#financial-benefits .sbSelector {
   text-indent: 48px;
   line-height: 40px;
 }
-/* line 792, ../scss/modules/_elements.scss */
+/* line 802, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .sbOptions li,
 #content .project-update-submission table#financial-benefits .sbOptions li {
   padding-left: 0;
 }
-/* line 795, ../scss/modules/_elements.scss */
+/* line 805, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .sbOptions a,
 #content .project-update-submission table#financial-benefits .sbOptions a {
   border-bottom: dotted 1px #cad4e7;
   padding-left: 48px;
 }
-/* line 800, ../scss/modules/_elements.scss */
+/* line 810, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .date-no-float,
 #content .project-update-submission table#financial-benefits .date-no-float {
   width: 100%;
 }
-/* line 804, ../scss/modules/_elements.scss */
+/* line 814, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .last-benefit-row th,
 #content .project-update-submission table#financial-benefits .last-benefit-row th {
   border-bottom: 2px solid #025468;
 }
-/* line 807, ../scss/modules/_elements.scss */
+/* line 817, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .last-benefit-row td,
 #content .project-update-submission table#financial-benefits .last-benefit-row td {
   border-bottom: 2px solid #808da6;
 }
-/* line 813, ../scss/modules/_elements.scss */
+/* line 823, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.table-remove-button a,
 #content .project-draft-submission table#financial-benefits td.table-remove-button input,
 #content .project-update-submission table#financial-benefits td.table-remove-button a,
@@ -3231,12 +3250,12 @@ body a.submit-button,
   padding: 0;
   text-decoration: underline;
 }
-/* line 821, ../scss/modules/_elements.scss */
+/* line 831, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.table-remove-button a:hover,
 #content .project-update-submission table#financial-benefits td.table-remove-button a:hover {
   text-decoration: none;
 }
-/* line 824, ../scss/modules/_elements.scss */
+/* line 834, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.table-remove-button .history-button,
 #content .project-draft-submission table#financial-benefits td.table-remove-button .remove-wrap,
 #content .project-update-submission table#financial-benefits td.table-remove-button .history-button,
@@ -3245,7 +3264,7 @@ body a.submit-button,
   padding-left: 20px;
   display: inline-block;
 }
-/* line 829, ../scss/modules/_elements.scss */
+/* line 839, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.table-remove-button .history-button:before,
 #content .project-draft-submission table#financial-benefits td.table-remove-button .remove-wrap:before,
 #content .project-update-submission table#financial-benefits td.table-remove-button .history-button:before,
@@ -3259,14 +3278,14 @@ body a.submit-button,
   height: 14px;
   display: block;
 }
-/* line 837, ../scss/modules/_elements.scss */
+/* line 847, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.table-remove-button .history-button:hover input,
 #content .project-draft-submission table#financial-benefits td.table-remove-button .remove-wrap:hover input,
 #content .project-update-submission table#financial-benefits td.table-remove-button .history-button:hover input,
 #content .project-update-submission table#financial-benefits td.table-remove-button .remove-wrap:hover input {
   text-decoration: none;
 }
-/* line 840, ../scss/modules/_elements.scss */
+/* line 850, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.table-remove-button .history-button:hover:before,
 #content .project-draft-submission table#financial-benefits td.table-remove-button .remove-wrap:hover:before,
 #content .project-update-submission table#financial-benefits td.table-remove-button .history-button:hover:before,
@@ -3276,7 +3295,7 @@ body a.submit-button,
   height: 14px;
   display: block;
 }
-/* line 846, ../scss/modules/_elements.scss */
+/* line 856, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.table-remove-button .history-button:before,
 #content .project-update-submission table#financial-benefits td.table-remove-button .history-button:before {
   top: 5px;
@@ -3285,7 +3304,7 @@ body a.submit-button,
   height: 14px;
   display: block;
 }
-/* line 851, ../scss/modules/_elements.scss */
+/* line 861, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits td.table-remove-button .history-button:hover:before,
 #content .project-update-submission table#financial-benefits td.table-remove-button .history-button:hover:before {
   background-position: 0 -34px;
@@ -3293,19 +3312,19 @@ body a.submit-button,
   height: 14px;
   display: block;
 }
-/* line 858, ../scss/modules/_elements.scss */
+/* line 868, ../scss/modules/_elements.scss */
 #content .project-draft-submission table#financial-benefits .ict-tick,
 #content .project-update-submission table#financial-benefits .ict-tick {
   display: inline-block;
 }
 
-/* line 864, ../scss/modules/_elements.scss */
+/* line 874, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status,
 .field-name-field-status .sbHolder,
 .field-name-field-status .sbOptions a {
   position: relative;
 }
-/* line 868, ../scss/modules/_elements.scss */
+/* line 878, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status:before,
 .field-name-field-status .sbHolder:before,
 .field-name-field-status .sbOptions a:before {
@@ -3320,31 +3339,31 @@ body a.submit-button,
   top: 11px;
   left: 18px;
 }
-/* line 881, ../scss/modules/_elements.scss */
+/* line 891, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status.yes:before,
 .field-name-field-status .sbHolder.yes:before,
 .field-name-field-status a[rel=yes]:before {
   background-color: #1b56af;
 }
-/* line 886, ../scss/modules/_elements.scss */
+/* line 896, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status.no:before,
 .field-name-field-status .sbHolder.no:before,
 .field-name-field-status a[rel=no]:before {
   background-color: #c42656;
 }
-/* line 891, ../scss/modules/_elements.scss */
+/* line 901, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status.on_track:before,
 .field-name-field-status .sbHolder.on_track:before,
 .field-name-field-status a[rel=on_track]:before {
   background-color: #1fd063;
 }
-/* line 896, ../scss/modules/_elements.scss */
+/* line 906, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status.at_risk:before,
 .field-name-field-status .sbHolder.at_risk:before,
 .field-name-field-status a[rel=at_risk]:before {
   background-color: #f6d000;
 }
-/* line 901, ../scss/modules/_elements.scss */
+/* line 911, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status.removed:before,
 .field-name-field-status .sbHolder.removed:before,
 .field-name-field-status a[rel=removed]:before {
@@ -3354,26 +3373,26 @@ body a.submit-button,
   display: block;
   top: 11px;
 }
-/* line 907, ../scss/modules/_elements.scss */
+/* line 917, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status.removed:before {
   display: inline-block;
 }
-/* line 910, ../scss/modules/_elements.scss */
+/* line 920, ../scss/modules/_elements.scss */
 .field-name-field-status td.field-status:before {
   position: static;
   display: inline-block;
 }
-/* line 914, ../scss/modules/_elements.scss */
+/* line 924, ../scss/modules/_elements.scss */
 .field-name-field-status .sbHolder.removed:before {
   top: 14px;
 }
 
-/* line 918, ../scss/modules/_elements.scss */
+/* line 928, ../scss/modules/_elements.scss */
 .benefits-action {
   text-align: right;
 }
 
-/* line 921, ../scss/modules/_elements.scss */
+/* line 931, ../scss/modules/_elements.scss */
 .ict-tick {
   background-position: 0 -145px;
   width: 10px;
@@ -3381,48 +3400,48 @@ body a.submit-button,
   display: block;
 }
 
-/* line 924, ../scss/modules/_elements.scss */
+/* line 934, ../scss/modules/_elements.scss */
 .ict-align-center {
   text-align: center;
 }
 
-/* line 928, ../scss/modules/_elements.scss */
+/* line 938, ../scss/modules/_elements.scss */
 .field-name-field-guide {
   background-color: transparent;
 }
 
-/* line 933, ../scss/modules/_elements.scss */
+/* line 943, ../scss/modules/_elements.scss */
 .node-basic-page .field, .bean-admin-editable .field {
   max-width: none;
   background-color: transparent;
 }
-/* line 937, ../scss/modules/_elements.scss */
+/* line 947, ../scss/modules/_elements.scss */
 .node-basic-page a:hover, .bean-admin-editable a:hover {
   text-decoration: none;
 }
 
-/* line 942, ../scss/modules/_elements.scss */
+/* line 952, ../scss/modules/_elements.scss */
 .sbOptions {
   z-index: 99;
 }
 
-/* line 946, ../scss/modules/_elements.scss */
+/* line 956, ../scss/modules/_elements.scss */
 .legend {
   overflow: hidden;
   margin-bottom: 25px;
 }
-/* line 949, ../scss/modules/_elements.scss */
+/* line 959, ../scss/modules/_elements.scss */
 .legend .bar-legend {
   padding-left: 40px;
 }
-/* line 951, ../scss/modules/_elements.scss */
+/* line 961, ../scss/modules/_elements.scss */
 .legend .bar-legend li {
   line-height: 20px;
   float: left;
   margin-right: 25px;
   font-size: 14px;
 }
-/* line 956, ../scss/modules/_elements.scss */
+/* line 966, ../scss/modules/_elements.scss */
 .legend .bar-legend li span {
   margin-right: 7px;
   display: inline-block;
@@ -3430,43 +3449,43 @@ body a.submit-button,
   height: 16px;
   vertical-align: middle;
 }
-/* line 963, ../scss/modules/_elements.scss */
+/* line 973, ../scss/modules/_elements.scss */
 .legend .bar-legend li b {
   color: #202b3d;
 }
-/* line 969, ../scss/modules/_elements.scss */
+/* line 979, ../scss/modules/_elements.scss */
 .legend#schedule_legend .bar-legend {
   padding-left: 2px;
 }
-/* line 975, ../scss/modules/_elements.scss */
+/* line 985, ../scss/modules/_elements.scss */
 .legend#benefits_legend .bar-legend li {
   float: none;
   font-weight: bold;
   margin-bottom: 25px;
 }
 
-/* line 984, ../scss/modules/_elements.scss */
+/* line 994, ../scss/modules/_elements.scss */
 .preview_switch {
   display: inline-block;
   margin-left: 10px;
   vertical-align: middle !important;
   min-width: 312px !important;
 }
-/* line 989, ../scss/modules/_elements.scss */
+/* line 999, ../scss/modules/_elements.scss */
 .preview_switch .viz-ico {
   background-position: 0 -48px;
   width: 17px;
   height: 17px;
   display: block;
 }
-/* line 992, ../scss/modules/_elements.scss */
+/* line 1002, ../scss/modules/_elements.scss */
 .preview_switch .table-ico {
   background-position: 0 -129px;
   width: 20px;
   height: 16px;
   display: block;
 }
-/* line 995, ../scss/modules/_elements.scss */
+/* line 1005, ../scss/modules/_elements.scss */
 .preview_switch .viz-ico,
 .preview_switch .table-ico {
   display: inline-block;
@@ -3474,7 +3493,7 @@ body a.submit-button,
   margin-right: 15px;
 }
 
-/* line 1002, ../scss/modules/_elements.scss */
+/* line 1012, ../scss/modules/_elements.scss */
 .tooltip-bottom,
 .tooltip-edit,
 .tooltip {
@@ -3491,7 +3510,7 @@ body a.submit-button,
   display: block;
   display: inline-block;
 }
-/* line 1014, ../scss/modules/_elements.scss */
+/* line 1024, ../scss/modules/_elements.scss */
 .tooltip-bottom:hover,
 .tooltip-edit:hover,
 .tooltip:hover {
@@ -3501,7 +3520,7 @@ body a.submit-button,
   display: block;
   display: inline-block;
 }
-/* line 1018, ../scss/modules/_elements.scss */
+/* line 1028, ../scss/modules/_elements.scss */
 .tooltip-bottom span.tooltip-content,
 .tooltip-edit span.tooltip-content,
 .tooltip span.tooltip-content {
@@ -3518,7 +3537,7 @@ body a.submit-button,
   right: -150px;
   width: 300px;
 }
-/* line 1031, ../scss/modules/_elements.scss */
+/* line 1041, ../scss/modules/_elements.scss */
 .tooltip-bottom span.tooltip-content:after,
 .tooltip-edit span.tooltip-content:after,
 .tooltip span.tooltip-content:after {
@@ -3534,20 +3553,20 @@ body a.submit-button,
   left: 50%;
   margin-left: -25px;
 }
-/* line 1046, ../scss/modules/_elements.scss */
+/* line 1056, ../scss/modules/_elements.scss */
 .tooltip-bottom:hover span.tooltip-content,
 .tooltip-edit:hover span.tooltip-content,
 .tooltip:hover span.tooltip-content {
   display: block;
 }
 
-/* line 1052, ../scss/modules/_elements.scss */
+/* line 1062, ../scss/modules/_elements.scss */
 .tooltip-bottom span.tooltip-content {
   top: 30px;
   right: -147px;
   bottom: auto;
 }
-/* line 1056, ../scss/modules/_elements.scss */
+/* line 1066, ../scss/modules/_elements.scss */
 .tooltip-bottom span.tooltip-content:after {
   border-top: 20px solid transparent;
   border-bottom: 20px solid #1e2635;
@@ -3555,7 +3574,7 @@ body a.submit-button,
   bottom: auto;
 }
 
-/* line 1064, ../scss/modules/_elements.scss */
+/* line 1074, ../scss/modules/_elements.scss */
 .tooltip-edit {
   margin-left: 0;
   margin-right: 5px;
@@ -3566,7 +3585,7 @@ body a.submit-button,
   display: block;
   display: inline-block;
 }
-/* line 1070, ../scss/modules/_elements.scss */
+/* line 1080, ../scss/modules/_elements.scss */
 .tooltip-edit:hover {
   background-position: 0 0;
   width: 21px;
@@ -3574,69 +3593,69 @@ body a.submit-button,
   display: block;
   display: inline-block;
 }
-/* line 1074, ../scss/modules/_elements.scss */
+/* line 1084, ../scss/modules/_elements.scss */
 .tooltip-edit span.tooltip-content {
   color: #1e2635;
   background-color: #f0b629;
   font-weight: normal;
 }
-/* line 1078, ../scss/modules/_elements.scss */
+/* line 1088, ../scss/modules/_elements.scss */
 .tooltip-edit span.tooltip-content:after {
   border-top: 20px solid #f0b629;
 }
 
-/* line 1084, ../scss/modules/_elements.scss */
+/* line 1094, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators {
   background-color: #e5eaf3;
   padding-top: 31px;
   padding-bottom: 30px;
 }
-/* line 1088, ../scss/modules/_elements.scss */
+/* line 1098, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators .label {
   font-size: 18px;
   font-weight: 600;
   color: #202b3d;
   line-height: 18px;
 }
-/* line 1093, ../scss/modules/_elements.scss */
+/* line 1103, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators .label .tooltip {
   margin-left: 2px;
   vertical-align: top;
 }
-/* line 1098, ../scss/modules/_elements.scss */
+/* line 1108, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
   padding-left: 5px;
 }
-/* line 1100, ../scss/modules/_elements.scss */
+/* line 1110, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row {
   margin-bottom: 55px;
 }
-/* line 1102, ../scss/modules/_elements.scss */
+/* line 1112, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row:first-child {
   margin-bottom: 140px;
 }
-/* line 1108, ../scss/modules/_elements.scss */
+/* line 1118, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number {
   font-size: 70px;
   line-height: 80px;
   font-weight: 600;
   color: #202b3d;
 }
-/* line 1113, ../scss/modules/_elements.scss */
+/* line 1123, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a {
   color: #202b3d;
   text-decoration: underline;
 }
-/* line 1116, ../scss/modules/_elements.scss */
+/* line 1126, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a:focus, #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a:hover {
   color: #202b3d;
   text-decoration: none;
 }
-/* line 1124, ../scss/modules/_elements.scss */
+/* line 1134, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
   display: block;
 }
-/* line 1126, ../scss/modules/_elements.scss */
+/* line 1136, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button span {
   text-align: left;
   padding-left: 16px;
@@ -3644,20 +3663,20 @@ body a.submit-button,
   line-height: 34px;
   height: 35px;
 }
-/* line 1135, ../scss/modules/_elements.scss */
+/* line 1145, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs {
   padding-right: 90px;
 }
-/* line 1137, ../scss/modules/_elements.scss */
+/* line 1147, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .label {
   margin-bottom: 11px;
 }
-/* line 1140, ../scss/modules/_elements.scss */
+/* line 1150, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
   position: relative;
   margin-top: 5px;
 }
-/* line 1143, ../scss/modules/_elements.scss */
+/* line 1153, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch label {
   font-weight: bold;
   float: left;
@@ -3665,67 +3684,67 @@ body a.submit-button,
   font-size: 14px;
   line-height: 34px;
 }
-/* line 1150, ../scss/modules/_elements.scss */
+/* line 1160, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
   max-width: 100%;
   width: 89%;
   margin-left: 60px;
   margin-right: 60px;
 }
-/* line 1156, ../scss/modules/_elements.scss */
+/* line 1166, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbToggle {
   background-position: 0 -115px;
 }
-/* line 1159, ../scss/modules/_elements.scss */
+/* line 1169, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbSelector {
   height: 32px;
   line-height: 32px;
 }
-/* line 1165, ../scss/modules/_elements.scss */
+/* line 1175, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend {
   padding-left: 0;
   font-size: 14px;
   margin: 11px 0;
   overflow: hidden;
 }
-/* line 1170, ../scss/modules/_elements.scss */
+/* line 1180, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li {
   color: #202b3d;
   margin-right: 30px;
 }
-/* line 1173, ../scss/modules/_elements.scss */
+/* line 1183, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li span {
   margin-right: 2px;
 }
-/* line 1179, ../scss/modules/_elements.scss */
+/* line 1189, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs .expenditure-budget-value {
   text-align: center;
   font-size: 16px;
   color: #202b3d;
 }
-/* line 1184, ../scss/modules/_elements.scss */
+/* line 1194, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph {
   margin-top: 12px;
 }
-/* line 1186, ../scss/modules/_elements.scss */
+/* line 1196, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a {
   text-decoration: underline;
 }
-/* line 1188, ../scss/modules/_elements.scss */
+/* line 1198, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a:hover {
   text-decoration: none;
 }
-/* line 1194, ../scss/modules/_elements.scss */
+/* line 1204, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend {
   margin: 0;
 }
-/* line 1196, ../scss/modules/_elements.scss */
+/* line 1206, ../scss/modules/_elements.scss */
 #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend li {
   margin-right: 20px;
   margin-bottom: 10px;
 }
 
-/* line 1206, ../scss/modules/_elements.scss */
+/* line 1216, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview h2 {
   font-size: 26px;
   line-height: 58px;
@@ -3734,37 +3753,37 @@ body a.submit-button,
   font-weight: 600;
   margin-bottom: 30px;
 }
-/* line 1213, ../scss/modules/_elements.scss */
+/* line 1223, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview h2 .tooltip {
   margin-left: 0;
   vertical-align: baseline;
   margin-bottom: -1px;
 }
-/* line 1219, ../scss/modules/_elements.scss */
+/* line 1229, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview #detailed-view-expenditure {
   padding-top: 15px;
 }
-/* line 1223, ../scss/modules/_elements.scss */
+/* line 1233, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview #expenditure_legend .bar-legend {
   overflow: hidden;
 }
-/* line 1228, ../scss/modules/_elements.scss */
+/* line 1238, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview #detailed-view-schedule-status .bar-legend {
   overflow: hidden;
   margin: 17px 0 4px;
 }
-/* line 1231, ../scss/modules/_elements.scss */
+/* line 1241, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview #detailed-view-schedule-status .bar-legend li {
   margin-right: 40px;
 }
-/* line 1236, ../scss/modules/_elements.scss */
+/* line 1246, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview .expand-collapse-button {
   display: block;
   max-width: 305px;
   height: 39px;
   line-height: 35px;
 }
-/* line 1241, ../scss/modules/_elements.scss */
+/* line 1251, ../scss/modules/_elements.scss */
 #ict-dashboard-detailed-overview .expand-collapse-button span {
   text-align: left;
   padding: 0 15px;
@@ -3772,7 +3791,7 @@ body a.submit-button,
   line-height: 35px;
 }
 
-/* line 1253, ../scss/modules/_elements.scss */
+/* line 1263, ../scss/modules/_elements.scss */
 .project-benefits h2,
 .project-timings h2,
 .project-timings h2,
@@ -3783,7 +3802,7 @@ body a.submit-button,
   border-bottom: 1px solid #f0f4fa;
   padding-bottom: 10px;
 }
-/* line 1259, ../scss/modules/_elements.scss */
+/* line 1269, ../scss/modules/_elements.scss */
 .project-benefits h2 a,
 .project-timings h2 a,
 .project-timings h2 a,
@@ -3792,22 +3811,22 @@ body a.submit-button,
   height: 19px !important;
 }
 
-/* line 1268, ../scss/modules/_elements.scss */
+/* line 1278, ../scss/modules/_elements.scss */
 #inner-content h2 a {
   margin-left: 2px !important;
   height: 19px !important;
 }
 
-/* line 1276, ../scss/modules/_elements.scss */
+/* line 1286, ../scss/modules/_elements.scss */
 #project-baseline-history .project-history {
   border-bottom: 1px solid #f0f4fa;
   padding-bottom: 10px;
 }
-/* line 1279, ../scss/modules/_elements.scss */
+/* line 1289, ../scss/modules/_elements.scss */
 #project-baseline-history .project-history:last-child {
   border-bottom: none;
 }
-/* line 1283, ../scss/modules/_elements.scss */
+/* line 1293, ../scss/modules/_elements.scss */
 #project-baseline-history .project-history > .label {
   color: #202b3d;
   font-weight: 700;
@@ -3816,100 +3835,100 @@ body a.submit-button,
   padding-right: 15px;
   padding-top: 9px;
 }
-/* line 1291, ../scss/modules/_elements.scss */
+/* line 1301, ../scss/modules/_elements.scss */
 #project-baseline-history .project-history .sub-content {
   padding-left: 15px;
 }
-/* line 1294, ../scss/modules/_elements.scss */
+/* line 1304, ../scss/modules/_elements.scss */
 #project-baseline-history .pbh-buttons {
   margin-bottom: 50px;
 }
-/* line 1295, ../scss/modules/_elements.scss */
+/* line 1305, ../scss/modules/_elements.scss */
 #project-baseline-history .pbh-buttons a {
   width: 180px;
 }
 
-/* line 1305, ../scss/modules/_elements.scss */
+/* line 1315, ../scss/modules/_elements.scss */
 .project-draft-submission .row .text #edit-field-brief-project-summary {
   max-width: 640px;
 }
-/* line 1307, ../scss/modules/_elements.scss */
+/* line 1317, ../scss/modules/_elements.scss */
 .project-draft-submission .row .text #edit-field-brief-project-summary #cke_1_bottom {
   background: none;
   border-top: none;
 }
 
-/* line 1316, ../scss/modules/_elements.scss */
+/* line 1326, ../scss/modules/_elements.scss */
 .other-option-buttons {
   display: inline-block;
 }
-/* line 1318, ../scss/modules/_elements.scss */
+/* line 1328, ../scss/modules/_elements.scss */
 .other-option-buttons .print_pdf {
   margin-left: 0px;
   text-transform: uppercase;
   display: block;
 }
-/* line 1322, ../scss/modules/_elements.scss */
+/* line 1332, ../scss/modules/_elements.scss */
 .other-option-buttons .print_pdf a.print-pdf {
   min-width: 275px !important;
   margin: 10px 10px 3px;
 }
 
-/* line 1330, ../scss/modules/_elements.scss */
+/* line 1340, ../scss/modules/_elements.scss */
 .object_and_summary a, .entity_comments a, span.tooltip-content a {
   color: #0d6c88;
   text-decoration: underline;
 }
-/* line 1333, ../scss/modules/_elements.scss */
+/* line 1343, ../scss/modules/_elements.scss */
 .object_and_summary a:hover, .entity_comments a:hover, span.tooltip-content a:hover {
   color: #0d6c88;
   text-decoration: none;
 }
-/* line 1337, ../scss/modules/_elements.scss */
+/* line 1347, ../scss/modules/_elements.scss */
 .object_and_summary a:visited, .entity_comments a:visited, span.tooltip-content a:visited {
   color: #0d6c88;
 }
-/* line 1340, ../scss/modules/_elements.scss */
+/* line 1350, ../scss/modules/_elements.scss */
 .object_and_summary a:focus, .entity_comments a:focus, span.tooltip-content a:focus {
   color: #0d6c88;
 }
-/* line 1344, ../scss/modules/_elements.scss */
+/* line 1354, ../scss/modules/_elements.scss */
 .object_and_summary ul, .entity_comments ul, span.tooltip-content ul {
   list-style-type: disc;
 }
-/* line 1346, ../scss/modules/_elements.scss */
+/* line 1356, ../scss/modules/_elements.scss */
 .object_and_summary ul ul, .entity_comments ul ul, span.tooltip-content ul ul {
   list-style-type: circle;
 }
-/* line 1348, ../scss/modules/_elements.scss */
+/* line 1358, ../scss/modules/_elements.scss */
 .object_and_summary ul ul ul, .entity_comments ul ul ul, span.tooltip-content ul ul ul {
   list-style-type: square;
 }
-/* line 1353, ../scss/modules/_elements.scss */
+/* line 1363, ../scss/modules/_elements.scss */
 .object_and_summary p, .entity_comments p, span.tooltip-content p {
   color: #202b3d;
 }
-/* line 1356, ../scss/modules/_elements.scss */
+/* line 1366, ../scss/modules/_elements.scss */
 .object_and_summary ol, .object_and_summary ul, .entity_comments ol, .entity_comments ul, span.tooltip-content ol, span.tooltip-content ul {
   color: #202b3d;
   padding-left: 40px;
   margin: 0.5em 0;
 }
-/* line 1360, ../scss/modules/_elements.scss */
+/* line 1370, ../scss/modules/_elements.scss */
 .object_and_summary ol ol, .object_and_summary ol ul, .object_and_summary ul ol, .object_and_summary ul ul, .entity_comments ol ol, .entity_comments ol ul, .entity_comments ul ol, .entity_comments ul ul, span.tooltip-content ol ol, span.tooltip-content ol ul, span.tooltip-content ul ol, span.tooltip-content ul ul {
   padding-left: 40px;
 }
-/* line 1364, ../scss/modules/_elements.scss */
+/* line 1374, ../scss/modules/_elements.scss */
 .object_and_summary ol, .entity_comments ol, span.tooltip-content ol {
   list-style-type: decimal;
 }
 
-/* line 1368, ../scss/modules/_elements.scss */
+/* line 1378, ../scss/modules/_elements.scss */
 div.tooltip-edit {
   cursor: pointer;
   position: static;
 }
-/* line 1371, ../scss/modules/_elements.scss */
+/* line 1381, ../scss/modules/_elements.scss */
 div.tooltip-edit span.tooltip-content {
   z-index: 1;
   width: auto;
@@ -3918,33 +3937,33 @@ div.tooltip-edit span.tooltip-content {
   left: 0;
   bottom: 40px;
 }
-/* line 1372, ../scss/modules/_elements.scss */
+/* line 1382, ../scss/modules/_elements.scss */
 div.tooltip-edit span.tooltip-content::after {
   border-left: none;
   border-right: 30px solid transparent;
   left: 40px;
 }
 
-/* line 1386, ../scss/modules/_elements.scss */
+/* line 1396, ../scss/modules/_elements.scss */
 #print-links-container {
   text-align: right;
 }
-/* line 1388, ../scss/modules/_elements.scss */
+/* line 1398, ../scss/modules/_elements.scss */
 #print-links-container .pdf_button {
   margin-bottom: 38px;
 }
-/* line 1390, ../scss/modules/_elements.scss */
+/* line 1400, ../scss/modules/_elements.scss */
 #print-links-container .pdf_button .print_pdf {
   margin-left: 0px;
   text-transform: uppercase;
 }
-/* line 1393, ../scss/modules/_elements.scss */
+/* line 1403, ../scss/modules/_elements.scss */
 #print-links-container .pdf_button .print_pdf a.print-pdf {
   min-width: 275px !important;
   margin: 10px 10px 3px;
 }
 
-/* line 1402, ../scss/modules/_elements.scss */
+/* line 1412, ../scss/modules/_elements.scss */
 #project-listings h2 {
   font-weight: 600;
   color: #0d6c88;
@@ -3953,11 +3972,11 @@ div.tooltip-edit span.tooltip-content::after {
   margin: 21px 0 30px;
   padding: 0 0 8px;
 }
-/* line 1410, ../scss/modules/_elements.scss */
+/* line 1420, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar {
   margin: 30px 0 18px;
 }
-/* line 1413, ../scss/modules/_elements.scss */
+/* line 1423, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar .form-type-select label {
   display: inline-block;
   font-weight: bold;
@@ -3965,23 +3984,23 @@ div.tooltip-edit span.tooltip-content::after {
   margin-right: 6px;
   vertical-align: middle;
 }
-/* line 1420, ../scss/modules/_elements.scss */
+/* line 1430, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar .form-type-select .sbHolder {
   width: auto;
   min-width: 79px;
   display: inline-block;
   vertical-align: middle;
 }
-/* line 1427, ../scss/modules/_elements.scss */
+/* line 1437, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar .item-list {
   float: right;
 }
-/* line 1430, ../scss/modules/_elements.scss */
+/* line 1440, ../scss/modules/_elements.scss */
 #project-listings .table-config-bar .pager {
   margin: 0;
 }
 
-/* line 1435, ../scss/modules/_elements.scss */
+/* line 1445, ../scss/modules/_elements.scss */
 .last-updated-block {
   width: 970px;
   margin: 0 auto;
@@ -3989,23 +4008,23 @@ div.tooltip-edit span.tooltip-content::after {
   margin-top: 25px;
   margin-bottom: 10px;
 }
-/* line 1441, ../scss/modules/_elements.scss */
+/* line 1451, ../scss/modules/_elements.scss */
 .last-updated-block .wrap.last-updated-on {
   width: 50% !important;
   max-width: 970px;
   float: left;
   min-width: 0;
 }
-/* line 1446, ../scss/modules/_elements.scss */
+/* line 1456, ../scss/modules/_elements.scss */
 .last-updated-block .wrap.last-updated-on p {
   margin: 0;
   font-size: 14px;
 }
-/* line 1449, ../scss/modules/_elements.scss */
+/* line 1459, ../scss/modules/_elements.scss */
 .last-updated-block .wrap.last-updated-on p strong {
   font-size: 14px;
 }
-/* line 1454, ../scss/modules/_elements.scss */
+/* line 1464, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history {
   width: 50%;
   text-align: right;
@@ -4013,32 +4032,32 @@ div.tooltip-edit span.tooltip-content::after {
   display: block;
   margin: 0;
 }
-/* line 1460, ../scss/modules/_elements.scss */
+/* line 1470, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history .view-baseline-link {
   color: #0d6c88;
   font-weight: 400;
   font-size: 14px;
   text-decoration: underline;
 }
-/* line 1465, ../scss/modules/_elements.scss */
+/* line 1475, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history .view-baseline-link:hover {
   text-decoration: none;
 }
-/* line 1469, ../scss/modules/_elements.scss */
+/* line 1479, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history .view-baseline-tooltip {
   margin-right: 0;
 }
-/* line 1471, ../scss/modules/_elements.scss */
+/* line 1481, ../scss/modules/_elements.scss */
 .last-updated-block .view-baseline-history .view-baseline-tooltip .tooltip-content {
   text-align: left;
 }
 
-/* line 1478, ../scss/modules/_elements.scss */
+/* line 1488, ../scss/modules/_elements.scss */
 #autocomplete {
   border: none;
   margin-top: 2px;
 }
-/* line 1481, ../scss/modules/_elements.scss */
+/* line 1491, ../scss/modules/_elements.scss */
 #autocomplete ul {
   background-color: #fff;
   border: solid 1px #b3bdcf;
@@ -4048,7 +4067,7 @@ div.tooltip-edit span.tooltip-content::after {
   width: 100%;
   overflow: hidden;
 }
-/* line 1489, ../scss/modules/_elements.scss */
+/* line 1499, ../scss/modules/_elements.scss */
 #autocomplete ul li {
   /*padding: 0 7px;*/
   border-bottom: dotted 1px #515151;
@@ -4056,15 +4075,15 @@ div.tooltip-edit span.tooltip-content::after {
   outline: none;
   padding: 7px 0 7px 3px;
 }
-/* line 1495, ../scss/modules/_elements.scss */
+/* line 1505, ../scss/modules/_elements.scss */
 #autocomplete ul li.selected {
   color: #0d6c88;
 }
-/* line 1498, ../scss/modules/_elements.scss */
+/* line 1508, ../scss/modules/_elements.scss */
 #autocomplete ul li:last-child {
   border-bottom: none;
 }
-/* line 1501, ../scss/modules/_elements.scss */
+/* line 1511, ../scss/modules/_elements.scss */
 #autocomplete ul li:focus, #autocomplete ul li:hover {
   color: #0d6c88;
   cursor: pointer;
