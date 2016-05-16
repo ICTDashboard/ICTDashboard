@@ -162,8 +162,11 @@
                     <div class="ict-fancy-content entity-bean">
                       <div class="field">
                         <p>
-                          <?php print t('Rebaselining a project requires approval of the project’s highest governance body and potentially the Government. <strong>Only proceed if this is the case.</strong>'); ?>
+                          <?php print t('Rebaselining a project requires approval of the project’s highest governance body and potentially the Government.'); ?>
                         </p>
+                        <strong>
+                          <?php print t('Only proceed if this is the case.') ?>
+                        </strong>
                       </div>
                     </div>
                     <div class="fancybox-actions">

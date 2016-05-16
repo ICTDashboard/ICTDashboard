@@ -1515,3 +1515,24 @@ div.tooltip-edit {
     }
   }
 }
+.ict-rebaseline-warn {
+  .fancybox-title {
+    margin-bottom: 15px!important;
+  }
+  background: #fff;
+  border-radius: 5px;
+  .ict-fancy-content {
+    margin-top: 0;
+    overflow: auto;
+    strong {
+      color: black;
+    }
+    p {
+      margin: 0;
+      line-height: 1.5em;
+    }
+  } 
+}
+// .fancybox-inner {
+//   height: auto!important;
+// }

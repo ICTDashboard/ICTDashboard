@@ -3213,6 +3213,20 @@ div.tooltip-edit {
         color: #0d6c88;
         cursor: pointer; }
 
+.ict-rebaseline-warn {
+  background: #fff;
+  border-radius: 5px; }
+  .ict-rebaseline-warn .fancybox-title {
+    margin-bottom: 15px !important; }
+  .ict-rebaseline-warn .ict-fancy-content {
+    margin-top: 0;
+    overflow: auto; }
+    .ict-rebaseline-warn .ict-fancy-content strong {
+      color: black; }
+    .ict-rebaseline-warn .ict-fancy-content p {
+      margin: 0;
+      line-height: 1.5em; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
