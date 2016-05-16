@@ -204,6 +204,7 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
   $vars['statuses'] = $statuses_info['settings']['allowed_values'];
 
   $subquery = db_select('field_data_field_project', 'pr');
+  $subquery->condition('pr.bundle', 'update');
   $subquery->addField('pr', 'field_project_target_id', 'project_id');
   $subquery->addExpression('MAX(entity_id)', 'update_id');
   $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));

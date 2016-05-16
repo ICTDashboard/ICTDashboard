@@ -1215,6 +1215,7 @@ function ict_update_get_actual_benefits($project_id) {
 
 function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
   $subquery = db_select('field_data_field_project');
+  $subquery->condition('bundle', 'update');
   $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));
   $subquery->addField('field_data_field_project', 'field_project_target_id', 'project_id');
   $subquery->addExpression('MAX(entity_id)', 'last_upd_id');

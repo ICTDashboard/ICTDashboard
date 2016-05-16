@@ -24,6 +24,7 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
 
     // current year expenditure
     $subquery = db_select('field_data_field_project', 'update_entity');
+    $subquery->condition('update_entity.bundle', 'update');
     $subquery->join('project_workflow', 'workflow', 'update_entity.entity_id = workflow.nid AND update_entity.revision_id = workflow.vid');
     $subquery->condition('workflow.state', 'approved');
     $subquery->fields('update_entity', array('field_project_target_id'));
