@@ -959,6 +959,11 @@ body,
         width: 16px;
         height: 16px;
         vertical-align: middle;
+        &.required {
+          width: auto;
+          vertical-align: top;
+          margin: 0;
+        }
       }
       b {
         color: #202b3d;
