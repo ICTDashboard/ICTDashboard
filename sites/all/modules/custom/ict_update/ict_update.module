@@ -973,8 +973,8 @@ function template_preprocess_field_benefits_realised_table_form(&$vars) {
         $field['settings']['buttonImage'] = "/sites/all/themes/itdash/html/images/calendar-icon.png";
         $field['settings']['buttonImageOnly'] = TRUE;
         $field['settings']['showOn'] = 'button';
-        $field['settings']['changeYear'] = FALSE;
-        $field['settings']['changeMonth'] = FALSE;
+        $field['settings']['changeYear'] = TRUE;
+        $field['settings']['changeMonth'] = TRUE;
       }
     }
   }
