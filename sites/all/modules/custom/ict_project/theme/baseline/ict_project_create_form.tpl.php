@@ -97,10 +97,16 @@
 						<div class="ict-fancy-content entity-bean">
 							<div class="field">
 								<p>
-									<?php print t('You are about to create a re-baselined project. Project @BASELINE’s details cannot be edited once a re-baselined project is created. Project @BASELINE will remain published on the dashboard until the first re-baselined update has been approved. <strong>Please note this change is permanent.</strong> Do you want to continue?', array(
+									<?php print t('You are about to create a re-baselined project. Project @BASELINE’s details cannot be edited once a re-baselined project is created. Project @BASELINE will remain published on the dashboard until the first re-baselined update has been approved.', array(
 										'@BASELINE' => $form['baseline']['#value']->title
 									)); ?>
 								</p>
+								<strong>
+                          			<?php print t('Please note this change is permanent.') ?>
+                        		</strong>
+                        		<p>
+                        			<?php print t('Do you want to continue?') ?>
+                        		</p>
 							</div>
 						</div>
 						<div class="fancybox-actions">
