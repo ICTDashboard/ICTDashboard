@@ -30,6 +30,18 @@ function ict_update_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_node_delete().
+ */
+function ict_update_node_delete($node) {
+  if ($node->type == 'update') {
+    // delete workflow records
+    $num_deleted = db_delete('project_workflow')
+      ->condition('nid', $node->nid)
+      ->execute();
+  }
+}
+
 function ict_update_benefit_print_history($field_collection) {
   $host_entity = $field_collection->hostEntity();
 

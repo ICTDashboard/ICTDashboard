@@ -29,6 +29,16 @@
     }
   }
 }
+.entity-bean {
+  .field {
+    overflow: hidden;
+  }
+}
+.ict-rebaseline-warn {
+  .field {
+    min-height: 130px;
+  }
+}
 .page-entityform {
   #content {
     min-width: 970px;

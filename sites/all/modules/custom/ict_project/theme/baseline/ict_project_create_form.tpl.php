@@ -1,6 +1,6 @@
 <div class="page-title dotbg">
 	<div class="inner-title-content wrap cf">
-		<h1><?php print t('Create Project'); ?></h1>
+		<h1><?php print empty($form['#page_title']) ? t('Create Project') : $form['#page_title']; ?></h1>
 	</div>
 </div>
 <div id="inner-content" class="wrap cf project-update-submission">
@@ -83,7 +83,36 @@
         ?>
       </div>
 			<div class="submit">
-        <?php print render($form['submit']) ;?>
+				<a class="export-btn" href="<?php print url('projects')?>"><span><?php print t('Cancel'); ?></span></a>
+				<?php if (empty($form['baseline']['#value'])) : ?>
+        	<?php print render($form['submit']) ;?>
+				<?php else : ?>
+					<div id="hidden-submit" style="display:none"><?php print render($form['submit']) ;?></div>
+					<a href="#ict-create-rebaseline" class="fancybox-inline submit-button">
+						<span><?php print t('Create Re-baseline'); ?></span>
+					</a>
+					<div style="display: none;" id="ict-create-rebaseline" class="ict-rebaseline-warn">
+						<?php $bean = bean_load_delta('opt-out-policy'); ?>
+						<h2 class="fancybox-title"><?php print t('Warning'); ?></h2>
+						<div class="ict-fancy-content entity-bean">
+							<div class="field">
+								<p>
+									<?php print t('You are about to create a re-baselined project. Project @BASELINE’s details cannot be edited once a re-baselined project is created. Project @BASELINE will remain published on the dashboard until the first re-baselined update has been approved. <strong>Please note this change is permanent.</strong> Do you want to continue?', array(
+										'@BASELINE' => $form['baseline']['#value']->title
+									)); ?>
+								</p>
+							</div>
+						</div>
+						<div class="fancybox-actions">
+							<a class="ict-fancybox-close export-btn" href="#"><span><?php print t('No'); ?></span></a>
+							<a class="general-button arrow-right confirm-proceed" href="javascript:void(0);" onclick="jQuery('#hidden-submit input[type=submit]').click()">
+								<span>
+									<?php print t('Yes'); ?>
+								</span>
+							</a>
+						</div>
+					</div>
+				<?php endif; ?>
       </div>
 		</form>
 	</div>
