@@ -86,6 +86,7 @@ features[taxonomy][] = funding_source
 features[taxonomy][] = portfolio
 features[taxonomy][] = project_category
 features[taxonomy][] = project_stage
+features[user_permission][] = access PDF version
 features[user_permission][] = create project content
 features[user_permission][] = delete any project content
 features[user_permission][] = delete own project content
