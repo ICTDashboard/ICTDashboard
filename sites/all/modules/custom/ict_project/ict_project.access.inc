@@ -134,7 +134,14 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
     if (__ict_project_user_is_dep_admin_for_project($nid, $account) &&
       ict_project_is_published_project($nid) &&
       !ict_project_get_project_rebaseline($nid)) {
-      return TRUE;
+
+      // force Dep Admin deleting update draft before creating re-baseline
+      $updates = ict_update_project_get_list($nid);
+      $update_id = reset($updates);
+      if ($update_id && !ict_update_delete_allowed($nid, $update_id))  {
+        return TRUE;
+      }
+      return False;
     }
     return FALSE;
   }
@@ -208,7 +215,7 @@ function ict_project_access_update($op, $project_id, $account = NULL, $nid = NUL
     if (ict_project_get_project_rebaseline($project_id)) {
       return FALSE;
     }
-    if (__ict_project_user_is_dep_admin_for_project($nid, $account) &&
+    if (__ict_project_user_is_dep_admin_for_project($project_id, $account) &&
       in_array(ict_project_get_workflow_state($nid), array('draft', 'waiting_approval'))) {
       return TRUE;
     }
