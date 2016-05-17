@@ -543,7 +543,9 @@ function ict_project_budget_by_year_preview_page_validate($node, &$errors) {
       ));
     }
     elseif ($value->field_total[LANGUAGE_NONE][0]['value'] < 0) {
-      $errors[] = t('Field <em>Budget Value</em> cannot be negative');
+      $field_name = $type == 'project' ? 'Budget Value' : 'Expenditure Value';
+
+      $errors[] = t('Field <em>!field_name</em> cannot be negative', array('!field_name' => $field_name));
     }
     elseif ($type == 'project') {
       $budget_sum += $value->field_total[LANGUAGE_NONE][0]['value'];
