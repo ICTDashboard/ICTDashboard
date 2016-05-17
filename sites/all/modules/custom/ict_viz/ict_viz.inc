@@ -66,11 +66,17 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
 
   // chart labels
   $labels = array();
-  foreach ($year_expenditure as $year => $total) {
+  foreach ($year_expenditure as $year => &$total) {
     $fin_year = explode('/', $year);
     $label = '20' . reset($fin_year) . '-' . end($fin_year);
     $label = $current_fin_year == $year ? $label . '*' : $label;
     $labels[] = $label;
+    $total = number_format($total, 2);
+  }
+  
+  // format budget values
+  foreach ($year_budget as &$total) {
+    $total = number_format($total, 2);
   }
 
   $chart_options = array(
