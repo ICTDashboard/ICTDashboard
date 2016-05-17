@@ -497,36 +497,61 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
 
 function ict_project_budget_by_year_validate($form, &$form_state) {
   $budget_values = $form_state['values']['field_original_total_budget'][LANGUAGE_NONE];
+  $budget_sum = 0;
   $current_fin_year = __ict_project_get_current_fin_year();
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
-      if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
-        $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
-        if ($form['#node']->type == 'update' && $year != $current_fin_year) {
-          continue;
-        }
-        form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
-          '!year' => $year
-        )));
+
+    if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
+      $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
+      if ($form['#node']->type == 'update' && $year != $current_fin_year) {
+        continue;
       }
+      form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
+        '!year' => $year
+      )));
+    }
+    elseif ($value['field_total'][LANGUAGE_NONE][0]['value'] < 0) {
+      form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> cannot be negative'));
+    }
+    else {
+      $budget_sum += $value['field_total'][LANGUAGE_NONE][0]['value'];
+    }
+  }
+
+  if ($budget_sum < 10) {
+    form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Total Project Budget in baseline project has to be greater or equal to $10m'));
   }
 }
 
 function ict_project_budget_by_year_preview_page_validate($node, &$errors) {
   $node_wrapper = entity_metadata_wrapper('node', $node);
   $budget_values = $node_wrapper->field_original_total_budget->value();
+  $type = $node_wrapper->getBundle();
+  $budget_sum = 0;
   $current_fin_year = __ict_project_get_current_fin_year();
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
+
     if (empty($value->field_total[LANGUAGE_NONE][0]['value'])) {
       $year = $value->field_year[LANGUAGE_NONE][0]['value'];
       if ($node->type == 'update' && $year != $current_fin_year) {
         continue;
       }
-      $errors[] = t(t('Field <em>Budget Value</em> is required for !year Financial Year', array(
+      $errors[] = t('Field <em>Budget Value</em> is required for !year Financial Year', array(
         '!year' => $year
-      )));
+      ));
     }
+    elseif ($value->field_total[LANGUAGE_NONE][0]['value'] < 0) {
+      $errors[] = t('Field <em>Budget Value</em> cannot be negative');
+    }
+    elseif ($type == 'project') {
+      $budget_sum += $value->field_total[LANGUAGE_NONE][0]['value'];
+    }
+  }
+
+  if ($budget_sum < 10 & $type == 'project') {
+    $errors[] = t('Total Project Budget has to be greater or equal to $10m');
   }
 }
 
