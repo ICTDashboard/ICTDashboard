@@ -33,6 +33,7 @@ function ict_project_access_add_approver($email, $nid) {
     'title' => $node_wrapper->title->value(),
     'name' => _ict_project_get_user_name($user),
     'admin_name' => _ict_project_get_user_name(),
+    'rebaseline' => ict_project_is_rebaseline($nid)
   ));
 
   return $query;
@@ -254,6 +255,7 @@ function ict_project_access_add_editor($email, $nid) {
     'title' => $node_wrapper->title->value(),
     'name' => _ict_project_get_user_name($user),
     'admin_name' => _ict_project_get_user_name(),
+    'rebaseline' => ict_project_is_rebaseline($nid)
   ));
 
   return $query;

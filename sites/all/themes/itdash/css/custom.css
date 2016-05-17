@@ -307,6 +307,9 @@ input.approver-email {margin-bottom: 10px !important;}
     /*left: 0;*/
     /*right: 0;*/
 }
+.fancybox-actions .export-btn {
+    padding: 8px 15px;
+}
 .ict-fancy-content {
     padding: 0 20px;
     overflow: scroll;

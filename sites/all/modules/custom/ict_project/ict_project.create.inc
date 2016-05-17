@@ -16,8 +16,17 @@ function ict_project_update_gov_entity_name($form, &$form_state) {
  * @param $form_state
  * @return mixed
  */
-function ict_project_projects_create_form($form, &$form_state) {
+function ict_project_projects_create_form($form, &$form_state, $baseline = NULL) {
   global $user;
+
+  $is_rebaseline = FALSE;
+  if (!empty($baseline->nid)) {
+    $is_rebaseline = TRUE;
+    $form['baseline'] = array(
+      '#type' => 'value',
+      '#value' => $baseline
+    );
+  }
 
   $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
   $portfolios = taxonomy_get_tree($portfolio_vocab->vid, 0, 1);
@@ -62,14 +71,27 @@ function ict_project_projects_create_form($form, &$form_state) {
     '#disabled' => TRUE,
   );
 
-  if (!empty($form_state['input']['field_portfolio_name'])) {
-    $portfolios = taxonomy_get_tree($portfolio_vocab->vid, $form_state['input']['field_portfolio_name'], 1);
+  if (!empty($form_state['input']['field_portfolio_name']) || $is_rebaseline) {
+
+    if (!empty($form_state['input']['field_portfolio_name'])) {
+      $portfolio_name = $form_state['input']['field_portfolio_name'];
+    }
+    else {
+      $portfolio_name = $baseline->field_portfolio_name[LANGUAGE_NONE][0]['tid'];
+      $form['field_portfolio_name']['#default_value'] = array($portfolio_name);
+    }
+
+    $portfolios = taxonomy_get_tree($portfolio_vocab->vid, $portfolio_name, 1);
     $portfolio_options = array();
     foreach ($portfolios as $entity) {
       $portfolio_options[$entity->tid] = $entity->name;
     }
     $form['field_government_entity_name']['#options'] = $portfolio_options;
     $form['field_government_entity_name']['#disabled'] = FALSE;
+
+    if ($is_rebaseline && empty($form_state['input']['field_government_entity_name'])) {
+      $form['field_government_entity_name']['#default_value'] = array($baseline->field_government_entity_name[LANGUAGE_NONE][0]['tid']);
+    }
   }
 
   $department_vocab = taxonomy_vocabulary_machine_name_load('department');
@@ -120,6 +142,10 @@ function ict_project_projects_create_form($form, &$form_state) {
     '#title_display' => 'invisible',
   );
 
+  if ($is_rebaseline && empty($form_state['input']['title'])) {
+    $form['title']['#default_value'] = $baseline->title;
+  }
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Create Project'),
@@ -127,6 +153,11 @@ function ict_project_projects_create_form($form, &$form_state) {
     '#validate' => array('ict_project_manage_users_emails_validate'),
     '#attributes' => array('class' => array('submit-button'))
   );
+
+  if ($is_rebaseline) {
+    $form['#page_title'] = t('Create Re-baseline');
+    $form['submit']['#value'] = t('Create re-baseline');
+  }
 
   $form['#theme'] = 'ict_project_create_form';
 
@@ -157,6 +188,7 @@ function ict_project_validate_email_department($email, $term) {
  */
 function ict_project_create_form_submit($form, &$form_state) {
   $values = $form_state['values'];
+  $status_message = t('The project has been created.');
   $node = new stdClass();
   $node->type = 'project';
   $node->title = $values['title'];
@@ -164,6 +196,12 @@ function ict_project_create_form_submit($form, &$form_state) {
 
   $node->language = LANGUAGE_NONE;
   node_object_prepare($node);
+
+  // add parent project if it's re-baseline
+  if (!empty($form['baseline']['#value'])) {
+    $node->field_project[$node->language][0]['target_id'] = $form['baseline']['#value']->nid;
+    $status_message = t('The re-baseline draft has been created has been created.');
+  }
 
   $node->field_government_entity_name[$node->language][0]['tid'] = $values['field_government_entity_name'];
   $node->field_portfolio_name[$node->language][0]['tid'] = $values['field_portfolio_name'];
@@ -180,7 +218,7 @@ function ict_project_create_form_submit($form, &$form_state) {
     foreach ($editors as $editor) {
       ict_project_access_add_editor($editor, $node->nid);
     }
-    drupal_set_message(t('The project has been created.'));
+    drupal_set_message($status_message);
     $form_state['redirect'] = 'projects';
   }
   else {

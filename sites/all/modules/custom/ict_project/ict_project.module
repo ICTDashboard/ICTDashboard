@@ -1202,9 +1202,16 @@ function ict_project_node_insert ($node) {
   if ($node->type == 'project') {
     ict_project_set_workflow_state('draft', $node->nid, $node->vid);
     __ict_mail_process_mails('ict_mail', 'project_create', $node, array('departmental_admins'), array('dep_admins' => array(array('name' => _ict_project_get_user_name()))), FALSE);
+
     if (ict_project_is_rebaseline($node)) {
-      // copy editors from parent project when re-baseline is created
-      ict_project_copy_editors_and_approvers($node);
+      $baseline = ict_project_get_parent_project($node);
+      if ($baseline && $baseline = node_load($baseline)) {
+        __ict_mail_process_mails('ict_mail', 'project_rebaselined', $baseline, array(
+          'data_approvers',
+          'data_editors',
+          'departmental_admins'
+        ), array('dep_admins' => array(array('name' => _ict_project_get_user_name()))), FALSE);
+      }
     }
   }
 }
@@ -1215,6 +1222,16 @@ function ict_project_node_insert ($node) {
 function ict_project_node_delete($node) {
   if ($node->type == 'project') {
     __ict_mail_process_mails('ict_mail', 'project_remove', $node, array('departmental_admins'), array('dep_admins' => array(array('name' => _ict_project_get_user_name()))), FALSE);
+
+    // delete workflow records
+    $num_deleted = db_delete('project_workflow')
+      ->condition('nid', $node->nid)
+      ->execute();
+
+    // dremove approvers and editors
+    $num_deleted = db_delete('project_access')
+      ->condition('nid', $node->nid)
+      ->execute();
   }
 }
 
