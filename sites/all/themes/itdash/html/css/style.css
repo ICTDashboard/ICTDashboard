@@ -3907,7 +3907,8 @@ you can add resource intensive styles.
       text-transform: uppercase; }
       .header #logo img {
         float: left;
-        margin-right: 17px; }
+        margin-right: 8px;
+        margin-bottom: 3px; }
       .header #logo span {
         font-weight: 300;
         display: inline-block;
