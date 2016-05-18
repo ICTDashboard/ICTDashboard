@@ -49,7 +49,7 @@
         // legend
         for (item in legend_items) {
           $('#benefits_legend .bar-legend')
-            .append('<li><span style="background-color:' + legend_items[item]['color'] + '"></span>' + legend_items[item]['number'] + ' Project Benefits, ' + legend_items[item]['percentage'] + '% ' + legend_items[item]['label'] + '</li>')
+            .append('<li><span style="background-color:' + legend_items[item]['color'] + '"></span>' + legend_items[item]['number'] + ' Project Benefits, ' + legend_items[item]['label'] + '</li>')
         }
 
         var chart = new google.visualization.PieChart(document.getElementById('benefits_chart_div'));
