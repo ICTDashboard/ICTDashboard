@@ -3238,6 +3238,18 @@ div.tooltip-edit {
       margin: 0;
       line-height: 1.5em; }
 
+.rebaseline-info {
+  display: block;
+  font-family: 'Open Sans';
+  color: #fff;
+  font-size: 13px;
+  font-style: italic;
+  text-align: left;
+  margin-bottom: 24px; }
+
+.project-title-info {
+  margin-bottom: 0; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
