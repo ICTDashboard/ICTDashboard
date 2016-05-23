@@ -180,3 +180,7 @@ color: black;
 form#ict-update-approve-form, form#ict-project-baseline-approve-form {
   display: none;
 }
+
+.view-baseline-history {
+  display: none;
+}
