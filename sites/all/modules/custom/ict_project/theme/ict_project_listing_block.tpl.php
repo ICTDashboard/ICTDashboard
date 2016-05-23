@@ -79,7 +79,7 @@
           <?php foreach ($rows as $project) : ?>
             <tr class="odd views-row-first">
             <td class ="title">
-            <?php if(!empty($project->nid) && ict_project_is_rebaseline($project->nid)) :
+            <?php if(!empty($project->nid) && $project->field_project_target_id) :
                 if(ict_project_get_last_rebaseline_project($project->nid) == $project->nid) : ?>
                       <a href="<?php print url('node/' . $project->nid); ?>">
                         <?php print $project->title; ?>
@@ -91,8 +91,9 @@
                     </a>
                     <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (!number)', array('!number' => count(ict_project_get_all_parents_project($project)) + 1)) ?> </span>
                 <?php endif; ?>
-                  <?php else :
-                    if(!empty(ict_project_get_project_rebaseline ($project->nid))) : ?>
+                  <?php else : 
+                    $get_project_rebaseline = ict_project_get_project_rebaseline($project->nid);
+                    if(!empty($get_project_rebaseline)) : ?>
                        <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
                         <?php print $project->title; ?>
                       </a>
