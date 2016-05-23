@@ -33,6 +33,7 @@ h2 {
 div.page-title h1 {
   font-size: 32px !important;
   font-weight:normal !important;
+  margin-bottom: 0;
 }
 
 div.print-logo img {
@@ -183,4 +184,11 @@ form#ict-update-approve-form, form#ict-project-baseline-approve-form {
 
 .view-baseline-history {
   display: none;
+}
+
+span.rebaseline-info {
+  font-style: italic;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
