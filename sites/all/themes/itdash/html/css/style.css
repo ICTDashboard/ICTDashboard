@@ -3850,7 +3850,7 @@ This is the average viewing window. So Desktops, Laptops, and
 in general anyone not viewing on a mobile device. Here's where
 you can add resource intensive styles.
 *********************/
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   /******************************************************************
   Site Name:
   Author:
@@ -5422,7 +5422,7 @@ This is the average viewing window. So Desktops, Laptops, and
 in general anyone not viewing on a mobile device. Here's where
 you can add resource intensive styles.
 *********************/
-@media only screen and (min-width: 1030px) {
+@media only screen and (min-width: 1025px) {
   /******************************************************************
   Site Name:
   Author:
@@ -5445,7 +5445,7 @@ you can add resource intensive styles.
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
 *********************/
-@media only screen and (min-width: 1240px) {
+@media only screen and (min-width: 1241px) {
   /******************************************************************
   Site Name: 
   Author: 
