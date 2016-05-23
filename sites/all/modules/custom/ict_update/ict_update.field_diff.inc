@@ -184,7 +184,10 @@ function ict_field_diff_compare_benefits($prev, $last) {
   $diff = array();
 
   foreach($last as $last_benefit) {
-    if (empty($last_benefit->field_previous_collection['und'][0]['target_id'])) continue;
+    if (empty($last_benefit->field_previous_collection['und'][0]['target_id'])) {
+      $diff[$last_benefit->item_id]['new_benefit'] = t('New Benefit added');
+      continue;
+    }
     if ($last_benefit->field_removed['und'][0]['value'] == 'removed') continue;
     $diff[$last_benefit->item_id] = array();
     foreach($prev as $key => $prev_benefit) {
