@@ -13,6 +13,15 @@ $diff = !empty($diff['field_benefits_realised']) ? $diff['field_benefits_realise
   <div class="node-faq-item <?php print !fmod($number, 2) ? 'row-blue' : 'row-white'; ?>">
     <div class="ict-faq-question <?php print !$viz ? 'ict-faq-question-active' : ''; ?>">
       <h4>
+        <?php if (!empty($diff[$benefit->item_id]['new_benefit'])) : ?>
+          <a href="javascript:void(0);" class="tooltip-edit">'
+            <span class="tooltip-content">
+              <strong>
+                <?php print $diff[$benefit->item_id]['new_benefit']; ?>
+              </strong>
+            </span>
+          </a>
+        <?php endif; ?>
         <?php if (!empty($diff[$benefit->item_id]['field_benefit'])) : ?>
           <?php print itdash_edited_tooltip_render($diff[$benefit->item_id]['field_benefit']); ?>
         <?php endif; ?>
