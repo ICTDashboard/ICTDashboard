@@ -3,8 +3,11 @@
   <div class="inner-title-content wrap cf">
     <h1 class="project-title-info"><?php print $title; ?></h1>
     <span class="rebaseline-info">
-      <?php  if(!empty($nid) && $rebaseline_check) :
-        print ($last_rebaseline == $nid) ? t('Re-Baselined') : t('Previous Baseline (!number)', array('!number' => count($previous_baseline)));
+      <?php if(!empty($nid) && $rebaseline_check) :
+        print ($last_rebaseline == $nid) ? t('Re-Baselined') : t('Previous Baseline (!number)', array('!number' => count($previous_baseline)+1));
+      else:
+        (!empty($get_rebaseline)) ?
+          print t('Previous Baseline (1)') : ''; 
       endif;?>
     </span>
   </div>
