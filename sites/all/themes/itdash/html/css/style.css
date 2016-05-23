@@ -2739,7 +2739,7 @@ body a.submit-button,
 .field-name-field-status td.field-status.at_risk:before,
 .field-name-field-status .sbHolder.at_risk:before,
 .field-name-field-status a[rel=at_risk]:before {
-  background-color: #f6d000; }
+  background-color: #f6a33c; }
 .field-name-field-status td.field-status.removed:before,
 .field-name-field-status .sbHolder.removed:before,
 .field-name-field-status a[rel=removed]:before {

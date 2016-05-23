@@ -1692,7 +1692,7 @@ function __ict_project_get_benefit_status_colors() {
     'yes' => '#1b56af',
     'no' => '#c42656',
     'on_track' => '#1fd063',
-    'at_risk' => '#f6d000'
+    'at_risk' => '#f6a33c'
   );
 }
 
