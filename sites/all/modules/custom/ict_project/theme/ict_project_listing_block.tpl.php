@@ -78,11 +78,32 @@
 
           <?php foreach ($rows as $project) : ?>
             <tr class="odd views-row-first">
-              <td class="title">
-                <a href="<?php print url('node/' . $project->nid); ?>">
-                  <?php print $project->title; ?>
-                </a>
-              </td>
+            <td class ="title">
+            <?php if(!empty($project->nid) && ict_project_is_rebaseline($project->nid)) :
+                if(ict_project_get_last_rebaseline_project($project->nid) == $project->nid) : ?>
+                      <a href="<?php print url('node/' . $project->nid); ?>">
+                        <?php print $project->title; ?>
+                      </a>
+                      <span class ="rebaseline-indicate" ><?php print t('Re-Baselined'); ?> </span>
+                  <?php else : ?>
+                    <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
+                      <?php print $project->title; ?>
+                    </a>
+                    <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (!number)', array('!number' => count(ict_project_get_all_parents_project($project)) + 1)) ?> </span>
+                <?php endif; ?>
+                  <?php else :
+                    if(!empty(ict_project_get_project_rebaseline ($project->nid))) : ?>
+                       <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
+                        <?php print $project->title; ?>
+                      </a>
+                      <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (1)') ?> </span>
+                    <?php else : ?>
+                       <a href="<?php print url('node/' . $project->nid); ?>">
+                        <?php print $project->title; ?>
+                      </a>
+                   <?php endif; ?>  
+            <?php endif;?>
+            </td> 
               <td class="dates">
                 <?php print format_date($project->changed, 'medium', 'j M Y h:i A'); ?>
               </td>

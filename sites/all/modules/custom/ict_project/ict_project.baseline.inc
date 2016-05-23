@@ -631,7 +631,7 @@ function ict_project_is_rebaseline ($node) {
     return FALSE;
   }
 
-  if (!empty($node->field_project[LANGUAGE_NONE][0]['target_id'])) {
+  if (!empty($node->field_project[LANGUAGE_NONE][0]['target_id']) || !empty($node->field_project_target_id)) {
     return TRUE;
   }
 
@@ -654,6 +654,10 @@ function ict_project_get_parent_project ($node) {
     return $node->field_project[LANGUAGE_NONE][0]['target_id'];
   }
 
+if (!empty($node->field_project_target_id)) {
+    return $node->field_project_target_id;
+  }
+  
   return FALSE;
 }
 
