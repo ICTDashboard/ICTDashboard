@@ -904,6 +904,7 @@ function ict_project_get_old_baselines($nid) {
       $old_baselines[$project_id]->approved_on = ict_project_get_approve_date($project_id);
       $old_baselines[$project_id]->unpublished_on = ict_project_get_unpublished_date($project_id);
       $old_baselines[$project_id]->field_original_total_budget = number_format(ict_project_get_total_budget($project_id), 2, '.', ' ');
+      $old_baselines[$project_id]->first_update = ict_project_get_first_approved_update($project_id);
 
       $last_update = ict_project_get_last_update($project_id);
       $old_baselines[$project_id]->last_update = $last_update ?
