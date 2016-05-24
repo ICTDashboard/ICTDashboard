@@ -3265,6 +3265,13 @@ div.tooltip-edit {
 .rebaseline-privious-project-list {
   padding-left: 38px !important; }
 
+.viz-number-of-benefits {
+  position: relative;
+  font-weight: 700;
+  color: #202b3d;
+  padding-right: 15px;
+  padding-top: 22px; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
