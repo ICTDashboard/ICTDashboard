@@ -32,11 +32,11 @@ var timeToWaitForLast = 100;
  * Put all your regular jQuery in here.
 */
 jQuery(document).ready(function($) {
-
-	/* $('#main-menu').slicknav({
-		prependTo: '#mobile-nav',
-		label: 'MENU'
-	}); */
+	
+	$('#main-menu').slicknav({
+		prependTo: '#navigation',
+		label: 'Menu'
+	});
 
 	$('.signin-request .tab-head a').click(function(){
 		var $this = $(this);
