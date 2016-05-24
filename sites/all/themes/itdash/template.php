@@ -145,7 +145,14 @@ function itdash_form_element($variables) {
 
 
 function itdash_menu_tree__menu_header_menu ($variables) {
-  return '<ul id="main-menu" class="nav">' . $variables['tree'] . '</ul>';
+//  <a id="mob-menu-button" href="javascript:void(0);">
+//    Menu
+//                <span class="slicknav_icon"><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span></span>
+//            </a>
+  return '
+            <ul id="main-menu" class="nav">' . $variables['tree'] . ' 
+            </ul>
+          ';
 }
 
 
@@ -191,7 +198,7 @@ function itdash_css_alter(&$css) {
 function itdash_preprocess_html(&$vars) {
   drupal_add_library('system', 'ui.datepicker');
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/js/jquery.multiSelect.js', array('type' => 'file', 'scope' => 'footer'));
-  drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/jquery.slicknav.js', array('type' => 'file', 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/jquery.slicknav.min.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js('https://cdn.jsdelivr.net/jquery.selectbox/0.2/js/jquery.selectbox-0.2.min.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/scripts.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/js/respond.js', array('type' => 'file', 'scope' => 'header'));

@@ -69,8 +69,12 @@ style a page via class
 LAYOUT & GRID STYLES
 *********************/
 
+#container {
+	width: 100%;
+	overflow: hidden;
+}
+
 .wrap {
-	width: 96%;
 	margin: 0 auto;
 }
 
@@ -152,98 +156,360 @@ HEADER STYLES
 *********************/
 
 .header {
-	background-color: $black;
-}
+	position: relative;
+	background: url(../images/header-bg.png) repeat-x scroll 0 0 #17716b;
+	padding-left: 20px;
+	padding-right: 20px;
 
 	#logo {
-		margin: 0.75em 0;
+		margin: 30px 0 15px;
+		overflow: hidden;
+		font-size: 34px;
+		text-transform: uppercase;
 
-		a {
+		& > a {
 			color: $white;
-		}
-	}
-
-/*********************
-NAVIGATION STYLES
-*********************/
-
-/*
-all navs have a .nav class applied via
-the wp_menu function; this is so we can
-easily write one group of styles for
-the navs on the site so our css is cleaner
-and more scalable.
-*/
-
-.nav {
-	border-bottom: 0;
-	margin: 0;
-
-	li {
-
-		a {
-			display: block;
-			color: $gray;
-			text-decoration: none;
-			padding: 0.75em;
-
-			/*
-			remember this is for mobile ONLY, so there's no need
-			to even declare hover styles here, you can do it in
-			the style.scss file where it's relevant. We want to
-			keep this file as small as possible!
-			*/
-			&:hover, &:focus {
-
+			float: left;
+			img {
+				width: 93px;
 			}
 		}
 
-		&:first-child {}
+		span {
+			font-size: 28px;
+			line-height: 28px;
+			margin-left: 15px;
+			margin-top: 5px;
+			float: left;
+			a {
+				color: $white;
+				font-size: 26px;
+				line-height: 30px;
 
-		&:last-child {}
+				strong {
+					letter-spacing: 1.5px;
+					font-weight: 700;
+					font-family: $ptsans;
+				}
+			}
+		}
+	}
+	/*********************
+	LOGIN AND REGISTER
+	*********************/
+	.login-register {
+		float: right;
+		margin: 5px 0 10px;
+		ul {
+			margin: 0;
+			li {
+				float: left;
+				a {
+					font-size: 15px;
+					font-weight: 600;
+					text-decoration: none;
+					text-align: center;
+					line-height: 37px;
+					margin-left: 20px;
+				}
+
+				&.reg {
+					a {
+						color: #d5ff92;
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+				&.log {
+					a {
+						color: $white;
+						background: url(../images/register-btn.png) no-repeat scroll 0 0;
+						width: 81px;
+						height: 41px;
+						display: block;
+
+						&:hover {
+							background-position: 0 -41px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/*********************
+    NAVIGATION STYLES
+    *********************/
+
+	#navigation {
 
 		/*
-		so you really have to rethink your dropdowns for mobile.
-		you don't want to have it expand too much because the
-		screen is so small. How you manage your menu should
-		depend on the project. Here's some great info on it:
-		http://www.alistapart.com/articles/organizing-mobile/
-		*/
-		ul.sub-menu,
-		ul.children {
+        all navs have a .nav class applied via
+        the wp_menu function; this is so we can
+        easily write one group of styles for
+        the navs on the site so our css is cleaner
+        and more scalable.
+        */
+
+		float: left;
+
+		.slicknav_menu {
+			.slicknav_btn {
+				color: $white;
+				text-decoration: none;
+				display: block;
+				padding: 15px 25px 24px 65px;
+				margin: 0 0 0 -20px;
+				border-radius: 0;
+				.slicknav_menutxt {
+					font-weight: 600;
+					font-size: 15px;
+
+				}
+				&.slicknav_open {
+					background-color: #0c5c57;
+				}
+				.slicknav_icon {
+					position: absolute;
+					left: 20px;
+					top: 8px;
+					float: left;
+					.slicknav_icon-bar {
+						margin-top: 6px;
+						background-color: $white;
+						display: block;
+						height: 2px;
+						width: 30px;
+					}
+				}
+			}
+			.slicknav_nav {
+				position: absolute;
+				top: 100%;
+				width: 100%;
+				background-color: #17716B;
+				margin-left: -20px;
+				li {
+					border-top: 1px solid #09514c;
+					border-bottom: none;
+					a {
+						position: relative;
+						font-size: 15px;
+						color: $white;
+						text-transform: none;
+						font-weight: 600;
+						&:hover, &.active {
+							background-color: #0c5c57;
+						}
+						&:before {
+							content: '';
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: 0;
+							width: 4px;
+						}
+					}
+					&.blue {
+						a:before {
+							background: $blue;
+						}
+					}
+					&.blue-green {
+						a:before {
+							background: $blue-green;
+						}
+					}
+					&.green {
+						a:before {
+							background: $green;
+						}
+					}
+					&.yellow-text {
+						a:before {
+							background: $yellow-text;
+						}
+					}
+					&.salad {
+						a:before {
+							background: $salad;
+						}
+					}
+					&.yellow-green {
+						a:before {
+							background: $yellow-green;
+						}
+					}
+				}
+			}
+		}
+
+		.nav {
+			&#main-menu {
+				display: none;
+			}
+			border-bottom: 0;
+			margin: 0;
 
 			li {
 
 				a {
-					padding-left: 30px;
+					display: block;
+					color: $gray;
+					text-decoration: none;
+					padding: 0.75em;
 
-					&:hover,
-					&:focus {}
+					/*
+                    remember this is for mobile ONLY, so there's no need
+                    to even declare hover styles here, you can do it in
+                    the style.scss file where it's relevant. We want to
+                    keep this file as small as possible!
+                    */
+					&:hover, &:focus {
 
-					&:link {}
+					}
+				}
+
+				&:first-child {
+				}
+
+				&:last-child {
+				}
+
+				/*
+                so you really have to rethink your dropdowns for mobile.
+                you don't want to have it expand too much because the
+                screen is so small. How you manage your menu should
+                depend on the project. Here's some great info on it:
+                http://www.alistapart.com/articles/organizing-mobile/
+                */
+				ul.sub-menu,
+				ul.children {
+
+					li {
+
+						a {
+							padding-left: 30px;
+
+							&:hover,
+							&:focus {
+							}
+
+							&:link {
+							}
+
+						}
+
+						&:first-child {
+						}
+
+						&:last-child {
+						}
+
+					}
 
 				}
 
-				&:first-child {}
+			}
+			/* end .menu li */
 
-				&:last-child {}
+			/* highlight current page */
+			li.current-menu-item,
+			li.current_page_item,
+			li.current_page_ancestor {
+
+				a {
+				}
 
 			}
+			/* end current highlighters */
 
 		}
+		/* end .nav */
+	}
+	/*********************
+	USER TOOLS
+	*********************/
+	.user-tools {
+		position: absolute;
+		right:20px;
+		top:129px;
 
-	} /* end .menu li */
+		&>div {
+			span {
+				font-size: 14px;
+				color: $yellow-text;
+				background: url(../images/user-icon.png) no-repeat scroll 0 0 transparent;
+				padding: 0 0 0 25px;
+				display: inline-block;
+			}
+			.user-option {
+				display: inline-block;
+				margin-left: 20px;
+				height: 24px;
 
-	/* highlight current page */
-	li.current-menu-item,
-	li.current_page_item,
-	li.current_page_ancestor {
+				a.arrowdown {
+					border: 1px solid rgba(0, 0, 0, 0);
+					color: $yellow-text;
+					display: block;
+					height: 25px;
+					outline: 0 none;
+					text-align: center;
+					width: 22px;
 
-		a {}
+					i {
+						font-size: 10px;
+						vertical-align: 3px;
+					}
 
-	}  /* end current highlighters */
+					&:hover {
+						border: 1px solid $yellow-text;
+						border-radius: 3px;
+					}
 
-} /* end .nav */
+					&.active {
+						background-color: #07524d;
+						border-radius: 3px 3px 0 0;
+
+						&:hover {
+							border: 1px solid transparent;
+						}
+					}
+				}
+				ul {
+					background-color: #07524d;
+					border-radius: 3px 0 3px 3px;
+					display: none;
+					margin: 0;
+					padding: 5px 15px;
+					position: absolute;
+					right: 0;
+					top: 100%;
+					width: 160px;
+
+					li {
+						border-top: 1px solid #11655f;
+
+						&:first-child { border-top: 0 none; }
+
+						a {
+							font-size: 14px;
+							color: $white;
+							text-decoration: none;
+							line-height: 27px;
+
+							&:hover {
+								color: $yellow-text;
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+}
 
 
 /*********************
