@@ -155,14 +155,3 @@ be set to display none.
 	@import "partials/print";
 
 }
-
-@media all and (max-width: 767px) {
-	/* #menu is the original menu */
-	.js #main-menu {
-		display:none;
-	}
-	
-	.js .slicknav_menu {
-		display:block;
-	}
-}
