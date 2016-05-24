@@ -147,8 +147,12 @@ function ict_project_preprocess_node(&$vars) {
     $vars['project_node'] = node_load($vars['project_id']);
   }
   if ($vars['type'] == 'project') {
-
     $node = $vars['node'];
+    $nid = $vars['nid'];
+    $vars['rebaseline_check'] = ict_project_is_rebaseline($node);
+    $vars['last_rebaseline'] = ict_project_get_last_rebaseline_project($nid);
+    $vars['previous_baseline'] = ict_project_get_all_parents_project($node);
+    $vars['get_rebaseline'] = ict_project_get_project_rebaseline ($nid);
     $view_mode = $vars['view_mode'];
     $vars['diff'] = array();
     if (ict_project_access_project('approve', NULL, $node->nid)) {
