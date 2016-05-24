@@ -3091,31 +3091,31 @@ body a.submit-button,
       min-width: 275px !important;
       margin: 10px 10px 3px; }
 
-.object_and_summary a, .entity_comments a, span.tooltip-content a {
+body .object_and_summary a, body .entity_comments a, span.tooltip-content a {
   color: #0d6c88;
   text-decoration: underline; }
-  .object_and_summary a:hover, .entity_comments a:hover, span.tooltip-content a:hover {
+  body .object_and_summary a:hover, body .entity_comments a:hover, span.tooltip-content a:hover {
     color: #0d6c88;
     text-decoration: none; }
-  .object_and_summary a:visited, .entity_comments a:visited, span.tooltip-content a:visited {
+  body .object_and_summary a:visited, body .entity_comments a:visited, span.tooltip-content a:visited {
     color: #0d6c88; }
-  .object_and_summary a:focus, .entity_comments a:focus, span.tooltip-content a:focus {
+  body .object_and_summary a:focus, body .entity_comments a:focus, span.tooltip-content a:focus {
     color: #0d6c88; }
-.object_and_summary ul, .entity_comments ul, span.tooltip-content ul {
+body .object_and_summary ul, body .entity_comments ul, span.tooltip-content ul {
   list-style-type: disc; }
-  .object_and_summary ul ul, .entity_comments ul ul, span.tooltip-content ul ul {
+  body .object_and_summary ul ul, body .entity_comments ul ul, span.tooltip-content ul ul {
     list-style-type: circle; }
-    .object_and_summary ul ul ul, .entity_comments ul ul ul, span.tooltip-content ul ul ul {
+    body .object_and_summary ul ul ul, body .entity_comments ul ul ul, span.tooltip-content ul ul ul {
       list-style-type: square; }
-.object_and_summary p, .entity_comments p, span.tooltip-content p {
+body .object_and_summary p, body .entity_comments p, span.tooltip-content p {
   color: #202b3d; }
-.object_and_summary ol, .object_and_summary ul, .entity_comments ol, .entity_comments ul, span.tooltip-content ol, span.tooltip-content ul {
+body .object_and_summary ol, body .object_and_summary ul, body .entity_comments ol, body .entity_comments ul, span.tooltip-content ol, span.tooltip-content ul {
   color: #202b3d;
   padding-left: 40px;
   margin: 0.5em 0; }
-  .object_and_summary ol ol, .object_and_summary ol ul, .object_and_summary ul ol, .object_and_summary ul ul, .entity_comments ol ol, .entity_comments ol ul, .entity_comments ul ol, .entity_comments ul ul, span.tooltip-content ol ol, span.tooltip-content ol ul, span.tooltip-content ul ol, span.tooltip-content ul ul {
+  body .object_and_summary ol ol, body .object_and_summary ol ul, body .object_and_summary ul ol, body .object_and_summary ul ul, body .entity_comments ol ol, body .entity_comments ol ul, body .entity_comments ul ol, body .entity_comments ul ul, span.tooltip-content ol ol, span.tooltip-content ol ul, span.tooltip-content ul ol, span.tooltip-content ul ul {
     padding-left: 40px; }
-.object_and_summary ol, .entity_comments ol, span.tooltip-content ol {
+body .object_and_summary ol, body .entity_comments ol, span.tooltip-content ol {
   list-style-type: decimal; }
 
 div.tooltip-edit {
