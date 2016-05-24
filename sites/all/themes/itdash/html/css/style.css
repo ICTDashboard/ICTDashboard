@@ -3238,6 +3238,13 @@ div.tooltip-edit {
       margin: 0;
       line-height: 1.5em; }
 
+.viz-number-of-benefits {
+  position: relative;
+  font-weight: 700;
+  color: #202b3d;
+  padding-right: 15px;
+  padding-top: 22px; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
