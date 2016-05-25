@@ -3254,6 +3254,17 @@ div.tooltip-edit {
 .project-title-info {
   margin-bottom: 0; }
 
+#content .project-program-link {
+  color: #0d6c88;
+  text-decoration: underline; }
+  #content .project-program-link:hover {
+    color: #0d6c88;
+    text-decoration: none; }
+  #content .project-program-link:visited {
+    color: #0d6c88; }
+  #content .project-program-link:focus {
+    color: #0d6c88; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If

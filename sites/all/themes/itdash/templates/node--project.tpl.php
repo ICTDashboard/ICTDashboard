@@ -99,7 +99,10 @@
       </div>
       <div class="text">
         <?php foreach (_ict_project_baseline_get_simple_values($field_program_name) as $value) : ?>
-          <p><?php print $value; ?></p>
+          <p><?php $query = $get;
+                $query['filter_by'] = 'program';
+                $query['filter'] = $value;
+            print l($value, 'dashboard-projects', array('query' => $query, 'attributes' => array('class' => array('project-program-link')))); ?></p>
         <?php endforeach; ?>
       </div>
     </div>
