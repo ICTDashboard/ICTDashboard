@@ -1568,3 +1568,17 @@ div.tooltip-edit {
   padding-right: 15px;
   padding-top: 22px;
 }
+#content .project-program-link {
+  color: #0d6c88;
+  text-decoration: underline;
+  &:hover {
+    color: #0d6c88;
+    text-decoration: none;
+  }
+  &:visited {
+    color: #0d6c88;
+  }
+  &:focus {
+    color: #0d6c88;
+  }
+}
