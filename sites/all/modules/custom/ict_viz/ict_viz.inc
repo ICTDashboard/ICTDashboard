@@ -209,6 +209,7 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
 
         // quarter expenditure
         $subquery = db_select('field_data_field_project', 'update_entity');
+        $subquery->condition('update_entity.bundle', 'update');
         $subquery->join('project_workflow', 'workflow', 'update_entity.entity_id = workflow.nid AND update_entity.revision_id = workflow.vid');
         $subquery->condition('workflow.state', 'approved');
         $subquery->fields('update_entity', array('field_project_target_id'));
@@ -247,7 +248,7 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
             if (!isset($data[$year][$quarter]['ahead_schedule']['value'])) {
               $data[$year][$quarter]['ahead_schedule']['value'] = 0;
             }
-            
+
             $data[$year][$quarter]['ahead_schedule']['value']++;
             $data[$year][$quarter]['ahead_schedule']['color'] = '#75a2df';
           }
