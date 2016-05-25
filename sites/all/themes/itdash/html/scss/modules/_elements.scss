@@ -1341,7 +1341,7 @@ body,
   }
 }
 
-.object_and_summary, .entity_comments, span.tooltip-content {
+body .object_and_summary, body .entity_comments, span.tooltip-content {
   a {
     color: #0d6c88;
     text-decoration: underline;
