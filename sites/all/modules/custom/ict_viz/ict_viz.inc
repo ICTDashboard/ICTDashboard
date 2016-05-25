@@ -19,6 +19,10 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
       ->fetchAll();
 
     foreach($year_budget_items as $budget) {
+      if (!isset($year_budget[$budget->field_year_value])) {
+        $year_budget[$budget->field_year_value] = 0;
+      }
+
       $year_budget[$budget->field_year_value] += (float)$budget->field_total_value;
     }
 
@@ -43,6 +47,10 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
       ->fetchAll();
 
     foreach($year_expenditure_items as $budget) {
+      if (!isset($year_expenditure[$budget->field_year_value])) {
+        $year_expenditure[$budget->field_year_value] = 0;
+      }
+
       $year_expenditure[$budget->field_year_value] += (float)$budget->field_total_value;
     }
   }
@@ -220,15 +228,24 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
 
         foreach ($current_status_items as $project) {
           if ($project->field_actual_level_of_project_co_value < $project->field_forecast_level_of_project__value) {
-            $data[$year][$quarter]['behind_schedule']['value']++;
+            $data[$year][$quarter]['behind_schedule']['value'] =
+              isset($data[$year][$quarter]['behind_schedule']['value']) ?
+              ++$data[$year][$quarter]['behind_schedule']['value'] :
+              0;
             $data[$year][$quarter]['behind_schedule']['color'] = '#f6d000';
           }
           elseif ($project->field_actual_level_of_project_co_value == $project->field_forecast_level_of_project__value) {
-            $data[$year][$quarter]['on_track']['value']++;
+            $data[$year][$quarter]['on_track']['value'] =
+              isset($data[$year][$quarter]['on_track']['value']) ?
+                ++$data[$year][$quarter]['on_track']['value'] :
+                0;
             $data[$year][$quarter]['on_track']['color'] = '#1fd063';
           }
           else {
-            $data[$year][$quarter]['ahead_schedule']['value']++;
+            $data[$year][$quarter]['ahead_schedule']['value'] =
+              isset($data[$year][$quarter]['ahead_schedule']['value']) ?
+                ++$data[$year][$quarter]['ahead_schedule']['value'] :
+                0;
             $data[$year][$quarter]['ahead_schedule']['color'] = '#75a2df';
           }
         }
