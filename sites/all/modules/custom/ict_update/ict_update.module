@@ -176,7 +176,9 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     'ict_project_baseline_admin_user_details', array(
       'departmental_admins' => $project_admins['departmental_admins'],
       'data_editors' => $project_admins['data_editors'],
-      'data_approvers' => $project_admins['data_approvers']
+      'data_approvers' => $project_admins['data_approvers'],
+      'project_id' => $project_id,
+      'view_mode' => 'full'
     )
   );
 
@@ -336,6 +338,9 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
           <a href="' . url('benefit/history/' . $budget_table[$key]['field_previous_collection']['und']['#value']) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
           </div>'
       );
+
+      // title is not editable
+      $budget_table[$key]['field_benefit'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
     }
     if (!$items_count) {
       foreach(element_children($budget_table) as $key) {
@@ -379,6 +384,9 @@ function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = arr
           <a href="' . url('benefit/history/' . $prev_collection) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
           </div>'
       );
+
+      // title is not editable
+      $budget_table[$key]['field_benefit'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
     }
     if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['current_item_id'])) {
       $budget_table[$key]['current_item_id'] = array(
@@ -1154,7 +1162,7 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
  * Implements hook_node_access().
  */
 function ict_update_node_access($node, $op, $account) {
-  if ($node == 'update' || $node->type == 'update') {
+  if ($node == 'update' || (!empty($node->type) && $node->type == 'update')) {
     if (empty($node->nid)) {
       return NODE_ACCESS_DENY;
     }
@@ -1217,7 +1225,8 @@ function ict_update_get_actual_benefits($project_id) {
     $benefits = $last_update->field_benefits_realised->value();
   }
   foreach($benefits as $key => $val) {
-    if ($val->field_removed['und'][0]['value'] || $val->field_status['und'][0]['value'] == 'removed') {
+    if ((!empty($val->field_removed['und'][0]['value']) && $val->field_removed['und'][0]['value']) ||
+      $val->field_status['und'][0]['value'] == 'removed') {
       unset($benefits[$key]);
     }
   }
