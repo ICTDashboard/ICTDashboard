@@ -868,7 +868,13 @@ function ict_project_project_history ($nid) {
   $current_baseline->approved_on = ict_project_get_approve_date($nid);
   $current_baseline->field_original_total_budget = number_format(ict_project_get_total_budget($nid), 2, '.', ' ');
   $current_baseline->first_update = ict_project_get_first_approved_update($nid);
-  $last_update = ict_project_get_last_update($nid);
+
+  // last accessible update
+  $project_revisions = ict_update_get_revisions_list($nid, 'approved');
+  $last_revision = end($project_revisions);
+  $project_history = ict_update_get_allowed_entity_list($nid);
+  $last_update = end($project_history[$last_revision]);
+
   $current_baseline->last_update = $last_update ?
     node_load($last_update) :
     FALSE;
@@ -906,7 +912,12 @@ function ict_project_get_old_baselines($nid) {
       $old_baselines[$project_id]->field_original_total_budget = number_format(ict_project_get_total_budget($project_id), 2, '.', ' ');
       $old_baselines[$project_id]->first_update = ict_project_get_first_approved_update($project_id);
 
-      $last_update = ict_project_get_last_update($project_id);
+      // last accessible update
+      $project_revisions = ict_update_get_revisions_list($project_id, 'approved');
+      $last_revision = end($project_revisions);
+      $project_history = ict_update_get_allowed_entity_list($project_id);
+      $last_update = end($project_history[$last_revision]);
+
       $old_baselines[$project_id]->last_update = $last_update ?
         node_load($last_update) :
         FALSE;
