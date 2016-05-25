@@ -1246,6 +1246,13 @@ function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
   if (is_numeric($project_id)) {
     $query->condition('project.nid', $project_id);
   }
+  else {
+    // get only active projects
+    $active_projects = ict_project_get_all_active_projects();
+    if ($active_projects) {
+      $query->condition('project.nid', $active_projects, 'IN');
+    }
+  }
   $count = $query->execute()->rowCount();
 
   $query->addExpression('COUNT(status.field_status_value)', 'count');
