@@ -61,6 +61,9 @@
           <li>
             <b>#</b> <?php print t('No. of Projects'); ?>
           </li>
+          <li>
+            <b>*</b> <?php print t('Current Quarter'); ?>
+          </li>
         </ul>
       </div>
       <a href="javascript:void(0);" title="<?php print t('View All Previous Quarters'); ?>" id="schedule-expand" class="general-button plus expand-collapse-button">
@@ -155,6 +158,7 @@
           .attr("width", width)
           .attr("height", Object.keys(data.data[year]).length * 72.5);
 
+        var current_is_printed = false;
         for (var quarter = 4; quarter > 0; quarter--) {
           // if no data provide for the quarter don't show it
           if (typeof data.data[year][quarter] == 'undefined') continue;
@@ -176,16 +180,30 @@
             .attr("font-size", '13px')
             .attr("font-family", 'Open Sans')
             .attr("color", '#202b3d');
-          // quarter number
+          // quarter numberX
           quarter_text
             .append("svg:tspan")
             .text(getGetOrdinal(quarter)+" Quarter");
+
+          var year_dy = 22;
+          if (!current_is_printed) {
+            quarter_text
+              .append("svg:tspan")
+              .attr("x", 5)
+              .attr("dx", 78)
+              .attr("dy", 12)
+              .text("*");
+
+            current_is_printed = true;
+            year_dy = 10;
+          }
+
           // year
           quarter_text
             .append("svg:tspan")
             .attr("font-weight", 'bold')
             .attr("x", 13)
-            .attr("dy", 22)
+            .attr("dy", year_dy)
             .attr("dx", 23)
             .attr("text-anchor", 'right')
             .text(data[year]);
