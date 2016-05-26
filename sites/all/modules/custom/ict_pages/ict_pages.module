@@ -46,6 +46,13 @@ function template_preprocess_ict_pages_last_update(&$vars) {
   $query->range(0, 1);
   $result = $query->execute()->fetchField();
 
+  // we should show unapproved baselines for
+  if (!$result && !empty($vars['nid'])) {
+    $node = node_load($vars['nid']);
+    if (!empty($node->type) && $node->type == 'project') {
+      $result = $node->changed;
+    }
+  }
   $vars['result'] = $result;
 }
 
