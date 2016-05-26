@@ -190,6 +190,16 @@ function ict_users_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'create page content'.
+  $permissions['create page content'] = array(
+    'name' => 'create page content',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create users'.
   $permissions['create users'] = array(
     'name' => 'create users',
@@ -200,6 +210,26 @@ function ict_users_user_default_permissions() {
     'module' => 'administerusersbyrole',
   );
 
+  // Exported permission: 'delete any page content'.
+  $permissions['delete any page content'] = array(
+    'name' => 'delete any page content',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own page content'.
+  $permissions['delete own page content'] = array(
+    'name' => 'delete own page content',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'display drupal links'.
   $permissions['display drupal links'] = array(
     'name' => 'display drupal links',
@@ -208,6 +238,26 @@ function ict_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'admin_menu',
+  );
+
+  // Exported permission: 'edit any page content'.
+  $permissions['edit any page content'] = array(
+    'name' => 'edit any page content',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own page content'.
+  $permissions['edit own page content'] = array(
+    'name' => 'edit own page content',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit users with role 153917155'.

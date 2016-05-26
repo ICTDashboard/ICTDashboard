@@ -1,7 +1,15 @@
 <?php if ($viz_preview) { $diff = array(); } ?>
 <div class="page-title dotbg">
   <div class="inner-title-content wrap cf">
-    <h1><?php print $title; ?></h1>
+    <h1 class="project-title-info"><?php print $title; ?></h1>
+    <span class="rebaseline-info">
+      <?php if(!empty($nid) && $rebaseline_check) :
+        print ($last_rebaseline == $nid) ? t('Re-Baselined') : t('Previous Baseline (!number)', array('!number' => count($previous_baseline)+1));
+      else:
+        (!empty($get_rebaseline)) ?
+          print t('Previous Baseline (1)') : ''; 
+      endif;?>
+    </span>
   </div>
 </div>
 
@@ -283,20 +291,6 @@
         </div>
       </div>
 
-      <?php if ($viz_preview) : ?>
-        <div class="row">
-          <div class="label">
-            <?php print t('Project Benefits Status'); ?>
-            <?php if ($view_mode != 'print'): ?>
-              <?php print $preview_switch; ?>
-            <?php endif; ?>
-          </div>
-          <div class="text">
-            <?php print $project_benefits_pie_chart; ?>
-          </div>
-        </div>
-      <?php endif; ?>
-
     <div class="project-benefits">
       <h2 id="project-benefits"><?php print t('Project Benefits'); ?>
         <?php if ($view_mode != 'print'): ?>
@@ -328,6 +322,20 @@
           <?php endforeach; ?>
         </div>
       </div>
+
+      <?php if ($viz_preview) : ?>
+        <div class="row">
+          <div class="label">
+            <?php print t('Project Benefits Status'); ?>
+            <?php if ($view_mode != 'print'): ?>
+              <?php print $preview_switch; ?>
+            <?php endif; ?>
+          </div>
+          <div class="text">
+            <?php print $project_benefits_pie_chart; ?>
+          </div>
+        </div>
+      <?php endif; ?>
 
       <div class="row">
         <?php if (!$viz_preview) : ?>

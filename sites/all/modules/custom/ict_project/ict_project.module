@@ -147,8 +147,12 @@ function ict_project_preprocess_node(&$vars) {
     $vars['project_node'] = node_load($vars['project_id']);
   }
   if ($vars['type'] == 'project') {
-
     $node = $vars['node'];
+    $nid = $vars['nid'];
+    $vars['rebaseline_check'] = ict_project_is_rebaseline($node);
+    $vars['last_rebaseline'] = ict_project_get_last_rebaseline_project($nid);
+    $vars['previous_baseline'] = ict_project_get_all_parents_project($node);
+    $vars['get_rebaseline'] = ict_project_get_project_rebaseline ($nid);
     $view_mode = $vars['view_mode'];
     $vars['diff'] = array();
     if (ict_project_access_project('approve', NULL, $node->nid)) {
@@ -652,7 +656,8 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
     $budget_table['#min_index'] = $min_columns;
     $budget_table['#budget_rows'] = $budget_rows;
 
-    $year = reset(explode('/', $first_fin_year));
+    $first_year_parts = explode('/', $first_fin_year);
+    $year = reset($first_year_parts);
     foreach (element_children($budget_table) as $item) {
       if (!is_numeric($item)) continue;
       $budget_table[$item]['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = sprintf('%02d', $year) . '/' . sprintf('%02d', ++$year);
@@ -758,10 +763,12 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
   }
   $budget_table['#theme'] = 'field_original_total_budget_table';
 
-  $budget_table['#year_range_settings'] = array(
-    'start_year' => sprintf("%02d", $start_year) . '/' . sprintf("%02d", ++$start_year),
-    'year_range' => range(date('y') - 10, date('y') + 10)
-  );
+  if (isset($start_year)) {
+    $budget_table['#year_range_settings'] = array(
+      'start_year' => sprintf("%02d", $start_year) . '/' . sprintf("%02d", ++$start_year),
+      'year_range' => range(date('y') - 10, date('y') + 10)
+    );
+  }
 
   $form['#after_build'][] = '_ict_project_budget_table_after_build';
 }
@@ -776,7 +783,13 @@ function _ict_project_project_budget_by_year_form (&$form, &$form_state) {
 function _ict_project_budget_table_after_build($form, &$form_state) {
   $budget_table = $form['field_original_total_budget'][LANGUAGE_NONE];
 
-  drupal_add_js(array('year_range' => $budget_table['#year_range_settings']), 'setting');
+  drupal_add_js(array(
+      'year_range' => isset($budget_table['#year_range_settings']) ?
+        $budget_table['#year_range_settings'] :
+        NULL
+    ),
+    'setting'
+  );
   return $form;
 }
 
@@ -1559,9 +1572,10 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
   $original_values = array();
   $original_row = reset($rows);
   foreach ($original_row['budget_items'] as $budget_item) {
-    $original_values[] = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
+    $original_value = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
       (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
       (float)0;
+    $original_values[] = number_format($original_value, 2);
   }
 
   $update_values = array();
@@ -1570,14 +1584,15 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
     // chart values
     $update_row = end($rows);
     foreach ($update_row['budget_items'] as $budget_item) {
-      $update_values[] = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
+      $update_value = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
         (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
         (float)0;
+      $update_values[] = number_format($update_value, 2);
     }
   }
   else {
     foreach ($original_row['budget_items'] as $budget_item) {
-      $update_values[] = (float)0;
+      $update_values[] = number_format((float)0, 2);
     }
   }
 
@@ -1692,7 +1707,7 @@ function __ict_project_get_benefit_status_colors() {
     'yes' => '#1b56af',
     'no' => '#c42656',
     'on_track' => '#1fd063',
-    'at_risk' => '#f6d000'
+    'at_risk' => '#f6a33c'
   );
 }
 

@@ -19,11 +19,16 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
       ->fetchAll();
 
     foreach($year_budget_items as $budget) {
+      if (!isset($year_budget[$budget->field_year_value])) {
+        $year_budget[$budget->field_year_value] = 0;
+      }
+
       $year_budget[$budget->field_year_value] += (float)$budget->field_total_value;
     }
 
     // current year expenditure
     $subquery = db_select('field_data_field_project', 'update_entity');
+    $subquery->condition('update_entity.bundle', 'update');
     $subquery->join('project_workflow', 'workflow', 'update_entity.entity_id = workflow.nid AND update_entity.revision_id = workflow.vid');
     $subquery->condition('workflow.state', 'approved');
     $subquery->fields('update_entity', array('field_project_target_id'));
@@ -43,6 +48,10 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
       ->fetchAll();
 
     foreach($year_expenditure_items as $budget) {
+      if (!isset($year_expenditure[$budget->field_year_value])) {
+        $year_expenditure[$budget->field_year_value] = 0;
+      }
+
       $year_expenditure[$budget->field_year_value] += (float)$budget->field_total_value;
     }
   }
@@ -65,11 +74,17 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
 
   // chart labels
   $labels = array();
-  foreach ($year_expenditure as $year => $total) {
+  foreach ($year_expenditure as $year => &$total) {
     $fin_year = explode('/', $year);
     $label = '20' . reset($fin_year) . '-' . end($fin_year);
     $label = $current_fin_year == $year ? $label . '*' : $label;
     $labels[] = $label;
+    $total = number_format($total, 2);
+  }
+  
+  // format budget values
+  foreach ($year_budget as &$total) {
+    $total = number_format($total, 2);
   }
 
   $chart_options = array(
@@ -201,6 +216,7 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
 
         // quarter expenditure
         $subquery = db_select('field_data_field_project', 'update_entity');
+        $subquery->condition('update_entity.bundle', 'update');
         $subquery->join('project_workflow', 'workflow', 'update_entity.entity_id = workflow.nid AND update_entity.revision_id = workflow.vid');
         $subquery->condition('workflow.state', 'approved');
         $subquery->fields('update_entity', array('field_project_target_id'));
@@ -220,14 +236,26 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
 
         foreach ($current_status_items as $project) {
           if ($project->field_actual_level_of_project_co_value < $project->field_forecast_level_of_project__value) {
+            if (!isset($data[$year][$quarter]['behind_schedule']['value'])) {
+              $data[$year][$quarter]['behind_schedule']['value'] = 0;
+            }
+
             $data[$year][$quarter]['behind_schedule']['value']++;
             $data[$year][$quarter]['behind_schedule']['color'] = '#f6d000';
           }
           elseif ($project->field_actual_level_of_project_co_value == $project->field_forecast_level_of_project__value) {
+            if (!isset($data[$year][$quarter]['on_track']['value'])) {
+              $data[$year][$quarter]['on_track']['value'] = 0;
+            }
+
             $data[$year][$quarter]['on_track']['value']++;
             $data[$year][$quarter]['on_track']['color'] = '#1fd063';
           }
           else {
+            if (!isset($data[$year][$quarter]['ahead_schedule']['value'])) {
+              $data[$year][$quarter]['ahead_schedule']['value'] = 0;
+            }
+
             $data[$year][$quarter]['ahead_schedule']['value']++;
             $data[$year][$quarter]['ahead_schedule']['color'] = '#75a2df';
           }

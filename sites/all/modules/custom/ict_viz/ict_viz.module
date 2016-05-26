@@ -119,12 +119,12 @@ function template_preprocess_ict_viz_home_projects(&$vars) {
 
   $direction = isset($get['direction']) ? $get['direction'] : 'desc';
   if (isset($sorting[$get['order']])) {
-    $table_header = t('Projects by @LABEL', array('@LABEL' => $sorting_labels[$get['order']]));
+    $table_header = t('Active Projects by @LABEL', array('@LABEL' => $sorting_labels[$get['order']]));
     $query->orderBy($sorting[$get['order']], $direction);
     $col_classes[array_search($get['order'], array_keys($sorting))][] = 'current_sort';
   }
   else {
-    $table_header = t('Current Projects');
+    $table_header = t('Active Projects');
     $query->orderBy('created', $direction);
   }
   $vars['table_header'] = $table_header;
@@ -204,6 +204,7 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
   $vars['statuses'] = $statuses_info['settings']['allowed_values'];
 
   $subquery = db_select('field_data_field_project', 'pr');
+  $subquery->condition('pr.bundle', 'update');
   $subquery->addField('pr', 'field_project_target_id', 'project_id');
   $subquery->addExpression('MAX(entity_id)', 'update_id');
   $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));
@@ -279,7 +280,7 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
     if ($get['filter_by'] == 'status' && isset($vars['statuses'][$label])) {
       $label = $vars['statuses'][$label];
     }
-    drupal_set_title($label . ' ' . t('Projects'));
+    drupal_set_title(t('Active ') . $label . ' ' . t('Projects'));
   }
 
   $vars['col_classes'] = array_map(function($var) { return implode(' ', $var); }, $col_classes);

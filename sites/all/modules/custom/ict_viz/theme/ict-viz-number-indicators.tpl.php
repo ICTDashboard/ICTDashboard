@@ -15,14 +15,14 @@
         <div id="current-fin-year-budget-graph" class="overview-expenditure-graphs">
           <div class="graph-container"></div>
           <div class="expenditure-budget-value">
-            <?php print '<strong>$' . number_format($current_year_expenditure, 1)  . 'm</strong> / $' . number_format($current_year_budget, 1) . 'm'; ?>
+            <?php print '<strong>$' . number_format($current_year_expenditure, 2)  . 'm</strong> / $' . number_format($current_year_budget, 2) . 'm'; ?>
           </div>
         </div>
 
         <div id="total-budget-graph" class="overview-expenditure-graphs" style="display: none;">
           <div class="graph-container"></div>
           <div class="expenditure-budget-value">
-            <?php print '<strong>$' . number_format($total_expenditure, 1)  . 'm</strong> / $' . number_format($total_budget, 1) . 'm'; ?>
+            <?php print '<strong>$' . number_format($total_expenditure, 2)  . 'm</strong> / $' . number_format($total_budget, 2) . 'm'; ?>
           </div>
         </div>
         

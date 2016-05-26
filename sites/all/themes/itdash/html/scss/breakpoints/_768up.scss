@@ -41,36 +41,53 @@ HEADER STYLES
 *********************/
 
 .header {
-	background: url(../images/header-bg.png) repeat-x scroll 0 0 #17716b;
 	height: 134px;
 
 	#inner-header { vertical-align: middle; position: relative; }
 	#logo {
-		text-align: left; margin: 26px 0;
-		font-size: 30px;
+		text-align: left;
+		margin: 26px 0;
 		text-transform: uppercase;
 
-		img { float: left; margin-right: 17px; }
+		img { float: left; margin-right: 8px; margin-bottom: 3px; }
 
 		span {
 			font-weight: 300;
 			display: inline-block;
 			margin-top: 7px;
+			margin-left: 9px;
 			font-style: normal;
 			line-height: 36px;
 			letter-spacing: .6px;
 
-			strong {
-				letter-spacing: 1.7px;
-				font-weight: 700;
-				font-family: $ptsans;
+			a {
+				font-size: 34px;
+				line-height: 36px;
+				strong {
+					letter-spacing: 1.7px;
+				}
 			}
+
 		}
 
 		&>* {
 			vertical-align: middle;
 			display: inline-block;
 		}
+
+		&>a {
+			margin-top: 1px;
+			img {
+				width: auto;
+			}
+		}
+	}
+	/*********************
+	USER TOOLS
+	*********************/
+	.user-tools {
+		right: 0;
+		top: 58px;
 	}
 }
 
@@ -1420,281 +1437,198 @@ CONTENT STYLES
 	}
 }
 
-/*********************
-NAVIGATION STYLES
-*********************/
-
-#navigation {
-	left: 374px;
-    max-height: 134px;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-}
-.nav {
-	border: 0;
-	ul {
-		background:$black;
-		margin-top:0;
-	}
-	li {
-		float: left;
-		position: relative;
-
-		a {
-			border-bottom: 0 none;
-			color: #ffffff;
-			font-size: 15px;
-			font-weight: 600;
-			padding: 57px 0;
-			text-align: center;
-
-			/*
-			you can use hover styles here even though this size
-			has the possibility of being a mobile device.
-			*/
-			&:hover, &:focus {
-				text-decoration: none;
-				background-color: #0c5c57;
-				color: $white;
-			}
-		}
-
-		&:first-child {}
-		&:last-child {}
-
-		&.blue {
-			width: 68px;
-			&:before { background: $blue; }
-		}
-		&.blue-green {
-			width: 74px;
-			&:before { background: $blue-green; }
-		}
-		&.green {
-			width: 85px;
-			&:before { background: $green; }
-		}
-		&.yellow-text {
-			width: 98px;
-			&:before { background: $yellow-text; }
-		}
-		&.salad {
-			width: 98px;
-			&:before { background: $salad; }
-		}
-		&.yellow-green {
-			width: 103px;
-			&:before { background: $yellow-green; }
-		}
-
-		&:before {
-			height: 4px;
-			width: 100%;
-			position: absolute;
-			top: 0; left: 0;
-			background: $blue;
-			content: " ";
-		}
-
-		/*
-		plan your menus and drop-downs wisely.
-		*/
-		ul.sub-menu,
-		ul.children {
-			margin-top: 0;
-			border: 1px solid #ccc;
-			border-top: 0;
-			position: absolute;
-			visibility: hidden;
-			z-index: 8999;
-
-			li {
-				position: relative;
-
-				a {
-					padding-left: 10px;
-					border-right: 0;
-					display: block;
-					width: 180px;
-					border-bottom: 1px solid #ccc;
-
-					&:hover,
-					&:focus {
-						color: $black;
-					}
-
-					&:link {}
-				}
-
-				&:first-child {}
-
-				&:last-child {
-					a {
-						border-bottom: 0;
-					}
-				}
-
-				/*
-				if you need to go deeper, go nuts
-				just remember deeper menus sucki do
-				for usability. k, bai.
-				*/
-				ul {
-					top:0;
-					left:100%;
-				}
-			}
-
-			/* highlight sub-menu current page */
-			li.current-menu-item,
-			li.current_page_item,
-			li.current_page_ancestor {
-				a {}
-			}
-		}
-
-		/* showing sub-menus */
-		&:hover > ul {
-			top: auto;
-			visibility:visible;
-		}
-
-	} /* end .menu ul li */
-
-
-
-	/* highlight current page */
-	li.current-menu-item,
-	li.current_page_item,
-	li.current_page_ancestor {
-		a {}
-	}  /* end current highlighters */
-
-} /* end .nav */
 
 /*********************
 LOGIN AND REGISTER
 *********************/
-.login-register {
-	position: absolute;
-	top: 25px;
-	right: 0;
-
-	ul {
-		li {
-			float: left;
-			a {
-				font-size: 15px;
-				font-weight: 600;
-				text-decoration: none;
-				text-align: center;
-				line-height: 37px;
-				margin-left: 20px;
-			}
-
-			&.reg {
-				a {
-					color: #d5ff92;
-					&:hover { text-decoration: underline; }
-				}
-			}
-			&.log {
-				a {
-					color: $white;
-					background: url(../images/register-btn.png) no-repeat scroll 0 0;
-					width: 81px;
-					height: 41px;
-					display: block;
-
-					&:hover {
-						background-position: 0 -41px;
-					}
-				}
-			}
+.header {
+	.login-register {
+		position: absolute;
+		top: 25px;
+		right: 0;
+		ul {
+			margin: 1em 0;
 		}
 	}
-}
 
-/*********************
-USER TOOLS
-*********************/
-.user-tools {
-	position: absolute;
-	right: 0;
-	top: 58px;
+	/*********************
+    NAVIGATION STYLES
+    *********************/
 
-	&>div {
-		span {
-			font-size: 14px;
-			color: $yellow-text;
-			background: url(../images/user-icon.png) no-repeat scroll 0 0 transparent;
-			padding: 0 0 0 25px;
-			display: inline-block;
+	#navigation {
+		left: 374px;
+		max-height: 134px;
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		.slicknav_menu {
+			display: none;
 		}
-		.user-option {
-			display: inline-block;
-			margin-left: 20px;
-			height: 24px;
 
-			a.arrowdown {
-				border: 1px solid rgba(0, 0, 0, 0);
-				color: $yellow-text;
+		.nav {
+			&#main-menu {
 				display: block;
-				height: 25px;
-				outline: 0 none;
-				text-align: center;
-				width: 22px;
+			}
+			border: 0;
+			ul {
+				background: $black;
+				margin-top: 0;
+			}
+			li {
+				float: left;
+				position: relative;
 
-				i {
-					font-size: 10px;
-					vertical-align: 3px;
-				}
+				a {
+					border-bottom: 0 none;
+					color: #ffffff;
+					font-size: 15px;
+					font-weight: 600;
+					padding: 57px 0;
+					text-align: center;
 
-				&:hover {
-					border: 1px solid $yellow-text;
-					border-radius: 3px;
-				}
-
-				&.active {
-					background-color: #07524d;
-					border-radius: 3px 3px 0 0;
-
-					&:hover {
-						border: 1px solid transparent;
+					/*
+                    you can use hover styles here even though this size
+                    has the possibility of being a mobile device.
+                    */
+					&:hover, &:focus {
+						text-decoration: none;
+						background-color: #0c5c57;
+						color: $white;
 					}
 				}
-			}
-			ul {
-				background-color: #07524d;
-				border-radius: 3px 0 3px 3px;
-				display: none;
-				margin: 0;
-				padding: 5px 15px;
-				position: absolute;
-				right: 0;
-				top: 100%;
-				width: 160px;
 
-				li {
-					border-top: 1px solid #11655f;
+				&:first-child {
+				}
+				&:last-child {
+				}
 
-					&:first-child { border-top: 0 none; }
+				&.blue {
+					width: 68px;
+					&:before {
+						background: $blue;
+					}
+				}
+				&.blue-green {
+					width: 74px;
+					&:before {
+						background: $blue-green;
+					}
+				}
+				&.green {
+					width: 85px;
+					&:before {
+						background: $green;
+					}
+				}
+				&.yellow-text {
+					width: 98px;
+					&:before {
+						background: $yellow-text;
+					}
+				}
+				&.salad {
+					width: 98px;
+					&:before {
+						background: $salad;
+					}
+				}
+				&.yellow-green {
+					width: 103px;
+					&:before {
+						background: $yellow-green;
+					}
+				}
 
-					a {
-						font-size: 14px;
-						color: $white;
-						text-decoration: none;
-						line-height: 27px;
+				&:before {
+					height: 4px;
+					width: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					background: $blue;
+					content: " ";
+				}
 
-						&:hover {
-							color: $yellow-text;
+				/*
+                plan your menus and drop-downs wisely.
+                */
+				ul.sub-menu,
+				ul.children {
+					margin-top: 0;
+					border: 1px solid #ccc;
+					border-top: 0;
+					position: absolute;
+					visibility: hidden;
+					z-index: 8999;
+
+					li {
+						position: relative;
+
+						a {
+							padding-left: 10px;
+							border-right: 0;
+							display: block;
+							width: 180px;
+							border-bottom: 1px solid #ccc;
+
+							&:hover,
+							&:focus {
+								color: $black;
+							}
+
+							&:link {
+							}
+						}
+
+						&:first-child {
+						}
+
+						&:last-child {
+							a {
+								border-bottom: 0;
+							}
+						}
+
+						/*
+                        if you need to go deeper, go nuts
+                        just remember deeper menus sucki do
+                        for usability. k, bai.
+                        */
+						ul {
+							top: 0;
+							left: 100%;
 						}
 					}
 
+					/* highlight sub-menu current page */
+					li.current-menu-item,
+					li.current_page_item,
+					li.current_page_ancestor {
+						a {
+						}
+					}
+				}
+
+				/* showing sub-menus */
+				&:hover > ul {
+					top: auto;
+					visibility: visible;
+				}
+
+			}
+			/* end .menu ul li */
+
+			/* highlight current page */
+			li.current-menu-item,
+			li.current_page_item,
+			li.current_page_ancestor {
+				a {
 				}
 			}
+			/* end current highlighters */
+
 		}
+		/* end .nav */
 	}
 }
 
