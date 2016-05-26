@@ -708,6 +708,10 @@ function ict_project_get_last_rebaseline_project($nid) {
       }
     } while(!$last_baseline);
   }
+  else {
+    return $nid;
+  }
+
   return $rebaseline;
 }
 
