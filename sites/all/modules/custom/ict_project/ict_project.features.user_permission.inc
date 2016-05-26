@@ -19,6 +19,13 @@ function ict_project_user_default_permissions() {
     'module' => 'print_pdf',
   );
 
+  // Exported permission: 'create any prject_list_description bean'.
+  $permissions['create any prject_list_description bean'] = array(
+    'name' => 'create any prject_list_description bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
   // Exported permission: 'create project content'.
   $permissions['create project content'] = array(
     'name' => 'create project content',
@@ -28,6 +35,13 @@ function ict_project_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'delete any prject_list_description bean'.
+  $permissions['delete any prject_list_description bean'] = array(
+    'name' => 'delete any prject_list_description bean',
+    'roles' => array(),
+    'module' => 'bean',
   );
 
   // Exported permission: 'delete any project content'.
@@ -48,6 +62,13 @@ function ict_project_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any prject_list_description bean'.
+  $permissions['edit any prject_list_description bean'] = array(
+    'name' => 'edit any prject_list_description bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
   // Exported permission: 'edit any project content'.
   $permissions['edit any project content'] = array(
     'name' => 'edit any project content',
@@ -62,6 +83,13 @@ function ict_project_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'view any prject_list_description bean'.
+  $permissions['view any prject_list_description bean'] = array(
+    'name' => 'view any prject_list_description bean',
+    'roles' => array(),
+    'module' => 'bean',
   );
 
   return $permissions;
