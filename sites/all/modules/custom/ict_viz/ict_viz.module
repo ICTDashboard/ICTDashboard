@@ -289,7 +289,7 @@ function template_preprocess_ict_viz_filtered_projects(&$vars) {
 
   if (isset($get['filter_by']) && $get['filter_by'] == 'program' ) {
     $label = $_GET['filter'];
-    drupal_set_title(t('Active ') . $label . ' ' . t('programmes'));
+    drupal_set_title(t('Programme - ') . $label);
   }
 
   $vars['col_classes'] = array_map(function($var) { return implode(' ', $var); }, $col_classes);
