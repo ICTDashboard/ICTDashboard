@@ -901,10 +901,12 @@ body .project-update-submission .row .label .edit-btn:before,
 .field-name-field-status .sbHolder.removed:before,
 .field-name-field-status a[rel=removed]:before, .ict-tick, .preview_switch .viz-ico, .preview_switch .table-ico, .tooltip-bottom,
 .tooltip-edit,
+.status-icon,
 .tooltip, .tooltip-bottom:hover,
 .tooltip-edit:hover,
-.tooltip:hover {
-  background-image: url('../images/icons-s507b264638.png');
+.status-icon:hover,
+.tooltip:hover, #project-listings .status-icon, #project-listings .status-icon:hover, #project-listings .status-icon:active {
+  background-image: url('../images/icons-sad2d026fc7.png');
   background-repeat: no-repeat; }
 
 /*********************
@@ -2344,7 +2346,7 @@ body #ict-home-projects-table-id tr th,
     position: relative;
     margin: 0px;
     z-index: 1;
-    background-position: 0 -169px;
+    background-position: 0 -201px;
     width: 16px;
     height: 17px;
     display: block;
@@ -2760,7 +2762,7 @@ body a.submit-button,
   text-align: right; }
 
 .ict-tick {
-  background-position: 0 -145px;
+  background-position: 0 -177px;
   width: 10px;
   height: 7px;
   display: block; }
@@ -2816,7 +2818,7 @@ body a.submit-button,
     height: 17px;
     display: block; }
   .preview_switch .table-ico {
-    background-position: 0 -129px;
+    background-position: 0 -161px;
     width: 20px;
     height: 16px;
     display: block; }
@@ -2828,6 +2830,7 @@ body a.submit-button,
 
 .tooltip-bottom,
 .tooltip-edit,
+.status-icon,
 .tooltip {
   position: relative;
   width: 16px;
@@ -2836,21 +2839,23 @@ body a.submit-button,
   margin-left: 5px;
   margin-right: 10px;
   z-index: 1;
-  background-position: 0 -169px;
+  background-position: 0 -201px;
   width: 16px;
   height: 17px;
   display: block;
   display: inline-block; }
   .tooltip-bottom:hover,
   .tooltip-edit:hover,
+  .status-icon:hover,
   .tooltip:hover {
-    background-position: 0 -152px;
+    background-position: 0 -184px;
     width: 16px;
     height: 17px;
     display: block;
     display: inline-block; }
   .tooltip-bottom span.tooltip-content,
   .tooltip-edit span.tooltip-content,
+  .status-icon span.tooltip-content,
   .tooltip span.tooltip-content {
     position: absolute;
     display: none;
@@ -2866,6 +2871,7 @@ body a.submit-button,
     width: 300px; }
     .tooltip-bottom span.tooltip-content:after,
     .tooltip-edit span.tooltip-content:after,
+    .status-icon span.tooltip-content:after,
     .tooltip span.tooltip-content:after {
       content: '';
       width: 0;
@@ -2880,6 +2886,7 @@ body a.submit-button,
       margin-left: -25px; }
   .tooltip-bottom:hover span.tooltip-content,
   .tooltip-edit:hover span.tooltip-content,
+  .status-icon:hover span.tooltip-content,
   .tooltip:hover span.tooltip-content {
     display: block; }
 
@@ -2909,11 +2916,56 @@ body a.submit-button,
     display: block;
     display: inline-block; }
   .tooltip-edit span.tooltip-content {
-    color: #1e2635;
-    background-color: #f0b629;
-    font-weight: normal; }
+    position: absolute;
+    display: none;
+    color: #fff;
+    font-size: 13px;
+    line-height: 22px;
+    background-color: #1e2635;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-style: normal;
+    bottom: 30px;
+    right: -150px;
+    width: 300px; }
     .tooltip-edit span.tooltip-content:after {
-      border-top: 20px solid #f0b629; }
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      display: block;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #1e2635;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -25px; }
+  .tooltip-edit:hover span.tooltip-content {
+    display: block; }
+
+#project-listings .status-icon {
+  width: 18px;
+  background-position: 0 -145px;
+  width: 18px;
+  height: 16px;
+  display: block;
+  display: inline-block; }
+  #project-listings .status-icon:hover {
+    background-position: 0 -129px;
+    width: 18px;
+    height: 16px;
+    display: block;
+    display: inline-block; }
+  #project-listings .status-icon:active {
+    background-position: 0 -129px;
+    width: 18px;
+    height: 16px;
+    display: block;
+    display: inline-block; }
+  #project-listings .status-icon span.tooltip-content {
+    font-weight: 700; }
+  #project-listings .status-icon:focus span.tooltip-content {
+    display: block; }
 
 #ict-dashboard-overview-number-indicators {
   background-color: #e5eaf3;
@@ -4121,6 +4173,8 @@ you can add resource intensive styles.
                 text-decoration: none; }
           #content #project-listings .project-lists table tr td.dates {
             width: 153px; }
+          #content #project-listings .project-lists table tr td.status-project {
+            text-align: center; }
           #content #project-listings .project-lists table tr td.update {
             text-align: center;
             border-right: 1px solid #abb6cb; }
