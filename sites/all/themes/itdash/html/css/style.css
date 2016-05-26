@@ -3242,6 +3242,17 @@ div.tooltip-edit {
       margin: 0;
       line-height: 1.5em; }
 
+.rebaseline-indicate {
+  display: block;
+  font-family: 'Open Sans';
+  color: #4e5365;
+  font-size: 13px;
+  font-style: italic;
+  text-align: left; }
+
+.rebaseline-privious-project-list {
+  padding-left: 38px !important; }
+
 .rebaseline-info {
   display: block;
   font-family: 'Open Sans';
@@ -4319,7 +4330,8 @@ you can add resource intensive styles.
               #content #project-listings .project-lists table tr td.title a:hover {
                 text-decoration: none; }
           #content #project-listings .project-lists table tr td.dates {
-            width: 153px; }
+            width: 153px;
+            padding-right: 35px; }
           #content #project-listings .project-lists table tr td.update {
             text-align: center;
             border-right: 1px solid #abb6cb; }
