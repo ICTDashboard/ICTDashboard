@@ -1582,3 +1582,47 @@ div.tooltip-edit {
     color: #0d6c88;
   }
 }
+.rebaseline-info {
+  display: block;
+  font-family: 'Open Sans';
+  color: #fff;
+  font-size: 13px;
+  font-style: italic;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.project-title-info {
+  margin-bottom: 0;
+}
+.rebaseline-indicate {
+  display: block;
+  font-family: 'Open Sans';
+  color: #4e5365;
+  font-size: 13px;
+  font-style: italic;
+  text-align: left;
+}
+.rebaseline-privious-project-list {
+  padding-left: 38px!important;
+}
+.viz-number-of-benefits {
+  position: relative;
+  font-weight: 700;
+  color: #202b3d;
+  padding-right: 15px;
+  padding-top: 22px;
+}
+#content .project-program-link {
+  color: #0d6c88;
+  text-decoration: underline;
+  &:hover {
+    color: #0d6c88;
+    text-decoration: none;
+  }
+  &:visited {
+    color: #0d6c88;
+  }
+  &:focus {
+    color: #0d6c88;
+  }
+}
