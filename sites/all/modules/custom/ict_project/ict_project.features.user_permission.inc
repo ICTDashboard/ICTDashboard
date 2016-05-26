@@ -65,7 +65,10 @@ function ict_project_user_default_permissions() {
   // Exported permission: 'edit any prject_list_description bean'.
   $permissions['edit any prject_list_description bean'] = array(
     'name' => 'edit any prject_list_description bean',
-    'roles' => array(),
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
     'module' => 'bean',
   );
 
@@ -88,7 +91,10 @@ function ict_project_user_default_permissions() {
   // Exported permission: 'view any prject_list_description bean'.
   $permissions['view any prject_list_description bean'] = array(
     'name' => 'view any prject_list_description bean',
-    'roles' => array(),
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'bean',
   );
 
