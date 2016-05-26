@@ -6,6 +6,7 @@ sites/*/files
 sites/*/private
 
 .idea/*
-sites/all/themes/itdash/html/scss/.sass-cache/
+sites/all/themes/itdash/html/scss/.sass-cache
+sites/all/themes/itdash/html/scss/.sass-cache/*
 /nbproject/private/
 

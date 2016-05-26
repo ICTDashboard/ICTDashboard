@@ -17,38 +17,35 @@
 <div id="inner-content" class="wrap cf">
   <?php global $user; ?>
 
-  <?php if (isset($user->name)) : ?>
-    <h2><?php print t('Add and manage projects'); ?></h2>
-  <?php endif; ?>
+
+  <?php $bean = bean_load_delta('project-page-description'); ?>
+
+  <h2><?php print $bean->title; ?></h2>
   <div id="project-listings">
     <div class="project-list-content">
 
-      <?php if (user_is_logged_in()) : ?>
-
-        <div class="text d-4of5">
-          <p><?php print t('Use this page to register a new project, or administer any existing projects associated with your login. Mid financial year updates are to be completed between November and January. End financial year updates are to be completed between May and July. Select the Add Project button to register a new project.'); ?></p>
-          <p><?php print t('The ICT Project Dashboard shows the performance of major ICT enabled projects. These are ICT enabled projects that meet the threshold for consideration as part of the ICT Two Pass Review Process.'); ?></p>
-        </div>
-        <?php global $user; ?>
-        <?php if (node_access('create', 'project', $user)): ?>
-          <div class="button-add d-1of5 t-2of5 last-col">
-            <a href="<?php print url('project/add'); ?>" class="general-button plus"><span><?php print t('Add Project'); ?></span></a>
-            <?php if (user_access('view any opt_out_policy bean')): ?>
-              <div>
-                <a href="#ict-policy" class="fancybox-inline"><?php print t('Opt-out policy'); ?></a>
-              </div>
-            <?php endif; ?>
-          </div>
-        <?php endif; ?>
-        <div style="display: none;" id="ict-policy">
-          <?php $bean = bean_load_delta('opt-out-policy'); ?>
-          <h2 class="fancybox-title"><?php print $bean->title; ?></h2>
-          <div class="ict-fancy-content"><?php print drupal_render(bean_view($bean)); ?></div>
-          <div class="fancybox-actions">
-            <a class="ict-fancybox-close general-button" href="#"><span><?php print t('Close'); ?></span></a>
-          </div>
+      <?php $bean_view = bean_view($bean); ?>
+      <?php print drupal_render($bean_view); ?>
+      <?php global $user; ?>
+      <?php if (node_access('create', 'project', $user)): ?>
+        <div class="button-add d-1of5 t-2of5 last-col">
+          <a href="<?php print url('project/add'); ?>" class="general-button plus"><span><?php print t('Add Project'); ?></span></a>
+          <?php if (user_access('view any opt_out_policy bean')): ?>
+            <div>
+              <a href="#ict-policy" class="fancybox-inline"><?php print t('Opt-out policy'); ?></a>
+            </div>
+          <?php endif; ?>
         </div>
       <?php endif; ?>
+      <div style="display: none;" id="ict-policy">
+        <?php $bean = bean_load_delta('opt-out-policy'); ?>
+        <h2 class="fancybox-title"><?php print $bean->title; ?></h2>
+        <?php $bean_view = bean_view($bean); ?>
+        <div class="ict-fancy-content"><?php print drupal_render($bean_view); ?></div>
+        <div class="fancybox-actions">
+          <a class="ict-fancybox-close general-button" href="#"><span><?php print t('Close'); ?></span></a>
+        </div>
+      </div>
     </div>
 
 
