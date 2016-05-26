@@ -18,15 +18,14 @@ function ict_project_project_list_block() {
 
   $query = db_select('node', 'n')
     ->fields('n', array('nid', 'title', 'changed', 'type'))
-    ->fields('p', array('field_project_target_id'))
-
     ->condition('n.type', 'project');
 
   // unpublished project should be excluded
   $unpublished_projects = ict_project_get_all_unpublished_projects();
   if ($unpublished_projects) {
-    $query->condition('n.nid', $unpublished_projects, 'NOT IN')
-    ->leftJoin('field_data_field_project', 'p', 'n.nid = p.entity_id');
+    $query->condition('n.nid', $unpublished_projects, 'NOT IN');
+    $query->fields('p', array('field_project_target_id'));
+    $query->leftJoin('field_data_field_project', 'p', 'n.nid = p.entity_id');
   }
 
   $tid = !empty($user->field_department[LANGUAGE_NONE][0]['tid']) ?
