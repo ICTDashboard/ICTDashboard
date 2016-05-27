@@ -71,12 +71,21 @@
 <!--                <i class="fa fa-sort-desc"></i>-->
               </a>
             </th>
+            <th class="views-field views-field-changed">
+              <?php print t('Status'); ?>
+            </th>
             <th class="views-field views-field-nothing">
               <?php print t('Actions'); ?>
             </th>
           </tr>
 
           <?php foreach ($rows as $project) : ?>
+            <?php $updates = ict_update_project_get_list($project->nid); ?>
+            <?php $update_id = reset($updates); ?>
+            <?php $states = ict_project_get_last_transaction_by_state($project->nid, ict_project_get_workflow_state($project->nid)); ?>
+            <?php $states_u = ict_project_get_last_transaction_by_state($project->nid, ict_project_get_workflow_state($update_id)); ?>
+            <?php $rebaseline = ict_project_get_project_rebaseline($project->nid) ?>
+            <?php $rebaseline_all = ict_project_get_all_rebaselines($project->nid) ?>
             <tr class="odd views-row-first">
             <td class ="title">
             <?php if(!empty($project->nid) && $project->field_project_target_id) :
@@ -108,6 +117,33 @@
               <td class="dates">
                 <?php print format_date($project->changed, 'medium', 'j M Y h:i A'); ?>
               </td>
+              <td class="status-project">
+                <a href="javascript:void(0);" class="status-icon">
+                  <?php if (!$update_id) : ?>
+                    <?php if (($states->old_state == 'waiting_approval') && ($states->state == 'draft')) : ?>
+                      <span class="tooltip-content">Baseline draft rejected</span>
+                    <?php elseif ($states->state == 'draft') : ?>
+                      <span class="tooltip-content">Baseline draft is with the Project Editor</span>
+                    <?php elseif ($states->state == 'waiting_approval') : ?>
+                      <span class="tooltip-content">Baseline draft is waiting for approval</span>
+                    <?php elseif ($states->state == 'approved') : ?>
+                      <span class="tooltip-content">Baseline approved</span>
+                    <?php endif; ?>
+                  <?php else : ?>
+                    <?php if (($states_u->old_state == 'waiting_approval') && ($states_u->state == 'draft')) : ?>
+                      <span class="tooltip-content">Update draft rejected</span>
+                    <?php elseif (($states_u->state == 'draft') || (($states->state == 'waiting_approval') && (!empty($states_u)))) : ?>
+                      <span class="tooltip-content">Update draft is with the Project Editor</span>
+                    <?php elseif ($states_u->state == 'waiting_approval') : ?>
+                      <span class="tooltip-content">Update draft is waiting for approval</span>
+                    <?php elseif (($states_u->state == 'approved') && !empty($rebaseline)) : ?>
+                      <span class="tooltip-content">Re-baseline approved</span>
+                    <?php elseif (($states_u->state == 'approved') && empty($rebaseline)) : ?>
+                      <span class="tooltip-content">Update approved</span>
+                    <?php endif; ?>
+                  <?php endif; ?>
+                </a>
+              </td>
               <td class="update">
                 <a href="<?php print url('node/' . $project->nid); ?>">
                   <span><?php print t('View Project'); ?></span>
@@ -115,8 +151,8 @@
 
                 <?php if (ict_project_access_project('delete', $user, $project->nid)) : ?>
                   <a href="<?php print url('node/' . $project->nid . '/delete', array(
-                      'query' => array('destination' => 'projects')
-                    )
+                          'query' => array('destination' => 'projects')
+                      )
                   ); ?>">
                     <span><?php print t('Delete Project'); ?></span>
                   </a>
@@ -136,8 +172,6 @@
                   </a>
                 <?php endif; ?>
 
-                <?php $updates = ict_update_project_get_list($project->nid); ?>
-                <?php $update_id = reset($updates); ?>
                 <?php if (ict_update_creation_allowed($project->nid)) : ?>
                   <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
                     <span><?php print t('Create Update Draft'); ?></span>
@@ -158,8 +192,8 @@
 
                 <?php if (ict_update_delete_allowed($project->nid, $update_id)) : ?>
                   <a href="<?php print url('node/' . $update_id .'/delete', array(
-                      'query' => array('destination' => 'projects')
-                    )
+                          'query' => array('destination' => 'projects')
+                      )
                   ); ?>">
                     <span><?php print t('Delete Update Draft'); ?></span>
                   </a>
@@ -167,8 +201,8 @@
 
                 <?php if (ict_project_access_project('manage_users', $user, $project->nid)) : ?>
                   <a href="<?php print url('project/' . $project->nid .'/manage-users', array(
-                      'query' => array('destination' => 'projects')
-                    )
+                          'query' => array('destination' => 'projects')
+                      )
                   ); ?>">
                     <span><?php print t('Manage Users'); ?></span>
                   </a>
@@ -194,8 +228,8 @@
                     <div class="fancybox-actions">
                       <a class="ict-fancybox-close export-btn" href="#"><span><?php print t('Cancel'); ?></span></a>
                       <a class="general-button arrow-right confirm-proceed" href="<?php print url('project/' . $project->nid .'/rebaseline', array(
-                          'query' => array('destination' => 'projects')
-                        )
+                              'query' => array('destination' => 'projects')
+                          )
                       ); ?>"><span><?php print t('Confirm and proceed'); ?></span></a>
                     </div>
                   </div>
