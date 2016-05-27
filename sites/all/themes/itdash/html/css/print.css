@@ -182,13 +182,12 @@ form#ict-update-approve-form, form#ict-project-baseline-approve-form {
   display: none;
 }
 
-.view-baseline-history {
-  display: none;
-}
-
 span.rebaseline-info {
   font-style: italic;
   display: block;
   margin-top: 5px;
   margin-bottom: 10px;
+}
+.view-baseline-history {
+  display: none;
 }
