@@ -58,14 +58,25 @@ body,
       margin: -19px 0 0 397px;
     }
   }
-  .welcome-text {
-    a {
-      color: #d5ff92;
-      &:hover {
-        text-decoration: none;
+  .dotbg {
+    background: url(../images/dot-bg.png) repeat scroll top center #1e2635; overflow: hidden;
+    .welcome-text {
+      p {
+        color: #fff;
+        -moz-hyphens: none;
+        -webkit-hyphens: none;
+        font-size: 16px;
+        word-break: normal;
+        margin: 25px 20px;
+
+      }
+      a {
+        color: #d5ff92;
+        &:hover {
+          text-decoration: none;
+        }
       }
     }
-
   }
   #inner-content {
     h3 {
@@ -1144,8 +1155,7 @@ body,
 
 #ict-dashboard-overview-number-indicators {
   background-color: #e5eaf3;
-  padding-top: 31px;
-  padding-bottom: 30px;
+  padding: 31px 20px 30px 20px;
   .label {
     font-size: 18px;
     font-weight: 600;
@@ -1157,7 +1167,6 @@ body,
     }
   }
   #ict-dashboard-numbers {
-    padding-left: 5px;
     .row {
       margin-bottom: 55px;
       &:first-child {

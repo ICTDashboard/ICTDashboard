@@ -1605,12 +1605,24 @@ select.ui-datepicker-month, select.ui-datepicker-year {
 body #ict-dashboard-detailed-overview #benefits_legend,
 #content #ict-dashboard-detailed-overview #benefits_legend {
   margin: -19px 0 0 397px; }
-body .welcome-text a,
-#content .welcome-text a {
-  color: #d5ff92; }
-  body .welcome-text a:hover,
-  #content .welcome-text a:hover {
-    text-decoration: none; }
+body .dotbg,
+#content .dotbg {
+  background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
+  overflow: hidden; }
+  body .dotbg .welcome-text p,
+  #content .dotbg .welcome-text p {
+    color: #fff;
+    -moz-hyphens: none;
+    -webkit-hyphens: none;
+    font-size: 16px;
+    word-break: normal;
+    margin: 25px 20px; }
+  body .dotbg .welcome-text a,
+  #content .dotbg .welcome-text a {
+    color: #d5ff92; }
+    body .dotbg .welcome-text a:hover,
+    #content .dotbg .welcome-text a:hover {
+      text-decoration: none; }
 body #inner-content h3,
 #content #inner-content h3 {
   font-size: 18px;
@@ -2973,8 +2985,7 @@ body a.submit-button,
 
 #ict-dashboard-overview-number-indicators {
   background-color: #e5eaf3;
-  padding-top: 31px;
-  padding-bottom: 30px; }
+  padding: 31px 20px 30px 20px; }
   #ict-dashboard-overview-number-indicators .label {
     font-size: 18px;
     font-weight: 600;
@@ -2983,31 +2994,29 @@ body a.submit-button,
     #ict-dashboard-overview-number-indicators .label .tooltip {
       margin-left: 2px;
       vertical-align: top; }
-  #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
-    padding-left: 5px; }
-    #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row {
-      margin-bottom: 55px; }
-      #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row:first-child {
-        margin-bottom: 140px; }
-      #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number {
-        font-size: 70px;
-        line-height: 80px;
-        font-weight: 600;
-        color: #202b3d; }
-        #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a {
+  #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row {
+    margin-bottom: 55px; }
+    #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row:first-child {
+      margin-bottom: 140px; }
+    #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number {
+      font-size: 70px;
+      line-height: 80px;
+      font-weight: 600;
+      color: #202b3d; }
+      #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a {
+        color: #202b3d;
+        text-decoration: underline; }
+        #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a:focus, #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a:hover {
           color: #202b3d;
-          text-decoration: underline; }
-          #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a:focus, #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .row .big-number a:hover {
-            color: #202b3d;
-            text-decoration: none; }
-    #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
-      display: block; }
-      #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button span {
-        text-align: left;
-        padding-left: 16px;
-        font-weight: 600;
-        line-height: 34px;
-        height: 35px; }
+          text-decoration: none; }
+  #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
+    display: block; }
+    #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button span {
+      text-align: left;
+      padding-left: 16px;
+      font-weight: 600;
+      line-height: 34px;
+      height: 35px; }
   #ict-dashboard-overview-number-indicators #overview-graphs {
     padding-right: 90px; }
     #ict-dashboard-overview-number-indicators #overview-graphs .label {
@@ -3409,6 +3418,18 @@ LAYOUT & GRID STYLES
 #container {
   width: 100%;
   overflow: hidden; }
+  #container #content {
+    margin-top: 0; }
+    #container #content #ict-dashboard-overview-number-indicators #overview-graphs {
+      padding-right: 0; }
+      #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
+        margin-top: 10px; }
+        #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
+          max-width: 78%; }
+      #container #content #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend {
+        border-bottom: 1px solid #D8DEEB; }
+        #container #content #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend .bar-legend {
+          margin-bottom: 25px; }
 
 .wrap {
   margin: 0 auto; }

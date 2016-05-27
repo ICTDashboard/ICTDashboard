@@ -72,6 +72,26 @@ LAYOUT & GRID STYLES
 #container {
 	width: 100%;
 	overflow: hidden;
+	#content {
+		margin-top: 0;
+		#ict-dashboard-overview-number-indicators {
+			#overview-graphs {
+				padding-right: 0;
+				#overview-expenditure-switch {
+					margin-top: 10px;
+					.sbHolder {
+						max-width: 78%;
+					}
+				}
+				#expenditure_legend {
+					border-bottom: 1px solid #D8DEEB;
+					.bar-legend {
+						margin-bottom: 25px;
+					}
+				}
+			}
+		}
+	}
 }
 
 .wrap {
