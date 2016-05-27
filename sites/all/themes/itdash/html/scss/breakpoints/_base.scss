@@ -529,7 +529,6 @@ POSTS & CONTENT STYLES
 			width: 100%!important;
 			margin-bottom: 20px;
 			padding-bottom: 25px;
-			border-bottom: 1px dotted #d8dee8;
 			p {
 				color:  #202b3d;
 			}
@@ -1313,9 +1312,7 @@ DETAILED OVERVIEW STYLES
 		margin-top: 0;
 		.page-title.dotbg {
 			background-color: #1e2635;
-			height: 95px;
 			.inner-title-content h1 {
-				margin-left: 20px;
 				font-family: $opensans;
 				color:  #c8f68f;
 				font-size: 28px;/* Approximation due to font substitution */
@@ -1336,6 +1333,22 @@ DETAILED OVERVIEW STYLES
 					font-weight: 600;
 					line-height: 29px;/* Approximation due to font substitution */
 					text-align: left;
+				}
+			}
+			#detailed-view-expenditure {
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+			#detailed-view-schedule-status {
+				margin-top: 20px;
+				#statuses_legend {
+					.bar-legend li {
+						float: none;
+						.noofproj,
+						.curqua {
+							text-align: right;
+						}
+					}
 				}
 			}
 			#detailed_schedule_chart_current {

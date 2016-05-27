@@ -46,7 +46,6 @@
           slices: slices_settings
         };
 
-        console.log('screen.width %s, (document).width() %s, (window).width() %s', screen.width, $(document).width(), $(window).width());
         // legend
         for (item in legend_items) {
           $('#benefits_legend .bar-legend')

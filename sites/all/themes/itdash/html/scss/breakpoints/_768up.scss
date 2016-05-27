@@ -30,11 +30,11 @@ body > #container { height: auto; min-height: 100%; }
 LAYOUT & GRID STYLES
 *********************/
 
-// .wrap {
-// 	width: 970px;
-// 	min-width: 970px;
-// 	padding: 0;
-// }
+ //.wrap {
+ //	width: 970px;
+ //	min-width: 970px;
+ //	padding: 0;
+ //}
 
 
 /*********************
@@ -116,6 +116,7 @@ CONTENT STYLES
 	.dotbg { background: url(../images/dot-bg.png) repeat scroll top center #1e2635; overflow: hidden; }
 
 	.page-title {
+		padding-left: 20px;
 		.inner-title-content {
 			h1 {
 				color: #c8f68f;
@@ -1849,12 +1850,19 @@ DETAILED OVERVIEW STYLES
 					margin: -19px 0 0 397px;
 				}
 			}
+			#detailed-view-schedule-status {
+				#statuses_legend {
+					.bar-legend li {
+						float: left;
+					}
+				}
+			}
 		}
-		.pane-last-updated {
+		/*.pane-last-updated {
 			.last-updated-on p {
 				margin-left: 20px;
 			}
-		}
+		}*/
 	}
 }
 

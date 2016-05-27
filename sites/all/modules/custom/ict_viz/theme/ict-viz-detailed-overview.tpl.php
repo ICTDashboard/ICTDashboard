@@ -11,7 +11,7 @@
         </a>
       </h2>
     </div>
-    <div id="detailed-view-expenditure" style="margin-left: 25px; max-width: 945px;">
+    <div id="detailed-view-expenditure" style="max-width: 945px;">
         <canvas id="detailed_budget_chart" width="945" height="360"></canvas>
         <div id="expenditure_legend" class="legend">
           <ul class="bar-legend">
@@ -59,10 +59,10 @@
             <?php print t('Ahead of Schedule'); ?>
           </li>
           <li>
-            <b>#</b> <?php print t('No. of Projects'); ?>
+            <span class="noofproj"><b>#</b></span> <?php print t('No. of Projects'); ?>
           </li>
           <li>
-            <b>*</b> <?php print t('Current Quarter'); ?>
+            <span class="curqua"><b>*</b></span> <?php print t('Current Quarter'); ?>
           </li>
         </ul>
       </div>
@@ -96,12 +96,16 @@
         Drupal.settings.detailed_budget_chart.data,
         Drupal.settings.detailed_budget_chart.options
       );
-
+      $('#detailed_budget_chart').css('width', '100%');
+      if (screen.width == 320) {
+        $('#detailed_budget_chart').css('max-width', 280 + 'px');
+      }
+      $('#detailed_budget_chart').css('height', 'auto');
       // *** Schedule Status Graph ***
       var data = Drupal.settings.detailed_schedule_chart,
         width = $('#detailed-view-schedule-status').innerWidth();
 
-      var max_bar = width < 684 ? width : 684,
+      var max_bar = width < 808 ? width - 124 : 684,
           left_padding = 94;
 
       // align legend with graph
@@ -157,7 +161,7 @@
           .attr("class", "chart")
           .attr("width", width)
           .attr("height", Object.keys(data.data[year]).length * 72.5);
-        console.log("y1 %d, width1 %d", y, width);
+        
         var current_is_printed = false;
         for (var quarter = 4; quarter > 0; quarter--) {
           // if no data provide for the quarter don't show it
@@ -234,7 +238,7 @@
               .attr("width", current_width)
               .attr("height", height)
               .attr("style", 'fill:'+current_value.color);
-            console.log("y %d, height %d, current_value %s, current_width %d, current_value.value %d", y, height, current_value.color, current_width, current_value.value);
+            
             quarter_g
               .append('svg:text')
               .attr("x", current_x)
