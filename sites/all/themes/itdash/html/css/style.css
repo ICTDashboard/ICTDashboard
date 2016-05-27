@@ -3689,6 +3689,12 @@ HEADER STYLES
 /*********************
 POSTS & CONTENT STYLES
 *********************/
+#content #project-baseline-history #inner-content {
+  padding: 0 20px; }
+  #content #project-baseline-history #inner-content .project-draft-submission {
+    padding: 0; }
+    #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+      width: 100%; }
 #content .last-updated-block {
   width: 100%;
   padding: 0 20px; }
@@ -4176,6 +4182,12 @@ tweeners.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
+  #content #project-baseline-history #inner-content {
+    padding: 0 7%; }
+    #content #project-baseline-history #inner-content .project-draft-submission {
+      padding: 0; }
+      #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+        width: 180px; }
   #content .last-updated-block {
     padding: 0 7%;
     margin: 0 auto;
@@ -5809,6 +5821,12 @@ you can add resource intensive styles.
   .page-title {
     padding: 0; }
 
+  #content #project-baseline-history #inner-content {
+    padding: 0; }
+    #content #project-baseline-history #inner-content .project-draft-submission {
+      padding: 0; }
+      #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+        width: 180px; }
   #content .last-updated-block {
     margin: 0;
     padding: 0;
