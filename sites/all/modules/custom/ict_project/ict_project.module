@@ -465,6 +465,10 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       $form['field_benefits_realised']['und']['#project_id'] = !empty($node->nid) ? $node->nid : NULL;
       $form['field_benefits_realised']['und']['add_more']['#value'] = t('Add another Benefit');
 
+      foreach(element_children($form['field_benefits_realised'][LANGUAGE_NONE]) as $ben_key) {
+        if (!is_numeric($ben_key)) continue;
+        unset($form['field_benefits_realised']['und'][$ben_key]['field_status']['und']['#options']['removed']);
+      }
 
       // portfolio and entity government options change
       $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
