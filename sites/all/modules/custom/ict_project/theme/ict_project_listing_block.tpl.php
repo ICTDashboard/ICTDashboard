@@ -68,6 +68,9 @@
 <!--                <i class="fa fa-sort-desc"></i>-->
               </a>
             </th>
+            <th class="views-field views-field-changed">
+              <?php print t('Status'); ?>
+            </th>
             <th class="views-field views-field-nothing">
               <?php print t('Actions'); ?>
             </th>
@@ -76,34 +79,41 @@
           <?php foreach ($rows as $project) : ?>
             <tr class="odd views-row-first">
             <td class ="title">
-            <?php if(!empty($project->nid) && $project->field_project_target_id) :
-                if(ict_project_get_last_rebaseline_project($project->nid) == $project->nid) : ?>
-                      <a href="<?php print url('node/' . $project->nid); ?>">
-                        <?php print $project->title; ?>
-                      </a>
-                      <span class ="rebaseline-indicate" ><?php print t('Re-Baselined'); ?> </span>
-                  <?php else : ?>
-                    <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
+            <?php if(!empty($project->nid) && $project->field_project_target_id) : ?>
+              <?php if(ict_project_get_last_rebaseline_project($project->nid) == $project->nid) : ?>
+                    <a href="<?php print url('node/' . $project->nid); ?>">
                       <?php print $project->title; ?>
                     </a>
-                    <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (!number)', array('!number' => count(ict_project_get_all_parents_project($project)) + 1)) ?> </span>
-                <?php endif; ?>
-                  <?php else : 
-                    $get_project_rebaseline = ict_project_get_project_rebaseline($project->nid);
-                    if(!empty($get_project_rebaseline)) : ?>
-                       <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
-                        <?php print $project->title; ?>
-                      </a>
-                      <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (1)') ?> </span>
-                    <?php else : ?>
-                       <a href="<?php print url('node/' . $project->nid); ?>">
-                        <?php print $project->title; ?>
-                      </a>
-                   <?php endif; ?>  
-            <?php endif;?>
+                    <span class ="rebaseline-indicate" ><?php print t('Re-Baselined'); ?> </span>
+                <?php else : ?>
+                  <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
+                    <?php print $project->title; ?>
+                  </a>
+                  <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (!number)', array('!number' => count(ict_project_get_all_parents_project($project)) + 1)) ?> </span>
+              <?php endif; ?>
+            <?php else : ?>
+              <?php $get_project_rebaseline = ict_project_get_project_rebaseline($project->nid);
+              if(!empty($get_project_rebaseline)) : ?>
+                 <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
+                  <?php print $project->title; ?>
+                </a>
+                <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (1)') ?> </span>
+              <?php else : ?>
+                 <a href="<?php print url('node/' . $project->nid); ?>">
+                  <?php print $project->title; ?>
+                </a>
+             <?php endif; ?>
+            <?php endif; ?>
             </td> 
               <td class="dates">
                 <?php print format_date($project->changed, 'medium', 'j M Y h:i A'); ?>
+              </td>
+              <td class="status-project">
+                <?php if ($project->current_status) : ?>
+                  <a href="javascript:void(0);" class="status-icon">
+                    <span class="tooltip-content"><?php print $project->current_status; ?></span>
+                  </a>
+                <?php endif; ?>
               </td>
               <td class="update">
                 <a href="<?php print url('node/' . $project->nid); ?>">
@@ -112,8 +122,8 @@
 
                 <?php if (ict_project_access_project('delete', $user, $project->nid)) : ?>
                   <a href="<?php print url('node/' . $project->nid . '/delete', array(
-                      'query' => array('destination' => 'projects')
-                    )
+                          'query' => array('destination' => 'projects')
+                      )
                   ); ?>">
                     <span><?php print t('Delete Project'); ?></span>
                   </a>
@@ -133,30 +143,28 @@
                   </a>
                 <?php endif; ?>
 
-                <?php $updates = ict_update_project_get_list($project->nid); ?>
-                <?php $update_id = reset($updates); ?>
                 <?php if (ict_update_creation_allowed($project->nid)) : ?>
                   <a href="<?php print url('project/' . $project->nid . '/update'); ?>">
                     <span><?php print t('Create Update Draft'); ?></span>
                   </a>
                 <?php endif; ?>
 
-                <?php if (ict_update_edit_allowed($project->nid, $update_id)) : ?>
+                <?php if (ict_update_edit_allowed($project->nid, $project->update_id)) : ?>
                   <a href="<?php print url('update/' . $update_id . '/edit'); ?>">
                     <span><?php print t('Edit Update Draft'); ?></span>
                   </a>
                 <?php endif; ?>
 
-                <?php if (ict_update_approve_allowed($project->nid, $update_id)) : ?>
+                <?php if (ict_update_approve_allowed($project->nid, $project->update_id)) : ?>
                   <a href="<?php print url('node/' . $project->nid); ?>">
                     <span><?php print t('Review Update Draft'); ?></span>
                   </a>
                 <?php endif; ?>
 
-                <?php if (ict_update_delete_allowed($project->nid, $update_id)) : ?>
+                <?php if (ict_update_delete_allowed($project->nid, $project->update_id)) : ?>
                   <a href="<?php print url('node/' . $update_id .'/delete', array(
-                      'query' => array('destination' => 'projects')
-                    )
+                          'query' => array('destination' => 'projects')
+                      )
                   ); ?>">
                     <span><?php print t('Delete Update Draft'); ?></span>
                   </a>
@@ -164,8 +172,8 @@
 
                 <?php if (ict_project_access_project('manage_users', $user, $project->nid)) : ?>
                   <a href="<?php print url('project/' . $project->nid .'/manage-users', array(
-                      'query' => array('destination' => 'projects')
-                    )
+                          'query' => array('destination' => 'projects')
+                      )
                   ); ?>">
                     <span><?php print t('Manage Users'); ?></span>
                   </a>
@@ -191,8 +199,8 @@
                     <div class="fancybox-actions">
                       <a class="ict-fancybox-close export-btn" href="#"><span><?php print t('Cancel'); ?></span></a>
                       <a class="general-button arrow-right confirm-proceed" href="<?php print url('project/' . $project->nid .'/rebaseline', array(
-                          'query' => array('destination' => 'projects')
-                        )
+                              'query' => array('destination' => 'projects')
+                          )
                       ); ?>"><span><?php print t('Confirm and proceed'); ?></span></a>
                     </div>
                   </div>
