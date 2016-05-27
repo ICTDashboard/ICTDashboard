@@ -521,6 +521,19 @@ HEADER STYLES
 POSTS & CONTENT STYLES
 *********************/
 #content {
+	#project-baseline-history {
+		#inner-content {
+			padding: 0 20px;
+			.project-draft-submission {
+				padding: 0;
+				.pbh-buttons {
+					a {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
 	.last-updated-block {
 		width: 100%;
 		padding: 0 20px;
