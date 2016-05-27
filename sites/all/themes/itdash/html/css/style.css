@@ -3733,6 +3733,14 @@ POSTS & CONTENT STYLES
       background-color: #f9fafc;
       box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
       padding: 8px 40px; }
+    #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+      right: 0;
+      bottom: 28px;
+      font-size: 12px;
+      width: 280px; }
+    #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+      border-left: none;
+      border-right: none; }
 #content #inner-content .individual-project-page {
   margin: 20px;
   padding-bottom: 15px; }
@@ -3775,19 +3783,35 @@ POSTS & CONTENT STYLES
       #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
         float: left;
         margin-right: 0; }
+  #content #inner-content .project-draft-submission .row .text p {
+    color: #4e5365; }
   #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
     margin-left: 0; }
     #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
       margin: 3px 0;
       margin-right: 0; }
+  #content #inner-content .project-draft-submission .project-program-link {
+    text-decoration: underline; }
+    #content #inner-content .project-draft-submission .project-program-link:hover {
+      text-decoration: none; }
+  #content #inner-content .project-draft-submission .email-value {
+    text-decoration: underline; }
+    #content #inner-content .project-draft-submission .email-value:hover {
+      text-decoration: none; }
+  #content #inner-content .project-draft-submission .entity_comments a {
+    text-decoration: underline; }
+    #content #inner-content .project-draft-submission .entity_comments a:hover {
+      text-decoration: none; }
 #content #inner-content #print-links-container .pdf_button {
   margin-bottom: 50px; }
   #content #inner-content #print-links-container .pdf_button a {
     min-width: none !important;
     width: 100%;
     margin: 0; }
-#content #inner-content .ict-benefits .ict-faq-question .benfit-status {
-  position: initial; }
+#content #inner-content .ict-benefits .ict-faq-question {
+  padding: 15px 15px 15px 60px; }
+  #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
+    position: initial; }
 #content #inner-content .ict-benefits .ict-faq-answer ul li div {
   display: block; }
 
@@ -4270,6 +4294,14 @@ tweeners.
         padding: 0; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+        right: 0;
+        bottom: -50px;
+        font-size: 12px;
+        width: 280px; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+        border-left: none;
+        border-right: none; }
   #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
     position: absolute; }
   #content #inner-content .ict-benefits .ict-faq-answer ul li div {
@@ -5939,20 +5971,6 @@ you can add resource intensive styles.
     float: left;
     width: 25%; }
 
-  .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
-    width: 970px;
-    min-width: 970px; }
-    .footer #inner-footer .wrap.cf .copy, .footer #inner-footer .wrap.comment-respond .copy {
-      padding-right: 0;
-      padding-left: 0; }
-    .footer #inner-footer .wrap.cf .menu, .footer #inner-footer .wrap.comment-respond .menu {
-      padding-left: 0; }
-      .footer #inner-footer .wrap.cf .menu li.last, .footer #inner-footer .wrap.comment-respond .menu li.last {
-        right: 5px; }
-    .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
-      width: 25%;
-      padding-right: 5px; }
-
   .page-title {
     padding: 0; }
 
@@ -6040,7 +6058,21 @@ you can add resource intensive styles.
     #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:first-child {
       border-radius: 4px 0 0; }
     #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
-      border-radius: 0 4px 0 0; } }
+      border-radius: 0 4px 0 0; }
+
+  .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
+    width: 970px;
+    min-width: 970px; }
+    .footer #inner-footer .wrap.cf .copy, .footer #inner-footer .wrap.comment-respond .copy {
+      padding-right: 0;
+      padding-left: 0; }
+    .footer #inner-footer .wrap.cf .menu, .footer #inner-footer .wrap.comment-respond .menu {
+      padding-left: 0; }
+      .footer #inner-footer .wrap.cf .menu li.last, .footer #inner-footer .wrap.comment-respond .menu li.last {
+        right: 5px; }
+    .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
+      width: 25%;
+      padding-right: 5px; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
@@ -6055,7 +6087,15 @@ This is for the larger monitors and possibly full screen viewers.
   You can add some advanced styles here if you like. This kicks in
   on larger screens.
   
-  ******************************************************************/ }
+  ******************************************************************/
+  #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+    right: -150px;
+    bottom: 30px;
+    font-size: 13px;
+    width: 300px; }
+  #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent; } }
 /*********************
 RETINA (2x RESOLUTION DEVICES)
 This applies to the retina iPhone (4s) and iPad (2,3) along with
