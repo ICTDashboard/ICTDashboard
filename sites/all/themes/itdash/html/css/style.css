@@ -3490,7 +3490,8 @@ HEADER STYLES
   USER TOOLS
   *********************/ }
   .header #logo {
-    margin: 30px 0 15px;
+    margin-top: 30px;
+    margin-bottom: 5px;
     overflow: hidden;
     font-size: 34px;
     text-transform: uppercase; }
@@ -3502,7 +3503,7 @@ HEADER STYLES
     .header #logo span {
       font-size: 28px;
       line-height: 28px;
-      margin-left: 15px;
+      margin-left: 14px;
       margin-top: 5px;
       float: left; }
       .header #logo span a {
@@ -3708,8 +3709,7 @@ POSTS & CONTENT STYLES
   #content .last-updated-block .last-updated-on {
     width: 100% !important;
     margin-bottom: 20px;
-    padding-bottom: 25px;
-    border-bottom: 1px dotted #d8dee8; }
+    padding-bottom: 25px; }
     #content .last-updated-block .last-updated-on p {
       color: #202b3d; }
     #content .last-updated-block .last-updated-on strong {
@@ -4209,6 +4209,60 @@ view.
   width: 0%; }
 
 /*********************
+DETAILED OVERVIEW STYLES
+*********************/
+#container #content {
+  margin-top: 0; }
+  #container #content .page-title.dotbg {
+    background-color: #1e2635; }
+    #container #content .page-title.dotbg .inner-title-content h1 {
+      font-family: "Open Sans", sans-serif;
+      color: #c8f68f;
+      font-size: 28px;
+      /* Approximation due to font substitution */
+      font-weight: 400;
+      line-height: 34px;
+      /* Approximation due to font substitution */
+      text-align: left; }
+  #container #content #ict-dashboard-detailed-overview .section-title h2 {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 0;
+    font-family: "Open Sans", sans-serif;
+    color: #0c6c88;
+    font-size: 24px;
+    /* Approximation due to font substitution */
+    font-weight: 600;
+    line-height: 29px;
+    /* Approximation due to font substitution */
+    text-align: left; }
+  #container #content #ict-dashboard-detailed-overview #detailed-view-expenditure {
+    padding-left: 20px;
+    padding-right: 20px; }
+  #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status {
+    margin-top: 20px; }
+    #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li {
+      float: none; }
+      #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li .noofproj,
+      #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li .curqua {
+        text-align: right; }
+  #container #content #ict-dashboard-detailed-overview #detailed_schedule_chart_current {
+    margin-left: 7px; }
+  #container #content #ict-dashboard-detailed-overview .benefits_chart_divs {
+    overflow: hidden; }
+    #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_chart_div {
+      padding-left: 12px;
+      padding-right: 20px; }
+    #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend {
+      width: 100%;
+      margin: 0; }
+      #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend .bar-legend {
+        padding-left: 20px;
+        margin-top: 8px; }
+  #container #content #ict-dashboard-detailed-overview .viz-number-of-benefits {
+    padding-left: 20px; }
+
+/*********************
 LARGER MOBILE DEVICES
 This is for devices like the Galaxy Note or something that's
 larger than an iPhone but smaller than a tablet. Let's call them
@@ -4268,7 +4322,6 @@ tweeners.
       #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
         width: 180px; }
   #content .last-updated-block {
-    padding: 0 7%;
     margin: 0 auto;
     display: table;
     margin-top: 25px;
@@ -4336,7 +4389,6 @@ tweeners.
       width: 275px; }
 
   .page-title {
-    padding: 0 7%;
     background: url(../images/dot-bg.png) repeat scroll top center #1e2635; }
 
   /* entry content */
@@ -4516,10 +4568,12 @@ you can add resource intensive styles.
     #content .dotbg {
       background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
       overflow: hidden; }
-    #content .page-title .inner-title-content h1 {
-      color: #c8f68f;
-      font-size: 34px;
-      font-weight: 400; }
+    #content .page-title {
+      padding-left: 20px; }
+      #content .page-title .inner-title-content h1 {
+        color: #c8f68f;
+        font-size: 34px;
+        font-weight: 400; }
     #content .welcome {
       padding: 20px 0; }
       #content .welcome h1 {
@@ -5944,7 +5998,26 @@ you can add resource intensive styles.
       #ict-basic-page form .form-actions .form-submit:hover {
         background-position: 0 -41px; }
   #ict-basic-page form .form-required {
-    display: none; } }
+    display: none; }
+
+  /*********************
+  DETAILED OVERVIEW STYLES
+  *********************/
+  #container #content {
+    /*.pane-last-updated {
+    	.last-updated-on p {
+    		margin-left: 20px;
+    	}
+    }*/ }
+    #container #content #ict-dashboard-detailed-overview .benefits_chart_divs {
+      overflow: hidden; }
+      #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_chart_div {
+        padding-left: 12px; }
+      #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend {
+        width: auto;
+        margin: -19px 0 0 397px; }
+    #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li {
+      float: left; } }
 /*********************
 DESKTOP
 This is the average viewing window. So Desktops, Laptops, and
@@ -5971,16 +6044,17 @@ you can add resource intensive styles.
     float: left;
     width: 25%; }
 
-  .page-title {
+  #container .header .inner-header {
+    margin: 0; }
+  #container #content .page-title {
+    padding-left: 0; }
+  #container #content #project-baseline-history #inner-content {
     padding: 0; }
-
-  #content #project-baseline-history #inner-content {
-    padding: 0; }
-    #content #project-baseline-history #inner-content .project-draft-submission {
+    #container #content #project-baseline-history #inner-content .project-draft-submission {
       padding: 0; }
-      #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+      #container #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
         width: 180px; }
-  #content .last-updated-block {
+  #container #content .last-updated-block {
     margin: 0;
     padding: 0;
     width: 970px;
@@ -5988,7 +6062,7 @@ you can add resource intensive styles.
     display: table;
     margin-top: 25px;
     margin-bottom: 10px; }
-    #content .last-updated-block .last-updated-on {
+    #container #content .last-updated-block .last-updated-on {
       width: 50% !important;
       max-width: 970px;
       float: left;
@@ -5996,49 +6070,57 @@ you can add resource intensive styles.
       border-bottom: none;
       margin-bottom: 0;
       padding-bottom: 0; }
-    #content .last-updated-block .view-baseline-history {
+    #container #content .last-updated-block .view-baseline-history {
       width: 50%;
       text-align: right;
       float: right;
       display: block;
       margin: 0; }
-      #content .last-updated-block .view-baseline-history .view-baseline-link {
+      #container #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
         text-decoration: underline;
         font-weight: 400;
         padding: 0; }
-        #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+        #container #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
-  #content #inner-content #print-links-container .pdf_button {
+  #container #content #ict-dashboard-detailed-overview .section-title h2 {
+    margin-left: 0;
+    margin-right: 0; }
+  #container #content #ict-dashboard-detailed-overview #detailed-view-expenditure {
+    padding-left: 0;
+    padding-right: 0; }
+  #container #content #ict-dashboard-detailed-overview .viz-number-of-benefits {
+    padding-left: 0; }
+  #container #content #inner-content #print-links-container .pdf_button {
     margin-bottom: 67px; }
-    #content #inner-content #print-links-container .pdf_button a {
+    #container #content #inner-content #print-links-container .pdf_button a {
       min-width: 275px !important;
       margin: 10px 10px 3px;
       width: 275px; }
-  #content #inner-content h2.individual-project-page {
+  #container #content #inner-content h2.individual-project-page {
     margin: 20px 0; }
-  #content #inner-content .project-draft-submission {
+  #container #content #inner-content .project-draft-submission {
     padding: 0; }
-    #content #inner-content .project-draft-submission #benefits_legend {
+    #container #content #inner-content .project-draft-submission #benefits_legend {
       overflow: hidden;
       color: #202b3d; }
-      #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+      #container #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
         float: none;
         margin-right: 25px; }
-    #content #inner-content .project-draft-submission .email-value {
+    #container #content #inner-content .project-draft-submission .email-value {
       text-decoration: underline; }
-      #content #inner-content .project-draft-submission .email-value:hover {
+      #container #content #inner-content .project-draft-submission .email-value:hover {
         text-decoration: none; }
-    #content #inner-content .project-draft-submission .entity_comments a {
+    #container #content #inner-content .project-draft-submission .entity_comments a {
       text-decoration: underline; }
-      #content #inner-content .project-draft-submission .entity_comments a:hover {
+      #container #content #inner-content .project-draft-submission .entity_comments a:hover {
         text-decoration: none; }
-    #content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+    #container #content #inner-content .project-draft-submission .individual-project-content .preview_switch {
       text-align: center;
       padding-left: 10px;
       margin: 0 10px;
       height: 41px; }
-      #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
+      #container #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
         vertical-align: sub;
         bottom: 0;
         top: 0;
@@ -6047,17 +6129,17 @@ you can add resource intensive styles.
         height: 17px;
         margin: 0 15px 0 0;
         left: 0; }
-    #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
+    #container #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
       margin-left: 25px; }
-      #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
+      #container #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
         margin-right: 25px; }
-    #content #inner-content .project-draft-submission .project-program-link {
+    #container #content #inner-content .project-draft-submission .project-program-link {
       text-decoration: underline; }
-      #content #inner-content .project-draft-submission .project-program-link:hover {
+      #container #content #inner-content .project-draft-submission .project-program-link:hover {
         text-decoration: none; }
-    #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:first-child {
+    #container #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:first-child {
       border-radius: 4px 0 0; }
-    #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
+    #container #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
       border-radius: 0 4px 0 0; }
 
   .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
