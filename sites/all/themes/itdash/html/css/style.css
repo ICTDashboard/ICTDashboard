@@ -4114,7 +4114,6 @@ FOOTER STYLES
 .footer {
   background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
   border-top: 1px solid #03a7a4;
-  height: 278px;
   clear: both;
   margin-top: 30px;
   position: relative;
@@ -4162,6 +4161,7 @@ FOOTER STYLES
   .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
     margin: 0;
     margin-top: 5px;
+    margin-bottom: 10px;
     width: 100%; }
 
 /*
@@ -4319,7 +4319,6 @@ tweeners.
   .footer {
     background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
     border-top: 1px solid #03a7a4;
-    height: 278px;
     clear: both;
     margin-top: 30px;
     position: relative;
@@ -4364,6 +4363,7 @@ tweeners.
     .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
       margin: 0;
       margin-top: 5px;
+      margin-bottom: 10px;
       width: 100%; }
 
   /*
@@ -5787,7 +5787,6 @@ you can add resource intensive styles.
   .footer {
     background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
     border-top: 1px solid #03a7a4;
-    height: 97px;
     clear: both;
     margin-top: -30px;
     position: relative;
@@ -5798,6 +5797,7 @@ you can add resource intensive styles.
       .footer #inner-footer .wrap.cf .copy, .footer #inner-footer .wrap.comment-respond .copy {
         margin: 0;
         margin-top: 10px;
+        margin-bottom: 10px;
         width: 70%;
         float: left;
         color: #363a41;
