@@ -437,6 +437,13 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
     }
   }
 
+  if (!empty($form_state['values']['field_predicted_project_benefit']['und'][0]['value'])) {
+    if ($form_state['values']['field_predicted_project_benefit']['und'][0]['value'] < 0) {
+      $errors[] = t('<em>Expected Financial Benefits</em> cannot be less than 0');
+    }
+  }
+
+
   ict_update_benefits_realised_validate($form, $form_state);
   ict_project_budget_by_year_validate($form, $form_state);
 }
@@ -484,6 +491,12 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
     !empty($node->field_original_completion_date['und'][0]['value'])) {
     if ($node->field_start_date['und'][0]['value'] >= $node->field_original_completion_date['und'][0]['value']) {
       $errors[] = t('<em>Original Approved Start Date</em> cannot be later than <em>Original Approved Completion Date </em>');
+    }
+  }
+
+  if (!empty($node->field_predicted_project_benefit['und'][0]['value'])) {
+    if ($node->field_predicted_project_benefit['und'][0]['value'] < 0) {
+      $errors[] = t('<em>Expected Financial Benefits</em> cannot be less than 0');
     }
   }
 
