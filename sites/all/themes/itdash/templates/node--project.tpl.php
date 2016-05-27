@@ -378,10 +378,6 @@
 
     <?php endif; ?>
 
-    <?php if (!empty($diff)) : ?>
-      <p class="diffs-provided"><em><?php print itdash_edited_tooltip_render() . ' - ' . t('fields that were updated.'); ?></em></p>
-    <?php endif; ?>
-
     <?php if (isset($update_form)) : ?>
       <?php print $update_form; ?>
     <?php elseif (isset($edit_form)) : ?>
