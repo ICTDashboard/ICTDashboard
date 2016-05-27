@@ -80,69 +80,43 @@
           </tr>
 
           <?php foreach ($rows as $project) : ?>
-            <?php $updates = ict_update_project_get_list($project->nid); ?>
-            <?php $update_id = reset($updates); ?>
-            <?php $states = ict_project_get_last_transaction_by_state($project->nid, ict_project_get_workflow_state($project->nid)); ?>
-            <?php $states_u = ict_project_get_last_transaction_by_state($project->nid, ict_project_get_workflow_state($update_id)); ?>
-            <?php $rebaseline = ict_project_get_project_rebaseline($project->nid) ?>
-            <?php $rebaseline_all = ict_project_get_all_rebaselines($project->nid) ?>
             <tr class="odd views-row-first">
             <td class ="title">
-            <?php if(!empty($project->nid) && $project->field_project_target_id) :
-                if(ict_project_get_last_rebaseline_project($project->nid) == $project->nid) : ?>
-                      <a href="<?php print url('node/' . $project->nid); ?>">
-                        <?php print $project->title; ?>
-                      </a>
-                      <span class ="rebaseline-indicate" ><?php print t('Re-Baselined'); ?> </span>
-                  <?php else : ?>
-                    <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
+            <?php if(!empty($project->nid) && $project->field_project_target_id) : ?>
+              <?php if(ict_project_get_last_rebaseline_project($project->nid) == $project->nid) : ?>
+                    <a href="<?php print url('node/' . $project->nid); ?>">
                       <?php print $project->title; ?>
                     </a>
-                    <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (!number)', array('!number' => count(ict_project_get_all_parents_project($project)) + 1)) ?> </span>
-                <?php endif; ?>
-                  <?php else : 
-                    $get_project_rebaseline = ict_project_get_project_rebaseline($project->nid);
-                    if(!empty($get_project_rebaseline)) : ?>
-                       <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
-                        <?php print $project->title; ?>
-                      </a>
-                      <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (1)') ?> </span>
-                    <?php else : ?>
-                       <a href="<?php print url('node/' . $project->nid); ?>">
-                        <?php print $project->title; ?>
-                      </a>
-                   <?php endif; ?>  
-            <?php endif;?>
+                    <span class ="rebaseline-indicate" ><?php print t('Re-Baselined'); ?> </span>
+                <?php else : ?>
+                  <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
+                    <?php print $project->title; ?>
+                  </a>
+                  <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (!number)', array('!number' => count(ict_project_get_all_parents_project($project)) + 1)) ?> </span>
+              <?php endif; ?>
+            <?php else : ?>
+              <?php $get_project_rebaseline = ict_project_get_project_rebaseline($project->nid);
+              if(!empty($get_project_rebaseline)) : ?>
+                 <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
+                  <?php print $project->title; ?>
+                </a>
+                <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (1)') ?> </span>
+              <?php else : ?>
+                 <a href="<?php print url('node/' . $project->nid); ?>">
+                  <?php print $project->title; ?>
+                </a>
+             <?php endif; ?>
+            <?php endif; ?>
             </td> 
               <td class="dates">
                 <?php print format_date($project->changed, 'medium', 'j M Y h:i A'); ?>
               </td>
               <td class="status-project">
-                <a href="javascript:void(0);" class="status-icon">
-                  <?php if (!$update_id) : ?>
-                    <?php if (($states->old_state == 'waiting_approval') && ($states->state == 'draft')) : ?>
-                      <span class="tooltip-content">Baseline draft rejected</span>
-                    <?php elseif ($states->state == 'draft') : ?>
-                      <span class="tooltip-content">Baseline draft is with the Project Editor</span>
-                    <?php elseif ($states->state == 'waiting_approval') : ?>
-                      <span class="tooltip-content">Baseline draft is waiting for approval</span>
-                    <?php elseif ($states->state == 'approved') : ?>
-                      <span class="tooltip-content">Baseline approved</span>
-                    <?php endif; ?>
-                  <?php else : ?>
-                    <?php if (($states_u->old_state == 'waiting_approval') && ($states_u->state == 'draft')) : ?>
-                      <span class="tooltip-content">Update draft rejected</span>
-                    <?php elseif (($states_u->state == 'draft') || (($states->state == 'waiting_approval') && (!empty($states_u)))) : ?>
-                      <span class="tooltip-content">Update draft is with the Project Editor</span>
-                    <?php elseif ($states_u->state == 'waiting_approval') : ?>
-                      <span class="tooltip-content">Update draft is waiting for approval</span>
-                    <?php elseif (($states_u->state == 'approved') && !empty($rebaseline)) : ?>
-                      <span class="tooltip-content">Re-baseline approved</span>
-                    <?php elseif (($states_u->state == 'approved') && empty($rebaseline)) : ?>
-                      <span class="tooltip-content">Update approved</span>
-                    <?php endif; ?>
-                  <?php endif; ?>
-                </a>
+                <?php if ($project->current_status) : ?>
+                  <a href="javascript:void(0);" class="status-icon">
+                    <span class="tooltip-content"><?php print $project->current_status; ?></span>
+                  </a>
+                <?php endif; ?>
               </td>
               <td class="update">
                 <a href="<?php print url('node/' . $project->nid); ?>">
@@ -178,19 +152,19 @@
                   </a>
                 <?php endif; ?>
 
-                <?php if (ict_update_edit_allowed($project->nid, $update_id)) : ?>
+                <?php if (ict_update_edit_allowed($project->nid, $project->update_id)) : ?>
                   <a href="<?php print url('update/' . $update_id . '/edit'); ?>">
                     <span><?php print t('Edit Update Draft'); ?></span>
                   </a>
                 <?php endif; ?>
 
-                <?php if (ict_update_approve_allowed($project->nid, $update_id)) : ?>
+                <?php if (ict_update_approve_allowed($project->nid, $project->update_id)) : ?>
                   <a href="<?php print url('node/' . $project->nid); ?>">
                     <span><?php print t('Review Update Draft'); ?></span>
                   </a>
                 <?php endif; ?>
 
-                <?php if (ict_update_delete_allowed($project->nid, $update_id)) : ?>
+                <?php if (ict_update_delete_allowed($project->nid, $project->update_id)) : ?>
                   <a href="<?php print url('node/' . $update_id .'/delete', array(
                           'query' => array('destination' => 'projects')
                       )
