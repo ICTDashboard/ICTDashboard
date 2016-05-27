@@ -13,7 +13,22 @@
     </div>
     <div id="detailed-view-expenditure" style="margin-left: 25px; max-width: 945px;">
         <canvas id="detailed_budget_chart" width="945" height="360"></canvas>
-        <div id="expenditure_legend" class="legend"></div>
+        <div id="expenditure_legend" class="legend">
+          <ul class="bar-legend">
+            <li>
+              <span style="background-color:#ff6161"></span>
+              <?php print t('Expenditure to Date ($m)'); ?>
+            </li>
+            <li>
+              <span style="background-color:#5c46a4"></span>
+              <?php print t('Total Budget ($m)'); ?>
+            </li>
+            <li>
+              <span class="required">*</span>
+              <?php print t('Current Financial Year'); ?>
+            </li>
+          </ul>
+        </div>
     </div>
     <div id="ict-all-benefits-setion" class="section-title">
       <h2>
@@ -45,6 +60,9 @@
           </li>
           <li>
             <b>#</b> <?php print t('No. of Projects'); ?>
+          </li>
+          <li>
+            <b>*</b> <?php print t('Current Quarter'); ?>
           </li>
         </ul>
       </div>
@@ -79,9 +97,6 @@
         Drupal.settings.detailed_budget_chart.data,
         Drupal.settings.detailed_budget_chart.options
       );
-      document
-        .getElementById("expenditure_legend")
-        .innerHTML = ExpenditureChart.generateLegend();
 
       // *** Schedule Status Graph ***
       var data = Drupal.settings.detailed_schedule_chart,
@@ -144,6 +159,7 @@
           .attr("width", width)
           .attr("height", Object.keys(data.data[year]).length * 72.5);
 
+        var current_is_printed = false;
         for (var quarter = 4; quarter > 0; quarter--) {
           // if no data provide for the quarter don't show it
           if (typeof data.data[year][quarter] == 'undefined') continue;
@@ -165,16 +181,30 @@
             .attr("font-size", '13px')
             .attr("font-family", 'Open Sans')
             .attr("color", '#202b3d');
-          // quarter number
+          // quarter numberX
           quarter_text
             .append("svg:tspan")
             .text(getGetOrdinal(quarter)+" Quarter");
+
+          var year_dy = 22;
+          if (!current_is_printed) {
+            quarter_text
+              .append("svg:tspan")
+              .attr("x", 5)
+              .attr("dx", 78)
+              .attr("dy", 12)
+              .text("*");
+
+            current_is_printed = true;
+            year_dy = 10;
+          }
+
           // year
           quarter_text
             .append("svg:tspan")
             .attr("font-weight", 'bold')
             .attr("x", 13)
-            .attr("dy", 22)
+            .attr("dy", year_dy)
             .attr("dx", 23)
             .attr("text-anchor", 'right')
             .text(data[year]);
