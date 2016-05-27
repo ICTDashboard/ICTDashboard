@@ -75,7 +75,7 @@
     </div>
     <div class="section-title">
       <h2>
-        <?php print t('Total Number Of Project Benefits'); ?>
+        <?php print t('Project Benefits'); ?>
         <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
               <span class="tooltip-content">
@@ -83,6 +83,7 @@
               </span>
         </a>
       </h2>
+
     </div>
     <?php print theme('all_benefits_pie_chart'); ?>
   </div>
