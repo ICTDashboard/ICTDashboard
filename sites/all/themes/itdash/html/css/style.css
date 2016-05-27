@@ -3143,31 +3143,31 @@ body a.submit-button,
       min-width: 275px !important;
       margin: 10px 10px 3px; }
 
-.object_and_summary a, .entity_comments a, span.tooltip-content a {
+body .object_and_summary a, body .entity_comments a, span.tooltip-content a {
   color: #0d6c88;
   text-decoration: underline; }
-  .object_and_summary a:hover, .entity_comments a:hover, span.tooltip-content a:hover {
+  body .object_and_summary a:hover, body .entity_comments a:hover, span.tooltip-content a:hover {
     color: #0d6c88;
     text-decoration: none; }
-  .object_and_summary a:visited, .entity_comments a:visited, span.tooltip-content a:visited {
+  body .object_and_summary a:visited, body .entity_comments a:visited, span.tooltip-content a:visited {
     color: #0d6c88; }
-  .object_and_summary a:focus, .entity_comments a:focus, span.tooltip-content a:focus {
+  body .object_and_summary a:focus, body .entity_comments a:focus, span.tooltip-content a:focus {
     color: #0d6c88; }
-.object_and_summary ul, .entity_comments ul, span.tooltip-content ul {
+body .object_and_summary ul, body .entity_comments ul, span.tooltip-content ul {
   list-style-type: disc; }
-  .object_and_summary ul ul, .entity_comments ul ul, span.tooltip-content ul ul {
+  body .object_and_summary ul ul, body .entity_comments ul ul, span.tooltip-content ul ul {
     list-style-type: circle; }
-    .object_and_summary ul ul ul, .entity_comments ul ul ul, span.tooltip-content ul ul ul {
+    body .object_and_summary ul ul ul, body .entity_comments ul ul ul, span.tooltip-content ul ul ul {
       list-style-type: square; }
-.object_and_summary p, .entity_comments p, span.tooltip-content p {
+body .object_and_summary p, body .entity_comments p, span.tooltip-content p {
   color: #202b3d; }
-.object_and_summary ol, .object_and_summary ul, .entity_comments ol, .entity_comments ul, span.tooltip-content ol, span.tooltip-content ul {
+body .object_and_summary ol, body .object_and_summary ul, body .entity_comments ol, body .entity_comments ul, span.tooltip-content ol, span.tooltip-content ul {
   color: #202b3d;
   padding-left: 40px;
   margin: 0.5em 0; }
-  .object_and_summary ol ol, .object_and_summary ol ul, .object_and_summary ul ol, .object_and_summary ul ul, .entity_comments ol ol, .entity_comments ol ul, .entity_comments ul ol, .entity_comments ul ul, span.tooltip-content ol ol, span.tooltip-content ol ul, span.tooltip-content ul ol, span.tooltip-content ul ul {
+  body .object_and_summary ol ol, body .object_and_summary ol ul, body .object_and_summary ul ol, body .object_and_summary ul ul, body .entity_comments ol ol, body .entity_comments ol ul, body .entity_comments ul ol, body .entity_comments ul ul, span.tooltip-content ol ol, span.tooltip-content ol ul, span.tooltip-content ul ol, span.tooltip-content ul ul {
     padding-left: 40px; }
-.object_and_summary ol, .entity_comments ol, span.tooltip-content ol {
+body .object_and_summary ol, body .entity_comments ol, span.tooltip-content ol {
   list-style-type: decimal; }
 
 div.tooltip-edit {
@@ -3293,6 +3293,13 @@ div.tooltip-edit {
     .ict-rebaseline-warn .ict-fancy-content p {
       margin: 0;
       line-height: 1.5em; }
+
+.viz-number-of-benefits {
+  position: relative;
+  font-weight: 700;
+  color: #202b3d;
+  padding-right: 15px;
+  padding-top: 22px; }
 
 .rebaseline-indicate {
   display: block;
@@ -4105,9 +4112,57 @@ SIDEBARS & ASIDES
 FOOTER STYLES
 *********************/
 .footer {
+  background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
+  border-top: 1px solid #03a7a4;
   clear: both;
-  background-color: #323944;
-  color: #dbdde0; }
+  margin-top: 30px;
+  position: relative;
+  z-index: 10;
+  font-size: 13px;
+  font-weight: 400; }
+  .footer #inner-footer .wrap.cf .copy, .footer #inner-footer .wrap.comment-respond .copy {
+    margin-top: 30px;
+    width: 100%;
+    color: #363a41;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    line-height: 22px;
+    margin-bottom: 0; }
+  .footer #inner-footer .wrap.cf .menu, .footer #inner-footer .wrap.comment-respond .menu {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 0;
+    width: 100%;
+    padding-left: 16px;
+    line-height: 21px;
+    position: relative; }
+    .footer #inner-footer .wrap.cf .menu li, .footer #inner-footer .wrap.comment-respond .menu li {
+      display: block; }
+      .footer #inner-footer .wrap.cf .menu li:before, .footer #inner-footer .wrap.comment-respond .menu li:before {
+        content: '\00b7';
+        color: #137992;
+        font-size: 26px;
+        padding: 5px 5px 5px 3px;
+        vertical-align: -4px;
+        line-height: 18px; }
+      .footer #inner-footer .wrap.cf .menu li.last, .footer #inner-footer .wrap.comment-respond .menu li.last {
+        position: absolute;
+        top: 0;
+        right: 20px; }
+        .footer #inner-footer .wrap.cf .menu li.last:before, .footer #inner-footer .wrap.comment-respond .menu li.last:before {
+          content: '';
+          padding: 0; }
+      .footer #inner-footer .wrap.cf .menu li a, .footer #inner-footer .wrap.comment-respond .menu li a {
+        color: #363a41;
+        text-decoration: underline; }
+        .footer #inner-footer .wrap.cf .menu li a:hover, .footer #inner-footer .wrap.comment-respond .menu li a:hover {
+          text-decoration: none; }
+  .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 100%; }
 
 /*
 if you checked out the link above:
@@ -4174,6 +4229,8 @@ DETAILED OVERVIEW STYLES
       #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend .bar-legend {
         padding-left: 20px;
         margin-top: 8px; }
+  #container #content #ict-dashboard-detailed-overview .viz-number-of-benefits {
+    padding-left: 20px; }
 
 /*********************
 LARGER MOBILE DEVICES
@@ -4311,6 +4368,56 @@ tweeners.
   /*********************
   FOOTER STYLES
   *********************/
+  .footer {
+    background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
+    border-top: 1px solid #03a7a4;
+    clear: both;
+    margin-top: 30px;
+    position: relative;
+    z-index: 10;
+    font-size: 13px;
+    font-weight: 400; }
+    .footer #inner-footer .wrap.cf .copy, .footer #inner-footer .wrap.comment-respond .copy {
+      margin: 0;
+      margin-top: 30px;
+      width: 100%;
+      color: #363a41;
+      text-align: center;
+      padding-left: 20px;
+      padding-right: 20px;
+      line-height: 22px; }
+    .footer #inner-footer .wrap.cf .menu, .footer #inner-footer .wrap.comment-respond .menu {
+      display: inline-block;
+      margin-top: 20px;
+      margin-bottom: 0;
+      width: 100%;
+      padding-left: 17px; }
+      .footer #inner-footer .wrap.cf .menu li, .footer #inner-footer .wrap.comment-respond .menu li {
+        display: block; }
+        .footer #inner-footer .wrap.cf .menu li:before, .footer #inner-footer .wrap.comment-respond .menu li:before {
+          content: '\00b7';
+          color: #137992;
+          font-size: 26px;
+          padding: 5px 5px 5px 3px;
+          vertical-align: -4px;
+          line-height: 18px; }
+        .footer #inner-footer .wrap.cf .menu li.last, .footer #inner-footer .wrap.comment-respond .menu li.last {
+          float: right;
+          padding-right: 0; }
+          .footer #inner-footer .wrap.cf .menu li.last:before, .footer #inner-footer .wrap.comment-respond .menu li.last:before {
+            content: '';
+            padding: 0; }
+        .footer #inner-footer .wrap.cf .menu li a, .footer #inner-footer .wrap.comment-respond .menu li a {
+          color: #363a41;
+          text-decoration: underline; }
+          .footer #inner-footer .wrap.cf .menu li a:hover, .footer #inner-footer .wrap.comment-respond .menu li a:hover {
+            text-decoration: none; }
+    .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
+      margin: 0;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      width: 100%; }
+
   /*
   check your menus here. do they look good?
   do they need tweaking?
@@ -5734,41 +5841,57 @@ you can add resource intensive styles.
   .footer {
     background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
     border-top: 1px solid #03a7a4;
-    height: 90px;
     clear: both;
-    margin-top: -60px;
+    margin-top: -30px;
     position: relative;
     z-index: 10; }
-    .footer #inner-footer .copy {
-      width: 80%;
-      float: right;
-      text-align: right;
-      color: #363a41;
-      margin: 1.5em 0 0; }
-    .footer #inner-footer .menu {
-      display: inline-block;
-      margin-top: 15px;
-      margin-bottom: 0; }
-      .footer #inner-footer .menu li {
-        display: inline; }
-        .footer #inner-footer .menu li:before {
-          content: '\00b7';
-          color: #137992;
-          font-size: 26px;
-          padding: 5px 5px 5px 3px;
-          vertical-align: -4px;
-          line-height: 26px; }
-        .footer #inner-footer .menu li:first-child:before {
-          content: '';
-          padding: 0; }
-        .footer #inner-footer .menu li a {
-          color: #363a41;
-          text-decoration: underline; }
-          .footer #inner-footer .menu li a:hover {
-            text-decoration: none; }
-    .footer #inner-footer .copy.second-copy {
-      margin: 0;
-      margin-top: 7px; }
+    .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
+      width: 100%;
+      min-width: 100%; }
+      .footer #inner-footer .wrap.cf .copy, .footer #inner-footer .wrap.comment-respond .copy {
+        margin: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 70%;
+        float: left;
+        color: #363a41;
+        text-align: left;
+        padding-left: 20px; }
+      .footer #inner-footer .wrap.cf .menu, .footer #inner-footer .wrap.comment-respond .menu {
+        display: inline-block;
+        margin-top: 15px;
+        margin-bottom: 0;
+        width: 100%;
+        padding-left: 20px; }
+        .footer #inner-footer .wrap.cf .menu li, .footer #inner-footer .wrap.comment-respond .menu li {
+          display: inline; }
+          .footer #inner-footer .wrap.cf .menu li:before, .footer #inner-footer .wrap.comment-respond .menu li:before {
+            content: '\00b7';
+            color: #137992;
+            font-size: 26px;
+            padding: 5px 5px 5px 3px;
+            vertical-align: -4px;
+            line-height: 26px; }
+          .footer #inner-footer .wrap.cf .menu li:first-child:before, .footer #inner-footer .wrap.comment-respond .menu li:first-child:before {
+            content: '';
+            padding: 0px; }
+          .footer #inner-footer .wrap.cf .menu li.last, .footer #inner-footer .wrap.comment-respond .menu li.last {
+            right: 25px; }
+            .footer #inner-footer .wrap.cf .menu li.last:before, .footer #inner-footer .wrap.comment-respond .menu li.last:before {
+              content: '';
+              padding: 0; }
+          .footer #inner-footer .wrap.cf .menu li a, .footer #inner-footer .wrap.comment-respond .menu li a {
+            color: #363a41;
+            text-decoration: underline; }
+            .footer #inner-footer .wrap.cf .menu li a:hover, .footer #inner-footer .wrap.comment-respond .menu li a:hover {
+              text-decoration: none; }
+      .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
+        margin: 0;
+        margin-top: 10px;
+        float: right;
+        width: 30%;
+        text-align: right;
+        padding-right: 25px; }
 
   .ui-datepicker {
     display: none; }
@@ -5919,6 +6042,8 @@ you can add resource intensive styles.
   #container #content #ict-dashboard-detailed-overview #detailed-view-expenditure {
     padding-left: 0;
     padding-right: 0; }
+  #container #content #ict-dashboard-detailed-overview .viz-number-of-benefits {
+    padding-left: 0; }
   #container #content #inner-content #print-links-container .pdf_button {
     margin-bottom: 67px; }
     #container #content #inner-content #print-links-container .pdf_button a {
@@ -5968,7 +6093,21 @@ you can add resource intensive styles.
     #container #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:first-child {
       border-radius: 4px 0 0; }
     #container #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
-      border-radius: 0 4px 0 0; } }
+      border-radius: 0 4px 0 0; }
+
+  .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
+    width: 970px;
+    min-width: 970px; }
+    .footer #inner-footer .wrap.cf .copy, .footer #inner-footer .wrap.comment-respond .copy {
+      padding-right: 0;
+      padding-left: 0; }
+    .footer #inner-footer .wrap.cf .menu, .footer #inner-footer .wrap.comment-respond .menu {
+      padding-left: 0; }
+      .footer #inner-footer .wrap.cf .menu li.last, .footer #inner-footer .wrap.comment-respond .menu li.last {
+        right: 5px; }
+    .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
+      width: 25%;
+      padding-right: 5px; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.

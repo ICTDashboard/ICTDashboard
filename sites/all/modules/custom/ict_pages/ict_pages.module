@@ -65,6 +65,14 @@ function ict_pages_form_alter (&$form, &$form_alter, $form_id) {
         if (drupal_is_front_page()) {
           break;
         }
+
+        $help_text = '';
+        $bean = bean_load_delta('sign-in-helptext');
+        if ($bean) {
+          $bean_view = bean_view($bean);
+          $help_text = drupal_render($bean_view);
+        }
+
         $form['#prefix'] = '
           <div class="page-title dotbg">
             <div class="inner-title-content wrap cf">
@@ -80,7 +88,7 @@ function ict_pages_form_alter (&$form, &$form_alter, $form_id) {
             </ul>
             <div class="tab-content d-1of2">
             <div class="tab active">
-        ';
+        ' . $help_text;
 
         $form['name']['#description'] = '';
         $form['pass']['#description'] = '';

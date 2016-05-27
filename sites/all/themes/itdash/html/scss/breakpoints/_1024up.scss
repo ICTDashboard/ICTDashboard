@@ -18,6 +18,7 @@ be seen on the Desktop.
   float: left;
   width: 25%;
 }
+
 .page-title {
 	padding: 0;
 }
@@ -75,6 +76,9 @@ be seen on the Desktop.
 			#detailed-view-expenditure {
 				padding-left: 0;
 				padding-right: 0;
+			}
+			.viz-number-of-benefits {
+				padding-left: 0;
 			}
 		}
 		#inner-content {
@@ -167,3 +171,29 @@ be seen on the Desktop.
 		}
 	}
 }
+
+.footer {
+	#inner-footer {
+		.wrap.cf {
+			width: 970px;
+			min-width: 970px;
+			.copy {
+				padding-right: 0;
+				padding-left: 0;
+			}
+			.menu {
+				padding-left: 0;
+				li {
+					&.last {
+						right: 5px;
+					}
+				}
+			}
+			.copy.second-copy {
+				width: 25%;
+				padding-right: 5px;
+			}
+		}
+	}
+}
+
