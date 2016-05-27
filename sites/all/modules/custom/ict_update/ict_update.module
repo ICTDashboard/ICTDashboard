@@ -279,13 +279,19 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
   );
 
-  if(!array_key_exists(ICT_FINANCE_ADMIN_ROLE,$user->roles)) {  
-    foreach ($form['field_benefits_realised']['und'] as $key => $value) {
-      if(is_numeric($key)) {
+  // only Finance Admin can remve benefits
+  foreach ($form['field_benefits_realised']['und'] as $key => $value) {
+    if(is_numeric($key)) {
+      if (empty($form['field_benefits_realised']['und'][$key]['#entity']->field_removed) && !array_key_exists(ICT_FINANCE_ADMIN_ROLE,$user->roles)) {
         unset($form['field_benefits_realised']['und'][$key]['field_status']['und']['#options']['removed']);
+      }
+      // and they should stay removed if someone else is updating the project
+      else {
+        $form['field_benefits_realised']['und'][$key]['field_status']['und']['#default_value'] = array('removed');
       }
     }
   }
+
 }
 
 function ict_update_node_form_after_build($form) {

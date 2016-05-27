@@ -1016,6 +1016,7 @@ body,
 }
 .tooltip-bottom,
 .tooltip-edit,
+.status-icon,
 .tooltip {
   position: relative;
   width: 16px;
@@ -1087,11 +1088,56 @@ body,
     display: inline-block;
   }
   span.tooltip-content {
-    color: #1e2635;
-    background-color: #f0b629;
-    font-weight: normal;
+    position: absolute;
+    display: none;
+    color: #fff;
+    font-size: 13px;
+    line-height: 22px;
+    background-color: #1e2635;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-style: normal;
+    bottom: 30px;
+    right: -150px;
+    width: 300px;
     &:after {
-      border-top: 20px solid #f0b629;
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      display: block;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #1e2635;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -25px;
+    }
+  }
+  &:hover {
+    span.tooltip-content {
+      display: block;
+    }
+  }
+}
+#project-listings .status-icon {
+  width: 18px;
+  @include sprite-icon('status-icon-normal');
+  display: inline-block;
+  &:hover {
+    @include sprite-icon('status-icon-hover');
+    display: inline-block;
+  }
+  &:active {
+    @include sprite-icon('status-icon-hover');
+    display: inline-block;
+  }
+  span.tooltip-content {
+    font-weight: 700;
+  }
+  &:focus {
+    span.tooltip-content {
+      display: block;
     }
   }
 }
@@ -1538,6 +1584,17 @@ div.tooltip-edit {
     }
   } 
 }
+.rebaseline-indicate {
+  display: block;
+  font-family: 'Open Sans';
+  color: #4e5365;
+  font-size: 13px;
+  font-style: italic;
+  text-align: left;
+}
+.rebaseline-privious-project-list {
+  padding-left: 38px!important;
+}
 .rebaseline-info {
   display: block;
   font-family: 'Open Sans';
@@ -1549,4 +1606,18 @@ div.tooltip-edit {
 }
 .project-title-info {
   margin-bottom: 0;
+}
+#content .project-program-link {
+  color: #0d6c88;
+  text-decoration: underline;
+  &:hover {
+    color: #0d6c88;
+    text-decoration: none;
+  }
+  &:visited {
+    color: #0d6c88;
+  }
+  &:focus {
+    color: #0d6c88;
+  }
 }

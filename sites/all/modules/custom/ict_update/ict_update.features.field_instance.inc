@@ -288,7 +288,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Actual Level of Project Completion',
     'required' => 0,
     'settings' => array(
-      'max' => '',
+      'max' => 100,
       'min' => 0,
       'prefix' => '',
       'suffix' => '',
@@ -380,7 +380,7 @@ function ict_update_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'max' => '',
-      'min' => '',
+      'min' => 0,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -498,7 +498,7 @@ function ict_update_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'max' => '',
-      'min' => '',
+      'min' => 0,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -600,7 +600,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Forecast Level of Project Completion',
     'required' => 0,
     'settings' => array(
-      'max' => '',
+      'max' => 100,
       'min' => 0,
       'prefix' => '',
       'suffix' => '',

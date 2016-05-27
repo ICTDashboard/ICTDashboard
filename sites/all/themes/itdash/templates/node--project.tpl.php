@@ -3,12 +3,12 @@
   <div class="inner-title-content wrap cf">
     <h1 class="project-title-info"><?php print $title; ?></h1>
     <span class="rebaseline-info">
-      <?php if(!empty($nid) && $rebaseline_check) :
-        print ($last_rebaseline == $nid) ? t('Re-Baselined') : t('Previous Baseline (!number)', array('!number' => count($previous_baseline)+1));
-      else:
-        (!empty($get_rebaseline)) ?
-          print t('Previous Baseline (1)') : ''; 
-      endif;?>
+      <?php if($old_baselines) : ?>
+        <?php $baseline_count = count($old_baselines); ?>
+        <?php print $last_rebaseline == $nid ? t('Re-Baselined') : t('Previous Baseline (!number)', array('!number' => ($baseline_count+1))); ?>
+      <?php elseif($last_rebaseline && $last_rebaseline != $nid) : ?>
+        <?php print t('Previous Baseline (!number)', array('!number' => 1)); ?>
+      <?php endif;?>
     </span>
   </div>
 </div>
@@ -99,7 +99,10 @@
       </div>
       <div class="text">
         <?php foreach (_ict_project_baseline_get_simple_values($field_program_name) as $value) : ?>
-          <p><?php print $value; ?></p>
+          <p><?php $query = $get;
+                $query['filter_by'] = 'program';
+                $query['filter'] = $value;
+            print l($value, 'dashboard-projects', array('query' => $query, 'attributes' => array('class' => array('project-program-link')))); ?></p>
         <?php endforeach; ?>
       </div>
     </div>

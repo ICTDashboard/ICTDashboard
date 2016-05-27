@@ -149,10 +149,8 @@ function ict_project_preprocess_node(&$vars) {
   if ($vars['type'] == 'project') {
     $node = $vars['node'];
     $nid = $vars['nid'];
-    $vars['rebaseline_check'] = ict_project_is_rebaseline($node);
-    $vars['last_rebaseline'] = ict_project_get_last_rebaseline_project($nid);
-    $vars['previous_baseline'] = ict_project_get_all_parents_project($node);
-    $vars['get_rebaseline'] = ict_project_get_project_rebaseline ($nid);
+    $vars['old_baselines'] = ict_project_get_old_baselines($nid);
+    $vars['last_rebaseline'] =ict_project_get_last_rebaseline_project($nid);
     $view_mode = $vars['view_mode'];
     $vars['diff'] = array();
     if (ict_project_access_project('approve', NULL, $node->nid)) {
@@ -467,6 +465,10 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
       $form['field_benefits_realised']['und']['#project_id'] = !empty($node->nid) ? $node->nid : NULL;
       $form['field_benefits_realised']['und']['add_more']['#value'] = t('Add another Benefit');
 
+      foreach(element_children($form['field_benefits_realised'][LANGUAGE_NONE]) as $ben_key) {
+        if (!is_numeric($ben_key)) continue;
+        unset($form['field_benefits_realised']['und'][$ben_key]['field_status']['und']['#options']['removed']);
+      }
 
       // portfolio and entity government options change
       $portfolio_vocab = taxonomy_vocabulary_machine_name_load('portfolio');
