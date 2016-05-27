@@ -30,11 +30,11 @@ body > #container { height: auto; min-height: 100%; }
 LAYOUT & GRID STYLES
 *********************/
 
-.wrap {
-	width: 970px;
-	min-width: 970px;
-	padding: 0;
-}
+// .wrap {
+// 	width: 970px;
+// 	min-width: 970px;
+// 	padding: 0;
+// }
 
 /*********************
 HEADER STYLES
@@ -95,6 +95,17 @@ HEADER STYLES
 /*********************
 CONTENT STYLES
 *********************/
+#content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+	float: none;
+}
+
+#content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+	margin: 15px 10px;
+	span {
+		width: 20px;
+	}
+}
+
 #content {
 	color: #4e5365;
 	margin: 0;
