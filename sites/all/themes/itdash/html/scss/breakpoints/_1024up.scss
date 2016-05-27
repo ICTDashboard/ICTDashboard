@@ -46,6 +46,19 @@ be seen on the Desktop.
 	padding: 0;
 }
 #content {
+	#project-baseline-history {
+		#inner-content {
+			padding: 0;
+			.project-draft-submission {
+				padding: 0;
+				.pbh-buttons {
+					a {
+						width: 180px;
+					}
+				}
+			}
+		}
+	}
 	.last-updated-block {
 		margin: 0;
 		padding: 0;
