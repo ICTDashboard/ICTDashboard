@@ -188,3 +188,6 @@ span.rebaseline-info {
   margin-top: 5px;
   margin-bottom: 10px;
 }
+.view-baseline-history {
+  display: none;
+}

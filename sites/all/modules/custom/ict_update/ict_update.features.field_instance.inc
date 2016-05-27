@@ -288,7 +288,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Actual Level of Project Completion',
     'required' => 0,
     'settings' => array(
-      'max' => '',
+      'max' => 100,
       'min' => 0,
       'prefix' => '',
       'suffix' => '',
@@ -380,7 +380,7 @@ function ict_update_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'max' => '',
-      'min' => '',
+      'min' => 0,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -494,11 +494,11 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_estimated_value_of_benefit',
-    'label' => 'Expected Value of Financial Benefits Realised To Date',
+    'label' => 'Value of Financial Benefits Realised To Date',
     'required' => 0,
     'settings' => array(
       'max' => '',
-      'min' => '',
+      'min' => 0,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -600,7 +600,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Forecast Level of Project Completion',
     'required' => 0,
     'settings' => array(
-      'max' => '',
+      'max' => 100,
       'min' => 0,
       'prefix' => '',
       'suffix' => '',
@@ -1006,7 +1006,7 @@ function ict_update_field_default_field_instances() {
   t('Entity Comments');
   t('Expected Completion Date');
   t('Expected Financial Benefits');
-  t('Expected Value of Financial Benefits Realised To Date');
+  t('Value of Financial Benefits Realised To Date');
   t('Financial');
   t('For each benefit listed, the date range when benefit is expected to be realised.');
   t('Forecast Level of Project Completion');

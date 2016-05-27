@@ -57,17 +57,6 @@
   <?php print $styles; ?>
   <?php print $scripts; ?>
   <link rel="stylesheet" id="icon-stylesheet-css"  href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" type="text/css" media="all" />
-
-  <?php if (arg(0) != 'project' && arg(1) != 'add') : ?>
-    <!--[if lte IE 8]>  <!--<script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/r2d3.js"></script>--><![endif]-->
-    <!--[if gte IE 9]><!-->
-<!--    <script type="text/javascript" src="/--><?php //print drupal_get_path('theme', 'itdash'); ?><!--/js/d3.v3.min.js"></script>-->
-    <!--<![endif]-->
-
-<!--    <link href="/--><?php //print drupal_get_path('theme', 'itdash'); ?><!--/css/nv.d3.css" rel="stylesheet">-->
-<!--    <script type="text/javascript" src="/--><?php //print drupal_get_path('theme', 'itdash'); ?><!--/js/nv.d3.js"></script>-->
-<!--    <script type="text/javascript" src="/--><?php //print drupal_get_path('theme', 'itdash'); ?><!--/js/d3-timeline.js"></script>-->
-  <?php endif; ?>
   <!--[if lt IE 9]>
   <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/flashcanvas.js"></script>
   <![endif]-->
@@ -75,7 +64,7 @@
   <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/moment.min.js"></script>
   <script type="text/javascript" src="/<?php print drupal_get_path('theme', 'itdash'); ?>/js/jsgantt.js"></script>
 
-  <!--meta name="viewport" content="width=device-width, initial-scale=1.0"/-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
 <div id="skip-link">

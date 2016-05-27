@@ -901,10 +901,12 @@ body .project-update-submission .row .label .edit-btn:before,
 .field-name-field-status .sbHolder.removed:before,
 .field-name-field-status a[rel=removed]:before, .ict-tick, .preview_switch .viz-ico, .preview_switch .table-ico, .tooltip-bottom,
 .tooltip-edit,
+.status-icon,
 .tooltip, .tooltip-bottom:hover,
 .tooltip-edit:hover,
-.tooltip:hover {
-  background-image: url('../images/icons-s507b264638.png');
+.status-icon:hover,
+.tooltip:hover, #project-listings .status-icon, #project-listings .status-icon:hover, #project-listings .status-icon:active {
+  background-image: url('../images/icons-sad2d026fc7.png');
   background-repeat: no-repeat; }
 
 /*********************
@@ -2344,7 +2346,7 @@ body #ict-home-projects-table-id tr th,
     position: relative;
     margin: 0px;
     z-index: 1;
-    background-position: 0 -169px;
+    background-position: 0 -201px;
     width: 16px;
     height: 17px;
     display: block;
@@ -2739,7 +2741,7 @@ body a.submit-button,
 .field-name-field-status td.field-status.at_risk:before,
 .field-name-field-status .sbHolder.at_risk:before,
 .field-name-field-status a[rel=at_risk]:before {
-  background-color: #f6d000; }
+  background-color: #f6a33c; }
 .field-name-field-status td.field-status.removed:before,
 .field-name-field-status .sbHolder.removed:before,
 .field-name-field-status a[rel=removed]:before {
@@ -2760,7 +2762,7 @@ body a.submit-button,
   text-align: right; }
 
 .ict-tick {
-  background-position: 0 -145px;
+  background-position: 0 -177px;
   width: 10px;
   height: 7px;
   display: block; }
@@ -2796,6 +2798,10 @@ body a.submit-button,
         width: 16px;
         height: 16px;
         vertical-align: middle; }
+        .legend .bar-legend li span.required {
+          width: auto;
+          vertical-align: top;
+          margin: 0; }
       .legend .bar-legend li b {
         color: #202b3d; }
   .legend#schedule_legend .bar-legend {
@@ -2816,7 +2822,7 @@ body a.submit-button,
     height: 17px;
     display: block; }
   .preview_switch .table-ico {
-    background-position: 0 -129px;
+    background-position: 0 -161px;
     width: 20px;
     height: 16px;
     display: block; }
@@ -2828,6 +2834,7 @@ body a.submit-button,
 
 .tooltip-bottom,
 .tooltip-edit,
+.status-icon,
 .tooltip {
   position: relative;
   width: 16px;
@@ -2836,21 +2843,23 @@ body a.submit-button,
   margin-left: 5px;
   margin-right: 10px;
   z-index: 1;
-  background-position: 0 -169px;
+  background-position: 0 -201px;
   width: 16px;
   height: 17px;
   display: block;
   display: inline-block; }
   .tooltip-bottom:hover,
   .tooltip-edit:hover,
+  .status-icon:hover,
   .tooltip:hover {
-    background-position: 0 -152px;
+    background-position: 0 -184px;
     width: 16px;
     height: 17px;
     display: block;
     display: inline-block; }
   .tooltip-bottom span.tooltip-content,
   .tooltip-edit span.tooltip-content,
+  .status-icon span.tooltip-content,
   .tooltip span.tooltip-content {
     position: absolute;
     display: none;
@@ -2866,6 +2875,7 @@ body a.submit-button,
     width: 300px; }
     .tooltip-bottom span.tooltip-content:after,
     .tooltip-edit span.tooltip-content:after,
+    .status-icon span.tooltip-content:after,
     .tooltip span.tooltip-content:after {
       content: '';
       width: 0;
@@ -2880,6 +2890,7 @@ body a.submit-button,
       margin-left: -25px; }
   .tooltip-bottom:hover span.tooltip-content,
   .tooltip-edit:hover span.tooltip-content,
+  .status-icon:hover span.tooltip-content,
   .tooltip:hover span.tooltip-content {
     display: block; }
 
@@ -2909,11 +2920,56 @@ body a.submit-button,
     display: block;
     display: inline-block; }
   .tooltip-edit span.tooltip-content {
-    color: #1e2635;
-    background-color: #f0b629;
-    font-weight: normal; }
+    position: absolute;
+    display: none;
+    color: #fff;
+    font-size: 13px;
+    line-height: 22px;
+    background-color: #1e2635;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-style: normal;
+    bottom: 30px;
+    right: -150px;
+    width: 300px; }
     .tooltip-edit span.tooltip-content:after {
-      border-top: 20px solid #f0b629; }
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      display: block;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #1e2635;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -25px; }
+  .tooltip-edit:hover span.tooltip-content {
+    display: block; }
+
+#project-listings .status-icon {
+  width: 18px;
+  background-position: 0 -145px;
+  width: 18px;
+  height: 16px;
+  display: block;
+  display: inline-block; }
+  #project-listings .status-icon:hover {
+    background-position: 0 -129px;
+    width: 18px;
+    height: 16px;
+    display: block;
+    display: inline-block; }
+  #project-listings .status-icon:active {
+    background-position: 0 -129px;
+    width: 18px;
+    height: 16px;
+    display: block;
+    display: inline-block; }
+  #project-listings .status-icon span.tooltip-content {
+    font-weight: 700; }
+  #project-listings .status-icon:focus span.tooltip-content {
+    display: block; }
 
 #ict-dashboard-overview-number-indicators {
   background-color: #e5eaf3;
@@ -3238,6 +3294,40 @@ div.tooltip-edit {
       margin: 0;
       line-height: 1.5em; }
 
+.rebaseline-indicate {
+  display: block;
+  font-family: 'Open Sans';
+  color: #4e5365;
+  font-size: 13px;
+  font-style: italic;
+  text-align: left; }
+
+.rebaseline-privious-project-list {
+  padding-left: 38px !important; }
+
+.rebaseline-info {
+  display: block;
+  font-family: 'Open Sans';
+  color: #fff;
+  font-size: 13px;
+  font-style: italic;
+  text-align: left;
+  margin-bottom: 24px; }
+
+.project-title-info {
+  margin-bottom: 0; }
+
+#content .project-program-link {
+  color: #0d6c88;
+  text-decoration: underline; }
+  #content .project-program-link:hover {
+    color: #0d6c88;
+    text-decoration: none; }
+  #content .project-program-link:visited {
+    color: #0d6c88; }
+  #content .project-program-link:focus {
+    color: #0d6c88; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
@@ -3309,8 +3399,11 @@ style a page via class
 /*********************
 LAYOUT & GRID STYLES
 *********************/
+#container {
+  width: 100%;
+  overflow: hidden; }
+
 .wrap {
-  width: 96%;
   margin: 0 auto; }
 
 /*********************
@@ -3371,53 +3464,223 @@ h5, .h5 {
 HEADER STYLES
 *********************/
 .header {
-  background-color: #323944; }
-
-#logo {
-  margin: 0.75em 0; }
-  #logo a {
-    color: #fff; }
-
-/*********************
-NAVIGATION STYLES
-*********************/
-/*
-all navs have a .nav class applied via
-the wp_menu function; this is so we can
-easily write one group of styles for
-the navs on the site so our css is cleaner
-and more scalable.
-*/
-.nav {
-  border-bottom: 0;
-  margin: 0;
-  /* end .menu li */
-  /* highlight current page */
-  /* end current highlighters */ }
-  .nav li {
-    /*
-    so you really have to rethink your dropdowns for mobile.
-    you don't want to have it expand too much because the
-    screen is so small. How you manage your menu should
-    depend on the project. Here's some great info on it:
-    http://www.alistapart.com/articles/organizing-mobile/
-    */ }
-    .nav li a {
-      display: block;
-      color: #4e5365;
+  position: relative;
+  background: url(../images/header-bg.png) repeat-x scroll 0 0 #17716b;
+  padding-left: 20px;
+  padding-right: 20px;
+  /*********************
+  LOGIN AND REGISTER
+  *********************/
+  	/*********************
+      NAVIGATION STYLES
+      *********************/
+  /*********************
+  USER TOOLS
+  *********************/ }
+  .header #logo {
+    margin: 30px 0 15px;
+    overflow: hidden;
+    font-size: 34px;
+    text-transform: uppercase; }
+    .header #logo > a {
+      color: #fff;
+      float: left; }
+      .header #logo > a img {
+        width: 93px; }
+    .header #logo span {
+      font-size: 28px;
+      line-height: 28px;
+      margin-left: 15px;
+      margin-top: 5px;
+      float: left; }
+      .header #logo span a {
+        color: #fff;
+        font-size: 26px;
+        line-height: 30px; }
+        .header #logo span a strong {
+          letter-spacing: 1.5px;
+          font-weight: 700;
+          font-family: "PT Sans", sans-serif; }
+  .header .login-register {
+    float: right;
+    margin: 5px 0 10px; }
+    .header .login-register ul {
+      margin: 0; }
+      .header .login-register ul li {
+        float: left; }
+        .header .login-register ul li a {
+          font-size: 15px;
+          font-weight: 600;
+          text-decoration: none;
+          text-align: center;
+          line-height: 37px;
+          margin-left: 20px; }
+        .header .login-register ul li.reg a {
+          color: #d5ff92; }
+          .header .login-register ul li.reg a:hover {
+            text-decoration: underline; }
+        .header .login-register ul li.log a {
+          color: #fff;
+          background: url(../images/register-btn.png) no-repeat scroll 0 0;
+          width: 81px;
+          height: 41px;
+          display: block; }
+          .header .login-register ul li.log a:hover {
+            background-position: 0 -41px; }
+  .header #navigation {
+    		/*
+            all navs have a .nav class applied via
+            the wp_menu function; this is so we can
+            easily write one group of styles for
+            the navs on the site so our css is cleaner
+            and more scalable.
+            */
+    float: left;
+    /* end .nav */ }
+    .header #navigation .slicknav_menu .slicknav_btn {
+      color: #fff;
       text-decoration: none;
-      padding: 0.75em;
-      /*
-      remember this is for mobile ONLY, so there's no need
-      to even declare hover styles here, you can do it in
-      the style.scss file where it's relevant. We want to
-      keep this file as small as possible!
-      */ }
-    .nav li ul.sub-menu li a,
-    .nav li ul.children li a {
-      padding-left: 30px; }
+      display: block;
+      padding: 15px 25px 24px 65px;
+      margin: 0 0 0 -20px;
+      border-radius: 0; }
+      .header #navigation .slicknav_menu .slicknav_btn .slicknav_menutxt {
+        font-weight: 600;
+        font-size: 15px; }
+      .header #navigation .slicknav_menu .slicknav_btn.slicknav_open {
+        background-color: #0c5c57; }
+      .header #navigation .slicknav_menu .slicknav_btn .slicknav_icon {
+        position: absolute;
+        left: 20px;
+        top: 8px;
+        float: left; }
+        .header #navigation .slicknav_menu .slicknav_btn .slicknav_icon .slicknav_icon-bar {
+          margin-top: 6px;
+          background-color: #fff;
+          display: block;
+          height: 2px;
+          width: 30px; }
+    .header #navigation .slicknav_menu .slicknav_nav {
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      background-color: #17716B;
+      margin-left: -20px; }
+      .header #navigation .slicknav_menu .slicknav_nav li {
+        border-top: 1px solid #09514c;
+        border-bottom: none; }
+        .header #navigation .slicknav_menu .slicknav_nav li a {
+          position: relative;
+          font-size: 15px;
+          color: #fff;
+          text-transform: none;
+          font-weight: 600; }
+          .header #navigation .slicknav_menu .slicknav_nav li a:hover, .header #navigation .slicknav_menu .slicknav_nav li a.active {
+            background-color: #0c5c57; }
+          .header #navigation .slicknav_menu .slicknav_nav li a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 4px; }
+        .header #navigation .slicknav_menu .slicknav_nav li.blue a:before {
+          background: #2ea5c2; }
+        .header #navigation .slicknav_menu .slicknav_nav li.blue-green a:before {
+          background: #3ac3cf; }
+        .header #navigation .slicknav_menu .slicknav_nav li.green a:before {
+          background: #42b46e; }
+        .header #navigation .slicknav_menu .slicknav_nav li.yellow-text a:before {
+          background: #d5ff92; }
+        .header #navigation .slicknav_menu .slicknav_nav li.salad a:before {
+          background: #91d053; }
+        .header #navigation .slicknav_menu .slicknav_nav li.yellow-green a:before {
+          background: #97d389; }
+    .header #navigation .nav {
+      border-bottom: 0;
+      margin: 0;
+      /* end .menu li */
+      /* highlight current page */
+      /* end current highlighters */ }
+      .header #navigation .nav#main-menu {
+        display: none; }
+      .header #navigation .nav li {
+        				/*
+                        so you really have to rethink your dropdowns for mobile.
+                        you don't want to have it expand too much because the
+                        screen is so small. How you manage your menu should
+                        depend on the project. Here's some great info on it:
+                        http://www.alistapart.com/articles/organizing-mobile/
+                        */ }
+        .header #navigation .nav li a {
+          display: block;
+          color: #4e5365;
+          text-decoration: none;
+          padding: 0.75em;
+          					/*
+                              remember this is for mobile ONLY, so there's no need
+                              to even declare hover styles here, you can do it in
+                              the style.scss file where it's relevant. We want to
+                              keep this file as small as possible!
+                              */ }
+        .header #navigation .nav li ul.sub-menu li a,
+        .header #navigation .nav li ul.children li a {
+          padding-left: 30px; }
+  .header .user-tools {
+    position: absolute;
+    right: 20px;
+    top: 129px; }
+    .header .user-tools > div span {
+      font-size: 14px;
+      color: #d5ff92;
+      background: url(../images/user-icon.png) no-repeat scroll 0 0 transparent;
+      padding: 0 0 0 25px;
+      display: inline-block; }
+    .header .user-tools > div .user-option {
+      display: inline-block;
+      margin-left: 20px;
+      height: 24px; }
+      .header .user-tools > div .user-option a.arrowdown {
+        border: 1px solid transparent;
+        color: #d5ff92;
+        display: block;
+        height: 25px;
+        outline: 0 none;
+        text-align: center;
+        width: 22px; }
+        .header .user-tools > div .user-option a.arrowdown i {
+          font-size: 10px;
+          vertical-align: 3px; }
+        .header .user-tools > div .user-option a.arrowdown:hover {
+          border: 1px solid #d5ff92;
+          border-radius: 3px; }
+        .header .user-tools > div .user-option a.arrowdown.active {
+          background-color: #07524d;
+          border-radius: 3px 3px 0 0; }
+          .header .user-tools > div .user-option a.arrowdown.active:hover {
+            border: 1px solid transparent; }
+      .header .user-tools > div .user-option ul {
+        background-color: #07524d;
+        border-radius: 3px 0 3px 3px;
+        display: none;
+        margin: 0;
+        padding: 5px 15px;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        width: 160px; }
+        .header .user-tools > div .user-option ul li {
+          border-top: 1px solid #11655f; }
+          .header .user-tools > div .user-option ul li:first-child {
+            border-top: 0 none; }
+          .header .user-tools > div .user-option ul li a {
+            font-size: 14px;
+            color: #fff;
+            text-decoration: none;
+            line-height: 27px; }
+            .header .user-tools > div .user-option ul li a:hover {
+              color: #d5ff92; }
 
-/* end .nav */
 /*********************
 POSTS & CONTENT STYLES
 *********************/
@@ -3771,7 +4034,7 @@ This is for devices like the Galaxy Note or something that's
 larger than an iPhone but smaller than a tablet. Let's call them
 tweeners.
 *********************/
-@media only screen and (min-width: 481px) {
+@media all and (min-width: 480px) {
   /******************************************************************
   Site Name:
   Author:
@@ -3850,7 +4113,7 @@ This is the average viewing window. So Desktops, Laptops, and
 in general anyone not viewing on a mobile device. Here's where
 you can add resource intensive styles.
 *********************/
-@media only screen and (min-width: 768px) {
+@media all and (min-width: 768px) {
   /******************************************************************
   Site Name:
   Author:
@@ -3891,33 +4154,44 @@ you can add resource intensive styles.
   HEADER STYLES
   *********************/
   .header {
-    background: url(../images/header-bg.png) repeat-x scroll 0 0 #17716b;
-    height: 134px; }
+    height: 134px;
+    /*********************
+    USER TOOLS
+    *********************/ }
     .header #inner-header {
       vertical-align: middle;
       position: relative; }
     .header #logo {
       text-align: left;
       margin: 26px 0;
-      font-size: 30px;
       text-transform: uppercase; }
       .header #logo img {
         float: left;
-        margin-right: 17px; }
+        margin-right: 8px;
+        margin-bottom: 3px; }
       .header #logo span {
         font-weight: 300;
         display: inline-block;
         margin-top: 7px;
+        margin-left: 9px;
         font-style: normal;
         line-height: 36px;
         letter-spacing: .6px; }
-        .header #logo span strong {
-          letter-spacing: 1.7px;
-          font-weight: 700;
-          font-family: "PT Sans", sans-serif; }
+        .header #logo span a {
+          font-size: 34px;
+          line-height: 36px; }
+          .header #logo span a strong {
+            letter-spacing: 1.7px; }
       .header #logo > * {
         vertical-align: middle;
         display: inline-block; }
+      .header #logo > a {
+        margin-top: 1px; }
+        .header #logo > a img {
+          width: auto; }
+    .header .user-tools {
+      right: 0;
+      top: 58px; }
 
   /*********************
   CONTENT STYLES
@@ -4119,7 +4393,10 @@ you can add resource intensive styles.
               #content #project-listings .project-lists table tr td.title a:hover {
                 text-decoration: none; }
           #content #project-listings .project-lists table tr td.dates {
-            width: 153px; }
+            width: 153px;
+            padding-right: 35px; }
+          #content #project-listings .project-lists table tr td.status-project {
+            text-align: center; }
           #content #project-listings .project-lists table tr td.update {
             text-align: center;
             border-right: 1px solid #abb6cb; }
@@ -5080,203 +5357,129 @@ you can add resource intensive styles.
       border-bottom: 1px solid #dbdde0; }
 
   /*********************
-  NAVIGATION STYLES
-  *********************/
-  #navigation {
-    left: 374px;
-    max-height: 134px;
-    overflow: hidden;
-    position: absolute;
-    top: 0; }
-
-  .nav {
-    border: 0;
-    /* end .menu ul li */
-    /* highlight current page */
-    /* end current highlighters */ }
-    .nav ul {
-      background: #323944;
-      margin-top: 0; }
-    .nav li {
-      float: left;
-      position: relative;
-      /*
-      plan your menus and drop-downs wisely.
-      */
-      /* showing sub-menus */ }
-      .nav li a {
-        border-bottom: 0 none;
-        color: #ffffff;
-        font-size: 15px;
-        font-weight: 600;
-        padding: 57px 0;
-        text-align: center;
-        /*
-        you can use hover styles here even though this size
-        has the possibility of being a mobile device.
-        */ }
-        .nav li a:hover, .nav li a:focus {
-          text-decoration: none;
-          background-color: #0c5c57;
-          color: #fff; }
-      .nav li.blue {
-        width: 68px; }
-        .nav li.blue:before {
-          background: #2ea5c2; }
-      .nav li.blue-green {
-        width: 74px; }
-        .nav li.blue-green:before {
-          background: #3ac3cf; }
-      .nav li.green {
-        width: 85px; }
-        .nav li.green:before {
-          background: #42b46e; }
-      .nav li.yellow-text {
-        width: 98px; }
-        .nav li.yellow-text:before {
-          background: #d5ff92; }
-      .nav li.salad {
-        width: 98px; }
-        .nav li.salad:before {
-          background: #91d053; }
-      .nav li.yellow-green {
-        width: 103px; }
-        .nav li.yellow-green:before {
-          background: #97d389; }
-      .nav li:before {
-        height: 4px;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: #2ea5c2;
-        content: " "; }
-      .nav li ul.sub-menu,
-      .nav li ul.children {
-        margin-top: 0;
-        border: 1px solid #ccc;
-        border-top: 0;
-        position: absolute;
-        visibility: hidden;
-        z-index: 8999;
-        /* highlight sub-menu current page */ }
-        .nav li ul.sub-menu li,
-        .nav li ul.children li {
-          position: relative;
-          /*
-          if you need to go deeper, go nuts
-          just remember deeper menus sucki do
-          for usability. k, bai.
-          */ }
-          .nav li ul.sub-menu li a,
-          .nav li ul.children li a {
-            padding-left: 10px;
-            border-right: 0;
-            display: block;
-            width: 180px;
-            border-bottom: 1px solid #ccc; }
-            .nav li ul.sub-menu li a:hover, .nav li ul.sub-menu li a:focus,
-            .nav li ul.children li a:hover,
-            .nav li ul.children li a:focus {
-              color: #323944; }
-          .nav li ul.sub-menu li:last-child a,
-          .nav li ul.children li:last-child a {
-            border-bottom: 0; }
-          .nav li ul.sub-menu li ul,
-          .nav li ul.children li ul {
-            top: 0;
-            left: 100%; }
-      .nav li:hover > ul {
-        top: auto;
-        visibility: visible; }
-
-  /* end .nav */
-  /*********************
   LOGIN AND REGISTER
   *********************/
-  .login-register {
-    position: absolute;
-    top: 25px;
-    right: 0; }
-    .login-register ul li {
-      float: left; }
-      .login-register ul li a {
-        font-size: 15px;
-        font-weight: 600;
-        text-decoration: none;
-        text-align: center;
-        line-height: 37px;
-        margin-left: 20px; }
-      .login-register ul li.reg a {
-        color: #d5ff92; }
-        .login-register ul li.reg a:hover {
-          text-decoration: underline; }
-      .login-register ul li.log a {
-        color: #fff;
-        background: url(../images/register-btn.png) no-repeat scroll 0 0;
-        width: 81px;
-        height: 41px;
-        display: block; }
-        .login-register ul li.log a:hover {
-          background-position: 0 -41px; }
-
-  /*********************
-  USER TOOLS
-  *********************/
-  .user-tools {
-    position: absolute;
-    right: 0;
-    top: 58px; }
-    .user-tools > div span {
-      font-size: 14px;
-      color: #d5ff92;
-      background: url(../images/user-icon.png) no-repeat scroll 0 0 transparent;
-      padding: 0 0 0 25px;
-      display: inline-block; }
-    .user-tools > div .user-option {
-      display: inline-block;
-      margin-left: 20px;
-      height: 24px; }
-      .user-tools > div .user-option a.arrowdown {
-        border: 1px solid transparent;
-        color: #d5ff92;
-        display: block;
-        height: 25px;
-        outline: 0 none;
-        text-align: center;
-        width: 22px; }
-        .user-tools > div .user-option a.arrowdown i {
-          font-size: 10px;
-          vertical-align: 3px; }
-        .user-tools > div .user-option a.arrowdown:hover {
-          border: 1px solid #d5ff92;
-          border-radius: 3px; }
-        .user-tools > div .user-option a.arrowdown.active {
-          background-color: #07524d;
-          border-radius: 3px 3px 0 0; }
-          .user-tools > div .user-option a.arrowdown.active:hover {
-            border: 1px solid transparent; }
-      .user-tools > div .user-option ul {
-        background-color: #07524d;
-        border-radius: 3px 0 3px 3px;
-        display: none;
-        margin: 0;
-        padding: 5px 15px;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        width: 160px; }
-        .user-tools > div .user-option ul li {
-          border-top: 1px solid #11655f; }
-          .user-tools > div .user-option ul li:first-child {
-            border-top: 0 none; }
-          .user-tools > div .user-option ul li a {
-            font-size: 14px;
-            color: #fff;
-            text-decoration: none;
-            line-height: 27px; }
-            .user-tools > div .user-option ul li a:hover {
-              color: #d5ff92; }
+  .header {
+    	/*********************
+        NAVIGATION STYLES
+        *********************/ }
+    .header .login-register {
+      position: absolute;
+      top: 25px;
+      right: 0; }
+      .header .login-register ul {
+        margin: 1em 0; }
+    .header #navigation {
+      left: 374px;
+      max-height: 134px;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      /* end .nav */ }
+      .header #navigation .slicknav_menu {
+        display: none; }
+      .header #navigation .nav {
+        border: 0;
+        /* end .menu ul li */
+        /* highlight current page */
+        /* end current highlighters */ }
+        .header #navigation .nav#main-menu {
+          display: block; }
+        .header #navigation .nav ul {
+          background: #323944;
+          margin-top: 0; }
+        .header #navigation .nav li {
+          float: left;
+          position: relative;
+          				/*
+                          plan your menus and drop-downs wisely.
+                          */
+          /* showing sub-menus */ }
+          .header #navigation .nav li a {
+            border-bottom: 0 none;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 57px 0;
+            text-align: center;
+            					/*
+                                you can use hover styles here even though this size
+                                has the possibility of being a mobile device.
+                                */ }
+            .header #navigation .nav li a:hover, .header #navigation .nav li a:focus {
+              text-decoration: none;
+              background-color: #0c5c57;
+              color: #fff; }
+          .header #navigation .nav li.blue {
+            width: 68px; }
+            .header #navigation .nav li.blue:before {
+              background: #2ea5c2; }
+          .header #navigation .nav li.blue-green {
+            width: 74px; }
+            .header #navigation .nav li.blue-green:before {
+              background: #3ac3cf; }
+          .header #navigation .nav li.green {
+            width: 85px; }
+            .header #navigation .nav li.green:before {
+              background: #42b46e; }
+          .header #navigation .nav li.yellow-text {
+            width: 98px; }
+            .header #navigation .nav li.yellow-text:before {
+              background: #d5ff92; }
+          .header #navigation .nav li.salad {
+            width: 98px; }
+            .header #navigation .nav li.salad:before {
+              background: #91d053; }
+          .header #navigation .nav li.yellow-green {
+            width: 103px; }
+            .header #navigation .nav li.yellow-green:before {
+              background: #97d389; }
+          .header #navigation .nav li:before {
+            height: 4px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #2ea5c2;
+            content: " "; }
+          .header #navigation .nav li ul.sub-menu,
+          .header #navigation .nav li ul.children {
+            margin-top: 0;
+            border: 1px solid #ccc;
+            border-top: 0;
+            position: absolute;
+            visibility: hidden;
+            z-index: 8999;
+            /* highlight sub-menu current page */ }
+            .header #navigation .nav li ul.sub-menu li,
+            .header #navigation .nav li ul.children li {
+              position: relative;
+              						/*
+                                      if you need to go deeper, go nuts
+                                      just remember deeper menus sucki do
+                                      for usability. k, bai.
+                                      */ }
+              .header #navigation .nav li ul.sub-menu li a,
+              .header #navigation .nav li ul.children li a {
+                padding-left: 10px;
+                border-right: 0;
+                display: block;
+                width: 180px;
+                border-bottom: 1px solid #ccc; }
+                .header #navigation .nav li ul.sub-menu li a:hover, .header #navigation .nav li ul.sub-menu li a:focus,
+                .header #navigation .nav li ul.children li a:hover,
+                .header #navigation .nav li ul.children li a:focus {
+                  color: #323944; }
+              .header #navigation .nav li ul.sub-menu li:last-child a,
+              .header #navigation .nav li ul.children li:last-child a {
+                border-bottom: 0; }
+              .header #navigation .nav li ul.sub-menu li ul,
+              .header #navigation .nav li ul.children li ul {
+                top: 0;
+                left: 100%; }
+          .header #navigation .nav li:hover > ul {
+            top: auto;
+            visibility: visible; }
 
   /*********************
   SIDEBARS & ASIDES
@@ -5421,7 +5624,7 @@ This is the average viewing window. So Desktops, Laptops, and
 in general anyone not viewing on a mobile device. Here's where
 you can add resource intensive styles.
 *********************/
-@media only screen and (min-width: 1030px) {
+@media all and (min-width: 1024px) {
   /******************************************************************
   Site Name:
   Author:
@@ -5444,7 +5647,7 @@ you can add resource intensive styles.
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
 *********************/
-@media only screen and (min-width: 1240px) {
+@media all and (min-width: 1240px) {
   /******************************************************************
   Site Name: 
   Author: 
@@ -5569,10 +5772,3 @@ be set to display none.
   .respond-form,
   nav {
     display: none; } }
-@media screen and (max-width: 767px) {
-  /* #menu is the original menu */
-  .js #main-menu {
-    display: none; }
-
-  .js .slicknav_menu {
-    display: block; } }

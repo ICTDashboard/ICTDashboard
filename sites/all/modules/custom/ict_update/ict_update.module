@@ -176,7 +176,9 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     'ict_project_baseline_admin_user_details', array(
       'departmental_admins' => $project_admins['departmental_admins'],
       'data_editors' => $project_admins['data_editors'],
-      'data_approvers' => $project_admins['data_approvers']
+      'data_approvers' => $project_admins['data_approvers'],
+      'project_id' => $project_id,
+      'view_mode' => 'full'
     )
   );
 
@@ -277,13 +279,19 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
   );
 
-  if(!array_key_exists(ICT_FINANCE_ADMIN_ROLE,$user->roles)) {  
-    foreach ($form['field_benefits_realised']['und'] as $key => $value) {
-      if(is_numeric($key)) {
+  // only Finance Admin can remve benefits
+  foreach ($form['field_benefits_realised']['und'] as $key => $value) {
+    if(is_numeric($key)) {
+      if (empty($form['field_benefits_realised']['und'][$key]['#entity']->field_removed) && !array_key_exists(ICT_FINANCE_ADMIN_ROLE,$user->roles)) {
         unset($form['field_benefits_realised']['und'][$key]['field_status']['und']['#options']['removed']);
+      }
+      // and they should stay removed if someone else is updating the project
+      else {
+        $form['field_benefits_realised']['und'][$key]['field_status']['und']['#default_value'] = array('removed');
       }
     }
   }
+
 }
 
 function ict_update_node_form_after_build($form) {
@@ -336,6 +344,9 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
           <a href="' . url('benefit/history/' . $budget_table[$key]['field_previous_collection']['und']['#value']) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
           </div>'
       );
+
+      // title is not editable
+      $budget_table[$key]['field_benefit'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
     }
     if (!$items_count) {
       foreach(element_children($budget_table) as $key) {
@@ -379,6 +390,9 @@ function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = arr
           <a href="' . url('benefit/history/' . $prev_collection) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
           </div>'
       );
+
+      // title is not editable
+      $budget_table[$key]['field_benefit'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
     }
     if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['current_item_id'])) {
       $budget_table[$key]['current_item_id'] = array(
@@ -1154,7 +1168,7 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
  * Implements hook_node_access().
  */
 function ict_update_node_access($node, $op, $account) {
-  if ($node == 'update' || $node->type == 'update') {
+  if ($node == 'update' || (!empty($node->type) && $node->type == 'update')) {
     if (empty($node->nid)) {
       return NODE_ACCESS_DENY;
     }
@@ -1217,7 +1231,8 @@ function ict_update_get_actual_benefits($project_id) {
     $benefits = $last_update->field_benefits_realised->value();
   }
   foreach($benefits as $key => $val) {
-    if ($val->field_removed['und'][0]['value'] || $val->field_status['und'][0]['value'] == 'removed') {
+    if ((!empty($val->field_removed['und'][0]['value']) && $val->field_removed['und'][0]['value']) ||
+      $val->field_status['und'][0]['value'] == 'removed') {
       unset($benefits[$key]);
     }
   }
@@ -1227,6 +1242,7 @@ function ict_update_get_actual_benefits($project_id) {
 
 function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
   $subquery = db_select('field_data_field_project');
+  $subquery->condition('bundle', 'update');
   $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));
   $subquery->addField('field_data_field_project', 'field_project_target_id', 'project_id');
   $subquery->addExpression('MAX(entity_id)', 'last_upd_id');
@@ -1244,6 +1260,13 @@ function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
   }
   if (is_numeric($project_id)) {
     $query->condition('project.nid', $project_id);
+  }
+  else {
+    // get only active projects
+    $active_projects = ict_project_get_all_active_projects();
+    if ($active_projects) {
+      $query->condition('project.nid', $active_projects, 'IN');
+    }
   }
   $count = $query->execute()->rowCount();
 

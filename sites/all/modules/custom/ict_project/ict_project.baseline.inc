@@ -436,7 +436,6 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
       form_set_error('field_start_date][und][0', t('<em>Original Approved Start Date</em> cannot be later than <em>Original Approved Completion Date </em>'));
     }
   }
-
   ict_update_benefits_realised_validate($form, $form_state);
   ict_project_budget_by_year_validate($form, $form_state);
 }
@@ -497,36 +496,63 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
 
 function ict_project_budget_by_year_validate($form, &$form_state) {
   $budget_values = $form_state['values']['field_original_total_budget'][LANGUAGE_NONE];
+  $budget_sum = 0;
   $current_fin_year = __ict_project_get_current_fin_year();
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
-      if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
-        $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
-        if ($form['#node']->type == 'update' && $year != $current_fin_year) {
-          continue;
-        }
-        form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
-          '!year' => $year
-        )));
+
+    if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
+      $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
+      if ($form['#node']->type == 'update' && $year != $current_fin_year) {
+        continue;
       }
+      form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
+        '!year' => $year
+      )));
+    }
+    elseif ($value['field_total'][LANGUAGE_NONE][0]['value'] < 0) {
+      form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> cannot be negative'));
+    }
+    else {
+      $budget_sum += $value['field_total'][LANGUAGE_NONE][0]['value'];
+    }
+  }
+
+  if ($budget_sum < 10) {
+    form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Total Project Budget in baseline project has to be greater or equal to $10m'));
   }
 }
 
 function ict_project_budget_by_year_preview_page_validate($node, &$errors) {
   $node_wrapper = entity_metadata_wrapper('node', $node);
   $budget_values = $node_wrapper->field_original_total_budget->value();
+  $type = $node_wrapper->getBundle();
+  $budget_sum = 0;
   $current_fin_year = __ict_project_get_current_fin_year();
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
+
     if (empty($value->field_total[LANGUAGE_NONE][0]['value'])) {
       $year = $value->field_year[LANGUAGE_NONE][0]['value'];
       if ($node->type == 'update' && $year != $current_fin_year) {
         continue;
       }
-      $errors[] = t(t('Field <em>Budget Value</em> is required for !year Financial Year', array(
+      $errors[] = t('Field <em>Budget Value</em> is required for !year Financial Year', array(
         '!year' => $year
-      )));
+      ));
     }
+    elseif ($value->field_total[LANGUAGE_NONE][0]['value'] < 0) {
+      $field_name = $type == 'project' ? 'Budget Value' : 'Expenditure Value';
+
+      $errors[] = t('Field <em>!field_name</em> cannot be negative', array('!field_name' => $field_name));
+    }
+    elseif ($type == 'project') {
+      $budget_sum += $value->field_total[LANGUAGE_NONE][0]['value'];
+    }
+  }
+
+  if ($budget_sum < 10 & $type == 'project') {
+    $errors[] = t('Total Project Budget has to be greater or equal to $10m');
   }
 }
 
@@ -654,6 +680,10 @@ function ict_project_get_parent_project ($node) {
     return $node->field_project[LANGUAGE_NONE][0]['target_id'];
   }
 
+if (!empty($node->field_project_target_id)) {
+    return $node->field_project_target_id;
+  }
+  
   return FALSE;
 }
 
@@ -681,6 +711,10 @@ function ict_project_get_last_rebaseline_project($nid) {
       }
     } while(!$last_baseline);
   }
+  else {
+    return $nid;
+  }
+
   return $rebaseline;
 }
 
@@ -877,6 +911,7 @@ function ict_project_get_old_baselines($nid) {
       $old_baselines[$project_id]->approved_on = ict_project_get_approve_date($project_id);
       $old_baselines[$project_id]->unpublished_on = ict_project_get_unpublished_date($project_id);
       $old_baselines[$project_id]->field_original_total_budget = number_format(ict_project_get_total_budget($project_id), 2, '.', ' ');
+      $old_baselines[$project_id]->first_update = ict_project_get_first_approved_update($project_id);
 
       $last_update = ict_project_get_last_update($project_id);
       $old_baselines[$project_id]->last_update = $last_update ?
