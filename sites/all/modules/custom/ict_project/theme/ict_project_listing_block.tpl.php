@@ -153,7 +153,7 @@
                 <?php endif; ?>
 
                 <?php if (ict_update_edit_allowed($project->nid, $project->update_id)) : ?>
-                  <a href="<?php print url('update/' . $update_id . '/edit'); ?>">
+                  <a href="<?php print url('update/' . $project->update_id . '/edit'); ?>">
                     <span><?php print t('Edit Update Draft'); ?></span>
                   </a>
                 <?php endif; ?>
@@ -165,7 +165,7 @@
                 <?php endif; ?>
 
                 <?php if (ict_update_delete_allowed($project->nid, $project->update_id)) : ?>
-                  <a href="<?php print url('node/' . $update_id .'/delete', array(
+                  <a href="<?php print url('node/' . $project->update_id .'/delete', array(
                           'query' => array('destination' => 'projects')
                       )
                   ); ?>">
