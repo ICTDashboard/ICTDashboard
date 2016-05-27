@@ -1701,51 +1701,68 @@ mobile. Make sure to double check these!
 .footer {
 	background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
 	border-top: 1px solid #03a7a4;
-
-	height: 90px;
 	clear: both;
-    margin-top: -60px;
+    margin-top: -30px;
     position: relative;
     z-index: 10;
-
 	#inner-footer {
-		.copy {
-			width: 80%;
-			float: right;
-			text-align: right;
-			color: #363a41;
-			margin: 1.5em 0 0;
-		}
-		.menu{
-			display: inline-block;
-			margin-top: 15px;
-			margin-bottom: 0;
-			li{
-				display: inline;
-				&:before{
-					content: '\00b7';
-					color: #137992;
-					font-size: 26px;
-					padding: 5px 5px 5px 3px;
-					vertical-align: -4px;
-					line-height: 26px;
-				}
-				&:first-child:before{
-					content: '';
-					padding: 0;
-				}
-				a{
-					color: #363a41;
-					text-decoration: underline;
-					&:hover{
-						text-decoration: none;
+		.wrap.cf {
+			width: 100%;
+			min-width: 100%;
+			.copy {
+				margin: 0;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				width: 70%;
+				float: left;
+				color: #363a41;
+				text-align: left;
+				padding-left: 20px;
+			}
+			.menu{
+				display: inline-block;
+				margin-top: 15px;
+				margin-bottom: 0;
+				width: 100%;
+				padding-left: 20px;
+				li{
+					display: inline;
+					&:before{
+						content: '\00b7';
+						color: #137992;
+						font-size: 26px;
+						padding: 5px 5px 5px 3px;
+						vertical-align: -4px;
+						line-height: 26px;
+					}
+					&:first-child:before{
+						content: '';
+						padding: 0px;
+					}
+					&.last {
+						right: 25px;
+						&:before{
+							content: '';
+							padding: 0;
+						}
+					}
+					a{
+						color: #363a41;
+						text-decoration: underline;
+						&:hover{
+							text-decoration: none;
+						}
 					}
 				}
 			}
-		}
-		.copy.second-copy{
-			margin: 0;
-			margin-top: 7px;
+			.copy.second-copy{
+				margin: 0;
+				margin-top: 10px;
+				float: right;
+				width: 30%;
+				text-align: right;
+				padding-right: 25px;
+			}
 		}
 	}
 }

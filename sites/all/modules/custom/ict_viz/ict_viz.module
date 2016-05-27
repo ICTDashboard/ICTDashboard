@@ -358,4 +358,5 @@ function ict_project_preprocess_all_benefits_pie_chart (&$vars) {
     ),
     'setting'
   );
+  $vars['benefits'] = $benefit_counter;
 }

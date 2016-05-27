@@ -61,3 +61,6 @@
     });
   })(jQuery);
 </script>
+<div class="viz-number-of-benefits">
+  <?php print t('Total Number of Project Benefits:'); ?></strong> <?php print $benefits; ?>
+</div>
