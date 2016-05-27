@@ -1,0 +1,16 @@
+name = ICT Content - Feature 1
+description = Should be enabled, reverted and disabled.
+core = 7.x
+package = ICT Content
+version = 7.x-1.01
+dependencies[] = bean
+dependencies[] = bean_admin_ui
+dependencies[] = bean_uuid
+dependencies[] = uuid_features
+__drupal_alter_by_ref[][bean][prject_list_description] = prject_list_description
+__drupal_alter_by_ref[][bean][home_page_main_copy] = home_page_main_copy
+__drupal_alter_by_ref[][bean][sign_in_helptext] = sign_in_helptext
+features[features_api][] = api:2
+features[uuid_bean][] = 03921703-a9f4-428e-8168-bdcbce2acefc
+features[uuid_bean][] = 52b0ada2-8235-4209-a9ed-9c5e4ad117a1
+features[uuid_bean][] = 8bd1cb21-c896-48ec-b39b-97b7c5ee15d3
