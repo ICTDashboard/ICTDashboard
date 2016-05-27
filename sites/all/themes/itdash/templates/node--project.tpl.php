@@ -16,7 +16,7 @@
 <?php print theme('ict_pages_last_update', array('nid' => $nid)); ?>
 
 <div id="inner-content" class="wrap cf">
-  <h2><?php print t('Project Information'); ?></h2>
+  <h2 class= "individual-project-page"><?php print t('Project Information'); ?></h2>
   <div class="project-draft-submission d-all ict-view-page">
 
     <div class="row">
