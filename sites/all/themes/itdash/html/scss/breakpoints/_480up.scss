@@ -108,6 +108,18 @@ POSTS & CONTENT STYLES
 			    	text-decoration: none;
 			    }
 		    }
+		    .view-baseline-tooltip {
+				span {
+					right: 0;
+					bottom: -50px;
+					font-size: 12px;
+					width: 280px;
+				}
+				span::after {
+					border-left: none;
+					border-right: none;
+				}
+			}
 	    }
 	}
 	#inner-content {
