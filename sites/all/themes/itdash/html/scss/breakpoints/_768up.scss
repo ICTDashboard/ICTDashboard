@@ -30,11 +30,12 @@ body > #container { height: auto; min-height: 100%; }
 LAYOUT & GRID STYLES
 *********************/
 
-.wrap {
-	width: 768px;
-	min-width: 768px;
-	padding: 0;
-}
+// .wrap {
+// 	width: 970px;
+// 	min-width: 970px;
+// 	padding: 0;
+// }
+
 
 /*********************
 HEADER STYLES
@@ -95,6 +96,17 @@ HEADER STYLES
 /*********************
 CONTENT STYLES
 *********************/
+#content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+	float: none;
+}
+
+#content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+	margin: 15px 10px;
+	span {
+		width: 20px;
+	}
+}
+
 #content {
 	color: #4e5365;
 	margin: 0;
@@ -375,8 +387,8 @@ CONTENT STYLES
 							}
 
 						}
-
 						&.dates { width: 153px; padding-right: 35px; }
+						&.status-project { text-align: center; }
 						&.update {
 							text-align: center;
 							border-right: 1px solid #abb6cb;
