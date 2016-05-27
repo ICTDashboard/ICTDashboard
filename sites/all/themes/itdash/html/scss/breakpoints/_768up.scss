@@ -31,8 +31,8 @@ LAYOUT & GRID STYLES
 *********************/
 
 .wrap {
-	width: 970px;
-	min-width: 970px;
+	width: 768px;
+	min-width: 768px;
 	padding: 0;
 }
 
@@ -1819,3 +1819,31 @@ mobile. Make sure to double check these!
 	}
   }
 }
+
+/*********************
+DETAILED OVERVIEW STYLES
+*********************/
+
+#container {
+	#content {
+		#ict-dashboard-detailed-overview {
+			.benefits_chart_divs {
+				overflow: hidden;
+				#benefits_chart_div {
+					padding-left: 12px;
+				}
+				#benefits_legend {
+					width: auto;
+					margin: -19px 0 0 397px;
+				}
+			}
+		}
+		.pane-last-updated {
+			.last-updated-on p {
+				margin-left: 20px;
+			}
+		}
+	}
+}
+
+

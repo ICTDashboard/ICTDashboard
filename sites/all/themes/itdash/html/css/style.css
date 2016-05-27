@@ -3415,7 +3415,8 @@ HEADER STYLES
   USER TOOLS
   *********************/ }
   .header #logo {
-    margin: 30px 0 15px;
+    margin-top: 30px;
+    margin-bottom: 5px;
     overflow: hidden;
     font-size: 34px;
     text-transform: uppercase; }
@@ -3427,7 +3428,7 @@ HEADER STYLES
     .header #logo span {
       font-size: 28px;
       line-height: 28px;
-      margin-left: 15px;
+      margin-left: 14px;
       margin-top: 5px;
       float: left; }
       .header #logo span a {
@@ -3966,6 +3967,50 @@ view.
   width: 0%; }
 
 /*********************
+DETAILED OVERVIEW STYLES
+*********************/
+#container #content {
+  margin-top: 0; }
+  #container #content .page-title.dotbg {
+    background-color: #1e2635;
+    height: 95px; }
+    #container #content .page-title.dotbg .inner-title-content h1 {
+      margin-left: 20px;
+      font-family: "Open Sans", sans-serif;
+      color: #c8f68f;
+      font-size: 28px;
+      /* Approximation due to font substitution */
+      font-weight: 400;
+      line-height: 34px;
+      /* Approximation due to font substitution */
+      text-align: left; }
+  #container #content #ict-dashboard-detailed-overview .section-title h2 {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 0;
+    font-family: "Open Sans", sans-serif;
+    color: #0c6c88;
+    font-size: 24px;
+    /* Approximation due to font substitution */
+    font-weight: 600;
+    line-height: 29px;
+    /* Approximation due to font substitution */
+    text-align: left; }
+  #container #content #ict-dashboard-detailed-overview #detailed_schedule_chart_current {
+    margin-left: 7px; }
+  #container #content #ict-dashboard-detailed-overview .benefits_chart_divs {
+    overflow: hidden; }
+    #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_chart_div {
+      padding-left: 12px;
+      padding-right: 20px; }
+    #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend {
+      width: 100%;
+      margin: 0; }
+      #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend .bar-legend {
+        padding-left: 20px;
+        margin-top: 8px; }
+
+/*********************
 LARGER MOBILE DEVICES
 This is for devices like the Galaxy Note or something that's
 larger than an iPhone but smaller than a tablet. Let's call them
@@ -4083,8 +4128,8 @@ you can add resource intensive styles.
   LAYOUT & GRID STYLES
   *********************/
   .wrap {
-    width: 970px;
-    min-width: 970px;
+    width: 768px;
+    min-width: 768px;
     padding: 0; }
 
   /*********************
@@ -5552,7 +5597,20 @@ you can add resource intensive styles.
       #ict-basic-page form .form-actions .form-submit:hover {
         background-position: 0 -41px; }
   #ict-basic-page form .form-required {
-    display: none; } }
+    display: none; }
+
+  /*********************
+  DETAILED OVERVIEW STYLES
+  *********************/
+  #container #content #ict-dashboard-detailed-overview .benefits_chart_divs {
+    overflow: hidden; }
+    #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_chart_div {
+      padding-left: 12px; }
+    #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend {
+      width: auto;
+      margin: -19px 0 0 397px; }
+  #container #content .pane-last-updated .last-updated-on p {
+    margin-left: 20px; } }
 /*********************
 DESKTOP
 This is the average viewing window. So Desktops, Laptops, and

@@ -130,7 +130,7 @@
           }
         });
       }
-
+      console.log("data.max_number %d, max_bar %d ", data.max_number, max_bar);
       x = d3.scale.linear()
         .domain([0, data.max_number])
         .range([0, max_bar - 1]);
@@ -157,7 +157,7 @@
           .attr("class", "chart")
           .attr("width", width)
           .attr("height", Object.keys(data.data[year]).length * 72.5);
-
+        console.log("y1 %d, width1 %d", y, width);
         var current_is_printed = false;
         for (var quarter = 4; quarter > 0; quarter--) {
           // if no data provide for the quarter don't show it
@@ -226,7 +226,7 @@
             if (typeof data.data[year][quarter][current_item] == 'undefined') continue;
 
             var current_width = x(current_value.value);
-
+            
             quarter_g
               .append("svg:rect")
               .attr("y", y)
@@ -234,7 +234,7 @@
               .attr("width", current_width)
               .attr("height", height)
               .attr("style", 'fill:'+current_value.color);
-
+            console.log("y %d, height %d, current_value %s, current_width %d, current_value.value %d", y, height, current_value.color, current_width, current_value.value);
             quarter_g
               .append('svg:text')
               .attr("x", current_x)

@@ -162,7 +162,8 @@ HEADER STYLES
 	padding-right: 20px;
 
 	#logo {
-		margin: 30px 0 15px;
+		margin-top: 30px;
+		margin-bottom: 5px;
 		overflow: hidden;
 		font-size: 34px;
 		text-transform: uppercase;
@@ -178,7 +179,7 @@ HEADER STYLES
 		span {
 			font-size: 28px;
 			line-height: 28px;
-			margin-left: 15px;
+			margin-left: 14px;
 			margin-top: 5px;
 			float: left;
 			a {
@@ -1155,4 +1156,60 @@ FOOTER STYLES
 .panel-3col .panel-col-first {
   float: left;
   width: 0%;
+}
+
+/*********************
+DETAILED OVERVIEW STYLES
+*********************/
+
+#container {
+	#content {
+		margin-top: 0;
+		.page-title.dotbg {
+			background-color: #1e2635;
+			height: 95px;
+			.inner-title-content h1 {
+				margin-left: 20px;
+				font-family: $opensans;
+				color:  #c8f68f;
+				font-size: 28px;/* Approximation due to font substitution */
+				font-weight: 400;
+				line-height: 34px;/* Approximation due to font substitution */
+				text-align: left;
+			}
+		}
+		#ict-dashboard-detailed-overview {
+			.section-title {
+				h2 {
+					margin-left: 20px;
+					margin-right: 20px;
+					margin-bottom: 0;
+					font-family: $opensans;
+					color:  #0c6c88;
+					font-size: 24px;/* Approximation due to font substitution */
+					font-weight: 600;
+					line-height: 29px;/* Approximation due to font substitution */
+					text-align: left;
+				}
+			}
+			#detailed_schedule_chart_current {
+				margin-left: 7px;
+			}
+			.benefits_chart_divs {
+				overflow: hidden;
+				#benefits_chart_div {
+					padding-left: 12px;
+					padding-right: 20px;
+				}
+				#benefits_legend {
+					width: 100%;
+					margin: 0;
+					.bar-legend {
+						padding-left: 20px;
+						margin-top: 8px;
+					}
+				}
+			}
+		}
+	}
 }

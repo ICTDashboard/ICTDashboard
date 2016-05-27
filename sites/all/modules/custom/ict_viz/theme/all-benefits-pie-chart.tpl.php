@@ -1,4 +1,4 @@
-<div style="overflow: hidden;">
+<div class="benefits_chart_divs">
   <div id="benefits_chart_div" style="float:left; width: 100%; max-width: 325px;"></div>
   <div class="legend" id="benefits_legend">
     <ul class="bar-legend">
@@ -46,17 +46,22 @@
           slices: slices_settings
         };
 
+        console.log('screen.width %s, (document).width() %s, (window).width() %s', screen.width, $(document).width(), $(window).width());
         // legend
         for (item in legend_items) {
           $('#benefits_legend .bar-legend')
-            .append('<li><span style="background-color:' + legend_items[item]['color'] + '"></span>' + legend_items[item]['number'] + ' Project Benefits, ' + legend_items[item]['label'] + '</li>')
+            .append('<li><span style="background-color:' + legend_items[item]['color'] + '" class="test_js_2"></span>' + legend_items[item]['number'] + ' Project Benefits, ' + legend_items[item]['label'] + '</li>')
         }
 
         var chart = new google.visualization.PieChart(document.getElementById('benefits_chart_div'));
         chart.draw(data, options);
 
         var graph_height = $('#benefits_chart_div').outerHeight();
-        $('#benefits_legend .bar-legend').css('margin-top', (graph_height - $('#benefits_legend').height())/2 + 'px');
+        if ($(document).width() < 768) {
+          $('#benefits_legend .bar-legend').css('margin-top', 0);
+        } else {
+          $('#benefits_legend .bar-legend').css('margin-top', (graph_height - $('#benefits_legend').height())/2 + 'px');
+        }
       }
     });
   })(jQuery);
