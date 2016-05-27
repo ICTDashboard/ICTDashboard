@@ -135,7 +135,7 @@
           }
         });
       }
-      console.log("data.max_number %d, max_bar %d ", data.max_number, max_bar);
+
       x = d3.scale.linear()
         .domain([0, data.max_number])
         .range([0, max_bar - 1]);
