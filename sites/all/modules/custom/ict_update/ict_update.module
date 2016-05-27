@@ -512,12 +512,6 @@ function ict_update_all_fields_required_validate($form, &$form_state) {
       form_set_error('field_expected_completion_date', 'Field <em>' . $form['field_expected_completion_date']['und'][0]['#title'] . '</em> could not be less than <em>Originally approved start date</em>');
     }
   }
-
-  if (!empty($form_state['values']['field_estimated_value_of_benefit']['und'][0]['value'])) {
-    if ($form_state['values']['field_estimated_value_of_benefit']['und'][0]['value'] < 0) {
-      form_set_error('field_estimated_value_of_benefit', '<em>Value of Financial Benefits Realised To Date</em> cannot be less than 0');
-    }
-  }
 }
 
 function ict_update_all_fields_required_validate_page_preview($node) {
@@ -584,13 +578,6 @@ function ict_update_all_fields_required_validate_page_preview($node) {
       $errors[] = t('Field <em>' . $field_info['label'] . '</em> could not be less than <em>Originally approved start date</em>');
     }
   }
-
-  if (!empty($node->field_estimated_value_of_benefit['und'][0]['value'])) {
-    if ($node->field_estimated_value_of_benefit['und'][0]['value'] < 0) {
-      $errors[] = t('<em>Value of Financial Benefits Realised To Date</em> cannot be less than 0');
-    }
-  }
-
 
   return $errors;
 }
