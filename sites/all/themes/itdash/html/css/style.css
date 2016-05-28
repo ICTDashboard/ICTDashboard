@@ -3704,7 +3704,7 @@ POSTS & CONTENT STYLES
     #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
       width: 100%; }
   #content #project-baseline-history #inner-content .project-history .project-draft-submission {
-    padding-left: 15px; }
+    padding-left: 15px !important; }
 #content .last-updated-block {
   width: 100%;
   padding: 0 20px; }
