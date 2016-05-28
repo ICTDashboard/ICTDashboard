@@ -27,7 +27,7 @@
         <?php if (!empty($original_total_budget_meta['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
+              <span class="tooltip-content individual-page-tooltip-height">
                 <?php print $original_total_budget_meta['#description']; ?>
               </span>
           </a>
@@ -52,7 +52,7 @@
           <?php if (!empty($field_actual_level_of_project_co['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
+              <span class="tooltip-content individual-page-tooltip-height">
                 <?php print $field_actual_level_of_project_co['meta']['#description']; ?>
               </span>
             </a>
@@ -77,7 +77,7 @@
           <?php if (!empty($field_forecast_level_of_project_['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
+              <span class="tooltip-content individual-page-tooltip-height">
                 <?php print $field_forecast_level_of_project_['meta']['#description']; ?>
               </span>
             </a>
@@ -98,7 +98,7 @@
           <?php print t('Project Schedule Status'); ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
+            <span class="tooltip-content individual-page-tooltip-height">
               <?php print t('The actual percentage of work completed at the current update and the percentage of work forecasted to be completed at the current update.'); ?>
             </span>
           </a>

@@ -125,6 +125,7 @@ POSTS & CONTENT STYLES
 	#inner-content {
 		.ict-benefits {
 			.ict-faq-question {
+				 padding: 10px 145px 10px 50px;
 				.benfit-status {
 					position: absolute;
 				}
@@ -175,6 +176,24 @@ POSTS & CONTENT STYLES
 						}
 					}
 				}
+			}
+			.label, .user-information, #project-benefits {
+				padding-right: 0;
+				a {
+					position: relative;
+					z-index: 0;
+					span.tooltip-content {
+						right: -150px;
+						width: 300px;
+					}
+					span.tooltip-content::after {
+					    border-left: 20px solid transparent;
+					    border-right: 20px solid transparent;
+					}
+				}
+			}
+			.individual-page-tooltip-height {
+				bottom: 30px;
 			}
 		}
 		#print-links-container {
