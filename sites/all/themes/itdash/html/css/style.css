@@ -3748,8 +3748,38 @@ POSTS & CONTENT STYLES
   padding-bottom: 15px; }
 #content #inner-content .project-draft-submission {
   padding: 0 20px; }
+  #content #inner-content .project-draft-submission .row .text {
+    color: #4e5365 !important; }
+  #content #inner-content .project-draft-submission .individual-page-tooltip-height {
+    bottom: 120px; }
+  #content #inner-content .project-draft-submission #project-benefits a {
+    position: relative;
+    z-index: 0; }
+    #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content {
+      right: -56px;
+      width: 280px; }
+    #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content::after {
+      border-right: 0;
+      border-left: 0; }
+  #content #inner-content .project-draft-submission .user-information a {
+    position: relative;
+    z-index: 0; }
+    #content #inner-content .project-draft-submission .user-information a span.tooltip-content {
+      right: 0;
+      width: 240px; }
+    #content #inner-content .project-draft-submission .user-information a span.tooltip-content::after {
+      border-right: 0;
+      border-left: 0; }
   #content #inner-content .project-draft-submission .label {
     padding-right: 0; }
+    #content #inner-content .project-draft-submission .label a {
+      position: initial; }
+      #content #inner-content .project-draft-submission .label a span.tooltip-content {
+        right: 0;
+        width: 280px; }
+      #content #inner-content .project-draft-submission .label a span.tooltip-content::after {
+        border-right: 0;
+        border-left: 0; }
   #content #inner-content .project-draft-submission a {
     text-decoration: none; }
   #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th {
@@ -3804,6 +3834,15 @@ POSTS & CONTENT STYLES
     text-decoration: underline; }
     #content #inner-content .project-draft-submission .entity_comments a:hover {
       text-decoration: none; }
+  #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a {
+    position: initial; }
+    #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a span.tooltip-content {
+      right: 0;
+      width: 280px;
+      bottom: 120px; }
+    #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a span.tooltip-content::after {
+      border-right: 0;
+      border-left: 0; }
 #content #inner-content #print-links-container .pdf_button {
   margin-bottom: 50px; }
   #content #inner-content #print-links-container .pdf_button a {
@@ -4357,8 +4396,10 @@ tweeners.
       #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
         border-left: none;
         border-right: none; }
-  #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
-    position: absolute; }
+  #content #inner-content .ict-benefits .ict-faq-question {
+    padding: 10px 145px 10px 50px; }
+    #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
+      position: absolute; }
   #content #inner-content .ict-benefits .ict-faq-answer ul li div {
     display: inline-block; }
   #content #inner-content h2.individual-project-page {
@@ -4383,6 +4424,19 @@ tweeners.
       #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
         margin: 3px 0;
         margin-right: 25px; }
+    #content #inner-content .project-draft-submission .label, #content #inner-content .project-draft-submission .user-information, #content #inner-content .project-draft-submission #project-benefits {
+      padding-right: 0; }
+      #content #inner-content .project-draft-submission .label a, #content #inner-content .project-draft-submission .user-information a, #content #inner-content .project-draft-submission #project-benefits a {
+        position: relative;
+        z-index: 0; }
+        #content #inner-content .project-draft-submission .label a span.tooltip-content, #content #inner-content .project-draft-submission .user-information a span.tooltip-content, #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content {
+          right: -150px;
+          width: 300px; }
+        #content #inner-content .project-draft-submission .label a span.tooltip-content::after, #content #inner-content .project-draft-submission .user-information a span.tooltip-content::after, #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content::after {
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent; }
+    #content #inner-content .project-draft-submission .individual-page-tooltip-height {
+      bottom: 30px; }
   #content #inner-content #print-links-container .pdf_button {
     margin-bottom: 50px; }
     #content #inner-content #print-links-container .pdf_button a {
@@ -6056,7 +6110,15 @@ you can add resource intensive styles.
       padding: 0; }
       #container #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
         width: 180px; }
-  #container #content .last-updated-block {
+  #container #inner-content .ict-benefits .ict-faq-question {
+    padding: 10px 155px 10px 50px; }
+  #container #inner-content #print-links-container .pdf_button {
+    margin-bottom: 67px; }
+    #container #inner-content #print-links-container .pdf_button a {
+      min-width: 275px !important;
+      margin: 10px 10px 3px;
+      width: 275px; }
+  #container #inner-content .last-updated-block {
     margin: 0;
     padding: 0;
     width: 970px;
@@ -6064,7 +6126,7 @@ you can add resource intensive styles.
     display: table;
     margin-top: 25px;
     margin-bottom: 10px; }
-    #container #content .last-updated-block .last-updated-on {
+    #container #inner-content .last-updated-block .last-updated-on {
       width: 50% !important;
       max-width: 970px;
       float: left;
@@ -6072,57 +6134,57 @@ you can add resource intensive styles.
       border-bottom: none;
       margin-bottom: 0;
       padding-bottom: 0; }
-    #container #content .last-updated-block .view-baseline-history {
+    #container #inner-content .last-updated-block .view-baseline-history {
       width: 50%;
       text-align: right;
       float: right;
       display: block;
       margin: 0; }
-      #container #content .last-updated-block .view-baseline-history .view-baseline-link {
+      #container #inner-content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
         text-decoration: underline;
         font-weight: 400;
         padding: 0; }
-        #container #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+        #container #inner-content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
-  #container #content #ict-dashboard-detailed-overview .section-title h2 {
+  #container #inner-content #ict-dashboard-detailed-overview .section-title h2 {
     margin-left: 0;
     margin-right: 0; }
-  #container #content #ict-dashboard-detailed-overview #detailed-view-expenditure {
+  #container #inner-content #ict-dashboard-detailed-overview #detailed-view-expenditure {
     padding-left: 0;
     padding-right: 0; }
-  #container #content #ict-dashboard-detailed-overview .viz-number-of-benefits {
+  #container #inner-content #ict-dashboard-detailed-overview .viz-number-of-benefits {
     padding-left: 0; }
-  #container #content #inner-content #print-links-container .pdf_button {
+  #container #inner-content #inner-content #print-links-container .pdf_button {
     margin-bottom: 67px; }
-    #container #content #inner-content #print-links-container .pdf_button a {
+    #container #inner-content #inner-content #print-links-container .pdf_button a {
       min-width: 275px !important;
       margin: 10px 10px 3px;
       width: 275px; }
-  #container #content #inner-content h2.individual-project-page {
+  #container #inner-content #inner-content h2.individual-project-page {
     margin: 20px 0; }
-  #container #content #inner-content .project-draft-submission {
+  #container #inner-content #inner-content .project-draft-submission {
     padding: 0; }
-    #container #content #inner-content .project-draft-submission #benefits_legend {
+    #container #inner-content #inner-content .project-draft-submission #benefits_legend {
       overflow: hidden;
       color: #202b3d; }
-      #container #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+      #container #inner-content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
         float: none;
         margin-right: 25px; }
-    #container #content #inner-content .project-draft-submission .email-value {
+    #container #inner-content #inner-content .project-draft-submission .email-value {
       text-decoration: underline; }
-      #container #content #inner-content .project-draft-submission .email-value:hover {
+      #container #inner-content #inner-content .project-draft-submission .email-value:hover {
         text-decoration: none; }
-    #container #content #inner-content .project-draft-submission .entity_comments a {
+    #container #inner-content #inner-content .project-draft-submission .entity_comments a {
       text-decoration: underline; }
-      #container #content #inner-content .project-draft-submission .entity_comments a:hover {
+      #container #inner-content #inner-content .project-draft-submission .entity_comments a:hover {
         text-decoration: none; }
-    #container #content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+    #container #inner-content #inner-content .project-draft-submission .individual-project-content .preview_switch {
       text-align: center;
       padding-left: 10px;
       margin: 0 10px;
       height: 41px; }
-      #container #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
+      #container #inner-content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
         vertical-align: sub;
         bottom: 0;
         top: 0;
@@ -6131,17 +6193,17 @@ you can add resource intensive styles.
         height: 17px;
         margin: 0 15px 0 0;
         left: 0; }
-    #container #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
+    #container #inner-content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
       margin-left: 25px; }
-      #container #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
+      #container #inner-content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
         margin-right: 25px; }
-    #container #content #inner-content .project-draft-submission .project-program-link {
+    #container #inner-content #inner-content .project-draft-submission .project-program-link {
       text-decoration: underline; }
-      #container #content #inner-content .project-draft-submission .project-program-link:hover {
+      #container #inner-content #inner-content .project-draft-submission .project-program-link:hover {
         text-decoration: none; }
-    #container #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:first-child {
+    #container #inner-content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:first-child {
       border-radius: 4px 0 0; }
-    #container #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
+    #container #inner-content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
       border-radius: 0 4px 0 0; }
 
   .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
