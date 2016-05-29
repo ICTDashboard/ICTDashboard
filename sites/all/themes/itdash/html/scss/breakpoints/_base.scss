@@ -779,6 +779,123 @@ POSTS & CONTENT STYLES
 	}
 }
 #content {
+	#ict-home-projects-table-id {
+		padding: 0 20px;
+		.footable-header {
+			.viz-tooltips-row {
+				position: absolute;
+				bottom: 15px;
+				margin-left: 0;
+    			margin-top: 4px;
+			}
+			.footable-toggle {
+				display: none;
+			}
+			a.ict-sort-link {
+				margin-left: 0!important;
+				&:after {
+					top: 15px;
+				}
+				&:before {
+					top: 25px;
+				}
+			}
+		}
+		tr {
+			td {
+				border-bottom: 2px dotted #f0f4fa;
+				padding-bottom: 14px !important;
+			}
+			th {
+				padding: 7px 25px 42px 14px;
+			}
+		}
+		span.footable-toggle.fooicon.fooicon-minus {
+			opacity: 1;
+			&::before {
+				content: ' ';
+			    background-image: url(/sites/all/themes/itdash/html/images/minus.png);
+			    width: 26px;
+			    height: 26px;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			}
+			& + a {
+				margin-left: 40px;
+			}
+		}
+		span.footable-toggle.fooicon.fooicon-plus {
+			opacity: 1;
+			&::before {
+				content: ' ';
+			    background-image: url(/sites/all/themes/itdash/html/images/plus.png);
+			    width: 26px;
+			    height: 26px;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			}
+			& + a {
+				margin-left: 40px;
+			}
+		}		
+		.footable-detail-row {
+			td:first-child {
+				padding-left: 40px;
+				padding-right: 10px;
+			}
+			.footable-details {
+				.viz-tooltips-row {
+					margin-left: 10px;
+					margin-top: 3px;
+				}
+				tbody {
+					tr:first-child {
+						display: none;
+					}
+				}
+				tr {
+					th {
+						background-color: #fff;
+						color: #202b3d;
+						border-left: none;
+						display: block;
+						width: 100%;
+						padding-right: 0;
+						display: flex;
+						padding-bottom: 7px;
+						font-size: 14px;
+
+					}
+					td {
+						display: block !important;
+						width: auto;
+						padding-right: 0;
+						padding-top: 0;
+						border-bottom: none;
+						height: auto;
+						padding-bottom: 12px;
+						word-break: break-word;
+						.ict-project-button {
+							padding-top: 7px;
+							padding-bottom: 8px;
+							a::before {
+								left: 44%;
+							}
+						}
+
+					}
+					.schedule-status-col::before {
+						top: 0;
+						margin-top: 4px;					
+					}
+				}
+			}
+		}
+	}
+}
+#content {
 	// margin-top: 1.5em;
 }
 	
