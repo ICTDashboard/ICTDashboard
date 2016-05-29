@@ -3856,6 +3856,86 @@ POSTS & CONTENT STYLES
 #content #inner-content .ict-benefits .ict-faq-answer ul li div {
   display: block; }
 
+#content #ict-home-projects-table-id {
+  padding: 0 20px; }
+  #content #ict-home-projects-table-id .footable-header .viz-tooltips-row {
+    position: absolute;
+    bottom: 15px;
+    margin-left: 0;
+    margin-top: 4px; }
+  #content #ict-home-projects-table-id .footable-header .footable-toggle {
+    display: none; }
+  #content #ict-home-projects-table-id .footable-header a.ict-sort-link {
+    margin-left: 0 !important; }
+    #content #ict-home-projects-table-id .footable-header a.ict-sort-link:after {
+      top: 15px; }
+    #content #ict-home-projects-table-id .footable-header a.ict-sort-link:before {
+      top: 25px; }
+  #content #ict-home-projects-table-id tr td {
+    border-bottom: 2px dotted #f0f4fa;
+    padding-bottom: 14px !important; }
+  #content #ict-home-projects-table-id tr th {
+    padding: 7px 25px 42px 14px; }
+  #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus {
+    opacity: 1; }
+    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus::before {
+      content: ' ';
+      background-image: url(/sites/all/themes/itdash/html/images/minus.png);
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      top: 0;
+      left: 0; }
+    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus + a {
+      margin-left: 40px; }
+  #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus {
+    opacity: 1; }
+    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus::before {
+      content: ' ';
+      background-image: url(/sites/all/themes/itdash/html/images/plus.png);
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      top: 0;
+      left: 0; }
+    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus + a {
+      margin-left: 40px; }
+  #content #ict-home-projects-table-id .footable-detail-row td:first-child {
+    padding-left: 40px;
+    padding-right: 10px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row {
+    margin-left: 10px;
+    margin-top: 3px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details tbody tr:first-child {
+    display: none; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr th {
+    background-color: #fff;
+    color: #202b3d;
+    border-left: none;
+    display: block;
+    width: 100%;
+    padding-right: 0;
+    display: flex;
+    padding-bottom: 7px;
+    font-size: 14px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td {
+    display: block !important;
+    width: auto;
+    padding-right: 0;
+    padding-top: 0;
+    border-bottom: none;
+    height: auto;
+    padding-bottom: 12px;
+    word-break: break-word; }
+    #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td .ict-project-button {
+      padding-top: 7px;
+      padding-bottom: 8px; }
+      #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td .ict-project-button a::before {
+        left: 44%; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr .schedule-status-col::before {
+    top: 0;
+    margin-top: 4px; }
+
 .hentry {
   background-color: #fff;
   border-radius: 3px;
@@ -6205,6 +6285,8 @@ you can add resource intensive styles.
       border-radius: 4px 0 0; }
     #container #inner-content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
       border-radius: 0 4px 0 0; }
+  #content #ict-home-projects-table-id {
+    padding: 0; }
 
   .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
     width: 970px;
