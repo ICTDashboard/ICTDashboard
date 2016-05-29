@@ -124,7 +124,7 @@ function template_preprocess_ict_viz_home_projects(&$vars) {
     $col_classes[array_search($get['order'], array_keys($sorting))][] = 'current_sort';
   }
   else {
-    $table_header = t('Active Projects');
+    $table_header = t('Projects by Entity');
     $query->orderBy('created', $direction);
   }
   $vars['table_header'] = $table_header;

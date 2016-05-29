@@ -77,6 +77,33 @@ NAVIGATION STYLES
 POSTS & CONTENT STYLES
 *********************/
 
+#container {
+	#content {
+		#ict-dashboard-overview-number-indicators {
+			#overview-graphs {
+				#overview-expenditure-switch {
+					.sbHolder {
+						float: right;
+						margin-left: 0;
+						margin-right: 0;
+					}
+				}
+				#expenditure_legend {
+					float: left;
+				}
+				.row {
+					float: left;
+				}
+			}
+			#ict-dashboard-numbers,
+			#ict-dashboard-numbers1 {
+				float: left;
+				width: 100%;
+			}
+		}
+	}
+}
+
 /* entry content */
 .entry-content {
 

@@ -1166,8 +1166,10 @@ body,
       vertical-align: top;
     }
   }
+  #ict-dashboard-numbers1,
   #ict-dashboard-numbers {
-    .row {
+    //.row {
+      //border-top: 1px solid #D8DEEB;
       margin-bottom: 55px;
       &:first-child {
         margin-bottom: 140px;
@@ -1180,6 +1182,7 @@ body,
         line-height: 80px;
         font-weight: 600;
         color: #202b3d;
+        text-align: center;
         a {
           color: #202b3d;
           text-decoration: underline;
@@ -1190,7 +1193,7 @@ body,
           }
         }
       }
-    }
+    //}
     .general-button {
       display: block;
       span {
