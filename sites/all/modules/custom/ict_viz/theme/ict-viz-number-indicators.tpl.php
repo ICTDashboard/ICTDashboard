@@ -48,6 +48,21 @@
           </ul>
         </div>
 
+        <div class="t-1of3 d-1of3" id="ict-dashboard-numbers1">
+          <div class="label">
+            <?php print t('Number of Active Projects'); ?>
+            <a href="javascript:void(0);" class="tooltip">
+              <i class="tooltip-icon"></i>
+            <span class="tooltip-content">
+              <?php print t('The number of ICT-enabled projects with a total project cost of $30 million or more, including ICT costs of at least $10 million.'); ?>
+            </span>
+            </a>
+          </div>
+          <div class="big-number">
+            <?php print l($number_of_projects, 'dashboard-projects', array('attributes' => array('title' => t('View all projects')))) ?>
+          </div>
+        </div>
+
         <div class="row">
           <div class="label">
             <?php print t('Projects Schedule Status'); ?>
@@ -83,20 +98,7 @@
       </div>
     </div>
     <div class="t-1of3 d-1of3" id="ict-dashboard-numbers">
-      <div class="row">
-        <div class="label">
-          <?php print t('Number of Active Projects'); ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print t('The number of ICT-enabled projects with a total project cost of $30 million or more, including ICT costs of at least $10 million.'); ?>
-            </span>
-          </a>
-        </div>
-        <div class="big-number">
-          <?php print l($number_of_projects, 'dashboard-projects', array('attributes' => array('title' => t('View all projects')))) ?>
-        </div>
-      </div>
+
 
       <div class="row">
         <div class="label">
