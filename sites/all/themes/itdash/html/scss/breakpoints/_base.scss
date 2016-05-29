@@ -72,6 +72,73 @@ LAYOUT & GRID STYLES
 #container {
 	width: 100%;
 	overflow: hidden;
+	#content {
+		margin-top: 0;
+		#ict-dashboard-overview-number-indicators {
+			padding-bottom: 20px;
+			#overview-graphs {
+				padding-right: 0;
+				#overview-expenditure-switch {
+					margin-top: 10px;
+					.sbHolder {
+						max-width: 78%;
+					}
+				}
+				#expenditure_legend {
+					margin-bottom: 0;
+					.bar-legend {
+						margin-bottom: 30px;
+					}
+				}
+			}
+			#ict-dashboard-numbers,
+			#ict-dashboard-numbers1 {
+				border-top: 1px solid #D8DEEB;
+				border-bottom: 1px solid #D8DEEB;
+				padding-top: 30px;
+				padding-bottom: 30px;
+				margin-bottom: 30px;
+				.label {
+					margin-right: 5px;
+				}
+				.big-number {
+
+				}
+			}
+			#ict-dashboard-numbers {
+				border-bottom: 0;
+				padding-bottom: 0;
+				margin-bottom: 0;
+				.big-number {
+					border-bottom: 1px solid #D8DEEB;
+					margin-bottom: 20px;
+					padding-bottom: 20px;
+				}
+			}
+		}
+		#ict-home-projects-table-id {
+			padding-right: 20px;
+			padding-left: 20px;
+			.sbHolder {
+				max-width: 78%;
+				width: 78%;
+				float: right;
+			}
+			.table-config-bar {
+				.item-list {
+					margin-top: 20px;
+					.pager {
+						.pager-first,
+						.pager-previous,
+						.pager-next,
+						.pager-last {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 .wrap {
