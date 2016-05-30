@@ -6227,11 +6227,16 @@ you can add resource intensive styles.
       width: 25%;
       padding-right: 5px; }
 
+  #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
+    max-width: 89%; }
   #container #content #ict-home-projects-table-id {
     padding-right: 0;
     padding-left: 0; }
+  #container #content #ict-home-projects-table-id table tr td {
+    padding: 18px 14px; }
   #container #content #ict-home-projects-table-id table tr td.schedule-status-col {
-    padding-left: 40px; }
+    padding: 18px 14px 18px 40px;
+    position: relative; }
     #container #content #ict-home-projects-table-id table tr td.schedule-status-col:before {
       left: 15px; }
   #container #content #ict-home-projects-table-id table .ict-sort-link-desktop {
