@@ -193,6 +193,16 @@ LAYOUT & GRID STYLES
 						top: -3px;
 					}
 				}
+				th {
+					padding-bottom: 15px;
+				}
+			}
+			table.viz-filtered-projects {
+				tr {
+					td {
+						padding-left: 10px;
+					}
+				}
 			}
 		}
 		.pane-last-updated {

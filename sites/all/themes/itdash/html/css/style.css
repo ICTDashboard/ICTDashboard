@@ -3504,6 +3504,10 @@ LAYOUT & GRID STYLES
           top: 6px; }
         #container #content #ict-home-projects-table-id table .ict-sort-link-mobile:after {
           top: -3px; }
+        #container #content #ict-home-projects-table-id table th {
+          padding-bottom: 15px; }
+      #container #content #ict-home-projects-table-id table.viz-filtered-projects tr td {
+        padding-left: 10px; }
     #container #content .pane-last-updated {
       padding: 0; }
 
