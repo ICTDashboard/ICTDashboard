@@ -65,7 +65,7 @@ function ict_pages_default_page_manager_handlers() {
             'paths' => 'faq
 dashboard
 project/*/update
-update/*
+update/*/delete
 node/*/delete
 user/create
 detailed-overview
