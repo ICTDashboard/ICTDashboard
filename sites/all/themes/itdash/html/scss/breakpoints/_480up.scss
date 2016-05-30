@@ -105,6 +105,71 @@ POSTS & CONTENT STYLES
 FOOTER STYLES
 *********************/
 
+.footer {
+	background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
+	border-top: 1px solid #03a7a4;
+	clear: both;
+	margin-top: 30px;
+	position: relative;
+	z-index: 10;
+	font-size: 13px;
+	font-weight: 400;
+	#inner-footer {
+		.wrap.cf {
+			.copy {
+				margin: 0;
+				margin-top: 30px;
+				width: 100%;
+				color: #363a41;
+				text-align: center;
+				padding-left: 20px;
+				padding-right: 20px;
+				line-height: 22px;
+			}
+			.menu {
+				display: inline-block;
+				margin-top: 20px;
+				margin-bottom: 0;
+				width: 100%;
+				padding-left: 17px;
+				li {
+					display: block;
+					&:before {
+						content: '\00b7';
+						color: #137992;
+						font-size: 26px;
+						padding: 5px 5px 5px 3px;
+						vertical-align: -4px;
+						line-height: 18px;
+					}
+					&.last {
+						float: right;
+						padding-right: 0;
+						&:before {
+							content: '';
+							padding: 0;
+						}
+					}
+					a {
+						color: #363a41;
+						text-decoration: underline;
+						&:hover {
+							text-decoration: none;
+						}
+					}
+				}
+			}
+			.copy.second-copy {
+				margin: 0;
+				margin-top: 5px;
+				margin-bottom: 10px;
+				width: 100%;
+			}
+		}
+	}
+}
+
+
 /*
 check your menus here. do they look good?
 do they need tweaking?

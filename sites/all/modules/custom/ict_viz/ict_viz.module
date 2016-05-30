@@ -118,7 +118,7 @@ function template_preprocess_ict_viz_home_projects(&$vars) {
   );
 
   $direction = isset($get['direction']) ? $get['direction'] : 'desc';
-  if (isset($sorting[$get['order']])) {
+  if (isset($get['order']) && isset($sorting[$get['order']])) {
     $table_header = t('Active Projects by @LABEL', array('@LABEL' => $sorting_labels[$get['order']]));
     $query->orderBy($sorting[$get['order']], $direction);
     $col_classes[array_search($get['order'], array_keys($sorting))][] = 'current_sort';
@@ -358,4 +358,5 @@ function ict_project_preprocess_all_benefits_pie_chart (&$vars) {
     ),
     'setting'
   );
+  $vars['benefits'] = $benefit_counter;
 }

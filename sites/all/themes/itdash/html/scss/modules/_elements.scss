@@ -1387,7 +1387,7 @@ body,
   }
 }
 
-.object_and_summary, .entity_comments, span.tooltip-content {
+body .object_and_summary, body .entity_comments, span.tooltip-content {
   a {
     color: #0d6c88;
     text-decoration: underline;
@@ -1583,6 +1583,13 @@ div.tooltip-edit {
       line-height: 1.5em;
     }
   } 
+}
+.viz-number-of-benefits {
+  position: relative;
+  font-weight: 700;
+  color: #202b3d;
+  padding-right: 15px;
+  padding-top: 22px;
 }
 .rebaseline-indicate {
   display: block;

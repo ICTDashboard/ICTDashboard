@@ -61,9 +61,23 @@ function ict_pages_user_default_permissions() {
     'module' => 'elfinder',
   );
 
+  // Exported permission: 'create any home_page_main_copy bean'.
+  $permissions['create any home_page_main_copy bean'] = array(
+    'name' => 'create any home_page_main_copy bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
   // Exported permission: 'create any opt_out_policy bean'.
   $permissions['create any opt_out_policy bean'] = array(
     'name' => 'create any opt_out_policy bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
+  // Exported permission: 'create any sign_in_helptext bean'.
+  $permissions['create any sign_in_helptext bean'] = array(
+    'name' => 'create any sign_in_helptext bean',
     'roles' => array(),
     'module' => 'bean',
   );
@@ -82,9 +96,23 @@ function ict_pages_user_default_permissions() {
     'module' => 'elfinder',
   );
 
+  // Exported permission: 'delete any home_page_main_copy bean'.
+  $permissions['delete any home_page_main_copy bean'] = array(
+    'name' => 'delete any home_page_main_copy bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
   // Exported permission: 'delete any opt_out_policy bean'.
   $permissions['delete any opt_out_policy bean'] = array(
     'name' => 'delete any opt_out_policy bean',
+    'roles' => array(),
+    'module' => 'bean',
+  );
+
+  // Exported permission: 'delete any sign_in_helptext bean'.
+  $permissions['delete any sign_in_helptext bean'] = array(
+    'name' => 'delete any sign_in_helptext bean',
     'roles' => array(),
     'module' => 'bean',
   );
@@ -106,11 +134,31 @@ function ict_pages_user_default_permissions() {
     'module' => 'elfinder',
   );
 
+  // Exported permission: 'edit any home_page_main_copy bean'.
+  $permissions['edit any home_page_main_copy bean'] = array(
+    'name' => 'edit any home_page_main_copy bean',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'bean',
+  );
+
   // Exported permission: 'edit any opt_out_policy bean'.
   $permissions['edit any opt_out_policy bean'] = array(
     'name' => 'edit any opt_out_policy bean',
     'roles' => array(
       'Finance Admin' => 'Finance Admin',
+    ),
+    'module' => 'bean',
+  );
+
+  // Exported permission: 'edit any sign_in_helptext bean'.
+  $permissions['edit any sign_in_helptext bean'] = array(
+    'name' => 'edit any sign_in_helptext bean',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
     ),
     'module' => 'bean',
   );
@@ -199,12 +247,32 @@ function ict_pages_user_default_permissions() {
     'module' => 'filter',
   );
 
+  // Exported permission: 'view any home_page_main_copy bean'.
+  $permissions['view any home_page_main_copy bean'] = array(
+    'name' => 'view any home_page_main_copy bean',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'bean',
+  );
+
   // Exported permission: 'view any opt_out_policy bean'.
   $permissions['view any opt_out_policy bean'] = array(
     'name' => 'view any opt_out_policy bean',
     'roles' => array(
       'Departmental Admin' => 'Departmental Admin',
       'Finance Admin' => 'Finance Admin',
+    ),
+    'module' => 'bean',
+  );
+
+  // Exported permission: 'view any sign_in_helptext bean'.
+  $permissions['view any sign_in_helptext bean'] = array(
+    'name' => 'view any sign_in_helptext bean',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'bean',
   );
