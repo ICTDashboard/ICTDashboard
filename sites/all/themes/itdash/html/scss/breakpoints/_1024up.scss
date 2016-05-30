@@ -70,6 +70,11 @@ be seen on the Desktop.
 	    }
 	}
 	#inner-content {
+		.ict-benefits {
+			.ict-faq-question {
+				 padding: 10px 155px 10px 50px;
+			}
+		}
 		#print-links-container {
 			.pdf_button {
 				margin-bottom: 67px;
@@ -157,6 +162,23 @@ be seen on the Desktop.
 			}	
 		}
 	}
+	#ict-home-projects-table-id {
+		padding: 0;
+		tr {
+			th {
+				padding: 7px 25px 42px 14px;
+    			font-size: 14px;
+			    a.ict-sort-link {
+			    	&:after {
+			    		top: 15px!important;
+			    	}
+			    	&:before {
+			    		top: 25px!important;
+			    	}
+			    }
+			}
+		}
+	}
 }
 .footer {
 	#inner-footer {
@@ -185,38 +207,41 @@ be seen on the Desktop.
 
 #container {
 	#content {
-		#ict-dashboard-overview-number-indicators {
-			#overview-graphs {
-				#overview-expenditure-switch {
-					.sbHolder {
-						max-width: 89%;
-					}
-				}
-			}
-		}
-		#ict-home-projects-table-id {
-			padding-right: 0;
-			padding-left: 0;
-		}
-		#ict-home-projects-table-id {
-			table {
-				tr {
-					td {
-						padding: 18px 14px;
-					}
-					td.schedule-status-col {
-						padding: 18px 14px 18px 40px;
-						position: relative;
-						&:before {
-							left: 15px;
+		.pane-overview-number-indicators,
+		.pane-home-projects {
+			#ict-dashboard-overview-number-indicators {
+				#overview-graphs {
+					#overview-expenditure-switch {
+						.sbHolder {
+							max-width: 89%;
 						}
 					}
 				}
-				.ict-sort-link-desktop {
-					display: block;
-				}
-				.ict-sort-link-mobile {
-					display: none;
+			}
+			#ict-home-projects-table-id {
+				padding-right: 0;
+				padding-left: 0;
+			}
+			#ict-home-projects-table-id {
+				.ict-home-projects-table-table {
+					tr {
+						td {
+							padding: 18px 14px;
+						}
+						td.schedule-status-col {
+							padding: 18px 14px 18px 40px;
+							position: relative;
+							&:before {
+								left: 15px;
+							}
+						}
+					}
+					.ict-sort-link-desktop {
+						display: block;
+					}
+					.ict-sort-link-mobile {
+						display: none;
+					}
 				}
 			}
 		}
@@ -229,4 +254,3 @@ be seen on the Desktop.
 		}
 	}
 }
-

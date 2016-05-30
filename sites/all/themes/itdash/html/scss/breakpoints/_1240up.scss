@@ -8,4 +8,21 @@ You can add some advanced styles here if you like. This kicks in
 on larger screens.
 
 ******************************************************************/
-
+#content {
+	.last-updated-block {
+		.view-baseline-history {
+			.view-baseline-tooltip {
+				span {
+					right: -150px;
+					bottom: 30px;
+					font-size: 13px;
+					width: 300px;
+				}
+				span::after {
+					border-left: 20px solid transparent;
+	    			border-right: 20px solid transparent;
+				}
+			}
+		}
+	}
+}

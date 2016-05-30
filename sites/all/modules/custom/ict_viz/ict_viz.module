@@ -183,6 +183,13 @@ function template_preprocess_ict_viz_home_projects(&$vars) {
 }
 
 function template_preprocess_ict_viz_filtered_projects(&$vars) {
+
+  drupal_add_css(drupal_get_path('module', 'ict_viz') . '/css/bootstrap-theme.min.css');
+  drupal_add_css(drupal_get_path('module', 'ict_viz') . '/css/footable.bootstrap.min.css');
+  
+  drupal_add_js(drupal_get_path('module', 'ict_viz') . '/js/viz-footable.js');
+  drupal_add_js(drupal_get_path('module', 'ict_viz') . '/js/footable.min.js');
+  
   $get = $_GET;
   unset($get['q']);
   $col_classes = array(
