@@ -258,25 +258,41 @@ be seen on the Desktop.
 }
 #container {
 	#content {
-		#ict-home-projects-table-id {
-			padding-right: 0;
-			padding-left: 0;
-		}
-		#ict-home-projects-table-id {
-			table {
-				tr {
-					td.schedule-status-col {
-						padding-left: 40px;
-						&:before {
-							left: 15px;
+		.pane-overview-number-indicators,
+		.pane-home-projects {
+			#ict-dashboard-overview-number-indicators {
+				#overview-graphs {
+					#overview-expenditure-switch {
+						.sbHolder {
+							max-width: 89%;
 						}
 					}
 				}
-				.ict-sort-link-desktop {
-					display: block;
-				}
-				.ict-sort-link-mobile {
-					display: none;
+			}
+			#ict-home-projects-table-id {
+				padding-right: 0;
+				padding-left: 0;
+			}
+			#ict-home-projects-table-id {
+				.ict-home-projects-table-table {
+					tr {
+						td {
+							padding: 18px 14px;
+						}
+						td.schedule-status-col {
+							padding: 18px 14px 18px 40px;
+							position: relative;
+							&:before {
+								left: 15px;
+							}
+						}
+					}
+					.ict-sort-link-desktop {
+						display: block;
+					}
+					.ict-sort-link-mobile {
+						display: none;
+					}
 				}
 			}
 		}

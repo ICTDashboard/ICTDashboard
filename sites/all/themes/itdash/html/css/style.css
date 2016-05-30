@@ -2364,7 +2364,11 @@ body #ict-home-projects-table-id tr th,
     display: block;
     display: block; }
   body #ict-home-projects-table-id tr th .ict-sort-link,
-  #content #ict-home-projects-table-id tr th .ict-sort-link {
+  body #ict-home-projects-table-id tr th .ict-sort-link-mobile,
+  body #ict-home-projects-table-id tr th .ict-sort-link-desktop,
+  #content #ict-home-projects-table-id tr th .ict-sort-link,
+  #content #ict-home-projects-table-id tr th .ict-sort-link-mobile,
+  #content #ict-home-projects-table-id tr th .ict-sort-link-desktop {
     display: block;
     width: 100%;
     height: 100%;
@@ -2372,8 +2376,16 @@ body #ict-home-projects-table-id tr th,
     top: 0;
     left: 0; }
     body #ict-home-projects-table-id tr th .ict-sort-link:after, body #ict-home-projects-table-id tr th .ict-sort-link:before,
+    body #ict-home-projects-table-id tr th .ict-sort-link-mobile:after,
+    body #ict-home-projects-table-id tr th .ict-sort-link-mobile:before,
+    body #ict-home-projects-table-id tr th .ict-sort-link-desktop:after,
+    body #ict-home-projects-table-id tr th .ict-sort-link-desktop:before,
     #content #ict-home-projects-table-id tr th .ict-sort-link:after,
-    #content #ict-home-projects-table-id tr th .ict-sort-link:before {
+    #content #ict-home-projects-table-id tr th .ict-sort-link:before,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-mobile:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-mobile:before,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-desktop:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-desktop:before {
       content: "";
       width: 0;
       height: 0;
@@ -2384,7 +2396,11 @@ body #ict-home-projects-table-id tr th,
       right: 15px;
       top: 36px; }
     body #ict-home-projects-table-id tr th .ict-sort-link:after,
-    #content #ict-home-projects-table-id tr th .ict-sort-link:after {
+    body #ict-home-projects-table-id tr th .ict-sort-link-mobile:after,
+    body #ict-home-projects-table-id tr th .ict-sort-link-desktop:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-mobile:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-desktop:after {
       border-color: transparent transparent white transparent;
       top: 26px; }
 body #ict-home-projects-table-id tr td,
@@ -2481,16 +2497,32 @@ body #ict-home-projects-table-id tr td,
     text-align: center;
     margin-top: 2px; }
 body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:before,
-#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:before {
+body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-mobile:before,
+body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-desktop:before,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:before,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-mobile:before,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-desktop:before {
   border-top-color: #3ac3cf; }
 body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:after,
-#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:after {
+body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-mobile:after,
+body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-desktop:after,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:after,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-mobile:after,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-desktop:after {
   display: none; }
 body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:before,
-#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:before {
+body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-mobile:before,
+body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-desktop:before,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:before,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-mobile:before,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-desktop:before {
   display: none; }
 body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:after,
-#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:after {
+body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-mobile:after,
+body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-desktop:after,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:after,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-mobile:after,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-desktop:after {
   border-bottom-color: #3ac3cf; }
 body #ict-home-projects-table-id.ict-filtered-projects-table tr td,
 #content #ict-home-projects-table-id.ict-filtered-projects-table tr td {
@@ -3026,54 +3058,52 @@ body a.submit-button,
         font-weight: 600;
         line-height: 34px;
         height: 35px; }
-  #ict-dashboard-overview-number-indicators #overview-graphs {
-    padding-right: 90px; }
-    #ict-dashboard-overview-number-indicators #overview-graphs .label {
-      margin-bottom: 11px; }
-    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
-      position: relative;
-      margin-top: 5px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch label {
-        font-weight: bold;
-        float: left;
-        color: #202b3d;
-        font-size: 14px;
-        line-height: 34px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
-        max-width: 100%;
-        width: 89%;
-        margin-left: 60px;
-        margin-right: 60px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbToggle {
-        background-position: 0 -115px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbSelector {
-        height: 32px;
-        line-height: 32px; }
-    #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend {
-      padding-left: 0;
+  #ict-dashboard-overview-number-indicators #overview-graphs .label {
+    margin-bottom: 11px; }
+  #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
+    position: relative;
+    margin-top: 5px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch label {
+      font-weight: bold;
+      float: left;
+      color: #202b3d;
       font-size: 14px;
-      margin: 11px 0;
-      overflow: hidden; }
-      #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li {
-        color: #202b3d;
-        margin-right: 30px; }
-        #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li span {
-          margin-right: 2px; }
-    #ict-dashboard-overview-number-indicators #overview-graphs .expenditure-budget-value {
-      text-align: center;
-      font-size: 16px;
-      color: #202b3d; }
-    #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph {
-      margin-top: 12px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a {
-        text-decoration: underline; }
-        #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a:hover {
-          text-decoration: none; }
-    #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend {
-      margin: 0; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend li {
-        margin-right: 20px;
-        margin-bottom: 10px; }
+      line-height: 34px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
+      max-width: 100%;
+      width: 89%;
+      margin-left: 60px;
+      margin-right: 60px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbToggle {
+      background-position: 0 -115px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbSelector {
+      height: 32px;
+      line-height: 32px; }
+  #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend {
+    padding-left: 0;
+    font-size: 14px;
+    margin: 11px 0;
+    overflow: hidden; }
+    #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li {
+      color: #202b3d;
+      margin-right: 30px; }
+      #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li span {
+        margin-right: 2px; }
+  #ict-dashboard-overview-number-indicators #overview-graphs .expenditure-budget-value {
+    text-align: center;
+    font-size: 16px;
+    color: #202b3d; }
+  #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph {
+    margin-top: 12px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a {
+      text-decoration: underline; }
+      #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a:hover {
+        text-decoration: none; }
+  #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend {
+    margin: 0; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend li {
+      margin-right: 20px;
+      margin-bottom: 10px; }
 
 #ict-dashboard-detailed-overview h2 {
   font-size: 26px;
@@ -3567,85 +3597,133 @@ LAYOUT & GRID STYLES
   overflow: hidden; }
   #container #content {
     margin-top: 0; }
-    #container #content #ict-dashboard-overview-number-indicators {
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators,
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators {
       padding-bottom: 20px; }
-      #container #content #ict-dashboard-overview-number-indicators #overview-graphs {
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs {
         padding-right: 0; }
-        #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
           margin-top: 10px; }
-          #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
-            max-width: 78%; }
-        #container #content #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend {
-          margin-bottom: 0; }
-          #container #content #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend .bar-legend {
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
+            max-width: 78%;
+            float: right;
+            margin-right: 0;
+            margin-left: 0; }
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend {
+          margin-bottom: 0;
+          float: left; }
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend .bar-legend,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend .bar-legend {
             margin-bottom: 30px; }
-      #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
-      #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 {
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 {
         border-top: 1px solid #D8DEEB;
         border-bottom: 1px solid #D8DEEB;
         padding-top: 30px;
         padding-bottom: 30px;
-        margin-bottom: 30px; }
-        #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .label,
-        #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .label {
+        margin-bottom: 30px;
+        float: left;
+        width: 100%; }
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .label,
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .label,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .label,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .label {
           margin-right: 5px; }
-      #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
         border-bottom: 0;
         padding-bottom: 0;
         margin-bottom: 0; }
-        #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
           border-bottom: 1px solid #D8DEEB;
           margin-bottom: 20px;
           padding-bottom: 20px; }
-      #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph {
-        margin-top: 10px; }
-      #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
-        padding-left: 0;
-        margin-top: 0; }
-        #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
-          margin-right: 30px; }
-    #container #content #ict-home-projects-table-id {
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status {
+        float: left; }
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph {
+          margin-top: 10px; }
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
+          padding-left: 0;
+          margin-top: 0; }
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
+            margin-right: 30px; }
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id,
+    #container #content .pane-home-projects #ict-home-projects-table-id {
       padding-right: 20px;
       padding-left: 20px; }
-      #container #content #ict-home-projects-table-id .pager-tags-top .item-list {
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .pager-tags-top .item-list,
+      #container #content .pane-home-projects #ict-home-projects-table-id .pager-tags-top .item-list {
         display: none; }
-      #container #content #ict-home-projects-table-id .sort-direction-desc .col-num-entity {
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .sort-direction-desc .col-num-entity,
+      #container #content .pane-home-projects #ict-home-projects-table-id .sort-direction-desc .col-num-entity {
         width: auto; }
-      #container #content #ict-home-projects-table-id tr td {
-        padding-left: 5px;
-        padding-right: 5px; }
-      #container #content #ict-home-projects-table-id tr td.schedule-status-col {
-        padding-left: 30px; }
-        #container #content #ict-home-projects-table-id tr td.schedule-status-col:before {
-          left: 5px; }
-      #container #content #ict-home-projects-table-id tr td {
-        padding-left: 2px; }
-      #container #content #ict-home-projects-table-id .sbHolder {
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .sbHolder,
+      #container #content .pane-home-projects #ict-home-projects-table-id .sbHolder {
         max-width: 78%;
         width: 78%;
         float: right; }
-      #container #content #ict-home-projects-table-id .table-config-bar .item-list {
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list,
+      #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list {
         margin-top: 20px; }
-        #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
-        #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
-        #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
-        #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last,
+        #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
+        #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
+        #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
+        #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
           display: none; }
-      #container #content #ict-home-projects-table-id table {
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table,
+      #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table {
         border-collapse: separate; }
-        #container #content #ict-home-projects-table-id table .col-num-budget,
-        #container #content #ict-home-projects-table-id table .col-num-benefits {
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .col-num-budget,
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .col-num-benefits,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .col-num-budget,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .col-num-benefits {
           display: none; }
-        #container #content #ict-home-projects-table-id table .ict-sort-link-desktop {
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-desktop,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-desktop {
           display: none; }
-        #container #content #ict-home-projects-table-id table .ict-sort-link-mobile:before {
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile:before,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile:before {
           top: 6px; }
-        #container #content #ict-home-projects-table-id table .ict-sort-link-mobile:after {
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile:after,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile:after {
           top: -3px; }
-        #container #content #ict-home-projects-table-id table th {
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td {
+          padding-left: 2px;
+          padding-right: 5px; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col {
+          padding-left: 30px; }
+          #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before,
+          #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before {
+            left: 5px; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table th,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table th {
           padding-bottom: 15px; }
-      #container #content #ict-home-projects-table-id table.viz-filtered-projects tr td {
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id table.viz-filtered-projects tr td,
+      #container #content .pane-home-projects #ict-home-projects-table-id table.viz-filtered-projects tr td {
         padding-left: 10px; }
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id th,
+      #container #content .pane-home-projects #ict-home-projects-table-id th {
+        padding-bottom: 15px; }
+    #container #content .pane-overview-number-indicators table.viz-filtered-projects tr td,
+    #container #content .pane-home-projects table.viz-filtered-projects tr td {
+      padding-left: 10px; }
     #container #content .pane-last-updated {
       padding: 0; }
 
@@ -4095,31 +4173,31 @@ POSTS & CONTENT STYLES
 #content #inner-content .ict-benefits .ict-faq-answer ul li div {
   display: block; }
 
-#content #ict-home-projects-table-id {
+#content #ict-filtered-projects {
   padding: 0 20px; }
-  #content #ict-home-projects-table-id .viz-filtered-projects tr[data-expanded="true"] td {
+  #content #ict-filtered-projects .viz-filtered-projects tr[data-expanded="true"] td {
     border-bottom: none; }
-  #content #ict-home-projects-table-id .footable-header .viz-tooltips-row {
+  #content #ict-filtered-projects .footable-header .viz-tooltips-row {
     position: absolute;
     bottom: 15px;
     margin-left: 0;
     margin-top: 4px; }
-  #content #ict-home-projects-table-id .footable-header .footable-toggle {
+  #content #ict-filtered-projects .footable-header .footable-toggle {
     display: none; }
-  #content #ict-home-projects-table-id .footable-header a.ict-sort-link {
+  #content #ict-filtered-projects .footable-header a.ict-sort-link {
     margin-left: 0 !important; }
-    #content #ict-home-projects-table-id .footable-header a.ict-sort-link:after {
+    #content #ict-filtered-projects .footable-header a.ict-sort-link:after {
       top: 15px; }
-    #content #ict-home-projects-table-id .footable-header a.ict-sort-link:before {
+    #content #ict-filtered-projects .footable-header a.ict-sort-link:before {
       top: 25px; }
-  #content #ict-home-projects-table-id tr td {
+  #content #ict-filtered-projects tr td {
     border-bottom: 2px dotted #f0f4fa;
     padding-bottom: 14px !important; }
-  #content #ict-home-projects-table-id tr th {
+  #content #ict-filtered-projects tr th {
     padding: 7px 25px 42px 14px; }
-  #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus {
+  #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-minus {
     opacity: 1; }
-    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus::before {
+    #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-minus::before {
       content: ' ';
       background-image: url(/sites/all/themes/itdash/html/images/minus.png);
       width: 26px;
@@ -4127,11 +4205,11 @@ POSTS & CONTENT STYLES
       position: absolute;
       top: 0;
       left: 0; }
-    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus + a {
+    #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-minus + a {
       margin-left: 40px; }
-  #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus {
+  #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-plus {
     opacity: 1; }
-    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus::before {
+    #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-plus::before {
       content: ' ';
       background-image: url(/sites/all/themes/itdash/html/images/plus.png);
       width: 26px;
@@ -4139,38 +4217,38 @@ POSTS & CONTENT STYLES
       position: absolute;
       top: 0;
       left: 0; }
-    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus + a {
+    #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-plus + a {
       margin-left: 40px; }
-  #content #ict-home-projects-table-id .footable-detail-row td:first-child {
+  #content #ict-filtered-projects .footable-detail-row td:first-child {
     padding-left: 40px;
     padding-right: 10px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-3 {
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-3 {
     right: -35px;
     width: 280px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-4 {
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-4 {
     right: -60px;
     width: 280px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-5 {
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-5 {
     right: -57px;
     width: 280px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-6 {
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-6 {
     right: -129px;
     width: 280px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-7 {
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-7 {
     right: -15px;
     width: 280px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-8 {
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-8 {
     right: -71px;
     width: 280px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row {
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-tooltips-row {
     margin-left: 10px;
     margin-top: 3px; }
-    #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row span:after {
+    #content #ict-filtered-projects .footable-detail-row .footable-details .viz-tooltips-row span:after {
       border-left: none;
       border-right: none; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details tbody tr:first-child {
+  #content #ict-filtered-projects .footable-detail-row .footable-details tbody tr:first-child {
     display: none; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr th {
+  #content #ict-filtered-projects .footable-detail-row .footable-details tr th {
     background-color: #fff;
     color: #202b3d;
     border-left: none;
@@ -4180,7 +4258,7 @@ POSTS & CONTENT STYLES
     display: flex;
     padding-bottom: 7px;
     font-size: 14px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td {
+  #content #ict-filtered-projects .footable-detail-row .footable-details tr td {
     display: block !important;
     width: auto;
     padding-right: 0;
@@ -4189,12 +4267,12 @@ POSTS & CONTENT STYLES
     height: auto;
     padding-bottom: 12px;
     word-break: break-word; }
-    #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td .ict-project-button {
+    #content #ict-filtered-projects .footable-detail-row .footable-details tr td .ict-project-button {
       padding-top: 7px;
       padding-bottom: 8px; }
-      #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td .ict-project-button a::before {
+      #content #ict-filtered-projects .footable-detail-row .footable-details tr td .ict-project-button a::before {
         left: 44%; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr .schedule-status-col::before {
+  #content #ict-filtered-projects .footable-detail-row .footable-details tr .schedule-status-col::before {
     top: 0;
     margin-top: 4px; }
 
@@ -4982,61 +5060,87 @@ you can add resource intensive styles.
   /*********************
   CONTENT STYLES
   *********************/
-  #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 {
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .t-2of3.d-2of3,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 {
     padding-right: 90px;
     width: 66.6%;
     float: left; }
-    #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs .graph-container .chart {
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs .graph-container .chart,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs .graph-container .chart {
       width: 100%; }
-    #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs #overview-expenditure-switch {
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs #overview-expenditure-switch,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs #overview-expenditure-switch {
       width: 100%; }
-  #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status {
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status {
     float: left;
     width: 66.6%; }
-    #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
       padding-left: 0; }
-  #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1,
-  #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1,
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
     float: right;
     width: 33.3%;
     padding-top: 0;
     padding-right: 0;
     border-top: 0;
     border-bottom: 0; }
-    #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .big-number,
-    #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .big-number,
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .big-number,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
       text-align: left; }
-  #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
     margin-right: 25px; }
-  #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
     width: 100%; }
-  #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
     border-bottom: 0; }
-  #container #content #ict-home-projects-table-id .pager-tags-top .item-list {
+  #container #content .pane-home-projects #ict-home-projects-table-id .pager-tags-top .item-list,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .pager-tags-top .item-list {
     display: block; }
-  #container #content #ict-home-projects-table-id .sort-direction-desc .col-num-entity {
+  #container #content .pane-home-projects #ict-home-projects-table-id .sort-direction-desc .col-num-entity,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .sort-direction-desc .col-num-entity {
     width: 110px; }
-  #container #content #ict-home-projects-table-id .table-config-bar .form-type-select {
+  #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .form-type-select,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .form-type-select {
     display: inline-block; }
-  #container #content #ict-home-projects-table-id .table-config-bar .sbHolder {
+  #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .sbHolder,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .sbHolder {
     float: none;
     width: auto; }
-  #container #content #ict-home-projects-table-id .table-config-bar .item-list {
+  #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list {
     margin-top: 0; }
-    #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
-    #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
-    #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
-    #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
+    #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
+    #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
+    #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
+    #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
       display: list-item; }
-  #container #content #ict-home-projects-table-id table tr td {
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td {
     padding-left: 15px;
     padding-right: 15px; }
-  #container #content #ict-home-projects-table-id table tr td.schedule-status-col {
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col {
     padding-left: 30px; }
-    #container #content #ict-home-projects-table-id table tr td.schedule-status-col:before {
+    #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before {
       left: 5px; }
-  #container #content #ict-home-projects-table-id table .col-num-budget,
-  #container #content #ict-home-projects-table-id table .col-num-benefits {
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .col-num-budget,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .col-num-benefits,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .col-num-budget,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .col-num-benefits {
     display: table-cell; }
   #container #content .pane-last-updated .last-updated-block .last-updated-on {
     padding-left: 20px; }
@@ -5049,30 +5153,19 @@ you can add resource intensive styles.
     #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
       width: 20px; }
 
-  /*#content {
-  	#ict-home-projects-table-id {
-  		tr {
-  			th {
-  			    padding: 7px 0px 42px 4px;
-  			    font-size: 14px;
-  			    a.ict-sort-link {
-  			    	&:after {
-  			    		top: 80px!important;
-  			    	}
-  			    	&:before {
-  			    		top: 90px!important;
-  			    	}
-  			    }
-  			}
-  		}
-  	}
-  }*/
   #content {
     color: #4e5365;
     margin: 0;
     background-color: #fff;
     padding-bottom: 60px;
     /* Project list */ }
+    #content #ict-filtered-projects tr th {
+      padding: 7px 0px 42px 4px;
+      font-size: 14px; }
+      #content #ict-filtered-projects tr th a.ict-sort-link:after {
+        top: 80px !important; }
+      #content #ict-filtered-projects tr th a.ict-sort-link:before {
+        top: 90px !important; }
     #content .dotbg {
       background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
       overflow: hidden; }
@@ -6691,16 +6784,28 @@ you can add resource intensive styles.
   #content #inner-content h2.individual-project-page {
     margin: 20px 0; }
 
-  #container #content #ict-home-projects-table-id {
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder,
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
+    max-width: 89%; }
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id,
+  #container #content .pane-home-projects #ict-home-projects-table-id {
     padding-right: 0;
     padding-left: 0; }
-  #container #content #ict-home-projects-table-id table tr td.schedule-status-col {
-    padding-left: 40px; }
-    #container #content #ict-home-projects-table-id table tr td.schedule-status-col:before {
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td {
+    padding: 18px 14px; }
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col {
+    padding: 18px 14px 18px 40px;
+    position: relative; }
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before,
+    #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before {
       left: 15px; }
-  #container #content #ict-home-projects-table-id table .ict-sort-link-desktop {
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-desktop,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-desktop {
     display: block; }
-  #container #content #ict-home-projects-table-id table .ict-sort-link-mobile {
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile {
     display: none; }
   #container #content .pane-last-updated .last-updated-block .last-updated-on {
     padding-left: 0; } }
