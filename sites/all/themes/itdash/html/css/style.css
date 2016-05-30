@@ -1581,7 +1581,7 @@ select.ui-datepicker-month, select.ui-datepicker-year {
       .entity-bean ul li:before,
       .node-type-page #inner-content ul li:before {
         position: absolute;
-        content: "• ";
+        content: "тАв ";
         color: #17716b;
         left: -2px;
         font-size: 24px; }
@@ -1653,7 +1653,7 @@ body .ict-benefits,
         body .ict-benefits .node-faq-item .ict-faq-answer ul li:before,
         #content .ict-benefits .node-faq-item .ict-faq-answer ul li:before {
           position: absolute;
-          content: "• ";
+          content: "тАв ";
           color: #17716b;
           left: -2px;
           font-size: 24px; }
@@ -3697,6 +3697,14 @@ HEADER STYLES
 /*********************
 POSTS & CONTENT STYLES
 *********************/
+#content #project-baseline-history #inner-content {
+  padding: 0 20px; }
+  #content #project-baseline-history #inner-content .project-draft-submission {
+    padding: 0; }
+    #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+      width: 100%; }
+  #content #project-baseline-history #inner-content .project-history .project-draft-submission {
+    padding-left: 15px; }
 #content .last-updated-block {
   width: 100%;
   padding: 0 20px; }
@@ -4288,6 +4296,12 @@ tweeners.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
+  #content #project-baseline-history #inner-content {
+    padding: 0 7%; }
+    #content #project-baseline-history #inner-content .project-draft-submission {
+      padding: 0; }
+      #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+        width: 180px; }
   #content .last-updated-block {
     margin: 0 auto;
     display: table;
@@ -6003,13 +6017,16 @@ you can add resource intensive styles.
     float: left;
     width: 25%; }
 
-  .page-title {
-    padding: 0; }
-
   #container .header .inner-header {
     margin: 0; }
   #container #content .page-title {
-    padding-left: 0; }
+    padding: 0; }
+  #container #content #project-baseline-history #inner-content {
+    padding: 0; }
+    #container #content #project-baseline-history #inner-content .project-draft-submission {
+      padding: 0; }
+      #container #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+        width: 180px; }
   #container #content .last-updated-block {
     margin: 0;
     padding: 0;

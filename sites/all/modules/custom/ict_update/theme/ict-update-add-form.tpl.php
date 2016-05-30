@@ -1,3 +1,8 @@
+<div class="page-title dotbg">
+  <div class="inner-title-content wrap cf">
+    <h1><?php print !empty($form['#page_title']) ? $form['#page_title'] : t('Update Project Data Form'); ?></h1>
+  </div>
+</div>
 <div id="inner-content" class="wrap cf">
   <div class="project-update-submission d-all">
   <h2><?php print t('Project Information'); ?></h2>
@@ -205,11 +210,11 @@
       <div class="text"><?php print drupal_render($form['field_project_stage']); ?></div>
     </div>
     <div class="row">
-      <div class="label"><?php print t('Original Approved Start Date'); ?> </div>
+      <div class="label"><?php print $form['#rebaseline'] ? t('Approved Start Date') : t('Original Approved Start Date'); ?> </div>
       <div class="text"><?php print format_date(strtotime($form['#project_node']->field_start_date['und'][0]['value']), 'medium', 'j F Y'); ?></div>
     </div>
     <div class="row">
-      <div class="label"><?php print t('Original Approved Completion Date'); ?></div>
+      <div class="label"><?php print $form['#rebaseline'] ? t('Approved Completion Date') : t('Original Approved Completion Date'); ?></div>
       <div class="text"><?php print format_date(strtotime($form['#project_node']->field_original_completion_date['und'][0]['value']), 'medium', 'j F Y'); ?></div>
     </div>
     <div class="row">
@@ -229,7 +234,9 @@
     </div>
 
     <div class="row">
-      <div class="label">Original Expected Financial Benefits<a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The financial value of benefits expected by the project as identified in the business case. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.</span></a></div>
+      <div class="label">
+        <?php print $form['#rebaseline'] ? t('Expected Financial Benefits') : t('Original Expected Financial Benefits'); ?>
+        <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">The financial value of benefits expected by the project as identified in the business case. Where project is part of a larger programme, only use benefits that this project will deliver or contribute to.</span></a></div>
       <div class="text">$<?php print number_format($form['#project_node']->field_predicted_project_benefit['und'][0]['value'], 2, '.', ''); ?>m</div>
     </div>
     <div class="row">

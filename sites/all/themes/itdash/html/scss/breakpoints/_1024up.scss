@@ -18,10 +18,6 @@ be seen on the Desktop.
   float: left;
   width: 25%;
 }
-
-.page-title {
-	padding: 0;
-}
 #container {
 	.header {
 		.inner-header {
@@ -30,7 +26,20 @@ be seen on the Desktop.
 	}
 	#content {
 		.page-title {
-			padding-left: 0;
+			padding: 0;
+		}
+		#project-baseline-history {
+			#inner-content {
+				padding: 0;
+				.project-draft-submission {
+					padding: 0;
+					.pbh-buttons {
+						a {
+							width: 180px;
+						}
+					}
+				}
+			}
 		}
 		.last-updated-block {
 			margin: 0;
@@ -171,7 +180,6 @@ be seen on the Desktop.
 		}
 	}
 }
-
 .footer {
 	#inner-footer {
 		.wrap.cf {
