@@ -4228,9 +4228,11 @@ DETAILED OVERVIEW STYLES
       margin: 0; }
       #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend .bar-legend {
         padding-left: 20px;
-        margin-top: 8px; }
+        margin-top: 8px;
+        color: #4e5365; }
   #container #content #ict-dashboard-detailed-overview .viz-number-of-benefits {
-    padding-left: 20px; }
+    padding-left: 20px;
+    font-size: 13px; }
 
 /*********************
 LARGER MOBILE DEVICES
