@@ -151,6 +151,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   if (empty($update->nid)) {
     $project_id = !empty($_REQUEST['project_id']) && is_numeric($_REQUEST['project_id']) ? check_plain($_REQUEST['project_id']) : arg(1);
     $project = node_load($project_id);
+    $form['#rebaseline'] = !empty($project->field_project);
     $approved_vid = ict_project_get_last_transaction_by_state($project_id, 'approved');
     if (!$approved_vid->vid) {
       drupal_not_found();
@@ -163,8 +164,12 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   else {
     $form['#project_id'] = $project_id = $form['#node']->field_project['und'][0]['target_id'];
     $project = node_load($project_id);
+    $form['#rebaseline'] = !empty($project->field_project);
     $form['#update_id'] = $update->nid;
   }
+
+  $form['#page_title'] = $form['#rebaseline'] ? t('Update Project Re-baseline Data Form') : t('Update Project Data Form');
+
   $field_instances = field_info_instances('node', 'project');
   $form['project_id'] = array('#type' => 'hidden', '#value' => $project_id);
   $form['#project_node'] = $project;

@@ -30,11 +30,11 @@ body > #container { height: auto; min-height: 100%; }
 LAYOUT & GRID STYLES
 *********************/
 
-/*.wrap {
-	width: 970px;
-	min-width: 970px;
-	padding: 0;
-}*/
+// .wrap {
+// 	width: 970px;
+// 	min-width: 970px;
+// 	padding: 0;
+// }
 
 /*********************
 HEADER STYLES
@@ -95,88 +95,9 @@ HEADER STYLES
 /*********************
 CONTENT STYLES
 *********************/
+
 #container {
 	#content {
-		color: #4e5365;
-		margin: 0;
-		background-color: #fff;
-		padding-bottom: 60px;
-
-		.dotbg {
-			background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
-			overflow: hidden;
-		}
-
-		.page-title {
-			.inner-title-content {
-				h1 {
-					color: #c8f68f;
-					font-size: 34px;
-					font-weight: 400;
-				}
-			}
-		}
-		.welcome {
-			padding: 20px 20px;
-
-			h1 {
-				color: $yellow-text;
-				font-size: 34px;
-				line-height: 48px;
-				margin: 0;
-			}
-			.welcome-text {
-				p {
-					color: $white;
-					-moz-hyphens: none;
-					-webkit-hyphens: none;
-					font-size: 16px;
-					word-break: normal;
-					margin: 20px 0;
-				}
-			}
-			.welcome-form {
-				form {
-					p {
-						input[type="text"],
-						input[type="password"] {
-							color: $white;
-							border: 1px solid #3c475c;
-							background: #131a28;
-							font-size: 14px;
-							height: 34px;
-							line-height: 34px;
-							letter-spacing: 0;
-							vertical-align: middle;
-
-							&:focus, &:hover {
-								border: 1px solid #02a7a4;
-							}
-						}
-						input[type="submit"] {
-							background: url(../images/signin-home-btn.png) no-repeat scroll 0 0 transparent;
-							border: 0 none;
-							width: 130px;
-							height: 36px;
-							text-indent: -999em;
-							overflow: hidden;
-
-							&:hover {
-								background-position: 0 -36px;
-							}
-						}
-
-						&.submit {
-							text-align: right;
-							border-top: none;
-							margin: 30px 0 0 0;
-							padding: 0;
-						}
-					}
-				}
-			}
-		}
-
 		#ict-dashboard-overview-number-indicators {
 			.t-2of3.d-2of3 {
 				padding-right: 90px;
@@ -279,6 +200,105 @@ CONTENT STYLES
 				.col-num-budget,
 				.col-num-benefits {
 					display: table-cell;
+				}
+			}
+		}
+		.pane-last-updated {
+			.last-updated-block {
+				.last-updated-on {
+					padding-left: 20px;
+				}
+			}
+		}
+	}
+}
+#content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+	float: none;
+}
+
+#content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+	margin: 15px 10px;
+	span {
+		width: 20px;
+	}
+}
+
+#content {
+	color: #4e5365;
+	margin: 0;
+	background-color: #fff;
+	padding-bottom: 60px;
+		.dotbg {
+			background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
+			overflow: hidden;
+		}
+
+		.page-title {
+			.inner-title-content {
+				h1 {
+					color: #c8f68f;
+					font-size: 34px;
+					font-weight: 400;
+				}
+			}
+		}
+		.welcome {
+			padding: 20px 20px;
+
+			h1 {
+				color: $yellow-text;
+				font-size: 34px;
+				line-height: 48px;
+				margin: 0;
+			}
+			.welcome-text {
+				p {
+					color: $white;
+					-moz-hyphens: none;
+					-webkit-hyphens: none;
+					font-size: 16px;
+					word-break: normal;
+					margin: 20px 0;
+				}
+			}
+			.welcome-form {
+				form {
+					p {
+						input[type="text"],
+						input[type="password"] {
+							color: $white;
+							border: 1px solid #3c475c;
+							background: #131a28;
+							font-size: 14px;
+							height: 34px;
+							line-height: 34px;
+							letter-spacing: 0;
+							vertical-align: middle;
+
+							&:focus, &:hover {
+								border: 1px solid #02a7a4;
+							}
+						}
+						input[type="submit"] {
+							background: url(../images/signin-home-btn.png) no-repeat scroll 0 0 transparent;
+							border: 0 none;
+							width: 130px;
+							height: 36px;
+							text-indent: -999em;
+							overflow: hidden;
+
+							&:hover {
+								background-position: 0 -36px;
+							}
+						}
+
+						&.submit {
+							text-align: right;
+							border-top: none;
+							margin: 30px 0 0 0;
+							padding: 0;
+						}
+					}
 				}
 			}
 		}
@@ -1638,7 +1658,6 @@ CONTENT STYLES
 			}
 		}
 	}
-}
 
 
 /*********************

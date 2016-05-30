@@ -16,7 +16,7 @@
 <?php print theme('ict_pages_last_update', array('nid' => $nid)); ?>
 
 <div id="inner-content" class="wrap cf">
-  <h2><?php print t('Project Information'); ?></h2>
+  <h2 class= "individual-project-page"><?php print t('Project Information'); ?></h2>
   <div class="project-draft-submission d-all ict-view-page">
 
     <div class="row">
@@ -258,7 +258,9 @@
 
       <div class="row">
         <div class="label">
-          <?php print $field_start_date['meta']['#title']; ?>
+          <?php print $old_baselines ?
+            str_replace('Original ', '', $field_start_date['meta']['#title']) :
+            $field_start_date['meta']['#title']; ?>
           <?php if (!empty($field_start_date['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
@@ -277,7 +279,9 @@
 
       <div class="row">
         <div class="label">
-          <?php print $field_original_completion_date['meta']['#title']; ?>
+          <?php print $old_baselines ?
+            str_replace('Original ', '', $field_original_completion_date['meta']['#title']) :
+            $field_original_completion_date['meta']['#title']; ?>
           <?php if (!empty($field_original_completion_date['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
@@ -309,7 +313,9 @@
 
       <div class="row">
         <div class="label">
-          <?php print $field_predicted_project_benefit['meta']['#title'] . ' <em>($m)</em>'; ?>
+          <?php print $old_baselines ?
+            str_replace('Original ', '', $field_predicted_project_benefit['meta']['#title'])  . ' <em>($m)</em>' :
+            $field_predicted_project_benefit['meta']['#title']  . ' <em>($m)</em>'; ?>
           <?php if (!empty($field_predicted_project_benefit['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>

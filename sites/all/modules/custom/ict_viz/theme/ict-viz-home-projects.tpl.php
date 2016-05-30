@@ -43,7 +43,7 @@
             <a class="ict-sort-link ict-sort-link-desktop" href="<?php print url(current_path(), array('query' => $query, 'fragment' => 'ict-home-projects-table-id')); ?>"><span></span></a>
           </th>
         </tr>
-        <tr class="tooltips-row">
+        <tr class="tooltips-row <?php print !empty($query['direction']) ? 'sort-direction-' . $query['direction'] : ''; ?>">
           <th class="<?php print $col_classes[0] ?>"><a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
             <?php print t('The Government entity responsible for the project.'); ?>
             </span></a>
