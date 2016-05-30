@@ -211,7 +211,7 @@
     <?php $start_date = &$form['field_start_date']; ?>
     <div class="row">
       <div class="label">
-        <?php print $start_date['#title']; ?>
+        <?php print $form['#rebaseline'] ? str_replace('Original ', '', $start_date['#title']) : $start_date['#title']; ?>
         <?php if (!empty($start_date['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
@@ -231,7 +231,7 @@
     <?php $end_date = &$form['field_original_completion_date']; ?>
     <div class="row">
       <div class="label">
-        <?php print $end_date['#title']; ?>
+        <?php print $form['#rebaseline'] ? str_replace('Original ', '', $end_date['#title']) : $end_date['#title']; ?>
         <?php if (!empty($end_date['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
@@ -261,7 +261,9 @@
 
     <div class="row">
       <div class="label">
-        <?php print $form['field_predicted_project_benefit']['#title'] . ' <em>($m)</em>'; ?>
+        <?php print $form['#rebaseline'] ?
+          str_replace('Original ', '', $form['field_predicted_project_benefit']['#title']) . ' <em>($m)</em>' :
+          $form['field_predicted_project_benefit']['#title'] . ' <em>($m)</em>'; ?>
         <?php if (!empty($form['field_original_total_budget']['#description'])) : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
