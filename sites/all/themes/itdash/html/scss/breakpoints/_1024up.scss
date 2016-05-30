@@ -18,6 +18,146 @@ be seen on the Desktop.
   float: left;
   width: 25%;
 }
+.page-title {
+	padding: 0;
+}
+#content {
+	#project-baseline-history {
+		#inner-content {
+			padding: 0;
+			.project-draft-submission {
+				padding: 0;
+				.pbh-buttons {
+					a {
+						width: 180px;
+					}
+				}
+			}
+		}
+	}
+	.last-updated-block {
+		margin: 0;
+		padding: 0;
+		width: 970px;
+	    margin: 0 auto;
+	    display: table;
+	    margin-top: 25px;
+	    margin-bottom: 10px;
+	    .last-updated-on {
+	    	width: 50% !important;
+		    max-width: 970px;
+		    float: left;
+		    min-width: 0;
+		    border-bottom: none;
+		    margin-bottom: 0;
+    		padding-bottom: 0;
+	    }
+	    .view-baseline-history {
+	    	width: 50%;
+		    text-align: right;
+		    float: right;
+		    display: block;
+		    margin: 0;
+		    .view-baseline-link {
+			    border-style: none;
+			    text-decoration: underline;
+			    font-weight: 400;
+			    padding: 0;
+			    &:hover {
+			    	text-decoration: none;
+			    }
+		    }
+	    }
+	}
+	#inner-content {
+		#print-links-container {
+			.pdf_button {
+				margin-bottom: 67px;
+				a {
+					min-width: 275px !important;
+				    margin: 10px 10px 3px;
+				    width: 275px;
+				}
+			}
+		}
+		 h2.individual-project-page {
+		 	margin: 20px 0;
+		 }
+		.project-draft-submission {
+			padding: 0;
+			#benefits_legend {
+				overflow: hidden;
+				color: #202b3d;
+				.bar-legend li {
+					float: none;
+					margin-right: 25px;
+				}
+			}
+			.email-value {
+				text-decoration: underline;
+				&:hover {
+				text-decoration: none;
+				}
+			}
+			.entity_comments {
+				a {
+					text-decoration: underline;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+			.individual-project-content {
+				.preview_switch {
+					text-align: center;
+					padding-left: 10px;
+					margin: 0 10px;
+					height: 41px;
+					span {
+						vertical-align: sub;
+					    bottom: 0;
+					    top: 0;
+					    position: inherit;
+					    width: 20px;
+					    height: 17px;
+					    margin: 0 15px 0 0;
+					    left: 0;
+					}
+				}
+			}
+			.row {
+				.text {
+					.project-individual-page-graph {
+						margin-left: 25px;
+						.bar-legend {
+							li {
+								margin-right: 25px;
+							}
+						}
+					}
+				}
+			}
+			.project-program-link {
+				text-decoration: underline;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+			#field_end_predicted_budget {
+				tbody {
+					tr {
+						th:first-child {
+							border-radius: 4px 0 0;
+						}
+						th:last-child {
+							border-radius: 0 4px 0 0;
+						}
+					}
+				}
+			}	
+		}
+	}
+}
 .footer {
 	#inner-footer {
 		.wrap.cf {
