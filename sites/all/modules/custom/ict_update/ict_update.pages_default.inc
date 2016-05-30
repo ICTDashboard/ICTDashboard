@@ -325,7 +325,7 @@ function ict_update_default_page_manager_pages() {
     $pane->uuid = 'a87d6ef0-b694-48b7-bdaa-69318164093b';
     $display->content['new-a87d6ef0-b694-48b7-bdaa-69318164093b'] = $pane;
     $display->panels['middle'][0] = 'new-a87d6ef0-b694-48b7-bdaa-69318164093b';
-  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;

@@ -288,7 +288,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Actual Level of Project Completion',
     'required' => 0,
     'settings' => array(
-      'max' => 100,
+      'max' => '',
       'min' => 0,
       'prefix' => '',
       'suffix' => '',
@@ -376,11 +376,11 @@ function ict_update_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_current_financial_benefits',
-    'label' => 'Expected Financial Benefits',
+    'label' => 'Current Expected Financial Benefits',
     'required' => 0,
     'settings' => array(
       'max' => '',
-      'min' => 0,
+      'min' => '',
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -498,7 +498,7 @@ function ict_update_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'max' => '',
-      'min' => 0,
+      'min' => '',
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -600,7 +600,7 @@ function ict_update_field_default_field_instances() {
     'label' => 'Forecast Level of Project Completion',
     'required' => 0,
     'settings' => array(
-      'max' => 100,
+      'max' => '',
       'min' => 0,
       'prefix' => '',
       'suffix' => '',
@@ -1002,11 +1002,10 @@ function ict_update_field_default_field_instances() {
   t('Briefly describe benefit.');
   t('Commentary');
   t('Context, remedial action, changes in project scope or other commentary.');
+  t('Current Expected Financial Benefits');
   t('End date');
   t('Entity Comments');
   t('Expected Completion Date');
-  t('Expected Financial Benefits');
-  t('Value of Financial Benefits Realised To Date');
   t('Financial');
   t('For each benefit listed, the date range when benefit is expected to be realised.');
   t('Forecast Level of Project Completion');
@@ -1028,6 +1027,7 @@ function ict_update_field_default_field_instances() {
   t('The name of the Senior Responsible Officer (SRO) for the delivery of the project.');
   t('The percentage of work forecasted to be completed at the current update.');
   t('The position (including group, division & branch) of the Senior Responsible Officer.');
+  t('Value of Financial Benefits Realised To Date');
   t('You may add a comment to further explain the context for inclusion or update of this benefit.');
 
   return $field_instances;
