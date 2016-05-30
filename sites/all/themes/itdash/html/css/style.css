@@ -3353,6 +3353,144 @@ div.tooltip-edit {
   #content .project-program-link:focus {
     color: #0d6c88; }
 
+.page-block #content {
+  width: 970px;
+  margin: 0 auto; }
+
+.pane-block blockquote, .page-block #content blockquote, .node-type-page #content blockquote, .entity-bean .content blockquote {
+  color: #202b3d;
+  border-left: 2px solid #0d6c88;
+  padding-left: 10px;
+  position: relative;
+  font-style: italic;
+  margin-left: 80px; }
+  .pane-block blockquote p, .page-block #content blockquote p, .node-type-page #content blockquote p, .entity-bean .content blockquote p {
+    color: #202b3d; }
+  .pane-block blockquote:before, .page-block #content blockquote:before, .node-type-page #content blockquote:before, .entity-bean .content blockquote:before {
+    content: "Note: ";
+    position: absolute;
+    left: -45px;
+    top: -6px;
+    color: #0d6c88;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 14px; }
+.pane-block h2, .page-block #content h2, .node-type-page #content h2, .entity-bean .content h2 {
+  font-family: "Open Sans", sans-serif;
+  color: #0d6c88;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left; }
+.pane-block h3, .page-block #content h3, .node-type-page #content h3, .entity-bean .content h3 {
+  font-family: "Open Sans", sans-serif;
+  color: #202b3d;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left; }
+.pane-block h4, .page-block #content h4, .node-type-page #content h4, .entity-bean .content h4 {
+  font-family: "Open Sans", sans-serif;
+  color: #202b3d;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left; }
+.pane-block h5, .page-block #content h5, .node-type-page #content h5, .entity-bean .content h5 {
+  font-family: "Open Sans", sans-serif;
+  color: #202b3d;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left;
+  font-style: italic;
+  text-transform: inherit;
+  letter-spacing: 0; }
+.pane-block p, .page-block #content p, .node-type-page #content p, .entity-bean .content p {
+  color: #4e5365;
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 22px; }
+.pane-block a, .page-block #content a, .node-type-page #content a, .entity-bean .content a {
+  color: #027e9c;
+  text-decoration: underline; }
+  .pane-block a:focus, .pane-block a:hover, .pane-block a:visited, .page-block #content a:focus, .page-block #content a:hover, .page-block #content a:visited, .node-type-page #content a:focus, .node-type-page #content a:hover, .node-type-page #content a:visited, .entity-bean .content a:focus, .entity-bean .content a:hover, .entity-bean .content a:visited {
+    color: #027e9c !important;
+    text-decoration: none; }
+.pane-block a[href^="http"], .page-block #content a[href^="http"], .node-type-page #content a[href^="http"], .entity-bean .content a[href^="http"] {
+  color: #027e9c;
+  text-decoration: underline; }
+  .pane-block a[href^="http"]:focus, .pane-block a[href^="http"]:hover, .pane-block a[href^="http"]:visited, .page-block #content a[href^="http"]:focus, .page-block #content a[href^="http"]:hover, .page-block #content a[href^="http"]:visited, .node-type-page #content a[href^="http"]:focus, .node-type-page #content a[href^="http"]:hover, .node-type-page #content a[href^="http"]:visited, .entity-bean .content a[href^="http"]:focus, .entity-bean .content a[href^="http"]:hover, .entity-bean .content a[href^="http"]:visited {
+    color: #027e9c !important;
+    text-decoration: none; }
+  .pane-block a[href^="http"]:after, .page-block #content a[href^="http"]:after, .node-type-page #content a[href^="http"]:after, .entity-bean .content a[href^="http"]:after {
+    content: " ";
+    background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    margin-left: 5px; }
+.pane-block ol, .page-block #content ol, .node-type-page #content ol, .entity-bean .content ol {
+  padding-left: 20px;
+  margin: 0;
+  counter-reset: item;
+  color: #4e5365; }
+  .pane-block ol li, .page-block #content ol li, .node-type-page #content ol li, .entity-bean .content ol li {
+    text-indent: -10px;
+    color: #4e5365;
+    font-family: "Open sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    display: block; }
+    .pane-block ol li p, .page-block #content ol li p, .node-type-page #content ol li p, .entity-bean .content ol li p {
+      margin: 0 0 0 11px; }
+    .pane-block ol li p:first-of-type, .page-block #content ol li p:first-of-type, .node-type-page #content ol li p:first-of-type, .entity-bean .content ol li p:first-of-type {
+      display: inline-block;
+      margin: 0 0 0 10px; }
+    .pane-block ol li:before, .page-block #content ol li:before, .node-type-page #content ol li:before, .entity-bean .content ol li:before {
+      content: counter(item) ". ";
+      counter-increment: item;
+      color: #0d6c88; }
+    .pane-block ol li ol, .page-block #content ol li ol, .node-type-page #content ol li ol, .entity-bean .content ol li ol {
+      counter-reset: alpha;
+      margin: 0 0 0.75em 10px; }
+      .pane-block ol li ol li:before, .page-block #content ol li ol li:before, .node-type-page #content ol li ol li:before, .entity-bean .content ol li ol li:before {
+        content: counter(alpha,lower-alpha) ". ";
+        counter-increment: alpha; }
+.pane-block ul, .page-block #content ul, .node-type-page #content ul, .entity-bean .content ul {
+  padding: 0;
+  margin: 0;
+  padding-left: 22px; }
+  .pane-block ul li, .page-block #content ul li, .node-type-page #content ul li, .entity-bean .content ul li {
+    text-indent: -10px;
+    padding-left: 14px;
+    font-family: "Open sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #4e5365;
+    list-style: none;
+    line-height: 1.6em; }
+    .pane-block ul li p, .page-block #content ul li p, .node-type-page #content ul li p, .entity-bean .content ul li p {
+      margin: 0 0 0 10px; }
+    .pane-block ul li p:first-of-type, .page-block #content ul li p:first-of-type, .node-type-page #content ul li p:first-of-type, .entity-bean .content ul li p:first-of-type {
+      display: inline-block; }
+    .pane-block ul li:before, .page-block #content ul li:before, .node-type-page #content ul li:before, .entity-bean .content ul li:before {
+      font-size: 20px;
+      content: "• ";
+      display: inline-block;
+      width: 10px;
+      height: 5px;
+      vertical-align: middle;
+      line-height: 1; }
+    .pane-block ul li ul li:before, .page-block #content ul li ul li:before, .node-type-page #content ul li ul li:before, .entity-bean .content ul li ul li:before {
+      content: "• ";
+      line-height: 1;
+      color: #55beaf; }
+    .pane-block ul li ul li ul li:before, .page-block #content ul li ul li ul li:before, .node-type-page #content ul li ul li ul li:before, .entity-bean .content ul li ul li ul li:before {
+      content: "• ";
+      line-height: 1;
+      color: #aabcb9; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
