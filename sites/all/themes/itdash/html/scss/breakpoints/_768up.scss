@@ -179,9 +179,9 @@ CONTENT STYLES
 
 		#ict-dashboard-overview-number-indicators {
 			.t-2of3.d-2of3 {
-				padding-right: 0;
-				width: 100%;
-				float: none;
+				padding-right: 90px;
+				width: 66.6%;
+				float: left;
 				#overview-graphs {
 					.graph-container {
 						.chart {
@@ -189,22 +189,60 @@ CONTENT STYLES
 						}
 					}
 					#overview-expenditure-switch {
-						width: 50%;
+						width: 100%;
 					}
 				}
 			}
-			.t-1of3 {
-				float: none;
+			.graph-schedule-status {
+				float: left;
+				width: 66.6%;
+				#statuses_legend {
+					.bar-legend {
+						padding-left: 0;
+					}
+				}
+			}
+			#ict-dashboard-numbers1,
+			#ict-dashboard-numbers {
+				float: right;
+				width: 33.3%;
+				padding-top: 0;
 				padding-right: 0;
-				width: auto;
+				border-top: 0;
+				border-bottom: 0;
+				.big-number {
+					text-align: left;
+				}
+			}
+			.graph-schedule-status {
+				#statuses_legend {
+					.bar-legend {
+						li {
+							margin-right: 25px;
+						}
+					}
+				}
 			}
 			#ict-dashboard-numbers {
 				.general-button {
-					width: 33%;
+					width: 100%;
+				}
+				.big-number {
+					border-bottom: 0;
 				}
 			}
 		}
 		#ict-home-projects-table-id {
+			.pager-tags-top {
+				.item-list {
+					display: block;
+				}
+			}
+			.sort-direction-desc {
+				.col-num-entity {
+					width: 110px;
+				}
+			}
 			.table-config-bar {
 				.form-type-select {
 					display: inline-block;
@@ -222,6 +260,18 @@ CONTENT STYLES
 						.pager-last {
 							display: list-item;
 						}
+					}
+				}
+			}
+			tr {
+				td {
+					padding-left: 15px;
+					padding-right: 15px;
+				}
+				td.schedule-status-col {
+					padding-left: 40px;
+					&:before {
+						left: 15px;
 					}
 				}
 			}

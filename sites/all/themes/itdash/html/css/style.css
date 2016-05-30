@@ -1581,7 +1581,7 @@ select.ui-datepicker-month, select.ui-datepicker-year {
       .entity-bean ul li:before,
       .node-type-page #inner-content ul li:before {
         position: absolute;
-        content: "тАв ";
+        content: "• ";
         color: #17716b;
         left: -2px;
         font-size: 24px; }
@@ -1665,7 +1665,7 @@ body .ict-benefits,
         body .ict-benefits .node-faq-item .ict-faq-answer ul li:before,
         #content .ict-benefits .node-faq-item .ict-faq-answer ul li:before {
           position: absolute;
-          content: "тАв ";
+          content: "• ";
           color: #17716b;
           left: -2px;
           font-size: 24px; }
@@ -2382,11 +2382,11 @@ body #ict-home-projects-table-id tr th,
       display: inline-block;
       position: absolute;
       right: 15px;
-      top: 36px; }
+      top: 6px; }
     body #ict-home-projects-table-id tr th .ict-sort-link:after,
     #content #ict-home-projects-table-id tr th .ict-sort-link:after {
       border-color: transparent transparent white transparent;
-      top: 26px; }
+      top: -3px; }
 body #ict-home-projects-table-id tr td,
 #content #ict-home-projects-table-id tr td {
   padding: 18px 14px;
@@ -3459,9 +3459,29 @@ LAYOUT & GRID STYLES
           border-bottom: 1px solid #D8DEEB;
           margin-bottom: 20px;
           padding-bottom: 20px; }
+      #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph {
+        margin-top: 10px; }
+      #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
+        padding-left: 0;
+        margin-top: 0; }
+        #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
+          margin-right: 30px; }
     #container #content #ict-home-projects-table-id {
       padding-right: 20px;
       padding-left: 20px; }
+      #container #content #ict-home-projects-table-id .pager-tags-top .item-list {
+        display: none; }
+      #container #content #ict-home-projects-table-id .sort-direction-desc .col-num-entity {
+        width: auto; }
+      #container #content #ict-home-projects-table-id tr td {
+        padding-left: 5px;
+        padding-right: 5px; }
+      #container #content #ict-home-projects-table-id tr td.schedule-status-col {
+        padding-left: 30px; }
+        #container #content #ict-home-projects-table-id tr td.schedule-status-col:before {
+          left: 5px; }
+      #container #content #ict-home-projects-table-id tr td {
+        padding-left: 2px; }
       #container #content #ict-home-projects-table-id .sbHolder {
         max-width: 78%;
         width: 78%;
@@ -3473,6 +3493,8 @@ LAYOUT & GRID STYLES
         #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
         #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
           display: none; }
+      #container #content #ict-home-projects-table-id table {
+        border-collapse: separate; }
     #container #content .last-updated-on {
       padding-left: 20px; }
 
@@ -4214,6 +4236,10 @@ tweeners.
   #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 {
     float: left;
     width: 100%; }
+  #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status {
+    float: left; }
+    #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
+      margin-right: 20px; }
 
   /* entry content */
   .entry-content {
@@ -4436,19 +4462,39 @@ you can add resource intensive styles.
         margin: 30px 0 0 0;
         padding: 0; }
     #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 {
-      padding-right: 0;
-      width: 100%;
-      float: none; }
+      padding-right: 90px;
+      width: 66.6%;
+      float: left; }
       #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs .graph-container .chart {
         width: 100%; }
       #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs #overview-expenditure-switch {
-        width: 50%; }
-    #container #content #ict-dashboard-overview-number-indicators .t-1of3 {
-      float: none;
+        width: 100%; }
+    #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status {
+      float: left;
+      width: 66.6%; }
+      #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
+        padding-left: 0; }
+    #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1,
+    #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
+      float: right;
+      width: 33.3%;
+      padding-top: 0;
       padding-right: 0;
-      width: auto; }
+      border-top: 0;
+      border-bottom: 0; }
+      #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .big-number,
+      #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
+        text-align: left; }
+    #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
+      margin-right: 25px; }
     #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
-      width: 33%; }
+      width: 100%; }
+    #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
+      border-bottom: 0; }
+    #container #content #ict-home-projects-table-id .pager-tags-top .item-list {
+      display: block; }
+    #container #content #ict-home-projects-table-id .sort-direction-desc .col-num-entity {
+      width: 110px; }
     #container #content #ict-home-projects-table-id .table-config-bar .form-type-select {
       display: inline-block; }
     #container #content #ict-home-projects-table-id .table-config-bar .sbHolder {
@@ -4461,6 +4507,13 @@ you can add resource intensive styles.
       #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
       #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
         display: list-item; }
+    #container #content #ict-home-projects-table-id tr td {
+      padding-left: 15px;
+      padding-right: 15px; }
+    #container #content #ict-home-projects-table-id tr td.schedule-status-col {
+      padding-left: 40px; }
+      #container #content #ict-home-projects-table-id tr td.schedule-status-col:before {
+        left: 15px; }
     #container #content .home-banner img {
       width: 100%;
       max-height: 70px; }
@@ -5882,7 +5935,13 @@ you can add resource intensive styles.
         right: 5px; }
     .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
       width: 25%;
-      padding-right: 5px; } }
+      padding-right: 5px; }
+
+  #container #content #ict-home-projects-table-id {
+    padding-right: 0;
+    padding-left: 0; }
+  #container #content .last-updated-on {
+    padding-left: 0; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
