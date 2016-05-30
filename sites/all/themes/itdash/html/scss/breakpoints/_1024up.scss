@@ -27,7 +27,7 @@ be seen on the Desktop.
 	}
 	#content {
 		.page-title {
-			padding-left: 0;
+			padding: 0;
 		}
 		#project-baseline-history {
 			#inner-content {
@@ -47,8 +47,8 @@ be seen on the Desktop.
 			padding-left: 0;
 		}
 		.last-updated-block {
-			padding-left: 27px;
-			padding-right: 27px;
+			padding: 0;
+			width: 970px;
 		}
 	}
 	#inner-content {
@@ -207,6 +207,20 @@ be seen on the Desktop.
 	}
 	#ict-home-projects-table-id {
 		padding: 0;
+		tr {
+			th {
+				padding: 7px 25px 42px 14px;
+    			font-size: 14px;
+			    a.ict-sort-link {
+			    	&:after {
+			    		top: 15px!important;
+			    	}
+			    	&:before {
+			    		top: 25px!important;
+			    	}
+			    }
+			}
+		}
 	}
 }
 
@@ -235,3 +249,9 @@ be seen on the Desktop.
 	}
 }
 
+#content #inner-content .project-draft-submission {
+	padding: 0;
+}
+#content #inner-content h2.individual-project-page {
+	margin: 20px 0;
+}

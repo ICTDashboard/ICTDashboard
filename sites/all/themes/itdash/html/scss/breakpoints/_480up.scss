@@ -91,8 +91,24 @@ POSTS & CONTENT STYLES
 			}
 		}
 	}
+	#ict-home-projects-table-id {
+		.footable-detail-row {
+			.footable-details {
+				.viz-f-p-3, .viz-f-p-4 ,.viz-f-p-5 ,.viz-f-p-6 ,.viz-f-p-7 ,.viz-f-p-8 {
+					right: -150px;
+					width: 300px;
+				}
+				.viz-tooltips-row {
+					span:after {
+					    border-left: 20px solid transparent;
+    					border-right: 20px solid transparent;
+					}
+				}
+			}
+		}
+	}
 	.last-updated-block {
-		//padding: 0 7%;
+		padding: 0 7%;
 	    margin: 0 auto;
 	    display: table;
 	    margin-top: 25px;
@@ -223,7 +239,7 @@ POSTS & CONTENT STYLES
 	}	
 }
 .page-title {
-    //padding: 0 7%;
+    padding: 0 7%;
     background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
 }
 

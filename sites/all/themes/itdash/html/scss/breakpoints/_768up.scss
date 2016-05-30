@@ -107,7 +107,24 @@ CONTENT STYLES
 		width: 20px;
 	}
 }
-
+#content {
+	#ict-home-projects-table-id {
+		tr {
+			th {
+			    padding: 7px 0px 42px 4px;
+			    font-size: 14px;
+			    a.ict-sort-link {
+			    	&:after {
+			    		top: 80px!important;
+			    	}
+			    	&:before {
+			    		top: 90px!important;
+			    	}
+			    }
+			}
+		}
+	}
+}
 #container {
 	#content {
 		color: #4e5365;
@@ -129,7 +146,6 @@ CONTENT STYLES
 		}
 		.welcome {
 			padding: 20px 20px;
-
 			h1 {
 				color: $yellow-text;
 				font-size: 34px;
@@ -2027,5 +2043,3 @@ DETAILED OVERVIEW STYLES
 		}*/
 	}
 }
-
-
