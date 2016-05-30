@@ -3735,13 +3735,51 @@ POSTS & CONTENT STYLES
       background-color: #f9fafc;
       box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
       padding: 8px 40px; }
+    #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+      right: 0;
+      bottom: 28px;
+      font-size: 12px;
+      width: 280px; }
+    #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+      border-left: none;
+      border-right: none; }
 #content #inner-content .individual-project-page {
   margin: 20px;
   padding-bottom: 15px; }
 #content #inner-content .project-draft-submission {
   padding: 0 20px; }
+  #content #inner-content .project-draft-submission .row .text {
+    color: #4e5365 !important; }
+  #content #inner-content .project-draft-submission .individual-page-tooltip-height {
+    bottom: 120px; }
+  #content #inner-content .project-draft-submission #project-benefits a {
+    position: relative;
+    z-index: 0; }
+    #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content {
+      right: -56px;
+      width: 280px; }
+    #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content::after {
+      border-right: 0;
+      border-left: 0; }
+  #content #inner-content .project-draft-submission .user-information a {
+    position: relative;
+    z-index: 0; }
+    #content #inner-content .project-draft-submission .user-information a span.tooltip-content {
+      right: 0;
+      width: 240px; }
+    #content #inner-content .project-draft-submission .user-information a span.tooltip-content::after {
+      border-right: 0;
+      border-left: 0; }
   #content #inner-content .project-draft-submission .label {
     padding-right: 0; }
+    #content #inner-content .project-draft-submission .label a {
+      position: initial; }
+      #content #inner-content .project-draft-submission .label a span.tooltip-content {
+        right: 0;
+        width: 280px; }
+      #content #inner-content .project-draft-submission .label a span.tooltip-content::after {
+        border-right: 0;
+        border-left: 0; }
   #content #inner-content .project-draft-submission a {
     text-decoration: none; }
   #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th {
@@ -3777,19 +3815,44 @@ POSTS & CONTENT STYLES
       #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
         float: left;
         margin-right: 0; }
+  #content #inner-content .project-draft-submission .row .text p {
+    color: #4e5365; }
   #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
     margin-left: 0; }
     #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
       margin: 3px 0;
       margin-right: 0; }
+  #content #inner-content .project-draft-submission .project-program-link {
+    text-decoration: underline; }
+    #content #inner-content .project-draft-submission .project-program-link:hover {
+      text-decoration: none; }
+  #content #inner-content .project-draft-submission .email-value {
+    text-decoration: underline; }
+    #content #inner-content .project-draft-submission .email-value:hover {
+      text-decoration: none; }
+  #content #inner-content .project-draft-submission .entity_comments a {
+    text-decoration: underline; }
+    #content #inner-content .project-draft-submission .entity_comments a:hover {
+      text-decoration: none; }
+  #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a {
+    position: initial; }
+    #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a span.tooltip-content {
+      right: 0;
+      width: 280px;
+      bottom: 120px; }
+    #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a span.tooltip-content::after {
+      border-right: 0;
+      border-left: 0; }
 #content #inner-content #print-links-container .pdf_button {
   margin-bottom: 50px; }
   #content #inner-content #print-links-container .pdf_button a {
     min-width: none !important;
     width: 100%;
     margin: 0; }
-#content #inner-content .ict-benefits .ict-faq-question .benfit-status {
-  position: initial; }
+#content #inner-content .ict-benefits .ict-faq-question {
+  padding: 15px 15px 15px 60px; }
+  #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
+    position: initial; }
 #content #inner-content .ict-benefits .ict-faq-answer ul li div {
   display: block; }
 
@@ -4272,8 +4335,18 @@ tweeners.
         padding: 0; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
-  #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
-    position: absolute; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+        right: 0;
+        bottom: -50px;
+        font-size: 12px;
+        width: 280px; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+        border-left: none;
+        border-right: none; }
+  #content #inner-content .ict-benefits .ict-faq-question {
+    padding: 10px 145px 10px 50px; }
+    #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
+      position: absolute; }
   #content #inner-content .ict-benefits .ict-faq-answer ul li div {
     display: inline-block; }
   #content #inner-content h2.individual-project-page {
@@ -4298,6 +4371,19 @@ tweeners.
       #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
         margin: 3px 0;
         margin-right: 25px; }
+    #content #inner-content .project-draft-submission .label, #content #inner-content .project-draft-submission .user-information, #content #inner-content .project-draft-submission #project-benefits {
+      padding-right: 0; }
+      #content #inner-content .project-draft-submission .label a, #content #inner-content .project-draft-submission .user-information a, #content #inner-content .project-draft-submission #project-benefits a {
+        position: relative;
+        z-index: 0; }
+        #content #inner-content .project-draft-submission .label a span.tooltip-content, #content #inner-content .project-draft-submission .user-information a span.tooltip-content, #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content {
+          right: -150px;
+          width: 300px; }
+        #content #inner-content .project-draft-submission .label a span.tooltip-content::after, #content #inner-content .project-draft-submission .user-information a span.tooltip-content::after, #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content::after {
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent; }
+    #content #inner-content .project-draft-submission .individual-page-tooltip-height {
+      bottom: 30px; }
   #content #inner-content #print-links-container .pdf_button {
     margin-bottom: 50px; }
     #content #inner-content #print-links-container .pdf_button a {
@@ -5979,6 +6065,8 @@ you can add resource intensive styles.
         padding: 0; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
+  #content #inner-content .ict-benefits .ict-faq-question {
+    padding: 10px 155px 10px 50px; }
   #content #inner-content #print-links-container .pdf_button {
     margin-bottom: 67px; }
     #content #inner-content #print-links-container .pdf_button a {
@@ -6057,7 +6145,15 @@ This is for the larger monitors and possibly full screen viewers.
   You can add some advanced styles here if you like. This kicks in
   on larger screens.
   
-  ******************************************************************/ }
+  ******************************************************************/
+  #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+    right: -150px;
+    bottom: 30px;
+    font-size: 13px;
+    width: 300px; }
+  #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent; } }
 /*********************
 RETINA (2x RESOLUTION DEVICES)
 This applies to the retina iPhone (4s) and iPad (2,3) along with
