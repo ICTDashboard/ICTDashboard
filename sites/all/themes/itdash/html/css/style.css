@@ -3922,6 +3922,8 @@ POSTS & CONTENT STYLES
 
 #content #ict-home-projects-table-id {
   padding: 0 20px; }
+  #content #ict-home-projects-table-id .viz-filtered-projects tr[data-expanded="true"] td {
+    border-bottom: none; }
   #content #ict-home-projects-table-id .footable-header .viz-tooltips-row {
     position: absolute;
     bottom: 15px;
@@ -3967,9 +3969,30 @@ POSTS & CONTENT STYLES
   #content #ict-home-projects-table-id .footable-detail-row td:first-child {
     padding-left: 40px;
     padding-right: 10px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-3 {
+    right: -35px;
+    width: 280px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-4 {
+    right: -60px;
+    width: 280px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-5 {
+    right: -57px;
+    width: 280px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-6 {
+    right: -129px;
+    width: 280px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-7 {
+    right: -15px;
+    width: 280px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-8 {
+    right: -71px;
+    width: 280px; }
   #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row {
     margin-left: 10px;
     margin-top: 3px; }
+    #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row span:after {
+      border-left: none;
+      border-right: none; }
   #content #ict-home-projects-table-id .footable-detail-row .footable-details tbody tr:first-child {
     display: none; }
   #content #ict-home-projects-table-id .footable-detail-row .footable-details tr th {
@@ -4506,7 +4529,14 @@ tweeners.
       padding: 0; }
       #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
         width: 180px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-3, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-4, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-5, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-6, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-7, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-8 {
+    right: -150px;
+    width: 300px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row span:after {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent; }
   #content .last-updated-block {
+    padding: 0 7%;
     margin: 0 auto;
     display: table;
     margin-top: 25px;
@@ -4589,6 +4619,7 @@ tweeners.
       width: 275px; }
 
   .page-title {
+    padding: 0 7%;
     background: url(../images/dot-bg.png) repeat scroll top center #1e2635; }
 
   #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
@@ -4771,6 +4802,14 @@ you can add resource intensive styles.
     margin: 15px 10px; }
     #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
       width: 20px; }
+
+  #content #ict-home-projects-table-id tr th {
+    padding: 7px 0px 42px 4px;
+    font-size: 14px; }
+    #content #ict-home-projects-table-id tr th a.ict-sort-link:after {
+      top: 80px !important; }
+    #content #ict-home-projects-table-id tr th a.ict-sort-link:before {
+      top: 90px !important; }
 
   #container #content {
     color: #4e5365;
@@ -6284,7 +6323,7 @@ you can add resource intensive styles.
   #container .header .inner-header {
     margin: 0; }
   #container #content .page-title {
-    padding-left: 0; }
+    padding: 0; }
   #container #content #project-baseline-history #inner-content {
     padding: 0; }
     #container #content #project-baseline-history #inner-content .project-draft-submission {
@@ -6295,8 +6334,8 @@ you can add resource intensive styles.
     padding-right: 0;
     padding-left: 0; }
   #container #content .last-updated-block {
-    padding-left: 27px;
-    padding-right: 27px; }
+    padding: 0;
+    width: 970px; }
   #container #inner-content .ict-benefits .ict-faq-question {
     padding: 10px 155px 10px 50px; }
   #container #inner-content #print-links-container .pdf_button {
@@ -6394,6 +6433,13 @@ you can add resource intensive styles.
       border-radius: 0 4px 0 0; }
   #container #ict-home-projects-table-id {
     padding: 0; }
+    #container #ict-home-projects-table-id tr th {
+      padding: 7px 25px 42px 14px;
+      font-size: 14px; }
+      #container #ict-home-projects-table-id tr th a.ict-sort-link:after {
+        top: 15px !important; }
+      #container #ict-home-projects-table-id tr th a.ict-sort-link:before {
+        top: 25px !important; }
 
   .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
     width: 970px;
@@ -6407,7 +6453,13 @@ you can add resource intensive styles.
         right: 5px; }
     .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
       width: 25%;
-      padding-right: 5px; } }
+      padding-right: 5px; }
+
+  #content #inner-content .project-draft-submission {
+    padding: 0; }
+
+  #content #inner-content h2.individual-project-page {
+    margin: 20px 0; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
@@ -6434,14 +6486,7 @@ This is for the larger monitors and possibly full screen viewers.
 
   #container #content .last-updated-block {
     padding-left: 0;
-    padding-right: 0; }
-    #container #content .last-updated-block .wrap.cf, #container #content .last-updated-block .wrap.comment-respond {
-      padding: 0;
-      margin: 0 auto;
-      max-width: 970px;
-      width: 970px;
-      float: none;
-      width: 100% !important; } }
+    padding-right: 0; } }
 /*********************
 RETINA (2x RESOLUTION DEVICES)
 This applies to the retina iPhone (4s) and iPad (2,3) along with
