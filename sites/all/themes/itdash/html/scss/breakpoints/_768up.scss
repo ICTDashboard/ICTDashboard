@@ -97,6 +97,123 @@ HEADER STYLES
 CONTENT STYLES
 *********************/
 
+#container {
+	#content {
+		#ict-dashboard-overview-number-indicators {
+			.t-2of3.d-2of3 {
+				padding-right: 90px;
+				width: 66.6%;
+				float: left;
+				#overview-graphs {
+					.graph-container {
+						.chart {
+							width: 100%;
+						}
+					}
+					#overview-expenditure-switch {
+						width: 100%;
+					}
+				}
+			}
+			.graph-schedule-status {
+				float: left;
+				width: 66.6%;
+				#statuses_legend {
+					.bar-legend {
+						padding-left: 0;
+					}
+				}
+			}
+			#ict-dashboard-numbers1,
+			#ict-dashboard-numbers {
+				float: right;
+				width: 33.3%;
+				padding-top: 0;
+				padding-right: 0;
+				border-top: 0;
+				border-bottom: 0;
+				.big-number {
+					text-align: left;
+				}
+			}
+			.graph-schedule-status {
+				#statuses_legend {
+					.bar-legend {
+						li {
+							margin-right: 25px;
+						}
+					}
+				}
+			}
+			#ict-dashboard-numbers {
+				.general-button {
+					width: 100%;
+				}
+				.big-number {
+					border-bottom: 0;
+				}
+			}
+		}
+		#ict-home-projects-table-id {
+			.pager-tags-top {
+				.item-list {
+					display: block;
+				}
+			}
+			.sort-direction-desc {
+				.col-num-entity {
+					width: 110px;
+				}
+			}
+			.table-config-bar {
+				.form-type-select {
+					display: inline-block;
+				}
+				.sbHolder {
+					float: none;
+					width: auto;
+				}
+				.item-list {
+					margin-top: 0;
+					.pager {
+						.pager-first,
+						.pager-previous,
+						.pager-next,
+						.pager-last {
+							display: list-item;
+						}
+					}
+				}
+			}
+			table {
+				tr {
+					td {
+						padding-left: 15px;
+						padding-right: 15px;
+					}
+					td.schedule-status-col {
+						padding-left: 30px;
+						&:before {
+							left: 5px;
+						}
+					}
+				}
+				.col-num-budget,
+				.col-num-benefits {
+					display: table-cell;
+				}
+			}
+		}
+		.pane-last-updated {
+			.last-updated-block {
+				.last-updated-on {
+					padding-left: 20px;
+				}
+			}
+		}
+	}
+}
+
 #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
 	float: none;
 }
@@ -107,7 +224,7 @@ CONTENT STYLES
 		width: 20px;
 	}
 }
-#content {
+/*#content {
 	#ict-home-projects-table-id {
 		tr {
 			th {
@@ -124,8 +241,7 @@ CONTENT STYLES
 			}
 		}
 	}
-}
-#container {
+}*/
 	#content {
 		color: #4e5365;
 		margin: 0;
@@ -198,56 +314,6 @@ CONTENT STYLES
 							border-top: none;
 							margin: 30px 0 0 0;
 							padding: 0;
-						}
-					}
-				}
-			}
-		}
-
-		#ict-dashboard-overview-number-indicators {
-			.t-2of3.d-2of3 {
-				padding-right: 0;
-				width: 100%;
-				float: none;
-				#overview-graphs {
-					.graph-container {
-						.chart {
-							width: 100%;
-						}
-					}
-					#overview-expenditure-switch {
-						width: 50%;
-					}
-				}
-			}
-			.t-1of3 {
-				float: none;
-				padding-right: 0;
-				width: auto;
-			}
-			#ict-dashboard-numbers {
-				.general-button {
-					width: 33%;
-				}
-			}
-		}
-		#ict-home-projects-table-id {
-			.table-config-bar {
-				.form-type-select {
-					display: inline-block;
-				}
-				.sbHolder {
-					float: none;
-					width: auto;
-				}
-				.item-list {
-					margin-top: 0;
-					.pager {
-						.pager-first,
-						.pager-previous,
-						.pager-next,
-						.pager-last {
-							display: list-item;
 						}
 					}
 				}
@@ -1609,7 +1675,6 @@ CONTENT STYLES
 			}
 		}
 	}
-}
 
 
 /*********************

@@ -236,7 +236,7 @@ POSTS & CONTENT STYLES
 			}
 		}
 
-	}	
+	}
 }
 .page-title {
     padding: 0 7%;
@@ -265,6 +265,25 @@ POSTS & CONTENT STYLES
 			#ict-dashboard-numbers1 {
 				float: left;
 				width: 100%;
+			}
+			.graph-schedule-status {
+				float: left;
+				#statuses_legend {
+					.bar-legend {
+						li {
+							margin-right: 20px;
+						}
+					}
+				}
+			}
+		}
+		.pane-last-updated {
+			padding: 0;
+			.last-updated-block {
+				padding: 0;
+				.last-updated-on {
+					padding-left: 20px;
+				}
 			}
 		}
 	}
