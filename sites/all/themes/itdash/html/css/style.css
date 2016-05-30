@@ -1581,7 +1581,7 @@ select.ui-datepicker-month, select.ui-datepicker-year {
       .entity-bean ul li:before,
       .node-type-page #inner-content ul li:before {
         position: absolute;
-        content: "тАв ";
+        content: "• ";
         color: #17716b;
         left: -2px;
         font-size: 24px; }
@@ -1665,7 +1665,7 @@ body .ict-benefits,
         body .ict-benefits .node-faq-item .ict-faq-answer ul li:before,
         #content .ict-benefits .node-faq-item .ict-faq-answer ul li:before {
           position: absolute;
-          content: "тАв ";
+          content: "• ";
           color: #17716b;
           left: -2px;
           font-size: 24px; }
@@ -6392,7 +6392,7 @@ you can add resource intensive styles.
       border-radius: 4px 0 0; }
     #container #inner-content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
       border-radius: 0 4px 0 0; }
-  #content #ict-home-projects-table-id {
+  #container #ict-home-projects-table-id {
     padding: 0; }
 
   .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
