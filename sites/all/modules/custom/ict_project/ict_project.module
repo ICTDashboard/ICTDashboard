@@ -1577,7 +1577,7 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
     $original_value = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
       (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
       (float)0;
-    $original_values[] = number_format($original_value, 2);
+    $original_values[] = $original_value;
   }
 
   $update_values = array();
@@ -1589,12 +1589,12 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
       $update_value = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
         (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
         (float)0;
-      $update_values[] = number_format($update_value, 2);
+      $update_values[] = $update_value;
     }
   }
   else {
     foreach ($original_row['budget_items'] as $budget_item) {
-      $update_values[] = number_format((float)0, 2);
+      $update_values[] = 0;
     }
   }
 
