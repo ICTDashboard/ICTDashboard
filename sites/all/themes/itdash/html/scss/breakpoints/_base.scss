@@ -178,10 +178,27 @@ LAYOUT & GRID STYLES
 			}
 			table {
 				border-collapse: separate;
+				.col-num-budget,
+				.col-num-benefits {
+					display: none;
+				}
+				.ict-sort-link-desktop {
+					display: none;
+				}
+				.ict-sort-link-mobile {
+					&:before {
+						top: 6px;
+					}
+					&:after {
+						top: -3px;
+					}
+				}
 			}
 		}
-		.last-updated-on {
-			padding-left: 20px;
+		.pane-last-updated {
+			.last-updated-on {
+				padding-left: 20px;
+			}
 		}
 	}
 }

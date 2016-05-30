@@ -263,16 +263,22 @@ CONTENT STYLES
 					}
 				}
 			}
-			tr {
-				td {
-					padding-left: 15px;
-					padding-right: 15px;
-				}
-				td.schedule-status-col {
-					padding-left: 40px;
-					&:before {
-						left: 15px;
+			table {
+				tr {
+					td {
+						padding-left: 15px;
+						padding-right: 15px;
 					}
+					td.schedule-status-col {
+						padding-left: 30px;
+						&:before {
+							left: 5px;
+						}
+					}
+				}
+				.col-num-budget,
+				.col-num-benefits {
+					display: table-cell;
 				}
 			}
 		}

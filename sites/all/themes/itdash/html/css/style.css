@@ -2382,11 +2382,11 @@ body #ict-home-projects-table-id tr th,
       display: inline-block;
       position: absolute;
       right: 15px;
-      top: 6px; }
+      top: 36px; }
     body #ict-home-projects-table-id tr th .ict-sort-link:after,
     #content #ict-home-projects-table-id tr th .ict-sort-link:after {
       border-color: transparent transparent white transparent;
-      top: -3px; }
+      top: 26px; }
 body #ict-home-projects-table-id tr td,
 #content #ict-home-projects-table-id tr td {
   padding: 18px 14px;
@@ -3495,7 +3495,16 @@ LAYOUT & GRID STYLES
           display: none; }
       #container #content #ict-home-projects-table-id table {
         border-collapse: separate; }
-    #container #content .last-updated-on {
+        #container #content #ict-home-projects-table-id table .col-num-budget,
+        #container #content #ict-home-projects-table-id table .col-num-benefits {
+          display: none; }
+        #container #content #ict-home-projects-table-id table .ict-sort-link-desktop {
+          display: none; }
+        #container #content #ict-home-projects-table-id table .ict-sort-link-mobile:before {
+          top: 6px; }
+        #container #content #ict-home-projects-table-id table .ict-sort-link-mobile:after {
+          top: -3px; }
+    #container #content .pane-last-updated .last-updated-on {
       padding-left: 20px; }
 
 .wrap {
@@ -4507,13 +4516,16 @@ you can add resource intensive styles.
       #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
       #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
         display: list-item; }
-    #container #content #ict-home-projects-table-id tr td {
+    #container #content #ict-home-projects-table-id table tr td {
       padding-left: 15px;
       padding-right: 15px; }
-    #container #content #ict-home-projects-table-id tr td.schedule-status-col {
-      padding-left: 40px; }
-      #container #content #ict-home-projects-table-id tr td.schedule-status-col:before {
-        left: 15px; }
+    #container #content #ict-home-projects-table-id table tr td.schedule-status-col {
+      padding-left: 30px; }
+      #container #content #ict-home-projects-table-id table tr td.schedule-status-col:before {
+        left: 5px; }
+    #container #content #ict-home-projects-table-id table .col-num-budget,
+    #container #content #ict-home-projects-table-id table .col-num-benefits {
+      display: table-cell; }
     #container #content .home-banner img {
       width: 100%;
       max-height: 70px; }
@@ -5940,7 +5952,15 @@ you can add resource intensive styles.
   #container #content #ict-home-projects-table-id {
     padding-right: 0;
     padding-left: 0; }
-  #container #content .last-updated-on {
+  #container #content #ict-home-projects-table-id table tr td.schedule-status-col {
+    padding-left: 40px; }
+    #container #content #ict-home-projects-table-id table tr td.schedule-status-col:before {
+      left: 15px; }
+  #container #content #ict-home-projects-table-id table .ict-sort-link-desktop {
+    display: block; }
+  #container #content #ict-home-projects-table-id table .ict-sort-link-mobile {
+    display: none; }
+  #container #content .pane-last-updated .last-updated-on {
     padding-left: 0; } }
 /*********************
 LARGE VIEWING SIZE
