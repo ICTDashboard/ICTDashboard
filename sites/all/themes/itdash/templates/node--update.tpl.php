@@ -2,7 +2,7 @@
 <div id="inner-content" class="wrap cf">
   <h2><?php print t(' Project Expenditure and Budget'); ?>
   </h2>
-  <div class="project-draft-submission d-all">
+  <div class="project-draft-submission d-all individual-project-content">
     <div class="row">
       <div class="label">
         <?php print t('Total Expenditure To Date'); ?>

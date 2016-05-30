@@ -3446,13 +3446,18 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
     text-decoration: none; }
 
 h1, .h1 {
-  font-size: 2.5em;
-  line-height: 1.333em; }
+  color: #c8f68f;
+  font-size: 34px;
+  font-weight: 400; }
 
 h2, .h2 {
-  font-size: 1.75em;
+  font-size: 24px;
   line-height: 1.4em;
-  margin-bottom: 0.375em; }
+  margin-bottom: 0.375em;
+  color: #0c6c88;
+  font-weight: 600;
+  border-bottom: 1px solid #f0f4fa;
+  padding-bottom: 10px; }
 
 h3, .h3 {
   font-size: 1.125em; }
@@ -3691,8 +3696,102 @@ HEADER STYLES
 /*********************
 POSTS & CONTENT STYLES
 *********************/
-#content {
-  margin-top: 1.5em; }
+#content #project-baseline-history #inner-content {
+  padding: 0 20px; }
+  #content #project-baseline-history #inner-content .project-draft-submission {
+    padding: 0; }
+    #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+      width: 100%; }
+  #content #project-baseline-history #inner-content .project-history .project-draft-submission {
+    padding-left: 15px; }
+#content .last-updated-block {
+  width: 100%;
+  padding: 0 20px; }
+  #content .last-updated-block .last-updated-on {
+    width: 100% !important;
+    margin-bottom: 20px;
+    padding-bottom: 25px;
+    border-bottom: 1px dotted #d8dee8; }
+    #content .last-updated-block .last-updated-on p {
+      color: #202b3d; }
+    #content .last-updated-block .last-updated-on strong {
+      font-weight: 700; }
+  #content .last-updated-block .view-baseline-history {
+    float: none;
+    text-align: left;
+    width: 100%; }
+    #content .last-updated-block .view-baseline-history .view-baseline-link {
+      color: #0d6c88;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      border-width: 1px;
+      border-color: #9fa5c5;
+      border-style: solid;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #dbe0e7;
+      box-sizing: border-box;
+      background-color: #f9fafc;
+      box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+      padding: 8px 40px; }
+#content #inner-content .individual-project-page {
+  margin: 20px;
+  padding-bottom: 15px; }
+#content #inner-content .project-draft-submission {
+  padding: 0 20px; }
+  #content #inner-content .project-draft-submission .label {
+    padding-right: 0; }
+  #content #inner-content .project-draft-submission a {
+    text-decoration: none; }
+  #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th {
+    border-radius: 0; }
+  #content #inner-content .project-draft-submission .individual-project-content {
+    padding: 0; }
+    #content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+      width: 100%;
+      margin: 15px 0;
+      min-width: 100% !important;
+      height: auto;
+      text-align: left;
+      line-height: 20px;
+      padding: 10px;
+      position: relative;
+      padding-left: 50px; }
+      #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
+        vertical-align: middle;
+        bottom: 0;
+        top: 0;
+        left: 20px;
+        margin: auto;
+        position: absolute;
+        width: 20px;
+        height: 17px; }
+      #content #inner-content .project-draft-submission .individual-project-content .preview_switch:hover {
+        background-position: inherit; }
+  #content #inner-content .project-draft-submission #benefits_legend {
+    overflow: visible;
+    color: #202b3d; }
+    #content #inner-content .project-draft-submission #benefits_legend .bar-legend {
+      padding-left: 0; }
+      #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+        float: left;
+        margin-right: 0; }
+  #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
+    margin-left: 0; }
+    #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
+      margin: 3px 0;
+      margin-right: 0; }
+#content #inner-content #print-links-container .pdf_button {
+  margin-bottom: 50px; }
+  #content #inner-content #print-links-container .pdf_button a {
+    min-width: none !important;
+    width: 100%;
+    margin: 0; }
+#content #inner-content .ict-benefits .ict-faq-question .benfit-status {
+  position: initial; }
+#content #inner-content .ict-benefits .ict-faq-answer ul li div {
+  display: block; }
 
 .hentry {
   background-color: #fff;
@@ -3713,6 +3812,10 @@ POSTS & CONTENT STYLES
 .page-title,
 .entry-title {
   margin: 0; }
+
+.page-title {
+  padding: 0 20px;
+  background: url(../images/dot-bg.png) repeat scroll top center #1e2635; }
 
 /* want to style individual post classes? Booya! */
 /* post by id (i.e. post-3) */
@@ -4136,6 +4239,76 @@ tweeners.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
+  #content #project-baseline-history #inner-content {
+    padding: 0 7%; }
+    #content #project-baseline-history #inner-content .project-draft-submission {
+      padding: 0; }
+      #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+        width: 180px; }
+  #content .last-updated-block {
+    padding: 0 7%;
+    margin: 0 auto;
+    display: table;
+    margin-top: 25px;
+    margin-bottom: 10px; }
+    #content .last-updated-block .last-updated-on {
+      width: 50% !important;
+      max-width: 970px;
+      float: left;
+      min-width: 0;
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0; }
+    #content .last-updated-block .view-baseline-history {
+      width: 50%;
+      text-align: right;
+      float: right;
+      display: block;
+      margin: 0; }
+      #content .last-updated-block .view-baseline-history .view-baseline-link {
+        border-style: none;
+        text-decoration: underline;
+        font-weight: 400;
+        padding: 0; }
+        #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+          text-decoration: none; }
+  #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
+    position: absolute; }
+  #content #inner-content .ict-benefits .ict-faq-answer ul li div {
+    display: inline-block; }
+  #content #inner-content h2.individual-project-page {
+    margin: 20px 7%; }
+  #content #inner-content .project-draft-submission {
+    padding: 0 7%; }
+    #content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+      min-width: 312px !important;
+      width: 312px; }
+      #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
+        width: 20px; }
+    #content #inner-content .project-draft-submission #benefits_legend {
+      overflow: visible;
+      color: #202b3d; }
+      #content #inner-content .project-draft-submission #benefits_legend .bar-legend {
+        padding-left: 40px; }
+        #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+          float: left;
+          margin-right: 25px; }
+    #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
+      margin-left: 0; }
+      #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
+        margin: 3px 0;
+        margin-right: 25px; }
+  #content #inner-content #print-links-container .pdf_button {
+    margin-bottom: 50px; }
+    #content #inner-content #print-links-container .pdf_button a {
+      min-width: 275px !important;
+      margin: 10px 10px 3px;
+      width: 275px; }
+
+  .page-title {
+    padding: 0 7%;
+    background: url(../images/dot-bg.png) repeat scroll top center #1e2635; }
+
   /* entry content */
   .entry-content {
     /* at this larger size, we can start to align images */ }
@@ -4250,11 +4423,6 @@ you can add resource intensive styles.
   /*********************
   LAYOUT & GRID STYLES
   *********************/
-  .wrap {
-    width: 970px;
-    min-width: 970px;
-    padding: 0; }
-
   /*********************
   HEADER STYLES
   *********************/
@@ -4301,6 +4469,14 @@ you can add resource intensive styles.
   /*********************
   CONTENT STYLES
   *********************/
+  #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+    float: none; }
+
+  #content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+    margin: 15px 10px; }
+    #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
+      width: 20px; }
+
   #content {
     color: #4e5365;
     margin: 0;
@@ -5764,6 +5940,95 @@ you can add resource intensive styles.
   .panel-3col .panel-col-first {
     float: left;
     width: 25%; }
+
+  .page-title {
+    padding: 0; }
+
+  #content #project-baseline-history #inner-content {
+    padding: 0; }
+    #content #project-baseline-history #inner-content .project-draft-submission {
+      padding: 0; }
+      #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+        width: 180px; }
+  #content .last-updated-block {
+    margin: 0;
+    padding: 0;
+    width: 970px;
+    margin: 0 auto;
+    display: table;
+    margin-top: 25px;
+    margin-bottom: 10px; }
+    #content .last-updated-block .last-updated-on {
+      width: 50% !important;
+      max-width: 970px;
+      float: left;
+      min-width: 0;
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0; }
+    #content .last-updated-block .view-baseline-history {
+      width: 50%;
+      text-align: right;
+      float: right;
+      display: block;
+      margin: 0; }
+      #content .last-updated-block .view-baseline-history .view-baseline-link {
+        border-style: none;
+        text-decoration: underline;
+        font-weight: 400;
+        padding: 0; }
+        #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+          text-decoration: none; }
+  #content #inner-content #print-links-container .pdf_button {
+    margin-bottom: 67px; }
+    #content #inner-content #print-links-container .pdf_button a {
+      min-width: 275px !important;
+      margin: 10px 10px 3px;
+      width: 275px; }
+  #content #inner-content h2.individual-project-page {
+    margin: 20px 0; }
+  #content #inner-content .project-draft-submission {
+    padding: 0; }
+    #content #inner-content .project-draft-submission #benefits_legend {
+      overflow: hidden;
+      color: #202b3d; }
+      #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
+        float: none;
+        margin-right: 25px; }
+    #content #inner-content .project-draft-submission .email-value {
+      text-decoration: underline; }
+      #content #inner-content .project-draft-submission .email-value:hover {
+        text-decoration: none; }
+    #content #inner-content .project-draft-submission .entity_comments a {
+      text-decoration: underline; }
+      #content #inner-content .project-draft-submission .entity_comments a:hover {
+        text-decoration: none; }
+    #content #inner-content .project-draft-submission .individual-project-content .preview_switch {
+      text-align: center;
+      padding-left: 10px;
+      margin: 0 10px;
+      height: 41px; }
+      #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
+        vertical-align: sub;
+        bottom: 0;
+        top: 0;
+        position: inherit;
+        width: 20px;
+        height: 17px;
+        margin: 0 15px 0 0;
+        left: 0; }
+    #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
+      margin-left: 25px; }
+      #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
+        margin-right: 25px; }
+    #content #inner-content .project-draft-submission .project-program-link {
+      text-decoration: underline; }
+      #content #inner-content .project-draft-submission .project-program-link:hover {
+        text-decoration: none; }
+    #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:first-child {
+      border-radius: 4px 0 0; }
+    #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
+      border-radius: 0 4px 0 0; }
 
   .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
     width: 970px;
