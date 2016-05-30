@@ -99,6 +99,8 @@ CONTENT STYLES
 
 #container {
 	#content {
+		.pane-home-projects,
+		.pane-overview-number-indicators {
 		#ict-dashboard-overview-number-indicators {
 			.t-2of3.d-2of3 {
 				padding-right: 90px;
@@ -185,7 +187,7 @@ CONTENT STYLES
 					}
 				}
 			}
-			table {
+			.ict-home-projects-table-table {
 				tr {
 					td {
 						padding-left: 15px;
@@ -203,6 +205,7 @@ CONTENT STYLES
 					display: table-cell;
 				}
 			}
+		}
 		}
 		.pane-last-updated {
 			.last-updated-block {
@@ -224,8 +227,8 @@ CONTENT STYLES
 		width: 20px;
 	}
 }
-/*#content {
-	#ict-home-projects-table-id {
+#content {
+	#ict-filtered-projects {
 		tr {
 			th {
 			    padding: 7px 0px 42px 4px;
@@ -241,8 +244,6 @@ CONTENT STYLES
 			}
 		}
 	}
-}*/
-	#content {
 		color: #4e5365;
 		margin: 0;
 		background-color: #fff;
