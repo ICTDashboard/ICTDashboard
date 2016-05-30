@@ -1581,7 +1581,7 @@ select.ui-datepicker-month, select.ui-datepicker-year {
       .entity-bean ul li:before,
       .node-type-page #inner-content ul li:before {
         position: absolute;
-        content: "тАв ";
+        content: "• ";
         color: #17716b;
         left: -2px;
         font-size: 24px; }
@@ -1665,7 +1665,7 @@ body .ict-benefits,
         body .ict-benefits .node-faq-item .ict-faq-answer ul li:before,
         #content .ict-benefits .node-faq-item .ict-faq-answer ul li:before {
           position: absolute;
-          content: "тАв ";
+          content: "• ";
           color: #17716b;
           left: -2px;
           font-size: 24px; }
@@ -2364,7 +2364,11 @@ body #ict-home-projects-table-id tr th,
     display: block;
     display: block; }
   body #ict-home-projects-table-id tr th .ict-sort-link,
-  #content #ict-home-projects-table-id tr th .ict-sort-link {
+  body #ict-home-projects-table-id tr th .ict-sort-link-mobile,
+  body #ict-home-projects-table-id tr th .ict-sort-link-desktop,
+  #content #ict-home-projects-table-id tr th .ict-sort-link,
+  #content #ict-home-projects-table-id tr th .ict-sort-link-mobile,
+  #content #ict-home-projects-table-id tr th .ict-sort-link-desktop {
     display: block;
     width: 100%;
     height: 100%;
@@ -2372,8 +2376,16 @@ body #ict-home-projects-table-id tr th,
     top: 0;
     left: 0; }
     body #ict-home-projects-table-id tr th .ict-sort-link:after, body #ict-home-projects-table-id tr th .ict-sort-link:before,
+    body #ict-home-projects-table-id tr th .ict-sort-link-mobile:after,
+    body #ict-home-projects-table-id tr th .ict-sort-link-mobile:before,
+    body #ict-home-projects-table-id tr th .ict-sort-link-desktop:after,
+    body #ict-home-projects-table-id tr th .ict-sort-link-desktop:before,
     #content #ict-home-projects-table-id tr th .ict-sort-link:after,
-    #content #ict-home-projects-table-id tr th .ict-sort-link:before {
+    #content #ict-home-projects-table-id tr th .ict-sort-link:before,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-mobile:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-mobile:before,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-desktop:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-desktop:before {
       content: "";
       width: 0;
       height: 0;
@@ -2384,7 +2396,11 @@ body #ict-home-projects-table-id tr th,
       right: 15px;
       top: 36px; }
     body #ict-home-projects-table-id tr th .ict-sort-link:after,
-    #content #ict-home-projects-table-id tr th .ict-sort-link:after {
+    body #ict-home-projects-table-id tr th .ict-sort-link-mobile:after,
+    body #ict-home-projects-table-id tr th .ict-sort-link-desktop:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-mobile:after,
+    #content #ict-home-projects-table-id tr th .ict-sort-link-desktop:after {
       border-color: transparent transparent white transparent;
       top: 26px; }
 body #ict-home-projects-table-id tr td,
@@ -2481,16 +2497,32 @@ body #ict-home-projects-table-id tr td,
     text-align: center;
     margin-top: 2px; }
 body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:before,
-#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:before {
+body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-mobile:before,
+body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-desktop:before,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:before,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-mobile:before,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-desktop:before {
   border-top-color: #3ac3cf; }
 body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:after,
-#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:after {
+body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-mobile:after,
+body #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-desktop:after,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link:after,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-mobile:after,
+#content #ict-home-projects-table-id tr.sort-direction-asc .current_sort .ict-sort-link-desktop:after {
   display: none; }
 body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:before,
-#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:before {
+body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-mobile:before,
+body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-desktop:before,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:before,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-mobile:before,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-desktop:before {
   display: none; }
 body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:after,
-#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:after {
+body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-mobile:after,
+body #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-desktop:after,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link:after,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-mobile:after,
+#content #ict-home-projects-table-id tr.sort-direction-desc .current_sort .ict-sort-link-desktop:after {
   border-bottom-color: #3ac3cf; }
 body #ict-home-projects-table-id.ict-filtered-projects-table tr td,
 #content #ict-home-projects-table-id.ict-filtered-projects-table tr td {
@@ -3026,54 +3058,52 @@ body a.submit-button,
         font-weight: 600;
         line-height: 34px;
         height: 35px; }
-  #ict-dashboard-overview-number-indicators #overview-graphs {
-    padding-right: 90px; }
-    #ict-dashboard-overview-number-indicators #overview-graphs .label {
-      margin-bottom: 11px; }
-    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
-      position: relative;
-      margin-top: 5px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch label {
-        font-weight: bold;
-        float: left;
-        color: #202b3d;
-        font-size: 14px;
-        line-height: 34px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
-        max-width: 100%;
-        width: 89%;
-        margin-left: 60px;
-        margin-right: 60px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbToggle {
-        background-position: 0 -115px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbSelector {
-        height: 32px;
-        line-height: 32px; }
-    #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend {
-      padding-left: 0;
+  #ict-dashboard-overview-number-indicators #overview-graphs .label {
+    margin-bottom: 11px; }
+  #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
+    position: relative;
+    margin-top: 5px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch label {
+      font-weight: bold;
+      float: left;
+      color: #202b3d;
       font-size: 14px;
-      margin: 11px 0;
-      overflow: hidden; }
-      #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li {
-        color: #202b3d;
-        margin-right: 30px; }
-        #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li span {
-          margin-right: 2px; }
-    #ict-dashboard-overview-number-indicators #overview-graphs .expenditure-budget-value {
-      text-align: center;
-      font-size: 16px;
-      color: #202b3d; }
-    #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph {
-      margin-top: 12px; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a {
-        text-decoration: underline; }
-        #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a:hover {
-          text-decoration: none; }
-    #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend {
-      margin: 0; }
-      #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend li {
-        margin-right: 20px;
-        margin-bottom: 10px; }
+      line-height: 34px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
+      max-width: 100%;
+      width: 89%;
+      margin-left: 60px;
+      margin-right: 60px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbToggle {
+      background-position: 0 -115px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbSelector {
+      height: 32px;
+      line-height: 32px; }
+  #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend {
+    padding-left: 0;
+    font-size: 14px;
+    margin: 11px 0;
+    overflow: hidden; }
+    #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li {
+      color: #202b3d;
+      margin-right: 30px; }
+      #ict-dashboard-overview-number-indicators #overview-graphs .legend .bar-legend li span {
+        margin-right: 2px; }
+  #ict-dashboard-overview-number-indicators #overview-graphs .expenditure-budget-value {
+    text-align: center;
+    font-size: 16px;
+    color: #202b3d; }
+  #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph {
+    margin-top: 12px; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a {
+      text-decoration: underline; }
+      #ict-dashboard-overview-number-indicators #overview-graphs #project-schedule-status-graph a:hover {
+        text-decoration: none; }
+  #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend {
+    margin: 0; }
+    #ict-dashboard-overview-number-indicators #overview-graphs #statuses_legend .bar-legend li {
+      margin-right: 20px;
+      margin-bottom: 10px; }
 
 #ict-dashboard-detailed-overview h2 {
   font-size: 26px;
@@ -3353,6 +3383,144 @@ div.tooltip-edit {
   #content .project-program-link:focus {
     color: #0d6c88; }
 
+.page-block #content {
+  width: 970px;
+  margin: 0 auto; }
+
+.pane-block blockquote, .page-block #content blockquote, .node-type-page #content blockquote, .entity-bean .content blockquote {
+  color: #202b3d;
+  border-left: 2px solid #0d6c88;
+  padding-left: 10px;
+  position: relative;
+  font-style: italic;
+  margin-left: 80px; }
+  .pane-block blockquote p, .page-block #content blockquote p, .node-type-page #content blockquote p, .entity-bean .content blockquote p {
+    color: #202b3d; }
+  .pane-block blockquote:before, .page-block #content blockquote:before, .node-type-page #content blockquote:before, .entity-bean .content blockquote:before {
+    content: "Note: ";
+    position: absolute;
+    left: -45px;
+    top: -6px;
+    color: #0d6c88;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 14px; }
+.pane-block h2, .page-block #content h2, .node-type-page #content h2, .entity-bean .content h2 {
+  font-family: "Open Sans", sans-serif;
+  color: #0d6c88;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left; }
+.pane-block h3, .page-block #content h3, .node-type-page #content h3, .entity-bean .content h3 {
+  font-family: "Open Sans", sans-serif;
+  color: #202b3d;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left; }
+.pane-block h4, .page-block #content h4, .node-type-page #content h4, .entity-bean .content h4 {
+  font-family: "Open Sans", sans-serif;
+  color: #202b3d;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left; }
+.pane-block h5, .page-block #content h5, .node-type-page #content h5, .entity-bean .content h5 {
+  font-family: "Open Sans", sans-serif;
+  color: #202b3d;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left;
+  font-style: italic;
+  text-transform: inherit;
+  letter-spacing: 0; }
+.pane-block p, .page-block #content p, .node-type-page #content p, .entity-bean .content p {
+  color: #4e5365;
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 22px; }
+.pane-block a, .page-block #content a, .node-type-page #content a, .entity-bean .content a {
+  color: #027e9c;
+  text-decoration: underline; }
+  .pane-block a:focus, .pane-block a:hover, .pane-block a:visited, .page-block #content a:focus, .page-block #content a:hover, .page-block #content a:visited, .node-type-page #content a:focus, .node-type-page #content a:hover, .node-type-page #content a:visited, .entity-bean .content a:focus, .entity-bean .content a:hover, .entity-bean .content a:visited {
+    color: #027e9c !important;
+    text-decoration: none; }
+.pane-block a[href^="http"], .page-block #content a[href^="http"], .node-type-page #content a[href^="http"], .entity-bean .content a[href^="http"] {
+  color: #027e9c;
+  text-decoration: underline; }
+  .pane-block a[href^="http"]:focus, .pane-block a[href^="http"]:hover, .pane-block a[href^="http"]:visited, .page-block #content a[href^="http"]:focus, .page-block #content a[href^="http"]:hover, .page-block #content a[href^="http"]:visited, .node-type-page #content a[href^="http"]:focus, .node-type-page #content a[href^="http"]:hover, .node-type-page #content a[href^="http"]:visited, .entity-bean .content a[href^="http"]:focus, .entity-bean .content a[href^="http"]:hover, .entity-bean .content a[href^="http"]:visited {
+    color: #027e9c !important;
+    text-decoration: none; }
+  .pane-block a[href^="http"]:after, .page-block #content a[href^="http"]:after, .node-type-page #content a[href^="http"]:after, .entity-bean .content a[href^="http"]:after {
+    content: " ";
+    background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    margin-left: 5px; }
+.pane-block ol, .page-block #content ol, .node-type-page #content ol, .entity-bean .content ol {
+  padding-left: 20px;
+  margin: 0;
+  counter-reset: item;
+  color: #4e5365; }
+  .pane-block ol li, .page-block #content ol li, .node-type-page #content ol li, .entity-bean .content ol li {
+    text-indent: -10px;
+    color: #4e5365;
+    font-family: "Open sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    display: block; }
+    .pane-block ol li p, .page-block #content ol li p, .node-type-page #content ol li p, .entity-bean .content ol li p {
+      margin: 0 0 0 11px; }
+    .pane-block ol li p:first-of-type, .page-block #content ol li p:first-of-type, .node-type-page #content ol li p:first-of-type, .entity-bean .content ol li p:first-of-type {
+      display: inline-block;
+      margin: 0 0 0 10px; }
+    .pane-block ol li:before, .page-block #content ol li:before, .node-type-page #content ol li:before, .entity-bean .content ol li:before {
+      content: counter(item) ". ";
+      counter-increment: item;
+      color: #0d6c88; }
+    .pane-block ol li ol, .page-block #content ol li ol, .node-type-page #content ol li ol, .entity-bean .content ol li ol {
+      counter-reset: alpha;
+      margin: 0 0 0.75em 10px; }
+      .pane-block ol li ol li:before, .page-block #content ol li ol li:before, .node-type-page #content ol li ol li:before, .entity-bean .content ol li ol li:before {
+        content: counter(alpha,lower-alpha) ". ";
+        counter-increment: alpha; }
+.pane-block ul, .page-block #content ul, .node-type-page #content ul, .entity-bean .content ul {
+  padding: 0;
+  margin: 0;
+  padding-left: 22px; }
+  .pane-block ul li, .page-block #content ul li, .node-type-page #content ul li, .entity-bean .content ul li {
+    text-indent: -10px;
+    padding-left: 14px;
+    font-family: "Open sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #4e5365;
+    list-style: none;
+    line-height: 1.6em; }
+    .pane-block ul li p, .page-block #content ul li p, .node-type-page #content ul li p, .entity-bean .content ul li p {
+      margin: 0 0 0 10px; }
+    .pane-block ul li p:first-of-type, .page-block #content ul li p:first-of-type, .node-type-page #content ul li p:first-of-type, .entity-bean .content ul li p:first-of-type {
+      display: inline-block; }
+    .pane-block ul li:before, .page-block #content ul li:before, .node-type-page #content ul li:before, .entity-bean .content ul li:before {
+      font-size: 20px;
+      content: "• ";
+      display: inline-block;
+      width: 10px;
+      height: 5px;
+      vertical-align: middle;
+      line-height: 1; }
+    .pane-block ul li ul li:before, .page-block #content ul li ul li:before, .node-type-page #content ul li ul li:before, .entity-bean .content ul li ul li:before {
+      content: "• ";
+      line-height: 1;
+      color: #55beaf; }
+    .pane-block ul li ul li ul li:before, .page-block #content ul li ul li ul li:before, .node-type-page #content ul li ul li ul li:before, .entity-bean .content ul li ul li ul li:before {
+      content: "• ";
+      line-height: 1;
+      color: #aabcb9; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
@@ -3429,50 +3597,135 @@ LAYOUT & GRID STYLES
   overflow: hidden; }
   #container #content {
     margin-top: 0; }
-    #container #content #ict-dashboard-overview-number-indicators {
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators,
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators {
       padding-bottom: 20px; }
-      #container #content #ict-dashboard-overview-number-indicators #overview-graphs {
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs {
         padding-right: 0; }
-        #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch {
           margin-top: 10px; }
-          #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
-            max-width: 78%; }
-        #container #content #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend {
-          margin-bottom: 0; }
-          #container #content #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend .bar-legend {
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
+            max-width: 78%;
+            float: right;
+            margin-right: 0;
+            margin-left: 0; }
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend {
+          margin-bottom: 0;
+          float: left; }
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend .bar-legend,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #expenditure_legend .bar-legend {
             margin-bottom: 30px; }
-      #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
-      #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 {
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 {
         border-top: 1px solid #D8DEEB;
         border-bottom: 1px solid #D8DEEB;
         padding-top: 30px;
         padding-bottom: 30px;
-        margin-bottom: 30px; }
-        #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .label,
-        #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .label {
+        margin-bottom: 30px;
+        float: left;
+        width: 100%; }
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .label,
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .label,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .label,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .label {
           margin-right: 5px; }
-      #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
         border-bottom: 0;
         padding-bottom: 0;
         margin-bottom: 0; }
-        #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
           border-bottom: 1px solid #D8DEEB;
           margin-bottom: 20px;
           padding-bottom: 20px; }
-    #container #content #ict-home-projects-table-id {
+      #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status,
+      #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status {
+        float: left; }
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph {
+          margin-top: 10px; }
+        #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend,
+        #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
+          padding-left: 0;
+          margin-top: 0; }
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
+            margin-right: 30px; }
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id,
+    #container #content .pane-home-projects #ict-home-projects-table-id {
       padding-right: 20px;
       padding-left: 20px; }
-      #container #content #ict-home-projects-table-id .sbHolder {
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .pager-tags-top .item-list,
+      #container #content .pane-home-projects #ict-home-projects-table-id .pager-tags-top .item-list {
+        display: none; }
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .sort-direction-desc .col-num-entity,
+      #container #content .pane-home-projects #ict-home-projects-table-id .sort-direction-desc .col-num-entity {
+        width: auto; }
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .sbHolder,
+      #container #content .pane-home-projects #ict-home-projects-table-id .sbHolder {
         max-width: 78%;
         width: 78%;
         float: right; }
-      #container #content #ict-home-projects-table-id .table-config-bar .item-list {
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list,
+      #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list {
         margin-top: 20px; }
-        #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
-        #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
-        #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
-        #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last,
+        #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
+        #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
+        #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
+        #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
           display: none; }
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table,
+      #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table {
+        border-collapse: separate; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .col-num-budget,
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .col-num-benefits,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .col-num-budget,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .col-num-benefits {
+          display: none; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-desktop,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-desktop {
+          display: none; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile:before,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile:before {
+          top: 6px; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile:after,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile:after {
+          top: -3px; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td {
+          padding-left: 2px;
+          padding-right: 5px; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col {
+          padding-left: 30px; }
+          #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before,
+          #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before {
+            left: 5px; }
+        #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table th,
+        #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table th {
+          padding-bottom: 15px; }
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id table.viz-filtered-projects tr td,
+      #container #content .pane-home-projects #ict-home-projects-table-id table.viz-filtered-projects tr td {
+        padding-left: 10px; }
+      #container #content .pane-overview-number-indicators #ict-home-projects-table-id th,
+      #container #content .pane-home-projects #ict-home-projects-table-id th {
+        padding-bottom: 15px; }
+    #container #content .pane-overview-number-indicators table.viz-filtered-projects tr td,
+    #container #content .pane-home-projects table.viz-filtered-projects tr td {
+      padding-left: 10px; }
+    #container #content .pane-last-updated {
+      padding: 0; }
 
 .wrap {
   margin: 0 auto; }
@@ -3920,29 +4173,31 @@ POSTS & CONTENT STYLES
 #content #inner-content .ict-benefits .ict-faq-answer ul li div {
   display: block; }
 
-#content #ict-home-projects-table-id {
+#content #ict-filtered-projects {
   padding: 0 20px; }
-  #content #ict-home-projects-table-id .footable-header .viz-tooltips-row {
+  #content #ict-filtered-projects .viz-filtered-projects tr[data-expanded="true"] td {
+    border-bottom: none; }
+  #content #ict-filtered-projects .footable-header .viz-tooltips-row {
     position: absolute;
     bottom: 15px;
     margin-left: 0;
     margin-top: 4px; }
-  #content #ict-home-projects-table-id .footable-header .footable-toggle {
+  #content #ict-filtered-projects .footable-header .footable-toggle {
     display: none; }
-  #content #ict-home-projects-table-id .footable-header a.ict-sort-link {
+  #content #ict-filtered-projects .footable-header a.ict-sort-link {
     margin-left: 0 !important; }
-    #content #ict-home-projects-table-id .footable-header a.ict-sort-link:after {
+    #content #ict-filtered-projects .footable-header a.ict-sort-link:after {
       top: 15px; }
-    #content #ict-home-projects-table-id .footable-header a.ict-sort-link:before {
+    #content #ict-filtered-projects .footable-header a.ict-sort-link:before {
       top: 25px; }
-  #content #ict-home-projects-table-id tr td {
+  #content #ict-filtered-projects tr td {
     border-bottom: 2px dotted #f0f4fa;
     padding-bottom: 14px !important; }
-  #content #ict-home-projects-table-id tr th {
+  #content #ict-filtered-projects tr th {
     padding: 7px 25px 42px 14px; }
-  #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus {
+  #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-minus {
     opacity: 1; }
-    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus::before {
+    #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-minus::before {
       content: ' ';
       background-image: url(/sites/all/themes/itdash/html/images/minus.png);
       width: 26px;
@@ -3950,11 +4205,11 @@ POSTS & CONTENT STYLES
       position: absolute;
       top: 0;
       left: 0; }
-    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-minus + a {
+    #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-minus + a {
       margin-left: 40px; }
-  #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus {
+  #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-plus {
     opacity: 1; }
-    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus::before {
+    #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-plus::before {
       content: ' ';
       background-image: url(/sites/all/themes/itdash/html/images/plus.png);
       width: 26px;
@@ -3962,17 +4217,38 @@ POSTS & CONTENT STYLES
       position: absolute;
       top: 0;
       left: 0; }
-    #content #ict-home-projects-table-id span.footable-toggle.fooicon.fooicon-plus + a {
+    #content #ict-filtered-projects span.footable-toggle.fooicon.fooicon-plus + a {
       margin-left: 40px; }
-  #content #ict-home-projects-table-id .footable-detail-row td:first-child {
+  #content #ict-filtered-projects .footable-detail-row td:first-child {
     padding-left: 40px;
     padding-right: 10px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row {
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-3 {
+    right: -35px;
+    width: 280px; }
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-4 {
+    right: -60px;
+    width: 280px; }
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-5 {
+    right: -57px;
+    width: 280px; }
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-6 {
+    right: -129px;
+    width: 280px; }
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-7 {
+    right: -15px;
+    width: 280px; }
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-f-p-8 {
+    right: -71px;
+    width: 280px; }
+  #content #ict-filtered-projects .footable-detail-row .footable-details .viz-tooltips-row {
     margin-left: 10px;
     margin-top: 3px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details tbody tr:first-child {
+    #content #ict-filtered-projects .footable-detail-row .footable-details .viz-tooltips-row span:after {
+      border-left: none;
+      border-right: none; }
+  #content #ict-filtered-projects .footable-detail-row .footable-details tbody tr:first-child {
     display: none; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr th {
+  #content #ict-filtered-projects .footable-detail-row .footable-details tr th {
     background-color: #fff;
     color: #202b3d;
     border-left: none;
@@ -3982,7 +4258,7 @@ POSTS & CONTENT STYLES
     display: flex;
     padding-bottom: 7px;
     font-size: 14px; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td {
+  #content #ict-filtered-projects .footable-detail-row .footable-details tr td {
     display: block !important;
     width: auto;
     padding-right: 0;
@@ -3991,12 +4267,12 @@ POSTS & CONTENT STYLES
     height: auto;
     padding-bottom: 12px;
     word-break: break-word; }
-    #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td .ict-project-button {
+    #content #ict-filtered-projects .footable-detail-row .footable-details tr td .ict-project-button {
       padding-top: 7px;
       padding-bottom: 8px; }
-      #content #ict-home-projects-table-id .footable-detail-row .footable-details tr td .ict-project-button a::before {
+      #content #ict-filtered-projects .footable-detail-row .footable-details tr td .ict-project-button a::before {
         left: 44%; }
-  #content #ict-home-projects-table-id .footable-detail-row .footable-details tr .schedule-status-col::before {
+  #content #ict-filtered-projects .footable-detail-row .footable-details tr .schedule-status-col::before {
     top: 0;
     margin-top: 4px; }
 
@@ -4440,12 +4716,15 @@ DETAILED OVERVIEW STYLES
       padding-right: 20px; }
     #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend {
       width: 100%;
-      margin: 0; }
+      margin: 0;
+      color: #4e5365; }
       #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend .bar-legend {
         padding-left: 20px;
-        margin-top: 8px; }
+        margin-top: 8px;
+        color: #4e5365; }
   #container #content #ict-dashboard-detailed-overview .viz-number-of-benefits {
-    padding-left: 20px; }
+    padding-left: 20px;
+    font-size: 13px; }
 
 /*********************
 LARGER MOBILE DEVICES
@@ -4506,7 +4785,14 @@ tweeners.
       padding: 0; }
       #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
         width: 180px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-3, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-4, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-5, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-6, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-7, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-8 {
+    right: -150px;
+    width: 300px; }
+  #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row span:after {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent; }
   #content .last-updated-block {
+    padding: 0 7%;
     margin: 0 auto;
     display: table;
     margin-top: 25px;
@@ -4589,6 +4875,7 @@ tweeners.
       width: 275px; }
 
   .page-title {
+    padding: 0 7%;
     background: url(../images/dot-bg.png) repeat scroll top center #1e2635; }
 
   #container #content #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
@@ -4603,6 +4890,16 @@ tweeners.
   #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 {
     float: left;
     width: 100%; }
+  #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status {
+    float: left; }
+    #container #content #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
+      margin-right: 20px; }
+  #container #content .pane-last-updated {
+    padding: 0; }
+    #container #content .pane-last-updated .last-updated-block {
+      padding: 0; }
+      #container #content .pane-last-updated .last-updated-block .last-updated-on {
+        padding-left: 20px; }
 
   /* entry content */
   .entry-content {
@@ -4764,6 +5061,91 @@ you can add resource intensive styles.
   /*********************
   CONTENT STYLES
   *********************/
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .t-2of3.d-2of3,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 {
+    padding-right: 90px;
+    width: 66.6%;
+    float: left; }
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs .graph-container .chart,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs .graph-container .chart {
+      width: 100%; }
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs #overview-expenditure-switch,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs #overview-expenditure-switch {
+      width: 100%; }
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status {
+    float: left;
+    width: 66.6%; }
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
+      padding-left: 0; }
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1,
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers {
+    float: right;
+    width: 33.3%;
+    padding-top: 0;
+    padding-right: 0;
+    border-top: 0;
+    border-bottom: 0; }
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .big-number,
+    #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers1 .big-number,
+    #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
+      text-align: left; }
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend li {
+    margin-right: 25px; }
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
+    width: 100%; }
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number,
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .big-number {
+    border-bottom: 0; }
+  #container #content .pane-home-projects #ict-home-projects-table-id .pager-tags-top .item-list,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .pager-tags-top .item-list {
+    display: block; }
+  #container #content .pane-home-projects #ict-home-projects-table-id .sort-direction-desc .col-num-entity,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .sort-direction-desc .col-num-entity {
+    width: 110px; }
+  #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .form-type-select,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .form-type-select {
+    display: inline-block; }
+  #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .sbHolder,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .sbHolder {
+    float: none;
+    width: auto; }
+  #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list {
+    margin-top: 0; }
+    #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
+    #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
+    #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
+    #container #content .pane-home-projects #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
+      display: list-item; }
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td {
+    padding-left: 15px;
+    padding-right: 15px; }
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col {
+    padding-left: 30px; }
+    #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before,
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before {
+      left: 5px; }
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .col-num-budget,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .col-num-benefits,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .col-num-budget,
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .col-num-benefits {
+    display: table-cell; }
+  #container #content .pane-last-updated .last-updated-block .last-updated-on {
+    padding-left: 20px; }
+
   #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
     float: none; }
 
@@ -4772,35 +5154,42 @@ you can add resource intensive styles.
     #content #inner-content .project-draft-submission .individual-project-content .preview_switch span {
       width: 20px; }
 
-  #container #content {
+  #content {
     color: #4e5365;
     margin: 0;
     background-color: #fff;
     padding-bottom: 60px;
     /* Project list */ }
-    #container #content .dotbg {
+    #content #ict-filtered-projects tr th {
+      padding: 7px 0px 42px 4px;
+      font-size: 14px; }
+      #content #ict-filtered-projects tr th a.ict-sort-link:after {
+        top: 80px !important; }
+      #content #ict-filtered-projects tr th a.ict-sort-link:before {
+        top: 90px !important; }
+    #content .dotbg {
       background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
       overflow: hidden; }
-    #container #content .page-title .inner-title-content h1 {
+    #content .page-title .inner-title-content h1 {
       color: #c8f68f;
       font-size: 34px;
       font-weight: 400; }
-    #container #content .welcome {
+    #content .welcome {
       padding: 20px 20px; }
-      #container #content .welcome h1 {
+      #content .welcome h1 {
         color: #d5ff92;
         font-size: 34px;
         line-height: 48px;
         margin: 0; }
-      #container #content .welcome .welcome-text p {
+      #content .welcome .welcome-text p {
         color: #fff;
         -moz-hyphens: none;
         -webkit-hyphens: none;
         font-size: 16px;
         word-break: normal;
         margin: 20px 0; }
-      #container #content .welcome .welcome-form form p input[type="text"],
-      #container #content .welcome .welcome-form form p input[type="password"] {
+      #content .welcome .welcome-form form p input[type="text"],
+      #content .welcome .welcome-form form p input[type="password"] {
         color: #fff;
         border: 1px solid #3c475c;
         background: #131a28;
@@ -4809,60 +5198,34 @@ you can add resource intensive styles.
         line-height: 34px;
         letter-spacing: 0;
         vertical-align: middle; }
-        #container #content .welcome .welcome-form form p input[type="text"]:focus, #container #content .welcome .welcome-form form p input[type="text"]:hover,
-        #container #content .welcome .welcome-form form p input[type="password"]:focus,
-        #container #content .welcome .welcome-form form p input[type="password"]:hover {
+        #content .welcome .welcome-form form p input[type="text"]:focus, #content .welcome .welcome-form form p input[type="text"]:hover,
+        #content .welcome .welcome-form form p input[type="password"]:focus,
+        #content .welcome .welcome-form form p input[type="password"]:hover {
           border: 1px solid #02a7a4; }
-      #container #content .welcome .welcome-form form p input[type="submit"] {
+      #content .welcome .welcome-form form p input[type="submit"] {
         background: url(../images/signin-home-btn.png) no-repeat scroll 0 0 transparent;
         border: 0 none;
         width: 130px;
         height: 36px;
         text-indent: -999em;
         overflow: hidden; }
-        #container #content .welcome .welcome-form form p input[type="submit"]:hover {
+        #content .welcome .welcome-form form p input[type="submit"]:hover {
           background-position: 0 -36px; }
-      #container #content .welcome .welcome-form form p.submit {
+      #content .welcome .welcome-form form p.submit {
         text-align: right;
         border-top: none;
         margin: 30px 0 0 0;
         padding: 0; }
-    #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 {
-      padding-right: 0;
-      width: 100%;
-      float: none; }
-      #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs .graph-container .chart {
-        width: 100%; }
-      #container #content #ict-dashboard-overview-number-indicators .t-2of3.d-2of3 #overview-graphs #overview-expenditure-switch {
-        width: 50%; }
-    #container #content #ict-dashboard-overview-number-indicators .t-1of3 {
-      float: none;
-      padding-right: 0;
-      width: auto; }
-    #container #content #ict-dashboard-overview-number-indicators #ict-dashboard-numbers .general-button {
-      width: 33%; }
-    #container #content #ict-home-projects-table-id .table-config-bar .form-type-select {
-      display: inline-block; }
-    #container #content #ict-home-projects-table-id .table-config-bar .sbHolder {
-      float: none;
-      width: auto; }
-    #container #content #ict-home-projects-table-id .table-config-bar .item-list {
-      margin-top: 0; }
-      #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-first,
-      #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-previous,
-      #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-next,
-      #container #content #ict-home-projects-table-id .table-config-bar .item-list .pager .pager-last {
-        display: list-item; }
-    #container #content .home-banner img {
+    #content .home-banner img {
       width: 100%;
       max-height: 70px; }
-    #container #content .project-categories {
+    #content .project-categories {
       padding: 30px 0 35px; }
-      #container #content .project-categories .box {
+      #content .project-categories .box {
         margin-right: 25.5591px;
         max-width: 306px;
         padding-right: 0; }
-        #container #content .project-categories .box .inner-box {
+        #content .project-categories .box .inner-box {
           background-color: #fff;
           border-left: 1px solid #cbd4e1;
           border-right: 1px solid #cbd4e1;
@@ -4870,22 +5233,22 @@ you can add resource intensive styles.
           width: 100%;
           position: relative;
           padding-top: 1px; }
-          #container #content .project-categories .box .inner-box h3 {
+          #content .project-categories .box .inner-box h3 {
             font-size: 18px;
             color: #202b3d;
             font-weight: 600;
             margin: 10px 15px; }
-          #container #content .project-categories .box .inner-box img {
+          #content .project-categories .box .inner-box img {
             margin: 0 10px; }
-          #container #content .project-categories .box .inner-box .text {
+          #content .project-categories .box .inner-box .text {
             padding: 0 15px; }
-            #container #content .project-categories .box .inner-box .text h4 {
+            #content .project-categories .box .inner-box .text h4 {
               margin: 10px 0 0;
               color: #117e99;
               font-size: 14px;
               text-transform: uppercase;
               font-weight: 600; }
-            #container #content .project-categories .box .inner-box .text p {
+            #content .project-categories .box .inner-box .text p {
               -moz-hyphens: none;
               -webkit-hyphens: none;
               hyphens: none;
@@ -4895,7 +5258,7 @@ you can add resource intensive styles.
               color: #202b3d;
               margin-top: 0;
               text-align: left; }
-        #container #content .project-categories .box.blue .inner-box:after {
+        #content .project-categories .box.blue .inner-box:after {
           background: #2ea5c2;
           border: 1px solid #2ea5c2;
           content: " ";
@@ -4904,9 +5267,9 @@ you can add resource intensive styles.
           position: absolute;
           top: 0;
           left: -1px; }
-        #container #content .project-categories .box.blue .inner-box .text h4 {
+        #content .project-categories .box.blue .inner-box .text h4 {
           color: #117e99; }
-        #container #content .project-categories .box.blue-green .inner-box:after {
+        #content .project-categories .box.blue-green .inner-box:after {
           background: #3ac3cf;
           border: 1px solid #3ac3cf;
           content: " ";
@@ -4915,9 +5278,9 @@ you can add resource intensive styles.
           position: absolute;
           top: 0;
           left: -1px; }
-        #container #content .project-categories .box.blue-green .inner-box .text h4 {
+        #content .project-categories .box.blue-green .inner-box .text h4 {
           color: #268088; }
-        #container #content .project-categories .box.green .inner-box:after {
+        #content .project-categories .box.green .inner-box:after {
           background: #53c0ad;
           border: 1px solid #53c0ad;
           content: " ";
@@ -4926,31 +5289,31 @@ you can add resource intensive styles.
           position: absolute;
           top: 0;
           left: -1px; }
-        #container #content .project-categories .box.green .inner-box .text h4 {
+        #content .project-categories .box.green .inner-box .text h4 {
           color: #058666; }
-        #container #content .project-categories .box:last-child {
+        #content .project-categories .box:last-child {
           margin-right: 0; }
-    #container #content #project-listings .project-list-content .text {
+    #content #project-listings .project-list-content .text {
       padding-right: 20px; }
-      #container #content #project-listings .project-list-content .text p {
+      #content #project-listings .project-list-content .text p {
         -moz-hyphens: none; }
-    #container #content #project-listings .project-list-content .button-add {
+    #content #project-listings .project-list-content .button-add {
       border-left: 1px dotted #f0f4fa;
       text-align: right;
       margin-top: 10px; }
-      #container #content #project-listings .project-list-content .button-add a {
+      #content #project-listings .project-list-content .button-add a {
         width: 140px;
         margin: 20px 0; }
-      #container #content #project-listings .project-list-content .button-add div a:hover {
+      #content #project-listings .project-list-content .button-add div a:hover {
         text-decoration: none; }
-    #container #content #project-listings .project-lists {
+    #content #project-listings .project-lists {
       margin: 10px 0 40px; }
-      #container #content #project-listings .project-lists table {
+      #content #project-listings .project-lists table {
         width: 100%;
         border-bottom: 1px solid #abb6cb;
         border-collapse: separate;
         border-spacing: 0; }
-        #container #content #project-listings .project-lists table tr th {
+        #content #project-listings .project-lists table tr th {
           text-align: left;
           padding: 8px;
           background-color: #137992;
@@ -4959,50 +5322,50 @@ you can add resource intensive styles.
           font-size: 15px;
           font-weight: 700;
           color: #fff; }
-          #container #content #project-listings .project-lists table tr th a {
+          #content #project-listings .project-lists table tr th a {
             float: right;
             color: #fff;
             text-align: right; }
-            #container #content #project-listings .project-lists table tr th a i {
+            #content #project-listings .project-lists table tr th a i {
               font-size: 10px; }
-            #container #content #project-listings .project-lists table tr th a .fa.fa-sort-desc {
+            #content #project-listings .project-lists table tr th a .fa.fa-sort-desc {
               margin-left: -5.6px; }
-            #container #content #project-listings .project-lists table tr th a.asc:hover .fa-sort-asc {
+            #content #project-listings .project-lists table tr th a.asc:hover .fa-sort-asc {
               color: #0a5f74; }
-            #container #content #project-listings .project-lists table tr th a.asc:hover .fa-sort-desc {
+            #content #project-listings .project-lists table tr th a.asc:hover .fa-sort-desc {
               color: #d5ff92; }
-            #container #content #project-listings .project-lists table tr th a.desc:hover .fa-sort-desc {
+            #content #project-listings .project-lists table tr th a.desc:hover .fa-sort-desc {
               color: #0a5f74; }
-            #container #content #project-listings .project-lists table tr th a.desc:hover .fa-sort-asc {
+            #content #project-listings .project-lists table tr th a.desc:hover .fa-sort-asc {
               color: #d5ff92; }
-          #container #content #project-listings .project-lists table tr th:first-child {
+          #content #project-listings .project-lists table tr th:first-child {
             border-radius: 4px 0 0;
             border-left: 0 none; }
-          #container #content #project-listings .project-lists table tr th:last-child {
+          #content #project-listings .project-lists table tr th:last-child {
             border-radius: 0 4px 0 0; }
-        #container #content #project-listings .project-lists table tr td {
+        #content #project-listings .project-lists table tr td {
           border-left: 1px solid #dde2ea;
           padding: 8px; }
-          #container #content #project-listings .project-lists table tr td.title {
+          #content #project-listings .project-lists table tr td.title {
             font-size: 20px;
             border-left: 1px solid #abb6cb;
             width: 635px; }
-            #container #content #project-listings .project-lists table tr td.title a {
+            #content #project-listings .project-lists table tr td.title a {
               font-size: 14px;
               font-weight: 600;
               color: #0d6c88;
               text-decoration: underline; }
-              #container #content #project-listings .project-lists table tr td.title a:hover {
+              #content #project-listings .project-lists table tr td.title a:hover {
                 text-decoration: none; }
-          #container #content #project-listings .project-lists table tr td.dates {
+          #content #project-listings .project-lists table tr td.dates {
             width: 153px;
             padding-right: 35px; }
-          #container #content #project-listings .project-lists table tr td.status-project {
+          #content #project-listings .project-lists table tr td.status-project {
             text-align: center; }
-          #container #content #project-listings .project-lists table tr td.update {
+          #content #project-listings .project-lists table tr td.update {
             text-align: center;
             border-right: 1px solid #abb6cb; }
-            #container #content #project-listings .project-lists table tr td.update a {
+            #content #project-listings .project-lists table tr td.update a {
               background: url(../images/button-bg.gif) repeat-x;
               height: 30px;
               display: block;
@@ -5017,17 +5380,17 @@ you can add resource intensive styles.
               position: relative;
               margin: 0;
               padding: 0; }
-              #container #content #project-listings .project-lists table tr td.update a:hover {
+              #content #project-listings .project-lists table tr td.update a:hover {
                 background-position: 0 -30px;
                 color: #fff;
                 background: #137992;
                 border-color: #137992; }
-                #container #content #project-listings .project-lists table tr td.update a:hover span:after {
+                #content #project-listings .project-lists table tr td.update a:hover span:after {
                   border-color: transparent transparent transparent #d5ff92; }
-              #container #content #project-listings .project-lists table tr td.update a span {
+              #content #project-listings .project-lists table tr td.update a span {
                 display: block;
                 padding: 0 20px; }
-                #container #content #project-listings .project-lists table tr td.update a span:after {
+                #content #project-listings .project-lists table tr td.update a span:after {
                   content: " ";
                   border-width: 3px;
                   border-color: transparent transparent transparent #137992;
@@ -5035,44 +5398,44 @@ you can add resource intensive styles.
                   position: absolute;
                   left: 10px;
                   top: 12px; }
-        #container #content #project-listings .project-lists table tr:first-child {
+        #content #project-listings .project-lists table tr:first-child {
           border-radius: 4px 4px 0 0; }
-        #container #content #project-listings .project-lists table tr:nth-child(even) {
+        #content #project-listings .project-lists table tr:nth-child(even) {
           background-color: #dff1f5; }
-        #container #content #project-listings .project-lists table tr:nth-child(odd) {
+        #content #project-listings .project-lists table tr:nth-child(odd) {
           background-color: #fff; }
-    #container #content .project-view {
+    #content .project-view {
       margin-bottom: 25px; }
-      #container #content .project-view table {
+      #content .project-view table {
         font-size: 14px; }
-        #container #content .project-view table tr td {
+        #content .project-view table tr td {
           padding-bottom: 15px;
           vertical-align: top; }
-          #container #content .project-view table tr td.label {
+          #content .project-view table tr td.label {
             font-weight: 700;
             color: #202b3d;
             vertical-align: top;
             width: 200px; }
-          #container #content .project-view table tr td.text {
+          #content .project-view table tr td.text {
             color: #202b3d;
             vertical-align: bottom; }
-            #container #content .project-view table tr td.text ul {
+            #content .project-view table tr td.text ul {
               margin: 0 0 0 15px; }
-              #container #content .project-view table tr td.text ul li {
+              #content .project-view table tr td.text ul li {
                 color: #02a7a4;
                 list-style: disc; }
-                #container #content .project-view table tr td.text ul li span {
+                #content .project-view table tr td.text ul li span {
                   color: #202b3d; }
-      #container #content .project-view.metrics h3 {
+      #content .project-view.metrics h3 {
         font-weight: 700;
         font-size: 14px;
         color: #202b3d;
         margin-top: 0; }
-      #container #content .project-view.metrics table {
+      #content .project-view.metrics table {
         width: 100%;
         border-bottom: 1px solid #abb6cb;
         border-collapse: separate; }
-        #container #content .project-view.metrics table tr th {
+        #content .project-view.metrics table tr th {
           text-align: left;
           padding: 8px;
           background-color: #137992;
@@ -5081,64 +5444,64 @@ you can add resource intensive styles.
           font-weight: 700;
           color: #fff;
           vertical-align: top; }
-          #container #content .project-view.metrics table tr th:first-child {
+          #content .project-view.metrics table tr th:first-child {
             border-radius: 4px 0 0;
             border-left: 0 none; }
-          #container #content .project-view.metrics table tr th:last-child {
+          #content .project-view.metrics table tr th:last-child {
             border-radius: 0 4px 0 0; }
-        #container #content .project-view.metrics table tr td {
+        #content .project-view.metrics table tr td {
           border-left: 1px solid #dde2ea;
           padding: 8px;
           color: #202b3d; }
-          #container #content .project-view.metrics table tr td:first-child {
+          #content .project-view.metrics table tr td:first-child {
             border-left: 1px solid #abb6cb; }
-          #container #content .project-view.metrics table tr td:last-child {
+          #content .project-view.metrics table tr td:last-child {
             border-right: 1px solid #abb6cb; }
-        #container #content .project-view.metrics table tr:nth-child(even) {
+        #content .project-view.metrics table tr:nth-child(even) {
           background-color: #dff1f5; }
-        #container #content .project-view.metrics table tr:nth-child(odd) {
+        #content .project-view.metrics table tr:nth-child(odd) {
           background-color: #fff; }
-    #container #content .register-form,
-    #container #content .project-update-submission {
+    #content .register-form,
+    #content .project-update-submission {
       margin-bottom: 25px; }
-      #container #content .register-form .sbHolder,
-      #container #content .project-update-submission .sbHolder {
+      #content .register-form .sbHolder,
+      #content .project-update-submission .sbHolder {
         max-width: 640px; }
-      #container #content .register-form h2,
-      #container #content .project-update-submission h2 {
+      #content .register-form h2,
+      #content .project-update-submission h2 {
         color: #0d6c88;
         font-size: 26px;
         font-weight: 600;
         border-bottom: 1px solid #f0f4fa;
         padding-bottom: 10px; }
-      #container #content .register-form table,
-      #container #content .project-update-submission table {
+      #content .register-form table,
+      #content .project-update-submission table {
         font-size: 14px;
         width: 100%; }
-        #container #content .register-form table tr td,
-        #container #content .project-update-submission table tr td {
+        #content .register-form table tr td,
+        #content .project-update-submission table tr td {
           padding-bottom: 15px;
           vertical-align: top; }
-          #container #content .register-form table tr td.label,
-          #container #content .project-update-submission table tr td.label {
+          #content .register-form table tr td.label,
+          #content .project-update-submission table tr td.label {
             font-weight: 700;
             color: #202b3d;
             width: 295px;
             padding-right: 15px;
             padding-top: 9px; }
-            #container #content .register-form table tr td.label em,
-            #container #content .project-update-submission table tr td.label em {
+            #content .register-form table tr td.label em,
+            #content .project-update-submission table tr td.label em {
               font-style: italic; }
-            #container #content .register-form table tr td.label span,
-            #container #content .project-update-submission table tr td.label span {
+            #content .register-form table tr td.label span,
+            #content .project-update-submission table tr td.label span {
               font-style: italic;
               font-weight: 400;
               display: block; }
-            #container #content .register-form table tr td.label.vtop,
-            #container #content .project-update-submission table tr td.label.vtop {
+            #content .register-form table tr td.label.vtop,
+            #content .project-update-submission table tr td.label.vtop {
               vertical-align: top; }
-          #container #content .register-form table tr td.text,
-          #container #content .project-update-submission table tr td.text {
+          #content .register-form table tr td.text,
+          #content .project-update-submission table tr td.text {
             color: #202b3d;
             							/* div.form-type-select:not(.form-item-field-project-users-und) {
                                             display: block;
@@ -5232,10 +5595,10 @@ you can add resource intensive styles.
                                                 border-radius: 0 0 5px 5px;
                                             }
                                         } */ }
-            #container #content .register-form table tr td.text input[type="text"], #container #content .register-form table tr td.text textarea, #container #content .register-form table tr td.text select,
-            #container #content .project-update-submission table tr td.text input[type="text"],
-            #container #content .project-update-submission table tr td.text textarea,
-            #container #content .project-update-submission table tr td.text select {
+            #content .register-form table tr td.text input[type="text"], #content .register-form table tr td.text textarea, #content .register-form table tr td.text select,
+            #content .project-update-submission table tr td.text input[type="text"],
+            #content .project-update-submission table tr td.text textarea,
+            #content .project-update-submission table tr td.text select {
               border: 1px solid #b3bdcf;
               background-color: #fff;
               background-image: none;
@@ -5246,28 +5609,28 @@ you can add resource intensive styles.
               height: 36px;
               line-height: 36px;
               padding: 0 10px; }
-              #container #content .register-form table tr td.text input[type="text"]:hover, #container #content .register-form table tr td.text input[type="text"]:focus, #container #content .register-form table tr td.text textarea:hover, #container #content .register-form table tr td.text textarea:focus, #container #content .register-form table tr td.text select:hover, #container #content .register-form table tr td.text select:focus,
-              #container #content .project-update-submission table tr td.text input[type="text"]:hover,
-              #container #content .project-update-submission table tr td.text input[type="text"]:focus,
-              #container #content .project-update-submission table tr td.text textarea:hover,
-              #container #content .project-update-submission table tr td.text textarea:focus,
-              #container #content .project-update-submission table tr td.text select:hover,
-              #container #content .project-update-submission table tr td.text select:focus {
+              #content .register-form table tr td.text input[type="text"]:hover, #content .register-form table tr td.text input[type="text"]:focus, #content .register-form table tr td.text textarea:hover, #content .register-form table tr td.text textarea:focus, #content .register-form table tr td.text select:hover, #content .register-form table tr td.text select:focus,
+              #content .project-update-submission table tr td.text input[type="text"]:hover,
+              #content .project-update-submission table tr td.text input[type="text"]:focus,
+              #content .project-update-submission table tr td.text textarea:hover,
+              #content .project-update-submission table tr td.text textarea:focus,
+              #content .project-update-submission table tr td.text select:hover,
+              #content .project-update-submission table tr td.text select:focus {
                 border: 1px solid #02a7a4; }
-            #container #content .register-form table tr td.text textarea,
-            #container #content .project-update-submission table tr td.text textarea {
+            #content .register-form table tr td.text textarea,
+            #content .project-update-submission table tr td.text textarea {
               padding: 10px; }
-            #container #content .register-form table tr td.text div.form-item-field-project-users-und,
-            #container #content .project-update-submission table tr td.text div.form-item-field-project-users-und {
+            #content .register-form table tr td.text div.form-item-field-project-users-und,
+            #content .project-update-submission table tr td.text div.form-item-field-project-users-und {
               position: relative; }
-            #container #content .register-form table tr td.text p,
-            #container #content .project-update-submission table tr td.text p {
+            #content .register-form table tr td.text p,
+            #content .project-update-submission table tr td.text p {
               margin: 0; }
-              #container #content .register-form table tr td.text p input[type="radio"],
-              #container #content .project-update-submission table tr td.text p input[type="radio"] {
+              #content .register-form table tr td.text p input[type="radio"],
+              #content .project-update-submission table tr td.text p input[type="radio"] {
                 margin-right: 15px; }
-            #container #content .register-form table tr td.text a.export-btn,
-            #container #content .project-update-submission table tr td.text a.export-btn {
+            #content .register-form table tr td.text a.export-btn,
+            #content .project-update-submission table tr td.text a.export-btn {
               color: #202b3d;
               font-weight: 700;
               font-size: 14px;
@@ -5297,8 +5660,8 @@ you can add resource intensive styles.
               /* W3C */
               filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d8e5', endColorstr='#c9d1de', GradientType=0);
               /* IE6-9 */ }
-              #container #content .register-form table tr td.text a.export-btn:hover,
-              #container #content .project-update-submission table tr td.text a.export-btn:hover {
+              #content .register-form table tr td.text a.export-btn:hover,
+              #content .project-update-submission table tr td.text a.export-btn:hover {
                 color: #fff;
                 border: 1px solid #0e6872;
                 background: #157a86;
@@ -5317,8 +5680,8 @@ you can add resource intensive styles.
                 /* W3C */
                 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#157a86', endColorstr='#0e6872', GradientType=0);
                 /* IE6-9 */ }
-              #container #content .register-form table tr td.text a.export-btn:after,
-              #container #content .project-update-submission table tr td.text a.export-btn:after {
+              #content .register-form table tr td.text a.export-btn:after,
+              #content .project-update-submission table tr td.text a.export-btn:after {
                 background: #d6dce5;
                 height: 2px;
                 width: 98%;
@@ -5329,8 +5692,8 @@ you can add resource intensive styles.
                 left: 1px;
                 z-index: 1;
                 border-radius: 0 0 5px 5px; }
-            #container #content .register-form table tr td.text #edit-field-mid-csv-file-und-0-upload-button,
-            #container #content .project-update-submission table tr td.text #edit-field-mid-csv-file-und-0-upload-button {
+            #content .register-form table tr td.text #edit-field-mid-csv-file-und-0-upload-button,
+            #content .project-update-submission table tr td.text #edit-field-mid-csv-file-und-0-upload-button {
               color: #202b3d;
               font-weight: 700;
               font-size: 14px;
@@ -5363,8 +5726,8 @@ you can add resource intensive styles.
               /* W3C */
               filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d8e5', endColorstr='#c9d1de', GradientType=0);
               /* IE6-9 */ }
-              #container #content .register-form table tr td.text #edit-field-mid-csv-file-und-0-upload-button:hover,
-              #container #content .project-update-submission table tr td.text #edit-field-mid-csv-file-und-0-upload-button:hover {
+              #content .register-form table tr td.text #edit-field-mid-csv-file-und-0-upload-button:hover,
+              #content .project-update-submission table tr td.text #edit-field-mid-csv-file-und-0-upload-button:hover {
                 color: #fff;
                 border: 1px solid #0e6872;
                 background: #157a86;
@@ -5383,8 +5746,8 @@ you can add resource intensive styles.
                 /* W3C */
                 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#157a86', endColorstr='#0e6872', GradientType=0);
                 /* IE6-9 */ }
-              #container #content .register-form table tr td.text #edit-field-mid-csv-file-und-0-upload-button:after,
-              #container #content .project-update-submission table tr td.text #edit-field-mid-csv-file-und-0-upload-button:after {
+              #content .register-form table tr td.text #edit-field-mid-csv-file-und-0-upload-button:after,
+              #content .project-update-submission table tr td.text #edit-field-mid-csv-file-und-0-upload-button:after {
                 background: #d6dce5;
                 height: 2px;
                 width: 98%;
@@ -5395,8 +5758,8 @@ you can add resource intensive styles.
                 left: 1px;
                 z-index: 1;
                 border-radius: 0 0 5px 5px; }
-            #container #content .register-form table tr td.text .fileUpload,
-            #container #content .project-update-submission table tr td.text .fileUpload {
+            #content .register-form table tr td.text .fileUpload,
+            #content .project-update-submission table tr td.text .fileUpload {
               overflow: hidden;
               color: #202b3d;
               font-weight: 700;
@@ -5429,8 +5792,8 @@ you can add resource intensive styles.
               /* W3C */
               filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d8e5', endColorstr='#c9d1de', GradientType=0);
               /* IE6-9 */ }
-              #container #content .register-form table tr td.text .fileUpload input.upload,
-              #container #content .project-update-submission table tr td.text .fileUpload input.upload {
+              #content .register-form table tr td.text .fileUpload input.upload,
+              #content .project-update-submission table tr td.text .fileUpload input.upload {
                 position: absolute;
                 top: 0;
                 right: 0;
@@ -5440,8 +5803,8 @@ you can add resource intensive styles.
                 cursor: pointer;
                 opacity: 0;
                 filter: alpha(opacity=0); }
-              #container #content .register-form table tr td.text .fileUpload:hover,
-              #container #content .project-update-submission table tr td.text .fileUpload:hover {
+              #content .register-form table tr td.text .fileUpload:hover,
+              #content .project-update-submission table tr td.text .fileUpload:hover {
                 color: #fff;
                 border: 1px solid #0e6872;
                 background: #157a86;
@@ -5460,8 +5823,8 @@ you can add resource intensive styles.
                 /* W3C */
                 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#157a86', endColorstr='#0e6872', GradientType=0);
                 /* IE6-9 */ }
-              #container #content .register-form table tr td.text .fileUpload:after,
-              #container #content .project-update-submission table tr td.text .fileUpload:after {
+              #content .register-form table tr td.text .fileUpload:after,
+              #content .project-update-submission table tr td.text .fileUpload:after {
                 background: #d6dce5;
                 height: 2px;
                 width: 98%;
@@ -5472,55 +5835,55 @@ you can add resource intensive styles.
                 left: 1px;
                 z-index: 1;
                 border-radius: 0 0 5px 5px; }
-            #container #content .register-form table tr td.text .description,
-            #container #content .project-update-submission table tr td.text .description {
+            #content .register-form table tr td.text .description,
+            #content .project-update-submission table tr td.text .description {
               font-style: italic; }
-            #container #content .register-form table tr td.text .tabledrag-toggle-weight,
-            #container #content .project-update-submission table tr td.text .tabledrag-toggle-weight {
+            #content .register-form table tr td.text .tabledrag-toggle-weight,
+            #content .project-update-submission table tr td.text .tabledrag-toggle-weight {
               text-decoration: none;
               color: #0d6c88; }
-              #container #content .register-form table tr td.text .tabledrag-toggle-weight:hover,
-              #container #content .project-update-submission table tr td.text .tabledrag-toggle-weight:hover {
+              #content .register-form table tr td.text .tabledrag-toggle-weight:hover,
+              #content .project-update-submission table tr td.text .tabledrag-toggle-weight:hover {
                 text-decoration: underline; }
-            #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td,
-            #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td {
+            #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td,
+            #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td {
               border-left: 1px solid #abb6cb !important;
               border-top: 1px solid #abb6cb !important;
               background: #fff;
               width: auto; }
-              #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td input[type="text"],
-              #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td input[type="text"] {
+              #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td input[type="text"],
+              #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td input[type="text"] {
                 width: 100%;
                 border-radius: 0 0 0; }
-              #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und),
-              #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) {
+              #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und),
+              #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) {
                 border: 0 none; }
-                #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und):after,
-                #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und):after {
+                #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und):after,
+                #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und):after {
                   left: 83%; }
-                #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) .sbHolder,
-                #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) .sbHolder {
+                #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) .sbHolder,
+                #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) .sbHolder {
                   border: 0 none; }
-                #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) .sbOptions,
-                #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) .sbOptions {
+                #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) .sbOptions,
+                #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) .sbOptions {
                   z-index: 100;
                   position: absolute; }
-                #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) select,
-                #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) select {
+                #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) select,
+                #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td div.form-type-select:not(.form-item-field-project-users-und) select {
                   max-width: 100%;
                   width: 100%;
                   border: 0 none;
                   text-align: center;
                   outline: 0 none; }
-              #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td.delta-order,
-              #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td.delta-order {
+              #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td.delta-order,
+              #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td.delta-order {
                 width: 110px !important;
                 max-width: 110px !important; }
-              #container #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td.field-multiple-drag,
-              #container #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td.field-multiple-drag {
+              #content .register-form table tr td.text table[id^="field-implementation-partners-values"] tr td.field-multiple-drag,
+              #content .project-update-submission table tr td.text table[id^="field-implementation-partners-values"] tr td.field-multiple-drag {
                 display: none; }
-            #container #content .register-form table tr td.text .field-add-more-submit,
-            #container #content .project-update-submission table tr td.text .field-add-more-submit {
+            #content .register-form table tr td.text .field-add-more-submit,
+            #content .project-update-submission table tr td.text .field-add-more-submit {
               color: #202b3d;
               font-weight: 700;
               font-size: 14px;
@@ -5554,8 +5917,8 @@ you can add resource intensive styles.
               /* W3C */
               filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d8e5', endColorstr='#c9d1de', GradientType=0);
               /* IE6-9 */ }
-              #container #content .register-form table tr td.text .field-add-more-submit:hover,
-              #container #content .project-update-submission table tr td.text .field-add-more-submit:hover {
+              #content .register-form table tr td.text .field-add-more-submit:hover,
+              #content .project-update-submission table tr td.text .field-add-more-submit:hover {
                 color: #fff;
                 border: 1px solid #0e6872;
                 background: #157a86;
@@ -5574,8 +5937,8 @@ you can add resource intensive styles.
                 /* W3C */
                 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#157a86', endColorstr='#0e6872', GradientType=0);
                 /* IE6-9 */ }
-              #container #content .register-form table tr td.text .field-add-more-submit:after,
-              #container #content .project-update-submission table tr td.text .field-add-more-submit:after {
+              #content .register-form table tr td.text .field-add-more-submit:after,
+              #content .project-update-submission table tr td.text .field-add-more-submit:after {
                 background: #d6dce5;
                 height: 2px;
                 width: 98%;
@@ -5586,14 +5949,14 @@ you can add resource intensive styles.
                 left: 1px;
                 z-index: 1;
                 border-radius: 0 0 5px 5px; }
-            #container #content .register-form table tr td.text table,
-            #container #content .project-update-submission table tr td.text table {
+            #content .register-form table tr td.text table,
+            #content .project-update-submission table tr td.text table {
               width: 100%;
               border-bottom: 1px solid #abb6cb;
               border-collapse: separate;
               font-size: 14px; }
-              #container #content .register-form table tr td.text table tr th,
-              #container #content .project-update-submission table tr td.text table tr th {
+              #content .register-form table tr td.text table tr th,
+              #content .project-update-submission table tr td.text table tr th {
                 text-align: left;
                 padding: 8px;
                 background-color: #137992;
@@ -5605,15 +5968,15 @@ you can add resource intensive styles.
                 text-shadow: 0 0 0;
                 font-weight: 700;
                 text-align: center; }
-                #container #content .register-form table tr td.text table tr th:first-child,
-                #container #content .project-update-submission table tr td.text table tr th:first-child {
+                #content .register-form table tr td.text table tr th:first-child,
+                #content .project-update-submission table tr td.text table tr th:first-child {
                   border-radius: 4px 0 0;
                   border-left: 0 none; }
-                #container #content .register-form table tr td.text table tr th:last-child,
-                #container #content .project-update-submission table tr td.text table tr th:last-child {
+                #content .register-form table tr td.text table tr th:last-child,
+                #content .project-update-submission table tr td.text table tr th:last-child {
                   border-radius: 0 4px 0 0; }
-              #container #content .register-form table tr td.text table tr td,
-              #container #content .project-update-submission table tr td.text table tr td {
+              #content .register-form table tr td.text table tr td,
+              #content .project-update-submission table tr td.text table tr td {
                 border-left: 1px solid #abb6cb;
                 border-top: 1px solid #abb6cb;
                 padding: 0;
@@ -5623,29 +5986,29 @@ you can add resource intensive styles.
                 height: 38px;
                 text-align: center;
                 vertical-align: middle; }
-                #container #content .register-form table tr td.text table tr td input[type="text"],
-                #container #content .project-update-submission table tr td.text table tr td input[type="text"] {
+                #content .register-form table tr td.text table tr td input[type="text"],
+                #content .project-update-submission table tr td.text table tr td input[type="text"] {
                   border: 0 none;
                   width: 100%;
                   height: 38px;
                   padding-left: 10px;
                   padding-right: 10px;
                   border-radius: 0; }
-                  #container #content .register-form table tr td.text table tr td input[type="text"]:hover, #container #content .register-form table tr td.text table tr td input[type="text"]:focus,
-                  #container #content .project-update-submission table tr td.text table tr td input[type="text"]:hover,
-                  #container #content .project-update-submission table tr td.text table tr td input[type="text"]:focus {
+                  #content .register-form table tr td.text table tr td input[type="text"]:hover, #content .register-form table tr td.text table tr td input[type="text"]:focus,
+                  #content .project-update-submission table tr td.text table tr td input[type="text"]:hover,
+                  #content .project-update-submission table tr td.text table tr td input[type="text"]:focus {
                     border: 0 none; }
-                #container #content .register-form table tr td.text table tr td:first-child,
-                #container #content .project-update-submission table tr td.text table tr td:first-child {
+                #content .register-form table tr td.text table tr td:first-child,
+                #content .project-update-submission table tr td.text table tr td:first-child {
                   border-left: 1px solid #abb6cb; }
-                #container #content .register-form table tr td.text table tr td:last-child,
-                #container #content .project-update-submission table tr td.text table tr td:last-child {
+                #content .register-form table tr td.text table tr td:last-child,
+                #content .project-update-submission table tr td.text table tr td:last-child {
                   border-right: 1px solid #abb6cb; }
-              #container #content .register-form table tr td.text table tr:nth-child(2) td,
-              #container #content .project-update-submission table tr td.text table tr:nth-child(2) td {
+              #content .register-form table tr td.text table tr:nth-child(2) td,
+              #content .project-update-submission table tr td.text table tr:nth-child(2) td {
                 border-top: 0 none; }
-          #container #content .register-form table tr td.date,
-          #container #content .project-update-submission table tr td.date {
+          #content .register-form table tr td.date,
+          #content .project-update-submission table tr td.date {
             position: relative;
             							/* div.form-type-select:not(.form-item-field-project-users-und) {
                                             width: 33.33%;
@@ -5686,57 +6049,57 @@ you can add resource intensive styles.
                                                 max-width: 120%;
                                             }
                                         } */ }
-            #container #content .register-form table tr td.date .ui-datepicker-trigger,
-            #container #content .project-update-submission table tr td.date .ui-datepicker-trigger {
+            #content .register-form table tr td.date .ui-datepicker-trigger,
+            #content .project-update-submission table tr td.date .ui-datepicker-trigger {
               position: absolute;
               left: 101.213%;
               top: 6px; }
-            #container #content .register-form table tr td.date div.form-item:last-child,
-            #container #content .project-update-submission table tr td.date div.form-item:last-child {
+            #content .register-form table tr td.date div.form-item:last-child,
+            #content .project-update-submission table tr td.date div.form-item:last-child {
               margin-right: 0;
               padding-right: 0; }
-      #container #content .register-form .submit,
-      #container #content .project-update-submission .submit {
+      #content .register-form .submit,
+      #content .project-update-submission .submit {
         padding-top: 20px;
         text-align: right; }
-        #container #content .register-form .submit input[type="submit"],
-        #container #content .project-update-submission .submit input[type="submit"] {
+        #content .register-form .submit input[type="submit"],
+        #content .project-update-submission .submit input[type="submit"] {
           background: url(../images/submit-btn.png) no-repeat;
           height: 44px;
           border: 0 none;
           overflow: hidden;
           text-indent: -999em;
           width: 130px; }
-          #container #content .register-form .submit input[type="submit"]:hover,
-          #container #content .project-update-submission .submit input[type="submit"]:hover {
+          #content .register-form .submit input[type="submit"]:hover,
+          #content .project-update-submission .submit input[type="submit"]:hover {
             background-position: 0 -44px; }
-      #container #content .register-form .dotted-line,
-      #container #content .project-update-submission .dotted-line {
+      #content .register-form .dotted-line,
+      #content .project-update-submission .dotted-line {
         background: url("../images/dot-line-bg.png") repeat-x scroll 0 0 transparent;
         display: block;
         height: 1px;
         width: 100%; }
-    #container #content #inner-content > h2 {
+    #content #inner-content > h2 {
       color: #0d6c88;
       font-size: 26px;
       font-weight: 600;
       border-bottom: 1px solid #f0f4fa;
       padding-bottom: 10px; }
-    #container #content #inner-content .register-form {
+    #content #inner-content .register-form {
       padding-bottom: 20px; }
-      #container #content #inner-content .register-form form label {
+      #content #inner-content .register-form form label {
         font-size: 14px;
         font-weight: 700;
         color: #202b3d;
         margin: 5px 0 5px;
         display: inline-block; }
-        #container #content #inner-content .register-form form label span {
+        #content #inner-content .register-form form label span {
           color: #ee2a24; }
-      #container #content #inner-content .register-form form .password-confirm,
-      #container #content #inner-content .register-form form .password-strength {
+      #content #inner-content .register-form form .password-confirm,
+      #content #inner-content .register-form form .password-strength {
         margin: 0; }
-      #container #content #inner-content .register-form form input[type="text"],
-      #container #content #inner-content .register-form form input[type="email"] {
+      #content #inner-content .register-form form input[type="text"],
+      #content #inner-content .register-form form input[type="email"] {
         background-color: #fff;
         border: 1px solid #b3bdcf;
         width: 100%;
@@ -5744,9 +6107,9 @@ you can add resource intensive styles.
         font-size: 14px;
         height: 36px;
         margin-bottom: 14px; }
-      #container #content #inner-content .register-form form fieldset {
+      #content #inner-content .register-form form fieldset {
         margin-bottom: 14px; }
-      #container #content #inner-content .register-form form span.select {
+      #content #inner-content .register-form form span.select {
         display: block;
         height: 36px;
         overflow: hidden;
@@ -5756,14 +6119,14 @@ you can add resource intensive styles.
         border-radius: 3px;
         cursor: pointer;
         background: #fff; }
-        #container #content #inner-content .register-form form span.select:after {
+        #content #inner-content .register-form form span.select:after {
           content: "\f0dc";
           font-family: FontAwesome;
           left: 96%;
           position: absolute;
           top: 25%;
           cursor: pointer; }
-        #container #content #inner-content .register-form form span.select select {
+        #content #inner-content .register-form form span.select select {
           background-color: transparent;
           background-image: none;
           font-size: 14px;
@@ -5774,15 +6137,15 @@ you can add resource intensive styles.
           width: 105%;
           position: relative;
           z-index: 1; }
-          #container #content #inner-content .register-form form span.select select option {
+          #content #inner-content .register-form form span.select select option {
             font-style: normal; }
-      #container #content #inner-content .register-form form #edit-actions {
+      #content #inner-content .register-form form #edit-actions {
         margin-bottom: 20px;
         border-top: 1px solid #f0f4fa;
         text-align: right;
         margin-top: 30px;
         padding-top: 30px; }
-        #container #content #inner-content .register-form form #edit-actions .form-submit {
+        #content #inner-content .register-form form #edit-actions .form-submit {
           border: 0;
           background: url(../images/general-btn.png) repeat-x scroll 0 0 transparent;
           text-align: center;
@@ -5799,24 +6162,24 @@ you can add resource intensive styles.
           width: auto;
           margin: 0;
           padding: 2px 15px; }
-          #container #content #inner-content .register-form form #edit-actions .form-submit:hover {
+          #content #inner-content .register-form form #edit-actions .form-submit:hover {
             background-position: 0 -41px; }
-      #container #content #inner-content .register-form form .description {
+      #content #inner-content .register-form form .description {
         font-size: 13px;
         font-weight: 400;
         font-style: italic;
         display: block; }
-    #container #content #inner-content .signin-request {
+    #content #inner-content .signin-request {
       padding-bottom: 20px;
       overflow: hidden; }
-      #container #content #inner-content .signin-request .tab-head {
+      #content #inner-content .signin-request .tab-head {
         border-bottom: 1px solid #f0f4fa;
         height: 32px;
         margin: 30px 0 10px; }
-        #container #content #inner-content .signin-request .tab-head li {
+        #content #inner-content .signin-request .tab-head li {
           float: left;
           margin-right: 5px; }
-          #container #content #inner-content .signin-request .tab-head li a {
+          #content #inner-content .signin-request .tab-head li a {
             text-decoration: none;
             font-size: 18px;
             font-weight: 600;
@@ -5828,18 +6191,18 @@ you can add resource intensive styles.
             padding: 5px 25px;
             outline: 0;
             position: relative; }
-            #container #content #inner-content .signin-request .tab-head li a.active {
+            #content #inner-content .signin-request .tab-head li a.active {
               color: #fff;
               border-top: 1px solid #137992;
               border-left: 1px solid #137992;
               border-right: 1px solid #137992;
               background: #137992; }
-              #container #content #inner-content .signin-request .tab-head li a.active:hover {
+              #content #inner-content .signin-request .tab-head li a.active:hover {
                 border-top: 1px solid #137992;
                 border-left: 1px solid #137992;
                 border-right: 1px solid #137992;
                 background: #137992; }
-              #container #content #inner-content .signin-request .tab-head li a.active:after {
+              #content #inner-content .signin-request .tab-head li a.active:after {
                 content: " ";
                 border-width: 5px;
                 border-color: transparent transparent #d6ddeb transparent;
@@ -5847,7 +6210,7 @@ you can add resource intensive styles.
                 position: absolute;
                 bottom: 0;
                 left: 45%; }
-            #container #content #inner-content .signin-request .tab-head li a:hover {
+            #content #inner-content .signin-request .tab-head li a:hover {
               border-top: 1px solid #b3bdd2;
               border-left: 1px solid #b3bdd2;
               border-right: 1px solid #b3bdd2;
@@ -5859,25 +6222,25 @@ you can add resource intensive styles.
               background: -ms-linear-gradient(top, #d7deea 0%, #dfe5ef 100%);
               background: linear-gradient(to bottom, #d7deea 0%, #dfe5ef 100%);
               filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d7deea', endColorstr='#dfe5ef', GradientType=0); }
-      #container #content #inner-content .signin-request .tab-content .tab {
+      #content #inner-content .signin-request .tab-content .tab {
         display: none; }
-        #container #content #inner-content .signin-request .tab-content .tab.active {
+        #content #inner-content .signin-request .tab-content .tab.active {
           display: block; }
-        #container #content #inner-content .signin-request .tab-content .tab form p label {
+        #content #inner-content .signin-request .tab-content .tab form p label {
           font-size: 14px;
           font-weight: 700;
           color: #202b3d; }
-          #container #content #inner-content .signin-request .tab-content .tab form p label span {
+          #content #inner-content .signin-request .tab-content .tab form p label span {
             color: #ee2a24; }
-        #container #content #inner-content .signin-request .tab-content .tab form p input[type="text"],
-        #container #content #inner-content .signin-request .tab-content .tab form p input[type="email"],
-        #container #content #inner-content .signin-request .tab-content .tab form p input[type="password"] {
+        #content #inner-content .signin-request .tab-content .tab form p input[type="text"],
+        #content #inner-content .signin-request .tab-content .tab form p input[type="email"],
+        #content #inner-content .signin-request .tab-content .tab form p input[type="password"] {
           background-color: #fff;
           border: 1px solid #b3bdcf;
           width: 100%;
           max-width: 100%;
           font-size: 14px; }
-        #container #content #inner-content .signin-request .tab-content .tab form p select {
+        #content #inner-content .signin-request .tab-content .tab form p select {
           background-color: #fff;
           border: 1px solid #b3bdcf;
           width: 100%;
@@ -5885,77 +6248,77 @@ you can add resource intensive styles.
           background-image: none;
           font-style: italic;
           font-size: 14px; }
-          #container #content #inner-content .signin-request .tab-content .tab form p select option {
+          #content #inner-content .signin-request .tab-content .tab form p select option {
             font-style: normal; }
-        #container #content #inner-content .signin-request .tab-content .tab form p.submit {
+        #content #inner-content .signin-request .tab-content .tab form p.submit {
           border-top: none;
           text-align: right;
           margin-top: 30px;
           padding-top: 30px;
           background: url(../images/dot-line-bg.png) repeat-x scroll 0 0; }
-        #container #content #inner-content .signin-request .tab-content .tab form.signin input[type="submit"] {
+        #content #inner-content .signin-request .tab-content .tab form.signin input[type="submit"] {
           background: url("../images/signin-btn.png") no-repeat scroll 0 0 transparent;
           border: 0 none;
           height: 44px;
           overflow: hidden;
           text-indent: -999em;
           width: 130px; }
-        #container #content #inner-content .signin-request .tab-content .tab form.signin input[type="submit"]:hover {
+        #content #inner-content .signin-request .tab-content .tab form.signin input[type="submit"]:hover {
           background-position: 0 -44px; }
-        #container #content #inner-content .signin-request .tab-content .tab form.request input[type="submit"] {
+        #content #inner-content .signin-request .tab-content .tab form.request input[type="submit"] {
           background: url("../images/email-pass-btn.png") no-repeat scroll 0 0 transparent;
           border: 0 none;
           height: 44px;
           overflow: hidden;
           text-indent: -999em;
           width: 217px; }
-        #container #content #inner-content .signin-request .tab-content .tab form.request input[type="submit"]:hover {
+        #content #inner-content .signin-request .tab-content .tab form.request input[type="submit"]:hover {
           background-position: 0 -44px; }
-    #container #content #main .post .article-header {
+    #content #main .post .article-header {
       background: url(../images/event-bg.png) repeat scroll center 0 #ab2142;
       padding: 25px 0; }
-      #container #content #main .post .article-header h1 {
+      #content #main .post .article-header h1 {
         font-weight: 600;
         font-size: 27px;
         color: #fff; }
-    #container #content #main .post .entry-content {
+    #content #main .post .entry-content {
       padding-top: 20px; }
-      #container #content #main .post .entry-content a {
+      #content #main .post .entry-content a {
         text-decoration: none; }
-      #container #content #main .post .entry-content h2, #container #content #main .post .entry-content h3, #container #content #main .post .entry-content h4 {
+      #content #main .post .entry-content h2, #content #main .post .entry-content h3, #content #main .post .entry-content h4 {
         font-weight: 600;
         margin: 0 0 .5em; }
-      #container #content #main .post .entry-content h2 {
+      #content #main .post .entry-content h2 {
         font-size: 21px;
         color: #ab2142; }
-      #container #content #main .post .entry-content h3 {
+      #content #main .post .entry-content h3 {
         font-size: 17px; }
-      #container #content #main .post .entry-content h4 {
+      #content #main .post .entry-content h4 {
         font-size: 15px; }
-      #container #content #main .post .entry-content ul, #container #content #main .post .entry-content ol {
+      #content #main .post .entry-content ul, #content #main .post .entry-content ol {
         margin-left: 35px;
         color: #ab2142; }
-        #container #content #main .post .entry-content ul li, #container #content #main .post .entry-content ol li {
+        #content #main .post .entry-content ul li, #content #main .post .entry-content ol li {
           padding-left: 7px; }
-          #container #content #main .post .entry-content ul li span, #container #content #main .post .entry-content ol li span {
+          #content #main .post .entry-content ul li span, #content #main .post .entry-content ol li span {
             color: #4e5365; }
-      #container #content #main .post .entry-content ul {
+      #content #main .post .entry-content ul {
         list-style: disc; }
-      #container #content #main .post .entry-content ol {
+      #content #main .post .entry-content ol {
         list-style: decimal; }
-      #container #content #main .post .entry-content .contact-info {
+      #content #main .post .entry-content .contact-info {
         display: inline-block;
         width: 52%; }
-        #container #content #main .post .entry-content .contact-info .contact-block p {
+        #content #main .post .entry-content .contact-info .contact-block p {
           margin-bottom: 5px; }
-          #container #content #main .post .entry-content .contact-info .contact-block p strong {
+          #content #main .post .entry-content .contact-info .contact-block p strong {
             display: inline-block;
             width: 50px; }
-      #container #content #main .post .entry-content .contact-map {
+      #content #main .post .entry-content .contact-map {
         width: 41%;
         display: inline-block;
         float: right; }
-    #container #content #main .post .article-footer .line {
+    #content #main .post .article-footer .line {
       border-bottom: 1px solid #dbdde0; }
 
   /*********************
@@ -6284,7 +6647,7 @@ you can add resource intensive styles.
   #container .header .inner-header {
     margin: 0; }
   #container #content .page-title {
-    padding-left: 0; }
+    padding: 0; }
   #container #content #project-baseline-history #inner-content {
     padding: 0; }
     #container #content #project-baseline-history #inner-content .project-draft-submission {
@@ -6295,8 +6658,8 @@ you can add resource intensive styles.
     padding-right: 0;
     padding-left: 0; }
   #container #content .last-updated-block {
-    padding-left: 27px;
-    padding-right: 27px; }
+    padding: 0;
+    width: 970px; }
   #container #inner-content .ict-benefits .ict-faq-question {
     padding: 10px 155px 10px 50px; }
   #container #inner-content #print-links-container .pdf_button {
@@ -6392,8 +6755,15 @@ you can add resource intensive styles.
       border-radius: 4px 0 0; }
     #container #inner-content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th:last-child {
       border-radius: 0 4px 0 0; }
-  #content #ict-home-projects-table-id {
+  #container #ict-home-projects-table-id {
     padding: 0; }
+    #container #ict-home-projects-table-id tr th {
+      padding: 7px 25px 42px 14px;
+      font-size: 14px; }
+      #container #ict-home-projects-table-id tr th a.ict-sort-link:after {
+        top: 15px !important; }
+      #container #ict-home-projects-table-id tr th a.ict-sort-link:before {
+        top: 25px !important; }
 
   .footer #inner-footer .wrap.cf, .footer #inner-footer .wrap.comment-respond {
     width: 970px;
@@ -6407,7 +6777,39 @@ you can add resource intensive styles.
         right: 5px; }
     .footer #inner-footer .wrap.cf .copy.second-copy, .footer #inner-footer .wrap.comment-respond .copy.second-copy {
       width: 25%;
-      padding-right: 5px; } }
+      padding-right: 5px; }
+
+  #content #inner-content .project-draft-submission {
+    padding: 0; }
+
+  #content #inner-content h2.individual-project-page {
+    margin: 20px 0; }
+
+  #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder,
+  #container #content .pane-home-projects #ict-dashboard-overview-number-indicators #overview-graphs #overview-expenditure-switch .sbHolder {
+    max-width: 89%; }
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id,
+  #container #content .pane-home-projects #ict-home-projects-table-id {
+    padding-right: 0;
+    padding-left: 0; }
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td {
+    padding: 18px 14px; }
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col {
+    padding: 18px 14px 18px 40px;
+    position: relative; }
+    #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before,
+    #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table tr td.schedule-status-col:before {
+      left: 15px; }
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-desktop,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-desktop {
+    display: block; }
+  #container #content .pane-overview-number-indicators #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile,
+  #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile {
+    display: none; }
+  #container #content .pane-last-updated .last-updated-block .last-updated-on {
+    padding-left: 0; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
@@ -6432,16 +6834,8 @@ This is for the larger monitors and possibly full screen viewers.
     border-left: 20px solid transparent;
     border-right: 20px solid transparent; }
 
-  #container #content .last-updated-block {
-    padding-left: 0;
-    padding-right: 0; }
-    #container #content .last-updated-block .wrap.cf, #container #content .last-updated-block .wrap.comment-respond {
-      padding: 0;
-      margin: 0 auto;
-      max-width: 970px;
-      width: 970px;
-      float: none;
-      width: 100% !important; } }
+  #container #content .pane-last-updated .last-updated-block {
+    padding-left: 0; } }
 /*********************
 RETINA (2x RESOLUTION DEVICES)
 This applies to the retina iPhone (4s) and iPad (2,3) along with

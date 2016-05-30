@@ -28,16 +28,9 @@ on larger screens.
 }
 #container {
 	#content {
-		.last-updated-block {
-			padding-left: 0;
-			padding-right: 0;
-			.wrap.cf {
-				padding: 0;
-				margin: 0 auto;
-				max-width: 970px;
-				width: 970px;
-				float: none;
-				width: 100%!important;
+		.pane-last-updated {
+			.last-updated-block {
+				padding-left: 0;
 			}
 		}
 	}

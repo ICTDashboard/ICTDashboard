@@ -8,7 +8,7 @@
         <?php $query['order'] = 'eg_name'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
         <div class="viz-tooltips-row">       
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
+          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content viz-f-p-1">
             <?php print t('The Government entity responsible for the project.'); ?>
           </span></a>
         </div>
@@ -18,7 +18,7 @@
         <?php $query['order'] = 'title'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
         <div class="viz-tooltips-row">
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
+          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content viz-f-p-2">
             <?php print t('The official full name of the project.'); ?>
           </span></a>
         </div>
@@ -28,7 +28,7 @@
         <?php $query['order'] = 'status'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
         <div class="viz-tooltips-row">
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
+          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content viz-f-p-3">
             <?php print t('A status of the project compared to its planned schedule.'); ?>
           </span></a>
         </div>
@@ -38,7 +38,7 @@
         <?php $query['order'] = 'level'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
         <div class="viz-tooltips-row">
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
+          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content viz-f-p-4">
             <?php print t('The percentage of work completed to date.'); ?>
           </span></a>
         </div>
@@ -48,17 +48,17 @@
         <?php $query['order'] = 'budget'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
         <div class="viz-tooltips-row">
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
+          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content viz-f-p-5">
             <?php print t('The total funding for the project.'); ?>
           </span></a>
         </div>
       </th>
-      <th class="<?php print $col_classes[5] ?>" data-breakpoints="x-small" data-type="html" data-sort-use="text">
+      <th class="<?php print $col_classes[5] ?>" data-breakpoints="x-small" data-type="html" data-sort-use="text ">
         <?php print t('Start Date'); ?>
         <?php $query['order'] = 'o_comp_date'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
         <div class="viz-tooltips-row">
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
+          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content viz-f-p-6">
             <?php print t('The date when the project commenced.'); ?>
           </span></a> 
         </div>
@@ -68,7 +68,7 @@
         <?php $query['order'] = 'exp_comp_date'; ?>
         <a class="ict-sort-link" href="<?php print url(current_path(), array('query' => $query)); ?>"><span></span></a>
         <div class="viz-tooltips-row">
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
+          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content viz-f-p-7">
             <?php print t('The forecasted date when the project will be completed.'); ?>
           </span></a>
         </div>
@@ -76,14 +76,14 @@
       <th class="<?php print $col_classes[7] ?>" data-breakpoints="x-small" data-type="html" data-sort-use="text">
         <?php print t('Project Dashboard'); ?>
         <div class="viz-tooltips-row">
-          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content">
+          <a href="javascript:void(0);" class="tooltip"><i class="tooltip-icon"></i><span class="tooltip-content viz-f-p-8">
             <?php print t('The overview of the project’s current performance against the baseline.'); ?>
           </span></a>
         </div>
       </th>
     </tr>
     <?php foreach($results as $row) : ?>
-      <tr data-expanded="true">
+      <tr data-expanded="false">
         <td class="<?php print $col_classes[0] ?>">
           <?php $query = $get;
                 $query['filter_by'] = 'eg_name';

@@ -74,69 +74,159 @@ LAYOUT & GRID STYLES
 	overflow: hidden;
 	#content {
 		margin-top: 0;
-		#ict-dashboard-overview-number-indicators {
-			padding-bottom: 20px;
-			#overview-graphs {
-				padding-right: 0;
-				#overview-expenditure-switch {
-					margin-top: 10px;
-					.sbHolder {
-						max-width: 78%;
+		.pane-overview-number-indicators,
+		.pane-home-projects {
+			#ict-dashboard-overview-number-indicators {
+				padding-bottom: 20px;
+				#overview-graphs {
+					padding-right: 0;
+					#overview-expenditure-switch {
+						margin-top: 10px;
+						.sbHolder {
+							max-width: 78%;
+							float: right;
+							margin-right: 0;
+							margin-left: 0;
+						}
+					}
+					#expenditure_legend {
+						margin-bottom: 0;
+						float: left;
+						.bar-legend {
+							margin-bottom: 30px;
+						}
 					}
 				}
-				#expenditure_legend {
-					margin-bottom: 0;
-					.bar-legend {
-						margin-bottom: 30px;
+				#ict-dashboard-numbers,
+				#ict-dashboard-numbers1 {
+					border-top: 1px solid #D8DEEB;
+					border-bottom: 1px solid #D8DEEB;
+					padding-top: 30px;
+					padding-bottom: 30px;
+					margin-bottom: 30px;
+					float: left;
+					width: 100%;
+					.label {
+						margin-right: 5px;
+					}
+					.big-number {
+
 					}
 				}
-			}
-			#ict-dashboard-numbers,
-			#ict-dashboard-numbers1 {
-				border-top: 1px solid #D8DEEB;
-				border-bottom: 1px solid #D8DEEB;
-				padding-top: 30px;
-				padding-bottom: 30px;
-				margin-bottom: 30px;
-				.label {
-					margin-right: 5px;
-				}
-				.big-number {
+				#ict-dashboard-numbers1 {
 
 				}
-			}
-			#ict-dashboard-numbers {
-				border-bottom: 0;
-				padding-bottom: 0;
-				margin-bottom: 0;
-				.big-number {
-					border-bottom: 1px solid #D8DEEB;
-					margin-bottom: 20px;
-					padding-bottom: 20px;
+				#ict-dashboard-numbers {
+					border-bottom: 0;
+					padding-bottom: 0;
+					margin-bottom: 0;
+					.big-number {
+						border-bottom: 1px solid #D8DEEB;
+						margin-bottom: 20px;
+						padding-bottom: 20px;
+					}
 				}
-			}
-		}
-		#ict-home-projects-table-id {
-			padding-right: 20px;
-			padding-left: 20px;
-			.sbHolder {
-				max-width: 78%;
-				width: 78%;
-				float: right;
-			}
-			.table-config-bar {
-				.item-list {
-					margin-top: 20px;
-					.pager {
-						.pager-first,
-						.pager-previous,
-						.pager-next,
-						.pager-last {
-							display: none;
+				.graph-schedule-status {
+					float: left;
+					#project-schedule-status-graph {
+						margin-top: 10px;
+					}
+					#statuses_legend {
+						.bar-legend {
+							padding-left: 0;
+							margin-top: 0;
+							li {
+								margin-right: 30px;
+							}
 						}
 					}
 				}
 			}
+			#ict-home-projects-table-id {
+				padding-right: 20px;
+				padding-left: 20px;
+				.pager-tags-top {
+					.item-list {
+						display: none;
+					}
+				}
+				.sort-direction-desc {
+					.col-num-entity {
+						width: auto;
+					}
+				}
+				.sbHolder {
+					max-width: 78%;
+					width: 78%;
+					float: right;
+				}
+				.table-config-bar {
+					.item-list {
+						margin-top: 20px;
+						.pager {
+							.pager-first,
+							.pager-previous,
+							.pager-next,
+							.pager-last {
+								display: none;
+							}
+						}
+					}
+				}
+				.ict-home-projects-table-table {
+					border-collapse: separate;
+					.col-num-budget,
+					.col-num-benefits {
+						display: none;
+					}
+					.ict-sort-link-desktop {
+						display: none;
+					}
+					.ict-sort-link-mobile {
+						&:before {
+							top: 6px;
+						}
+						&:after {
+							top: -3px;
+						}
+					}
+					tr {
+						td {
+							padding-left: 2px;
+							padding-right: 5px;
+						}
+						td.schedule-status-col {
+							padding-left: 30px;
+							&:before {
+								left: 5px;
+							}
+						}
+					}
+					th {
+						padding-bottom: 15px;
+					}
+				}
+				table.viz-filtered-projects {
+					tr {
+						td {
+							padding-left: 10px;
+						}
+					}
+				}
+				th {
+					padding-bottom: 15px;
+				}
+			}
+			table.viz-filtered-projects {
+				tr {
+					td {
+						padding-left: 10px;
+					}
+				}
+			}
+		}
+		.pane-last-updated {
+			padding: 0;
 		}
 	}
 }
@@ -846,7 +936,14 @@ POSTS & CONTENT STYLES
 	}
 }
 #content {
-	#ict-home-projects-table-id {
+	#ict-filtered-projects {
+		.viz-filtered-projects {
+			tr[data-expanded="true"] {
+				td {
+					border-bottom: none;
+				}
+			}
+		}
 		padding: 0 20px;
 		.footable-header {
 			.viz-tooltips-row {
@@ -913,9 +1010,37 @@ POSTS & CONTENT STYLES
 				padding-right: 10px;
 			}
 			.footable-details {
+				.viz-f-p-3 {
+					right: -35px;
+		    		width: 280px;
+				}
+				.viz-f-p-4 {
+					right: -60px;
+		    		width: 280px;
+				}
+				.viz-f-p-5 {
+					right: -57px;
+		    		width: 280px;
+				}
+				.viz-f-p-6 {
+					right: -129px;
+		    		width: 280px;
+				}
+				.viz-f-p-7 {
+					right: -15px;
+		    		width: 280px;
+				}
+				.viz-f-p-8 {
+					right: -71px;
+		    		width: 280px;
+				}
 				.viz-tooltips-row {
 					margin-left: 10px;
 					margin-top: 3px;
+					span:after {
+						border-left: none;
+						border-right: none;
+					}
 				}
 				tbody {
 					tr:first-child {
@@ -1727,14 +1852,17 @@ DETAILED OVERVIEW STYLES
 				#benefits_legend {
 					width: 100%;
 					margin: 0;
+					color: #4e5365;
 					.bar-legend {
 						padding-left: 20px;
 						margin-top: 8px;
+						color: #4e5365;
 					}
 				}
 			}
 			.viz-number-of-benefits {
 				padding-left: 20px;
+				font-size: 13px;
 			}
 		}
 	}
