@@ -115,10 +115,49 @@ LAYOUT & GRID STYLES
 					padding-bottom: 20px;
 				}
 			}
+			.graph-schedule-status {
+				#project-schedule-status-graph {
+					margin-top: 10px;
+				}
+				#statuses_legend {
+					.bar-legend {
+						padding-left: 0;
+						margin-top: 0;
+						li {
+							margin-right: 30px;
+						}
+					}
+				}
+			}
 		}
 		#ict-home-projects-table-id {
 			padding-right: 20px;
 			padding-left: 20px;
+			.pager-tags-top {
+				.item-list {
+					display: none;
+				}
+			}
+			.sort-direction-desc {
+				.col-num-entity {
+					width: auto;
+				}
+			}
+			tr {
+				td {
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+				td.schedule-status-col {
+					padding-left: 30px;
+					&:before {
+						left: 5px;
+					}
+				}
+				td {
+					padding-left: 2px;
+				}
+			}
 			.sbHolder {
 				max-width: 78%;
 				width: 78%;
@@ -137,6 +176,27 @@ LAYOUT & GRID STYLES
 					}
 				}
 			}
+			table {
+				border-collapse: separate;
+				.col-num-budget,
+				.col-num-benefits {
+					display: none;
+				}
+				.ict-sort-link-desktop {
+					display: none;
+				}
+				.ict-sort-link-mobile {
+					&:before {
+						top: 6px;
+					}
+					&:after {
+						top: -3px;
+					}
+				}
+			}
+		}
+		.pane-last-updated {
+			padding: 0;
 		}
 	}
 }

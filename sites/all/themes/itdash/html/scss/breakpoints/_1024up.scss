@@ -249,9 +249,44 @@ be seen on the Desktop.
 	}
 }
 
+
 #content #inner-content .project-draft-submission {
 	padding: 0;
 }
 #content #inner-content h2.individual-project-page {
 	margin: 20px 0;
 }
+#container {
+	#content {
+		#ict-home-projects-table-id {
+			padding-right: 0;
+			padding-left: 0;
+		}
+		#ict-home-projects-table-id {
+			table {
+				tr {
+					td.schedule-status-col {
+						padding-left: 40px;
+						&:before {
+							left: 15px;
+						}
+					}
+				}
+				.ict-sort-link-desktop {
+					display: block;
+				}
+				.ict-sort-link-mobile {
+					display: none;
+				}
+			}
+		}
+		.pane-last-updated {
+			.last-updated-block {
+				.last-updated-on {
+					padding-left: 0;
+				}
+			}
+		}
+	}
+}
+
