@@ -4720,7 +4720,8 @@ DETAILED OVERVIEW STYLES
       color: #4e5365; }
       #container #content #ict-dashboard-detailed-overview .benefits_chart_divs #benefits_legend .bar-legend {
         padding-left: 20px;
-        margin-top: 8px; }
+        margin-top: 8px;
+        color: #4e5365; }
   #container #content #ict-dashboard-detailed-overview .viz-number-of-benefits {
     padding-left: 20px;
     font-size: 13px; }
@@ -6833,9 +6834,8 @@ This is for the larger monitors and possibly full screen viewers.
     border-left: 20px solid transparent;
     border-right: 20px solid transparent; }
 
-  #container #content .last-updated-block {
-    padding-left: 0;
-    padding-right: 0; } }
+  #container #content .pane-last-updated .last-updated-block {
+    padding-left: 0; } }
 /*********************
 RETINA (2x RESOLUTION DEVICES)
 This applies to the retina iPhone (4s) and iPad (2,3) along with

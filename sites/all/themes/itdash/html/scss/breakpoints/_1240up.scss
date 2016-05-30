@@ -28,9 +28,10 @@ on larger screens.
 }
 #container {
 	#content {
-		.last-updated-block {
-			padding-left: 0;
-			padding-right: 0;
+		.pane-last-updated {
+			.last-updated-block {
+				padding-left: 0;
+			}
 		}
 	}
 }
