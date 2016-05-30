@@ -762,6 +762,13 @@ POSTS & CONTENT STYLES
 }
 #content {
 	#ict-home-projects-table-id {
+		.viz-filtered-projects {
+			tr[data-expanded="true"] {
+				td {
+					border-bottom: none;
+				}
+			}
+		}
 		padding: 0 20px;
 		.footable-header {
 			.viz-tooltips-row {
@@ -828,9 +835,37 @@ POSTS & CONTENT STYLES
 				padding-right: 10px;
 			}
 			.footable-details {
+				.viz-f-p-3 {
+					right: -35px;
+		    		width: 280px;
+				}
+				.viz-f-p-4 {
+					right: -60px;
+		    		width: 280px;
+				}
+				.viz-f-p-5 {
+					right: -57px;
+		    		width: 280px;
+				}
+				.viz-f-p-6 {
+					right: -129px;
+		    		width: 280px;
+				}
+				.viz-f-p-7 {
+					right: -15px;
+		    		width: 280px;
+				}
+				.viz-f-p-8 {
+					right: -71px;
+		    		width: 280px;
+				}
 				.viz-tooltips-row {
 					margin-left: 10px;
 					margin-top: 3px;
+					span:after {
+						border-left: none;
+						border-right: none;
+					}
 				}
 				tbody {
 					tr:first-child {
