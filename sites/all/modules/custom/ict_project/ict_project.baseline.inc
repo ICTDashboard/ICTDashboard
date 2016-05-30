@@ -961,3 +961,54 @@ function ict_project_get_all_unpublished_projects() {
   
   return $unpublished;
 }
+
+
+function ict_project_unpublish_project_form($form, &$form_state) {
+  $form['project_id'] = array(
+    '#type' => 'hidden',
+    '#value' => ''
+  );
+
+  $form['comment'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Comment'),
+    '#title_dispay' => 'invisible'
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#title' => t('Unpublish'),
+    '#validate' => array('ict_project_unpublish_validate'),
+    '#submit' => array('ict_project_unpublish_submit')
+  );
+
+  $form['#theme'] = 'ict_project_unpublish_form';
+
+  return $form;
+}
+
+function ict_project_unpublish_validate($form, &$form_state) {
+  global $user;
+
+  $values = $form_state['values'];
+
+  if (empty($values['project_id'])) {
+    form_set_error('project_id', t('Error. Please try again later.'));
+  }
+
+  $nid = $values['project_id'];
+  if (!ict_project_access_project('unpublish', $user, $nid) || ict_project_get_unpublished_date($nid)) {
+    form_set_error('project_id', t('Error. Toy cannot unpublish selected project.'));
+  }
+}
+
+function ict_project_unpublish_submit($form, &$form_state) {
+  global $user;
+
+  $values = $form_state['values'];
+  $nid = $values['project_id'];
+
+  ict_project_set_workflow_state('unpublished', $nid);
+
+  drupal_set_message(t('Project has been unpublished.'));
+}
