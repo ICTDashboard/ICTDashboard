@@ -14,7 +14,9 @@
 
     <div class="row">
       <div class="label">
-        <?php print t('Original Total Project Budget'); ?>
+        <?php print $is_rebaseline ?
+          t('Total Project Budget') :
+          t('Original Total Project Budget'); ?>
       </div>
       <div class="text">
         <?php print '$' . $original_total_budget_number . 'm'; ?>
@@ -136,7 +138,9 @@
     <?php $field_start_date_info = field_info_instance('node', 'field_start_date', 'project');?>
     <div class="row">
       <div class="label">
-        <?php print $field_start_date_info['label']; ?>
+        <?php print $is_rebaseline ?
+          str_replace('Original ', '', $field_start_date_info['label']) :
+          $field_start_date_info['label']; ?>
         <?php if (!empty($field_start_date_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
@@ -153,7 +157,9 @@
     <?php $field_original_completion_date_info = field_info_instance('node', 'field_original_completion_date', 'project');?>
     <div class="row">
       <div class="label">
-        <?php print $field_original_completion_date_info['label']; ?>
+        <?php print $is_rebaseline ?
+          str_replace('Original ', '', $field_original_completion_date_info['label']) :
+          $field_original_completion_date_info['label']; ?>
         <?php if (!empty($field_original_completion_date_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
@@ -205,7 +211,9 @@
     
     <div class="row">
       <div class="label">
-        <?php print $field_predicted_project_benefit_info['label']; ?>
+        <?php print $is_rebaseline ?
+          str_replace('Original ', '', $field_predicted_project_benefit_info['label']) :
+          $field_predicted_project_benefit_info['label']; ?>
         <?php if (!empty($field_predicted_project_benefit_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
