@@ -83,7 +83,7 @@
       </th>
     </tr>
     <?php foreach($results as $row) : ?>
-      <tr data-expanded="true">
+      <tr data-expanded="false">
         <td class="<?php print $col_classes[0] ?>">
           <?php $query = $get;
                 $query['filter_by'] = 'eg_name';
