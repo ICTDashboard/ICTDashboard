@@ -92,6 +92,13 @@ POSTS & CONTENT STYLES
 		}
 	}
 	#ict-home-projects-table-id {
+		.footable-header {
+			.viz-f-p-2:after {
+				left: 11%;
+				border-left: 20px solid transparent;
+    			border-right: 20px solid transparent;
+			}
+		}
 		.footable-detail-row {
 			.footable-details {
 				.viz-f-p-3, .viz-f-p-4 ,.viz-f-p-5 ,.viz-f-p-6 ,.viz-f-p-7 ,.viz-f-p-8 {
