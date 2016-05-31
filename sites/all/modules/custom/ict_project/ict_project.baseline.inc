@@ -961,3 +961,75 @@ function ict_project_get_all_unpublished_projects() {
   
   return $unpublished;
 }
+
+
+function ict_project_unpublish_project_form($form, &$form_state) {
+  $form['project_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => ''
+  );
+
+  $form['comment'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Comment'),
+    '#title_display' => 'invisible'
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Unpublish'),
+    '#attributes' => array('class' => array('submit-button')),
+    '#validate' => array('ict_project_unpublish_validate'),
+    '#submit' => array('ict_project_unpublish_submit')
+  );
+
+  $form['#theme'] = 'ict_project_unpublish_form';
+
+  return $form;
+}
+
+function ict_project_unpublish_validate($form, &$form_state) {
+  global $user;
+
+  $values = $form_state['values'];
+
+  if (empty($values['project_id'])) {
+    form_set_error('project_id', t('Error. Please try again later.'));
+  }
+
+  $nid = $values['project_id'];
+  if (!ict_project_access_project('unpublish', $user, $nid) || ict_project_get_unpublished_date($nid)) {
+    form_set_error('project_id', t('Error. Toy cannot unpublish selected project.'));
+  }
+}
+
+function ict_project_unpublish_submit($form, &$form_state) {
+  $values = $form_state['values'];
+  $nid = $values['project_id'];
+
+  $project_node = node_load($nid);
+  $project_node->revision = TRUE;
+  node_save($project_node);
+
+  ict_project_set_workflow_state('unpublished', $project_node->nid);
+
+  $unpublish_date = ict_project_get_last_transaction_by_state($project_node->nid, 'unpublished')->created;
+
+  $fin_name = _ict_project_get_user_name();
+  __ict_mail_process_mails(
+    'ict_mail',
+    'project_unpublished',
+    $project_node,
+    array(
+      'data_approvers',
+      'data_editors',
+      'departmental_admins'),
+    array(
+      'fin_name' => $fin_name,
+      'unpublish_date' => format_date($unpublish_date, 'medium', 'j M Y h:i A'),
+      'comment' => !empty($values['comment']) ? $values['comment'] : '',
+    )
+  );
+
+  drupal_set_message(t('Project has been unpublished.'));
+}
