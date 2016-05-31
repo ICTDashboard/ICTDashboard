@@ -181,6 +181,24 @@ function ict_mail_mail($key, &$message, $params) {
       $message['body'][] = t('No further action is required.');
       $message['body'][] = t('Please contact @DEP_ADMIN if you have any queries.', array('@DEP_ADMIN' => $dep_name));
       break;
+
+    case in_array($key, array('project_unpublished_data_approvers', 'project_unpublished_data_editors', 'project_unpublished_departmental_admins')):
+      $message['subject'] = t('ICT Projects Dashboard - @TITLE has been unpublished', array('@TITLE' => $params['title']));
+      $msg = t('Project @TITLE is no longer published on the ICT Projects Dashboard as of @DATE. @TITLE is unpublished', array('@DATE' => $params['unpublish_date'], '@TITLE' => $params['title']));
+      $msg .= !empty($params['comment']) ? t(' for the following reasons ') : '.';
+      if (!empty($params['comment'])) {
+        $msg .= '<em>' . nl2br($params['comment']) . '</em>';
+      }
+      $message['body'][] = $msg;
+      $message['body'][] = t('The unpublished project:');
+      $message['body'][] = t('<strong>This project will remain publicly available on the dashboard until the first re-baselined project update is approved</strong>.');
+      $message['body'][] = t('No further action is required.');
+      $message['body'][] = t('1) Will be removed from your project list,');
+      $message['body'][] = t('2) No further changes can be made to the project,');
+      $message['body'][] = t('3) Will not be included in the Dashboard calculations, and');
+      $message['body'][] = t('4) Will not be represented in the Dashboard visualisations.');
+      $message['body'][] = t('Please contact the Finance Administrator, @FIN_ADMIN, if you have any queries.', array('@FIN_ADMIN' => $params['fin_name']));
+      break;
   }
 }
 

@@ -207,10 +207,10 @@
                 <?php endif; ?>
 
                 <?php if (ict_project_access_project('unpublish', $user, $project->nid)) : ?>
-                  <a href="#ict-rebaseline-<?php print $project->nid; ?>" class="fancybox-inline">
+                  <a href="#ict-rebaseline" data-nid="<?php print $project->nid; ?>" class="unpublish-button fancybox-inline">
                     <span><?php print t('Unpublish Project'); ?></span>
                   </a>
-                  <div style="display: none;" id="ict-rebaseline-<?php print $project->nid; ?>" class="ict-rebaseline-warn">
+                  <div style="display: none;" id="ict-rebaseline" class="ict-rebaseline-warn">
                     <h2 class="fancybox-title"><?php print t('Warning'); ?></h2>
                     <div class="ict-fancy-content entity-bean">
                       <div class="field">
@@ -242,9 +242,18 @@
         </table>
         <div style="display: none;" id="ict-project-delete">
           <h2 class="fancybox-title"><?php print t('Unpublish Project'); ?></h2>
-            <?php $form = drupal_get_form('ict_project_unpublish_form'); ?>
+            <?php $form = drupal_get_form('ict_project_unpublish_project_form'); ?>
             <?php print drupal_render($form); ?>
         </div>
+        <script>
+          (function($) {
+            $('.unpublish-button').click(function() {
+              var current_nid = $(this).attr('data-nid');
+
+              $('input[name="project_id"]').val(current_nid);
+            });
+          })(jQuery)
+        </script>
       </div>
     <?php else : ?>
       <div class="views-no-results">
