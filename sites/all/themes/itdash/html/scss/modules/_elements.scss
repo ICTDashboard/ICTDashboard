@@ -1645,186 +1645,196 @@ div.tooltip-edit {
     color: #0d6c88;
   }
 }
-.page-block {
-  #content {
-    width: 970px;
-    margin: 0 auto;
+.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+  table {
+    font-family: "Open Sans", sans-serif;
+    color: #4e5365;
+    border: 1px solid #ddd;
+    tr {
+      th {
+        background-color: #137992;
+        border: 1px solid #0a5f74;
+        color: #fff;
+        p, h2, h3, h4, h5 {
+          color: #fff;
+        }
+        padding: 0 5px;
+      }
+      td {
+        padding: 0 5px;
+      }
+    }
   }
-}
-.pane-block, .page-block #content, .node-type-page #content, .entity-bean .content {
-    blockquote {
-      color: #202b3d;
+  font-family: "Open Sans", sans-serif;
+  blockquote {
+    border-left: 2px solid #0d6c88;
+    padding-left: 10px;
+    position: relative;
+    font-style: italic;
+    margin-left: 80px;
+    &:before {
+      content: "Note: ";
+      position: absolute;
+      left: -45px;
+      top: -6px;
+      color: #0d6c88;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+  h2 {
+    font-family: "Open Sans", sans-serif;
+    color:  #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+  }
+  h3 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+  }
+  h4 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+  }   
+  h5 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+    font-style: italic;
+    text-transform: inherit;
+    letter-spacing: 0;
+  }       
+  p {
+    color: #4e5365;
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 22px;
+    font-family: "Open Sans", sans-serif;
+  }
+  a {
+    color: #027e9c;
+    text-decoration: underline;
+    &:focus,
+    &:hover,
+    &:visited {
+      color: #027e9c!important;
+      text-decoration: none;
+    }
+  }
+  a[href^="http"] {
+    color: #027e9c;
+    text-decoration: underline;
+    &:focus,
+    &:hover,
+    &:visited {
+      color: #027e9c!important;
+      text-decoration: none;
+    }
+    &:after {
+      content: " ";
+      background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+      height: 10px;
+      width: 10px;
+      display: inline-block;
+      margin-left: 5px;
+    }
+  }
+  ol {
+    padding-left: 20px;
+    margin: 0;
+    counter-reset: item;
+    color: #4e5365;
+    li {
+      text-indent:-10px;
+      color: #4e5365;
       p {
-        color: #202b3d;
+        margin: 0 0 0 11px;;
       }
-      border-left: 2px solid #0d6c88;
-      padding-left: 10px;
-      position: relative;
-      font-style: italic;
-      margin-left: 80px;
-      &:before {
-        content: "Note: ";
-        position: absolute;
-        left: -45px;
-        top: -6px;
-        color: #0d6c88;
-        font-style: italic;
-        font-weight: 600;
-        font-size: 14px;
-      }
-    }
-    h2 {
-      font-family: "Open Sans", sans-serif;
-      color:  #0d6c88;
-      font-size: 26px;
-      font-weight: 600;
-      line-height: 22px;
-      text-align: left;
-    }
-    h3 {
-      font-family: "Open Sans", sans-serif;
-      color: #202b3d;
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 22px;
-      text-align: left;
-    }
-    h4 {
-      font-family: "Open Sans", sans-serif;
-      color: #202b3d;
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 22px;
-      text-align: left;
-    }   
-    h5 {
-      font-family: "Open Sans", sans-serif;
-      color: #202b3d;
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 22px;
-      text-align: left;
-      font-style: italic;
-      text-transform: inherit;
-      letter-spacing: 0;
-    }       
-    p {
-      color: #4e5365;
-      margin: 5px 0;
-      font-size: 14px;
-      line-height: 22px;
-    }
-    a {
-      color: #027e9c;
-      text-decoration: underline;
-      &:focus,
-      &:hover,
-      &:visited {
-        color: #027e9c!important;
-        text-decoration: none;
-      }
-    }
-    a[href^="http"] {
-      color: #027e9c;
-      text-decoration: underline;
-      &:focus,
-      &:hover,
-      &:visited {
-        color: #027e9c!important;
-        text-decoration: none;
-      }
-      &:after {
-        content: " ";
-        background: url(/sites/all/themes/itdash/html/images/ico-01.png);
-        height: 10px;
-        width: 10px;
+      p:first-of-type {
         display: inline-block;
-        margin-left: 5px;
+        margin: 0 0 0 10px;
+      }            
+      font-family: "Open sans", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      display: block;
+      &:before {
+        content: counter(item) ". ";
+        counter-increment: item;
+        color: #0d6c88;
       }
-    }
-    ol {
-      padding-left: 20px;
-      margin: 0;
-      counter-reset: item;
-      color: #4e5365;
-      li {
-        text-indent:-10px;
-        color: #4e5365;
-        p {
-          margin: 0 0 0 11px;;
-        }
-        p:first-of-type {
-          display: inline-block;
-          margin: 0 0 0 10px;
-        }            
-        font-family: "Open sans", sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        display: block;
-        &:before {
-          content: counter(item) ". ";
-          counter-increment: item;
-          color: #0d6c88;
-        }
-        ol {
-          counter-reset: alpha;
-          margin: 0 0 0.75em 10px;
-          li {
-            &:before {
-              content: counter(alpha, lower-alpha) ". ";
-              counter-increment: alpha;
-            }
+      ol {
+        counter-reset: alpha;
+        margin: 0 0 0.75em 10px;
+        li {
+          &:before {
+            content: counter(alpha, lower-alpha) ". ";
+            counter-increment: alpha;
           }
         }
       }
     }
-    ul {
-      padding: 0;
-      margin: 0;
-      padding-left: 22px;
-      li {
-        text-indent: -10px;
-        padding-left: 14px;
-        p {
-          margin: 0 0 0 10px;
-        }
-        p:first-of-type {
-          display: inline-block;
-        }
-        font-family: "Open sans", sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        color: #4e5365;
-        list-style: none;
-        line-height: 1.6em;
-        &:before {
-          font-size: 20px;
-          content: "• ";
-          display: inline-block;
-          width: 10px;
-          height: 5px;
-          vertical-align: middle;
-          line-height: 1;
-        }
-        ul {
-          li {
-            &:before {
-              content: "• ";
-              line-height: 1;
-              color: #55beaf;
-            }
-            ul {
-              li {
-                &:before {
-                  content: "• ";
-                  line-height: 1;
-                  color: #aabcb9; 
-                }
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    padding-left: 22px;
+    li {
+      text-indent: -10px;
+      padding-left: 14px;
+      p {
+        margin: 0 0 0 10px;
+      }
+      p:first-of-type {
+        display: inline-block;
+      }
+      font-family: "Open sans", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #4e5365;
+      list-style: none;
+      line-height: 1.6em;
+      &:before {
+        font-size: 20px;
+        content: "• ";
+        display: inline-block;
+        width: 10px;
+        height: 5px;
+        vertical-align: middle;
+        line-height: 1;
+      }
+      ul {
+        li {
+          &:before {
+            content: "• ";
+            line-height: 1;
+            color: #55beaf;
+          }
+          ul {
+            li {
+              &:before {
+                content: "• ";
+                line-height: 1;
+                color: #aabcb9; 
               }
             }
           }
         }
       }
     }
-
+  }
 }
