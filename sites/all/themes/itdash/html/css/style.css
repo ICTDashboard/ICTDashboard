@@ -3852,6 +3852,12 @@ POSTS & CONTENT STYLES
   padding: 0 20px; }
   #content #ict-home-projects-table-id .viz-filtered-projects tr[data-expanded="true"] td {
     border-bottom: none; }
+  #content #ict-home-projects-table-id .footable-header .viz-f-p-2 {
+    right: -249px;
+    width: 280px; }
+    #content #ict-home-projects-table-id .footable-header .viz-f-p-2:after {
+      border-left: none;
+      border-right: none; }
   #content #ict-home-projects-table-id .footable-header .viz-tooltips-row {
     position: absolute;
     bottom: 15px;
@@ -4397,6 +4403,10 @@ tweeners.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
+  #content #ict-home-projects-table-id .footable-header .viz-f-p-2:after {
+    left: 11%;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent; }
   #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-3, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-4, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-5, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-6, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-7, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-8 {
     right: -150px;
     width: 300px; }
@@ -4664,6 +4674,14 @@ you can add resource intensive styles.
     background-color: #fff;
     padding-bottom: 60px;
     /* Project list */ }
+    #content #ict-home-projects-table-id .footable-header .viz-f-p-1 {
+      right: -268px; }
+      #content #ict-home-projects-table-id .footable-header .viz-f-p-1:after {
+        left: 10%; }
+    #content #ict-home-projects-table-id .footable-header .viz-f-p-8 {
+      right: -85px; }
+      #content #ict-home-projects-table-id .footable-header .viz-f-p-8:after {
+        left: 72%; }
     #content #ict-home-projects-table-id tr th {
       padding: 7px 0px 42px 4px;
       font-size: 14px; }
@@ -6251,6 +6269,14 @@ This is for the larger monitors and possibly full screen viewers.
   on larger screens.
   
   ******************************************************************/
+  #content #ict-filtered-projects .footable-header .viz-f-p-1 {
+    right: -150px; }
+    #content #ict-filtered-projects .footable-header .viz-f-p-1:after {
+      left: 50%; }
+  #content #ict-filtered-projects .footable-header .viz-f-p-8 {
+    right: -150px; }
+    #content #ict-filtered-projects .footable-header .viz-f-p-8:after {
+      left: 50%; }
   #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
     right: -150px;
     bottom: 30px;
