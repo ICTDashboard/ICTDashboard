@@ -9,6 +9,22 @@ on larger screens.
 
 ******************************************************************/
 #content {
+	#ict-filtered-projects {
+		.footable-header {
+			.viz-f-p-1 {
+				right: -150px;
+				&:after {
+					left: 50%;
+				}
+			}
+			.viz-f-p-8 {
+				right: -150px;
+				&:after {
+					left: 50%;
+				}
+			}
+		}
+	}
 	.last-updated-block {
 		.view-baseline-history {
 			.view-baseline-tooltip {
