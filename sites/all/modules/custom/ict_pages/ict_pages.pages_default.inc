@@ -74,6 +74,15 @@ dashboard-projects',
           'context' => 'argument_string_1',
           'not' => FALSE,
         ),
+        1 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '0',
+            'paths' => 'project/*/update',
+          ),
+          'context' => 'argument_string_1',
+          'not' => FALSE,
+        ),
       ),
     );
     $pane->configuration = array();

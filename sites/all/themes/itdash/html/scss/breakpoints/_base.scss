@@ -574,6 +574,18 @@ POSTS & CONTENT STYLES
 				box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
 				padding: 8px 40px;
 			}
+			.view-baseline-tooltip {
+				span {
+					right: 0;
+					bottom: 28px;
+					font-size: 12px;
+					width: 280px;
+				}
+				span::after {
+					border-left: none;
+					border-right: none;
+				}
+			}
 		}
 	}	
 	#inner-content {
@@ -582,9 +594,56 @@ POSTS & CONTENT STYLES
 			padding-bottom: 15px;
 		}
 		.project-draft-submission {
+			.row {
+				.text {
+					color: #4e5365!important;
+				}
+			}
 			padding: 0 20px;
+			.individual-page-tooltip-height {
+				bottom: 120px;
+			}
+			#project-benefits {
+				a {
+					position: relative;
+					z-index: 0;
+					span.tooltip-content {
+						right: -56px;
+						width: 280px;
+					}
+					span.tooltip-content::after {
+						border-right: 0;
+						border-left: 0;
+					}
+				}
+			}
+			.user-information {
+				a {
+					position: relative;
+					z-index: 0;
+					span.tooltip-content {
+						right: 0;
+						width: 240px;
+					}
+					span.tooltip-content::after {
+						border-right: 0;
+						border-left: 0;
+					}
+				}
+			}
 			.label {
 				padding-right: 0;
+				a {
+					position: initial;
+					span.tooltip-content {
+						right: 0;
+						width: 280px;
+					}
+					span.tooltip-content::after {
+						border-right: 0;
+						border-left: 0;
+					}
+				}
 			}
 			a {
 				text-decoration: none;
@@ -638,12 +697,53 @@ POSTS & CONTENT STYLES
 			}
 			.row {
 				.text {
+					p {
+						color: #4e5365;
+					}
 					.project-individual-page-graph{
 						margin-left: 0;
 						.bar-legend li {
 							margin: 3px 0;
 							margin-right: 0;
 						}
+					}
+				}
+			}
+			.project-program-link {
+				text-decoration: underline;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+			.email-value {
+				text-decoration: underline;
+				&:hover {
+				text-decoration: none;
+				}
+			}
+			.entity_comments {
+				a {
+					text-decoration: underline;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+			#inner-content {
+				.project-draft-submission {
+					label {
+						a {
+							position: initial;
+							span.tooltip-content {
+								right: 0;
+								width: 280px;
+								bottom: 120px;
+							}
+							span.tooltip-content::after {
+								border-right: 0;
+								border-left: 0;
+							}
+						}						
 					}
 				}
 			}
@@ -660,6 +760,7 @@ POSTS & CONTENT STYLES
 		}
 		.ict-benefits {
 			.ict-faq-question {
+				padding: 15px 15px 15px 60px;
 				.benfit-status {
 					position: initial;
 				}

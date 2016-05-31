@@ -13,7 +13,9 @@
 					<?php print t('Active from'); ?>
 				</div>
 				<div class="text">
-					<?php print $current_baseline->first_update ? date('d M Y', $current_baseline->first_update): t('Not active yet'); ?>
+					<?php print $current_baseline->first_update ?
+						date('d M Y', $current_baseline->first_update) . ' - ' . t('Still active') :
+						t('Not active yet'); ?>
 				</div>
 			</div>
 			<div class="row">
