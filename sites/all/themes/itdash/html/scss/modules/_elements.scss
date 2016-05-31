@@ -1031,6 +1031,71 @@ body,
     margin-right: 15px;
   }
 }
+.tooltip-custom {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-bottom: -3px;
+  margin-left: 5px;
+  margin-right: 10px;
+  z-index: 1;
+  @include sprite-icon('tooltip-icon-normal');
+  display: inline-block;
+  &:hover {
+    @include sprite-icon('tooltip-icon-hover');
+    display:inline-block;
+  }
+  span.custom-tooltip-content {
+    position: absolute;
+    display: none;
+    color: #fff;
+    font-size: 13px;
+    line-height: 22px;
+    background-color: #1e2635;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-style: normal;
+    bottom: 30px;
+    right: 0;
+    width: 300px;
+    &:after {
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      display: block;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #1e2635;
+      bottom: -10px;
+    }
+  }
+  span.custom-tooltip-corner-right {
+    &:after {
+      margin-left: -20px;
+      left: 100%;
+      border-right: 0;
+    }
+  }
+  span.custom-tooltip-corner-left {
+    &:after {
+      left: 0;
+      border-left: 0;
+      margin-left: 0;
+    }
+  }
+  span.custom-tooltip-corner-no {
+    &:after {
+      border-left: 0;
+      border-right: 0;
+    }
+  }
+  &:hover {
+    span.custom-tooltip-content {
+      display: block;
+    }
+  }
+}
 .tooltip-bottom,
 .tooltip-edit,
 .status-icon,
