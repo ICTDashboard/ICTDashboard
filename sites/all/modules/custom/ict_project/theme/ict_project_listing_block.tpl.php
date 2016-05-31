@@ -207,10 +207,10 @@
                 <?php endif; ?>
 
                 <?php if (ict_project_access_project('unpublish', $user, $project->nid)) : ?>
-                  <a href="#ict-rebaseline" data-nid="<?php print $project->nid; ?>" class="unpublish-button fancybox-inline">
+                  <a href="#ict-project-delete-warn" data-nid="<?php print $project->nid; ?>" data-title="<?php print $project->title; ?>" class="unpublish-button fancybox-inline">
                     <span><?php print t('Unpublish Project'); ?></span>
                   </a>
-                  <div style="display: none;" id="ict-rebaseline" class="ict-rebaseline-warn">
+                  <div style="display: none;" id="ict-project-delete-warn" class="ict-rebaseline-warn">
                     <h2 class="fancybox-title"><?php print t('Warning'); ?></h2>
                     <div class="ict-fancy-content entity-bean">
                       <div class="field">
@@ -248,8 +248,10 @@
         <script>
           (function($) {
             $('.unpublish-button').click(function() {
-              var current_nid = $(this).attr('data-nid');
+              var current_nid = $(this).attr('data-nid'),
+                  current_title = $(this).attr('data-title');
 
+              $('#ict-project-delete .fancybox-title').html('Unpublish Project - <em>'+current_title+'</em>');
               $('input[name="project_id"]').val(current_nid);
             });
           })(jQuery)
