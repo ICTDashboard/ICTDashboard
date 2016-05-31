@@ -191,8 +191,6 @@ function ict_mail_mail($key, &$message, $params) {
       }
       $message['body'][] = $msg;
       $message['body'][] = t('The unpublished project:');
-      $message['body'][] = t('<strong>This project will remain publicly available on the dashboard until the first re-baselined project update is approved</strong>.');
-      $message['body'][] = t('No further action is required.');
       $message['body'][] = t('1) Will be removed from your project list,');
       $message['body'][] = t('2) No further changes can be made to the project,');
       $message['body'][] = t('3) Will not be included in the Dashboard calculations, and');
