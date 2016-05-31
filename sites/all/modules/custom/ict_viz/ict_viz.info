@@ -9,3 +9,4 @@ features[ctools][] = page_manager:pages_default:1
 features[features_api][] = api:2
 features[page_manager_pages][] = dashboard_detailed_overview
 features[page_manager_pages][] = filtered_projects
+scripts[] = js/tooltip_responsive.js

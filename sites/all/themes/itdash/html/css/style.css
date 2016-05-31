@@ -898,7 +898,7 @@ body .project-update-submission .row .label .edit-btn:before,
 #content .project-update-submission table#financial-benefits td.table-remove-button .history-button:hover:before,
 #content .project-update-submission table#financial-benefits td.table-remove-button .remove-wrap:hover:before, .field-name-field-status td.field-status.removed:before,
 .field-name-field-status .sbHolder.removed:before,
-.field-name-field-status a[rel=removed]:before, .ict-tick, .preview_switch .viz-ico, .preview_switch .table-ico, .tooltip-bottom,
+.field-name-field-status a[rel=removed]:before, .ict-tick, .preview_switch .viz-ico, .preview_switch .table-ico, .tooltip-custom, .tooltip-custom:hover, .tooltip-bottom,
 .tooltip-edit,
 .status-icon,
 .tooltip, .tooltip-bottom:hover,
@@ -2874,6 +2874,62 @@ body a.submit-button,
     display: inline-block;
     vertical-align: sub;
     margin-right: 15px; }
+
+.tooltip-custom {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-bottom: -3px;
+  margin-left: 5px;
+  margin-right: 10px;
+  z-index: 1;
+  background-position: 0 -201px;
+  width: 16px;
+  height: 17px;
+  display: block;
+  display: inline-block; }
+  .tooltip-custom:hover {
+    background-position: 0 -184px;
+    width: 16px;
+    height: 17px;
+    display: block;
+    display: inline-block; }
+  .tooltip-custom span.custom-tooltip-content {
+    position: absolute;
+    display: none;
+    color: #fff;
+    font-size: 13px;
+    line-height: 22px;
+    background-color: #1e2635;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-style: normal;
+    bottom: 30px;
+    right: 0;
+    width: 300px; }
+    .tooltip-custom span.custom-tooltip-content:after {
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      display: block;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #1e2635;
+      bottom: -10px; }
+  .tooltip-custom span.custom-tooltip-corner-right:after {
+    margin-left: -20px;
+    left: 100%;
+    border-right: 0; }
+  .tooltip-custom span.custom-tooltip-corner-left:after {
+    left: 0;
+    border-left: 0;
+    margin-left: 0; }
+  .tooltip-custom span.custom-tooltip-corner-no:after {
+    border-left: 0;
+    border-right: 0; }
+  .tooltip-custom:hover span.custom-tooltip-content {
+    display: block; }
 
 .tooltip-bottom,
 .tooltip-edit,
