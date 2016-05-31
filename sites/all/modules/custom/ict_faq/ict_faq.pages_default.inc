@@ -67,7 +67,7 @@ function ict_faq_default_page_manager_pages() {
     ),
   );
   $display->cache = array();
-  $display->title = 'FAQ';
+  $display->title = 'About';
   $display->uuid = 'e7527db1-265f-430a-a089-d7edb9c19236';
   $display->content = array();
   $display->panels = array();
