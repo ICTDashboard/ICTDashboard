@@ -541,7 +541,7 @@ function ict_update_all_fields_required_validate_page_preview($node) {
   $project = node_load($project_id, $project_vid);
 
   $fields = array(
-    'text' => array(
+    'number' => array(
       'field_forecast_level_of_project_',
       'field_actual_level_of_project_co',
       'field_current_financial_benefits',
@@ -553,7 +553,7 @@ function ict_update_all_fields_required_validate_page_preview($node) {
   foreach($fields as $type => $subfields) {
     foreach($subfields as $field) {
       if ((empty($node->{$field}['und'][0]['tid']) && $type == 'term')
-        || (empty($node->{$field}['und'][0]['value']) && $type == 'text')) {
+        || (empty($node->{$field}) && $type == 'number')) {
         $field_info = field_info_instance('node', $field, 'update');
         $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
       }
