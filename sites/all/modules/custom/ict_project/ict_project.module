@@ -1101,6 +1101,11 @@ function ict_project_theme () {
       'template' => 'ict_project_manage_project_users_form',
       'render element' => 'form'
     ),
+    'ict_project_unpublish_form' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme/baseline',
+      'template' => 'ict_project_unpublish_form',
+      'render element' => 'form'
+    ),
   );
 }
 
