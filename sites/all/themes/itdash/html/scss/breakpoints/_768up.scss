@@ -228,6 +228,20 @@ CONTENT STYLES
 
 #content {
 	#ict-filtered-projects {
+		.footable-header {
+			.viz-f-p-1 {
+				right: -268px;
+				&:after {
+					left: 10%;
+				}
+			}
+			.viz-f-p-8 {
+				right: -85px;
+				&:after {
+					left: 72%;
+				}
+			}
+		}
 		tr {
 			th {
 			    padding: 7px 0px 42px 4px;

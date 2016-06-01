@@ -936,6 +936,14 @@ POSTS & CONTENT STYLES
 		}
 		padding: 0 20px;
 		.footable-header {
+			.viz-f-p-2 {
+				right: -249px;
+				width: 280px;
+				&:after {
+					border-left: none;
+					border-right: none;
+				}
+			}
 			.viz-tooltips-row {
 				position: absolute;
 				bottom: 15px;
