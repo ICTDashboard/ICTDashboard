@@ -4,7 +4,7 @@
       <div  id="overview-graphs">
         <div class="label">
           <?php print t('Expenditure and Budget'); ?>
-          <a href="javascript:void(0);" class="tooltip tooltip-custom budget-tooltip">
+          <a href="javascript:void(0);" class="tooltip-custom budget-tooltip">
             <i class="tooltip-icon"></i>
               <span class="custom-tooltip-content">
                 <?php print t('Expenditure to date and budget across all active projects, by current financial year or total across all years.'); ?>
@@ -52,10 +52,10 @@
     <div class="t-1of3 d-1of3" id="ict-dashboard-numbers1">
       <div class="label">
         <?php print t('Number of Active Projects'); ?>
-        <a href="javascript:void(0);" class="tooltip tooltip-custom">
+        <a href="javascript:void(0);" class="tooltip-custom">
           <i class="tooltip-icon"></i>
         <span class="custom-tooltip-content">
-          <?php print t('The number of ICT-enabled projects with a total project cost of $30 million or more, including ICT costs of at least $10 million.'); ?>
+          <?php print t('The number of ICT-enabled projects with ICT costs of $10 million or more published on the Dashboard.'); ?>
         </span>
         </a>
       </div>
@@ -67,7 +67,7 @@
     <div class="row graph-schedule-status">
       <div class="label">
         <?php print t('Projects Schedule Status'); ?>
-        <a href="javascript:void(0);" class="tooltip tooltip-custom">
+        <a href="javascript:void(0);" class="tooltip-custom">
           <i class="tooltip-icon"></i>
         <span class="custom-tooltip-content">
           <?php print t('A summary of schedule status for all active projects compared to their planned schedule.'); ?>
@@ -100,7 +100,7 @@
       <div class="row">
         <div class="label">
           <?php print t('Total Number of Benefits Listed'); ?>
-          <a href="javascript:void(0);" class="tooltip tooltip-custom">
+          <a href="javascript:void(0);" class="tooltip-custom">
             <i class="tooltip-icon"></i>
             <span class="custom-tooltip-content">
               <?php print t('The number of benefits over all active projects.'); ?>
