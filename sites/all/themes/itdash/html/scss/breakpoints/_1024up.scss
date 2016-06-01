@@ -19,9 +19,6 @@ be seen on the Desktop.
   width: 25%;
 }
 
-.page-title {
-	padding: 0;
-}
 #container {
 	.header {
 		.inner-header {
@@ -30,7 +27,20 @@ be seen on the Desktop.
 	}
 	#content {
 		.page-title {
-			padding-left: 0;
+			padding-left: 20px;
+		}
+		#project-baseline-history {
+			#inner-content {
+				padding: 0;
+				.project-draft-submission {
+					padding: 0;
+					.pbh-buttons {
+						a {
+							width: 180px;
+						}
+					}
+				}
+			}
 		}
 		.last-updated-block {
 			margin: 0;

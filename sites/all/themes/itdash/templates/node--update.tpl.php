@@ -14,7 +14,9 @@
 
     <div class="row">
       <div class="label">
-        <?php print t('Original Total Project Budget'); ?>
+        <?php print $is_rebaseline ?
+          t('Total Project Budget') :
+          t('Original Total Project Budget'); ?>
       </div>
       <div class="text">
         <?php print '$' . $original_total_budget_number . 'm'; ?>
@@ -27,7 +29,7 @@
         <?php if (!empty($original_total_budget_meta['#description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
+              <span class="tooltip-content individual-page-tooltip-height">
                 <?php print $original_total_budget_meta['#description']; ?>
               </span>
           </a>
@@ -52,7 +54,7 @@
           <?php if (!empty($field_actual_level_of_project_co['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
+              <span class="tooltip-content individual-page-tooltip-height">
                 <?php print $field_actual_level_of_project_co['meta']['#description']; ?>
               </span>
             </a>
@@ -77,7 +79,7 @@
           <?php if (!empty($field_forecast_level_of_project_['meta']['#description']) && $view_mode != 'print') : ?>
             <a href="javascript:void(0);" class="tooltip">
               <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
+              <span class="tooltip-content individual-page-tooltip-height">
                 <?php print $field_forecast_level_of_project_['meta']['#description']; ?>
               </span>
             </a>
@@ -98,7 +100,7 @@
           <?php print t('Project Schedule Status'); ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
+            <span class="tooltip-content individual-page-tooltip-height">
               <?php print t('The actual percentage of work completed at the current update and the percentage of work forecasted to be completed at the current update.'); ?>
             </span>
           </a>
@@ -136,7 +138,9 @@
     <?php $field_start_date_info = field_info_instance('node', 'field_start_date', 'project');?>
     <div class="row">
       <div class="label">
-        <?php print $field_start_date_info['label']; ?>
+        <?php print $is_rebaseline ?
+          str_replace('Original ', '', $field_start_date_info['label']) :
+          $field_start_date_info['label']; ?>
         <?php if (!empty($field_start_date_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
@@ -153,7 +157,9 @@
     <?php $field_original_completion_date_info = field_info_instance('node', 'field_original_completion_date', 'project');?>
     <div class="row">
       <div class="label">
-        <?php print $field_original_completion_date_info['label']; ?>
+        <?php print $is_rebaseline ?
+          str_replace('Original ', '', $field_original_completion_date_info['label']) :
+          $field_original_completion_date_info['label']; ?>
         <?php if (!empty($field_original_completion_date_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>
@@ -205,7 +211,9 @@
     
     <div class="row">
       <div class="label">
-        <?php print $field_predicted_project_benefit_info['label']; ?>
+        <?php print $is_rebaseline ?
+          str_replace('Original ', '', $field_predicted_project_benefit_info['label']) :
+          $field_predicted_project_benefit_info['label']; ?>
         <?php if (!empty($field_predicted_project_benefit_info['description']) && $view_mode != 'print') : ?>
           <a href="javascript:void(0);" class="tooltip">
             <i class="tooltip-icon"></i>

@@ -65,11 +65,20 @@ function ict_pages_default_page_manager_handlers() {
             'paths' => 'faq
 dashboard
 project/*/update
-update/*
+update/*/delete
 node/*/delete
 user/create
 detailed-overview
 dashboard-projects',
+          ),
+          'context' => 'argument_string_1',
+          'not' => FALSE,
+        ),
+        1 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '0',
+            'paths' => 'project/*/update',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,
