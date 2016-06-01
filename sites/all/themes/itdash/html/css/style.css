@@ -4849,12 +4849,6 @@ tweeners.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
-  #content #project-baseline-history #inner-content {
-    padding: 0 7%; }
-    #content #project-baseline-history #inner-content .project-draft-submission {
-      padding: 0; }
-      #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
-        width: 180px; }
   #content #ict-home-projects-table-id .footable-header .viz-f-p-2:after {
     left: 11%;
     border-left: 20px solid transparent;
@@ -4865,6 +4859,12 @@ tweeners.
   #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-tooltips-row span:after {
     border-left: 20px solid transparent;
     border-right: 20px solid transparent; }
+  #content #project-baseline-history #inner-content {
+    padding: 0 7%; }
+    #content #project-baseline-history #inner-content .project-draft-submission {
+      padding: 0; }
+      #content #project-baseline-history #inner-content .project-draft-submission .pbh-buttons a {
+        width: 180px; }
   #content .last-updated-block {
     padding: 0 7%;
     margin: 0 auto;
