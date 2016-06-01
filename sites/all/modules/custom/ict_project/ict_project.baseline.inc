@@ -978,7 +978,6 @@ function ict_project_get_all_unpublished_projects() {
   return $unpublished;
 }
 
-
 function ict_project_unpublish_project_form($form, &$form_state) {
   $form['project_id'] = array(
     '#type' => 'hidden',
@@ -1048,4 +1047,10 @@ function ict_project_unpublish_submit($form, &$form_state) {
   );
 
   drupal_set_message(t('Project has been unpublished.'));
+}
+
+function ict_project_project_active_from_date($nid) {
+  $baseline = node_load($nid);
+  $baseline->first_update = ict_project_get_first_approved_update($nid);
+  return $baseline;
 }
