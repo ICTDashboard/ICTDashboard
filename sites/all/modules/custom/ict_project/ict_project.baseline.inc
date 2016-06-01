@@ -357,7 +357,7 @@ function ict_project_baseline_get_admin_user_emails ($node) {
   );
 }
 
-function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE, $prefix = '', $suffix = '', $finance = FALSE) {
+function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE, $prefix = '', $suffix = '', $finance = FALSE, $percent = FALSE) {
   $values = array();
   foreach ($items as $key => $item) {
     // exclude field meta data from the display
@@ -389,6 +389,12 @@ function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALS
     if ($finance) {
       $val = number_format($val, 2, '.', '');
     }
+
+    if ($percent) {
+      $values[] = $val;
+      continue;
+    }
+
     $values[] = $val ? $prefix . $val . $suffix : '';
   }
   $default_value = $not_applicable ? t('Not Applicable') : '-';
