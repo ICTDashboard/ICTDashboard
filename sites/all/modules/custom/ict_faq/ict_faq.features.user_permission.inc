@@ -10,6 +10,16 @@
 function ict_faq_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: 'assign node weight'.
+  $permissions['assign node weight'] = array(
+    'name' => 'assign node weight',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'weight',
+  );
+
   // Exported permission: 'create faq_item content'.
   $permissions['create faq_item content'] = array(
     'name' => 'create faq_item content',

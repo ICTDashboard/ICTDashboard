@@ -13,7 +13,9 @@
 					<?php print t('Active from'); ?>
 				</div>
 				<div class="text">
-					<?php print $current_baseline->first_update ? date('d M Y', $current_baseline->first_update): t('Not active yet'); ?>
+					<?php print $current_baseline->first_update ?
+						date('d M Y', $current_baseline->first_update) . ' - ' . t('Still active') :
+						t('Not active yet'); ?>
 				</div>
 			</div>
 			<div class="row">
@@ -42,7 +44,7 @@
 			</div>
 			<div class="row">
 				<div class="label">
-					<?php print t('Original Approved Start Date'); ?>
+					<?php print t('Approved Start Date'); ?>
 				</div>
 				<div class="text">
 					<?php print !empty($current_baseline->field_start_date['und'][0]['value']) ?
@@ -52,7 +54,7 @@
 			</div>
 			<div class="row">
 				<div class="label">
-					<?php print t('Original Approved Completion Date'); ?>
+					<?php print t('Approved Completion Date'); ?>
 				</div>
 				<div class="text">
 					<?php print !empty($current_baseline->field_original_completion_date['und'][0]['value']) ?
@@ -64,9 +66,9 @@
 				<div class="label">
 					<?php print t('Entity Сomments'); ?>
 				</div>
-				<div class="text">
+				<div class="text entity_comments">
 					<?php print !empty($current_baseline->last_update->field_entity_comments[LANGUAGE_NONE][0]['value']) ?
-						$current_baseline->last_update->field_entity_comments[LANGUAGE_NONE][0]['value'] :
+						$current_baseline->last_update->field_entity_comments[LANGUAGE_NONE][0]['safe_value'] :
 						'-' ?>
 				</div>
 			</div>
@@ -118,7 +120,9 @@
 					</div>
 					<div class="row">
 						<div class="label">
-							<?php print t('Original Approved Start Date'); ?>
+							<?php print !$count_baselines ?
+								t('Original Approved Start Date') :
+								t('Approved Start Date') ; ?>
 						</div>
 						<div class="text">
 							<?php print date('d M Y', strtotime($project->field_start_date['und'][0]['value'])); ?>
@@ -126,7 +130,9 @@
 					</div>
 					<div class="row">
 						<div class="label">
-							<?php print t('Original Approved Completion Date'); ?>
+							<?php print !$count_baselines ?
+								t('Original Approved Completion Date') :
+								t('Approved Completion Date') ; ?>
 						</div>
 						<div class="text">
 							<?php print date('d M Y', strtotime($project->field_original_completion_date['und'][0]['value'])); ?>
@@ -136,9 +142,9 @@
 						<div class="label">
 							<?php print t('Entity Сomments'); ?>
 						</div>
-						<div class="text">
+						<div class="text entity_comments">
 							<?php print !empty($project->last_update->field_entity_comments[LANGUAGE_NONE][0]['value']) ?
-								$project->last_update->field_entity_comments[LANGUAGE_NONE][0]['value'] :
+								$project->last_update->field_entity_comments[LANGUAGE_NONE][0]['safe_value'] :
 								'-' ?>
 						</div>
 					</div>

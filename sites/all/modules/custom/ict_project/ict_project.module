@@ -89,6 +89,13 @@ function ict_project_preprocess_node(&$vars) {
       $budget_items = _ict_project_prepare_budget_history($project_id, 'view');
     }
 
+    // re-baseline or baseline
+    $project = node_load($project_id);
+    $node_wrapper = entity_metadata_wrapper('node', $project);
+    $vars['is_rebaseline'] = $node_wrapper->field_project->value() ?
+      TRUE :
+      FALSE;
+
     // should show previous approved values OR current pendong values only
     $baseline_row = reset($budget_items);
     $last_update = end($budget_items);
@@ -451,6 +458,7 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
     $form['#after_build'][] = 'ict_project_node_form_after_build';
     $node = $form['#node'];
     if (!empty($node->nid) || !empty($node->field_project)) {
+      $form['#re-baseline'] = FALSE;
 //      $entity_list = ict_update_get_allowed_entity_list($node->nid);
 
       // project budget by financial year
@@ -515,6 +523,10 @@ function ict_project_form_alter( &$form, &$form_state, $form_id) {
 
       $form['field_implementation_partners'][LANGUAGE_NONE]['#options']['_none'] = t('Not Applicable');
 
+      if (!empty($node->field_project)) {
+        $form['#rebaseline'] = TRUE;
+        $form['#page_title'] = t('ICT Project Re-baseline Submission Form');
+      }
       // alter actions
       $form['actions']['submit_request'] = $form['actions']['submit'];
       $form['actions']['submit_request']['#value'] = t('Save and request approval');
@@ -1577,7 +1589,7 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
     $original_value = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
       (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
       (float)0;
-    $original_values[] = number_format($original_value, 2);
+    $original_values[] = $original_value;
   }
 
   $update_values = array();
@@ -1589,12 +1601,12 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
       $update_value = !empty($budget_item->field_total[LANGUAGE_NONE][0]['value']) ?
         (float)$budget_item->field_total[LANGUAGE_NONE][0]['value'] :
         (float)0;
-      $update_values[] = number_format($update_value, 2);
+      $update_values[] = $update_value;
     }
   }
   else {
     foreach ($original_row['budget_items'] as $budget_item) {
-      $update_values[] = number_format((float)0, 2);
+      $update_values[] = 0;
     }
   }
 
