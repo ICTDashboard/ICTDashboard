@@ -3715,6 +3715,9 @@ LAYOUT & GRID STYLES
         #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph,
         #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph {
           margin-top: 10px; }
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a {
+            text-decoration: underline; }
         #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend,
         #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
           padding-left: 0;

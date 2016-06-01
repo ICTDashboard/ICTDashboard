@@ -130,6 +130,9 @@ LAYOUT & GRID STYLES
 					float: left;
 					#project-schedule-status-graph {
 						margin-top: 10px;
+						a {
+							text-decoration: underline;
+						}
 					}
 					#statuses_legend {
 						.bar-legend {
