@@ -180,6 +180,23 @@ be seen on the Desktop.
 			}
 		}
 	}
+	#ict-home-projects-table-id {
+		padding: 0;
+		tr {
+			th {
+				padding: 7px 25px 42px 14px;
+    			font-size: 14px;
+			    a.ict-sort-link {
+			    	&:after {
+			    		top: 15px!important;
+			    	}
+			    	&:before {
+			    		top: 25px!important;
+			    	}
+			    }
+			}
+		}
+	}
 }
 
 .footer {
