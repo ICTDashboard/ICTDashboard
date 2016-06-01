@@ -6729,7 +6729,7 @@ you can add resource intensive styles.
   #container .header .inner-header {
     margin: 0; }
   #container #content .page-title {
-    padding: 0; }
+    padding-left: 20px; }
   #container #content #project-baseline-history #inner-content {
     padding: 0; }
     #container #content #project-baseline-history #inner-content .project-draft-submission {
@@ -6891,6 +6891,13 @@ you can add resource intensive styles.
   #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile {
     display: none; }
   #container #content .pane-last-updated .last-updated-block .last-updated-on {
+    padding-left: 0; }
+  #container #content .pane-detailed-overview #ict-dashboard-detailed-overview h2 {
+    margin-left: 0; }
+  #container #content .pane-detailed-overview #ict-dashboard-detailed-overview #detailed-view-expenditure {
+    padding-left: 0;
+    padding-right: 0; }
+  #container #content .pane-detailed-overview #ict-dashboard-detailed-overview .viz-number-of-benefits {
     padding-left: 0; } }
 /*********************
 LARGE VIEWING SIZE
