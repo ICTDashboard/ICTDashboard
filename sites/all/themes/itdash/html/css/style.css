@@ -3989,6 +3989,9 @@ POSTS & CONTENT STYLES
       box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
       padding: 8px 40px;
       display: inline-block; }
+      #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+        background-color: #0b626c;
+        color: #fff; }
     #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
       right: 0;
       bottom: 28px;
