@@ -467,3 +467,11 @@ do they need tweaking?
 	}
 } /* end .footer-links */
 
+/* Styles for Block and Basic Page content*/
+
+.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+		padding: 0 7%;
+		.field {
+			padding: 0;
+		}
+}
