@@ -977,3 +977,9 @@ function ict_project_get_all_unpublished_projects() {
   
   return $unpublished;
 }
+
+function ict_project_project_active_from_date($nid) {
+  $baseline = node_load($nid);
+  $baseline->first_update = ict_project_get_first_approved_update($nid);
+  return $baseline;
+}
