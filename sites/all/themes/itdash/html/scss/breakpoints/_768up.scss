@@ -30,11 +30,12 @@ body > #container { height: auto; min-height: 100%; }
 LAYOUT & GRID STYLES
 *********************/
 
-// .wrap {
-// 	width: 970px;
-// 	min-width: 970px;
-// 	padding: 0;
-// }
+ //.wrap {
+ //	width: 970px;
+ //	min-width: 970px;
+ //	padding: 0;
+ //}
+
 
 /*********************
 HEADER STYLES
@@ -145,6 +146,7 @@ CONTENT STYLES
 	.dotbg { background: url(../images/dot-bg.png) repeat scroll top center #1e2635; overflow: hidden; }
 
 	.page-title {
+		padding-left: 20px;
 		.inner-title-content {
 			h1 {
 				color: #c8f68f;
@@ -1878,7 +1880,38 @@ mobile. Make sure to double check these!
   }
 }
 
+/*********************
+DETAILED OVERVIEW STYLES
+*********************/
 
+#container {
+	#content {
+		#ict-dashboard-detailed-overview {
+			.benefits_chart_divs {
+				overflow: hidden;
+				#benefits_chart_div {
+					padding-left: 12px;
+				}
+				#benefits_legend {
+					width: auto;
+					margin: -19px 0 0 397px;
+				}
+			}
+			#detailed-view-schedule-status {
+				#statuses_legend {
+					.bar-legend li {
+						float: left;
+					}
+				}
+			}
+		}
+		/*.pane-last-updated {
+			.last-updated-on p {
+				margin-left: 20px;
+			}
+		}*/
+	}
+}
 
 #content {
 	.last-updated-block {
