@@ -132,6 +132,9 @@ LAYOUT & GRID STYLES
 						margin-top: 10px;
 						a {
 							text-decoration: underline;
+							&:hover {
+								text-decoration: none;
+							}
 						}
 					}
 					#statuses_legend {

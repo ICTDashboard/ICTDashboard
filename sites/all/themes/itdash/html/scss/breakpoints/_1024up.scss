@@ -27,7 +27,7 @@ be seen on the Desktop.
 	}
 	#content {
 		.page-title {
-			padding: 0;
+			padding-left: 20px;
 		}
 		#project-baseline-history {
 			#inner-content {
@@ -303,6 +303,20 @@ be seen on the Desktop.
 				}
 			}
 		}
+		.pane-detailed-overview {
+			#ict-dashboard-detailed-overview {
+				h2 {
+					margin-left: 0;
+				}
+				#detailed-view-expenditure {
+					padding-left: 0;
+					padding-right: 0;
+				}
+				.viz-number-of-benefits {
+					padding-left: 0;
+				}
+			}
+		}
 	}
 }
 
@@ -405,6 +419,7 @@ be seen on the Desktop.
 
 		 //  	}
 	    }
+
 	}
 }
 
