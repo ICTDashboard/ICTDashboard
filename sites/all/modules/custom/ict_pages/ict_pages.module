@@ -39,6 +39,9 @@ function template_preprocess_ict_pages_last_update(&$vars) {
 
     $last_rebaseline = ict_project_get_last_rebaseline_project($nid);
     $old_rebaselines = ict_project_get_old_baselines($last_rebaseline);
+    $active_from = ict_project_project_active_from_date($nid);
+    $vars['active_from'] = $active_from->first_update;
+    $vars['active'] = $active_from->unpublished_on;
     $vars['last_rebaseline'] = $last_rebaseline;
     $vars['projects'] = count($old_rebaselines) + 1;
   }

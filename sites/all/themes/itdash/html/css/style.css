@@ -3438,153 +3438,6 @@ div.tooltip-edit {
   #content .project-program-link:focus {
     color: #0d6c88; }
 
-.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
-  font-family: "Open Sans", sans-serif; }
-  .page-block #content table, .node-type-page #content #inner-content table, .entity-bean .content table {
-    font-family: "Open Sans", sans-serif;
-    color: #4e5365;
-    border: 1px solid #ddd; }
-    .page-block #content table tr th, .node-type-page #content #inner-content table tr th, .entity-bean .content table tr th {
-      background-color: #137992;
-      border: 1px solid #0a5f74;
-      color: #fff;
-      padding: 0 5px; }
-      .page-block #content table tr th p, .page-block #content table tr th h2, .page-block #content table tr th h3, .page-block #content table tr th h4, .page-block #content table tr th h5, .node-type-page #content #inner-content table tr th p, .node-type-page #content #inner-content table tr th h2, .node-type-page #content #inner-content table tr th h3, .node-type-page #content #inner-content table tr th h4, .node-type-page #content #inner-content table tr th h5, .entity-bean .content table tr th p, .entity-bean .content table tr th h2, .entity-bean .content table tr th h3, .entity-bean .content table tr th h4, .entity-bean .content table tr th h5 {
-        color: #fff; }
-    .page-block #content table tr td, .node-type-page #content #inner-content table tr td, .entity-bean .content table tr td {
-      padding: 0 5px; }
-  .page-block #content blockquote, .node-type-page #content #inner-content blockquote, .entity-bean .content blockquote {
-    border-left: 2px solid #0d6c88;
-    padding-left: 10px;
-    position: relative;
-    font-style: italic;
-    margin-left: 80px; }
-    .page-block #content blockquote:before, .node-type-page #content #inner-content blockquote:before, .entity-bean .content blockquote:before {
-      content: "Note: ";
-      position: absolute;
-      left: -45px;
-      top: -6px;
-      color: #0d6c88;
-      font-style: italic;
-      font-weight: 600;
-      font-size: 14px; }
-  .page-block #content h2, .node-type-page #content #inner-content h2, .entity-bean .content h2 {
-    font-family: "Open Sans", sans-serif;
-    color: #0d6c88;
-    font-size: 26px;
-    font-weight: 600;
-    line-height: 22px;
-    text-align: left; }
-  .page-block #content h3, .node-type-page #content #inner-content h3, .entity-bean .content h3 {
-    font-family: "Open Sans", sans-serif;
-    color: #202b3d;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 22px;
-    text-align: left; }
-  .page-block #content h4, .node-type-page #content #inner-content h4, .entity-bean .content h4 {
-    font-family: "Open Sans", sans-serif;
-    color: #202b3d;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 22px;
-    text-align: left; }
-  .page-block #content h5, .node-type-page #content #inner-content h5, .entity-bean .content h5 {
-    font-family: "Open Sans", sans-serif;
-    color: #202b3d;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 22px;
-    text-align: left;
-    font-style: italic;
-    text-transform: inherit;
-    letter-spacing: 0; }
-  .page-block #content p, .node-type-page #content #inner-content p, .entity-bean .content p {
-    color: #4e5365;
-    margin: 5px 0;
-    font-size: 14px;
-    line-height: 22px;
-    font-family: "Open Sans", sans-serif; }
-  .page-block #content a, .node-type-page #content #inner-content a, .entity-bean .content a {
-    color: #027e9c;
-    text-decoration: underline; }
-    .page-block #content a:focus, .page-block #content a:hover, .page-block #content a:visited, .node-type-page #content #inner-content a:focus, .node-type-page #content #inner-content a:hover, .node-type-page #content #inner-content a:visited, .entity-bean .content a:focus, .entity-bean .content a:hover, .entity-bean .content a:visited {
-      color: #027e9c !important;
-      text-decoration: none; }
-  .page-block #content a[href^="http"], .node-type-page #content #inner-content a[href^="http"], .entity-bean .content a[href^="http"] {
-    color: #027e9c;
-    text-decoration: underline; }
-    .page-block #content a[href^="http"]:focus, .page-block #content a[href^="http"]:hover, .page-block #content a[href^="http"]:visited, .node-type-page #content #inner-content a[href^="http"]:focus, .node-type-page #content #inner-content a[href^="http"]:hover, .node-type-page #content #inner-content a[href^="http"]:visited, .entity-bean .content a[href^="http"]:focus, .entity-bean .content a[href^="http"]:hover, .entity-bean .content a[href^="http"]:visited {
-      color: #027e9c !important;
-      text-decoration: none; }
-    .page-block #content a[href^="http"]:after, .node-type-page #content #inner-content a[href^="http"]:after, .entity-bean .content a[href^="http"]:after {
-      content: " ";
-      background: url(/sites/all/themes/itdash/html/images/ico-01.png);
-      height: 10px;
-      width: 10px;
-      display: inline-block;
-      margin-left: 5px; }
-  .page-block #content ol, .node-type-page #content #inner-content ol, .entity-bean .content ol {
-    padding-left: 20px;
-    margin: 0;
-    counter-reset: item;
-    color: #4e5365; }
-    .page-block #content ol li, .node-type-page #content #inner-content ol li, .entity-bean .content ol li {
-      text-indent: -10px;
-      color: #4e5365;
-      font-family: "Open sans", sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      display: block; }
-      .page-block #content ol li p, .node-type-page #content #inner-content ol li p, .entity-bean .content ol li p {
-        margin: 0 0 0 11px; }
-      .page-block #content ol li p:first-of-type, .node-type-page #content #inner-content ol li p:first-of-type, .entity-bean .content ol li p:first-of-type {
-        display: inline-block;
-        margin: 0 0 0 10px; }
-      .page-block #content ol li:before, .node-type-page #content #inner-content ol li:before, .entity-bean .content ol li:before {
-        content: counter(item) ". ";
-        counter-increment: item;
-        color: #0d6c88; }
-      .page-block #content ol li ol, .node-type-page #content #inner-content ol li ol, .entity-bean .content ol li ol {
-        counter-reset: alpha;
-        margin: 0 0 0.75em 10px; }
-        .page-block #content ol li ol li:before, .node-type-page #content #inner-content ol li ol li:before, .entity-bean .content ol li ol li:before {
-          content: counter(alpha,lower-alpha) ". ";
-          counter-increment: alpha; }
-  .page-block #content ul, .node-type-page #content #inner-content ul, .entity-bean .content ul {
-    padding: 0;
-    margin: 0;
-    padding-left: 22px; }
-    .page-block #content ul li, .node-type-page #content #inner-content ul li, .entity-bean .content ul li {
-      text-indent: -10px;
-      padding-left: 14px;
-      font-family: "Open sans", sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: #4e5365;
-      list-style: none;
-      line-height: 1.6em; }
-      .page-block #content ul li p, .node-type-page #content #inner-content ul li p, .entity-bean .content ul li p {
-        margin: 0 0 0 10px; }
-      .page-block #content ul li p:first-of-type, .node-type-page #content #inner-content ul li p:first-of-type, .entity-bean .content ul li p:first-of-type {
-        display: inline-block; }
-      .page-block #content ul li:before, .node-type-page #content #inner-content ul li:before, .entity-bean .content ul li:before {
-        font-size: 20px;
-        content: "• ";
-        display: inline-block;
-        width: 10px;
-        height: 5px;
-        vertical-align: middle;
-        line-height: 1; }
-      .page-block #content ul li ul li:before, .node-type-page #content #inner-content ul li ul li:before, .entity-bean .content ul li ul li:before {
-        content: "• ";
-        line-height: 1;
-        color: #55beaf; }
-      .page-block #content ul li ul li ul li:before, .node-type-page #content #inner-content ul li ul li ul li:before, .entity-bean .content ul li ul li ul li:before {
-        content: "• ";
-        line-height: 1;
-        color: #aabcb9; }
-
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
@@ -3715,6 +3568,9 @@ LAYOUT & GRID STYLES
         #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph,
         #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph {
           margin-top: 10px; }
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a {
+            text-decoration: underline; }
         #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend,
         #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
           padding-left: 0;
@@ -4091,16 +3947,32 @@ POSTS & CONTENT STYLES
   padding: 0 20px; }
   #content .last-updated-block .last-updated-on {
     width: 100% !important;
-    margin-bottom: 20px;
-    padding-bottom: 25px; }
+    padding-bottom: 15px; }
     #content .last-updated-block .last-updated-on p {
       color: #202b3d; }
     #content .last-updated-block .last-updated-on strong {
       font-weight: 700; }
+  #content .last-updated-block .induvidual-project-state {
+    display: inline-block;
+    font-size: 14px;
+    color: #202b3d;
+    margin-bottom: 20px;
+    border-top: 1px dotted #d9dfe9;
+    width: 100%;
+    padding-top: 15px; }
+    #content .last-updated-block .induvidual-project-state p {
+      margin: 0; }
+    #content .last-updated-block .induvidual-project-state a .tooltip-content {
+      right: -172px;
+      width: 280px; }
+      #content .last-updated-block .induvidual-project-state a .tooltip-content:after {
+        border-left: none;
+        border-right: none; }
   #content .last-updated-block .view-baseline-history {
     float: none;
     text-align: left;
-    width: 100%; }
+    width: 100%;
+    /* Styles for Link to Data.gov.au  */ }
     #content .last-updated-block .view-baseline-history .view-baseline-link {
       color: #0d6c88;
       font-weight: 700;
@@ -4115,7 +3987,11 @@ POSTS & CONTENT STYLES
       box-sizing: border-box;
       background-color: #f9fafc;
       box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
-      padding: 8px 40px; }
+      padding: 8px 40px;
+      display: inline-block; }
+      #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+        background-color: #0b626c;
+        color: #fff; }
     #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
       right: 0;
       bottom: 28px;
@@ -4796,6 +4672,166 @@ DETAILED OVERVIEW STYLES
     padding-left: 20px;
     font-size: 13px; }
 
+/* Styles for Block and Basic Page content*/
+.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+  padding: 0 20px;
+  font-family: "Open Sans", sans-serif; }
+  .page-block #content .field, .node-type-page #content #inner-content .field, .entity-bean .content .field {
+    padding: 0; }
+  .page-block #content p img, .node-type-page #content #inner-content p img, .entity-bean .content p img {
+    height: 100%;
+    width: 100%; }
+  .page-block #content table, .node-type-page #content #inner-content table, .entity-bean .content table {
+    font-family: "Open Sans", sans-serif;
+    color: #4e5365;
+    border: 1px solid #ddd;
+    width: 100% !important; }
+    .page-block #content table tr, .node-type-page #content #inner-content table tr, .entity-bean .content table tr {
+      line-height: 22px;
+      font-size: 14px; }
+      .page-block #content table tr th, .node-type-page #content #inner-content table tr th, .entity-bean .content table tr th {
+        background-color: #137992;
+        border: 1px solid #0a5f74;
+        color: #fff;
+        padding: 5px; }
+        .page-block #content table tr th p, .page-block #content table tr th h2, .page-block #content table tr th h3, .page-block #content table tr th h4, .page-block #content table tr th h5, .node-type-page #content #inner-content table tr th p, .node-type-page #content #inner-content table tr th h2, .node-type-page #content #inner-content table tr th h3, .node-type-page #content #inner-content table tr th h4, .node-type-page #content #inner-content table tr th h5, .entity-bean .content table tr th p, .entity-bean .content table tr th h2, .entity-bean .content table tr th h3, .entity-bean .content table tr th h4, .entity-bean .content table tr th h5 {
+          color: #fff; }
+      .page-block #content table tr td, .node-type-page #content #inner-content table tr td, .entity-bean .content table tr td {
+        padding: 5px;
+        border: 1px solid #ddd; }
+  .page-block #content blockquote, .node-type-page #content #inner-content blockquote, .entity-bean .content blockquote {
+    border-left: 2px solid #0d6c88;
+    padding-left: 15px;
+    position: relative;
+    font-style: italic;
+    margin-left: 80px; }
+    .page-block #content blockquote:before, .node-type-page #content #inner-content blockquote:before, .entity-bean .content blockquote:before {
+      content: "Note: ";
+      position: absolute;
+      left: -45px;
+      top: -6px;
+      color: #0d6c88;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 14px; }
+  .page-block #content h2, .node-type-page #content #inner-content h2, .entity-bean .content h2 {
+    font-family: "Open Sans", sans-serif;
+    color: #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left; }
+  .page-block #content h3, .node-type-page #content #inner-content h3, .entity-bean .content h3 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left; }
+  .page-block #content h4, .node-type-page #content #inner-content h4, .entity-bean .content h4 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left; }
+  .page-block #content h5, .node-type-page #content #inner-content h5, .entity-bean .content h5 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+    font-style: italic;
+    text-transform: inherit;
+    letter-spacing: 0; }
+  .page-block #content p, .node-type-page #content #inner-content p, .entity-bean .content p {
+    color: #4e5365;
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 22px;
+    font-family: "Open Sans", sans-serif; }
+  .page-block #content a, .node-type-page #content #inner-content a, .entity-bean .content a {
+    color: #027e9c;
+    text-decoration: underline; }
+    .page-block #content a:focus, .page-block #content a:hover, .page-block #content a:visited, .node-type-page #content #inner-content a:focus, .node-type-page #content #inner-content a:hover, .node-type-page #content #inner-content a:visited, .entity-bean .content a:focus, .entity-bean .content a:hover, .entity-bean .content a:visited {
+      color: #027e9c !important;
+      text-decoration: none; }
+  .page-block #content a[href^="http"], .node-type-page #content #inner-content a[href^="http"], .entity-bean .content a[href^="http"] {
+    color: #027e9c;
+    text-decoration: underline; }
+    .page-block #content a[href^="http"]:focus, .page-block #content a[href^="http"]:hover, .page-block #content a[href^="http"]:visited, .node-type-page #content #inner-content a[href^="http"]:focus, .node-type-page #content #inner-content a[href^="http"]:hover, .node-type-page #content #inner-content a[href^="http"]:visited, .entity-bean .content a[href^="http"]:focus, .entity-bean .content a[href^="http"]:hover, .entity-bean .content a[href^="http"]:visited {
+      color: #027e9c !important;
+      text-decoration: none; }
+    .page-block #content a[href^="http"]:after, .node-type-page #content #inner-content a[href^="http"]:after, .entity-bean .content a[href^="http"]:after {
+      content: " ";
+      background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+      height: 10px;
+      width: 10px;
+      display: inline-block;
+      margin-left: 5px; }
+  .page-block #content ol, .node-type-page #content #inner-content ol, .entity-bean .content ol {
+    padding-left: 20px;
+    margin: 0;
+    counter-reset: item;
+    color: #4e5365; }
+    .page-block #content ol li, .node-type-page #content #inner-content ol li, .entity-bean .content ol li {
+      line-height: 22px;
+      text-indent: -10px;
+      color: #4e5365;
+      font-family: "Open sans", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      display: block; }
+      .page-block #content ol li p, .node-type-page #content #inner-content ol li p, .entity-bean .content ol li p {
+        margin: 0 0 0 11px; }
+      .page-block #content ol li p:first-of-type, .node-type-page #content #inner-content ol li p:first-of-type, .entity-bean .content ol li p:first-of-type {
+        display: inline-block;
+        margin: 0 0 0 10px; }
+      .page-block #content ol li:before, .node-type-page #content #inner-content ol li:before, .entity-bean .content ol li:before {
+        content: counter(item) ". ";
+        counter-increment: item;
+        color: #0d6c88; }
+      .page-block #content ol li ol, .node-type-page #content #inner-content ol li ol, .entity-bean .content ol li ol {
+        counter-reset: alpha;
+        margin: 0 0 0.75em 10px; }
+        .page-block #content ol li ol li:before, .node-type-page #content #inner-content ol li ol li:before, .entity-bean .content ol li ol li:before {
+          content: counter(alpha,lower-alpha) ". ";
+          counter-increment: alpha; }
+  .page-block #content ul, .node-type-page #content #inner-content ul, .entity-bean .content ul {
+    padding: 0;
+    margin: 0;
+    padding-left: 22px; }
+    .page-block #content ul li, .node-type-page #content #inner-content ul li, .entity-bean .content ul li {
+      text-indent: -10px;
+      padding-left: 14px;
+      font-family: "Open sans", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #4e5365;
+      list-style: none;
+      line-height: 22px; }
+      .page-block #content ul li p, .node-type-page #content #inner-content ul li p, .entity-bean .content ul li p {
+        margin: 0 0 0 10px; }
+      .page-block #content ul li p:first-of-type, .node-type-page #content #inner-content ul li p:first-of-type, .entity-bean .content ul li p:first-of-type {
+        display: inline-block; }
+      .page-block #content ul li:before, .node-type-page #content #inner-content ul li:before, .entity-bean .content ul li:before {
+        font-size: 20px;
+        content: "• ";
+        display: inline-block;
+        width: 10px;
+        height: 5px;
+        vertical-align: middle;
+        line-height: 1; }
+      .page-block #content ul li ul li:before, .node-type-page #content #inner-content ul li ul li:before, .entity-bean .content ul li ul li:before {
+        content: "• ";
+        line-height: 1;
+        color: #55beaf; }
+      .page-block #content ul li ul li ul li:before, .node-type-page #content #inner-content ul li ul li ul li:before, .entity-bean .content ul li ul li ul li:before {
+        content: "• ";
+        line-height: 1;
+        color: #aabcb9; }
+
 /*********************
 LARGER MOBILE DEVICES
 This is for devices like the Galaxy Note or something that's
@@ -4871,25 +4907,60 @@ tweeners.
     display: table;
     margin-top: 25px;
     margin-bottom: 10px; }
-    #content .last-updated-block .last-updated-on {
-      width: 50% !important;
-      max-width: 970px;
-      float: left;
-      min-width: 0;
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0; }
+    #content .last-updated-block .last-updated-and-active-block {
+      display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .last-updated-on {
+        width: 220px !important;
+        max-width: 970px;
+        float: left;
+        min-width: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .induvidual-project-state {
+        display: inline-block;
+        font-size: 14px;
+        color: #202b3d;
+        padding-left: 25px;
+        border-left: 1px dotted #d9dfe9;
+        border-top: none;
+        width: auto;
+        padding-top: 0; }
+        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state p {
+          margin: 0; }
+        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state a .tooltip-content {
+          right: -150px;
+          width: 300px; }
+          #content .last-updated-block .last-updated-and-active-block .induvidual-project-state a .tooltip-content:after {
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent; }
     #content .last-updated-block .view-baseline-history {
-      width: 50%;
-      text-align: right;
-      float: right;
-      display: block;
-      margin: 0; }
+      width: 100%;
+      text-align: left;
+      float: none;
+      display: inline-block;
+      margin: 0;
+      /* Styles for Link to Data.gov.au  */ }
       #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
         text-decoration: underline;
         font-weight: 400;
-        padding: 0; }
+        padding: 0;
+        display: inline-block;
+        color: #0d6c88;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 4px;
+        border-width: 1px;
+        border-color: #9fa5c5;
+        border-style: solid;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #dbe0e7;
+        box-sizing: border-box;
+        background-color: #f9fafc;
+        box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+        padding: 8px 14px; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
       #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
@@ -5050,7 +5121,12 @@ tweeners.
   check your menus here. do they look good?
   do they need tweaking?
   */
-  /* end .footer-links */ }
+  /* end .footer-links */
+  /* Styles for Block and Basic Page content*/
+  .page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+    padding: 0 7%; }
+    .page-block #content .field, .node-type-page #content #inner-content .field, .entity-bean .content .field {
+      padding: 0; } }
 /*********************
 TABLET & SMALLER LAPTOPS
 This is the average viewing window. So Desktops, Laptops, and
@@ -6699,7 +6775,70 @@ you can add resource intensive styles.
         width: auto;
         margin: -19px 0 0 397px; }
     #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li {
-      float: left; } }
+      float: left; }
+
+  #content .last-updated-block {
+    padding: 0 7%;
+    margin: 0 auto;
+    display: table;
+    margin-top: 25px;
+    margin-bottom: 10px; }
+    #content .last-updated-block .last-updated-and-active-block {
+      display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .last-updated-on {
+        width: 220px !important;
+        max-width: 970px;
+        float: left;
+        min-width: 0;
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .induvidual-project-state {
+        display: inline-block;
+        font-size: 14px;
+        color: #202b3d;
+        padding-left: 25px;
+        border-left: 1px dotted #d9dfe9; }
+        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state p {
+          margin: 0; }
+    #content .last-updated-block .view-baseline-history {
+      width: 36%;
+      text-align: right;
+      float: right;
+      display: inline-block;
+      margin: 0;
+      /* Styles for Link to Data.gov.au  */ }
+      #content .last-updated-block .view-baseline-history .view-baseline-link {
+        border-style: none;
+        text-decoration: underline;
+        font-weight: 400;
+        padding: 0;
+        display: inline-block;
+        color: #0d6c88;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 4px;
+        border-width: 1px;
+        border-color: #9fa5c5;
+        border-style: solid;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #dbe0e7;
+        box-sizing: border-box;
+        background-color: #f9fafc;
+        box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+        padding: 8px 14px; }
+        #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+          text-decoration: none; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+        right: 0;
+        bottom: -50px;
+        font-size: 12px;
+        width: 280px; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+        border-left: none;
+        border-right: none; } }
 /*********************
 DESKTOP
 This is the average viewing window. So Desktops, Laptops, and
@@ -6892,6 +7031,7 @@ you can add resource intensive styles.
     display: none; }
   #container #content .pane-last-updated .last-updated-block .last-updated-on {
     padding-left: 0; }
+<<<<<<< HEAD
   #container #content .pane-detailed-overview #ict-dashboard-detailed-overview h2 {
     margin-left: 0; }
   #container #content .pane-detailed-overview #ict-dashboard-detailed-overview #detailed-view-expenditure {
@@ -6899,6 +7039,228 @@ you can add resource intensive styles.
     padding-right: 0; }
   #container #content .pane-detailed-overview #ict-dashboard-detailed-overview .viz-number-of-benefits {
     padding-left: 0; } }
+=======
+
+  #content .last-updated-block {
+    padding: 0;
+    margin: 0 auto;
+    display: table;
+    margin-top: 25px;
+    margin-bottom: 10px; }
+    #content .last-updated-block .last-updated-and-active-block {
+      display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .last-updated-on {
+        width: 220px !important;
+        max-width: 970px;
+        float: left;
+        min-width: 0;
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .induvidual-project-state {
+        display: inline-block;
+        font-size: 14px;
+        color: #202b3d;
+        padding-left: 25px;
+        border-left: 1px dotted #d9dfe9; }
+        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state p {
+          margin: 0; }
+    #content .last-updated-block .view-baseline-history {
+      width: 30%;
+      text-align: right;
+      float: right;
+      display: inline-block;
+      margin: 0;
+      /* Styles for Link to Data.gov.au  */ }
+      #content .last-updated-block .view-baseline-history .view-baseline-link {
+        border-style: none;
+        text-decoration: underline;
+        font-weight: 400;
+        padding: 0;
+        display: inline-block;
+        color: #0d6c88;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 4px;
+        border-width: 1px;
+        border-color: #9fa5c5;
+        border-style: solid;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #dbe0e7;
+        box-sizing: border-box;
+        background-color: #f9fafc;
+        box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+        padding: 8px 14px; }
+        #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+          text-decoration: none; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+        right: 0;
+        bottom: -50px;
+        font-size: 12px;
+        width: 280px; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+        border-left: none;
+        border-right: none; }
+
+  /* Styles for Block and Basic Page content*/
+  .page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+    padding: 0;
+    font-family: "Open Sans", sans-serif; }
+    .page-block #content .field, .node-type-page #content #inner-content .field, .entity-bean .content .field {
+      padding: 0; }
+    .page-block #content table, .node-type-page #content #inner-content table, .entity-bean .content table {
+      font-family: "Open Sans", sans-serif;
+      color: #4e5365;
+      border: 1px solid #ddd;
+      width: 100% !important; }
+      .page-block #content table tr, .node-type-page #content #inner-content table tr, .entity-bean .content table tr {
+        line-height: 22px;
+        font-size: 14px; }
+        .page-block #content table tr th, .node-type-page #content #inner-content table tr th, .entity-bean .content table tr th {
+          background-color: #137992;
+          border: 1px solid #0a5f74;
+          color: #fff;
+          padding: 5px; }
+          .page-block #content table tr th p, .page-block #content table tr th h2, .page-block #content table tr th h3, .page-block #content table tr th h4, .page-block #content table tr th h5, .node-type-page #content #inner-content table tr th p, .node-type-page #content #inner-content table tr th h2, .node-type-page #content #inner-content table tr th h3, .node-type-page #content #inner-content table tr th h4, .node-type-page #content #inner-content table tr th h5, .entity-bean .content table tr th p, .entity-bean .content table tr th h2, .entity-bean .content table tr th h3, .entity-bean .content table tr th h4, .entity-bean .content table tr th h5 {
+            color: #fff; }
+        .page-block #content table tr td, .node-type-page #content #inner-content table tr td, .entity-bean .content table tr td {
+          padding: 5px;
+          border: 1px solid #ddd; }
+    .page-block #content blockquote, .node-type-page #content #inner-content blockquote, .entity-bean .content blockquote {
+      border-left: 2px solid #0d6c88;
+      padding-left: 15px;
+      position: relative;
+      font-style: italic;
+      margin-left: 80px; }
+      .page-block #content blockquote:before, .node-type-page #content #inner-content blockquote:before, .entity-bean .content blockquote:before {
+        content: "Note: ";
+        position: absolute;
+        left: -45px;
+        top: -6px;
+        color: #0d6c88;
+        font-style: italic;
+        font-weight: 600;
+        font-size: 14px; }
+    .page-block #content h2, .node-type-page #content #inner-content h2, .entity-bean .content h2 {
+      font-family: "Open Sans", sans-serif;
+      color: #0d6c88;
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 22px;
+      text-align: left; }
+    .page-block #content h3, .node-type-page #content #inner-content h3, .entity-bean .content h3 {
+      font-family: "Open Sans", sans-serif;
+      color: #202b3d;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 22px;
+      text-align: left; }
+    .page-block #content h4, .node-type-page #content #inner-content h4, .entity-bean .content h4 {
+      font-family: "Open Sans", sans-serif;
+      color: #202b3d;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 22px;
+      text-align: left; }
+    .page-block #content h5, .node-type-page #content #inner-content h5, .entity-bean .content h5 {
+      font-family: "Open Sans", sans-serif;
+      color: #202b3d;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 22px;
+      text-align: left;
+      font-style: italic;
+      text-transform: inherit;
+      letter-spacing: 0; }
+    .page-block #content p, .node-type-page #content #inner-content p, .entity-bean .content p {
+      color: #4e5365;
+      margin: 5px 0;
+      font-size: 14px;
+      line-height: 22px;
+      font-family: "Open Sans", sans-serif; }
+    .page-block #content a, .node-type-page #content #inner-content a, .entity-bean .content a {
+      color: #027e9c;
+      text-decoration: underline; }
+      .page-block #content a:focus, .page-block #content a:hover, .page-block #content a:visited, .node-type-page #content #inner-content a:focus, .node-type-page #content #inner-content a:hover, .node-type-page #content #inner-content a:visited, .entity-bean .content a:focus, .entity-bean .content a:hover, .entity-bean .content a:visited {
+        color: #027e9c !important;
+        text-decoration: none; }
+    .page-block #content a[href^="http"], .node-type-page #content #inner-content a[href^="http"], .entity-bean .content a[href^="http"] {
+      color: #027e9c;
+      text-decoration: underline; }
+      .page-block #content a[href^="http"]:focus, .page-block #content a[href^="http"]:hover, .page-block #content a[href^="http"]:visited, .node-type-page #content #inner-content a[href^="http"]:focus, .node-type-page #content #inner-content a[href^="http"]:hover, .node-type-page #content #inner-content a[href^="http"]:visited, .entity-bean .content a[href^="http"]:focus, .entity-bean .content a[href^="http"]:hover, .entity-bean .content a[href^="http"]:visited {
+        color: #027e9c !important;
+        text-decoration: none; }
+      .page-block #content a[href^="http"]:after, .node-type-page #content #inner-content a[href^="http"]:after, .entity-bean .content a[href^="http"]:after {
+        content: " ";
+        background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+        height: 10px;
+        width: 10px;
+        display: inline-block;
+        margin-left: 5px; }
+    .page-block #content ol, .node-type-page #content #inner-content ol, .entity-bean .content ol {
+      padding-left: 20px;
+      margin: 0;
+      counter-reset: item;
+      color: #4e5365; }
+      .page-block #content ol li, .node-type-page #content #inner-content ol li, .entity-bean .content ol li {
+        line-height: 22px;
+        text-indent: -10px;
+        color: #4e5365;
+        font-family: "Open sans", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        display: block; }
+        .page-block #content ol li p, .node-type-page #content #inner-content ol li p, .entity-bean .content ol li p {
+          margin: 0 0 0 11px; }
+        .page-block #content ol li p:first-of-type, .node-type-page #content #inner-content ol li p:first-of-type, .entity-bean .content ol li p:first-of-type {
+          display: inline-block;
+          margin: 0 0 0 10px; }
+        .page-block #content ol li:before, .node-type-page #content #inner-content ol li:before, .entity-bean .content ol li:before {
+          content: counter(item) ". ";
+          counter-increment: item;
+          color: #0d6c88; }
+        .page-block #content ol li ol, .node-type-page #content #inner-content ol li ol, .entity-bean .content ol li ol {
+          counter-reset: alpha;
+          margin: 0 0 0.75em 10px; }
+          .page-block #content ol li ol li:before, .node-type-page #content #inner-content ol li ol li:before, .entity-bean .content ol li ol li:before {
+            content: counter(alpha,lower-alpha) ". ";
+            counter-increment: alpha; }
+    .page-block #content ul, .node-type-page #content #inner-content ul, .entity-bean .content ul {
+      padding: 0;
+      margin: 0;
+      padding-left: 22px; }
+      .page-block #content ul li, .node-type-page #content #inner-content ul li, .entity-bean .content ul li {
+        text-indent: -10px;
+        padding-left: 14px;
+        font-family: "Open sans", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #4e5365;
+        list-style: none;
+        line-height: 22px; }
+        .page-block #content ul li p, .node-type-page #content #inner-content ul li p, .entity-bean .content ul li p {
+          margin: 0 0 0 10px; }
+        .page-block #content ul li p:first-of-type, .node-type-page #content #inner-content ul li p:first-of-type, .entity-bean .content ul li p:first-of-type {
+          display: inline-block; }
+        .page-block #content ul li:before, .node-type-page #content #inner-content ul li:before, .entity-bean .content ul li:before {
+          font-size: 20px;
+          content: "• ";
+          display: inline-block;
+          width: 10px;
+          height: 5px;
+          vertical-align: middle;
+          line-height: 1; }
+        .page-block #content ul li ul li:before, .node-type-page #content #inner-content ul li ul li:before, .entity-bean .content ul li ul li:before {
+          content: "• ";
+          line-height: 1;
+          color: #55beaf; }
+        .page-block #content ul li ul li ul li:before, .node-type-page #content #inner-content ul li ul li ul li:before, .entity-bean .content ul li ul li ul li:before {
+          content: "• ";
+          line-height: 1;
+          color: #aabcb9; } }
+>>>>>>> 495446d2770999d4e7bad6968a2847320722963d
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
