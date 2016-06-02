@@ -39,10 +39,12 @@ $diff = !empty($diff['field_benefits_realised']) ? $diff['field_benefits_realise
       <ul>
         <li>
           <div class="label"><?php print t('Commentary:'); ?></div>
-          <?php if (!empty($diff[$benefit->item_id]['field_commentary'])) : ?>
-            <?php print itdash_edited_tooltip_render($diff[$benefit->item_id]['field_commentary']); ?>
+          <?php if (isset($diff[$benefit->item_id]['field_commentary'])) : ?>
+            <?php print itdash_edited_tooltip_render($diff[$benefit->item_id]['field_commentary'], '', '', TRUE); ?>
           <?php endif; ?>
-          <div class="benefit"><?php print $benefit_wrap->field_commentary->value(); ?></div>
+          <div class="benefit"><?php print $benefit_wrap->field_commentary->value() ?
+              $benefit_wrap->field_commentary->value() :
+              '-'; ?></div>
         </li>
         <li>
           <div class="label"><?php print t('Start date:'); ?></div>

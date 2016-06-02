@@ -47,8 +47,8 @@
     <?php if (!$viz_preview) : ?>
       <div class="row">
         <div class="label">
-          <?php if (!empty($diff['field_actual_level_of_project_co'])) : ?>
-            <?php print itdash_edited_tooltip_render($diff['field_actual_level_of_project_co'], '', '%'); ?>
+          <?php if (isset($diff['field_actual_level_of_project_co'])) : ?>
+            <?php print itdash_edited_tooltip_render($diff['field_actual_level_of_project_co'], '', '%', TRUE); ?>
           <?php endif; ?>
           <?php print $field_actual_level_of_project_co['meta']['#title']; ?>
           <?php if (!empty($field_actual_level_of_project_co['meta']['#description']) && $view_mode != 'print') : ?>
@@ -72,8 +72,8 @@
 
       <div class="row">
         <div class="label">
-          <?php if (!empty($diff['field_forecast_level_of_project_'])) : ?>
-            <?php print itdash_edited_tooltip_render($diff['field_forecast_level_of_project_'], '', '%'); ?>
+          <?php if (isset($diff['field_forecast_level_of_project_'])) : ?>
+            <?php print itdash_edited_tooltip_render($diff['field_forecast_level_of_project_'], '', '%', TRUE); ?>
           <?php endif; ?>
           <?php print $field_forecast_level_of_project_['meta']['#title']; ?>
           <?php if (!empty($field_forecast_level_of_project_['meta']['#description']) && $view_mode != 'print') : ?>
@@ -229,8 +229,8 @@
     </div>
     <div class="row">
       <div class="label">
-        <?php if (!empty($diff['field_current_financial_benefits'])) : ?>
-          <?php print itdash_edited_tooltip_render(number_format($diff['field_current_financial_benefits'], 2, '.', ''), '$', 'm'); ?>
+        <?php if (isset($diff['field_current_financial_benefits'])) : ?>
+          <?php print itdash_edited_tooltip_render(number_format($diff['field_current_financial_benefits'], 2, '.', ''), '$', 'm', TRUE); ?>
         <?php endif; ?>
         <?php print $field_current_financial_benefits['meta']['#title']; ?>
         <?php if (!empty($field_current_financial_benefits['meta']['#description']) && $view_mode != 'print') : ?>
@@ -251,8 +251,8 @@
 
     <div class="row">
       <div class="label">
-        <?php if (!empty($diff['field_estimated_value_of_benefit'])) : ?>
-          <?php print itdash_edited_tooltip_render(number_format($diff['field_estimated_value_of_benefit'], 2, '.', ''), '$', 'm'); ?>
+        <?php if (isset($diff['field_estimated_value_of_benefit'])) : ?>
+          <?php print itdash_edited_tooltip_render(number_format($diff['field_estimated_value_of_benefit'], 2, '.', ''), '$', 'm', TRUE); ?>
         <?php endif; ?>
         <?php print $field_estimated_value_of_benefit['meta']['#title']; ?>
         <?php if (!empty($field_estimated_value_of_benefit['meta']['#description']) && $view_mode != 'print') : ?>
@@ -315,8 +315,8 @@
 
     <div class="row">
       <div class="label">
-        <?php if (!empty($diff['field_entity_comments'])) : ?>
-          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']['value'], '', '', FALSE, TRUE); ?>
+        <?php if (isset($diff['field_entity_comments'])) : ?>
+          <?php print itdash_edited_tooltip_render($diff['field_entity_comments']['value'], '', '', TRUE, TRUE); ?>
         <?php endif; ?>
         <?php print $field_entity_comments['meta']['#title']; ?>
         <?php if (!empty($field_entity_comments['meta']['#description']) && $view_mode != 'print') : ?>

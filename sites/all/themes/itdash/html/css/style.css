@@ -3288,6 +3288,9 @@ div.tooltip-edit {
       border-right: 30px solid transparent;
       left: 40px; }
 
+.tooltip-edit span.tooltip-content p {
+  color: #fff; }
+
 #print-links-container {
   text-align: right; }
   #print-links-container .pdf_button {
