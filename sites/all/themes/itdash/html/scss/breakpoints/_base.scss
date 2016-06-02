@@ -72,6 +72,153 @@ LAYOUT & GRID STYLES
 #container {
 	width: 100%;
 	overflow: hidden;
+	#content {
+		margin-top: 0;
+		.pane-overview-number-indicators,
+		.pane-home-projects {
+			#ict-dashboard-overview-number-indicators {
+				padding-bottom: 20px;
+				#overview-graphs {
+					padding-right: 0;
+					#overview-expenditure-switch {
+						margin-top: 10px;
+						.sbHolder {
+							max-width: 78%;
+							float: right;
+							margin-right: 0;
+							margin-left: 0;
+						}
+					}
+					#expenditure_legend {
+						margin-bottom: 0;
+						float: left;
+						.bar-legend {
+							margin-bottom: 30px;
+						}
+					}
+				}
+				#ict-dashboard-numbers,
+				#ict-dashboard-numbers1 {
+					border-top: 1px solid #D8DEEB;
+					border-bottom: 1px solid #D8DEEB;
+					padding-top: 30px;
+					padding-bottom: 30px;
+					margin-bottom: 30px;
+					float: left;
+					width: 100%;
+					.label {
+						margin-right: 5px;
+					}
+					.big-number {
+
+					}
+				}
+				#ict-dashboard-numbers1 {
+
+				}
+				#ict-dashboard-numbers {
+					border-bottom: 0;
+					padding-bottom: 0;
+					margin-bottom: 0;
+					.big-number {
+						border-bottom: 1px solid #D8DEEB;
+						margin-bottom: 20px;
+						padding-bottom: 20px;
+					}
+				}
+				.graph-schedule-status {
+					float: left;
+					#project-schedule-status-graph {
+						margin-top: 10px;
+					}
+					#statuses_legend {
+						.bar-legend {
+							padding-left: 0;
+							margin-top: 0;
+							li {
+								margin-right: 30px;
+							}
+						}
+					}
+				}
+			}
+			#ict-home-projects-table-id {
+				padding-right: 20px;
+				padding-left: 20px;
+				.pager-tags-top {
+					.item-list {
+						display: none;
+					}
+				}
+				.sort-direction-desc {
+					.col-num-entity {
+						width: auto;
+					}
+				}
+				.sbHolder {
+					max-width: 78%;
+					width: 78%;
+					float: right;
+				}
+				.table-config-bar {
+					.item-list {
+						margin-top: 20px;
+						.pager {
+							.pager-first,
+							.pager-previous,
+							.pager-next,
+							.pager-last {
+								display: none;
+							}
+						}
+					}
+				}
+				.ict-home-projects-table-table {
+					border-collapse: separate;
+					.col-num-budget,
+					.col-num-benefits {
+						display: none;
+					}
+					.ict-sort-link-desktop {
+						display: none;
+					}
+					.ict-sort-link-mobile {
+						&:before {
+							top: 6px;
+						}
+						&:after {
+							top: -3px;
+						}
+					}
+					tr {
+						td {
+							padding-left: 2px;
+							padding-right: 5px;
+						}
+						td.schedule-status-col {
+							padding-left: 30px;
+							&:before {
+								left: 5px;
+							}
+						}
+					}
+					th {
+						padding-bottom: 15px;
+					}
+				}
+				table.viz-filtered-projects {
+					tr {
+						td {
+							padding-left: 10px;
+						}
+					}
+				}
+			}
+		}
+		.pane-last-updated {
+			padding: 0;
+		}
+	}
 }
 
 .wrap {
@@ -167,7 +314,8 @@ HEADER STYLES
 	padding-right: 20px;
 
 	#logo {
-		margin: 30px 0 15px;
+		margin-top: 30px;
+		margin-bottom: 5px;
 		overflow: hidden;
 		font-size: 34px;
 		text-transform: uppercase;
@@ -183,7 +331,7 @@ HEADER STYLES
 		span {
 			font-size: 28px;
 			line-height: 28px;
-			margin-left: 15px;
+			margin-left: 14px;
 			margin-top: 5px;
 			float: left;
 			a {
@@ -544,9 +692,7 @@ POSTS & CONTENT STYLES
 		padding: 0 20px;
 		.last-updated-on  {
 			width: 100%!important;
-			margin-bottom: 20px;
-			padding-bottom: 25px;
-			border-bottom: 1px dotted #d8dee8;
+			padding-bottom: 15px;
 			p {
 				color:  #202b3d;
 			}
@@ -554,6 +700,28 @@ POSTS & CONTENT STYLES
 				font-weight: 700;
 			}
 		}
+		.induvidual-project-state {
+	    	display: inline-block;
+	    	font-size: 14px;
+	    	color: #202b3d;
+	    	margin-bottom: 20px;
+	    	border-top: 1px dotted #d9dfe9;
+	    	width: 100%;
+	    	padding-top: 15px;
+	    	p {
+	    		margin: 0;
+	    	}
+			a {
+				.tooltip-content {
+					right: -172px;
+					width: 280px;
+					&:after {
+						border-left: none;
+						border-right: none;
+					}
+				}
+			}
+	    }
 		.view-baseline-history {
 			float: none;
 			text-align: left;
@@ -573,6 +741,11 @@ POSTS & CONTENT STYLES
 				background-color:  #f9fafc;
 				box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
 				padding: 8px 40px;
+				display: inline-block;
+				&:hover {
+					background-color: #0b626c;
+			    	color: #fff;
+				}
 			}
 			.view-baseline-tooltip {
 				span {
@@ -586,8 +759,35 @@ POSTS & CONTENT STYLES
 					border-right: none;
 				}
 			}
+/* Styles for Link to Data.gov.au  */
+			// .external-link-to-data-gov{
+			// 	font-size: 14px;
+			// 	text-align: right;
+		 //  		a {
+		 //  			color: #0d6c88;
+			//   		margin-right: 26px;
+			// 		margin-top: 15px;
+			// 		border-style: none;
+			// 	    text-decoration: underline;
+			// 	    font-weight: 400;
+			// 	    padding: 0;
+			// 	    display: inline-block;
+			// 	    &:hover {
+			// 	    	text-decoration: none;
+			// 	    }
+			// 	    &:after {
+	  // 			    content: " ";
+			// 	    background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+			// 	    height: 10px;
+			// 	    width: 10px;
+			// 	    display: inline-block;
+			// 	    margin-left: 7px;
+	  // 				}
+		 //  		}
+
+		 //  	}
 		}
-	}	
+	}
 	#inner-content {
 		.individual-project-page {
 			margin: 20px;
@@ -774,6 +974,166 @@ POSTS & CONTENT STYLES
 					}
 				}
 
+			}
+		}
+	}
+}
+#content {
+	#ict-filtered-projects {
+		.viz-filtered-projects {
+			tr[data-expanded="true"] {
+				td {
+					border-bottom: none;
+				}
+			}
+		}
+		padding: 0 20px;
+		.footable-header {
+			.viz-f-p-2 {
+				right: -249px;
+				width: 280px;
+				&:after {
+					border-left: none;
+					border-right: none;
+				}
+			}
+			.viz-tooltips-row {
+				position: absolute;
+				bottom: 15px;
+				margin-left: 0;
+    			margin-top: 4px;
+			}
+			.footable-toggle {
+				display: none;
+			}
+			a.ict-sort-link {
+				margin-left: 0!important;
+				&:after {
+					top: 15px;
+				}
+				&:before {
+					top: 25px;
+				}
+			}
+		}
+		tr {
+			td {
+				border-bottom: 2px dotted #f0f4fa;
+				padding-bottom: 14px !important;
+			}
+			th {
+				padding: 7px 25px 42px 14px;
+			}
+		}
+		span.footable-toggle.fooicon.fooicon-minus {
+			opacity: 1;
+			&::before {
+				content: ' ';
+			    background-image: url(/sites/all/themes/itdash/html/images/minus.png);
+			    width: 26px;
+			    height: 26px;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			}
+			& + a {
+				margin-left: 40px;
+			}
+		}
+		span.footable-toggle.fooicon.fooicon-plus {
+			opacity: 1;
+			&::before {
+				content: ' ';
+			    background-image: url(/sites/all/themes/itdash/html/images/plus.png);
+			    width: 26px;
+			    height: 26px;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			}
+			& + a {
+				margin-left: 40px;
+			}
+		}		
+		.footable-detail-row {
+			td:first-child {
+				padding-left: 40px;
+				padding-right: 10px;
+			}
+			.footable-details {
+				.viz-f-p-3 {
+					right: -35px;
+		    		width: 280px;
+				}
+				.viz-f-p-4 {
+					right: -60px;
+		    		width: 280px;
+				}
+				.viz-f-p-5 {
+					right: -57px;
+		    		width: 280px;
+				}
+				.viz-f-p-6 {
+					right: -129px;
+		    		width: 280px;
+				}
+				.viz-f-p-7 {
+					right: -15px;
+		    		width: 280px;
+				}
+				.viz-f-p-8 {
+					right: -71px;
+		    		width: 280px;
+				}
+				.viz-tooltips-row {
+					margin-left: 10px;
+					margin-top: 3px;
+					span:after {
+						border-left: none;
+						border-right: none;
+					}
+				}
+				tbody {
+					tr:first-child {
+						display: none;
+					}
+				}
+				tr {
+					th {
+						background-color: #fff;
+						color: #202b3d;
+						border-left: none;
+						display: block;
+						width: 100%;
+						padding-right: 0;
+						display: flex;
+						padding-bottom: 7px;
+						font-size: 14px;
+
+					}
+					td {
+						display: block !important;
+						width: auto;
+						padding-right: 0;
+						padding-top: 0;
+						border-bottom: none;
+						height: auto;
+						padding-bottom: 12px;
+						word-break: break-word;
+						.ict-project-button {
+							padding-top: 7px;
+							padding-bottom: 8px;
+							a::before {
+								left: 44%;
+							}
+						}
+
+					}
+					.schedule-status-col::before {
+						top: 0;
+						margin-top: 4px;					
+					}
+				}
 			}
 		}
 	}
@@ -1481,4 +1841,80 @@ FOOTER STYLES
 .panel-3col .panel-col-first {
   float: left;
   width: 0%;
+}
+
+/*********************
+DETAILED OVERVIEW STYLES
+*********************/
+
+#container {
+	#content {
+		margin-top: 0;
+		.page-title.dotbg {
+			background-color: #1e2635;
+			.inner-title-content h1 {
+				font-family: $opensans;
+				color:  #c8f68f;
+				font-size: 28px;/* Approximation due to font substitution */
+				font-weight: 400;
+				line-height: 34px;/* Approximation due to font substitution */
+				text-align: left;
+			}
+		}
+		#ict-dashboard-detailed-overview {
+			.section-title {
+				h2 {
+					margin-left: 20px;
+					margin-right: 20px;
+					margin-bottom: 0;
+					font-family: $opensans;
+					color:  #0c6c88;
+					font-size: 24px;/* Approximation due to font substitution */
+					font-weight: 600;
+					line-height: 29px;/* Approximation due to font substitution */
+					text-align: left;
+				}
+			}
+			#detailed-view-expenditure {
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+			#detailed-view-schedule-status {
+				margin-top: 20px;
+				#statuses_legend {
+					.bar-legend li {
+						float: none;
+						.noofproj,
+						.curqua {
+							text-align: right;
+						}
+					}
+				}
+			}
+			#detailed_schedule_chart_current {
+				margin-left: 7px;
+			}
+			.benefits_chart_divs {
+				overflow: hidden;
+				#benefits_chart_div {
+					padding-left: 12px;
+					padding-right: 20px;
+				}
+				#benefits_legend {
+					width: 100%;
+					margin: 0;
+					color: #4e5365;
+					.bar-legend {
+						padding-left: 20px;
+						margin-top: 8px;
+						color: #4e5365;
+					}
+				}
+			}
+			.viz-number-of-benefits {
+				padding-left: 20px;
+				font-size: 13px;
+			}
+		}
+	}
 }

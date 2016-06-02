@@ -284,14 +284,14 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
   );
 
-  // only Finance Admin can remve benefits
+  // only Finance Admin can remove benefits
   foreach ($form['field_benefits_realised']['und'] as $key => $value) {
     if(is_numeric($key)) {
       if (empty($form['field_benefits_realised']['und'][$key]['#entity']->field_removed) && !array_key_exists(ICT_FINANCE_ADMIN_ROLE,$user->roles)) {
         unset($form['field_benefits_realised']['und'][$key]['field_status']['und']['#options']['removed']);
       }
       // and they should stay removed if someone else is updating the project
-      else {
+      elseif (!empty($form['field_benefits_realised']['und'][$key]['#entity']->field_removed)) {
         $form['field_benefits_realised']['und'][$key]['field_status']['und']['#default_value'] = array('removed');
       }
     }
@@ -541,7 +541,7 @@ function ict_update_all_fields_required_validate_page_preview($node) {
   $project = node_load($project_id, $project_vid);
 
   $fields = array(
-    'text' => array(
+    'number' => array(
       'field_forecast_level_of_project_',
       'field_actual_level_of_project_co',
       'field_current_financial_benefits',
@@ -553,7 +553,7 @@ function ict_update_all_fields_required_validate_page_preview($node) {
   foreach($fields as $type => $subfields) {
     foreach($subfields as $field) {
       if ((empty($node->{$field}['und'][0]['tid']) && $type == 'term')
-        || (empty($node->{$field}['und'][0]['value']) && $type == 'text')) {
+        || (empty($node->{$field}) && $type == 'number')) {
         $field_info = field_info_instance('node', $field, 'update');
         $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
       }
