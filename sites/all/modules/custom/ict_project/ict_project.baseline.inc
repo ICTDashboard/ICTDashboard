@@ -357,7 +357,7 @@ function ict_project_baseline_get_admin_user_emails ($node) {
   );
 }
 
-function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE, $prefix = '', $suffix = '', $finance = FALSE) {
+function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE, $prefix = '', $suffix = '', $finance = FALSE, $percent = FALSE) {
   $values = array();
   foreach ($items as $key => $item) {
     // exclude field meta data from the display
@@ -389,6 +389,12 @@ function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALS
     if ($finance) {
       $val = number_format($val, 2, '.', '');
     }
+
+    if ($percent) {
+      $values[] = $val;
+      continue;
+    }
+
     $values[] = $val ? $prefix . $val . $suffix : '';
   }
   $default_value = $not_applicable ? t('Not Applicable') : '-';
@@ -402,7 +408,6 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
     'field_brief_project_summary',
     'field_responsible_officer_name',
     'field_resp_officer_position',
-    'field_predicted_project_benefit',
   );
   $term = array(
     'field_government_entity_name',
@@ -412,6 +417,9 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
   $dates = array(
     'field_start_date',
     'field_original_completion_date',
+  );
+  $number = array(
+    'field_predicted_project_benefit',
   );
   foreach($term as $field) {
     if (empty($form_state['values'][$field]['und'][0]['tid'])) {
@@ -425,6 +433,11 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
   }
   foreach($dates as $field) {
     if (empty($form_state['values'][$field]['und'][0]['value'])) {
+      form_set_error($field . '][und][0', 'Field <em>' . $form[$field]['und'][0]['#title'] . '</em> is required.');
+    }
+  }
+  foreach($number as $field) {
+    if (empty($form_state['values'][$field])) {
       form_set_error($field . '][und][0', 'Field <em>' . $form[$field]['und'][0]['#title'] . '</em> is required.');
     }
   }
@@ -455,7 +468,6 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
       'field_brief_project_summary',
       'field_responsible_officer_name',
       'field_resp_officer_position',
-      'field_predicted_project_benefit',
     ),
     'term' => array(
       'field_government_entity_name',
@@ -466,12 +478,16 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
       'field_start_date',
       'field_original_completion_date',
     ),
+    'number' => array(
+      'field_predicted_project_benefit',
+    )
   );
   foreach($fields as $type => $subfields) {
     foreach($subfields as $field) {
       if ((empty($node->{$field}['und'][0]['tid']) && $type == 'term')
         || (empty($node->{$field}['und'][0]['value']) && $type == 'text')
-        || (empty($node->{$field}['und'][0]['value']) && $type == 'dates')) {
+        || (empty($node->{$field}['und'][0]['value']) && $type == 'dates')
+        || (empty($node->{$field}) && $type == 'number')) {
         $field_info = field_info_instance('node', $field, 'project');
         $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
       }
@@ -960,4 +976,10 @@ function ict_project_get_all_unpublished_projects() {
   $unpublished = $query->execute()->fetchAllKeyed(0, 0);
   
   return $unpublished;
+}
+
+function ict_project_project_active_from_date($nid) {
+  $baseline = node_load($nid);
+  $baseline->first_update = ict_project_get_first_approved_update($nid);
+  return $baseline;
 }

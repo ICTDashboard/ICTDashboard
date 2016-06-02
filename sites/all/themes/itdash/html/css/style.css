@@ -3944,17 +3944,32 @@ POSTS & CONTENT STYLES
   padding: 0 20px; }
   #content .last-updated-block .last-updated-on {
     width: 100% !important;
-    margin-bottom: 20px;
-    padding-bottom: 25px;
-    border-bottom: 1px dotted #d8dee8; }
+    padding-bottom: 15px; }
     #content .last-updated-block .last-updated-on p {
       color: #202b3d; }
     #content .last-updated-block .last-updated-on strong {
       font-weight: 700; }
+  #content .last-updated-block .induvidual-project-state {
+    display: inline-block;
+    font-size: 14px;
+    color: #202b3d;
+    margin-bottom: 20px;
+    border-top: 1px dotted #d9dfe9;
+    width: 100%;
+    padding-top: 15px; }
+    #content .last-updated-block .induvidual-project-state p {
+      margin: 0; }
+    #content .last-updated-block .induvidual-project-state a .tooltip-content {
+      right: -172px;
+      width: 280px; }
+      #content .last-updated-block .induvidual-project-state a .tooltip-content:after {
+        border-left: none;
+        border-right: none; }
   #content .last-updated-block .view-baseline-history {
     float: none;
     text-align: left;
-    width: 100%; }
+    width: 100%;
+    /* Styles for Link to Data.gov.au  */ }
     #content .last-updated-block .view-baseline-history .view-baseline-link {
       color: #0d6c88;
       font-weight: 700;
@@ -3969,7 +3984,11 @@ POSTS & CONTENT STYLES
       box-sizing: border-box;
       background-color: #f9fafc;
       box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
-      padding: 8px 40px; }
+      padding: 8px 40px;
+      display: inline-block; }
+      #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+        background-color: #0b626c;
+        color: #fff; }
     #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
       right: 0;
       bottom: 28px;
@@ -4668,25 +4687,60 @@ tweeners.
     display: table;
     margin-top: 25px;
     margin-bottom: 10px; }
-    #content .last-updated-block .last-updated-on {
-      width: 50% !important;
-      max-width: 970px;
-      float: left;
-      min-width: 0;
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0; }
+    #content .last-updated-block .last-updated-and-active-block {
+      display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .last-updated-on {
+        width: 220px !important;
+        max-width: 970px;
+        float: left;
+        min-width: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .induvidual-project-state {
+        display: inline-block;
+        font-size: 14px;
+        color: #202b3d;
+        padding-left: 25px;
+        border-left: 1px dotted #d9dfe9;
+        border-top: none;
+        width: auto;
+        padding-top: 0; }
+        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state p {
+          margin: 0; }
+        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state a .tooltip-content {
+          right: -150px;
+          width: 300px; }
+          #content .last-updated-block .last-updated-and-active-block .induvidual-project-state a .tooltip-content:after {
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent; }
     #content .last-updated-block .view-baseline-history {
-      width: 50%;
-      text-align: right;
-      float: right;
-      display: block;
-      margin: 0; }
+      width: 100%;
+      text-align: left;
+      float: none;
+      display: inline-block;
+      margin: 0;
+      /* Styles for Link to Data.gov.au  */ }
       #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
         text-decoration: underline;
         font-weight: 400;
-        padding: 0; }
+        padding: 0;
+        display: inline-block;
+        color: #0d6c88;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 4px;
+        border-width: 1px;
+        border-color: #9fa5c5;
+        border-style: solid;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #dbe0e7;
+        box-sizing: border-box;
+        background-color: #f9fafc;
+        box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+        padding: 8px 14px; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
       #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
@@ -6477,7 +6531,70 @@ you can add resource intensive styles.
       #ict-basic-page form .form-actions .form-submit:hover {
         background-position: 0 -41px; }
   #ict-basic-page form .form-required {
-    display: none; } }
+    display: none; }
+
+  #content .last-updated-block {
+    padding: 0 7%;
+    margin: 0 auto;
+    display: table;
+    margin-top: 25px;
+    margin-bottom: 10px; }
+    #content .last-updated-block .last-updated-and-active-block {
+      display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .last-updated-on {
+        width: 220px !important;
+        max-width: 970px;
+        float: left;
+        min-width: 0;
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .induvidual-project-state {
+        display: inline-block;
+        font-size: 14px;
+        color: #202b3d;
+        padding-left: 25px;
+        border-left: 1px dotted #d9dfe9; }
+        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state p {
+          margin: 0; }
+    #content .last-updated-block .view-baseline-history {
+      width: 36%;
+      text-align: right;
+      float: right;
+      display: inline-block;
+      margin: 0;
+      /* Styles for Link to Data.gov.au  */ }
+      #content .last-updated-block .view-baseline-history .view-baseline-link {
+        border-style: none;
+        text-decoration: underline;
+        font-weight: 400;
+        padding: 0;
+        display: inline-block;
+        color: #0d6c88;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 4px;
+        border-width: 1px;
+        border-color: #9fa5c5;
+        border-style: solid;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #dbe0e7;
+        box-sizing: border-box;
+        background-color: #f9fafc;
+        box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+        padding: 8px 14px; }
+        #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+          text-decoration: none; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+        right: 0;
+        bottom: -50px;
+        font-size: 12px;
+        width: 280px; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+        border-left: none;
+        border-right: none; } }
 /*********************
 DESKTOP
 This is the average viewing window. So Desktops, Laptops, and
@@ -6642,7 +6759,70 @@ you can add resource intensive styles.
   #container #content .pane-home-projects #ict-home-projects-table-id .ict-home-projects-table-table .ict-sort-link-mobile {
     display: none; }
   #container #content .pane-last-updated .last-updated-block .last-updated-on {
-    padding-left: 0; } }
+    padding-left: 0; }
+
+  #content .last-updated-block {
+    padding: 0;
+    margin: 0 auto;
+    display: table;
+    margin-top: 25px;
+    margin-bottom: 10px; }
+    #content .last-updated-block .last-updated-and-active-block {
+      display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .last-updated-on {
+        width: 220px !important;
+        max-width: 970px;
+        float: left;
+        min-width: 0;
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        display: inline-block; }
+      #content .last-updated-block .last-updated-and-active-block .induvidual-project-state {
+        display: inline-block;
+        font-size: 14px;
+        color: #202b3d;
+        padding-left: 25px;
+        border-left: 1px dotted #d9dfe9; }
+        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state p {
+          margin: 0; }
+    #content .last-updated-block .view-baseline-history {
+      width: 30%;
+      text-align: right;
+      float: right;
+      display: inline-block;
+      margin: 0;
+      /* Styles for Link to Data.gov.au  */ }
+      #content .last-updated-block .view-baseline-history .view-baseline-link {
+        border-style: none;
+        text-decoration: underline;
+        font-weight: 400;
+        padding: 0;
+        display: inline-block;
+        color: #0d6c88;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 4px;
+        border-width: 1px;
+        border-color: #9fa5c5;
+        border-style: solid;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #dbe0e7;
+        box-sizing: border-box;
+        background-color: #f9fafc;
+        box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+        padding: 8px 14px; }
+        #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
+          text-decoration: none; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+        right: 0;
+        bottom: -50px;
+        font-size: 12px;
+        width: 280px; }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
+        border-left: none;
+        border-right: none; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
