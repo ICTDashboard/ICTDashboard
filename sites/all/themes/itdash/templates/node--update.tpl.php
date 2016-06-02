@@ -64,7 +64,7 @@
           <?php endif; ?>
         </div>
         <div class="text">
-          <?php foreach (_ict_project_baseline_get_simple_values($field_actual_level_of_project_co, FALSE, '', '%') as $value) : ?>
+          <?php foreach (_ict_project_baseline_get_simple_values($field_actual_level_of_project_co, FALSE, '', '%', FALSE, TRUE) as $value) : ?>
             <p><?php print $value; ?></p>
           <?php endforeach; ?>
         </div>
@@ -89,7 +89,7 @@
           <?php endif; ?>
         </div>
         <div class="text">
-          <?php foreach (_ict_project_baseline_get_simple_values($field_forecast_level_of_project_, FALSE, '', '%') as $value) : ?>
+          <?php foreach (_ict_project_baseline_get_simple_values($field_forecast_level_of_project_, FALSE, '', '%', FALSE, TRUE) as $value) : ?>
             <p><?php print $value; ?></p>
           <?php endforeach; ?>
         </div>
