@@ -75,7 +75,7 @@ function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $updat
       if (!empty($array_difference)) {
         $diff[$key] = $project->{$key}['und'];
       }
-      else if (empty($array_project)) {
+      else if (empty($array_prev_update) && !empty($array_last_update)) {
         $diff[$key] = '-';
       }
     }
