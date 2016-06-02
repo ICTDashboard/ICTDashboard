@@ -5334,10 +5334,12 @@ you can add resource intensive styles.
     #content .dotbg {
       background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
       overflow: hidden; }
-    #content .page-title .inner-title-content h1 {
-      color: #c8f68f;
-      font-size: 34px;
-      font-weight: 400; }
+    #content .page-title {
+      padding-left: 20px; }
+      #content .page-title .inner-title-content h1 {
+        color: #c8f68f;
+        font-size: 34px;
+        font-weight: 400; }
     #content .welcome {
       padding: 20px 20px; }
       #content .welcome h1 {
