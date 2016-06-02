@@ -2227,3 +2227,23 @@ DETAILED OVERVIEW STYLES
 	    }
 	}
 }
+
+.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+	blockquote {
+		border-left: 2px solid #0d6c88;
+		padding-left: 15px;
+		position: relative;
+		font-style: italic;
+		margin-left: 80px;
+		&:before {
+		  content: "Note: ";
+		  position: absolute;
+		  left: -45px;
+		  top: -6px;
+		  color: #0d6c88;
+		  font-style: italic;
+		  font-weight: 600;
+		  font-size: 14px;
+		}
+	}
+}
