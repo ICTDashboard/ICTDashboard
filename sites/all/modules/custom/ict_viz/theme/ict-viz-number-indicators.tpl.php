@@ -4,9 +4,9 @@
       <div  id="overview-graphs">
         <div class="label">
           <?php print t('Expenditure and Budget'); ?>
-          <a href="javascript:void(0);" class="tooltip budget-tooltip">
+          <a href="javascript:void(0);" class="tooltip-custom budget-tooltip">
             <i class="tooltip-icon"></i>
-              <span class="tooltip-content">
+              <span class="custom-tooltip-content">
                 <?php print t('Expenditure to date and budget across all active projects, by current financial year or total across all years.'); ?>
               </span>
           </a>
@@ -47,63 +47,62 @@
             </li>
           </ul>
         </div>
-
-        <div class="row">
-          <div class="label">
-            <?php print t('Projects Schedule Status'); ?>
-            <a href="javascript:void(0);" class="tooltip">
-              <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print t('A summary of schedule status for all active projects compared to their planned schedule.'); ?>
-            </span>
-            </a>
-          </div>
-          <div id="project-schedule-status-graph"></div>
-          <div class="legend" id="statuses_legend">
-            <ul class="bar-legend">
-              <li>
-                <span style="background-color:<?php print $project_statuses['behind_schedule']['color']; ?>"></span>
-                <?php print t('Behind Schedule'); ?>
-              </li>
-              <li>
-                <span style="background-color:<?php print $project_statuses['on_track']['color']; ?>"></span>
-                <?php print t('On Track'); ?>
-              </li>
-              <li>
-                <span style="background-color:<?php print $project_statuses['ahead_schedule']['color']; ?>"></span>
-                <?php print t('Ahead of Schedule'); ?>
-              </li>
-              <li>
-                <b>#</b> <?php print t('No. of Projects'); ?>
-              </li>
-            </ul>
-          </div>
-        </div>
-
       </div>
     </div>
+    <div class="t-1of3 d-1of3" id="ict-dashboard-numbers1">
+      <div class="label">
+        <?php print t('Number of Active Projects'); ?>
+        <a href="javascript:void(0);" class="tooltip-custom">
+          <i class="tooltip-icon"></i>
+        <span class="custom-tooltip-content">
+          <?php print t('The number of ICT-enabled projects with ICT costs of $10 million or more published on the Dashboard.'); ?>
+        </span>
+        </a>
+      </div>
+      <div class="big-number">
+        <?php print l($number_of_projects, 'dashboard-projects', array('attributes' => array('title' => t('View all projects')))) ?>
+      </div>
+    </div>
+
+    <div class="row graph-schedule-status">
+      <div class="label">
+        <?php print t('Projects Schedule Status'); ?>
+        <a href="javascript:void(0);" class="tooltip-custom">
+          <i class="tooltip-icon"></i>
+        <span class="custom-tooltip-content">
+          <?php print t('A summary of schedule status for all active projects compared to their planned schedule.'); ?>
+        </span>
+        </a>
+      </div>
+      <div id="project-schedule-status-graph"></div>
+      <div class="legend" id="statuses_legend">
+        <ul class="bar-legend">
+          <li>
+            <span style="background-color:<?php print $project_statuses['behind_schedule']['color']; ?>"></span>
+            <?php print t('Behind Schedule'); ?>
+          </li>
+          <li>
+            <span style="background-color:<?php print $project_statuses['on_track']['color']; ?>"></span>
+            <?php print t('On Track'); ?>
+          </li>
+          <li>
+            <span style="background-color:<?php print $project_statuses['ahead_schedule']['color']; ?>"></span>
+            <?php print t('Ahead of Schedule'); ?>
+          </li>
+          <li>
+            <b>#</b> <?php print t('No. of Projects'); ?>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <div class="t-1of3 d-1of3" id="ict-dashboard-numbers">
       <div class="row">
         <div class="label">
-          <?php print t('Number of Active Projects'); ?>
-          <a href="javascript:void(0);" class="tooltip">
-            <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
-              <?php print t('The number of ICT-enabled projects with ICT costs of $10 million or more published on the Dashboard.'); ?>
-            </span>
-          </a>
-        </div>
-        <div class="big-number">
-          <?php print l($number_of_projects, 'dashboard-projects', array('attributes' => array('title' => t('View all projects')))) ?>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="label">
           <?php print t('Total Number of Benefits Listed'); ?>
-          <a href="javascript:void(0);" class="tooltip">
+          <a href="javascript:void(0);" class="tooltip-custom">
             <i class="tooltip-icon"></i>
-            <span class="tooltip-content">
+            <span class="custom-tooltip-content">
               <?php print t('The number of benefits over all active projects.'); ?>
             </span>
           </a>
@@ -112,10 +111,8 @@
           <?php print $total_number_of_benefits; ?>
         </div>
       </div>
-
       <a href="<?php print url('detailed-overview'); ?>" title="<?php print t('View Detailed Overview'); ?>" class="general-button arrow-right"><span><?php print t('View Detailed Overview'); ?></span></a>
     </div>
-
   </div>
 </div>
 
