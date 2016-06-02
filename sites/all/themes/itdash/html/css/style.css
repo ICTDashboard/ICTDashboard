@@ -3571,6 +3571,9 @@ LAYOUT & GRID STYLES
           #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a,
           #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a {
             text-decoration: underline; }
+            #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a:hover,
+            #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a:hover {
+              text-decoration: none; }
         #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend,
         #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
           padding-left: 0;
@@ -7031,15 +7034,13 @@ you can add resource intensive styles.
     display: none; }
   #container #content .pane-last-updated .last-updated-block .last-updated-on {
     padding-left: 0; }
-<<<<<<< HEAD
   #container #content .pane-detailed-overview #ict-dashboard-detailed-overview h2 {
     margin-left: 0; }
   #container #content .pane-detailed-overview #ict-dashboard-detailed-overview #detailed-view-expenditure {
     padding-left: 0;
     padding-right: 0; }
   #container #content .pane-detailed-overview #ict-dashboard-detailed-overview .viz-number-of-benefits {
-    padding-left: 0; } }
-=======
+    padding-left: 0; }
 
   #content .last-updated-block {
     padding: 0;
@@ -7260,7 +7261,6 @@ you can add resource intensive styles.
           content: "• ";
           line-height: 1;
           color: #aabcb9; } }
->>>>>>> 495446d2770999d4e7bad6968a2847320722963d
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
