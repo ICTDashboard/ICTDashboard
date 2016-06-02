@@ -1444,6 +1444,12 @@ div.tooltip-edit {
   }    
 }
 
+.tooltip-edit span.tooltip-content {
+  p {
+    color: #fff;
+  }
+}
+
 #print-links-container {
   text-align: right;
   & .pdf_button {
