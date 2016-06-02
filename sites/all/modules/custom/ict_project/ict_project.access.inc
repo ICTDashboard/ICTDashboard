@@ -122,6 +122,17 @@ function ict_project_access_project($op, $account = NULL, $nid = NULL) {
     return FALSE;
   }
 
+  if ($op == 'unpublish' && $nid) {
+    if (!ict_project_is_published_project($nid) ||
+      ict_project_get_project_rebaseline($nid)) {
+      return FALSE;
+    }
+    if (user_has_role(ICT_FINANCE_ADMIN_ROLE, $account)) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+
   if ($op == 'manage_users' && $nid) {
     if (!ict_project_get_project_rebaseline($nid) &&
       __ict_project_user_is_dep_admin_for_project($nid, $account)) {
