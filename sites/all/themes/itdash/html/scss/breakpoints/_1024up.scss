@@ -8,7 +8,9 @@ This is the desktop size. It's larger than an iPad so it will only
 be seen on the Desktop.
 
 ******************************************************************/
-
+.page-title {
+	padding: 0;
+}
 .wrap {
 	min-width: 970px;
 	width: 970px;
@@ -27,7 +29,7 @@ be seen on the Desktop.
 	}
 	#content {
 		.page-title {
-			padding-left: 0;
+			padding: 0;
 		}
 		#project-baseline-history {
 			#inner-content {
