@@ -4705,7 +4705,7 @@ DETAILED OVERVIEW STYLES
     margin-left: 20px;
     margin-right: 0; }
     .page-block #content blockquote p, .node-type-page #content #inner-content blockquote p, .entity-bean .content blockquote p {
-      margin-left: 0; }
+      margin-left: 0 !important; }
     .page-block #content blockquote:before, .node-type-page #content #inner-content blockquote:before, .entity-bean .content blockquote:before {
       content: "Note: ";
       position: relative;
@@ -5330,12 +5330,10 @@ you can add resource intensive styles.
     #content .dotbg {
       background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
       overflow: hidden; }
-    #content .page-title {
-      padding-left: 20px; }
-      #content .page-title .inner-title-content h1 {
-        color: #c8f68f;
-        font-size: 34px;
-        font-weight: 400; }
+    #content .page-title .inner-title-content h1 {
+      color: #c8f68f;
+      font-size: 34px;
+      font-weight: 400; }
     #content .welcome {
       padding: 20px 20px; }
       #content .welcome h1 {
@@ -6876,6 +6874,9 @@ you can add resource intensive styles.
   be seen on the Desktop.
   
   ******************************************************************/
+  .page-title {
+    padding: 0; }
+
   .wrap {
     min-width: 970px;
     width: 970px;
@@ -6888,7 +6889,7 @@ you can add resource intensive styles.
   #container .header .inner-header {
     margin: 0; }
   #container #content .page-title {
-    padding-left: 20px; }
+    padding: 0; }
   #container #content #project-baseline-history #inner-content {
     padding: 0; }
     #container #content #project-baseline-history #inner-content .project-draft-submission {
