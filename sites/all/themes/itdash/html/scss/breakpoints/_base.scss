@@ -1967,6 +1967,9 @@ DETAILED OVERVIEW STYLES
   }
   font-family: "Open Sans", sans-serif;
   blockquote {
+	p {
+		margin-left: 0;
+	}
   	text-indent: 0;
     border-left: 2px solid #0d6c88;
     padding-left: 15px;

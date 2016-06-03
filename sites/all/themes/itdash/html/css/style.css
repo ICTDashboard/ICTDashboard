@@ -4704,6 +4704,8 @@ DETAILED OVERVIEW STYLES
     font-style: italic;
     margin-left: 20px;
     margin-right: 0; }
+    .page-block #content blockquote p, .node-type-page #content #inner-content blockquote p, .entity-bean .content blockquote p {
+      margin-left: 0; }
     .page-block #content blockquote:before, .node-type-page #content #inner-content blockquote:before, .entity-bean .content blockquote:before {
       content: "Note: ";
       position: relative;
