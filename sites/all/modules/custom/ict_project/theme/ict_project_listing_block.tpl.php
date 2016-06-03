@@ -205,12 +205,57 @@
                     </div>
                   </div>
                 <?php endif; ?>
+
+                <?php if (ict_project_access_project('unpublish', $user, $project->nid)) : ?>
+                  <a href="#ict-project-delete-warn" data-nid="<?php print $project->nid; ?>" data-title="<?php print $project->title; ?>" class="unpublish-button fancybox-inline">
+                    <span><?php print t('Unpublish Project'); ?></span>
+                  </a>
+                  <div style="display: none;" id="ict-project-delete-warn" class="ict-rebaseline-warn">
+                    <h2 class="fancybox-title"><?php print t('Warning'); ?></h2>
+                    <div class="ict-fancy-content entity-bean">
+                      <div class="field">
+                        <p>
+                          To unpublish a project on the Dashboard, a written request from the responsible agency is required. Once the project is unpublished:
+                        </p>
+                        <ol>
+                          <li>The project will be removed from all assigned users’ project lists,</li>
+                          <li>No further changes can be made to the project,</li>
+                          <li>The project will not be included in the Dashboard calculations,</li>
+                          <li>The project will not be represented in the Dashboard visualisation.</li>
+                        </ol>
+                        <strong>
+                          <?php print t('Do you wish to proceed?') ?>
+                        </strong>
+                      </div>
+                    </div>
+                    <div class="fancybox-actions">
+                      <a class="ict-fancybox-close export-btn" href="#"><span><?php print t('Cancel'); ?></span></a>
+                      <a class="general-button arrow-right confirm-proceed fancybox-inline" href="#ict-project-delete"><span><?php print t('Confirm and proceed'); ?></span></a>
+                    </div>
+                  </div>
+                <?php endif; ?>
               </td>
             </tr>
           <?php endforeach; ?>
           </tbody>
 
         </table>
+        <div style="display: none;" id="ict-project-delete">
+          <h2 class="fancybox-title"><?php print t('Unpublish Project'); ?></h2>
+            <?php $form = drupal_get_form('ict_project_unpublish_project_form'); ?>
+            <?php print drupal_render($form); ?>
+        </div>
+        <script>
+          (function($) {
+            $('.unpublish-button').click(function() {
+              var current_nid = $(this).attr('data-nid'),
+                  current_title = $(this).attr('data-title');
+
+              $('#ict-project-delete .fancybox-title').html('Unpublish Project - <em>'+current_title+'</em>');
+              $('input[name="project_id"]').val(current_nid);
+            });
+          })(jQuery)
+        </script>
       </div>
     <?php else : ?>
       <div class="views-no-results">
