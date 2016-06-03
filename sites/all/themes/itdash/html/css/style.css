@@ -3568,6 +3568,12 @@ LAYOUT & GRID STYLES
         #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph,
         #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph {
           margin-top: 10px; }
+          #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a,
+          #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a {
+            text-decoration: underline; }
+            #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a:hover,
+            #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #project-schedule-status-graph a:hover {
+              text-decoration: none; }
         #container #content .pane-overview-number-indicators #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend,
         #container #content .pane-home-projects #ict-dashboard-overview-number-indicators .graph-schedule-status #statuses_legend .bar-legend {
           padding-left: 0;
@@ -6694,7 +6700,7 @@ you can add resource intensive styles.
   #container .header .inner-header {
     margin: 0; }
   #container #content .page-title {
-    padding-left: 20px; }
+    padding-left: 0; }
   #container #content #project-baseline-history #inner-content {
     padding: 0; }
     #container #content #project-baseline-history #inner-content .project-draft-submission {
