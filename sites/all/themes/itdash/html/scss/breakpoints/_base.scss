@@ -1935,7 +1935,6 @@ DETAILED OVERVIEW STYLES
 	}
 }
 
-
 /* Styles for Block and Basic Page content*/
 
 .page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
@@ -1974,15 +1973,20 @@ DETAILED OVERVIEW STYLES
   }
   font-family: "Open Sans", sans-serif;
   blockquote {
+	p {
+		margin-left: 0;
+	}
+  	text-indent: 0;
     border-left: 2px solid #0d6c88;
     padding-left: 15px;
     position: relative;
     font-style: italic;
-    margin-left: 80px;
+    margin-left: 20px;
+    margin-right: 0;
     &:before {
       content: "Note: ";
-      position: absolute;
-      left: -45px;
+      position: relative;
+      left: 0;
       top: -6px;
       color: #0d6c88;
       font-style: italic;
@@ -2066,9 +2070,10 @@ DETAILED OVERVIEW STYLES
     counter-reset: item;
     color: #4e5365;
     li {
-    	line-height: 22px;
-      text-indent:-10px;
-      color: #4e5365;
+		line-height: 22px;
+	  	text-indent: -15px;
+		padding-left: 5px;
+	  	color: #4e5365;
       p {
         margin: 0 0 0 11px;;
       }

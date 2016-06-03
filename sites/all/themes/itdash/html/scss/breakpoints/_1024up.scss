@@ -249,13 +249,13 @@ be seen on the Desktop.
 	}
 }
 
-
 #content #inner-content .project-draft-submission {
 	padding: 0;
 }
 #content #inner-content h2.individual-project-page {
 	margin: 20px 0;
 }
+
 #container {
 	#content {
 		.pane-overview-number-indicators,
@@ -455,6 +455,7 @@ be seen on the Desktop.
 		}
 		font-family: "Open Sans", sans-serif;
 		blockquote {
+		text-indent: 0;
 		border-left: 2px solid #0d6c88;
 		padding-left: 15px;
 		position: relative;
@@ -548,8 +549,9 @@ be seen on the Desktop.
 		color: #4e5365;
 		li {
 			line-height: 22px;
-		  text-indent:-10px;
-		  color: #4e5365;
+		  	text-indent: -15px;
+			padding-left: 5px;
+		  	color: #4e5365;
 		  p {
 		    margin: 0 0 0 11px;;
 		  }

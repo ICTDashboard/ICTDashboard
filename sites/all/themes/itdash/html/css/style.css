@@ -4706,15 +4706,19 @@ DETAILED OVERVIEW STYLES
         padding: 5px;
         border: 1px solid #ddd; }
   .page-block #content blockquote, .node-type-page #content #inner-content blockquote, .entity-bean .content blockquote {
+    text-indent: 0;
     border-left: 2px solid #0d6c88;
     padding-left: 15px;
     position: relative;
     font-style: italic;
-    margin-left: 80px; }
+    margin-left: 20px;
+    margin-right: 0; }
+    .page-block #content blockquote p, .node-type-page #content #inner-content blockquote p, .entity-bean .content blockquote p {
+      margin-left: 0; }
     .page-block #content blockquote:before, .node-type-page #content #inner-content blockquote:before, .entity-bean .content blockquote:before {
       content: "Note: ";
-      position: absolute;
-      left: -45px;
+      position: relative;
+      left: 0;
       top: -6px;
       color: #0d6c88;
       font-style: italic;
@@ -4783,7 +4787,8 @@ DETAILED OVERVIEW STYLES
     color: #4e5365; }
     .page-block #content ol li, .node-type-page #content #inner-content ol li, .entity-bean .content ol li {
       line-height: 22px;
-      text-indent: -10px;
+      text-indent: -15px;
+      padding-left: 5px;
       color: #4e5365;
       font-family: "Open sans", sans-serif;
       font-size: 14px;
@@ -6846,7 +6851,23 @@ you can add resource intensive styles.
         width: 280px; }
       #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
         border-left: none;
-        border-right: none; } }
+        border-right: none; }
+
+  .page-block #content blockquote, .node-type-page #content #inner-content blockquote, .entity-bean .content blockquote {
+    border-left: 2px solid #0d6c88;
+    padding-left: 15px;
+    position: relative;
+    font-style: italic;
+    margin-left: 80px; }
+    .page-block #content blockquote:before, .node-type-page #content #inner-content blockquote:before, .entity-bean .content blockquote:before {
+      content: "Note: ";
+      position: absolute;
+      left: -45px;
+      top: -6px;
+      color: #0d6c88;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 14px; } }
 /*********************
 DESKTOP
 This is the average viewing window. So Desktops, Laptops, and
@@ -7135,6 +7156,7 @@ you can add resource intensive styles.
           padding: 5px;
           border: 1px solid #ddd; }
     .page-block #content blockquote, .node-type-page #content #inner-content blockquote, .entity-bean .content blockquote {
+      text-indent: 0;
       border-left: 2px solid #0d6c88;
       padding-left: 15px;
       position: relative;
@@ -7212,7 +7234,8 @@ you can add resource intensive styles.
       color: #4e5365; }
       .page-block #content ol li, .node-type-page #content #inner-content ol li, .entity-bean .content ol li {
         line-height: 22px;
-        text-indent: -10px;
+        text-indent: -15px;
+        padding-left: 5px;
         color: #4e5365;
         font-family: "Open sans", sans-serif;
         font-size: 14px;
