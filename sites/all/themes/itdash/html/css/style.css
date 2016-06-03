@@ -6897,7 +6897,7 @@ you can add resource intensive styles.
   #container .header .inner-header {
     margin: 0; }
   #container #content .page-title {
-    padding-left: 20px; }
+    padding-left: 0; }
   #container #content #project-baseline-history #inner-content {
     padding: 0; }
     #container #content #project-baseline-history #inner-content .project-draft-submission {
