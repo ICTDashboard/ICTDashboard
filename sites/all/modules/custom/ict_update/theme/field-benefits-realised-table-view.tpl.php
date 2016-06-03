@@ -4,6 +4,13 @@ $number = 0;
 $diff = !empty($diff['field_benefits_realised']) ? $diff['field_benefits_realised'] : array();
 ?>
 <div class="label">
+  <?php if (!empty($diff['removed_benefits'])) : ?>
+    <a class="tooltip-edit" href="javascript:void(0);">
+      <span class="tooltip-content">
+        <?php print t('!number Project Benefits have been deleted. <em style="font-weight: normal;">Note: Only Finance Administrators can remove Project Benefits</em>', array('!number' => $diff['removed_benefits'])); ?>
+      </span>
+    </a>
+  <?php endif; ?>
   <?php print t('Total Number of Project Benefits:'); ?></strong> <?php print count($benefits); ?>
 </div>
 
