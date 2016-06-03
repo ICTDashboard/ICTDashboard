@@ -2888,14 +2888,8 @@ body a.submit-button,
   width: 16px;
   height: 17px;
   display: block;
-  display: inline-block; }
-  .tooltip-custom:hover {
-    background-position: 0 -184px;
-    width: 16px;
-    height: 17px;
-    display: block;
-    display: inline-block; }
-  .tooltip-custom span.custom-tooltip-content {
+  display: inline-block;
+  /*span.custom-tooltip-content {
     position: absolute;
     display: none;
     color: #fff;
@@ -2907,8 +2901,8 @@ body a.submit-button,
     font-style: normal;
     bottom: 30px;
     right: 0;
-    width: 300px; }
-    .tooltip-custom span.custom-tooltip-content:after {
+    width: 300px;
+    &:after {
       content: '';
       width: 0;
       height: 0;
@@ -2917,20 +2911,40 @@ body a.submit-button,
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
       border-top: 20px solid #1e2635;
-      bottom: -10px; }
-  .tooltip-custom span.custom-tooltip-corner-right:after {
-    margin-left: -20px;
-    left: 100%;
-    border-right: 0; }
-  .tooltip-custom span.custom-tooltip-corner-left:after {
-    left: 0;
-    border-left: 0;
-    margin-left: 0; }
-  .tooltip-custom span.custom-tooltip-corner-no:after {
-    border-left: 0;
-    border-right: 0; }
-  .tooltip-custom:hover span.custom-tooltip-content {
-    display: block; }
+      bottom: -10px;
+    }
+  }
+  span.custom-tooltip-corner-right {
+    &:after {
+      margin-left: -20px;
+      left: 100%;
+      border-right: 0;
+    }
+  }
+  span.custom-tooltip-corner-left {
+    &:after {
+      left: 0;
+      border-left: 0;
+      margin-left: 0;
+    }
+  }
+  span.custom-tooltip-corner-no {
+    &:after {
+      border-left: 0;
+      border-right: 0;
+    }
+  }
+  &:hover {
+    span.custom-tooltip-content {
+      display: block;
+    }
+  }*/ }
+  .tooltip-custom:hover {
+    background-position: 0 -184px;
+    width: 16px;
+    height: 17px;
+    display: block;
+    display: inline-block; }
 
 .tooltip-bottom,
 .tooltip-edit,
@@ -2971,7 +2985,7 @@ body a.submit-button,
     border-radius: 10px;
     font-style: normal;
     bottom: 30px;
-    right: -150px;
+    right: 0;
     width: 300px; }
     .tooltip-bottom span.tooltip-content:after,
     .tooltip-edit span.tooltip-content:after,
@@ -2985,9 +2999,27 @@ body a.submit-button,
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
       border-top: 20px solid #1e2635;
-      bottom: -10px;
-      left: 50%;
-      margin-left: -25px; }
+      bottom: -10px; }
+  .tooltip-bottom span.custom-tooltip-corner-right:after,
+  .tooltip-edit span.custom-tooltip-corner-right:after,
+  .status-icon span.custom-tooltip-corner-right:after,
+  .tooltip span.custom-tooltip-corner-right:after {
+    margin-left: -20px;
+    left: 100%;
+    border-right: 0; }
+  .tooltip-bottom span.custom-tooltip-corner-left:after,
+  .tooltip-edit span.custom-tooltip-corner-left:after,
+  .status-icon span.custom-tooltip-corner-left:after,
+  .tooltip span.custom-tooltip-corner-left:after {
+    left: 0;
+    border-left: 0;
+    margin-left: 0; }
+  .tooltip-bottom span.custom-tooltip-corner-no:after,
+  .tooltip-edit span.custom-tooltip-corner-no:after,
+  .status-icon span.custom-tooltip-corner-no:after,
+  .tooltip span.custom-tooltip-corner-no:after {
+    border-left: 0;
+    border-right: 0; }
   .tooltip-bottom:hover span.tooltip-content,
   .tooltip-edit:hover span.tooltip-content,
   .status-icon:hover span.tooltip-content,
@@ -3964,14 +3996,16 @@ POSTS & CONTENT STYLES
       background-color: #f9fafc;
       box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
       padding: 8px 40px; }
-    #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-      right: 0;
-      bottom: 28px;
-      font-size: 12px;
-      width: 280px; }
-    #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-      border-left: none;
-      border-right: none; }
+    #content .last-updated-block .view-baseline-history .view-baseline-tooltip {
+      /*span::after {
+      	border-left: none;
+      	border-right: none;
+      }*/ }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+        right: 0;
+        bottom: 28px;
+        font-size: 12px;
+        width: 280px; }
 #content #inner-content .individual-project-page {
   margin: 20px;
   padding-bottom: 15px; }
@@ -3983,32 +4017,35 @@ POSTS & CONTENT STYLES
     bottom: 120px; }
   #content #inner-content .project-draft-submission #project-benefits a {
     position: relative;
-    z-index: 0; }
+    z-index: 0;
+    /*span.tooltip-content::after {
+    	border-right: 0;
+    	border-left: 0;
+    }*/ }
     #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content {
       right: -56px;
       width: 280px; }
-    #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content::after {
-      border-right: 0;
-      border-left: 0; }
   #content #inner-content .project-draft-submission .user-information a {
     position: relative;
-    z-index: 0; }
+    z-index: 0;
+    /*span.tooltip-content::after {
+    	border-right: 0;
+    	border-left: 0;
+    }*/ }
     #content #inner-content .project-draft-submission .user-information a span.tooltip-content {
       right: 0;
       width: 240px; }
-    #content #inner-content .project-draft-submission .user-information a span.tooltip-content::after {
-      border-right: 0;
-      border-left: 0; }
   #content #inner-content .project-draft-submission .label {
     padding-right: 0; }
     #content #inner-content .project-draft-submission .label a {
-      position: initial; }
+      position: initial;
+      /*span.tooltip-content::after {
+      	border-right: 0;
+      	border-left: 0;
+      }*/ }
       #content #inner-content .project-draft-submission .label a span.tooltip-content {
         right: 0;
         width: 280px; }
-      #content #inner-content .project-draft-submission .label a span.tooltip-content::after {
-        border-right: 0;
-        border-left: 0; }
   #content #inner-content .project-draft-submission a {
     text-decoration: none; }
   #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th {
@@ -4064,14 +4101,15 @@ POSTS & CONTENT STYLES
     #content #inner-content .project-draft-submission .entity_comments a:hover {
       text-decoration: none; }
   #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a {
-    position: initial; }
+    position: initial;
+    /*span.tooltip-content::after {
+    	border-right: 0;
+    	border-left: 0;
+    }*/ }
     #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a span.tooltip-content {
       right: 0;
       width: 280px;
       bottom: 120px; }
-    #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a span.tooltip-content::after {
-      border-right: 0;
-      border-left: 0; }
 #content #inner-content #print-links-container .pdf_button {
   margin-bottom: 50px; }
   #content #inner-content #print-links-container .pdf_button a {
@@ -4675,7 +4713,19 @@ tweeners.
       text-align: right;
       float: right;
       display: block;
-      margin: 0; }
+      margin: 0;
+    /*.view-baseline-tooltip {
+		span {
+			right: 0;
+			bottom: -50px;
+			font-size: 12px;
+			width: 280px;
+		}
+		span::after {
+			border-left: none;
+			border-right: none;
+		}
+	}*/ }
       #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
         text-decoration: underline;
@@ -4683,14 +4733,6 @@ tweeners.
         padding: 0; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-        right: 0;
-        bottom: -50px;
-        font-size: 12px;
-        width: 280px; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-        border-left: none;
-        border-right: none; }
   #content #inner-content .ict-benefits .ict-faq-question {
     padding: 10px 145px 10px 50px; }
     #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
@@ -4723,13 +4765,14 @@ tweeners.
       padding-right: 0; }
       #content #inner-content .project-draft-submission .label a, #content #inner-content .project-draft-submission .user-information a, #content #inner-content .project-draft-submission #project-benefits a {
         position: relative;
-        z-index: 0; }
+        z-index: 0;
+        /*span.tooltip-content::after {
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+        }*/ }
         #content #inner-content .project-draft-submission .label a span.tooltip-content, #content #inner-content .project-draft-submission .user-information a span.tooltip-content, #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content {
           right: -150px;
           width: 300px; }
-        #content #inner-content .project-draft-submission .label a span.tooltip-content::after, #content #inner-content .project-draft-submission .user-information a span.tooltip-content::after, #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content::after {
-          border-left: 20px solid transparent;
-          border-right: 20px solid transparent; }
     #content #inner-content .project-draft-submission .individual-page-tooltip-height {
       bottom: 30px; }
   #content #inner-content #print-links-container .pdf_button {

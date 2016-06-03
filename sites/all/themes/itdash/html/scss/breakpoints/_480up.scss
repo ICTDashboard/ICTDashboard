@@ -144,7 +144,7 @@ POSTS & CONTENT STYLES
 			    	text-decoration: none;
 			    }
 		    }
-		    .view-baseline-tooltip {
+		    /*.view-baseline-tooltip {
 				span {
 					right: 0;
 					bottom: -50px;
@@ -155,7 +155,7 @@ POSTS & CONTENT STYLES
 					border-left: none;
 					border-right: none;
 				}
-			}
+			}*/
 	    }
 	}
 	#inner-content {
@@ -222,10 +222,10 @@ POSTS & CONTENT STYLES
 						right: -150px;
 						width: 300px;
 					}
-					span.tooltip-content::after {
+					/*span.tooltip-content::after {
 					    border-left: 20px solid transparent;
 					    border-right: 20px solid transparent;
-					}
+					}*/
 				}
 			}
 			.individual-page-tooltip-height {
