@@ -4697,6 +4697,7 @@ DETAILED OVERVIEW STYLES
         padding: 5px;
         border: 1px solid #ddd; }
   .page-block #content blockquote, .node-type-page #content #inner-content blockquote, .entity-bean .content blockquote {
+    text-indent: 0;
     border-left: 2px solid #0d6c88;
     padding-left: 15px;
     position: relative;
