@@ -414,7 +414,7 @@ function theme_security_review_reviewed($variables) {
   if (!empty($variables['items'])) {
     foreach ($variables['items'] as $item) {
       $output .= '<tr class="' . $item['class'] . '">';
-      $output .= '<td class="status-icon"><div title="' . $item['title'] . '"><span class="element-invisible">' . $item['title'] . '</span></div></td>';
+      $output .= '<td class="status-icon tooltip"><div title="' . $item['title'] . '"><span class="element-invisible">' . $item['title'] . '</span></div></td>';
       $output .= '<td>' . $item['message'] . '</td>';
       $output .= '<td>' . $item['help_link'] . '</td>';
       $output .= '<td>' . $item['toggle_link'] . '</td>';

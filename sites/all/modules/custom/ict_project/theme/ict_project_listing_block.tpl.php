@@ -110,7 +110,7 @@
               </td>
               <td class="status-project">
                 <?php if ($project->current_status) : ?>
-                  <a href="javascript:void(0);" class="status-icon">
+                  <a href="javascript:void(0);" class="status-icon tooltip">
                     <span class="tooltip-content"><?php print $project->current_status; ?></span>
                   </a>
                 <?php endif; ?>

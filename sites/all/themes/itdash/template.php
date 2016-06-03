@@ -202,6 +202,7 @@ function itdash_preprocess_html(&$vars) {
   drupal_add_js('https://cdn.jsdelivr.net/jquery.selectbox/0.2/js/jquery.selectbox-0.2.min.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/scripts.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/js/respond.js', array('type' => 'file', 'scope' => 'header'));
+  drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/tooltip_responsive.js');
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/ie8.css', array('weight' => 999, 'browsers' => array('IE' => 'lte IE 8', '!IE' => FALSE), 'preprocess' => FALSE));
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/ie.css', array('weight' => 999, 'browsers' => array('IE' => 'IE', '!IE' => FALSE), 'preprocess' => FALSE));
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/slicknav.css');
