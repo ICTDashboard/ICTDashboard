@@ -2887,14 +2887,8 @@ body a.submit-button,
   width: 16px;
   height: 17px;
   display: block;
-  display: inline-block; }
-  .tooltip-custom:hover {
-    background-position: 0 -184px;
-    width: 16px;
-    height: 17px;
-    display: block;
-    display: inline-block; }
-  .tooltip-custom span.custom-tooltip-content {
+  display: inline-block;
+  /*span.custom-tooltip-content {
     position: absolute;
     display: none;
     color: #fff;
@@ -2906,8 +2900,8 @@ body a.submit-button,
     font-style: normal;
     bottom: 30px;
     right: 0;
-    width: 300px; }
-    .tooltip-custom span.custom-tooltip-content:after {
+    width: 300px;
+    &:after {
       content: '';
       width: 0;
       height: 0;
@@ -2916,20 +2910,40 @@ body a.submit-button,
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
       border-top: 20px solid #1e2635;
-      bottom: -10px; }
-  .tooltip-custom span.custom-tooltip-corner-right:after {
-    margin-left: -20px;
-    left: 100%;
-    border-right: 0; }
-  .tooltip-custom span.custom-tooltip-corner-left:after {
-    left: 0;
-    border-left: 0;
-    margin-left: 0; }
-  .tooltip-custom span.custom-tooltip-corner-no:after {
-    border-left: 0;
-    border-right: 0; }
-  .tooltip-custom:hover span.custom-tooltip-content {
-    display: block; }
+      bottom: -10px;
+    }
+  }
+  span.custom-tooltip-corner-right {
+    &:after {
+      margin-left: -20px;
+      left: 100%;
+      border-right: 0;
+    }
+  }
+  span.custom-tooltip-corner-left {
+    &:after {
+      left: 0;
+      border-left: 0;
+      margin-left: 0;
+    }
+  }
+  span.custom-tooltip-corner-no {
+    &:after {
+      border-left: 0;
+      border-right: 0;
+    }
+  }
+  &:hover {
+    span.custom-tooltip-content {
+      display: block;
+    }
+  }*/ }
+  .tooltip-custom:hover {
+    background-position: 0 -184px;
+    width: 16px;
+    height: 17px;
+    display: block;
+    display: inline-block; }
 
 .tooltip-bottom,
 .tooltip-edit,
@@ -2970,7 +2984,7 @@ body a.submit-button,
     border-radius: 10px;
     font-style: normal;
     bottom: 30px;
-    right: -150px;
+    right: 0;
     width: 300px; }
     .tooltip-bottom span.tooltip-content:after,
     .tooltip-edit span.tooltip-content:after,
@@ -2984,9 +2998,27 @@ body a.submit-button,
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
       border-top: 20px solid #1e2635;
-      bottom: -10px;
-      left: 50%;
-      margin-left: -25px; }
+      bottom: -10px; }
+  .tooltip-bottom span.custom-tooltip-corner-right:after,
+  .tooltip-edit span.custom-tooltip-corner-right:after,
+  .status-icon span.custom-tooltip-corner-right:after,
+  .tooltip span.custom-tooltip-corner-right:after {
+    margin-left: -20px;
+    left: 100%;
+    border-right: 0; }
+  .tooltip-bottom span.custom-tooltip-corner-left:after,
+  .tooltip-edit span.custom-tooltip-corner-left:after,
+  .status-icon span.custom-tooltip-corner-left:after,
+  .tooltip span.custom-tooltip-corner-left:after {
+    left: 0;
+    border-left: 0;
+    margin-left: 0; }
+  .tooltip-bottom span.custom-tooltip-corner-no:after,
+  .tooltip-edit span.custom-tooltip-corner-no:after,
+  .status-icon span.custom-tooltip-corner-no:after,
+  .tooltip span.custom-tooltip-corner-no:after {
+    border-left: 0;
+    border-right: 0; }
   .tooltip-bottom:hover span.tooltip-content,
   .tooltip-edit:hover span.tooltip-content,
   .status-icon:hover span.tooltip-content,
@@ -3965,15 +3997,19 @@ POSTS & CONTENT STYLES
     margin-bottom: 20px;
     border-top: 1px dotted #d9dfe9;
     width: 100%;
-    padding-top: 15px; }
+    padding-top: 15px;
+    /*a {
+    	.tooltip-content {
+    		right: -172px;
+    		width: 280px;
+    		&:after {
+    			border-left: none;
+    			border-right: none;
+    		}
+    	}
+    }*/ }
     #content .last-updated-block .induvidual-project-state p {
       margin: 0; }
-    #content .last-updated-block .induvidual-project-state a .tooltip-content {
-      right: -172px;
-      width: 280px; }
-      #content .last-updated-block .induvidual-project-state a .tooltip-content:after {
-        border-left: none;
-        border-right: none; }
   #content .last-updated-block .view-baseline-history {
     float: none;
     text-align: left;
@@ -3998,14 +4034,16 @@ POSTS & CONTENT STYLES
       #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
         background-color: #0b626c;
         color: #fff; }
-    #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-      right: 0;
-      bottom: 28px;
-      font-size: 12px;
-      width: 280px; }
-    #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-      border-left: none;
-      border-right: none; }
+    #content .last-updated-block .view-baseline-history .view-baseline-tooltip {
+      /*span::after {
+      	border-left: none;
+      	border-right: none;
+      }*/ }
+      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
+        right: 0;
+        bottom: 28px;
+        font-size: 12px;
+        width: 280px; }
 #content #inner-content .individual-project-page {
   margin: 20px;
   padding-bottom: 15px; }
@@ -4017,32 +4055,35 @@ POSTS & CONTENT STYLES
     bottom: 120px; }
   #content #inner-content .project-draft-submission #project-benefits a {
     position: relative;
-    z-index: 0; }
+    z-index: 0;
+    /*span.tooltip-content::after {
+    	border-right: 0;
+    	border-left: 0;
+    }*/ }
     #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content {
       right: -56px;
       width: 280px; }
-    #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content::after {
-      border-right: 0;
-      border-left: 0; }
   #content #inner-content .project-draft-submission .user-information a {
     position: relative;
-    z-index: 0; }
+    z-index: 0;
+    /*span.tooltip-content::after {
+    	border-right: 0;
+    	border-left: 0;
+    }*/ }
     #content #inner-content .project-draft-submission .user-information a span.tooltip-content {
       right: 0;
       width: 240px; }
-    #content #inner-content .project-draft-submission .user-information a span.tooltip-content::after {
-      border-right: 0;
-      border-left: 0; }
   #content #inner-content .project-draft-submission .label {
     padding-right: 0; }
     #content #inner-content .project-draft-submission .label a {
-      position: initial; }
+      position: initial;
+      /*span.tooltip-content::after {
+      	border-right: 0;
+      	border-left: 0;
+      }*/ }
       #content #inner-content .project-draft-submission .label a span.tooltip-content {
         right: 0;
         width: 280px; }
-      #content #inner-content .project-draft-submission .label a span.tooltip-content::after {
-        border-right: 0;
-        border-left: 0; }
   #content #inner-content .project-draft-submission a {
     text-decoration: none; }
   #content #inner-content .project-draft-submission #field_end_predicted_budget tbody tr th {
@@ -4098,14 +4139,15 @@ POSTS & CONTENT STYLES
     #content #inner-content .project-draft-submission .entity_comments a:hover {
       text-decoration: none; }
   #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a {
-    position: initial; }
+    position: initial;
+    /*span.tooltip-content::after {
+    	border-right: 0;
+    	border-left: 0;
+    }*/ }
     #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a span.tooltip-content {
       right: 0;
       width: 280px;
       bottom: 120px; }
-    #content #inner-content .project-draft-submission #inner-content .project-draft-submission label a span.tooltip-content::after {
-      border-right: 0;
-      border-left: 0; }
 #content #inner-content #print-links-container .pdf_button {
   margin-bottom: 50px; }
   #content #inner-content #print-links-container .pdf_button a {
@@ -4125,10 +4167,11 @@ POSTS & CONTENT STYLES
     border-bottom: none; }
   #content #ict-filtered-projects .footable-header .viz-f-p-2 {
     right: -249px;
-    width: 280px; }
-    #content #ict-filtered-projects .footable-header .viz-f-p-2:after {
-      border-left: none;
-      border-right: none; }
+    width: 280px;
+    /*&:after {
+    	border-left: none;
+    	border-right: none;
+    }*/ }
   #content #ict-filtered-projects .footable-header .viz-tooltips-row {
     position: absolute;
     bottom: 15px;
@@ -4896,10 +4939,12 @@ tweeners.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
-  #content #ict-home-projects-table-id .footable-header .viz-f-p-2:after {
-    left: 11%;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent; }
+  #content #ict-home-projects-table-id .footable-header {
+    			/*.viz-f-p-2:after {
+    				left: 11%;
+    				border-left: 20px solid transparent;
+        			border-right: 20px solid transparent;
+    			}*/ }
   #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-3, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-4, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-5, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-6, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-7, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-8 {
     right: -150px;
     width: 300px; }
@@ -4936,21 +4981,38 @@ tweeners.
         border-left: 1px dotted #d9dfe9;
         border-top: none;
         width: auto;
-        padding-top: 0; }
+        padding-top: 0;
+    /*a {
+		.tooltip-content {
+			right: -150px;
+			width: 300px;
+			&:after {
+			    border-left: 20px solid transparent;
+			    border-right: 20px solid transparent;
+			}
+		}
+	}*/ }
         #content .last-updated-block .last-updated-and-active-block .induvidual-project-state p {
           margin: 0; }
-        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state a .tooltip-content {
-          right: -150px;
-          width: 300px; }
-          #content .last-updated-block .last-updated-and-active-block .induvidual-project-state a .tooltip-content:after {
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent; }
     #content .last-updated-block .view-baseline-history {
       width: 100%;
       text-align: left;
       float: none;
       display: inline-block;
       margin: 0;
+      			/*.view-baseline-tooltip {
+                      span {
+                          right: 0;
+                          bottom: -50px;
+                          font-size: 12px;
+                          width: 280px;
+                      }
+                      span::after {
+                          border-left: none;
+                          border-right: none;
+                      }
+                  }
+      
       /* Styles for Link to Data.gov.au  */ }
       #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
@@ -4962,9 +5024,6 @@ tweeners.
         font-weight: 700;
         text-decoration: none;
         border-radius: 4px;
-        border-width: 1px;
-        border-color: #9fa5c5;
-        border-style: solid;
         border-style: solid;
         border-width: 1px;
         border-color: #dbe0e7;
@@ -4974,14 +5033,6 @@ tweeners.
         padding: 8px 14px; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-        right: 0;
-        bottom: -50px;
-        font-size: 12px;
-        width: 280px; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-        border-left: none;
-        border-right: none; }
   #content #inner-content .ict-benefits .ict-faq-question {
     padding: 10px 145px 10px 50px; }
     #content #inner-content .ict-benefits .ict-faq-question .benfit-status {
@@ -5014,13 +5065,14 @@ tweeners.
       padding-right: 0; }
       #content #inner-content .project-draft-submission .label a, #content #inner-content .project-draft-submission .user-information a, #content #inner-content .project-draft-submission #project-benefits a {
         position: relative;
-        z-index: 0; }
+        z-index: 0;
+        /*span.tooltip-content::after {
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+        }*/ }
         #content #inner-content .project-draft-submission .label a span.tooltip-content, #content #inner-content .project-draft-submission .user-information a span.tooltip-content, #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content {
           right: -150px;
           width: 300px; }
-        #content #inner-content .project-draft-submission .label a span.tooltip-content::after, #content #inner-content .project-draft-submission .user-information a span.tooltip-content::after, #content #inner-content .project-draft-submission #project-benefits a span.tooltip-content::after {
-          border-left: 20px solid transparent;
-          border-right: 20px solid transparent; }
     #content #inner-content .project-draft-submission .individual-page-tooltip-height {
       bottom: 30px; }
   #content #inner-content #print-links-container .pdf_button {
@@ -5321,21 +5373,28 @@ you can add resource intensive styles.
     background-color: #fff;
     padding-bottom: 60px;
     /* Project list */ }
-    #content #ict-filtered-projects .footable-header .viz-f-p-1 {
-      right: -268px; }
-      #content #ict-filtered-projects .footable-header .viz-f-p-1:after {
-        left: 10%; }
-    #content #ict-filtered-projects .footable-header .viz-f-p-8 {
-      right: -85px; }
-      #content #ict-filtered-projects .footable-header .viz-f-p-8:after {
-        left: 72%; }
-    #content #ict-filtered-projects tr th {
-      padding: 7px 0px 42px 4px;
-      font-size: 14px; }
-      #content #ict-filtered-projects tr th a.ict-sort-link:after {
-        top: 80px !important; }
-      #content #ict-filtered-projects tr th a.ict-sort-link:before {
-        top: 90px !important; }
+    #content #ict-filtered-projects {
+      /*.footable-header {
+      	.viz-f-p-1 {
+      		right: -268px;
+      		&:after {
+      			left: 10%;
+      		}
+      	}
+      	.viz-f-p-8 {
+      		right: -85px;
+      		&:after {
+      			left: 72%;
+      		}
+      	}
+      }*/ }
+      #content #ict-filtered-projects tr.footable-header th {
+        padding: 7px 0px 42px 4px;
+        font-size: 14px; }
+        #content #ict-filtered-projects tr.footable-header th a.ict-sort-link:after {
+          top: 80px !important; }
+        #content #ict-filtered-projects tr.footable-header th a.ict-sort-link:before {
+          top: 90px !important; }
     #content .dotbg {
       background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
       overflow: hidden; }
@@ -6819,6 +6878,18 @@ you can add resource intensive styles.
       float: right;
       display: inline-block;
       margin: 0;
+    /*.view-baseline-tooltip {
+		span {
+			right: 0;
+			bottom: -50px;
+			font-size: 12px;
+			width: 280px;
+		}
+		span::after {
+			border-left: none;
+			border-right: none;
+		}
+	}*/
       /* Styles for Link to Data.gov.au  */ }
       #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
@@ -6842,14 +6913,6 @@ you can add resource intensive styles.
         padding: 8px 14px; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-        right: 0;
-        bottom: -50px;
-        font-size: 12px;
-        width: 280px; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-        border-left: none;
-        border-right: none; }
 
   .page-block #content blockquote, .node-type-page #content #inner-content blockquote, .entity-bean .content blockquote {
     border-left: 2px solid #0d6c88;
@@ -7100,6 +7163,18 @@ you can add resource intensive styles.
       float: right;
       display: inline-block;
       margin: 0;
+   /* .view-baseline-tooltip {
+		span {
+			right: 0;
+			bottom: -50px;
+			font-size: 12px;
+			width: 280px;
+		}
+		span::after {
+			border-left: none;
+			border-right: none;
+		}
+	}*/
       /* Styles for Link to Data.gov.au  */ }
       #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
@@ -7123,14 +7198,6 @@ you can add resource intensive styles.
         padding: 8px 14px; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
           text-decoration: none; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-        right: 0;
-        bottom: -50px;
-        font-size: 12px;
-        width: 280px; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-        border-left: none;
-        border-right: none; }
 
   /* Styles for Block and Basic Page content*/
   .page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
@@ -7305,22 +7372,34 @@ This is for the larger monitors and possibly full screen viewers.
   on larger screens.
   
   ******************************************************************/
-  #content #ict-filtered-projects .footable-header .viz-f-p-1 {
-    right: -150px; }
-    #content #ict-filtered-projects .footable-header .viz-f-p-1:after {
-      left: 50%; }
-  #content #ict-filtered-projects .footable-header .viz-f-p-8 {
-    right: -150px; }
-    #content #ict-filtered-projects .footable-header .viz-f-p-8:after {
-      left: 50%; }
-  #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-    right: -150px;
-    bottom: 30px;
-    font-size: 13px;
-    width: 300px; }
-  #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent; }
+  #content #ict-filtered-projects {
+    /*.footable-header {
+    	.viz-f-p-1 {
+    		right: -150px;
+    		&:after {
+    			left: 50%;
+    		}
+    	}
+    	.viz-f-p-8 {
+    		right: -150px;
+    		&:after {
+    			left: 50%;
+    		}
+    	}
+    }*/ }
+  #content .last-updated-block .view-baseline-history {
+    		/*.view-baseline-tooltip {
+    			span {
+    				right: -150px;
+    				bottom: 30px;
+    				font-size: 13px;
+    				width: 300px;
+    			}
+    			span::after {
+    				border-left: 20px solid transparent;
+        			border-right: 20px solid transparent;
+    			}
+    		}*/ }
 
   #container #content .pane-last-updated .last-updated-block {
     padding-left: 0; } }

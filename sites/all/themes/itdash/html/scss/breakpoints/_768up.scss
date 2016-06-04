@@ -229,7 +229,7 @@ CONTENT STYLES
 }
 #content {
 	#ict-filtered-projects {
-		.footable-header {
+		/*.footable-header {
 			.viz-f-p-1 {
 				right: -268px;
 				&:after {
@@ -242,8 +242,8 @@ CONTENT STYLES
 					left: 72%;
 				}
 			}
-		}
-		tr {
+		}*/
+		tr.footable-header {
 			th {
 			    padding: 7px 0px 42px 4px;
 			    font-size: 14px;
@@ -2184,7 +2184,7 @@ DETAILED OVERVIEW STYLES
 			    box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
 			    padding: 8px 14px;
 		    }
-		    .view-baseline-tooltip {
+		    /*.view-baseline-tooltip {
 				span {
 					right: 0;
 					bottom: -50px;
@@ -2195,7 +2195,7 @@ DETAILED OVERVIEW STYLES
 					border-left: none;
 					border-right: none;
 				}
-			}
+			}*/
 /* Styles for Link to Data.gov.au  */
 			// .external-link-to-data-gov{
 			// 	font-size: 14px;
