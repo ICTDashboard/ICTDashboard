@@ -10,7 +10,7 @@ on larger screens.
 ******************************************************************/
 #content {
 	#ict-filtered-projects {
-		.footable-header {
+		/*.footable-header {
 			.viz-f-p-1 {
 				right: -150px;
 				&:after {
@@ -23,11 +23,11 @@ on larger screens.
 					left: 50%;
 				}
 			}
-		}
+		}*/
 	}
 	.last-updated-block {
 		.view-baseline-history {
-			.view-baseline-tooltip {
+			/*.view-baseline-tooltip {
 				span {
 					right: -150px;
 					bottom: 30px;
@@ -38,7 +38,7 @@ on larger screens.
 					border-left: 20px solid transparent;
 	    			border-right: 20px solid transparent;
 				}
-			}
+			}*/
 		}
 	}
 }
