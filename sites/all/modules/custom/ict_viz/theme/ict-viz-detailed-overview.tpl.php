@@ -3,9 +3,9 @@
     <div class="section-title">
       <h2>
         <?php print t('Projects Expenditure and Budget'); ?>
-        <a href="javascript:void(0);" class="tooltip-custom">
+        <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
-              <span class="custom-tooltip-content">
+              <span class="tooltip-content">
                 <?php print t('Expenditure to date and budget across all active projects by financial year.'); ?>
               </span>
         </a>
@@ -33,9 +33,9 @@
     <div id="ict-all-benefits-setion" class="section-title">
       <h2>
         <?php print t('Projects Schedule Status'); ?>
-        <a href="javascript:void(0);" class="tooltip-custom">
+        <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
-          <span class="custom-tooltip-content">
+          <span class="tooltip-content">
             <?php print t('A summary of schedule status for all active projects compared to their planned schedule.'); ?>
           </span>
         </a>
@@ -76,9 +76,9 @@
     <div class="section-title">
       <h2>
         <?php print t('Project Benefits'); ?>
-        <a href="javascript:void(0);" class="tooltip-custom">
+        <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
-              <span class="custom-tooltip-content">
+              <span class="tooltip-content">
                 <?php print t('Benefits over all active projects.'); ?>
               </span>
         </a>

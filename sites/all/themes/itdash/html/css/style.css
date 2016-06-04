@@ -3988,15 +3988,19 @@ POSTS & CONTENT STYLES
     margin-bottom: 20px;
     border-top: 1px dotted #d9dfe9;
     width: 100%;
-    padding-top: 15px; }
+    padding-top: 15px;
+    /*a {
+    	.tooltip-content {
+    		right: -172px;
+    		width: 280px;
+    		&:after {
+    			border-left: none;
+    			border-right: none;
+    		}
+    	}
+    }*/ }
     #content .last-updated-block .induvidual-project-state p {
       margin: 0; }
-    #content .last-updated-block .induvidual-project-state a .tooltip-content {
-      right: -172px;
-      width: 280px; }
-      #content .last-updated-block .induvidual-project-state a .tooltip-content:after {
-        border-left: none;
-        border-right: none; }
   #content .last-updated-block .view-baseline-history {
     float: none;
     text-align: left;
@@ -4154,10 +4158,11 @@ POSTS & CONTENT STYLES
     border-bottom: none; }
   #content #ict-filtered-projects .footable-header .viz-f-p-2 {
     right: -249px;
-    width: 280px; }
-    #content #ict-filtered-projects .footable-header .viz-f-p-2:after {
-      border-left: none;
-      border-right: none; }
+    width: 280px;
+    /*&:after {
+    	border-left: none;
+    	border-right: none;
+    }*/ }
   #content #ict-filtered-projects .footable-header .viz-tooltips-row {
     position: absolute;
     bottom: 15px;
@@ -4760,10 +4765,12 @@ tweeners.
   /*********************
   POSTS & CONTENT STYLES
   *********************/
-  #content #ict-home-projects-table-id .footable-header .viz-f-p-2:after {
-    left: 11%;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent; }
+  #content #ict-home-projects-table-id .footable-header {
+    			/*.viz-f-p-2:after {
+    				left: 11%;
+    				border-left: 20px solid transparent;
+        			border-right: 20px solid transparent;
+    			}*/ }
   #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-3, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-4, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-5, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-6, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-7, #content #ict-home-projects-table-id .footable-detail-row .footable-details .viz-f-p-8 {
     right: -150px;
     width: 300px; }
@@ -4799,15 +4806,19 @@ tweeners.
         border-left: 1px dotted #d9dfe9;
         border-top: none;
         width: auto;
-        padding-top: 0; }
+        padding-top: 0;
+    /*a {
+		.tooltip-content {
+			right: -150px;
+			width: 300px;
+			&:after {
+			    border-left: 20px solid transparent;
+			    border-right: 20px solid transparent;
+			}
+		}
+	}*/ }
         #content .last-updated-block .last-updated-and-active-block .induvidual-project-state p {
           margin: 0; }
-        #content .last-updated-block .last-updated-and-active-block .induvidual-project-state a .tooltip-content {
-          right: -150px;
-          width: 300px; }
-          #content .last-updated-block .last-updated-and-active-block .induvidual-project-state a .tooltip-content:after {
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent; }
     #content .last-updated-block .view-baseline-history {
       width: 100%;
       text-align: left;
@@ -5181,21 +5192,28 @@ you can add resource intensive styles.
     background-color: #fff;
     padding-bottom: 60px;
     /* Project list */ }
-    #content #ict-filtered-projects .footable-header .viz-f-p-1 {
-      right: -268px; }
-      #content #ict-filtered-projects .footable-header .viz-f-p-1:after {
-        left: 10%; }
-    #content #ict-filtered-projects .footable-header .viz-f-p-8 {
-      right: -85px; }
-      #content #ict-filtered-projects .footable-header .viz-f-p-8:after {
-        left: 72%; }
-    #content #ict-filtered-projects tr th {
-      padding: 7px 0px 42px 4px;
-      font-size: 14px; }
-      #content #ict-filtered-projects tr th a.ict-sort-link:after {
-        top: 80px !important; }
-      #content #ict-filtered-projects tr th a.ict-sort-link:before {
-        top: 90px !important; }
+    #content #ict-filtered-projects {
+      /*.footable-header {
+      	.viz-f-p-1 {
+      		right: -268px;
+      		&:after {
+      			left: 10%;
+      		}
+      	}
+      	.viz-f-p-8 {
+      		right: -85px;
+      		&:after {
+      			left: 72%;
+      		}
+      	}
+      }*/ }
+      #content #ict-filtered-projects tr th {
+        padding: 7px 0px 42px 4px;
+        font-size: 14px; }
+        #content #ict-filtered-projects tr th a.ict-sort-link:after {
+          top: 80px !important; }
+        #content #ict-filtered-projects tr th a.ict-sort-link:before {
+          top: 90px !important; }
     #content .dotbg {
       background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
       overflow: hidden; }
@@ -6681,6 +6699,18 @@ you can add resource intensive styles.
       float: right;
       display: inline-block;
       margin: 0;
+    /*.view-baseline-tooltip {
+		span {
+			right: 0;
+			bottom: -50px;
+			font-size: 12px;
+			width: 280px;
+		}
+		span::after {
+			border-left: none;
+			border-right: none;
+		}
+	}*/
       /* Styles for Link to Data.gov.au  */ }
       #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
@@ -6703,15 +6733,7 @@ you can add resource intensive styles.
         box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
         padding: 8px 14px; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
-          text-decoration: none; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-        right: 0;
-        bottom: -50px;
-        font-size: 12px;
-        width: 280px; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-        border-left: none;
-        border-right: none; } }
+          text-decoration: none; } }
 /*********************
 DESKTOP
 This is the average viewing window. So Desktops, Laptops, and
@@ -6916,6 +6938,18 @@ you can add resource intensive styles.
       float: right;
       display: inline-block;
       margin: 0;
+   /* .view-baseline-tooltip {
+		span {
+			right: 0;
+			bottom: -50px;
+			font-size: 12px;
+			width: 280px;
+		}
+		span::after {
+			border-left: none;
+			border-right: none;
+		}
+	}*/
       /* Styles for Link to Data.gov.au  */ }
       #content .last-updated-block .view-baseline-history .view-baseline-link {
         border-style: none;
@@ -6938,15 +6972,7 @@ you can add resource intensive styles.
         box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
         padding: 8px 14px; }
         #content .last-updated-block .view-baseline-history .view-baseline-link:hover {
-          text-decoration: none; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-        right: 0;
-        bottom: -50px;
-        font-size: 12px;
-        width: 280px; }
-      #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-        border-left: none;
-        border-right: none; } }
+          text-decoration: none; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
@@ -6962,22 +6988,34 @@ This is for the larger monitors and possibly full screen viewers.
   on larger screens.
   
   ******************************************************************/
-  #content #ict-filtered-projects .footable-header .viz-f-p-1 {
-    right: -150px; }
-    #content #ict-filtered-projects .footable-header .viz-f-p-1:after {
-      left: 50%; }
-  #content #ict-filtered-projects .footable-header .viz-f-p-8 {
-    right: -150px; }
-    #content #ict-filtered-projects .footable-header .viz-f-p-8:after {
-      left: 50%; }
-  #content .last-updated-block .view-baseline-history .view-baseline-tooltip span {
-    right: -150px;
-    bottom: 30px;
-    font-size: 13px;
-    width: 300px; }
-  #content .last-updated-block .view-baseline-history .view-baseline-tooltip span::after {
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent; } }
+  #content #ict-filtered-projects {
+    /*.footable-header {
+    	.viz-f-p-1 {
+    		right: -150px;
+    		&:after {
+    			left: 50%;
+    		}
+    	}
+    	.viz-f-p-8 {
+    		right: -150px;
+    		&:after {
+    			left: 50%;
+    		}
+    	}
+    }*/ }
+  #content .last-updated-block .view-baseline-history {
+    		/*.view-baseline-tooltip {
+    			span {
+    				right: -150px;
+    				bottom: 30px;
+    				font-size: 13px;
+    				width: 300px;
+    			}
+    			span::after {
+    				border-left: 20px solid transparent;
+        			border-right: 20px solid transparent;
+    			}
+    		}*/ } }
 /*********************
 RETINA (2x RESOLUTION DEVICES)
 This applies to the retina iPhone (4s) and iPad (2,3) along with

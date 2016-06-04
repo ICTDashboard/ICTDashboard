@@ -80,11 +80,11 @@ POSTS & CONTENT STYLES
 #content {
 	#ict-home-projects-table-id {
 		.footable-header {
-			.viz-f-p-2:after {
+			/*.viz-f-p-2:after {
 				left: 11%;
 				border-left: 20px solid transparent;
     			border-right: 20px solid transparent;
-			}
+			}*/
 		}
 		.footable-detail-row {
 			.footable-details {
@@ -143,7 +143,7 @@ POSTS & CONTENT STYLES
 		    	p {
 		    		margin: 0;
 		    	}
-			    a {
+			    /*a {
 					.tooltip-content {
 						right: -150px;
 						width: 300px;
@@ -152,7 +152,7 @@ POSTS & CONTENT STYLES
 						    border-right: 20px solid transparent;
 						}
 					}
-				}
+				}*/
 		    }
 	    }
 	    .view-baseline-history {
