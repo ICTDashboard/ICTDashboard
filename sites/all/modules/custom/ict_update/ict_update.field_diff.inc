@@ -205,5 +205,16 @@ function ict_field_diff_compare_benefits($prev, $last) {
     }
   }
 
+  // track removed benefits
+  $diff['removed_benefits'] = 0;
+  foreach ($last as $benefit) {
+    if (empty($benefit->field_status[LANGUAGE_NONE][0]['value'])) continue;
+    if ($benefit->field_status[LANGUAGE_NONE][0]['value'] != 'removed') continue;
+    if (!empty($benefit->field_removed)) continue;
+
+    // add just removed benefit to the counter
+    $diff['removed_benefits']++;
+  }
+
   return $diff;
 }
