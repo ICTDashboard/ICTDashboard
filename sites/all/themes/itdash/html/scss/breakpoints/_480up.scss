@@ -115,7 +115,7 @@ POSTS & CONTENT STYLES
 		}
 	}
 	.last-updated-block {
-		//padding: 0 7%;
+		padding: 0 7%;
 	    margin: 0 auto;
 	    display: table;
 	    margin-top: 25px;
@@ -312,7 +312,7 @@ POSTS & CONTENT STYLES
 	}
 }
 .page-title {
-    //padding: 0 7%;
+    padding: 0 7%;
     background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
 }
 
@@ -465,3 +465,11 @@ do they need tweaking?
 	}
 } /* end .footer-links */
 
+/* Styles for Block and Basic Page content*/
+
+.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+		padding: 0 7%;
+		.field {
+			padding: 0;
+		}
+}

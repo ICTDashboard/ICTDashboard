@@ -216,6 +216,7 @@ CONTENT STYLES
 		}
 	}
 }
+
 #content #inner-content .project-draft-submission #benefits_legend .bar-legend li {
 	float: none;
 }
@@ -226,7 +227,6 @@ CONTENT STYLES
 		width: 20px;
 	}
 }
-
 #content {
 	#ict-filtered-projects {
 		/*.footable-header {
@@ -258,17 +258,15 @@ CONTENT STYLES
 			}
 		}
 	}
-	color: #4e5365;
-	margin: 0;
-	background-color: #fff;
-	padding-bottom: 60px;
+		color: #4e5365;
+		margin: 0;
+		background-color: #fff;
+		padding-bottom: 60px;
 		.dotbg {
 			background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
 			overflow: hidden;
 		}
-
 		.page-title {
-			padding-left: 20px;
 			.inner-title-content {
 				h1 {
 					color: #c8f68f;
@@ -2226,5 +2224,25 @@ DETAILED OVERVIEW STYLES
 
 		 //  	}
 	    }
+	}
+}
+
+.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+	blockquote {
+		border-left: 2px solid #0d6c88;
+		padding-left: 15px;
+		position: relative;
+		font-style: italic;
+		margin-left: 80px;
+		&:before {
+		  content: "Note: ";
+		  position: absolute;
+		  left: -45px;
+		  top: -6px;
+		  color: #0d6c88;
+		  font-style: italic;
+		  font-weight: 600;
+		  font-size: 14px;
+		}
 	}
 }

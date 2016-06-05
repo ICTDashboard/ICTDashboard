@@ -1693,12 +1693,17 @@ div.tooltip-edit {
     }
   } 
 }
-.viz-number-of-benefits {
-  position: relative;
-  font-weight: 700;
-  color: #202b3d;
-  padding-right: 15px;
-  padding-top: 22px;
+.rebaseline-info {
+  display: block;
+  font-family: 'Open Sans';
+  color: #fff;
+  font-size: 13px;
+  font-style: italic;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.project-title-info {
+  margin-bottom: 0;
 }
 .rebaseline-indicate {
   display: block;
@@ -1711,17 +1716,12 @@ div.tooltip-edit {
 .rebaseline-privious-project-list {
   padding-left: 38px!important;
 }
-.rebaseline-info {
-  display: block;
-  font-family: 'Open Sans';
-  color: #fff;
-  font-size: 13px;
-  font-style: italic;
-  text-align: left;
-  margin-bottom: 24px;
-}
-.project-title-info {
-  margin-bottom: 0;
+.viz-number-of-benefits {
+  position: relative;
+  font-weight: 700;
+  color: #202b3d;
+  padding-right: 15px;
+  padding-top: 22px;
 }
 #content .project-program-link {
   color: #0d6c88;

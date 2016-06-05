@@ -978,7 +978,6 @@ function ict_project_get_all_unpublished_projects() {
   return $unpublished;
 }
 
-
 function ict_project_unpublish_project_form($form, &$form_state) {
   $form['project_id'] = array(
     '#type' => 'hidden',
