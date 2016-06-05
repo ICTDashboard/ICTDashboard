@@ -1,0 +1,475 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: 481px and Up Stylesheet
+
+This stylesheet is loaded for larger devices. It's set to
+481px because at 480px it would load on a landscaped iPhone.
+This isn't ideal because then you would be loading all those
+extra styles on that same mobile connection.
+
+A word of warning. This size COULD be a larger mobile device,
+so you still want to keep it pretty light and simply expand
+upon your base.scss styles.
+
+******************************************************************/
+
+/*
+IMPORTANT NOTE ABOUT SASS 3.3 & UP
+You can't use @extend within media queries
+anymore, so just be aware that if you drop
+them in here, they won't work.
+*/
+
+
+/*********************
+NAVIGATION STYLES
+*********************/
+
+.nav {}
+
+	/* .menu is clearfixed inside mixins.scss */
+	.menu {
+		ul {
+			li {
+				a {
+
+					/*
+					you can use hover styles here even though this size
+					has the possibility of being a mobile device.
+					*/
+					&:hover, &:focus {
+
+					}
+				}
+
+				&:first-child {}
+				&:last-child {}
+
+				/*
+				plan your menus and drop-downs wisely.
+				*/
+				ul.sub-menu,
+				ul.children {
+					li {
+						a {
+							&:hover,
+							&:focus {}
+							&:link {}
+						}
+						&:first-child {}
+						&:last-child {}
+					}
+				}
+			} /* end .menu ul li */
+
+			/* highlight current page */
+			li.current-menu-item,
+			li.current_page_item,
+			li.current_page_ancestor {
+				a {}
+			}  /* end current highlighters */
+		} /* end .menu ul */
+	} /* end .menu */
+
+/*********************
+POSTS & CONTENT STYLES
+*********************/
+
+#content {
+	#ict-home-projects-table-id {
+		.footable-header {
+			/*.viz-f-p-2:after {
+				left: 11%;
+				border-left: 20px solid transparent;
+    			border-right: 20px solid transparent;
+			}*/
+		}
+		.footable-detail-row {
+			.footable-details {
+				.viz-f-p-3, .viz-f-p-4 ,.viz-f-p-5 ,.viz-f-p-6 ,.viz-f-p-7 ,.viz-f-p-8 {
+					right: -150px;
+					width: 300px;
+				}
+				.viz-tooltips-row {
+					span:after {
+					    border-left: 20px solid transparent;
+    					border-right: 20px solid transparent;
+					}
+				}
+			}
+		}
+	}
+	#project-baseline-history {
+		#inner-content {
+			padding: 0 7%;
+			.project-draft-submission {
+				padding: 0;
+				.pbh-buttons {
+					a {
+						width: 180px;
+					}
+				}
+			}
+		}
+	}
+	.last-updated-block {
+		padding: 0 7%;
+	    margin: 0 auto;
+	    display: table;
+	    margin-top: 25px;
+	    margin-bottom: 10px;
+	    .last-updated-and-active-block {
+	    	display: inline-block;
+    	    .last-updated-on {
+	    	width: 220px !important;
+		    max-width: 970px;
+		    float: left;
+		    min-width: 0;
+		    margin-bottom: 0;
+    		padding-bottom: 0;
+    		display: inline-block;
+		    }
+		    .induvidual-project-state {
+		    	display: inline-block;
+		    	font-size: 14px;
+		    	color: #202b3d;
+		    	padding-left: 25px;
+		    	border-left: 1px dotted #d9dfe9;
+		    	border-top: none;
+		    	width: auto;
+		    	padding-top: 0;
+		    	p {
+		    		margin: 0;
+		    	}
+			    /*a {
+					.tooltip-content {
+						right: -150px;
+						width: 300px;
+						&:after {
+						    border-left: 20px solid transparent;
+						    border-right: 20px solid transparent;
+						}
+					}
+				}*/
+		    }
+	    }
+	    .view-baseline-history {
+			width: 100%;
+			text-align: left;
+			float: none;
+			display: inline-block;
+			margin: 0;
+			.view-baseline-link {
+				border-style: none;
+				text-decoration: underline;
+				font-weight: 400;
+				padding: 0;
+				display: inline-block;
+				&:hover {
+					text-decoration: none;
+				}
+				color: #0d6c88;
+				font-weight: 700;
+				text-decoration: none;
+				border-radius: 4px;
+				border-style: solid;
+				border-width: 1px;
+				border-color: #dbe0e7;
+				box-sizing: border-box;
+				background-color: #f9fafc;
+				box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+				padding: 8px 14px;
+			}
+			/*.view-baseline-tooltip {
+                span {
+                    right: 0;
+                    bottom: -50px;
+                    font-size: 12px;
+                    width: 280px;
+                }
+                span::after {
+                    border-left: none;
+                    border-right: none;
+                }
+            }
+
+/* Styles for Link to Data.gov.au  */
+			// .external-link-to-data-gov{
+			// 	font-size: 14px;
+			// 	text-align: left;
+		 //  		a {
+		 //  			color: #0d6c88;
+			//   		margin-right: 26px;
+			// 		margin-top: 15px;
+			// 		border-style: none;
+			// 	    text-decoration: underline;
+			// 	    font-weight: 400;
+			// 	    padding: 0;
+			// 	    display: inline-block;
+			// 	    &:hover {
+			// 	    	text-decoration: none;
+			// 	    }
+			// 	    &:after {
+	  // 			    content: " ";
+			// 	    background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+			// 	    height: 10px;
+			// 	    width: 10px;
+			// 	    display: inline-block;
+			// 	    margin-left: 7px;
+	  // 				}
+		 //  		}
+
+		 //  	}
+	    }
+	}
+	#inner-content {
+		.ict-benefits {
+			.ict-faq-question {
+				 padding: 10px 145px 10px 50px;
+				.benfit-status {
+					position: absolute;
+				}
+			}
+			.ict-faq-answer {
+				ul {
+					li {
+						div {
+							display: inline-block;
+						}
+					}
+				}
+
+			}
+		}
+		h2.individual-project-page {
+			margin: 20px 7%;
+		}
+		.project-draft-submission {
+			padding: 0 7%;
+			.individual-project-content {
+				.preview_switch {
+					min-width: 312px!important;
+					width: 312px;
+					span {
+						width: 20px;
+					}
+				}
+			}
+			#benefits_legend {
+				overflow: visible;
+				color: #202b3d;
+				.bar-legend {
+					padding-left: 40px;
+					li {
+						float: left;
+						margin-right: 25px;
+					}
+				}
+			}
+			.row {
+				.text {
+					.project-individual-page-graph{
+						margin-left: 0;
+						.bar-legend li {
+							margin: 3px 0;
+							margin-right: 25px;
+						}
+					}
+				}
+			}
+			.label, .user-information, #project-benefits {
+				padding-right: 0;
+				a {
+					position: relative;
+					z-index: 0;
+					span.tooltip-content {
+						right: -150px;
+						width: 300px;
+					}
+					/*span.tooltip-content::after {
+					    border-left: 20px solid transparent;
+					    border-right: 20px solid transparent;
+					}*/
+				}
+			}
+			.individual-page-tooltip-height {
+				bottom: 30px;
+			}
+		}
+		#print-links-container {
+			.pdf_button {
+				margin-bottom: 50px;
+				a {
+    				min-width: 275px !important;
+   					margin: 10px 10px 3px;
+   					width: 275px;
+				}
+			}
+		}
+
+	}
+}
+.page-title {
+    padding: 0 7%;
+    background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
+}
+
+#container {
+	#content {
+		#ict-dashboard-overview-number-indicators {
+			#overview-graphs {
+				#overview-expenditure-switch {
+					.sbHolder {
+						float: right;
+						margin-left: 0;
+						margin-right: 0;
+					}
+				}
+				#expenditure_legend {
+					float: left;
+				}
+				.row {
+					float: left;
+				}
+			}
+			#ict-dashboard-numbers,
+			#ict-dashboard-numbers1 {
+				float: left;
+				width: 100%;
+			}
+			.graph-schedule-status {
+				float: left;
+				#statuses_legend {
+					.bar-legend {
+						li {
+							margin-right: 20px;
+						}
+					}
+				}
+			}
+		}
+		.pane-last-updated {
+			padding: 0;
+			.last-updated-block {
+				padding: 0;
+				.last-updated-on {
+					padding-left: 20px;
+				}
+			}
+		}
+	}
+}
+
+/* entry content */
+.entry-content {
+
+
+	/* at this larger size, we can start to align images */
+	.alignleft, img.alignleft {
+		margin-right: 1.5em;
+		display: inline;
+		float: left;
+	}
+	.alignright, img.alignright {
+		margin-left: 1.5em;
+		display: inline;
+		float: right;
+	}
+	.aligncenter, img.aligncenter {
+		margin-right: auto;
+		margin-left: auto;
+		display: block;
+		clear: both;
+	}
+
+} /* end .entry-content */
+
+/*********************
+FOOTER STYLES
+*********************/
+
+.footer {
+	background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
+	border-top: 1px solid #03a7a4;
+	clear: both;
+	margin-top: 30px;
+	position: relative;
+	z-index: 10;
+	font-size: 13px;
+	font-weight: 400;
+	#inner-footer {
+		.wrap.cf {
+			.copy {
+				margin: 0;
+				margin-top: 30px;
+				width: 100%;
+				color: #363a41;
+				text-align: center;
+				padding-left: 20px;
+				padding-right: 20px;
+				line-height: 22px;
+			}
+			.menu {
+				display: inline-block;
+				margin-top: 20px;
+				margin-bottom: 0;
+				width: 100%;
+				padding-left: 17px;
+				li {
+					display: block;
+					&:before {
+						content: '\00b7';
+						color: #137992;
+						font-size: 26px;
+						padding: 5px 5px 5px 3px;
+						vertical-align: -4px;
+						line-height: 18px;
+					}
+					&.last {
+						float: right;
+						padding-right: 0;
+						&:before {
+							content: '';
+							padding: 0;
+						}
+					}
+					a {
+						color: #363a41;
+						text-decoration: underline;
+						&:hover {
+							text-decoration: none;
+						}
+					}
+				}
+			}
+			.copy.second-copy {
+				margin: 0;
+				margin-top: 5px;
+				margin-bottom: 10px;
+				width: 100%;
+			}
+		}
+	}
+}
+
+
+/*
+check your menus here. do they look good?
+do they need tweaking?
+*/
+.footer-links {
+	ul {
+		li {}
+	}
+} /* end .footer-links */
+
+/* Styles for Block and Basic Page content*/
+
+.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+		padding: 0 7%;
+		.field {
+			padding: 0;
+		}
+}

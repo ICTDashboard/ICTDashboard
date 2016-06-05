@@ -129,8 +129,6 @@ div#edit-field-rebaselined-total-budget td {
 }
 .tooltipster-icon:hover {background-color: #0a5f74;}
 /*.radio-description .form-item {float: left;}*/
-.header #logo {font-size: 34px;}
-
 #content .project-update-submission .submit input.form-submit,
 #content .project-update-submission .submit input#edit-preview,
 #content .project-update-submission .submit input#edit-preview--2,
@@ -265,6 +263,9 @@ textarea.is-invalid,
     padding: 15px 15px 15px 60px;
     font-size: 14px;
 }
+.ict-faq-answer a:hover{
+  text-decoration: none;
+}
 .sbHolderDisabled {
     background-color: #ced6e6;
     /*border: inherit;*/
@@ -304,9 +305,12 @@ input.approver-email {margin-bottom: 10px !important;}
     /*left: 0;*/
     /*right: 0;*/
 }
+.fancybox-actions .export-btn {
+    padding: 8px 15px;
+}
 .ict-fancy-content {
     padding: 0 20px;
-    overflow: scroll;
+    overflow: auto;
     position: relative;
     margin: 20px 0;
 }

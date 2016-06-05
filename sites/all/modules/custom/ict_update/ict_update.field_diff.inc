@@ -53,17 +53,31 @@ function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $updat
     'field_responsible_officer_name' => 'value',
     'field_resp_officer_position' => 'value',
     'field_project_stage' => 'tid',
+    'field_implementation_partners' => ''
   );
 
   $project = node_load($project_id, $prev_vid);
   $project_wrap = entity_metadata_wrapper('node', $project);
   $update = node_load($update_id);
   $update_wrap = entity_metadata_wrapper('node', $update);
-
   $diff = array();
+
   foreach($field_list as $key => $val) {
-    if ($update->{$key}['und'][0][$val] != $project->{$key}['und'][0][$val]) {
-      $diff[$key] = $project_wrap->{$key}->value();
+   if ($key != 'field_implementation_partners') {
+      if ($update->{$key}['und'][0][$val] != $project->{$key}['und'][0][$val]) {
+        $diff[$key] = $project_wrap->{$key}->value();
+      }
+    }
+    else {
+      $array_project = _ict_update_generate_default_multiple_select_terms_array($project->{$key}['und']);
+      $array_update = _ict_update_generate_default_multiple_select_terms_array($update->{$key}['und']);
+      $array_difference = array_diff_assoc($array_project, $array_update);
+      if (!empty($array_difference)) {
+        $diff[$key] = $project->{$key}['und'];
+      }
+      else if (empty($array_project) && !empty($array_update)) {
+        $diff[$key] = '-';
+      }
     }
   }
 
@@ -96,6 +110,7 @@ function ict_field_diff_compare_update_update($project_id, $prev_update_id, $las
     'field_current_financial_benefits' => 'value',
     'field_estimated_value_of_benefit' => 'value',
     'field_entity_comments' => 'value',
+    'field_implementation_partners' => ''
   );
 
   $prev_update = node_load($prev_update_id);
@@ -105,8 +120,25 @@ function ict_field_diff_compare_update_update($project_id, $prev_update_id, $las
 
   $diff = array();
   foreach($field_list as $key => $val) {
-    if ($prev_update->{$key}['und'][0][$val] != $last_update->{$key}['und'][0][$val]) {
-      $diff[$key] = $prev_update_wrapper->{$key}->value();
+    if ($key != 'field_implementation_partners') {
+      if ($prev_update->{$key}['und'][0][$val] != $last_update->{$key}['und'][0][$val]) {
+        if ($key == 'field_entity_comments' && is_null($prev_update->{$key}['und'][0][$val])) {
+          $diff[$key] = '-';
+          continue;
+        }
+        $diff[$key] = $prev_update_wrapper->{$key}->value();
+      }
+    }
+    else {
+      $array_prev_update = _ict_update_generate_default_multiple_select_terms_array($prev_update->{$key}['und']);
+      $array_last_update = _ict_update_generate_default_multiple_select_terms_array($last_update->{$key}['und']);
+      $array_difference = array_diff_assoc($array_prev_update, $array_last_update);
+      if (!empty($array_difference)) {
+        $diff[$key] = $prev_update->{$key}['und'];
+      }
+      else if (empty($array_prev_update) && !empty($array_last_update)) {
+        $diff[$key] = '-';
+      }
     }
   }
 
@@ -156,7 +188,10 @@ function ict_field_diff_compare_benefits($prev, $last) {
   $diff = array();
 
   foreach($last as $last_benefit) {
-    if (empty($last_benefit->field_previous_collection['und'][0]['target_id'])) continue;
+    if (empty($last_benefit->field_previous_collection['und'][0]['target_id'])) {
+      $diff[$last_benefit->item_id]['new_benefit'] = t('New Benefit added');
+      continue;
+    }
     if ($last_benefit->field_removed['und'][0]['value'] == 'removed') continue;
     $diff[$last_benefit->item_id] = array();
     foreach($prev as $key => $prev_benefit) {
@@ -167,11 +202,25 @@ function ict_field_diff_compare_benefits($prev, $last) {
         foreach($field_list as $field_key => $field_val) {
           if ($prev_benefit->{$field_key}['und'][0][$field_val] != $last_benefit->{$field_key}['und'][0][$field_val]) {
             $diff[$last_benefit->item_id][$field_key] = $prev_benefit_wrap->{$field_key}->label() ? $prev_benefit_wrap->{$field_key}->label() : $prev_benefit_wrap->{$field_key}->value();
+            if ($field_key == 'field_commentary' && is_null($diff[$last_benefit->item_id][$field_key])) {
+              $diff[$last_benefit->item_id][$field_key] = '-';
+            }
           }
         }
         break;
       }
     }
+  }
+
+  // track removed benefits
+  $diff['removed_benefits'] = 0;
+  foreach ($last as $benefit) {
+    if (empty($benefit->field_status[LANGUAGE_NONE][0]['value'])) continue;
+    if ($benefit->field_status[LANGUAGE_NONE][0]['value'] != 'removed') continue;
+    if (!empty($benefit->field_removed)) continue;
+
+    // add just removed benefit to the counter
+    $diff['removed_benefits']++;
   }
 
   return $diff;

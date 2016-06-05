@@ -69,8 +69,175 @@ style a page via class
 LAYOUT & GRID STYLES
 *********************/
 
+#container {
+	width: 100%;
+	overflow: hidden;
+	#content {
+		margin-top: 0;
+		.pane-overview-number-indicators,
+		.pane-home-projects {
+			#ict-dashboard-overview-number-indicators {
+				padding-bottom: 20px;
+				#overview-graphs {
+					padding-right: 0;
+					#overview-expenditure-switch {
+						margin-top: 10px;
+						.sbHolder {
+							max-width: 78%;
+							float: right;
+							margin-right: 0;
+							margin-left: 0;
+						}
+					}
+					#expenditure_legend {
+						margin-bottom: 0;
+						float: left;
+						.bar-legend {
+							margin-bottom: 30px;
+						}
+					}
+				}
+				#ict-dashboard-numbers,
+				#ict-dashboard-numbers1 {
+					border-top: 1px solid #D8DEEB;
+					border-bottom: 1px solid #D8DEEB;
+					padding-top: 30px;
+					padding-bottom: 30px;
+					margin-bottom: 30px;
+					float: left;
+					width: 100%;
+					.label {
+						margin-right: 5px;
+					}
+					.big-number {
+
+					}
+				}
+				#ict-dashboard-numbers1 {
+
+				}
+				#ict-dashboard-numbers {
+					border-bottom: 0;
+					padding-bottom: 0;
+					margin-bottom: 0;
+					.big-number {
+						border-bottom: 1px solid #D8DEEB;
+						margin-bottom: 20px;
+						padding-bottom: 20px;
+					}
+				}
+				.graph-schedule-status {
+					float: left;
+					#project-schedule-status-graph {
+						margin-top: 10px;
+						a {
+							text-decoration: underline;
+							&:hover {
+								text-decoration: none;
+							}
+						}
+					}
+					#statuses_legend {
+						.bar-legend {
+							padding-left: 0;
+							margin-top: 0;
+							li {
+								margin-right: 30px;
+							}
+						}
+					}
+				}
+			}
+			#ict-home-projects-table-id {
+				padding-right: 20px;
+				padding-left: 20px;
+				.pager-tags-top {
+					.item-list {
+						display: none;
+					}
+				}
+				.sort-direction-desc {
+					.col-num-entity {
+						width: auto;
+					}
+				}
+				.sbHolder {
+					max-width: 78%;
+					width: 78%;
+					float: right;
+				}
+				.table-config-bar {
+					.item-list {
+						margin-top: 20px;
+						.pager {
+							.pager-first,
+							.pager-previous,
+							.pager-next,
+							.pager-last {
+								display: none;
+							}
+						}
+					}
+				}
+				.ict-home-projects-table-table {
+					border-collapse: separate;
+					.col-num-budget,
+					.col-num-benefits {
+						display: none;
+					}
+					.ict-sort-link-desktop {
+						display: none;
+					}
+					.ict-sort-link-mobile {
+						&:before {
+							top: 6px;
+						}
+						&:after {
+							top: -3px;
+						}
+					}
+					tr {
+						td {
+							padding-left: 2px;
+							padding-right: 5px;
+						}
+						td.schedule-status-col {
+							padding-left: 30px;
+							&:before {
+								left: 5px;
+							}
+						}
+					}
+					th {
+						padding-bottom: 15px;
+					}
+				}
+				table.viz-filtered-projects {
+					tr {
+						td {
+							padding-left: 10px;
+						}
+					}
+				}
+				th {
+					padding-bottom: 15px;
+				}
+			}
+			table.viz-filtered-projects {
+				tr {
+					td {
+						padding-left: 10px;
+					}
+				}
+			}
+		}
+		.pane-last-updated {
+			padding: 0;
+		}
+	}
+}
+
 .wrap {
-	width: 96%;
 	margin: 0 auto;
 }
 
@@ -121,14 +288,19 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 }
 
 h1, .h1 {
-	font-size: 2.5em;
-	line-height: 1.333em;
+	color: #c8f68f;
+    font-size: 34px;
+    font-weight: 400;
 }
 
 h2, .h2 {
-	font-size: 1.75em;
+	font-size: 24px;
 	line-height: 1.4em;
 	margin-bottom: 0.375em;
+	color:  #0c6c88;
+	font-weight: 600;
+	border-bottom: 1px solid #f0f4fa;
+    padding-bottom: 10px;
 }
 
 h3, .h3 {
@@ -152,108 +324,840 @@ HEADER STYLES
 *********************/
 
 .header {
-	background-color: $black;
-}
+	position: relative;
+	background: url(../images/header-bg.png) repeat-x scroll 0 0 #17716b;
+	padding-left: 20px;
+	padding-right: 20px;
 
 	#logo {
-		margin: 0.75em 0;
+		margin-top: 30px;
+		margin-bottom: 5px;
+		overflow: hidden;
+		font-size: 34px;
+		text-transform: uppercase;
 
-		a {
+		& > a {
 			color: $white;
-		}
-	}
-
-/*********************
-NAVIGATION STYLES
-*********************/
-
-/*
-all navs have a .nav class applied via
-the wp_menu function; this is so we can
-easily write one group of styles for
-the navs on the site so our css is cleaner
-and more scalable.
-*/
-
-.nav {
-	border-bottom: 0;
-	margin: 0;
-
-	li {
-
-		a {
-			display: block;
-			color: $gray;
-			text-decoration: none;
-			padding: 0.75em;
-
-			/*
-			remember this is for mobile ONLY, so there's no need
-			to even declare hover styles here, you can do it in
-			the style.scss file where it's relevant. We want to
-			keep this file as small as possible!
-			*/
-			&:hover, &:focus {
-
+			float: left;
+			img {
+				width: 93px;
 			}
 		}
 
-		&:first-child {}
+		span {
+			font-size: 28px;
+			line-height: 28px;
+			margin-left: 14px;
+			margin-top: 5px;
+			float: left;
+			a {
+				color: $white;
+				font-size: 26px;
+				line-height: 30px;
 
-		&:last-child {}
+				strong {
+					letter-spacing: 1.5px;
+					font-weight: 700;
+					font-family: $ptsans;
+				}
+			}
+		}
+	}
+	/*********************
+	LOGIN AND REGISTER
+	*********************/
+	.login-register {
+		float: right;
+		margin: 5px 0 10px;
+		ul {
+			margin: 0;
+			li {
+				float: left;
+				a {
+					font-size: 15px;
+					font-weight: 600;
+					text-decoration: none;
+					text-align: center;
+					line-height: 37px;
+					margin-left: 20px;
+				}
+
+				&.reg {
+					a {
+						color: #d5ff92;
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+				&.log {
+					a {
+						color: $white;
+						background: url(../images/register-btn.png) no-repeat scroll 0 0;
+						width: 81px;
+						height: 41px;
+						display: block;
+
+						&:hover {
+							background-position: 0 -41px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/*********************
+    NAVIGATION STYLES
+    *********************/
+
+	#navigation {
 
 		/*
-		so you really have to rethink your dropdowns for mobile.
-		you don't want to have it expand too much because the
-		screen is so small. How you manage your menu should
-		depend on the project. Here's some great info on it:
-		http://www.alistapart.com/articles/organizing-mobile/
-		*/
-		ul.sub-menu,
-		ul.children {
+        all navs have a .nav class applied via
+        the wp_menu function; this is so we can
+        easily write one group of styles for
+        the navs on the site so our css is cleaner
+        and more scalable.
+        */
+
+		float: left;
+
+		.slicknav_menu {
+			.slicknav_btn {
+				color: $white;
+				text-decoration: none;
+				display: block;
+				padding: 15px 25px 24px 65px;
+				margin: 0 0 0 -20px;
+				border-radius: 0;
+				.slicknav_menutxt {
+					font-weight: 600;
+					font-size: 15px;
+
+				}
+				&.slicknav_open {
+					background-color: #0c5c57;
+				}
+				.slicknav_icon {
+					position: absolute;
+					left: 20px;
+					top: 8px;
+					float: left;
+					.slicknav_icon-bar {
+						margin-top: 6px;
+						background-color: $white;
+						display: block;
+						height: 2px;
+						width: 30px;
+					}
+				}
+			}
+			.slicknav_nav {
+				position: absolute;
+				top: 100%;
+				width: 100%;
+				background-color: #17716B;
+				margin-left: -20px;
+				li {
+					border-top: 1px solid #09514c;
+					border-bottom: none;
+					a {
+						position: relative;
+						font-size: 15px;
+						color: $white;
+						text-transform: none;
+						font-weight: 600;
+						&:hover, &.active {
+							background-color: #0c5c57;
+						}
+						&:before {
+							content: '';
+							position: absolute;
+							top: 0;
+							bottom: 0;
+							left: 0;
+							width: 4px;
+						}
+					}
+					&.blue {
+						a:before {
+							background: $blue;
+						}
+					}
+					&.blue-green {
+						a:before {
+							background: $blue-green;
+						}
+					}
+					&.green {
+						a:before {
+							background: $green;
+						}
+					}
+					&.yellow-text {
+						a:before {
+							background: $yellow-text;
+						}
+					}
+					&.salad {
+						a:before {
+							background: $salad;
+						}
+					}
+					&.yellow-green {
+						a:before {
+							background: $yellow-green;
+						}
+					}
+				}
+			}
+		}
+
+		.nav {
+			&#main-menu {
+				display: none;
+			}
+			border-bottom: 0;
+			margin: 0;
 
 			li {
 
 				a {
-					padding-left: 30px;
+					display: block;
+					color: $gray;
+					text-decoration: none;
+					padding: 0.75em;
 
-					&:hover,
-					&:focus {}
+					/*
+                    remember this is for mobile ONLY, so there's no need
+                    to even declare hover styles here, you can do it in
+                    the style.scss file where it's relevant. We want to
+                    keep this file as small as possible!
+                    */
+					&:hover, &:focus {
 
-					&:link {}
+					}
+				}
+
+				&:first-child {
+				}
+
+				&:last-child {
+				}
+
+				/*
+                so you really have to rethink your dropdowns for mobile.
+                you don't want to have it expand too much because the
+                screen is so small. How you manage your menu should
+                depend on the project. Here's some great info on it:
+                http://www.alistapart.com/articles/organizing-mobile/
+                */
+				ul.sub-menu,
+				ul.children {
+
+					li {
+
+						a {
+							padding-left: 30px;
+
+							&:hover,
+							&:focus {
+							}
+
+							&:link {
+							}
+
+						}
+
+						&:first-child {
+						}
+
+						&:last-child {
+						}
+
+					}
 
 				}
 
-				&:first-child {}
+			}
+			/* end .menu li */
 
-				&:last-child {}
+			/* highlight current page */
+			li.current-menu-item,
+			li.current_page_item,
+			li.current_page_ancestor {
+
+				a {
+				}
 
 			}
+			/* end current highlighters */
 
 		}
+		/* end .nav */
+	}
+	/*********************
+	USER TOOLS
+	*********************/
+	.user-tools {
+		position: absolute;
+		right:20px;
+		top:129px;
 
-	} /* end .menu li */
+		&>div {
+			span {
+				font-size: 14px;
+				color: $yellow-text;
+				background: url(../images/user-icon.png) no-repeat scroll 0 0 transparent;
+				padding: 0 0 0 25px;
+				display: inline-block;
+			}
+			.user-option {
+				display: inline-block;
+				margin-left: 20px;
+				height: 24px;
 
-	/* highlight current page */
-	li.current-menu-item,
-	li.current_page_item,
-	li.current_page_ancestor {
+				a.arrowdown {
+					border: 1px solid rgba(0, 0, 0, 0);
+					color: $yellow-text;
+					display: block;
+					height: 25px;
+					outline: 0 none;
+					text-align: center;
+					width: 22px;
 
-		a {}
+					i {
+						font-size: 10px;
+						vertical-align: 3px;
+					}
 
-	}  /* end current highlighters */
+					&:hover {
+						border: 1px solid $yellow-text;
+						border-radius: 3px;
+					}
 
-} /* end .nav */
+					&.active {
+						background-color: #07524d;
+						border-radius: 3px 3px 0 0;
+
+						&:hover {
+							border: 1px solid transparent;
+						}
+					}
+				}
+				ul {
+					background-color: #07524d;
+					border-radius: 3px 0 3px 3px;
+					display: none;
+					margin: 0;
+					padding: 5px 15px;
+					position: absolute;
+					right: 0;
+					top: 100%;
+					width: 160px;
+
+					li {
+						border-top: 1px solid #11655f;
+
+						&:first-child { border-top: 0 none; }
+
+						a {
+							font-size: 14px;
+							color: $white;
+							text-decoration: none;
+							line-height: 27px;
+
+							&:hover {
+								color: $yellow-text;
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+}
 
 
 /*********************
 POSTS & CONTENT STYLES
 *********************/
-
 #content {
-	margin-top: 1.5em;
-}
+	#project-baseline-history {
+		#inner-content {
+			padding: 0 20px;
+			.project-draft-submission {
+				padding: 0;
+				.pbh-buttons {
+					a {
+						width: 100%;
+					}
+				}
+			}
+			.project-history {
+				.project-draft-submission {
+					padding-left: 15px!important;
+				}
+			}
+		}
+	}
+	.last-updated-block {
+		width: 100%;
+		padding: 0 20px;
+		.last-updated-on  {
+			width: 100%!important;
+			padding-bottom: 15px;
+			p {
+				color:  #202b3d;
+			}
+			strong {
+				font-weight: 700;
+			}
+		}
+		.induvidual-project-state {
+	    	display: inline-block;
+	    	font-size: 14px;
+	    	color: #202b3d;
+	    	margin-bottom: 20px;
+	    	border-top: 1px dotted #d9dfe9;
+	    	width: 100%;
+	    	padding-top: 15px;
+	    	p {
+	    		margin: 0;
+	    	}
+			/*a {
+				.tooltip-content {
+					right: -172px;
+					width: 280px;
+					&:after {
+						border-left: none;
+						border-right: none;
+					}
+				}
+			}*/
+	    }
+		.view-baseline-history {
+			float: none;
+			text-align: left;
+			width: 100%;
+			.view-baseline-link{
+				color: #0d6c88;
+				font-weight: 700;
+				text-decoration: none;
+				border-radius: 4px;
+				border-width: 1px;
+				border-color:  #9fa5c5;
+				border-style: solid;
+				border-style: solid;
+				border-width: 1px;
+				border-color:  #dbe0e7;
+				box-sizing: border-box;
+				background-color:  #f9fafc;
+				box-shadow: 1px 3px 0px 0px rgba(21, 29, 44, 0.03);
+				padding: 8px 40px;
+				display: inline-block;
+				&:hover {
+					background-color: #0b626c;
+			    	color: #fff;
+				}
+			}
+			.view-baseline-tooltip {
+				span {
+					right: 0;
+					bottom: 28px;
+					font-size: 12px;
+					width: 280px;
+				}
+				/*span::after {
+					border-left: none;
+					border-right: none;
+				}*/
+			}
+/* Styles for Link to Data.gov.au  */
+			// .external-link-to-data-gov{
+			// 	font-size: 14px;
+			// 	text-align: right;
+		 //  		a {
+		 //  			color: #0d6c88;
+			//   		margin-right: 26px;
+			// 		margin-top: 15px;
+			// 		border-style: none;
+			// 	    text-decoration: underline;
+			// 	    font-weight: 400;
+			// 	    padding: 0;
+			// 	    display: inline-block;
+			// 	    &:hover {
+			// 	    	text-decoration: none;
+			// 	    }
+			// 	    &:after {
+	  // 			    content: " ";
+			// 	    background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+			// 	    height: 10px;
+			// 	    width: 10px;
+			// 	    display: inline-block;
+			// 	    margin-left: 7px;
+	  // 				}
+		 //  		}
 
+		 //  	}
+		}
+	}
+	#inner-content {
+		.individual-project-page {
+			margin: 20px;
+			padding-bottom: 15px;
+		}
+		.project-draft-submission {
+			.row {
+				.text {
+					color: #4e5365!important;
+				}
+			}
+			padding: 0 20px;
+			.individual-page-tooltip-height {
+				bottom: 120px;
+			}
+			#project-benefits {
+				a {
+					position: relative;
+					z-index: 0;
+					span.tooltip-content {
+						right: -56px;
+						width: 280px;
+					}
+					/*span.tooltip-content::after {
+						border-right: 0;
+						border-left: 0;
+					}*/
+				}
+			}
+			.user-information {
+				a {
+					position: relative;
+					z-index: 0;
+					span.tooltip-content {
+						right: 0;
+						width: 240px;
+					}
+					/*span.tooltip-content::after {
+						border-right: 0;
+						border-left: 0;
+					}*/
+				}
+			}
+			.label {
+				padding-right: 0;
+				a {
+					position: initial;
+					span.tooltip-content {
+						right: 0;
+						width: 280px;
+					}
+					/*span.tooltip-content::after {
+						border-right: 0;
+						border-left: 0;
+					}*/
+				}
+			}
+			a {
+				text-decoration: none;
+			}
+			#field_end_predicted_budget {
+				tbody {
+					tr {
+						th {
+							border-radius: 0;
+						}
+					}
+				}
+			}
+			.individual-project-content {
+				padding: 0;
+				.preview_switch {
+					width: 100%;
+    				margin: 15px 0;
+    				min-width: 100%!important;
+    				height: auto;
+    				text-align: left;
+    				line-height: 20px;
+    				padding: 10px;
+    				position: relative;
+    				padding-left: 50px;
+    				span {
+    					vertical-align: middle;
+    					bottom: 0;
+    					top: 0;
+    					left: 20px;
+    					margin: auto;
+    					position: absolute;
+    					width: 20px;
+    					height: 17px;
+    				}
+    				&:hover {
+    					background-position: inherit;
+    				}
+				}
+			}
+			#benefits_legend {
+				overflow: visible;
+				color: #202b3d;
+				.bar-legend {
+					padding-left: 0;
+					li {
+						float: left;
+						margin-right: 0;
+					}
+				}
+			}
+			.row {
+				.text {
+					p {
+						color: #4e5365;
+					}
+					.project-individual-page-graph{
+						margin-left: 0;
+						.bar-legend li {
+							margin: 3px 0;
+							margin-right: 0;
+						}
+					}
+				}
+			}
+			.project-program-link {
+				text-decoration: underline;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+			.email-value {
+				text-decoration: underline;
+				&:hover {
+				text-decoration: none;
+				}
+			}
+			.entity_comments {
+				a {
+					text-decoration: underline;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+			#inner-content {
+				.project-draft-submission {
+					label {
+						a {
+							position: initial;
+							span.tooltip-content {
+								right: 0;
+								width: 280px;
+								bottom: 120px;
+							}
+							/*span.tooltip-content::after {
+								border-right: 0;
+								border-left: 0;
+							}*/
+						}						
+					}
+				}
+			}
+		}
+		#print-links-container {
+			.pdf_button {
+				margin-bottom: 50px;
+				a {
+					min-width: none!important;
+					width: 100%;
+					margin: 0;
+				}
+			}
+		}
+		.ict-benefits {
+			.ict-faq-question {
+				padding: 15px 15px 15px 60px;
+				.benfit-status {
+					position: initial;
+				}
+			}
+			.ict-faq-answer {
+				ul {
+					li {
+						div {
+							display: block;
+						}
+					}
+				}
+
+			}
+		}
+	}
+}
+#content {
+	#ict-filtered-projects {
+		.viz-filtered-projects {
+			tr[data-expanded="true"] {
+				td {
+					border-bottom: none;
+				}
+			}
+		}
+		padding: 0 20px;
+		.footable-header {
+			.viz-f-p-2 {
+				right: -249px;
+				width: 280px;
+				/*&:after {
+					border-left: none;
+					border-right: none;
+				}*/
+			}
+			.viz-tooltips-row {
+				position: absolute;
+				bottom: 15px;
+				margin-left: 0;
+    			margin-top: 4px;
+			}
+			.footable-toggle {
+				display: none;
+			}
+			a.ict-sort-link {
+				margin-left: 0!important;
+				&:after {
+					top: 15px;
+				}
+				&:before {
+					top: 25px;
+				}
+			}
+		}
+		tr {
+			td {
+				border-bottom: 2px dotted #f0f4fa;
+				padding-bottom: 14px !important;
+			}
+			th {
+				padding: 7px 25px 42px 14px;
+			}
+		}
+		span.footable-toggle.fooicon.fooicon-minus {
+			opacity: 1;
+			&::before {
+				content: ' ';
+			    background-image: url(/sites/all/themes/itdash/html/images/minus.png);
+			    width: 26px;
+			    height: 26px;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			}
+			& + a {
+				margin-left: 40px;
+			}
+		}
+		span.footable-toggle.fooicon.fooicon-plus {
+			opacity: 1;
+			&::before {
+				content: ' ';
+			    background-image: url(/sites/all/themes/itdash/html/images/plus.png);
+			    width: 26px;
+			    height: 26px;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			}
+			& + a {
+				margin-left: 40px;
+			}
+		}		
+		.footable-detail-row {
+			td:first-child {
+				padding-left: 40px;
+				padding-right: 10px;
+			}
+			.footable-details {
+				.viz-f-p-3 {
+					right: -35px;
+		    		width: 280px;
+				}
+				.viz-f-p-4 {
+					right: -60px;
+		    		width: 280px;
+				}
+				.viz-f-p-5 {
+					right: -57px;
+		    		width: 280px;
+				}
+				.viz-f-p-6 {
+					right: -129px;
+		    		width: 280px;
+				}
+				.viz-f-p-7 {
+					right: -15px;
+		    		width: 280px;
+				}
+				.viz-f-p-8 {
+					right: -71px;
+		    		width: 280px;
+				}
+				.viz-tooltips-row {
+					margin-left: 10px;
+					margin-top: 3px;
+					span:after {
+						border-left: none;
+						border-right: none;
+					}
+				}
+				tbody {
+					tr:first-child {
+						display: none;
+					}
+				}
+				tr {
+					th {
+						background-color: #fff;
+						color: #202b3d;
+						border-left: none;
+						display: block;
+						width: 100%;
+						padding-right: 0;
+						display: flex;
+						padding-bottom: 7px;
+						font-size: 14px;
+
+					}
+					td {
+						display: block !important;
+						width: auto;
+						padding-right: 0;
+						padding-top: 0;
+						border-bottom: none;
+						height: auto;
+						padding-bottom: 12px;
+						word-break: break-word;
+						.ict-project-button {
+							padding-top: 7px;
+							padding-bottom: 8px;
+							a::before {
+								left: 44%;
+							}
+						}
+
+					}
+					.schedule-status-col::before {
+						top: 0;
+						margin-top: 4px;					
+					}
+				}
+			}
+		}
+	}
+}
+#content {
+	// margin-top: 1.5em;
+}
+	
 		.hentry {
 			background-color: $white;
 			border-radius: 3px;
@@ -284,7 +1188,10 @@ POSTS & CONTENT STYLES
 
 		.single-title {}
 
-		.page-title {}
+		.page-title {
+		    padding: 0 20px;
+		    background: url(../images/dot-bg.png) repeat scroll top center #1e2635;
+		}
 
 		.entry-title {}
 
@@ -860,9 +1767,70 @@ FOOTER STYLES
 *********************/
 
 .footer {
+	background: url(../images/footer-bg.png) repeat-x scroll 0 0 #cdd4e0;
+	border-top: 1px solid #03a7a4;
 	clear: both;
-	background-color: $black;
-	color: $light-gray;
+	margin-top: 30px;
+	position: relative;
+	z-index: 10;
+	font-size: 13px;
+	font-weight: 400;
+	#inner-footer {
+		.wrap.cf {
+			.copy {
+				margin-top: 30px;
+				width: 100%;
+				color: #363a41;
+				text-align: center;
+				padding-left: 20px;
+				padding-right: 20px;
+				line-height: 22px;
+				margin-bottom: 0;
+			}
+			.menu {
+				display: inline-block;
+				margin-top: 20px;
+				margin-bottom: 0;
+				width: 100%;
+				padding-left: 16px;
+				line-height: 21px;
+				position: relative;
+				li {
+					display: block;
+					&:before {
+						content: '\00b7';
+						color: #137992;
+						font-size: 26px;
+						padding: 5px 5px 5px 3px;
+						vertical-align: -4px;
+						line-height: 18px;
+					}
+					&.last {
+						position: absolute;
+						top: 0;
+						right: 20px;
+						&:before {
+							content: '';
+							padding: 0;
+						}
+					}
+					a {
+						color: #363a41;
+						text-decoration: underline;
+						&:hover {
+							text-decoration: none;
+						}
+					}
+				}
+			}
+			.copy.second-copy {
+				margin: 0;
+				margin-top: 5px;
+				margin-bottom: 10px;
+				width: 100%;
+			}
+		}
+	}
 }
 
 	/*
@@ -889,4 +1857,297 @@ FOOTER STYLES
 .panel-3col .panel-col-first {
   float: left;
   width: 0%;
+}
+
+/*********************
+DETAILED OVERVIEW STYLES
+*********************/
+
+#container {
+	#content {
+		margin-top: 0;
+		.page-title.dotbg {
+			background-color: #1e2635;
+			.inner-title-content h1 {
+				font-family: $opensans;
+				color:  #c8f68f;
+				font-size: 28px;/* Approximation due to font substitution */
+				font-weight: 400;
+				line-height: 34px;/* Approximation due to font substitution */
+				text-align: left;
+			}
+		}
+		#ict-dashboard-detailed-overview {
+			.section-title {
+				h2 {
+					margin-left: 20px;
+					margin-right: 20px;
+					margin-bottom: 0;
+					font-family: $opensans;
+					color:  #0c6c88;
+					font-size: 24px;/* Approximation due to font substitution */
+					font-weight: 600;
+					line-height: 29px;/* Approximation due to font substitution */
+					text-align: left;
+				}
+			}
+			#detailed-view-expenditure {
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+			#detailed-view-schedule-status {
+				margin-top: 20px;
+				#statuses_legend {
+					.bar-legend li {
+						float: none;
+						.noofproj,
+						.curqua {
+							text-align: right;
+						}
+					}
+				}
+			}
+			#detailed_schedule_chart_current {
+				margin-left: 7px;
+			}
+			.benefits_chart_divs {
+				overflow: hidden;
+				#benefits_chart_div {
+					padding-left: 12px;
+					padding-right: 20px;
+				}
+				#benefits_legend {
+					width: 100%;
+					margin: 0;
+					color: #4e5365;
+					.bar-legend {
+						padding-left: 20px;
+						margin-top: 8px;
+						color: #4e5365;
+					}
+				}
+			}
+			.viz-number-of-benefits {
+				padding-left: 20px;
+				font-size: 13px;
+			}
+		}
+	}
+}
+
+/* Styles for Block and Basic Page content*/
+
+.page-block #content, .node-type-page #content #inner-content, .entity-bean .content {
+		padding: 0 20px;
+		.field {
+			padding: 0;
+		}
+		p {
+			img {
+				height: 100%;
+				width: 100%;
+			}
+		}
+  table {
+    font-family: "Open Sans", sans-serif;
+    color: #4e5365;
+    border: 1px solid #ddd;
+    width: 100% !important;
+    tr {
+    	line-height: 22px;
+    	font-size: 14px;
+      th {
+        background-color: #137992;
+        border: 1px solid #0a5f74;
+        color: #fff;
+        p, h2, h3, h4, h5 {
+          color: #fff;
+        }
+        padding: 5px;
+      }
+      td {
+        padding: 5px;
+        border: 1px solid #ddd;
+      }
+    }
+  }
+  font-family: "Open Sans", sans-serif;
+  blockquote {
+	p {
+		margin-left: 0 !important;
+	}
+  	text-indent: 0;
+    border-left: 2px solid #0d6c88;
+    padding-left: 15px;
+    position: relative;
+    font-style: italic;
+    margin-left: 20px;
+    margin-right: 0;
+    &:before {
+      content: "Note: ";
+      position: relative;
+      left: 0;
+      top: -6px;
+      color: #0d6c88;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+  h2 {
+    font-family: "Open Sans", sans-serif;
+    color:  #0d6c88;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+  }
+  h3 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+  }
+  h4 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+  }   
+  h5 {
+    font-family: "Open Sans", sans-serif;
+    color: #202b3d;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+    font-style: italic;
+    text-transform: inherit;
+    letter-spacing: 0;
+  }       
+  p {
+    color: #4e5365;
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 22px;
+    font-family: "Open Sans", sans-serif;
+  }
+  a {
+    color: #027e9c;
+    text-decoration: underline;
+    &:focus,
+    &:hover,
+    &:visited {
+      color: #027e9c!important;
+      text-decoration: none;
+    }
+  }
+  a[href^="http"] {
+    color: #027e9c;
+    text-decoration: underline;
+    &:focus,
+    &:hover,
+    &:visited {
+      color: #027e9c!important;
+      text-decoration: none;
+    }
+    &:after {
+      content: " ";
+      background: url(/sites/all/themes/itdash/html/images/ico-01.png);
+      height: 10px;
+      width: 10px;
+      display: inline-block;
+      margin-left: 5px;
+    }
+  }
+  ol {
+    padding-left: 20px;
+    margin: 0;
+    counter-reset: item;
+    color: #4e5365;
+    li {
+		line-height: 22px;
+	  	text-indent: -15px;
+		padding-left: 5px;
+	  	color: #4e5365;
+      p {
+        margin: 0 0 0 11px;;
+      }
+      p:first-of-type {
+        display: inline-block;
+        margin: 0 0 0 10px;
+      }            
+      font-family: "Open sans", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      display: block;
+      &:before {
+        content: counter(item) ". ";
+        counter-increment: item;
+        color: #0d6c88;
+      }
+      ol {
+        counter-reset: alpha;
+        margin: 0 0 0.75em 10px;
+        li {
+          &:before {
+            content: counter(alpha, lower-alpha) ". ";
+            counter-increment: alpha;
+          }
+        }
+      }
+    }
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    padding-left: 22px;
+    li {
+      text-indent: -10px;
+      padding-left: 14px;
+      p {
+        margin: 0 0 0 10px;
+      }
+      p:first-of-type {
+        display: inline-block;
+      }
+      font-family: "Open sans", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #4e5365;
+      list-style: none;
+      line-height: 22px;
+      &:before {
+        font-size: 20px;
+        content: "• ";
+        display: inline-block;
+        width: 10px;
+        height: 5px;
+        vertical-align: middle;
+        line-height: 1;
+      }
+      ul {
+        li {
+          &:before {
+            content: "• ";
+            line-height: 1;
+            color: #55beaf;
+          }
+          ul {
+            li {
+              &:before {
+                content: "• ";
+                line-height: 1;
+                color: #aabcb9; 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

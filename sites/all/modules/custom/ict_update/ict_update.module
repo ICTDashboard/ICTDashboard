@@ -30,6 +30,18 @@ function ict_update_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_node_delete().
+ */
+function ict_update_node_delete($node) {
+  if ($node->type == 'update') {
+    // delete workflow records
+    $num_deleted = db_delete('project_workflow')
+      ->condition('nid', $node->nid)
+      ->execute();
+  }
+}
+
 function ict_update_benefit_print_history($field_collection) {
   $host_entity = $field_collection->hostEntity();
 
@@ -132,10 +144,14 @@ function ict_update_update_form_recursive($key, $value, $array) {
  * Implements hook_form_FORM_ID_alter().
  */
 function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) {
+  
+  $form['#after_build'][] = 'ict_update_node_form_after_build';
+  global $user;
   $update = $form['#node'];
   if (empty($update->nid)) {
     $project_id = !empty($_REQUEST['project_id']) && is_numeric($_REQUEST['project_id']) ? check_plain($_REQUEST['project_id']) : arg(1);
     $project = node_load($project_id);
+    $form['#rebaseline'] = !empty($project->field_project);
     $approved_vid = ict_project_get_last_transaction_by_state($project_id, 'approved');
     if (!$approved_vid->vid) {
       drupal_not_found();
@@ -148,10 +164,16 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   else {
     $form['#project_id'] = $project_id = $form['#node']->field_project['und'][0]['target_id'];
     $project = node_load($project_id);
+    $form['#rebaseline'] = !empty($project->field_project);
     $form['#update_id'] = $update->nid;
   }
+
+  $form['#page_title'] = $form['#rebaseline'] ? t('Update Project Re-baseline Data Form') : t('Update Project Data Form');
+
+  $field_instances = field_info_instances('node', 'project');
   $form['project_id'] = array('#type' => 'hidden', '#value' => $project_id);
   $form['#project_node'] = $project;
+  $form['#project_instances'] = $field_instances;
 
   $form['#theme'] = 'ict_update_add_form';
   $project_admins = ict_project_baseline_get_admin_user_emails($project);
@@ -159,7 +181,9 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     'ict_project_baseline_admin_user_details', array(
       'departmental_admins' => $project_admins['departmental_admins'],
       'data_editors' => $project_admins['data_editors'],
-      'data_approvers' => $project_admins['data_approvers']
+      'data_approvers' => $project_admins['data_approvers'],
+      'project_id' => $project_id,
+      'view_mode' => 'full'
     )
   );
 
@@ -169,6 +193,12 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
     $last_project_revision_updates = end($entity_list);
     if(empty($last_project_revision_updates)) {
       // from project
+      if (isset($project->field_implementation_partners[LANGUAGE_NONE]) && !empty($project->field_implementation_partners[LANGUAGE_NONE])) {
+        $form['field_implementation_partners']['und']['#default_value'] = _ict_update_generate_default_multiple_select_terms_array($project->field_implementation_partners[LANGUAGE_NONE]);
+      }
+      else {
+        $form['field_implementation_partners']['und']['#default_value'] = array('_none');
+      }
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $project->field_original_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $project->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $project->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
@@ -179,6 +209,12 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       // from previous update
       $last_update = node_load(end($last_project_revision_updates));
       _ict_update_prepopulate_benefit($form, $form_state, $last_update->field_benefits_realised['und']);
+      if (isset($last_update->field_implementation_partners[LANGUAGE_NONE]) && !empty($last_update->field_implementation_partners[LANGUAGE_NONE])) {
+        $form['field_implementation_partners']['und']['#default_value'] = _ict_update_generate_default_multiple_select_terms_array($last_update->field_implementation_partners[LANGUAGE_NONE]);
+      }
+      else {
+        $form['field_implementation_partners']['und']['#default_value'] = array('_none');
+      }
       $form['field_expected_completion_date']['und'][0]['#default_value']['value'] = $last_update->field_expected_completion_date[LANGUAGE_NONE][0]['value'];
       $form['field_responsible_officer_name']['und'][0]['value']['#default_value'] = $last_update->field_responsible_officer_name[LANGUAGE_NONE][0]['value'];
       $form['field_resp_officer_position']['und'][0]['value']['#default_value'] = $last_update->field_resp_officer_position[LANGUAGE_NONE][0]['value'];
@@ -187,7 +223,8 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       $form['field_forecast_level_of_project_']['und'][0]['value']['#default_value'] = $last_update->field_forecast_level_of_project_[LANGUAGE_NONE][0]['value'];
       $form['field_current_financial_benefits']['und'][0]['value']['#default_value'] = $last_update->field_current_financial_benefits[LANGUAGE_NONE][0]['value'];
       $form['field_estimated_value_of_benefit']['und'][0]['value']['#default_value'] = $last_update->field_estimated_value_of_benefit[LANGUAGE_NONE][0]['value'];
-      $form['field_entity_comments']['und'][0]['value']['#default_value'] = $last_update->field_entity_comments[LANGUAGE_NONE][0]['value'];
+      $form['field_entity_comments']['und'][0]['#default_value'] = $last_update->field_entity_comments[LANGUAGE_NONE][0]['value'];
+      $form['field_entity_comments']['und'][0]['#format'] = $last_update->field_entity_comments[LANGUAGE_NONE][0]['format'];
     }
   }
   else {
@@ -227,7 +264,7 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
     $form['actions']['submit']['#submit'][] = 'ict_update_workflow_set_draft';
   }
-
+  $form['field_implementation_partners'][LANGUAGE_NONE]['#options']['_none'] = t('Not Applicable');
   // project budget by financial year
   _ict_project_project_budget_by_year_form ($form, $form_state);
 
@@ -245,8 +282,37 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
 
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'ict_update') . '/js/ict_update.js',
-    drupal_get_path('module', 'ict_update') . '/js/jQuery.textareaCounter.min.js',
   );
+
+  // only Finance Admin can remove benefits
+  foreach ($form['field_benefits_realised']['und'] as $key => $value) {
+    if(is_numeric($key)) {
+      if (!empty($form['#node']->nid)) {
+        if (empty($form['field_benefits_realised']['und'][$key]['#entity']->field_removed) && !array_key_exists(ICT_FINANCE_ADMIN_ROLE, $user->roles)) {
+          unset($form['field_benefits_realised']['und'][$key]['field_status']['und']['#options']['removed']);
+        }
+        // and they should stay removed if someone else is updating the project
+        elseif (!empty($form['field_benefits_realised']['und'][$key]['#entity']->field_removed)) {
+          $form['field_benefits_realised']['und'][$key]['field_status']['und']['#default_value'] = array('removed');
+        }
+      }
+      else {
+        if (empty($form['field_benefits_realised']['und'][$key]['field_removed'][LANGUAGE_NONE][0]['#default_value']['value']) && !array_key_exists(ICT_FINANCE_ADMIN_ROLE, $user->roles)) {
+          unset($form['field_benefits_realised']['und'][$key]['field_status']['und']['#options']['removed']);
+        }
+        // and they should stay removed if someone else is updating the project
+        elseif (!empty($form['field_benefits_realised']['und'][$key]['field_removed'][LANGUAGE_NONE][0]['#default_value']['value'])) {
+          $form['field_benefits_realised']['und'][$key]['field_status']['und']['#default_value'] = array('removed');
+        }
+      }
+    }
+  }
+
+}
+
+function ict_update_node_form_after_build($form) {
+    $form['field_entity_comments']['und']['0']['format']['#access'] = FALSE;
+    return $form;
 }
 
 function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
@@ -294,6 +360,9 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
           <a href="' . url('benefit/history/' . $budget_table[$key]['field_previous_collection']['und']['#value']) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
           </div>'
       );
+
+      // title is not editable
+      $budget_table[$key]['field_benefit'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
     }
     if (!$items_count) {
       foreach(element_children($budget_table) as $key) {
@@ -310,6 +379,16 @@ function _ict_update_prepopulate_benefit(&$form, &$form_state, $items) {
   // Fix triggering element nested level
   $budget_table['#language'] = LANGUAGE_NONE;
 }
+
+function _ict_update_generate_default_multiple_select_terms_array($data = array()) {
+  $generated = array();
+  foreach($data as $value) {
+    array_push($generated, $value['tid']);
+  }
+
+  return $generated;
+}
+
 function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = array()) {
   $budget_table = &$form['field_benefits_realised'][LANGUAGE_NONE];
 
@@ -327,6 +406,9 @@ function _ict_update_edit_prepopulate_benefit(&$form, &$form_state, $items = arr
           <a href="' . url('benefit/history/' . $prev_collection) . '" class="fancybox-benefit-history">' . t('Show History of Benefit Updates') . '</a>
           </div>'
       );
+
+      // title is not editable
+      $budget_table[$key]['field_benefit'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
     }
     if (!empty($form_state['values']['field_benefits_realised']['und'][$key]['current_item_id'])) {
       $budget_table[$key]['current_item_id'] = array(
@@ -470,7 +552,7 @@ function ict_update_all_fields_required_validate_page_preview($node) {
   $project = node_load($project_id, $project_vid);
 
   $fields = array(
-    'text' => array(
+    'number' => array(
       'field_forecast_level_of_project_',
       'field_actual_level_of_project_co',
       'field_current_financial_benefits',
@@ -482,7 +564,7 @@ function ict_update_all_fields_required_validate_page_preview($node) {
   foreach($fields as $type => $subfields) {
     foreach($subfields as $field) {
       if ((empty($node->{$field}['und'][0]['tid']) && $type == 'term')
-        || (empty($node->{$field}['und'][0]['value']) && $type == 'text')) {
+        || (empty($node->{$field}) && $type == 'number')) {
         $field_info = field_info_instance('node', $field, 'update');
         $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
       }
@@ -702,6 +784,7 @@ function ict_update_project_get_list($project_id, $state = NULL) {
   $query = db_select('field_data_field_project', 'p');
   $query->addField('p', 'entity_id');
   $query->condition('field_project_target_id', $project_id);
+  $query->condition('bundle', 'update');
   if ($state) {
     $query->join('project_workflow', 'w', "w.state = '" . $state . "' AND w.nid = p.entity_id");
   }
@@ -817,7 +900,6 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
     $node->revision = TRUE;
     node_save($node);
     ict_project_set_workflow_state('approved', $nid);
-    drupal_set_message(t('Update data has been approved.'));
 
     $project_id = $node->field_project['und'][0]['target_id'];
     if ($project = node_load($project_id)) {
@@ -831,6 +913,27 @@ function ict_update_review_workflow_set_approve($form, &$form_state) {
         $val->save();
       }
     }
+
+    $status_message = t('Update data has been approved.');
+
+    // unpublish parent project if first update approved
+    if (ict_project_is_rebaseline($project_id)) {
+      $parent_project = ict_project_get_parent_project($project_id);
+
+      // if first update
+      if (!ict_update_project_get_list($parent_project, 'unpublished')) {
+        $baseline_node = node_load($parent_project);
+        $baseline_node->revision = TRUE;
+        node_save($baseline_node);
+
+        ict_project_set_workflow_state('unpublished', $baseline_node->nid);
+
+        $status_message = t('Update Data has been approved. Previous baseline has been unpublished.');
+      }
+    }
+
+    drupal_set_message($status_message);
+    
     ict_update_calculate_project_fields($form['#nid'], $nid);
   }
 }
@@ -900,8 +1003,8 @@ function template_preprocess_field_benefits_realised_table_form(&$vars) {
         $field['settings']['buttonImage'] = "/sites/all/themes/itdash/html/images/calendar-icon.png";
         $field['settings']['buttonImageOnly'] = TRUE;
         $field['settings']['showOn'] = 'button';
-        $field['settings']['changeYear'] = FALSE;
-        $field['settings']['changeMonth'] = FALSE;
+        $field['settings']['changeYear'] = TRUE;
+        $field['settings']['changeMonth'] = TRUE;
       }
     }
   }
@@ -1051,6 +1154,7 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
   $query->addField('p', 'entity_id', 'update_nid');
   $query->addField('pr', 'field_project_revision_value', 'project_vid');
   $query->condition('field_project_target_id', $project_id);
+  $query->condition('p.bundle', 'update');
   $query->join('field_data_field_project_revision', 'pr', 'pr.entity_id = p.entity_id');
   $query->orderBy('p.entity_id', 'ASC');
   $updates_res = $query->execute()->fetchAllAssoc('update_nid');
@@ -1080,7 +1184,7 @@ function ict_update_get_allowed_entity_list($project_id, $account = NULL) {
  * Implements hook_node_access().
  */
 function ict_update_node_access($node, $op, $account) {
-  if ($node == 'update' || $node->type == 'update') {
+  if ($node == 'update' || (!empty($node->type) && $node->type == 'update')) {
     if (empty($node->nid)) {
       return NODE_ACCESS_DENY;
     }
@@ -1143,7 +1247,8 @@ function ict_update_get_actual_benefits($project_id) {
     $benefits = $last_update->field_benefits_realised->value();
   }
   foreach($benefits as $key => $val) {
-    if ($val->field_removed['und'][0]['value'] || $val->field_status['und'][0]['value'] == 'removed') {
+    if ((!empty($val->field_removed['und'][0]['value']) && $val->field_removed['und'][0]['value']) ||
+      $val->field_status['und'][0]['value'] == 'removed') {
       unset($benefits[$key]);
     }
   }
@@ -1153,6 +1258,7 @@ function ict_update_get_actual_benefits($project_id) {
 
 function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
   $subquery = db_select('field_data_field_project');
+  $subquery->condition('bundle', 'update');
   $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));
   $subquery->addField('field_data_field_project', 'field_project_target_id', 'project_id');
   $subquery->addExpression('MAX(entity_id)', 'last_upd_id');
@@ -1170,6 +1276,13 @@ function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
   }
   if (is_numeric($project_id)) {
     $query->condition('project.nid', $project_id);
+  }
+  else {
+    // get only active projects
+    $active_projects = ict_project_get_all_active_projects();
+    if ($active_projects) {
+      $query->condition('project.nid', $active_projects, 'IN');
+    }
   }
   $count = $query->execute()->rowCount();
 

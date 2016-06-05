@@ -32,11 +32,11 @@ var timeToWaitForLast = 100;
  * Put all your regular jQuery in here.
 */
 jQuery(document).ready(function($) {
-
-	/* $('#main-menu').slicknav({
-		prependTo: '#mobile-nav',
-		label: 'MENU'
-	}); */
+	
+	$('#main-menu').slicknav({
+		prependTo: '#navigation',
+		label: 'Menu'
+	});
 
 	$('.signin-request .tab-head a').click(function(){
 		var $this = $(this);
@@ -219,6 +219,8 @@ Drupal.behaviors.ictFaq = {
 Drupal.behaviors.atepickerIcon = {
 	attach: function(context) {
 		for (id in Drupal.settings.datePopup) {
+			Drupal.settings.datePopup[id].settings.changeMonth = true;
+			Drupal.settings.datePopup[id].settings.changeYear = true;
 			jQuery('#' + id).datepicker(Drupal.settings.datePopup[id].settings)
 			.addClass('date-popup-init');
 		}

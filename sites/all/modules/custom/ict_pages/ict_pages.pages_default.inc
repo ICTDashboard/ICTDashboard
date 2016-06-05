@@ -65,11 +65,20 @@ function ict_pages_default_page_manager_handlers() {
             'paths' => 'faq
 dashboard
 project/*/update
-update/*
+update/*/delete
 node/*/delete
 user/create
 detailed-overview
 dashboard-projects',
+          ),
+          'context' => 'argument_string_1',
+          'not' => FALSE,
+        ),
+        1 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '0',
+            'paths' => 'project/*/update',
           ),
           'context' => 'argument_string_1',
           'not' => FALSE,
@@ -379,25 +388,31 @@ function ict_pages_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-e7723f9c-65e9-4882-b8e2-f67e5af656d2';
+    $pane->pid = 'new-ae4a8cdc-3d00-41b9-b235-5597d0c65ff0';
     $pane->panel = 'middle';
-    $pane->type = 'home_login';
-    $pane->subtype = 'home_login';
+    $pane->type = 'block';
+    $pane->subtype = 'bean-home-page-main-copy';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
-      'style' => 'naked',
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'welcome dotbg',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = 'e7723f9c-65e9-4882-b8e2-f67e5af656d2';
-    $display->content['new-e7723f9c-65e9-4882-b8e2-f67e5af656d2'] = $pane;
-    $display->panels['middle'][0] = 'new-e7723f9c-65e9-4882-b8e2-f67e5af656d2';
+    $pane->uuid = 'ae4a8cdc-3d00-41b9-b235-5597d0c65ff0';
+    $display->content['new-ae4a8cdc-3d00-41b9-b235-5597d0c65ff0'] = $pane;
+    $display->panels['middle'][0] = 'new-ae4a8cdc-3d00-41b9-b235-5597d0c65ff0';
     $pane = new stdClass();
     $pane->pid = 'new-2cbf2c4c-d156-4058-8574-78e6f47af7a9';
     $pane->panel = 'middle';
@@ -437,7 +452,7 @@ function ict_pages_default_page_manager_pages() {
     $display->content['new-e83ec894-d70b-434e-8670-4e33c5351d04'] = $pane;
     $display->panels['middle'][2] = 'new-e83ec894-d70b-434e-8670-4e33c5351d04';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-e7723f9c-65e9-4882-b8e2-f67e5af656d2';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['home_page'] = $page;

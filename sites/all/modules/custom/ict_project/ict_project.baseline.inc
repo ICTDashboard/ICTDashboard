@@ -104,6 +104,42 @@ function ict_project_baseline_edit_draft_block ($nid) {
 }
 
 /**
+ * Baseline Edit Draft block
+ * @param $nid
+ * @return string
+ */
+function ict_project_rebaseline_create_block ($parent_project) {
+  $parent_project = node_load($parent_project);
+
+  if (!$parent_project) {
+    drupal_not_found();
+  }
+
+  if (!ict_project_access_project('rebaseline', NULL, $parent_project->nid)) {
+    drupal_access_denied();
+  }
+
+  $form = drupal_get_form('ict_project_projects_create_form', $parent_project);
+
+  return drupal_render($form);
+}
+
+/**
+ * Copy editors and approvers from parent project
+ * @param $node
+ */
+function ict_project_copy_editors_and_approvers($node) {
+  $parent_project = ict_project_get_parent_project($node);
+  $project_users = ict_project_baseline_get_admin_user_emails($parent_project);
+  foreach ($project_users['data_approvers'] as $approver_email) {
+    ict_project_access_add_approver($approver_email, $node->nid);
+  }
+  foreach ($project_users['data_editors'] as $editor_email) {
+    ict_project_access_add_editor($editor_email, $node->nid);
+  }
+}
+
+/**
  * Baseline Approve block
  * @param $nid
  * @return string
@@ -286,6 +322,8 @@ function ict_project_baseline_approve_form_submit_decline ($form, &$form_state) 
  * @return array
  */
 function ict_project_baseline_get_admin_user_emails ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
   $project_department = ict_department_get_department_tid_of_entity('project', $node);
   $query = db_select('users', 'u');
   $query->join('field_data_field_department', 'd', 'd.entity_id = u.uid');
@@ -319,7 +357,7 @@ function ict_project_baseline_get_admin_user_emails ($node) {
   );
 }
 
-function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE, $prefix = '', $suffix = '', $finance = FALSE) {
+function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALSE, $prefix = '', $suffix = '', $finance = FALSE, $percent = FALSE) {
   $values = array();
   foreach ($items as $key => $item) {
     // exclude field meta data from the display
@@ -332,6 +370,11 @@ function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALS
     elseif (isset($item['taxonomy_term'])) {
       // term reference fields
       $val = $item['taxonomy_term']->name;
+    }
+    elseif (!isset($item['taxonomy_term']) && isset($item['tid'])) {
+      // term reference fields
+      $term = taxonomy_term_load($item['tid']);
+      $val = $term->name;
     }
     elseif (isset($item['timezone'])) {
       // date fields
@@ -346,6 +389,12 @@ function _ict_project_baseline_get_simple_values ($items, $not_applicable = FALS
     if ($finance) {
       $val = number_format($val, 2, '.', '');
     }
+
+    if ($percent) {
+      $values[] = $val;
+      continue;
+    }
+
     $values[] = $val ? $prefix . $val . $suffix : '';
   }
   $default_value = $not_applicable ? t('Not Applicable') : '-';
@@ -359,7 +408,6 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
     'field_brief_project_summary',
     'field_responsible_officer_name',
     'field_resp_officer_position',
-    'field_predicted_project_benefit',
   );
   $term = array(
     'field_government_entity_name',
@@ -369,6 +417,9 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
   $dates = array(
     'field_start_date',
     'field_original_completion_date',
+  );
+  $number = array(
+    'field_predicted_project_benefit',
   );
   foreach($term as $field) {
     if (empty($form_state['values'][$field]['und'][0]['tid'])) {
@@ -385,6 +436,11 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
       form_set_error($field . '][und][0', 'Field <em>' . $form[$field]['und'][0]['#title'] . '</em> is required.');
     }
   }
+  foreach($number as $field) {
+    if (empty($form_state['values'][$field])) {
+      form_set_error($field . '][und][0', 'Field <em>' . $form[$field]['und'][0]['#title'] . '</em> is required.');
+    }
+  }
 
   // date validation
   if (!empty($form_state['values']['field_start_date']['und'][0]['value']) &&
@@ -393,7 +449,6 @@ function ict_project_baseline_approve_form_validate_required_fields($form, &$for
       form_set_error('field_start_date][und][0', t('<em>Original Approved Start Date</em> cannot be later than <em>Original Approved Completion Date </em>'));
     }
   }
-
   ict_update_benefits_realised_validate($form, $form_state);
   ict_project_budget_by_year_validate($form, $form_state);
 }
@@ -413,7 +468,6 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
       'field_brief_project_summary',
       'field_responsible_officer_name',
       'field_resp_officer_position',
-      'field_predicted_project_benefit',
     ),
     'term' => array(
       'field_government_entity_name',
@@ -424,12 +478,16 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
       'field_start_date',
       'field_original_completion_date',
     ),
+    'number' => array(
+      'field_predicted_project_benefit',
+    )
   );
   foreach($fields as $type => $subfields) {
     foreach($subfields as $field) {
       if ((empty($node->{$field}['und'][0]['tid']) && $type == 'term')
         || (empty($node->{$field}['und'][0]['value']) && $type == 'text')
-        || (empty($node->{$field}['und'][0]['value']) && $type == 'dates')) {
+        || (empty($node->{$field}['und'][0]['value']) && $type == 'dates')
+        || (empty($node->{$field}) && $type == 'number')) {
         $field_info = field_info_instance('node', $field, 'project');
         $errors[] = t('Field <em>' . $field_info['label'] . '</em> is required.');
       }
@@ -454,36 +512,63 @@ function ict_project_baseline_preview_page_validate_required_fields($node) {
 
 function ict_project_budget_by_year_validate($form, &$form_state) {
   $budget_values = $form_state['values']['field_original_total_budget'][LANGUAGE_NONE];
+  $budget_sum = 0;
   $current_fin_year = __ict_project_get_current_fin_year();
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
-      if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
-        $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
-        if ($form['#node']->type == 'update' && $year != $current_fin_year) {
-          continue;
-        }
-        form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
-          '!year' => $year
-        )));
+
+    if (empty($value['field_total'][LANGUAGE_NONE][0]['value'])) {
+      $year = $value['field_year'][LANGUAGE_NONE][0]['value'];
+      if ($form['#node']->type == 'update' && $year != $current_fin_year) {
+        continue;
       }
+      form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> is required for !year Financial Year', array(
+        '!year' => $year
+      )));
+    }
+    elseif ($value['field_total'][LANGUAGE_NONE][0]['value'] < 0) {
+      form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Field <em>Budget Value</em> cannot be negative'));
+    }
+    else {
+      $budget_sum += $value['field_total'][LANGUAGE_NONE][0]['value'];
+    }
+  }
+
+  if ($budget_sum < 10) {
+    form_set_error('field_original_total_budget][und]['.$key.'][field_total][und][0][value', t('Total Project Budget in baseline project has to be greater or equal to $10m'));
   }
 }
 
 function ict_project_budget_by_year_preview_page_validate($node, &$errors) {
   $node_wrapper = entity_metadata_wrapper('node', $node);
   $budget_values = $node_wrapper->field_original_total_budget->value();
+  $type = $node_wrapper->getBundle();
+  $budget_sum = 0;
   $current_fin_year = __ict_project_get_current_fin_year();
   foreach ($budget_values as $key => $value) {
     if (!is_numeric($key)) continue;
+
     if (empty($value->field_total[LANGUAGE_NONE][0]['value'])) {
       $year = $value->field_year[LANGUAGE_NONE][0]['value'];
       if ($node->type == 'update' && $year != $current_fin_year) {
         continue;
       }
-      $errors[] = t(t('Field <em>Budget Value</em> is required for !year Financial Year', array(
+      $errors[] = t('Field <em>Budget Value</em> is required for !year Financial Year', array(
         '!year' => $year
-      )));
+      ));
     }
+    elseif ($value->field_total[LANGUAGE_NONE][0]['value'] < 0) {
+      $field_name = $type == 'project' ? 'Budget Value' : 'Expenditure Value';
+
+      $errors[] = t('Field <em>!field_name</em> cannot be negative', array('!field_name' => $field_name));
+    }
+    elseif ($type == 'project') {
+      $budget_sum += $value->field_total[LANGUAGE_NONE][0]['value'];
+    }
+  }
+
+  if ($budget_sum < 10 & $type == 'project') {
+    $errors[] = t('Total Project Budget has to be greater or equal to $10m');
   }
 }
 
@@ -503,4 +588,469 @@ function __ict_project_get_current_fin_year () {
     $current_date > new DateTime ($current_year_long . '-07-01 00:00:00') ?
       $current_year_short . '/' . ($current_year_short + 1) :
       ($current_year_short - 1) . '/' . $current_year_short;
+}
+
+/**
+ * Checks if project is published
+ * @param $nid
+ * @return bool
+ */
+function ict_project_is_published_project($nid) {
+  $updates = ict_update_project_get_list($nid);
+  $update_id = end($updates);
+
+  if ($update_id) {
+    $update_state = ict_project_get_workflow_state($update_id);
+    if (in_array($update_state, array('approved'))) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Clone a Field Collection. Helper function for hook_node_clone_alter().
+ * Taken from field_collection_clone_items() - https://www.drupal.org/project/field_collection_node_clone
+ */
+function ict_project_field_collection_clone_items($entity_type, &$entity, $fc_field, $language = LANGUAGE_NONE) {
+  $entity_wrapper = entity_metadata_wrapper($entity_type, $entity);
+  $old_items = $entity_wrapper->{$fc_field}->value();
+  if (!is_array($old_items)) {
+    $old_items = array($old_items);
+  }
+
+  $field_info_instances = field_info_instances();
+  $field_names = element_children($field_info_instances['field_collection_item'][$fc_field]);
+
+  unset($entity->{$fc_field}[$language]);
+
+  foreach ($old_items as $old_item) {
+    $new_item = entity_create('field_collection_item', array('field_name' => $fc_field));
+    $new_item->setHostEntity($entity_type, $entity);
+
+    foreach ($field_names as $field_name) {
+      if (!empty($old_item->{$field_name})) {
+        $new_item->{$field_name} = $old_item->{$field_name};
+      }
+    }
+
+    // Now check if any of the fields in the newly cloned fc item is a field
+    // collection and recursively call this function to properly clone it.
+    foreach ($field_names as $field_name) {
+      if (!empty($new_item->{$field_name})) {
+        $field_info = field_info_field($field_name);
+        if ($field_info['type'] == 'field_collection') {
+          field_collection_clone_items('field_collection_item', $new_item, $field_name, $language);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Gets re-baseline of the project
+ * @param $nid
+ * @return array
+ */
+function ict_project_get_project_rebaseline ($project_id) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));
+  $query->join('field_data_field_project', 'baseline', 'baseline.entity_id = n.nid');
+  $query->condition('n.type', 'project');
+  $query->condition('baseline.field_project_target_id', $project_id);
+  return $query->execute()->fetchAssoc();
+}
+
+/**
+ * Checks if project is a re-baseline
+ * @param $node|$nid
+ * @return bool
+ */
+function ict_project_is_rebaseline ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
+  if ($node->type != 'project') {
+    return FALSE;
+  }
+
+  if (!empty($node->field_project[LANGUAGE_NONE][0]['target_id'])) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Gets parent project
+ * @param $node|$nid
+ * @return int
+ */
+function ict_project_get_parent_project ($node) {
+  $node = !empty($node->nid) ? $node : node_load($node);
+
+  if ($node->type != 'project') {
+    return FALSE;
+  }
+
+  if (!empty($node->field_project[LANGUAGE_NONE][0]['target_id'])) {
+    return $node->field_project[LANGUAGE_NONE][0]['target_id'];
+  }
+
+if (!empty($node->field_project_target_id)) {
+    return $node->field_project_target_id;
+  }
+  
+  return FALSE;
+}
+
+/**
+ * Gets last rebaseline project
+ * @param $node|$nid
+ * @return int
+ */
+function ict_project_get_last_rebaseline_project($nid) {
+  $rebaseline = '';
+  $parent = ict_project_get_project_rebaseline ($nid);
+  if (!$parent && ict_project_get_parent_project($nid)) {
+    return $nid;
+  }
+
+  $last_baseline = FALSE;
+
+  if(!empty($parent['nid']) && ict_project_access_project('view', NULL, $parent['nid'])) {
+    do {
+      $last_nid = $parent['nid'];
+      $parent = ict_project_get_project_rebaseline($last_nid);
+      if (!isset($parent['nid'])) {
+        $last_baseline = TRUE;
+        $rebaseline = $last_nid;
+      }
+    } while(!$last_baseline);
+  }
+  else {
+    return $nid;
+  }
+
+  return $rebaseline;
+}
+
+/**
+ * Gets all rebaseline projects
+ * @param $node|$nid
+ * @return int
+ */
+ function ict_project_get_all_rebaselines($nid) {
+  $rebaseline = ict_project_get_last_rebaseline_project($nid);
+  $check_rebaseline = ict_project_is_rebaseline ($rebaseline);
+
+  if(!empty($check_rebaseline) && $check_rebaseline == TRUE) {
+    $rebaselines = ict_project_get_all_parents_project($rebaseline);
+  }
+  return $rebaselines;
+ }
+
+/**
+ * Get project first approve date
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_approve_date($nid) {
+  $query = db_select('project_workflow', 'pw');
+  $query->fields('pw', array('created'));
+  $query->condition('pw.nid', $nid, '=');
+  $query->condition('state', 'approved');
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get project unpublished date
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_unpublished_date($nid) {
+  $query = db_select('project_workflow', 'pw');
+  $query->fields('pw', array('created'));
+  $query->condition('pw.nid', $nid, '=');
+  $query->condition('state', 'unpublished');
+
+  return $query->execute()->fetchField();
+}
+
+
+/**
+ * Gets all project relatives
+ * @param $node|$nid
+ * @return int
+ */
+function ict_project_get_all_parents_project($node) {
+  $relatives = array();
+  $parent = ict_project_get_parent_project ($node);
+
+  if ($parent) {
+    array_push($relatives, $parent);
+    do {
+      $nid = $parent;
+      $parent = ict_project_get_parent_project ($nid);
+      if ($parent) {
+        array_push($relatives, $parent);
+      }
+    } while($parent);
+  }
+
+  return $relatives;
+}
+
+/**
+ * Gets total budget
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_total_budget($nid) {
+  if ($nid) {
+    $budget_items = _ict_project_prepare_budget_history($nid, 'view');
+  }
+
+  // should show previous approved values OR current pendong values only
+  $baseline_row = reset($budget_items);
+  $last_update = end($budget_items);
+
+  if ($last_update['entity_type'] == 'update') {
+    $budget_items = array($baseline_row, $last_update);
+  }
+  else {
+    $budget_items = array($baseline_row);
+  }
+
+  // total budget and expenditure values
+  $total_budget = 0;
+  foreach ($budget_items[0]['budget_items'] as $budget_value) {
+    $total_budget += (float)$budget_value->field_total[LANGUAGE_NONE][0]['value'];
+  }
+
+  return $total_budget;
+}
+
+/**
+ * Get project first approved update
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_first_approved_update($nid) {
+  $update_nids = array();
+  $updates = ict_update_get_allowed_entity_list($nid);
+
+  foreach ($updates as $update) {
+    $update_nids = $update;
+  }
+
+  if (!empty($update_nids)) {
+    $query = db_select('project_workflow', 'pw');
+    $query->fields('pw', array('created'));
+    $query->condition('pw.nid', $update_nids, 'IN');
+    $query->condition('state', 'approved');
+    $query->orderBy('pw.created', 'ASC');
+    $query->range(0 ,1);
+
+    return $query->execute()->fetchField();
+  }
+
+  return '';
+}
+
+/**
+ * Get project last update
+ * @param $nid
+ * @return int
+ */
+function ict_project_get_last_update($nid) {
+  $updates = ict_update_project_get_list($nid);
+  if ($updates) {
+    return reset($updates);
+  }
+
+  return '';
+}
+
+/**
+ * Get project baseline history block
+ * @param $nid
+ * @return string
+ */
+function ict_project_project_history ($nid) {
+
+  if (!ict_project_access_project('view', NULL, $nid)) {
+    drupal_access_denied();
+  }
+
+  $current_baseline = node_load($nid);
+
+  if ($current_baseline->type != 'project') {
+    drupal_not_found();
+  }
+  $current_baseline->approved_on = ict_project_get_approve_date($nid);
+  $current_baseline->field_original_total_budget = number_format(ict_project_get_total_budget($nid), 2, '.', ' ');
+  $current_baseline->first_update = ict_project_get_first_approved_update($nid);
+
+  // last accessible update
+  $project_revisions = ict_update_get_revisions_list($nid, 'approved');
+  $last_revision = end($project_revisions);
+  $project_history = ict_update_get_allowed_entity_list($nid);
+  $last_update = end($project_history[$last_revision]);
+
+  $current_baseline->last_update = $last_update ?
+    node_load($last_update) :
+    FALSE;
+
+  $total_expenditure = 0;
+  if ($current_baseline->last_update) {
+    $upd_wrap = entity_metadata_wrapper('node', $current_baseline->last_update->nid);
+    foreach ($upd_wrap->field_original_total_budget as $budget) {
+      $total_expenditure += $budget->field_total->value();
+    }
+  }
+  $current_baseline->total_expenditure = number_format($total_expenditure, 2, '.', ' ');
+
+  $old_baselines = ict_project_get_old_baselines($nid);
+
+  return theme('project_baseline_history', array(
+    'current_baseline' => $current_baseline,
+    'old_baselines' => $old_baselines,
+    'count_baselines' => count($old_baselines))
+  );
+}
+
+/**
+ * Gets old baselines for specified project
+ * @param $nid
+ */
+function ict_project_get_old_baselines($nid) {
+  $old_baselines = array();
+  $projects = ict_project_get_all_parents_project($nid);
+  if (is_array($projects) && !empty($projects)) {
+    $old_baselines = node_load_multiple($projects);
+    foreach ($projects as $project_id) {
+      $old_baselines[$project_id]->approved_on = ict_project_get_approve_date($project_id);
+      $old_baselines[$project_id]->unpublished_on = ict_project_get_unpublished_date($project_id);
+      $old_baselines[$project_id]->field_original_total_budget = number_format(ict_project_get_total_budget($project_id), 2, '.', ' ');
+      $old_baselines[$project_id]->first_update = ict_project_get_first_approved_update($project_id);
+
+      // last accessible update
+      $project_revisions = ict_update_get_revisions_list($project_id, 'approved');
+      $last_revision = end($project_revisions);
+      $project_history = ict_update_get_allowed_entity_list($project_id);
+      $last_update = end($project_history[$last_revision]);
+
+      $old_baselines[$project_id]->last_update = $last_update ?
+        node_load($last_update) :
+        FALSE;
+
+      $total_expenditure = 0;
+      $upd_wrap = entity_metadata_wrapper('node', $old_baselines[$project_id]->last_update->nid);
+      foreach ($upd_wrap->field_original_total_budget as $budget) {
+        $total_expenditure += $budget->field_total->value();
+      }
+      $old_baselines[$project_id]->total_expenditure = number_format($total_expenditure, 2, '.', ' ');
+    }
+  }
+  return $old_baselines;
+}
+
+/**
+ * Gets all unpublished projects
+ * @return mixed
+ */
+function ict_project_get_all_unpublished_projects() {
+
+  $unpublished = &drupal_static(__FUNCTION__);
+
+  if (isset($unpublished)) {
+    return $unpublished;
+  }
+
+  $query = db_select('node', 'project');
+  $query->condition('project.type', 'project');
+  $query->join('project_workflow', 'wf', 'wf.nid = project.nid AND state = :state', array(':state' => 'unpublished'));
+  $query->addField('project', 'nid');
+  $query->groupBy('project.nid');
+  $unpublished = $query->execute()->fetchAllKeyed(0, 0);
+  
+  return $unpublished;
+}
+
+function ict_project_unpublish_project_form($form, &$form_state) {
+  $form['project_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => ''
+  );
+
+  $form['comment'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Comment'),
+    '#title_display' => 'invisible'
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Unpublish'),
+    '#attributes' => array('class' => array('submit-button')),
+    '#validate' => array('ict_project_unpublish_validate'),
+    '#submit' => array('ict_project_unpublish_submit')
+  );
+
+  $form['#theme'] = 'ict_project_unpublish_form';
+
+  return $form;
+}
+
+function ict_project_unpublish_validate($form, &$form_state) {
+  global $user;
+
+  $values = $form_state['values'];
+
+  if (empty($values['project_id'])) {
+    form_set_error('project_id', t('Error. Please try again later.'));
+  }
+
+  $nid = $values['project_id'];
+  if (!ict_project_access_project('unpublish', $user, $nid) || ict_project_get_unpublished_date($nid)) {
+    form_set_error('project_id', t('Error. Toy cannot unpublish selected project.'));
+  }
+}
+
+function ict_project_unpublish_submit($form, &$form_state) {
+  $values = $form_state['values'];
+  $nid = $values['project_id'];
+
+  $project_node = node_load($nid);
+  $project_node->revision = TRUE;
+  node_save($project_node);
+
+  ict_project_set_workflow_state('unpublished', $project_node->nid);
+
+  $unpublish_date = ict_project_get_last_transaction_by_state($project_node->nid, 'unpublished')->created;
+
+  $fin_name = _ict_project_get_user_name();
+  __ict_mail_process_mails(
+    'ict_mail',
+    'project_unpublished',
+    $project_node,
+    array(
+      'data_approvers',
+      'data_editors',
+      'departmental_admins'),
+    array(
+      'fin_name' => $fin_name,
+      'unpublish_date' => format_date($unpublish_date, 'medium', 'j M Y h:i A'),
+      'comment' => !empty($values['comment']) ? $values['comment'] : '',
+    )
+  );
+
+  drupal_set_message(t('Project has been unpublished.'));
+}
+
+function ict_project_project_active_from_date($nid) {
+  $baseline = node_load($nid);
+  $baseline->first_update = ict_project_get_first_approved_update($nid);
+  return $baseline;
 }

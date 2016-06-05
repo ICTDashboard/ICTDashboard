@@ -1,0 +1,193 @@
+﻿
+* {}
+
+body {
+  position: relative;
+  color: black !important;
+  font-family: "Open Sans",sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+  border: 0px !important;
+}
+div.project-draft-submission {
+  font-size: 14px !important;
+}
+
+h2 {
+  font-size: 26px !important;
+  font-weight: 500 !important;
+}
+
+.row {
+  margin-bottom: 15px;
+}
+.row p, .row a{
+  margin: 0px;
+}
+.row a{
+  margin-bottom: 5px;
+}
+
+div.page-title h1 {
+  font-size: 32px !important;
+  font-weight:normal !important;
+  margin-bottom: 0;
+}
+
+div.print-logo img {
+  width: 80px;
+}
+
+#logo {
+  margin-bottom: 10px;
+}
+
+#footer-copyright {
+  margin-top: 10px;
+}
+
+table tr td.print-logo-title img{
+  width: 160px;
+  padding-left: 5px;
+}
+
+div.ict-faq-answer ul li .label, div.ict-faq-answer ul li .benefit {
+  display: block !important;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.email-value {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ict-benefits {
+max-width: 812px;
+}
+
+.ict-benefits .node-faq-item .benfit-status {
+position: absolute;
+top: 12px;
+right: 0px;
+width: 140px;
+color: black;
+}
+
+.ict-benefits .node-faq-item.row-blue {
+  border: 0px;
+}
+.ict-benefits .node-faq-item.row-white {
+  border: 0px;
+}
+
+.ict-benefits .node-faq-item .benfit-status .status-marker {
+  width: 16px;
+  height: 16px;
+  display: none;
+  line-height: 54px;
+  vertical-align: sub;
+  margin-right: 5px;
+}
+
+.ict-faq-question {
+  position: relative;
+  padding: 10px 155px 10px 50px;
+}
+.ict-faq-question:before {
+  left: 10px;
+  top: 10px;
+}
+.ict-faq-question h4 {
+  margin: 0;
+  font-size: 16px;
+}
+.ict-faq-answer {
+  padding-top: 0;
+  padding-left: 50px;
+}
+.ict-faq-answer ul {
+  list-style: none;
+  padding:0;
+  margin:0;
+  margin-top: -2px;
+}
+.ict-faq-answer ul li {
+  padding-left: 18px;
+  line-height: 22px;
+  position: relative;
+}
+.ict-faq-answer ul li .label:before {
+  position: absolute;
+  content: "• ";
+  color: #17716b;
+  left: -2px;
+  font-size: 26px;
+}
+.ict-faq-answer ul li .label {
+  padding: 0;
+  display: inline-block;
+  min-width: 98px;
+}
+.ict-faq-answer ul li .benefit {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+#field_end_predicted_budget {
+  border-collapse: collapse;
+  max-width: 640px;
+  width: 100%;
+}
+
+#field_end_predicted_budget th {
+  border: 1px solid black;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px;
+  text-align: center;
+  text-shadow: 0 0 0;
+  vertical-align: top;
+}
+
+#field_end_predicted_budget td {
+  border: 1px solid black;
+  color: #202b3d;
+  height: 38px;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  width: 110px;
+}
+
+#footer-copyright {
+  font-size: 12px !important;
+}
+
+.diffs-provided {
+  display: none;
+}
+
+.tooltip-edit {
+  display: none;
+}
+
+form#ict-update-approve-form, form#ict-project-baseline-approve-form {
+  display: none;
+}
+
+span.rebaseline-info {
+  font-style: italic;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.view-baseline-history {
+  display: none;
+}

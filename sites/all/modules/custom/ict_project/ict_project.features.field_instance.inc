@@ -10,6 +10,70 @@
 function ict_project_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'bean-prject_list_description-field_description'.
+  $field_instances['bean-prject_list_description-field_description'] = array(
+    'bundle' => 'prject_list_description',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'bean',
+    'field_name' => 'field_description',
+    'label' => 'Description',
+    'required' => 1,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'ds_code' => 0,
+          'filtered_html' => 'filtered_html',
+          'filtered_html_plus_word_count' => 0,
+          'full_html' => 0,
+          'plain_text' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'ds_code' => array(
+              'weight' => 12,
+            ),
+            'filtered_html' => array(
+              'weight' => 0,
+            ),
+            'filtered_html_plus_word_count' => array(
+              'weight' => 0,
+            ),
+            'full_html' => array(
+              'weight' => 1,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance:
   // 'field_collection_item-field_benefits_realised-field_previous_collection'.
   $field_instances['field_collection_item-field_benefits_realised-field_previous_collection'] = array(
@@ -224,7 +288,7 @@ function ict_project_field_default_field_instances() {
     'bundle' => 'project',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Describe the project through a summary of the delivery method, key outputs, strategic objectives and/or outcomes.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -246,7 +310,7 @@ function ict_project_field_default_field_instances() {
     'label' => 'Project Summary and Objectives ',
     'required' => 0,
     'settings' => array(
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -566,7 +630,7 @@ function ict_project_field_default_field_instances() {
         'label_position' => 'none',
         'no_fieldset' => 1,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-10:+10',
       ),
       'type' => 'date_popup',
       'weight' => 11,
@@ -688,7 +752,7 @@ function ict_project_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'max' => '',
-      'min' => '',
+      'min' => 0,
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
@@ -740,6 +804,49 @@ function ict_project_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-project-field_project'.
+  $field_instances['node-project-field_project'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 52,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_project',
+    'label' => 'Re-baseline of',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 36,
     ),
   );
 
@@ -955,7 +1062,7 @@ function ict_project_field_default_field_instances() {
         'label_position' => 'none',
         'no_fieldset' => 1,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '-10:+10',
       ),
       'type' => 'date_popup',
       'weight' => 10,
@@ -1002,6 +1109,8 @@ function ict_project_field_default_field_instances() {
   t('Abbreviation');
   t('Annual budgeted funding for each financial year of the project, agreed by Cabinet including any additional funding from other sources.');
   t('Department');
+  t('Describe the project through a summary of the delivery method, key outputs, strategic objectives and/or outcomes.');
+  t('Description');
   t('Expenditure budget calc');
   t('Expenditure to date calc');
   t('Government Entity Name');
@@ -1016,6 +1125,7 @@ function ict_project_field_default_field_instances() {
   t('Project Budget By Financial Year ');
   t('Project Stage');
   t('Project Summary and Objectives ');
+  t('Re-baseline of');
   t('Removed');
   t('Schedule status calc');
   t('Senior Responsible Officer  Position ');

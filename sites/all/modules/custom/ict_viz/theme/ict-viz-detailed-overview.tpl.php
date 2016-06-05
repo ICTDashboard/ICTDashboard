@@ -11,9 +11,24 @@
         </a>
       </h2>
     </div>
-    <div id="detailed-view-expenditure" style="margin-left: 25px; max-width: 945px;">
+    <div id="detailed-view-expenditure" style="max-width: 945px;">
         <canvas id="detailed_budget_chart" width="945" height="360"></canvas>
-        <div id="expenditure_legend" class="legend"></div>
+        <div id="expenditure_legend" class="legend">
+          <ul class="bar-legend">
+            <li>
+              <span style="background-color:#ff6161"></span>
+              <?php print t('Expenditure to Date ($m)'); ?>
+            </li>
+            <li>
+              <span style="background-color:#5c46a4"></span>
+              <?php print t('Total Budget ($m)'); ?>
+            </li>
+            <li>
+              <span class="required">*</span>
+              <?php print t('Current Financial Year'); ?>
+            </li>
+          </ul>
+        </div>
     </div>
     <div id="ict-all-benefits-setion" class="section-title">
       <h2>
@@ -44,7 +59,10 @@
             <?php print t('Ahead of Schedule'); ?>
           </li>
           <li>
-            <b>#</b> <?php print t('No. of Projects'); ?>
+            <span class="noofproj"><b>#</b></span> <?php print t('No. of Projects'); ?>
+          </li>
+          <li>
+            <span class="curqua"><b>*</b></span> <?php print t('Current Quarter'); ?>
           </li>
         </ul>
       </div>
@@ -65,6 +83,7 @@
               </span>
         </a>
       </h2>
+
     </div>
     <?php print theme('all_benefits_pie_chart'); ?>
   </div>
@@ -78,15 +97,16 @@
         Drupal.settings.detailed_budget_chart.data,
         Drupal.settings.detailed_budget_chart.options
       );
-      document
-        .getElementById("expenditure_legend")
-        .innerHTML = ExpenditureChart.generateLegend();
-
+      $('#detailed_budget_chart').css('width', '100%');
+      if (screen.width == 320) {
+        $('#detailed_budget_chart').css('max-width', 280 + 'px');
+      }
+      $('#detailed_budget_chart').css('height', 'auto');
       // *** Schedule Status Graph ***
       var data = Drupal.settings.detailed_schedule_chart,
         width = $('#detailed-view-schedule-status').innerWidth();
 
-      var max_bar = width < 684 ? width : 684,
+      var max_bar = width < 808 ? width - 124 : 684,
           left_padding = 94;
 
       // align legend with graph
@@ -142,7 +162,8 @@
           .attr("class", "chart")
           .attr("width", width)
           .attr("height", Object.keys(data.data[year]).length * 72.5);
-
+        
+        var current_is_printed = false;
         for (var quarter = 4; quarter > 0; quarter--) {
           // if no data provide for the quarter don't show it
           if (typeof data.data[year][quarter] == 'undefined') continue;
@@ -164,16 +185,30 @@
             .attr("font-size", '13px')
             .attr("font-family", 'Open Sans')
             .attr("color", '#202b3d');
-          // quarter number
+          // quarter numberX
           quarter_text
             .append("svg:tspan")
             .text(getGetOrdinal(quarter)+" Quarter");
+
+          var year_dy = 22;
+          if (!current_is_printed) {
+            quarter_text
+              .append("svg:tspan")
+              .attr("x", 5)
+              .attr("dx", 78)
+              .attr("dy", 12)
+              .text("*");
+
+            current_is_printed = true;
+            year_dy = 10;
+          }
+
           // year
           quarter_text
             .append("svg:tspan")
             .attr("font-weight", 'bold')
             .attr("x", 13)
-            .attr("dy", 22)
+            .attr("dy", year_dy)
             .attr("dx", 23)
             .attr("text-anchor", 'right')
             .text(data[year]);
@@ -196,7 +231,7 @@
             if (typeof data.data[year][quarter][current_item] == 'undefined') continue;
 
             var current_width = x(current_value.value);
-
+            
             quarter_g
               .append("svg:rect")
               .attr("y", y)
@@ -204,7 +239,7 @@
               .attr("width", current_width)
               .attr("height", height)
               .attr("style", 'fill:'+current_value.color);
-
+            
             quarter_g
               .append('svg:text')
               .attr("x", current_x)

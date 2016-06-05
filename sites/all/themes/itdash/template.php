@@ -145,7 +145,14 @@ function itdash_form_element($variables) {
 
 
 function itdash_menu_tree__menu_header_menu ($variables) {
-  return '<ul id="main-menu" class="nav">' . $variables['tree'] . '</ul>';
+//  <a id="mob-menu-button" href="javascript:void(0);">
+//    Menu
+//                <span class="slicknav_icon"><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span></span>
+//            </a>
+  return '
+            <ul id="main-menu" class="nav">' . $variables['tree'] . ' 
+            </ul>
+          ';
 }
 
 
@@ -191,10 +198,11 @@ function itdash_css_alter(&$css) {
 function itdash_preprocess_html(&$vars) {
   drupal_add_library('system', 'ui.datepicker');
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/js/jquery.multiSelect.js', array('type' => 'file', 'scope' => 'footer'));
-  drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/jquery.slicknav.js', array('type' => 'file', 'scope' => 'footer'));
-  drupal_add_js('//select-box.googlecode.com/svn/tags/0.2/jquery.selectbox-0.2.min.js', array('type' => 'file', 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/jquery.slicknav.min.js', array('type' => 'file', 'scope' => 'footer'));
+  drupal_add_js('https://cdn.jsdelivr.net/jquery.selectbox/0.2/js/jquery.selectbox-0.2.min.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/scripts.js', array('type' => 'file', 'scope' => 'footer'));
   drupal_add_js(drupal_get_path('theme', 'itdash') . '/js/respond.js', array('type' => 'file', 'scope' => 'header'));
+  drupal_add_js(drupal_get_path('theme', 'itdash') . '/html/js/tooltip_responsive.js');
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/ie8.css', array('weight' => 999, 'browsers' => array('IE' => 'lte IE 8', '!IE' => FALSE), 'preprocess' => FALSE));
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/ie.css', array('weight' => 999, 'browsers' => array('IE' => 'IE', '!IE' => FALSE), 'preprocess' => FALSE));
   drupal_add_css(drupal_get_path('theme', 'itdash') . '/html/css/slicknav.css');
@@ -218,11 +226,29 @@ function itdash_js_alter(&$javascript) {
   }
 }
 
-function itdash_edited_tooltip_render($text = '', $prefix = '', $suffix = '', $force_empty = FALSE) {
-  $html = '<a href="javascript:void(0);" class="tooltip-edit">';
-  $html .= !empty($text) || $force_empty ? '<span class="tooltip-content">' . t('Changed from') . ' <em><strong>' . $prefix . $text . $suffix . '</strong></em></span>' : '';
-  $html .= '</a>';
-
+function itdash_edited_tooltip_render($text = '', $prefix = '', $suffix = '', $force_empty = FALSE, $html = FALSE) {
+  if ($html) {
+      $html = '<div class="tooltip-edit">';
+      $html .= !empty($text) || $force_empty ? '<span class="tooltip-content">' . t('Changed from') . '<br/>' . $text . '</span>' : '';
+      $html .= '</div>';
+  }
+  else {
+    if (!is_array($text)) {
+      $html = '<a href="javascript:void(0);" class="tooltip-edit">';
+      $html .= !empty($text) || $force_empty ? '<span class="tooltip-content">' . t('Changed from') . '<br/>' . ' <em><strong>' . $prefix . $text . $suffix . '</strong></em></span>' : '';
+      $html .= '</a>';
+    }
+    else {
+      $html = '<a href="javascript:void(0);" class="tooltip-edit">';
+      $html .= '<span class="tooltip-content">' . t('Changed from') . '<br/>';
+      foreach ($text as $value) {
+        $term = taxonomy_term_load($value['tid']);
+        $html .= ' <em><strong>' . $prefix . $term->name . $suffix . '</strong></em><br/>';
+      }
+      $html .= '</span>';
+      $html .= '</a>';
+    }
+  }
   return $html;
 }
 
