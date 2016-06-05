@@ -75,7 +75,7 @@ function ict_field_diff_compare_update_rebaseline($project_id, $prev_vid, $updat
       if (!empty($array_difference)) {
         $diff[$key] = $project->{$key}['und'];
       }
-      else if (empty($array_project)) {
+      else if (empty($array_project) && !empty($array_update)) {
         $diff[$key] = '-';
       }
     }
@@ -122,6 +122,10 @@ function ict_field_diff_compare_update_update($project_id, $prev_update_id, $las
   foreach($field_list as $key => $val) {
     if ($key != 'field_implementation_partners') {
       if ($prev_update->{$key}['und'][0][$val] != $last_update->{$key}['und'][0][$val]) {
+        if ($key == 'field_entity_comments' && is_null($prev_update->{$key}['und'][0][$val])) {
+          $diff[$key] = '-';
+          continue;
+        }
         $diff[$key] = $prev_update_wrapper->{$key}->value();
       }
     }
@@ -132,7 +136,7 @@ function ict_field_diff_compare_update_update($project_id, $prev_update_id, $las
       if (!empty($array_difference)) {
         $diff[$key] = $prev_update->{$key}['und'];
       }
-      else if (empty($array_prev_update)) {
+      else if (empty($array_prev_update) && !empty($array_last_update)) {
         $diff[$key] = '-';
       }
     }
@@ -198,6 +202,9 @@ function ict_field_diff_compare_benefits($prev, $last) {
         foreach($field_list as $field_key => $field_val) {
           if ($prev_benefit->{$field_key}['und'][0][$field_val] != $last_benefit->{$field_key}['und'][0][$field_val]) {
             $diff[$last_benefit->item_id][$field_key] = $prev_benefit_wrap->{$field_key}->label() ? $prev_benefit_wrap->{$field_key}->label() : $prev_benefit_wrap->{$field_key}->value();
+            if ($field_key == 'field_commentary' && is_null($diff[$last_benefit->item_id][$field_key])) {
+              $diff[$last_benefit->item_id][$field_key] = '-';
+            }
           }
         }
         break;
