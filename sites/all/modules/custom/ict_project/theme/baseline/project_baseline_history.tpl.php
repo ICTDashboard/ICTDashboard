@@ -68,7 +68,7 @@
 				</div>
 				<div class="text entity_comments">
 					<?php print !empty($current_baseline->last_update->field_entity_comments[LANGUAGE_NONE][0]['value']) ?
-						$current_baseline->last_update->field_entity_comments[LANGUAGE_NONE][0]['safe_value'] :
+					 	$current_baseline->last_update->field_entity_comments[LANGUAGE_NONE][0]['safe_value'] :
 						'-' ?>
 				</div>
 			</div>
