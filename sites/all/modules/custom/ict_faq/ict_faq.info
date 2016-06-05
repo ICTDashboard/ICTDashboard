@@ -1,7 +1,7 @@
 name = ICT FAQ
 core = 7.x
 package = ICT Dashboard
-version = 7.x-1.02
+version = 7.x-1.03
 dependencies[] = ds
 dependencies[] = ict_project
 dependencies[] = node
