@@ -246,3 +246,11 @@ function __ict_mail_prepare_mails($node, $strict_dep_admins = TRUE) {
 
   return $accs;
 }
+
+/**
+ * Implements hook_mail_alter()
+ */
+function ict_mail_mail_alter (&$message) {
+  // adds security note to all emails as per Finance requirements
+  $message['subject'] .= ' [SEC=UNCLASSIFIED]';
+}
