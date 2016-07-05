@@ -253,4 +253,15 @@ function __ict_mail_prepare_mails($node, $strict_dep_admins = TRUE) {
 function ict_mail_mail_alter (&$message) {
   // adds security note to all emails as per Finance requirements
   $message['subject'] .= ' [SEC=UNCLASSIFIED]';
+
+  $unclassified_content_mark  = '
+    <p class="MsoNormal" align="center" style="margin-bottom:12.0pt;text-align:center">
+        <b>
+        <span style="font-family:”Arial”;,sans-serif;color:#999999">
+            UNCLASSIFIED<br><br>
+        </span>
+    </p>';
+
+  array_push($message['body'], $unclassified_content_mark);
+  array_unshift($message['body'], $unclassified_content_mark);
 }
