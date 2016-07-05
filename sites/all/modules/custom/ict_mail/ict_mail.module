@@ -257,9 +257,10 @@ function ict_mail_mail_alter (&$message) {
   $unclassified_content_mark  = '
     <p class="MsoNormal" align="center" style="margin-bottom:12.0pt;text-align:center">
         <b>
-        <span style="font-family:”Arial”;,sans-serif;color:#999999">
-            UNCLASSIFIED<br><br>
-        </span>
+          <span style="font-family:”Arial”;,sans-serif;color:#999999">
+              UNCLASSIFIED<br><br>
+          </span>
+        </b>
     </p>';
 
   array_push($message['body'], $unclassified_content_mark);
