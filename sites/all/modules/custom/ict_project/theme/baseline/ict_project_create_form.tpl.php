@@ -98,7 +98,7 @@
 							<div class="field">
 								<p>
 									<?php print t('You are about to create a re-baselined project. Project @BASELINE’s details cannot be edited once a re-baselined project is created. Project @BASELINE will remain published on the dashboard until the first re-baselined update has been approved.', array(
-										'@BASELINE' => $form['baseline']['#value']->title
+										'@BASELINE' => check_plain($form['baseline']['#value']->title)
 									)); ?>
 								</p>
 								<strong>
