@@ -84,7 +84,7 @@
               <?php print l($row->eg_name, 'dashboard-projects', array('query' => $query)); ?>
             </td>
             <td class="<?php print $col_classes[1] ?>">
-              <?php print l($row->title, 'node/' . $row->nid); ?>
+              <?php print l(check_plain($row->title), 'node/' . $row->nid); ?>
             </td>
             <td class="<?php print $col_classes[2] ?>">
               <div class="graph-container">

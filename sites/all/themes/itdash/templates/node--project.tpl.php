@@ -1,7 +1,7 @@
 <?php if ($viz_preview) { $diff = array(); } ?>
 <div class="page-title dotbg">
   <div class="inner-title-content wrap cf">
-    <h1 class="project-title-info"><?php print $title; ?></h1>
+    <h1 class="project-title-info"><?php print check_plain($title); ?></h1>
     <span class="rebaseline-info">
       <?php if($old_baselines) : ?>
         <?php $baseline_count = count($old_baselines); ?>
