@@ -91,7 +91,7 @@
           <?php print l($row->eg_name, 'dashboard-projects', array('query' => $query)); ?>
         </td>
         <td class="<?php print $col_classes[1] ?>">
-          <?php print l($row->title, 'node/' . $row->nid); ?>
+          <?php print l(check_plain($row->title), 'node/' . $row->nid); ?>
         </td>
         <td class="<?php print $col_classes[2] ?> schedule-status-col schedule-status-<?php print $row->field_schedule_status_calc_value; ?>">
           <?php $query = $get;
@@ -117,7 +117,7 @@
         </td>
         <td class="<?php print $col_classes[7] ?>">
           <div class="ict-project-button">
-            <?php print l($row->title, 'node/' . $row->nid); ?>
+            <?php print l(check_plain($row->title), 'node/' . $row->nid); ?>
           </div>
         </td>
       </tr>
