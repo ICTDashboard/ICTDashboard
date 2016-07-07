@@ -138,7 +138,7 @@
         </a>
       <?php endif; ?>
     </h2>
-    </div>
+
 
     <div class="row">
       <div class="label">
@@ -196,7 +196,7 @@
     </div>
 
     <?php print $admin_user_details; ?>
-
+    </div>
     <?php endif; ?>
 
     <?php if (!$project_updates_available) : ?>
@@ -393,7 +393,9 @@
     <?php else: ?>
       <div id="print-links-container" class="wrap cf">
         <div class="pdf_button submit">
-          <?php print print_pdf_insert_link(); ?>
+          <div class="pdf_button submit">
+            <span class="print_pdf"><a href="javascript:void(0);" title="Print this page." class="print-pdf export-btn" onclick="window.print(); return false" rel="nofollow">Print Preview</a></span>
+          </div>
         </div>
       </div>
     <?php endif; ?>
