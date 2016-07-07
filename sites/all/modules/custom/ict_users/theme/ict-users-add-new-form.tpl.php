@@ -1,8 +1,4 @@
 <div class="project-update-submission">
-  <div class="row">
-    <div class="label"><?php print $form['account']['name']['#title']; ?></div>
-    <div class="text"><?php  print drupal_render($form['account']['name']); ?></div>
-  </div>
    <div class="row">
     <div class="label"><?php print $form['account']['mail']['#title']; ?></div>
     <div class="text"><?php  print drupal_render($form['account']['mail']); ?></div>
