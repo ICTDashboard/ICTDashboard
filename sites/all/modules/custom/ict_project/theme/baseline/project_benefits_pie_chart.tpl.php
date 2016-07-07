@@ -48,10 +48,15 @@
         // legend
         for (item in legend_items) {
           $('#benefits_legend .bar-legend')
-            .append('<li><span style="background-color:' + legend_items[item]['color'] + '"></span>' + legend_items[item]['number'] + ' Project Benefits, ' + legend_items[item]['label'] + '</li>')
+            .append('<li><span style="background-color:' + legend_items[item]['color'] + '">' + '<img src="/sites/all/themes/itdash/html/images/legends/legend-' + legend_items[item]['color'].replace('#', '') + '.jpg" />' + '</span>' + legend_items[item]['number'] + ' Project Benefits, ' + legend_items[item]['label'] + '</li>')
         }
 
         var chart = new google.visualization.PieChart(document.getElementById('benefits_chart_div'));
+
+        google.visualization.events.addListener(chart, 'ready', function () {
+          document.getElementById('benefits_chart_div').innerHTML = '<img src="' + chart.getImageURI() + '">';
+        });
+
         chart.draw(data, options);
 
         var graph_height = $('#benefits_chart_div').outerHeight();
