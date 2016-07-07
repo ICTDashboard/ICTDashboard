@@ -112,14 +112,14 @@ NOTE: The cancellation of your account is not reversible.
 
 This link expires in one day and nothing will happen if it is not used.
 
---  [site:name] team';
+--  [site:name] Team';
   $export['user_mail_cancel_confirm_body'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_cancel_confirm_subject';
-  $strongarm->value = 'Account cancellation request for [user:name] at [site:name]';
+  $strongarm->value = 'Account cancellation request for [user:field-first-name] [user:field-last-name] at [site:name]';
   $export['user_mail_cancel_confirm_subject'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -136,14 +136,14 @@ You may now log in by clicking this link or copying and pasting it to your brows
 
 This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it&#039;s not used.
 
---  [site:name] team';
+--  [site:name] Team';
   $export['user_mail_password_reset_body'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_password_reset_subject';
-  $strongarm->value = 'Replacement login information for [user:name] at [site:name]';
+  $strongarm->value = 'Replacement login information for [user:field-first-name] [user:field-last-name] at [site:name]';
   $export['user_mail_password_reset_subject'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -163,14 +163,14 @@ After setting your password, you will be able to log in at [site:login-url] in t
 username: [user:name]
 password: Your password
 
---  [site:name] team';
+--  [site:name] Team';
   $export['user_mail_register_admin_created_body'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_admin_created_subject';
-  $strongarm->value = 'An administrator created an account for you at [site:name]';
+  $strongarm->value = 'An administrator created an account for you at [user:field-first-name] [user:field-last-name]';
   $export['user_mail_register_admin_created_subject'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -190,14 +190,14 @@ After setting your password, you will be able to log in at [site:login-url] in t
 username: [user:name]
 password: Your password
 
---  [site:name] team';
+--  [site:name] Team';
   $export['user_mail_register_no_approval_required_body'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_no_approval_required_subject';
-  $strongarm->value = 'Account details for [user:name] at [site:name]';
+  $strongarm->value = 'Account details for [user:field-first-name] [user:field-last-name] at [site:name]';
   $export['user_mail_register_no_approval_required_subject'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -209,14 +209,14 @@ password: Your password
 Thank you for registering at [site:name]. Your application for an account is currently pending approval. Once it has been approved, you will receive another e-mail containing information about how to log in, set your password, and other details.
 
 
---  [site:name] team';
+--  [site:name] Team';
   $export['user_mail_register_pending_approval_body'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_register_pending_approval_subject';
-  $strongarm->value = 'Account details for [user:name] at [site:name] (pending admin approval)';
+  $strongarm->value = 'Account details for [user:field-first-name] [user:field-last-name] at [site:name] (pending admin approval)';
   $export['user_mail_register_pending_approval_subject'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -238,7 +238,7 @@ After setting your password, you will be able to log in at [site:login-url] in t
 username: [user:name]
 password: Your password
 
---  [site:name] team';
+--  [site:name] Team';
   $export['user_mail_status_activated_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -252,7 +252,7 @@ password: Your password
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_status_activated_subject';
-  $strongarm->value = 'Account details for [user:name] at [site:name] (approved)';
+  $strongarm->value = 'Account details for [user:field-first-name] [user:field-last-name] at [site:name] (approved)';
   $export['user_mail_status_activated_subject'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -263,7 +263,7 @@ password: Your password
 
 Your account on [site:name] has been blocked.
 
---  [site:name] team';
+--  [site:name] Team';
   $export['user_mail_status_blocked_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -277,7 +277,7 @@ Your account on [site:name] has been blocked.
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_status_blocked_subject';
-  $strongarm->value = 'Account details for [user:name] at [site:name] (blocked)';
+  $strongarm->value = 'Account details for [user:field-first-name] [user:field-last-name] at [site:name] (blocked)';
   $export['user_mail_status_blocked_subject'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -288,7 +288,7 @@ Your account on [site:name] has been blocked.
 
 Your account on [site:name] has been cancelled.
 
---  [site:name] team';
+--  [site:name] Team';
   $export['user_mail_status_canceled_body'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -302,7 +302,7 @@ Your account on [site:name] has been cancelled.
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'user_mail_status_canceled_subject';
-  $strongarm->value = 'Account details for [user:name] at [site:name] (canceled)';
+  $strongarm->value = 'Account details for [user:field-first-name] [user:field-last-name] at [site:name] (canceled)';
   $export['user_mail_status_canceled_subject'] = $strongarm;
 
   $strongarm = new stdClass();
