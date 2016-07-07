@@ -128,7 +128,6 @@ function ict_users_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       'Departmental Admin' => 'Departmental Admin',
-      'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'user',
