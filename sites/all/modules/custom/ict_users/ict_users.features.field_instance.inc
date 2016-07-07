@@ -25,10 +25,11 @@ function ict_users_field_default_field_instances() {
         'weight' => 5,
       ),
     ),
+    'ds_extras_field_template' => 'theme_field',
     'entity_type' => 'user',
     'field_name' => 'field_department',
     'label' => 'Department',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'user_register_form' => 1,
     ),
