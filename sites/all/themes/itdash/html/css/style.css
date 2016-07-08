@@ -5232,7 +5232,9 @@ you can add resource intensive styles.
 
   body > #container {
     height: auto;
-    min-height: 100%;
+    min-height: 100%; }
+
+  .page-block-user-guide #container {
     padding-bottom: 50px; }
 
   /*********************
