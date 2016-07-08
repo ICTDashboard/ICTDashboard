@@ -752,7 +752,7 @@ function ict_project_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'max' => '',
-      'min' => 0,
+      'min' => '',
       'prefix' => '',
       'suffix' => '',
       'user_register_form' => FALSE,
