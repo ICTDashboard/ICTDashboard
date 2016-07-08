@@ -24,7 +24,6 @@ function ict_users_user_default_permissions() {
   $permissions['access administration pages'] = array(
     'name' => 'access administration pages',
     'roles' => array(
-      'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'system',
@@ -226,7 +225,6 @@ function ict_users_user_default_permissions() {
   $permissions['display drupal links'] = array(
     'name' => 'display drupal links',
     'roles' => array(
-      'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'admin_menu',
