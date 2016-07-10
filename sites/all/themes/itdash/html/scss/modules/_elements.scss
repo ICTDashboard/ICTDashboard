@@ -144,9 +144,12 @@ body,
           width: 16px;
           height: 16px;
           display: inline-block;
-          line-height: 54px;
+          line-height: 16px;
           vertical-align: sub;
           margin-right: 5px;
+          img {
+            display: none;
+          }
         }
       }
     }
@@ -986,6 +989,9 @@ body,
         width: 16px;
         height: 16px;
         vertical-align: middle;
+        img {
+          display: none;
+        }
         &.required {
           width: auto;
           vertical-align: top;

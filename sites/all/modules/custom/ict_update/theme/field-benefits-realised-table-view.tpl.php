@@ -38,7 +38,7 @@ $diff = !empty($diff['field_benefits_realised']) ? $diff['field_benefits_realise
         <?php if (!empty($diff[$benefit->item_id]['field_status'])) : ?>
           <?php print itdash_edited_tooltip_render($diff[$benefit->item_id]['field_status']); ?>
         <?php endif; ?>
-        <span class="status-marker" style="background-color: <?php print $colors[$benefit_wrap->field_status->raw()]; ?>"></span>
+        <span class="status-marker" style="background-color: <?php print $colors[$benefit_wrap->field_status->raw()]; ?>"><img src="/<?php print drupal_get_path('theme', 'itdash') . '/html/images/legends/legend-' . str_replace('#', '', $colors[$benefit_wrap->field_status->raw()]) . '.jpg';?>" /></span>
         <?php print $benefit_wrap->field_status->label(); ?>
       </div>
     </div>
