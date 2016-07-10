@@ -341,6 +341,15 @@ HEADER STYLES
 			float: left;
 			img {
 				width: 93px;
+				&#print-logo {
+					display: none;
+				}
+			}
+		}
+
+		> img {
+			&#print-logo {
+				display: none;
 			}
 		}
 

@@ -1688,9 +1688,12 @@ body .ict-benefits,
       width: 16px;
       height: 16px;
       display: inline-block;
-      line-height: 54px;
+      line-height: 16px;
       vertical-align: sub;
       margin-right: 5px; }
+      body .ict-benefits .node-faq-item .benfit-status .status-marker img,
+      #content .ict-benefits .node-faq-item .benfit-status .status-marker img {
+        display: none; }
 body #user-pass-reset,
 body .ict-fancy-content,
 body .project-draft-submission,
@@ -2841,6 +2844,8 @@ body a.submit-button,
         width: 16px;
         height: 16px;
         vertical-align: middle; }
+        .legend .bar-legend li span img {
+          display: none; }
         .legend .bar-legend li span.required {
           width: auto;
           vertical-align: top;
@@ -3775,6 +3780,10 @@ HEADER STYLES
       float: left; }
       .header #logo > a img {
         width: 93px; }
+        .header #logo > a img#print-logo {
+          display: none; }
+    .header #logo > img#print-logo {
+      display: none; }
     .header #logo span {
       font-size: 28px;
       line-height: 28px;
@@ -5263,6 +5272,8 @@ you can add resource intensive styles.
       .header #logo > * {
         vertical-align: middle;
         display: inline-block; }
+        .header #logo > *#print-logo {
+          display: none; }
       .header #logo > a {
         margin-top: 1px; }
         .header #logo > a img {
@@ -7468,6 +7479,14 @@ be set to display none.
   though, go for it.
   
   ******************************************************************/
+  body:before {
+    content: 'IMPORTANT: Print only in Landscape Orientation to avoid clipping of charts.';
+    font-weight: bold;
+    margin: 0 2cm; }
+
+  .header {
+    margin: 0 1.5cm; }
+
   * {
     background: transparent !important;
     color: black !important;
@@ -7478,10 +7497,6 @@ be set to display none.
   a, a:visited {
     color: #444 !important;
     text-decoration: underline; }
-    a:after, a:visited:after {
-      content: " (" attr(href) ")"; }
-    a abbr[title]:after, a:visited abbr[title]:after {
-      content: " (" attr(title) ")"; }
 
   .ir a:after,
   a[href^="javascript:"]:after,
@@ -7516,4 +7531,36 @@ be set to display none.
   .wp-prev-next,
   .respond-form,
   nav {
-    display: none; } }
+    display: none; }
+
+  .user-tools {
+    display: none; }
+
+  #container #inner-content #print-links-container .pdf_button,
+  #content .submit-button,
+  #content .last-updated-block .view-baseline-history {
+    display: none; }
+
+  body .ict-benefits .node-faq-item .ict-faq-answer, #content .ict-benefits .node-faq-item .ict-faq-answer {
+    overflow: visible;
+    display: block !important; }
+
+  .ict-faq-answer ul li .label:before {
+    content: '' !important; }
+
+  .header #logo > *#print-logo {
+    display: inline-block !important; }
+
+  #web-logo {
+    display: none !important; }
+
+  body .ict-benefits .node-faq-item .benfit-status .status-marker, #content .ict-benefits .node-faq-item .benfit-status .status-marker img,
+  .legend .bar-legend li span img {
+    display: inline; }
+
+  .user-information {
+    display: none; }
+
+  td, th {
+    border: 1px solid black !important;
+    border-collapse: collapse !important; } }
