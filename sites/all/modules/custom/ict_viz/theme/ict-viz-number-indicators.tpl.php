@@ -263,6 +263,7 @@
             .attr('font-size', '16px')
             .attr('font-weight', '600')
             .attr('font-family', 'Open Sans')
+            .attr('text-decoration', 'inherit')
             .attr('dy', height/2 + 5)
             .attr('dx', current_width/2)
             .attr('text-anchor', 'middle')
