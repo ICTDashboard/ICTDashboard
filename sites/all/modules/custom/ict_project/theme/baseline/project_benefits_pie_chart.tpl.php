@@ -46,9 +46,9 @@
         };
 
         // legend
-        for (item in legend_items) {
+        for (benefit_item in legend_items) {
           $('#benefits_legend .bar-legend')
-            .append('<li><span style="background-color:' + legend_items[item]['color'] + '">' + '<img src="/sites/all/themes/itdash/html/images/legends/legend-' + legend_items[item]['color'].replace('#', '') + '.jpg" />' + '</span>' + legend_items[item]['number'] + ' Project Benefits, ' + legend_items[item]['label'] + '</li>')
+            .append('<li><span style="background-color:' + legend_items[benefit_item]['color'] + '">' + '<img src="/sites/all/themes/itdash/html/images/legends/legend-' + legend_items[benefit_item]['color'].replace('#', '') + '.jpg" />' + '</span>' + legend_items[benefit_item]['number'] + ' Project Benefits, ' + legend_items[benefit_item]['label'] + '</li>')
         }
 
         var chart = new google.visualization.PieChart(document.getElementById('benefits_chart_div'));

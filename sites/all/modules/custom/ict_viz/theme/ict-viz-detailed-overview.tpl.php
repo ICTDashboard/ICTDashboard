@@ -124,8 +124,12 @@
       $('#detailed-view-schedule-status .expand-collapse-button').css('margin-left', left_padding+'px');
 
       // expand/collapse buttons
-      if (typeof data.data['previous'] == 'undefined') {
+      if (typeof data.data['previous'] == 'undefined' || typeof data.data['current'] == 'undefined') {
         $('#detailed-view-schedule-status .expand-collapse-button').hide();
+
+        if (typeof data.data['current'] == 'undefined') {
+          $('#detailed_schedule_chart_previous').show();
+        }
       }
       else {
         $('#detailed-view-schedule-status .expand-collapse-button').click(function() {
@@ -201,7 +205,7 @@
             .text(getGetOrdinal(quarter)+" Quarter");
 
           var year_dy = 22;
-          if (!current_is_printed) {
+          if (!current_is_printed && year == 'current') {
             quarter_text
               .append("svg:tspan")
               .attr("x", 5)
