@@ -1,14 +1,26 @@
 <div id="schedule_chart_div"></div>
 <div class="legend" id="schedule_legend">
   <ul class="bar-legend">
-    <li><span style="background-color:#1fd063"></span>Actual Level of Completion (%)</li>
-    <li><span style="background-color:#007299"></span>Forecast Level of Project Completion (%)</li>
+    <li>
+      <span style="background-color:#1fd063">
+        <img src="/<?php print drupal_get_path('theme', 'itdash') . '/html/images/legends/legend-1fd063.jpg';?>" />
+      </span>Actual Level of Completion (%)
+    </li>
+    <li>
+      <span style="background-color:#007299">
+        <img src="/<?php print drupal_get_path('theme', 'itdash') . '/html/images/legends/legend-007299.jpg';?>" />
+      </span>Forecast Level of Project Completion (%)
+    </li>
   </ul>
 </div>
 <script>
   (function ($) {
     $(document).ready(function () {
       google.charts.setOnLoadCallback(drawBasic);
+
+      $(window).resize(function () {
+        google.charts.setOnLoadCallback(drawBasic);
+      });
 
       function drawBasic() {
 
@@ -100,6 +112,10 @@
         var chart = new google.visualization.BarChart(document.getElementById('schedule_chart_div'));
 
         chart.draw(data, options);
+
+        google.visualization.events.addListener(chart, 'ready', function () {
+          document.getElementById('schedule_chart_div').innerHTML = '<img src="' + chart.getImageURI() + '">';
+        });
       }
     });
   })(jQuery);

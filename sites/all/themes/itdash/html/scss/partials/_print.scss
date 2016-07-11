@@ -10,7 +10,17 @@ though, go for it.
 
 ******************************************************************/
 
-  * {
+  body:before {
+    content: 'IMPORTANT: Print only in Landscape Orientation to avoid clipping of charts.';
+    font-weight: bold;
+    margin: 0 2cm;
+  }
+
+  .header {
+    margin: 0 1.5cm;
+  }
+
+  *{
     background: transparent !important;
     color: black !important;
     text-shadow: none !important;
@@ -21,16 +31,6 @@ though, go for it.
   a, a:visited {
     color: #444 !important;
     text-decoration: underline;
-
-    // show links on printed pages
-    &:after {
-      content: " (" attr(href) ")";
-    }
-
-    // show title too
-    abbr[title]:after {
-      content: " (" attr(title) ")";
-    }
   }
 
   .ir a:after,
@@ -78,3 +78,44 @@ though, go for it.
     nav {
       display: none;
     }
+
+  .user-tools {
+    display: none;
+  }
+  #container #inner-content #print-links-container .pdf_button,
+  #content .submit-button,
+  #content .last-updated-block .view-baseline-history {
+    display: none;
+  }
+
+  body .ict-benefits .node-faq-item .ict-faq-answer, #content .ict-benefits .node-faq-item .ict-faq-answer {
+    overflow: visible;
+    display: block !important;
+  }
+
+  .ict-faq-answer ul li .label:before {
+    content: '' !important;
+  }
+
+  .header #logo > *#print-logo {
+    display: inline-block !important;
+  }
+
+  #web-logo {
+    display: none !important;
+  }
+
+  body .ict-benefits .node-faq-item .benfit-status .status-marker, #content .ict-benefits .node-faq-item .benfit-status .status-marker img,
+  .legend .bar-legend li span img {
+    display: inline;
+  }
+
+  .user-information {
+    display: none;
+  }
+
+  td, th {
+    border: 1px solid black !important;
+    border-collapse: collapse !important;
+  }
+
