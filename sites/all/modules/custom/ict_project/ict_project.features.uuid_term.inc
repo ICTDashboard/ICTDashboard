@@ -263,17 +263,6 @@ function ict_project_uuid_features_default_terms() {
     ),
   );
   $terms[] = array(
-    'name' => 'Execution – The project’s planning has been approved and the project is executing activities',
-    'description' => '',
-    'format' => 'filtered_html',
-    'weight' => 1,
-    'uuid' => '138a4c12-af0a-48c3-af74-f36ebb928d46',
-    'vocabulary_machine_name' => 'project_stage',
-    'path' => array(
-      'pathauto' => 1,
-    ),
-  );
-  $terms[] = array(
     'name' => 'Science',
     'description' => '',
     'format' => 'plain_text',
@@ -303,17 +292,6 @@ function ict_project_uuid_features_default_terms() {
     'field_abbreviation' => array(),
     'parent' => array(
       0 => '2adbb306-a109-499c-b79d-fe6d9bd1851b',
-    ),
-  );
-  $terms[] = array(
-    'name' => 'On hold – The project has been put temporarily on hold',
-    'description' => '',
-    'format' => 'filtered_html',
-    'weight' => 3,
-    'uuid' => '188a9d4d-9f50-4c79-951d-c9e2ecdac5f7',
-    'vocabulary_machine_name' => 'project_stage',
-    'path' => array(
-      'pathauto' => 1,
     ),
   );
   $terms[] = array(
@@ -619,17 +597,6 @@ function ict_project_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => '3d51ef87-b04a-4a20-8c47-2aac4a214018',
     'vocabulary_machine_name' => 'funding_source',
-  );
-  $terms[] = array(
-    'name' => 'Ceased – The project has been prematurely terminated (i.e. decision to stop work)',
-    'description' => '',
-    'format' => 'filtered_html',
-    'weight' => 4,
-    'uuid' => '3fd6dde7-d9c8-4f00-987a-3dd88d83ebe1',
-    'vocabulary_machine_name' => 'project_stage',
-    'path' => array(
-      'pathauto' => 1,
-    ),
   );
   $terms[] = array(
     'name' => 'Health care',
@@ -1285,17 +1252,6 @@ function ict_project_uuid_features_default_terms() {
     'field_abbreviation' => array(),
   );
   $terms[] = array(
-    'name' => 'Completed – The project has delivered its outputs, and has closed',
-    'description' => '',
-    'format' => 'filtered_html',
-    'weight' => 2,
-    'uuid' => '87cc2f05-50b4-466e-8989-34635eaaffca',
-    'vocabulary_machine_name' => 'project_stage',
-    'path' => array(
-      'pathauto' => 1,
-    ),
-  );
-  $terms[] = array(
     'name' => 'Australian Bureau of Statistics',
     'description' => '',
     'format' => 'plain_text',
@@ -1875,17 +1831,6 @@ function ict_project_uuid_features_default_terms() {
     'weight' => 0,
     'uuid' => 'cb8e582a-0da5-42ff-8112-1364a09f3f64',
     'vocabulary_machine_name' => 'funding_source',
-  );
-  $terms[] = array(
-    'name' => 'Start up – Detailed planning and setup for the project is underway',
-    'description' => '',
-    'format' => 'filtered_html',
-    'weight' => 0,
-    'uuid' => 'cbe76c93-a5d1-41ed-9408-d75995b37fb1',
-    'vocabulary_machine_name' => 'project_stage',
-    'path' => array(
-      'pathauto' => 1,
-    ),
   );
   $terms[] = array(
     'name' => 'Office of the Fair Work Building Industry Inspectorate',
