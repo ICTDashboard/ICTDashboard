@@ -74,6 +74,9 @@ HEADER STYLES
 		&>* {
 			vertical-align: middle;
 			display: inline-block;
+			&#print-logo {
+				display: none;
+			}
 		}
 
 		&>a {

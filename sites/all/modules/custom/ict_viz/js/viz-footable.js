@@ -3,7 +3,6 @@ jQuery(function($){
 		"on": {
 			"init.ft.table": function(e, ft){
 				// bind to the plugin initialize event to do something
-				console.log('hi');
 			}
 		}
 	});

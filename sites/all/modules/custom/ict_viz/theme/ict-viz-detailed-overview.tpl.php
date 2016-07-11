@@ -16,11 +16,15 @@
         <div id="expenditure_legend" class="legend">
           <ul class="bar-legend">
             <li>
-              <span style="background-color:#ff6161"></span>
+              <span style="background-color:#ff6161">
+                <img src="/<?php print drupal_get_path('theme', 'itdash') . '/html/images/legends/legend-ff6161.jpg';?>" />
+              </span>
               <?php print t('Expenditure to Date ($m)'); ?>
             </li>
             <li>
-              <span style="background-color:#5c46a4"></span>
+              <span style="background-color:#5c46a4">
+                <img src="/<?php print drupal_get_path('theme', 'itdash') . '/html/images/legends/legend-5c46a4.jpg';?>" />
+              </span>
               <?php print t('Total Budget ($m)'); ?>
             </li>
             <li>
@@ -47,15 +51,21 @@
       <div class="legend" id="statuses_legend">
         <ul class="bar-legend">
           <li>
-            <span style="background-color:<?php print '#f6d000'; ?>"></span>
+            <span style="background-color:<?php print '#f6d000'; ?>">
+              <img src="/<?php print drupal_get_path('theme', 'itdash') . '/html/images/legends/legend-f6d000.jpg';?>" />
+            </span>
             <?php print t('Behind Schedule'); ?>
           </li>
           <li>
-            <span style="background-color:<?php print '#1fd063'; ?>"></span>
+            <span style="background-color:<?php print '#1fd063'; ?>">
+              <img src="/<?php print drupal_get_path('theme', 'itdash') . '/html/images/legends/legend-1fd063.jpg';?>" />
+            </span>
             <?php print t('On Track'); ?>
           </li>
           <li>
-            <span style="background-color:<?php print '#75a2df'; ?>"></span>
+            <span style="background-color:<?php print '#75a2df'; ?>">
+              <img src="/<?php print drupal_get_path('theme', 'itdash') . '/html/images/legends/legend-75a2df.jpg';?>" />
+            </span>
             <?php print t('Ahead of Schedule'); ?>
           </li>
           <li>
@@ -114,8 +124,12 @@
       $('#detailed-view-schedule-status .expand-collapse-button').css('margin-left', left_padding+'px');
 
       // expand/collapse buttons
-      if (typeof data.data['previous'] == 'undefined') {
+      if (typeof data.data['previous'] == 'undefined' || typeof data.data['current'] == 'undefined') {
         $('#detailed-view-schedule-status .expand-collapse-button').hide();
+
+        if (typeof data.data['current'] == 'undefined') {
+          $('#detailed_schedule_chart_previous').show();
+        }
       }
       else {
         $('#detailed-view-schedule-status .expand-collapse-button').click(function() {
@@ -191,7 +205,7 @@
             .text(getGetOrdinal(quarter)+" Quarter");
 
           var year_dy = 22;
-          if (!current_is_printed) {
+          if (!current_is_printed && year == 'current') {
             quarter_text
               .append("svg:tspan")
               .attr("x", 5)
