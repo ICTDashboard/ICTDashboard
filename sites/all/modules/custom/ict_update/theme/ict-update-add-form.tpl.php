@@ -73,7 +73,7 @@
         </a>
       </div>
       <div class="text">
-        <?php print $form['#project_node']->title; ?>
+        <?php print check_plain($form['#project_node']->title); ?>
       </div>
     </div>
 
