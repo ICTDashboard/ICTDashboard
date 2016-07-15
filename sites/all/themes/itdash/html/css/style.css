@@ -5234,6 +5234,9 @@ you can add resource intensive styles.
     height: auto;
     min-height: 100%; }
 
+  .page-block-user-guide #container {
+    padding-bottom: 50px; }
+
   /*********************
   LAYOUT & GRID STYLES
   *********************/

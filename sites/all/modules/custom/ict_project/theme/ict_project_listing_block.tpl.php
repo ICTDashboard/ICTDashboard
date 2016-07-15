@@ -82,12 +82,12 @@
             <?php if(!empty($project->nid) && $project->field_project_target_id) : ?>
               <?php if(ict_project_get_last_rebaseline_project($project->nid) == $project->nid) : ?>
                     <a href="<?php print url('node/' . $project->nid); ?>">
-                      <?php print $project->title; ?>
+                      <?php print check_plain($project->title); ?>
                     </a>
                     <span class ="rebaseline-indicate" ><?php print t('Re-Baselined'); ?> </span>
                 <?php else : ?>
                   <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
-                    <?php print $project->title; ?>
+                    <?php print check_plain($project->title); ?>
                   </a>
                   <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (!number)', array('!number' => count(ict_project_get_all_parents_project($project)) + 1)) ?> </span>
               <?php endif; ?>
@@ -95,12 +95,12 @@
               <?php $get_project_rebaseline = ict_project_get_project_rebaseline($project->nid);
               if(!empty($get_project_rebaseline)) : ?>
                  <a class ="rebaseline-privious-project-list" href="<?php print url('node/' . $project->nid); ?>">
-                  <?php print $project->title; ?>
+                  <?php print check_plain($project->title); ?>
                 </a>
                 <span class ="rebaseline-indicate rebaseline-privious-project-list" ><?php print t('Previous Baseline (1)') ?> </span>
               <?php else : ?>
                  <a href="<?php print url('node/' . $project->nid); ?>">
-                  <?php print $project->title; ?>
+                  <?php print check_plain($project->title); ?>
                 </a>
              <?php endif; ?>
             <?php endif; ?>
@@ -207,7 +207,7 @@
                 <?php endif; ?>
 
                 <?php if (ict_project_access_project('unpublish', $user, $project->nid)) : ?>
-                  <a href="#ict-project-delete-warn" data-nid="<?php print $project->nid; ?>" data-title="<?php print $project->title; ?>" class="unpublish-button fancybox-inline">
+                  <a href="#ict-project-delete-warn" data-nid="<?php print $project->nid; ?>" data-title="<?php print check_plain($project->title); ?>" class="unpublish-button fancybox-inline">
                     <span><?php print t('Unpublish Project'); ?></span>
                   </a>
                   <div style="display: none;" id="ict-project-delete-warn" class="ict-rebaseline-warn">
