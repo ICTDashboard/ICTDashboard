@@ -136,6 +136,7 @@ function ict_users_user_default_permissions() {
   $permissions['administer users'] = array(
     'name' => 'administer users',
     'roles' => array(
+      'Finance Admin' => 'Finance Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'user',
