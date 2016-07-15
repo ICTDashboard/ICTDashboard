@@ -19,6 +19,20 @@ function ict_project_user_default_permissions() {
     'module' => 'print_pdf',
   );
 
+  // Exported permission: 'administer honeypot'.
+  $permissions['administer honeypot'] = array(
+    'name' => 'administer honeypot',
+    'roles' => array(),
+    'module' => 'honeypot',
+  );
+
+  // Exported permission: 'bypass honeypot protection'.
+  $permissions['bypass honeypot protection'] = array(
+    'name' => 'bypass honeypot protection',
+    'roles' => array(),
+    'module' => 'honeypot',
+  );
+
   // Exported permission: 'create any prject_list_description bean'.
   $permissions['create any prject_list_description bean'] = array(
     'name' => 'create any prject_list_description bean',

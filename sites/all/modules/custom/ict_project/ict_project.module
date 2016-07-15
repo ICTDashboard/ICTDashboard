@@ -454,6 +454,9 @@ function ict_project_workflow_set_draft($form, &$form_state) {
  * Implement hook_form_alter
  */
 function ict_project_form_alter( &$form, &$form_state, $form_id) {
+  if($form_id == 'ict_project_projects_create_form') {
+    honeypot_add_form_protection($form, $form_state, array('honeypot', 'time_restriction'));
+  }
   if ($form_id == 'project_node_form') {
     $form['#after_build'][] = 'ict_project_node_form_after_build';
     $node = $form['#node'];
