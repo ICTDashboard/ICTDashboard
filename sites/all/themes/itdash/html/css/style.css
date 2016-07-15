@@ -7563,4 +7563,10 @@ be set to display none.
 
   td, th {
     border: 1px solid black !important;
-    border-collapse: collapse !important; } }
+    border-collapse: collapse !important; }
+
+  #inner-footer .menu {
+    display: none !important; }
+
+  .login-register {
+    display: none !important; } }
