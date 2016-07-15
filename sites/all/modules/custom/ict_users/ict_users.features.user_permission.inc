@@ -70,6 +70,15 @@ function ict_users_user_default_permissions() {
     'module' => 'administerusersbyrole',
   );
 
+  // Exported permission: 'administer autologout'.
+  $permissions['administer autologout'] = array(
+    'name' => 'administer autologout',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'autologout',
+  );
+
   // Exported permission: 'administer filters'.
   $permissions['administer filters'] = array(
     'name' => 'administer filters',
@@ -170,6 +179,15 @@ function ict_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'administerusersbyrole',
+  );
+
+  // Exported permission: 'change own logout threshold'.
+  $permissions['change own logout threshold'] = array(
+    'name' => 'change own logout threshold',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'autologout',
   );
 
   // Exported permission: 'change own username'.
