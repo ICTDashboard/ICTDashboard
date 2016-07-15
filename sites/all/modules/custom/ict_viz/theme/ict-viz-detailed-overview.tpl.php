@@ -1,3 +1,11 @@
+<style type="text/css">
+    .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+</style>
 <div id="ict-dashboard-detailed-overview">
   <div class="wrap cf">
     <div class="section-title">
@@ -12,7 +20,8 @@
       </h2>
     </div>
     <div id="detailed-view-expenditure" style="max-width: 945px;">
-        <canvas id="detailed_budget_chart" width="945" height="360"></canvas>
+        <!-- <canvas id="detailed_budget_chart" width="945" height="360"></canvas> -->
+        <svg id="detailed-overview-chart"></svg>
         <div id="expenditure_legend" class="legend">
           <ul class="bar-legend">
             <li>
@@ -98,192 +107,274 @@
     <?php print theme('all_benefits_pie_chart'); ?>
   </div>
 </div>
-<script>
-  (function ($){
-    $(document).ready(function () {
-      // *** Expenditure Graph ***
-      var ctx = document.getElementById("detailed_budget_chart").getContext("2d");
-      var ExpenditureChart = new Chart(ctx).Bar(
-        Drupal.settings.detailed_budget_chart.data,
-        Drupal.settings.detailed_budget_chart.options
-      );
-      $('#detailed_budget_chart').css('width', '100%');
-      if (screen.width == 320) {
-        $('#detailed_budget_chart').css('max-width', 280 + 'px');
-      }
-      $('#detailed_budget_chart').css('height', 'auto');
-      // *** Schedule Status Graph ***
-      var data = Drupal.settings.detailed_schedule_chart,
-        width = $('#detailed-view-schedule-status').innerWidth();
+<script> 
 
-      var max_bar = width < 808 ? width - 124 : 684,
-          left_padding = 94;
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 990 - margin.left - margin.right,
+    height = 360 - margin.top - margin.bottom;
 
-      // align legend with graph
-      $('#statuses_legend .bar-legend').css('padding-left', left_padding+'px');
-      $('#detailed-view-schedule-status .expand-collapse-button').css('margin-left', left_padding+'px');
+    // var data = [750,200,300,400,500,600, 450, 300, 500];
+    var data = { "x" :[44.43, 168.7, 230.8, 234.69, 404.02, 600, 450, 420, 100],
+                 "y" : [55.88, 188.4, 259.6, 243.79, 639.4, 180, 250, 600, 50]};
+    var year = ['2011-12', '2012-13', '2013-14', '2014-15', '2015-16', '2016-17', '2017-18', '2018-19', '2019-20'];
+    
+    var x = d3.scale.ordinal()
+    .domain(year)
+    .rangeBands([0, width - margin.right]);
+    
+    var y = d3.scale.linear().range([height, 0]).domain([0,
+      d3.max(data.y, function (d) {
+        return d;
+      })
+    ]);
 
-      // expand/collapse buttons
-      if (typeof data.data['previous'] == 'undefined' || typeof data.data['current'] == 'undefined') {
-        $('#detailed-view-schedule-status .expand-collapse-button').hide();
+    var y2 = d3.scale.linear().range([height, 0]).domain([0,
+      d3.max(data.y, function (d) {
+        return d;
+      })
+    ]);
 
-        if (typeof data.data['current'] == 'undefined') {
-          $('#detailed_schedule_chart_previous').show();
-        }
-      }
-      else {
-        $('#detailed-view-schedule-status .expand-collapse-button').click(function() {
-          $('#detailed-view-schedule-status .expand-collapse-button')
-            .show()
-            .addClass('visible');
+    var g = d3.scale.ordinal()
+    .domain(data.x)
+    .rangeBands([0, width - margin.right]);
 
-          $(this)
-            .hide()
-            .removeClass('visible');
+    var g2 = d3.scale.ordinal()
+    .domain(data.y)
+    .rangeBands([0, width - margin.right]);
+    
+    var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
 
-          if (!$('#schedule-collapse').hasClass('visible')) {
-            $('#detailed_schedule_chart_previous').hide();
-          }
-          else {
-            $('#detailed_schedule_chart_previous').show();
-          }
-        });
-      }
+    var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(15);
 
-      x = d3.scale.linear()
-        .domain([0, data.max_number])
-        .range([0, max_bar - 1]);
+var chart = d3.select("#detailed-overview-chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
 
-      // get ordinal for quarter
-      getGetOrdinal = function (n) {
-        var s=["th","st","nd","rd"],
-            v=n%100;
-        return n+(s[(v-20)%10]||s[v]||s[0]);
-      };
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
 
-      var years = ['current', 'previous'];
-      for (i in years) {
-        var year = years[i];
-
-        // if no data provide for year don't show it
-        if (typeof data.data[year] == 'undefined') continue;
-
-        var y = 0,
-            bar_padding = 16;
-
-        var chart = d3.select('#detailed_schedule_chart_'+year)
-          .append("svg:svg")
-          .attr("class", "chart")
-          .attr("width", width)
-          .attr("height", Object.keys(data.data[year]).length * 72.5);
-        
-        var current_is_printed = false;
-        for (var quarter = 4; quarter > 0; quarter--) {
-          // if no data provide for the quarter don't show it
-          if (typeof data.data[year][quarter] == 'undefined') continue;
-
-          var height = 40,
-              current_x = left_padding + 1;
-
-          // update Y start
-          y += bar_padding;
-
-          // add row group
-          var quarter_g = chart.append("g");
-
-          // add text on the left
-          var quarter_text = quarter_g
-            .append("svg:text")
-            .attr("x", 13)
-            .attr("y", y + height/3 + 2)
-            .attr("font-size", '13px')
-            .attr("font-family", 'Open Sans')
-            .attr("color", '#202b3d');
-          // quarter numberX
-          quarter_text
-            .append("svg:tspan")
-            .text(getGetOrdinal(quarter)+" Quarter");
-
-          var year_dy = 22;
-          if (!current_is_printed && year == 'current') {
-            quarter_text
-              .append("svg:tspan")
-              .attr("x", 5)
-              .attr("dx", 78)
-              .attr("dy", 12)
-              .text("*");
-
-            current_is_printed = true;
-            year_dy = 10;
-          }
-
-          // year
-          quarter_text
-            .append("svg:tspan")
-            .attr("font-weight", 'bold')
-            .attr("x", 13)
-            .attr("dy", year_dy)
-            .attr("dx", 23)
-            .attr("text-anchor", 'right')
-            .text(data[year]);
-
-          // initial line on the left
-          quarter_g
-            .append("svg:line")
-            .attr('x1', left_padding)
-            .attr('y1', y - bar_padding)
-            .attr('x2', left_padding)
-            .attr('y2', y  + height + bar_padding)
-            .attr("style", 'stroke:#1e2635;stroke-width:1');
-
-          var statuses = ['behind_schedule', 'on_track', 'ahead_schedule'];
-          for (i in statuses) {
-            var current_item = statuses[i],
-              current_value = data.data[year][quarter][current_item];
-
-            // draw only status that have at least one project
-            if (typeof data.data[year][quarter][current_item] == 'undefined') continue;
-
-            var current_width = x(current_value.value);
-            
-            quarter_g
-              .append("svg:rect")
-              .attr("y", y)
-              .attr("x", current_x)
-              .attr("width", current_width)
-              .attr("height", height)
-              .attr("style", 'fill:'+current_value.color);
-            
-            quarter_g
-              .append('svg:text')
-              .attr("x", current_x)
-              .attr("y", y)
-              .attr('font-size', '13px')
-              .attr('font-weight', '600')
-              .attr('font-family', 'Open Sans')
-              .attr('dy', (height+bar_padding)/2 - 3)
-              .attr('dx', current_width/2)
-              .attr('text-anchor', 'middle')
-              .text(current_value.value);
-
-            current_x += current_width;
-          }
-
-          // draw delimiter if nex item exists
-          if (typeof data.data[year][quarter-1] == 'undefined') continue;
-
-          // update Y start
-          y += height + bar_padding;
-
-          // add row delimiter
-          quarter_g.append("svg:line")
-            .attr('x1', left_padding)
-            .attr('y1', y)
-            .attr('x2', width)
-            .attr('y2', y)
-            .attr("style", 'stroke:#f0f4fa;stroke-width:1');
-        }
-      }
+  chart.selectAll("div")
+      .data(data.x)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .style("fill", "#FF6161")
+      .attr("x", function(d) {return g(d) + 25; })
+      .attr("y", function (d) { return y(d);})
+      .attr("width", 28)
+      .attr("height", function (d) { return (height - y(d)); })
+      .transition()
+      .duration(3500)
+      .attr({ y : function (d) { return y(d)}
     });
-  })(jQuery);
+    chart.selectAll("div")
+      .data(data.y)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .style("fill", "#5C46A4")
+      .attr("x", function(d) {return g2(d) + 53; })
+      .attr("y", function (d) { return y2(d);})
+      .attr("width", 28)
+      .attr("height", function (d) { return (height - y2(d)); });
+
+
+  // (function ($){
+  //   $(document).ready(function () {
+  //     // *** Expenditure Graph ***
+  //     var ctx = document.getElementById("detailed_budget_chart").getContext("2d");
+  //     var ExpenditureChart = new Chart(ctx).Bar(
+  //       Drupal.settings.detailed_budget_chart.data,
+  //       Drupal.settings.detailed_budget_chart.options
+  //     );
+  //     $('#detailed_budget_chart').css('width', '100%');
+  //     if (screen.width == 320) {
+  //       $('#detailed_budget_chart').css('max-width', 280 + 'px');
+  //     }
+  //     $('#detailed_budget_chart').css('height', 'auto');
+  //     // *** Schedule Status Graph ***
+  //     var data = Drupal.settings.detailed_schedule_chart,
+  //       width = $('#detailed-view-schedule-status').innerWidth();
+
+  //     var max_bar = width < 808 ? width - 124 : 684,
+  //         left_padding = 94;
+
+  //     // align legend with graph
+  //     $('#statuses_legend .bar-legend').css('padding-left', left_padding+'px');
+  //     $('#detailed-view-schedule-status .expand-collapse-button').css('margin-left', left_padding+'px');
+
+  //     // expand/collapse buttons
+  //     if (typeof data.data['previous'] == 'undefined' || typeof data.data['current'] == 'undefined') {
+  //       $('#detailed-view-schedule-status .expand-collapse-button').hide();
+
+  //       if (typeof data.data['current'] == 'undefined') {
+  //         $('#detailed_schedule_chart_previous').show();
+  //       }
+  //     }
+  //     else {
+  //       $('#detailed-view-schedule-status .expand-collapse-button').click(function() {
+  //         $('#detailed-view-schedule-status .expand-collapse-button')
+  //           .show()
+  //           .addClass('visible');
+
+  //         $(this)
+  //           .hide()
+  //           .removeClass('visible');
+
+  //         if (!$('#schedule-collapse').hasClass('visible')) {
+  //           $('#detailed_schedule_chart_previous').hide();
+  //         }
+  //         else {
+  //           $('#detailed_schedule_chart_previous').show();
+  //         }
+  //       });
+  //     }
+
+  //     x = d3.scale.linear()
+  //       .domain([0, data.max_number])
+  //       .range([0, max_bar - 1]);
+
+  //     // get ordinal for quarter
+  //     getGetOrdinal = function (n) {
+  //       var s=["th","st","nd","rd"],
+  //           v=n%100;
+  //       return n+(s[(v-20)%10]||s[v]||s[0]);
+  //     };
+
+  //     var years = ['current', 'previous'];
+  //     for (i in years) {
+  //       var year = years[i];
+
+  //       // if no data provide for year don't show it
+  //       if (typeof data.data[year] == 'undefined') continue;
+
+  //       var y = 0,
+  //           bar_padding = 16;
+
+  //       var chart = d3.select('#detailed_schedule_chart_'+year)
+  //         .append("svg:svg")
+  //         .attr("class", "chart")
+  //         .attr("width", width)
+  //         .attr("height", Object.keys(data.data[year]).length * 72.5);
+        
+  //       var current_is_printed = false;
+  //       for (var quarter = 4; quarter > 0; quarter--) {
+  //         // if no data provide for the quarter don't show it
+  //         if (typeof data.data[year][quarter] == 'undefined') continue;
+
+  //         var height = 40,
+  //             current_x = left_padding + 1;
+
+  //         // update Y start
+  //         y += bar_padding;
+
+  //         // add row group
+  //         var quarter_g = chart.append("g");
+
+  //         // add text on the left
+  //         var quarter_text = quarter_g
+  //           .append("svg:text")
+  //           .attr("x", 13)
+  //           .attr("y", y + height/3 + 2)
+  //           .attr("font-size", '13px')
+  //           .attr("font-family", 'Open Sans')
+  //           .attr("color", '#202b3d');
+  //         // quarter numberX
+  //         quarter_text
+  //           .append("svg:tspan")
+  //           .text(getGetOrdinal(quarter)+" Quarter");
+
+  //         var year_dy = 22;
+  //         if (!current_is_printed && year == 'current') {
+  //           quarter_text
+  //             .append("svg:tspan")
+  //             .attr("x", 5)
+  //             .attr("dx", 78)
+  //             .attr("dy", 12)
+  //             .text("*");
+
+  //           current_is_printed = true;
+  //           year_dy = 10;
+  //         }
+
+  //         // year
+  //         quarter_text
+  //           .append("svg:tspan")
+  //           .attr("font-weight", 'bold')
+  //           .attr("x", 13)
+  //           .attr("dy", year_dy)
+  //           .attr("dx", 23)
+  //           .attr("text-anchor", 'right')
+  //           .text(data[year]);
+
+  //         // initial line on the left
+  //         quarter_g
+  //           .append("svg:line")
+  //           .attr('x1', left_padding)
+  //           .attr('y1', y - bar_padding)
+  //           .attr('x2', left_padding)
+  //           .attr('y2', y  + height + bar_padding)
+  //           .attr("style", 'stroke:#1e2635;stroke-width:1');
+
+  //         var statuses = ['behind_schedule', 'on_track', 'ahead_schedule'];
+  //         for (i in statuses) {
+  //           var current_item = statuses[i],
+  //             current_value = data.data[year][quarter][current_item];
+
+  //           // draw only status that have at least one project
+  //           if (typeof data.data[year][quarter][current_item] == 'undefined') continue;
+
+  //           var current_width = x(current_value.value);
+            
+  //           quarter_g
+  //             .append("svg:rect")
+  //             .attr("y", y)
+  //             .attr("x", current_x)
+  //             .attr("width", current_width)
+  //             .attr("height", height)
+  //             .attr("style", 'fill:'+current_value.color);
+            
+  //           quarter_g
+  //             .append('svg:text')
+  //             .attr("x", current_x)
+  //             .attr("y", y)
+  //             .attr('font-size', '13px')
+  //             .attr('font-weight', '600')
+  //             .attr('font-family', 'Open Sans')
+  //             .attr('dy', (height+bar_padding)/2 - 3)
+  //             .attr('dx', current_width/2)
+  //             .attr('text-anchor', 'middle')
+  //             .text(current_value.value);
+
+  //           current_x += current_width;
+  //         }
+
+  //         // draw delimiter if nex item exists
+  //         if (typeof data.data[year][quarter-1] == 'undefined') continue;
+
+  //         // update Y start
+  //         y += height + bar_padding;
+
+  //         // add row delimiter
+  //         quarter_g.append("svg:line")
+  //           .attr('x1', left_padding)
+  //           .attr('y1', y)
+  //           .attr('x2', width)
+  //           .attr('y2', y)
+  //           .attr("style", 'stroke:#f0f4fa;stroke-width:1');
+  //       }
+  //     }
+  //   });
+  // })(jQuery);
 </script>
