@@ -170,6 +170,21 @@ function ict_users_register_form_add_username_value(&$form, &$form_state) {
   $form_state['values']['name'] = reset(explode('@', $form_state['values']['mail']));
 }
 
+
+/**
+ * Implements hook_menu().
+ */
+function ict_users_menu_alter(&$items) {
+  $items['admin/help']['access callback'] = 'ict_users_is_admin';
+}
+
+function ict_users_is_admin() {
+  global $user;
+
+  return !user_has_role(ICT_ADMINISTRATOR_ROLE, $user) ? FALSE : TRUE;
+}
+
+
 function ict_user_update_department_mail($form, &$form_state) {
   return $form['account']['mail'];
 }
