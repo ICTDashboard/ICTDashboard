@@ -1109,6 +1109,10 @@ function ict_project_theme () {
       'template' => 'ict_project_unpublish_form',
       'render element' => 'form'
     ),
+    'ict_project_print_pdf_button' => array(
+      'path' => drupal_get_path('module', 'ict_project') . '/theme',
+      'template' => 'ict_project_print_pdf_button'
+    ),
   );
 }
 
