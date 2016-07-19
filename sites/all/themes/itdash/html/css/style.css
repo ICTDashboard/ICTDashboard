@@ -1627,6 +1627,25 @@ body #inner-content h3,
   font-size: 18px;
   color: #202b3d;
   font-weight: 600; }
+body #inner-content .project-draft-submission #ict-project-baseline-edit-form .other-option-buttons .pdf_button.submit,
+body #inner-content .project-draft-submission #ict-update-edit-form .other-option-buttons .pdf_button.submit,
+body #inner-content .project-draft-submission #ict-update-approve-form .other-option-buttons .pdf_button.submit,
+body #inner-content .project-draft-submission #ict-project-baseline-approve-form .other-option-buttons .pdf_button.submit,
+#content #inner-content .project-draft-submission #ict-project-baseline-edit-form .other-option-buttons .pdf_button.submit,
+#content #inner-content .project-draft-submission #ict-update-edit-form .other-option-buttons .pdf_button.submit,
+#content #inner-content .project-draft-submission #ict-update-approve-form .other-option-buttons .pdf_button.submit,
+#content #inner-content .project-draft-submission #ict-project-baseline-approve-form .other-option-buttons .pdf_button.submit {
+  margin-top: 0;
+  border-top: none; }
+  body #inner-content .project-draft-submission #ict-project-baseline-edit-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  body #inner-content .project-draft-submission #ict-update-edit-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  body #inner-content .project-draft-submission #ict-update-approve-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  body #inner-content .project-draft-submission #ict-project-baseline-approve-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  #content #inner-content .project-draft-submission #ict-project-baseline-edit-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  #content #inner-content .project-draft-submission #ict-update-edit-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  #content #inner-content .project-draft-submission #ict-update-approve-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  #content #inner-content .project-draft-submission #ict-project-baseline-approve-form .other-option-buttons .pdf_button.submit a.print-pdf {
+    margin-top: 0; }
 body .ict-benefits,
 #content .ict-benefits {
   max-width: 812px;
@@ -3281,7 +3300,7 @@ body a.submit-button,
     display: block; }
     .other-option-buttons .print_pdf a.print-pdf {
       min-width: 275px !important;
-      margin: 10px 10px 3px; }
+      margin: 0px 10px 3px; }
 
 body .object_and_summary a, body .entity_comments a, span.tooltip-content a {
   color: #0d6c88;
@@ -3337,7 +3356,7 @@ div.tooltip-edit {
       text-transform: uppercase; }
       #print-links-container .pdf_button .print_pdf a.print-pdf {
         min-width: 275px !important;
-        margin: 10px 10px 3px; }
+        margin: 0px 10px 3px; }
 
 #project-listings h2 {
   font-weight: 600;
@@ -5088,7 +5107,7 @@ tweeners.
     margin-bottom: 50px; }
     #content #inner-content #print-links-container .pdf_button a {
       min-width: 275px !important;
-      margin: 10px 10px 3px;
+      margin: 0px 10px 3px;
       width: 275px; }
 
   .page-title {
@@ -6994,7 +7013,7 @@ you can add resource intensive styles.
     margin-bottom: 67px; }
     #container #inner-content #print-links-container .pdf_button a {
       min-width: 275px !important;
-      margin: 10px 10px 3px;
+      margin: 0px 10px 3px;
       width: 275px; }
   #container #inner-content .last-updated-block {
     margin: 0;
@@ -7037,7 +7056,7 @@ you can add resource intensive styles.
     margin-bottom: 67px; }
     #container #inner-content #inner-content #print-links-container .pdf_button a {
       min-width: 275px !important;
-      margin: 10px 10px 3px;
+      margin: 0px 10px 3px;
       width: 275px; }
   #container #inner-content #inner-content h2.individual-project-page {
     margin: 20px 0; }

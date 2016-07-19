@@ -84,6 +84,22 @@ body,
       color: #202b3d;
       font-weight: 600;
     }
+    .project-draft-submission {
+      #ict-project-baseline-edit-form,
+      #ict-update-edit-form,
+      #ict-update-approve-form,
+      #ict-project-baseline-approve-form {
+        .other-option-buttons {
+          .pdf_button.submit {
+            margin-top: 0;
+            border-top: none;
+            a.print-pdf {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
   }
   .ict-benefits {
     max-width: 812px;
@@ -1491,7 +1507,7 @@ body,
     display: block;
     & a.print-pdf {
       min-width: 275px !important;
-      margin: 10px 10px 3px;
+      margin: 0px 10px 3px;
     }
   }
 }
@@ -1568,7 +1584,7 @@ div.tooltip-edit {
       text-transform: uppercase;
       & a.print-pdf {
         min-width: 275px !important;
-        margin: 10px 10px 3px;
+        margin: 0px 10px 3px;
       }
     }
   }
