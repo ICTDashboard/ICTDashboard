@@ -199,7 +199,7 @@
     .ticks(15)
         .tickFormat(function (d) {
         var prefix = d3.formatPrefix(d);
-        return prefix.scale(d) + 'm';
+        return '$' + prefix.scale(d);
     });
 
     var tip = d3.tip()
