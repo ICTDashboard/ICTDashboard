@@ -151,8 +151,8 @@ some nice typographical defaults
 more here: http://www.newnet-soft.com/blog/csstypography
 */
 p {
-  -ms-word-break: break-all;
-  -ms-word-wrap: break-all;
+  -ms-word-break: break-word;
+  -ms-word-wrap: break-word;
       word-break: break-word;
      word-break: break-word;
   // cleaning up the ragged lines and breaks
