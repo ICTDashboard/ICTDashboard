@@ -1,0 +1,319 @@
+<?php
+/**
+ * @file
+ * Code for the ckan_api module.
+ */
+include_once 'ckan_api/ckan_api.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function ict_ckan_api_menu() {
+  // Configure ckan instance. Includes: API-key, ...
+  $items['admin/config/content/ckan-api-settings'] = array(
+    'title' => 'CKAN settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ckan_conf_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('ckan set config'),
+    'file' => 'ict_ckan_api.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function ict_ckan_api_permission() {
+  $permission = array(
+    'ckan set config' => array(
+      'title' => t('Set and change CKAN instance settings')
+    ),
+  );
+
+  return $permission;
+}
+
+function ict_ckan_api_get_workflow_data() {
+  // get embargo period time
+  $day = 60 * 60 * 24;
+  $embargo_period = variable_get('embargo_period', 7);
+  $period = $day * $embargo_period;
+  $updates = array();
+
+  $query = db_select('project_workflow', 'w');
+  $query->fields('w', array('nid', 'created'));
+  $query->condition('state', 'approved');
+  $query->orderBy('created', 'ASC');
+  $query->range(0, 3);
+  $res = $query->execute()->fetchAll();
+
+  foreach ($res as $update) {
+    $update_time = $update->created + $period;
+    $current_date = time();
+
+    // check if embargo period passed
+    if ($update_time <= $current_date ) {
+      $updates[] = $update;
+      // $update_node = node_load($update->nid);
+      // $update_node->update_approved_date = $update->created;
+      // $project_id = $update_node->field_project['und'][0]['target_id'];
+      
+
+      // if($project_id) {
+      //   $updates[$project_id][] = $update;
+      //   $updates[$project_id]['project_id'] = $project_id;
+      // }
+    }
+    
+
+  }
+
+  //var_dump($updates); die;
+
+  return $updates;
+}
+
+/**
+ * Implements hook_cron().
+ */
+
+function ict_ckan_api_cron() {
+  $result = ict_ckan_api_get_workflow_data();
+  $queue = DrupalQueue::get('send_updates');
+
+  foreach ($result as $update) {
+    $queue->createItem($update);
+  }
+}
+ 
+/*
+ * Implements hook_cron_queue_info().
+ */
+function ict_ckan_api_cron_queue_info() {
+  $queues['send_updates'] = array(
+    'worker callback' => 'ckan_send_updates',
+    'time' => 60,
+  );
+  return $queues;
+}
+
+function ckan_send_updates($data) {
+
+  // TO DO get all UPDATES for each Project
+  global $base_url;
+  // Get update data
+  $update = node_load(1965);
+  $partners = array();
+
+  if ($update->type == 'update' && ((empty($update->field_update_published) || isset($update->field_update_published['und'][0]['value'])) && empty($update->field_update_published['und'][0]['value']))) {
+
+    $project_id = $update->field_project['und'][0]['target_id'];
+    $project = node_load($project_id);
+
+
+    // Generating Budget total
+    $node_project_wrapper = entity_metadata_wrapper('node', $project);
+    $budget_values = $node_project_wrapper->field_original_total_budget->value();
+    $budget_total = _prepare_budget($budget_values);
+
+    $project_term_gov_entity = taxonomy_term_load($project->field_government_entity_name['und'][0]['tid']);
+    $project_term_portfolio = taxonomy_term_load($project->field_government_entity_name['und'][0]['tid']);
+    
+    // Approve and Completion dates
+    $approved_start_date = format_date(strtotime($project->field_start_date['und'][0]['value']), 'medium', 'j F Y');
+    $approved_completion_date = format_date(strtotime($project->field_original_completion_date['und'][0]['value']), 'medium', 'j F Y');
+
+    // Expected financial benefits
+    $expected_fin_benefits = "$" . number_format($project->field_predicted_project_benefit['und'][0]['value'], 2, '.', ' ') . "m";
+
+    /***** Get Data from Update *****/
+
+    // Generating partners list
+    if (isset($update->field_implementation_partners['und']) && !empty($update->field_implementation_partners['und'])) {
+      $get_partners = _ict_update_generate_default_multiple_select_terms_array($update->field_implementation_partners['und']);
+    }
+    else {
+      $get_partners = _ict_update_generate_default_multiple_select_terms_array($project->field_implementation_partners['und']);
+    }
+
+    foreach ($get_partners as $partner) {
+      $pterm = taxonomy_term_load($partner);
+      array_push($partners, $pterm->name);
+    }
+
+    // Generating Budget spent total
+    $node_update_wrapper = entity_metadata_wrapper('node', $update);
+    $budget_spent = $node_update_wrapper->field_original_total_budget->value();
+    $budget_total_spent = _prepare_budget($budget_spent);
+    $get_approved_date = date('d/m/Y', $data->created);
+    
+    // Actual level of completion
+    $level_of_project_co = $update->field_actual_level_of_project_co['und'][0]['value'] . '%';
+    
+    // Forecast level of completion
+    $forecast_level_of_project_co = $update->field_forecast_level_of_project_['und'][0]['value'] . '%';
+
+    // Project stage
+    $project_stage = taxonomy_term_load($update->field_project_stage['und'][0]['tid']);
+
+    // Expected Completion Date
+    $expected_co_date = format_date(strtotime($update->field_expected_completion_date['und'][0]['value']), 'medium', 'j F Y');
+
+    // Current expected financial benefits
+    $curr_expected_fin_benefits = "$" . number_format($update->field_current_financial_benefits['und'][0]['value'], 2, '.', ' ') . "m";
+
+    // Value of financial benefits realised to date
+    $value_of_fin_benefits = "$" . number_format($update->field_estimated_value_of_benefit['und'][0]['value'], 2, '.', ' ') . "m";
+
+    // Benefits realised
+    $benefits_realised = _get_realised_benefits($update);
+
+    // Entity comments
+    $entity_comments = $update->field_entity_comments['und'][0]['value'];
+
+    // Gather all of the data into one array
+    $prepare_data[] = array(
+      "Project Title" => $project->title,
+      "Government Entity Name" => $project_term_gov_entity->name,
+      "Portfolio Name" => $project_term_portfolio->name,
+      "Government Implementation Partner/s" => $partners,
+      "Program Name" => $project->field_program_name['und'][0]['safe_value'],
+      "Project Summary and Objectives" => strip_tags($project->field_brief_project_summary['und'][0]['safe_value']),
+      "Project Budget" => $budget_total,
+      "Project Budget Spent" => $budget_total_spent,
+      "Actual Level of Project Completion" => $level_of_project_co,
+      "Forecast Level of Project Completion" => $forecast_level_of_project_co,
+      "Project Stage" => $project_stage->name,
+      "Original Approved Start Date" => $approved_start_date,
+      "Original Approved Completion Date" => $approved_completion_date,
+      "Expected Completion Date" => $expected_co_date,
+      "Expected Financial Benefits" => $expected_fin_benefits,
+      "Current Expected Financial Benefits" => $curr_expected_fin_benefits,
+      "Value of Financial Benefits Realised To Date" => $value_of_fin_benefits,
+      "Benefits realised" => $benefits_realised,
+      "Entity comments" =>$entity_comments,
+      "Updated" => $get_approved_date
+    );
+
+    // Resource creation for the first time
+    if (isset($project->field_resource_id['und'][0]['value']) && empty($project->field_resource_id['und'][0]['value'])) {
+      $json_data = json_encode($prepare_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+      // var_dump($json_data); die;
+
+      // Generate tmp file
+      $tmp_path = file_directory_temp();
+      $tmp_file = tempnam(DRUPAL_ROOT . '/' . $tmp_path, '');
+
+      $handle = fopen($tmp_file, "w");
+      fwrite($handle, $json_data);
+      fclose($handle);
+
+      $resource_create = CkanApi::getInstance()->action('resource_create', array(
+        'data' => array(
+            'package_id' => variable_get('dataset_id'),
+            'url' => 'data.json',
+            'description' => strip_tags($project->field_brief_project_summary['und'][0]['safe_value']),
+            'name' => $project->title,
+            'format' => 'json',
+            'url_type' => 'upload',
+            'upload' => new CurlFile(realpath($tmp_file), 'application/json', 'data.json')
+        )
+      ));
+
+      // remove tmp file after data is sent to CKAN
+      unlink($tmp_file);
+
+      if (!empty($resource_create) && isset($resource_create->id)) {
+        $project->field_resource_id['und'][0]['value'] = $resource_create->id;
+        node_save($project);
+        $update->field_update_published['und'][0]['value'] = 1;
+        node_save($update);
+      }
+
+      var_dump($resource_create); die;
+      watchdog('resource_result', json_encode($resource_create));
+    }
+
+    // Recource update
+    else if (isset($project->field_resource_id['und'][0]['value']) && !empty($project->field_resource_id['und'][0]['value'])) {
+      
+      // GET resource file data
+      $resource_json_data = CkanApi::getInstance()->action('resource_get_json_file', array(
+        'url' => variable_get('ckan_url') . "/dataset/" . variable_get('dataset_id') . "/resource/" . $project->field_resource_id['und'][0]['value'] . "/download/data.json"
+        )
+      );
+
+      array_push($resource_json_data, $prepare_data[0]);
+
+      $json_data = json_encode($resource_json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+      // Generate tmp file
+      $tmp_path = file_directory_temp();
+      $tmp_file = tempnam(DRUPAL_ROOT . '/' . $tmp_path, '');
+
+      $handle = fopen($tmp_file, "w");
+      fwrite($handle, $json_data);
+      fclose($handle);
+
+      // Resource update data
+      $resource_update = CkanApi::getInstance()->action('resource_update', array(
+        'data' => array(
+            'id' => $project->field_resource_id['und'][0]['value'],
+            'url_type' => 'upload',
+            'format' => 'json',
+            'upload' => new CurlFile(realpath($tmp_file), 'application/json', 'data.json')
+        )
+      ));
+
+      // remove tmp file after data is sent to CKAN
+      unlink($tmp_file);
+
+      if (!empty($resource_update) && isset($resource_update->id)) {
+        $update->field_update_published['und'][0]['value'] = 1;
+        node_save($update);
+      }
+
+      var_dump($resource_json_data); die;
+    }
+  }
+
+}
+
+function _prepare_budget($data) {
+  $budgets = array();
+
+  foreach ($data as $key => $value) {
+    
+    if (!is_numeric($key)) continue;
+    
+    $budgets[$value->field_year['und'][0]['safe_value']] = "$" . number_format($value->field_total['und'][0]['value'], 2, '.', ' ') . "m";
+  }
+
+  return $budgets;
+}
+
+function _get_realised_benefits($update) {
+  $update = entity_metadata_wrapper('node', $update);
+  $benefits = $update->field_benefits_realised->value();
+  $prepared_benefits = array();
+
+  foreach($benefits as $key => $val) {
+    if ((!empty($val->field_removed['und'][0]['value']) && $val->field_removed['und'][0]['value']) ||
+      $val->field_status['und'][0]['value'] == 'removed') {
+      unset($benefits[$key]);
+    }
+    else {
+      $collection_wrapper = entity_metadata_wrapper('field_collection_item', $val);
+      $prepared_benefits[] = array(
+        "Benefit title" => $collection_wrapper->field_benefit->value(),
+        "Start date" => date('d/m/Y', strtotime($val->field_benefit_start_date['und'][0]['value'])),
+        "End date" => date('d/m/Y', strtotime($val->field_end_date['und'][0]['value'])),
+        "Benefit commentary" => $collection_wrapper->field_commentary->value(),
+        "Benefit status" => $collection_wrapper->field_status->label()
+      );
+    }
+  }
+
+  return $prepared_benefits;
+}
+
