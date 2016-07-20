@@ -129,7 +129,7 @@ function ckan_send_updates($data) {
         $get_partners = _ict_update_generate_default_multiple_select_terms_array($project->field_implementation_partners['und']);
       }
       else {
-        $get_partners = [];
+        $get_partners = array();
       }
 
       // Check for empty partners
