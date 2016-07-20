@@ -653,44 +653,6 @@ function ict_update_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-update-field_implementation_partners'.
-  $field_instances['node-update-field_implementation_partners'] = array(
-    'bundle' => 'update',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'A list of government entities that are involved with the project.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 14,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_implementation_partners',
-    'label' => 'Government Implementation Partner/s',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'node-update-field_original_total_budget'.
   $field_instances['node-update-field_original_total_budget'] = array(
     'bundle' => 'update',
@@ -992,6 +954,50 @@ function ict_update_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-update-field_update_published'.
+  $field_instances['node-update-field_update_published'] = array(
+    'bundle' => 'update',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_update_published',
+    'label' => 'Update published',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 17,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('A list of government entities that are involved with the project.');
@@ -1027,6 +1033,7 @@ function ict_update_field_default_field_instances() {
   t('The name of the Senior Responsible Officer (SRO) for the delivery of the project.');
   t('The percentage of work forecasted to be completed at the current update.');
   t('The position (including group, division & branch) of the Senior Responsible Officer.');
+  t('Update published');
   t('Value of Financial Benefits Realised To Date');
   t('You may add a comment to further explain the context for inclusion or update of this benefit.');
 

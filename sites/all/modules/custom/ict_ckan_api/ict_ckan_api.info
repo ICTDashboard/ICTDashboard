@@ -1,0 +1,4 @@
+name = ICT CKAN API connection data
+core = 7.x
+package = ICT Dashboard
+version = 7.x
