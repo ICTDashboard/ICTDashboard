@@ -226,7 +226,10 @@ function ckan_send_updates($data) {
             'name' => $project->title,
             'format' => 'json',
             'url_type' => 'upload',
-            'upload' => new CurlFile(realpath($tmp_file), 'application/json', 'data.json')
+            // for php 5.5 +
+            // 'upload' => new CurlFile(realpath($tmp_file), 'application/json', 'data.json')
+            // for old PHP versions
+            'upload' => '@' . realpath($tmp_file)
           )
         ));
 
@@ -278,7 +281,10 @@ function ckan_send_updates($data) {
               'id' => $project->field_resource_id['und'][0]['value'],
               'url_type' => 'upload',
               'format' => 'json',
-              'upload' => new CurlFile(realpath($tmp_file), 'application/json', 'data.json')
+              //for PHP 5.5+
+              // 'upload' => new CurlFile(realpath($tmp_file), 'application/json', 'data.json')
+              // for old PHP versions
+              'upload' => '@' . realpath($tmp_file)
           )
         ));
 
