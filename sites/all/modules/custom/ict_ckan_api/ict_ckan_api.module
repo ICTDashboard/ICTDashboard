@@ -199,7 +199,11 @@ function ckan_send_updates($data) {
       // Resource creation for the first time
       $project_resource = field_get_items('node', $project, 'field_resource_id');
       if (!$project_resource) {
-        $json_data = json_encode($prepare_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        // for PHP 5.4+
+        // $json_data = json_encode($prepare_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        
+        // for PHP 5.3 -
+        $json_data = json_encode($prepare_data);
 
         // Generate tmp file
         $tmp_path = file_directory_temp();
@@ -254,7 +258,11 @@ function ckan_send_updates($data) {
 
         array_push($resource_json_data, $prepare_data[0]);
 
-        $json_data = json_encode($resource_json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        // for PHP 5.4+
+        // $json_data = json_encode($prepare_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        
+        // for PHP 5.3 -
+        $json_data = json_encode($prepare_data);
         
         // Generate tmp file
         $tmp_path = file_directory_temp();
