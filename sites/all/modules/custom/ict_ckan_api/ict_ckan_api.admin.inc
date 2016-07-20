@@ -13,6 +13,7 @@ function ckan_conf_form($form, &$form_state)
 {
   global $base_url;
 
+  // Basic options
   $form['ckan_admin_key'] = array(
     '#type' => 'textfield',
     '#title' => t('CKAN admin\'s API-Key'),
@@ -54,6 +55,46 @@ function ckan_conf_form($form, &$form_state)
     '#size' => 40,
     '#description' => t('The embargo period starts when an update submission is approved'),
     '#required' => TRUE,
+  );
+
+  // Advanced options
+  $form['adv_options'] = array(
+    '#type' => 'fieldset', 
+    '#title' => t('Advanced options'), 
+    '#collapsible' => TRUE, 
+    '#collapsed' => FALSE,
+  );
+
+  $form['adv_options']['ict_proxy'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Set Proxy'),
+    '#default_value' => variable_get('ict_proxy', ''),
+    '#size' => 40,
+    '#description' => t('Set proxy if needed, pattern is [host:port].'),
+  );
+
+  $form['adv_options']['ict_proxy_type'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Set Proxy type'),
+    '#default_value' => variable_get('ict_proxy_type', ''),
+    '#size' => 40,
+    '#description' => t('Set proxy type for example CURLPROXY_SOCKS4.'),
+  );
+
+  $form['adv_options']['ict_ckan_time'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Set cron queue time'),
+    '#default_value' => variable_get('ict_ckan_time', 300),
+    '#size' => 20,
+    '#description' => t('Set time for cron queue to run in seconds.'),
+  );
+
+  $form['adv_options']['ict_limit_query'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Set Updates query limit'),
+    '#default_value' => variable_get('ict_limit_query'),
+    '#size' => 20,
+    '#description' => t('Limit the number of updates to run on cron job, leave EMPTY for no limit'),
   );
 
   return system_settings_form($form);

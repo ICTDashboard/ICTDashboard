@@ -892,6 +892,77 @@ function ict_project_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-project-field_resource_id'.
+  $field_instances['node-project-field_resource_id'] = array(
+    'bundle' => 'project',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 53,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_resource_id',
+    'label' => 'Resource ID',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'ds_code' => 'ds_code',
+          'filtered_html' => 'filtered_html',
+          'filtered_html_plus_word_count' => 'filtered_html_plus_word_count',
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'ds_code' => array(
+              'weight' => 12,
+            ),
+            'filtered_html' => array(
+              'weight' => 0,
+            ),
+            'filtered_html_plus_word_count' => array(
+              'weight' => 0,
+            ),
+            'full_html' => array(
+              'weight' => 1,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 37,
+    ),
+  );
+
   // Exported field_instance: 'node-project-field_resp_officer_position'.
   $field_instances['node-project-field_resp_officer_position'] = array(
     'bundle' => 'project',
@@ -1127,6 +1198,7 @@ function ict_project_field_default_field_instances() {
   t('Project Summary and Objectives ');
   t('Re-baseline of');
   t('Removed');
+  t('Resource ID');
   t('Schedule status calc');
   t('Senior Responsible Officer  Position ');
   t('Senior Responsible Officer Name');

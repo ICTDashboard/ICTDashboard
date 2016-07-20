@@ -98,12 +98,8 @@ class CkanApi {
   private function curl_request_data($url, $data=array()) {
   	/* cURL with SOCKS PROXY setup */
   	$ch = curl_init();
-  	     
-  	if($ch === false) {
-  	    die('Failed to create curl object');
-  	}
-
   	$timeout = 60 * 5;
+
   	curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, TRUE);
   	curl_setopt($ch, CURLOPT_POSTFIELDS, $data['data']);
@@ -114,13 +110,13 @@ class CkanApi {
   	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 
   	//proxy details
-  	curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:2001');
-  	curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
+    $proxy = variable_get('ict_proxy', false); //admin page settings
+  	$proxy && curl_setopt($ch, CURLOPT_PROXY, $proxy);
+    $proxy_type = variable_get('ict_proxy_type', false); //admin page settings
+  	$proxy_type && curl_setopt($ch, CURLOPT_PROXYTYPE, constant($proxy_type));
   	 
   	$req_res = curl_exec($ch);
-
   	// $info = curl_getinfo($ch);
-
   	curl_close($ch);
 
     $rdata = json_decode($req_res);
@@ -129,9 +125,9 @@ class CkanApi {
   }
 
   private function curl_get_json_data($url, $data=array()) {
-    $timeout = 5;
-    // var_dump($url); die;
+    $timeout = 10;
     $ch = curl_init();
+
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
@@ -141,14 +137,15 @@ class CkanApi {
     curl_setopt($ch, CURLOPT_HEADER, false);
 
     //proxy details
-    curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:2001');
-    curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
+    $proxy = variable_get('ict_proxy', false); //admin page settings
+    $proxy && curl_setopt($ch, CURLOPT_PROXY, $proxy);
+    $proxy_type = variable_get('ict_proxy_type', false); //admin page settings
+    $proxy_type && curl_setopt($ch, CURLOPT_PROXYTYPE, constant($proxy_type));
 
     $get_data = curl_exec($ch);
     // $info = curl_getinfo($ch);
     curl_close($ch);
 
-    // var_dump($info);
     $rdata = json_decode($get_data, true);
 
     return $rdata;
