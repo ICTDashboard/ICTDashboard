@@ -548,8 +548,8 @@ some nice typographical defaults
 more here: http://www.newnet-soft.com/blog/csstypography
 */
 p {
-  -ms-word-break: break-all;
-  -ms-word-wrap: break-all;
+  -ms-word-break: break-word;
+  -ms-word-wrap: break-word;
   word-break: break-word;
   word-break: break-word;
   -webkit-hyphens: auto;
@@ -5233,6 +5233,9 @@ you can add resource intensive styles.
   body > #container {
     height: auto;
     min-height: 100%; }
+
+  .page-block-user-guide #container {
+    padding-bottom: 50px; }
 
   /*********************
   LAYOUT & GRID STYLES
