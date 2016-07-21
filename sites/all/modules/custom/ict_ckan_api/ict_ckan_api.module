@@ -40,26 +40,24 @@ function ict_ckan_api_get_workflow_data() {
   $day = 60 * 60 * 24;
   $embargo_period = variable_get('embargo_period', 7);
   $period = $day * $embargo_period;
+  $current_date = time();
+  $substructed_date = $current_date - $period;
   $updates = array();
 
   $query = db_select('project_workflow', 'w');
+  $query->leftJoin('node', 'n', "n.nid = w.nid");
+  $query->leftJoin('field_data_field_update_published', 'up', "up.entity_id = w.nid");
   $query->fields('w', array('nid', 'created'));
-  $query->condition('state', 'approved');
-  $query->orderBy('created', 'ASC');
+  $query->condition('w.state', 'approved');
+  $query->condition('w.created', $substructed_date, '<=');
+  $query->condition('n.type', 'update');
+  $query->where("((up.field_update_published_value IS NULL) OR (up.field_update_published_value = 0))");
+  $query->orderBy('w.created', 'ASC');
   $query_limit && $query->range(0, $query_limit);
   $res = $query->execute()->fetchAll();
 
-  foreach ($res as $update) {
-    $update_time = $update->created + $period;
-    $current_date = time();
-
-    // check if embargo period passed
-    if ($update_time <= $current_date ) {
-      $updates[] = $update;
-    }
-  }
-
-  return $updates;
+  //var_dump($res); die;
+  return $res;
 }
 
 /**
@@ -91,10 +89,10 @@ function ckan_send_updates($data) {
   global $base_url;
   
   // Get update data
-  $update = node_load($data->nid);
+  $update = isset($data->nid) ? node_load($data->nid) : FALSE;
   $partners = array();
 
-  if ($update->type == 'update' && ((empty($update->field_update_published) || isset($update->field_update_published['und'][0]['value'])) && empty($update->field_update_published['und'][0]['value']))) {
+  if ($update && $update->type == 'update' && ((empty($update->field_update_published) || isset($update->field_update_published['und'][0]['value'])) && empty($update->field_update_published['und'][0]['value']))) {
 
     $project_id = $update->field_project['und'][0]['target_id'];
     $project = node_load($project_id);
@@ -108,7 +106,7 @@ function ckan_send_updates($data) {
 
       // Government entity and Portfolio
       $project_term_gov_entity = taxonomy_term_load($project->field_government_entity_name['und'][0]['tid']);
-      $project_term_portfolio = taxonomy_term_load($project->field_government_entity_name['und'][0]['tid']);
+      $project_term_portfolio = taxonomy_term_load($project->field_portfolio_name['und'][0]['tid']);
       
       // Approve and Completion dates
       $approved_start_date = format_date(strtotime($project->field_start_date['und'][0]['value']), 'medium', 'j F Y');
@@ -125,9 +123,9 @@ function ckan_send_updates($data) {
       if (isset($update->field_implementation_partners['und']) && !empty($update->field_implementation_partners['und'])) {
         $get_partners = _ict_update_generate_default_multiple_select_terms_array($update->field_implementation_partners['und']);
       }
-      else if (isset($project->field_implementation_partners['und']) && !empty($project->field_implementation_partners['und'])) {
-        $get_partners = _ict_update_generate_default_multiple_select_terms_array($project->field_implementation_partners['und']);
-      }
+      // else if (isset($project->field_implementation_partners['und']) && !empty($project->field_implementation_partners['und'])) {
+      //   $get_partners = _ict_update_generate_default_multiple_select_terms_array($project->field_implementation_partners['und']);
+      // }
       else {
         $get_partners = array();
       }
@@ -180,8 +178,10 @@ function ckan_send_updates($data) {
         "Government Implementation Partner/s" => $partners,
         "Program Name" => $project->field_program_name['und'][0]['safe_value'],
         "Project Summary and Objectives" => strip_tags($project->field_brief_project_summary['und'][0]['safe_value']),
-        "Project Budget" => $budget_total,
-        "Project Budget Spent" => $budget_total_spent,
+        "Total Expenditure To Date" => isset($budget_total_spent['total']) ? $budget_total_spent['total'] : '$0.00m',
+        "Original Total Project Budget" => isset($budget_total['total']) ? $budget_total['total'] : '$0.00m',
+        "Project Budget" => isset($budget_total['splited']) ? $budget_total['splited'] : array(),
+        "Project Budget Spent" => isset($budget_total_spent['splited']) ? $budget_total_spent['splited'] : array(),
         "Actual Level of Project Completion" => $level_of_project_co,
         "Forecast Level of Project Completion" => $forecast_level_of_project_co,
         "Project Stage" => $project_stage->name,
@@ -192,7 +192,7 @@ function ckan_send_updates($data) {
         "Current Expected Financial Benefits" => $curr_expected_fin_benefits,
         "Value of Financial Benefits Realised To Date" => $value_of_fin_benefits,
         "Benefits realised" => $benefits_realised,
-        "Entity comments" =>$entity_comments,
+        "Entity comments" => strip_tags($entity_comments),
         "Updated" => $get_approved_date
       );
 
@@ -262,7 +262,7 @@ function ckan_send_updates($data) {
         array_push($resource_json_data, $prepare_data[0]);
 
         // for PHP 5.4+
-        // $json_data = json_encode($prepare_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        // $json_data = json_encode($resource_json_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         
         // for PHP 5.3 -
         $json_data = json_encode($resource_json_data);
@@ -304,12 +304,18 @@ function ckan_send_updates($data) {
 function _prepare_budget($data) {
   $budgets = array();
   if ($data) {
+    $budgets['total'] = 0;
+    
     foreach ($data as $key => $value) {
       
       if (!is_numeric($key)) continue;
       
-      $budgets[$value->field_year['und'][0]['safe_value']] = isset($value->field_total['und']) ? "$" . number_format($value->field_total['und'][0]['value'], 2, '.', ' ') . "m" : '-';
+      $budgets['splited'][$value->field_year['und'][0]['safe_value']] = isset($value->field_total['und']) ? "$" . number_format($value->field_total['und'][0]['value'], 2, '.', ' ') . "m" : '-';
+
+      $budgets['total'] += isset($value->field_total['und']) ? $value->field_total['und'][0]['value'] : 0;
     }
+    $budgets['total'] = "$" . number_format($budgets['total'], 2, '.', ' ') . "m";
+
   }
 
   return $budgets;
@@ -327,11 +333,12 @@ function _get_realised_benefits($update) {
     }
     else {
       $collection_wrapper = entity_metadata_wrapper('field_collection_item', $val);
+      $benefit_commentary = $collection_wrapper->field_commentary->value() ? $collection_wrapper->field_commentary->value() : '';
       $prepared_benefits[] = array(
         "Benefit title" => $collection_wrapper->field_benefit->value(),
-        "Start date" => date('d/m/Y', strtotime($val->field_benefit_start_date['und'][0]['value'])),
-        "End date" => date('d/m/Y', strtotime($val->field_end_date['und'][0]['value'])),
-        "Benefit commentary" => $collection_wrapper->field_commentary->value(),
+        "Start date" => format_date(strtotime($val->field_benefit_start_date['und'][0]['value']), 'medium', 'j F Y'),
+        "End date" => format_date(strtotime($val->field_end_date['und'][0]['value']), 'medium', 'j F Y'),
+        "Benefit commentary" => $benefit_commentary,
         "Benefit status" => $collection_wrapper->field_status->label()
       );
     }
