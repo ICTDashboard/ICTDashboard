@@ -291,6 +291,12 @@ A site administrator at [site:name] has created an account for you. You may now 
 
 This link can only be used once to log in and will lead you to a page where you can set your password.
 
+As a user of this application, you agree to not enter data that has a security classification of PROTECTED or above. You also acknowledge the Disclaimer, Terms of Use and Privacy statements as set out in the footer of this website.
+ 
+Agree = continue registration/first time login
+ 
+Not Agree = Message “Your registration cannot continue unless you agree to these requirements” – stop process.
+
 After setting your password, you will be able to log in at [site:login-url] in the future using:
 
 username: [user:name]
