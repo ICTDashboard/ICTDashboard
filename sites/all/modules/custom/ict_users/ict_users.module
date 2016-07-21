@@ -38,6 +38,9 @@ function ict_users_form_alter (&$form, &$form_state, $form_id) {
     $form['actions']['#attributes']['class'][] = 'submit';
   }
   if ($form_id == 'ict_users_register_form') {
+    $form['account']['status']['#default_value'] = array('1');
+    $form['account']['status']['#access'] = TRUE;
+
     $form['#validate'][] = 'ict_users_register_form_email_validation';
     $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
 
