@@ -3497,6 +3497,9 @@ div.tooltip-edit {
   #content .project-program-link:focus {
     color: #0d6c88; }
 
+#user-pass-reset .expiration-date-user-pass-reset em {
+  font-style: normal; }
+
 /*********************
 BASE (MOBILE) SIZE
 This are the mobile styles. It's what people see on their phones. If
