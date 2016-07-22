@@ -108,6 +108,9 @@
 
 jQuery(document).ready(function () {
 
+var panExtent = {x: [0,width], y: [-100,400] };
+
+
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = 960 - margin.left - margin.right,
       height = 360 - margin.top - margin.bottom;
@@ -128,7 +131,7 @@ jQuery(document).ready(function () {
       });
       element.push(i);
     };
-
+    // var current_year = {data1 : arr[4].x, data2 : arr[4].y, year : arr[4].years};
     var data = [{ "x" : data1.data.datasets[0].data,
                  "y" : data1.data.datasets[1].data,
                  "year" : data1.data['labels'],
@@ -136,7 +139,7 @@ jQuery(document).ready(function () {
 
     var x = d3.scale.ordinal()
       .domain(data[0].year)
-      .rangeBands([8, width - margin.right - 140]);
+      .rangeBands([8, width - margin.right - 150]);
     
     var y = d3.scale.linear().range([height, 0]).domain([0,
         d3.max(data[0].y, function (d) {
@@ -180,11 +183,18 @@ jQuery(document).ready(function () {
         .orient("left")
   }
 
+  // var zoom = d3.behavior.zoom()
+  //   .x(x)
+  //   .y(y)
+  //   .scaleExtent([1, 10])
+  //   .on("zoom", zoomed);
+
   var chart = d3.select("#detailed-overview-chart")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    // .call(d3.behavior.zoom().x(x).scaleExtent([1, 10]).on("zoom", zoomed));
  
   chart.call(tip);
 
@@ -241,8 +251,84 @@ jQuery(document).ready(function () {
       .filter(function(d) { return d.element == arr[4].element; })
         .style("fill", "#3D2390");
 
-  jQuery( "text:contains('2016-17')").css('fill', '#3D2390').parent().append(jQuery('<line>', {"class" : "Hello" ,"y1" : 26,"y2" : 26 ,"x1" : -48, "x2" : 47}));
-// jQuery(".Hello").text('activeyear');
+  chart.selectAll('.x .tick')
+      .data(arr)
+      .each(function(d, i) {
+          if(d.years == arr[4].years) {
+              d3.select(this)
+                .append('line')
+                .attr({
+                    "text-anchor": "middle",
+                    dy: 24,
+                    "y1" : 28,
+                    "y2" : 28,
+                    "x1" : -41,
+                     "x2" : 42,
+                    "font-size": "10.5px",
+                    "class": "line-current-year"
+
+                })
+              d3.select(this)
+                .selectAll('.line-current-year')
+                    .style({
+                      "stroke": "#FC3E3E",
+                      "stroke-width": "4px"
+
+                })
+          }
+      });
+
+// function zoom() {
+//   chart.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
+//     chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
+//         .call(xAxis.scale(x.rangeRoundBands([0, width * d3.event.scale],.1 * d3.event.scale)));
+//   chart.select(".y.axis").call(yAxis);
+// }
+// function zoomed() {
+//   // chart.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+//     chart.select(".x.axis").call(xAxis);
+//   // chart.select(".y.axis").call(yAxis);
+// }
+
+function zoom() {
+
+  /* call the zoom.translate vector with the array returned from panLimit() */
+  zoom.translate(panLimit());
+          
+  chart.select(".x.axis").call(xAxis);
+  chart.select(".y.axis").call(yAxis);
+}
+
+function panLimit() {
+  /*
+  
+  include boolean to work out the panExtent and return to zoom.translate()
+  
+  */
+
+  var divisor = {h: height / ((y.domain()[1]-y.domain()[0])*zoom.scale()), w: width / ((x.domain()[1]-x.domain()[0])*zoom.scale())},
+    minX = -(((x.domain()[0]-x.domain()[1])*zoom.scale())+(panExtent.x[1]-(panExtent.x[1]-(width/divisor.w)))),
+    minY = -(((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-(panExtent.y[1]-(height*(zoom.scale())/divisor.h))))*divisor.h,
+    maxX = -(((x.domain()[0]-x.domain()[1]))+(panExtent.x[1]-panExtent.x[0]))*divisor.w*zoom.scale(),
+    maxY = (((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-panExtent.y[0]))*divisor.h*zoom.scale(), 
+
+    tx = x.domain()[0] < panExtent.x[0] ? 
+        minX : 
+        x.domain()[1] > panExtent.x[1] ? 
+          maxX : 
+          zoom.translate()[0],
+    ty = y.domain()[0]  < panExtent.y[0]? 
+        minY : 
+        y.domain()[1] > panExtent.y[1] ? 
+          maxY : 
+          zoom.translate()[1];
+  
+  return [tx,0];
+
+}
+
+  jQuery( "text:contains('2016-17')").css('fill', '#3D2390');
+
 });
 
   (function ($){
