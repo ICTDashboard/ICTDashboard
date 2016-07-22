@@ -280,3 +280,19 @@ function itdash_preprocess_node(&$variables) {
   if ($variables['type'] == 'project') {
   }
 }
+
+function itdash_form_user_pass_reset_alter(&$form, &$form_state, $form_id) {
+
+  $uid = $form_state['build_info']['args'][0];
+  $timestamp = $form_state['build_info']['args'][1];
+  $timeout = variable_get('user_password_reset_timeout', 86400);
+  $users = user_load_multiple(array($uid), array('status' => '1'));
+  $form['message'] = array('#markup' => t('<p>As a user of this application,<b> you agree to not enter data that has a security classification of PROTECTED or above.</b>
+                                            You also acknowledge the Disclaimer, Terms of Use and Privacy statements as set out in the footer of this website.</p>
+                                            <p><b>Agree</b> = continue registration/first time login</p>
+                                            <p><b>Not Agree</b> = Message “Your registration cannot continue unless you agree to these requirements” – stop process.</p>
+                                            <p>This is one-time login for %user_name and will expire on <span class="expiration-date-user-pass-reset">%expiration_date</span>.</p>
+                                            <p>If you agree, click on this button to log in to the site and change your password.</p>',
+                     array('%user_name' => $users[$uid]->name, '%expiration_date' => format_date($timestamp + $timeout, 'custom', 'D, d/m/Y - H:ia'))));
+  $form['help'] = array('#markup' => '<p>' . t('This login can be used only once.') . '</p>');
+}
