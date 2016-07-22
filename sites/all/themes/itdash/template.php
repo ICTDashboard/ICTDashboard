@@ -293,6 +293,6 @@ function itdash_form_user_pass_reset_alter(&$form, &$form_state, $form_id) {
                                             <p><b>Not Agree</b> = Message “Your registration cannot continue unless you agree to these requirements” – stop process.</p>
                                             <p>This is one-time login for %user_name and will expire on <span class="expiration-date-user-pass-reset">%expiration_date</span>.</p>
                                             <p>If you agree, click on this button to log in to the site and change your password.</p>',
-                     array('%user_name' => $users[$uid]->name, '%expiration_date' => format_date($timestamp + $timeout, 'custom', 'D, m/d/Y - H:ia'))));
+                     array('%user_name' => $users[$uid]->name, '%expiration_date' => format_date($timestamp + $timeout, 'custom', 'D, d/m/Y - H:ia'))));
   $form['help'] = array('#markup' => '<p>' . t('This login can be used only once.') . '</p>');
 }
