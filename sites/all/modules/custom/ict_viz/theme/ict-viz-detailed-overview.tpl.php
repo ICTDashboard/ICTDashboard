@@ -116,12 +116,12 @@ var panExtent = {x: [0,width], y: [-100,400] };
       height = 360 - margin.top - margin.bottom;
 
     var data1 = Drupal.settings.detailed_budget_chart;
-    data1.data.datasets[0].data.shift();
-    data1.data.datasets[1].data.shift();
-    data1.data.labels.shift();
-    data1.data.datasets[0].data.pop();
-    data1.data.datasets[1].data.pop();
-    data1.data.labels.pop();
+    // data1.data.datasets[0].data.shift();
+    // data1.data.datasets[1].data.shift();
+    // data1.data.labels.shift();
+    // data1.data.datasets[0].data.pop();
+    // data1.data.datasets[1].data.pop();
+    // data1.data.labels.pop();
     var arr = [];
     var element = [];
 
@@ -137,30 +137,23 @@ var panExtent = {x: [0,width], y: [-100,400] };
                  "year" : data1.data['labels'],
                 "element": element}];
 
-    var x = d3.scale.ordinal()
-      .domain(data[0].year)
-      .rangeBands([8, width - margin.right - 150]);
-    
-    var y = d3.scale.linear().range([height, 0]).domain([0,
-        d3.max(data[0].y, function (d) {
-          return d;
+      var x = d3.scale.ordinal()
+      .domain(arr.map(function(d) { return d.years; }))
+      .rangeRoundBands([0, width - margin.right])
+
+      var y = d3.scale.linear()
+      .range([height, 0])
+      .domain([0,
+        d3.max(arr, function(d) {
+          return d.y;
         })
       ]);
 
-    var g = d3.scale.ordinal()
-      .domain(data[0].element)
-      .rangeBands([0, width - margin.right - 160]);
-
-    var g2 = d3.scale.ordinal()
-      .domain(data[0].element)
-      .rangeBands([0, width - margin.right - 160]);
-    
-    var xAxis = d3.svg.axis()
-      .scale(x) 
-      .outerTickSize(0)
+      var xAxis = d3.svg.axis()
+      .scale(x)
       .orient("bottom");
 
-    var yAxis = d3.svg.axis()
+      var yAxis = d3.svg.axis()
       .scale(y)
       .orient("left")
       .tickSize(0)
@@ -169,6 +162,18 @@ var panExtent = {x: [0,width], y: [-100,400] };
         return '$' + prefix.scale(d);
       });
 
+      // var zoom = d3.behavior.zoom()
+      //   .x(xAxis)
+      //   .y(yAxis)
+      //   .scaleExtent([1, 30])
+      // .on("zoom", zoomed);
+
+      function make_y_axis() {
+        return d3.svg.axis()
+            .scale(y)
+            .orient("left")
+      }
+
     var tip = d3.tip()
       .attr('class', 'd3-tip')
       .offset([0, -70])
@@ -176,28 +181,15 @@ var panExtent = {x: [0,width], y: [-100,400] };
         return "<span style='border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
       })
 
-
-  function make_y_axis() {
-    return d3.svg.axis()
-        .scale(y)
-        .orient("left")
-  }
-
-  // var zoom = d3.behavior.zoom()
-  //   .x(x)
-  //   .y(y)
-  //   .scaleExtent([1, 10])
-  //   .on("zoom", zoomed);
-
   var chart = d3.select("#detailed-overview-chart")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    // .call(d3.behavior.zoom().x(x).scaleExtent([1, 10]).on("zoom", zoomed));
- 
-  chart.call(tip);
+    .call(d3.behavior.zoom().scaleExtent([1, 1]).on("zoom", zoom));
 
+  chart.call(tip);
+ 
   chart.append("g")            
     .attr("class", "grid")
     .call(make_y_axis()
@@ -212,14 +204,15 @@ var panExtent = {x: [0,width], y: [-100,400] };
 
   chart.append("g")
       .attr("class", "y axis")
-      .call(yAxis)
+      .call(yAxis);
+
 
   chart.selectAll("div")
       .data(arr)
       .enter().append("rect")
       .attr("class", "bar1")
       .style("fill", "#FF6161")
-      .attr("x", function(d) {return g(d.element) + 20; })
+      .attr("x", function(d) {return x(d.years) + 10; })
       .attr("y",height)
       .attr("width", 41)  
       .attr("height", 0)
@@ -232,13 +225,13 @@ var panExtent = {x: [0,width], y: [-100,400] };
       .filter(function(d) { return d.element == arr[4].element; })
       .style("fill", "#FC3E3E")
       .attr("class", "fdasfds");
-  
+
   chart.selectAll("div")
       .data(arr)
       .enter().append("rect")
       .attr("class", "bar2")
       .style("fill", "#5C46A4")
-      .attr("x", function(d) {return g2(d.element) + 62; })
+      .attr("x", function(d) {return x(d.years) + 52; })
       .attr("y", height)
       .attr("width", 41)
       .attr("height", 0)
@@ -278,56 +271,206 @@ var panExtent = {x: [0,width], y: [-100,400] };
           }
       });
 
+function zoom() {
+  chart.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
+    chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
+        .call(xAxis.scale(x.rangeRoundBands([0, width * d3.event.scale],.1 * d3.event.scale)));
+  // chart.select(".y.axis").call(yAxis);
+}
+
+jQuery( "text:contains('2015-16')").css('fill', '#3D2390');
+
+//     var x = d3.scale.ordinal()
+//       .domain(data[0].year)
+//       .rangeBands([8, width - margin.right - 150]);
+    
+//     var y = d3.scale.linear().range([height, 0]).domain([0,
+//         d3.max(data[0].y, function (d) {
+//           return d;
+//         })
+//       ]);
+
+//     var g = d3.scale.ordinal()
+//       .domain(data[0].element)
+//       .rangeBands([0, width - margin.right - 160]);
+
+//     var g2 = d3.scale.ordinal()
+//       .domain(data[0].element)
+//       .rangeBands([0, width - margin.right - 160]);
+    
+//     var xAxis = d3.svg.axis()
+//       .scale(x) 
+//       .outerTickSize(0)
+//       .orient("bottom");
+
+//     var yAxis = d3.svg.axis()
+//       .scale(y)
+//       .orient("left")
+//       .tickSize(0)
+//       .tickFormat(function (d) {
+//         var prefix = d3.formatPrefix(d);
+//         return '$' + prefix.scale(d);
+//       });
+
+//     var tip = d3.tip()
+//       .attr('class', 'd3-tip')
+//       .offset([0, -70])
+//       .html(function(d) {
+//         return "<span style='border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
+//       })
+
+
+//   function make_y_axis() {
+//     return d3.svg.axis()
+//         .scale(y)
+//         .orient("left")
+//   }
+
+//   // var zoom = d3.behavior.zoom()
+//   //   .x(x)
+//   //   .y(y)
+//   //   .scaleExtent([1, 10])
+//   //   .on("zoom", zoomed);
+
+//   var chart = d3.select("#detailed-overview-chart")
+//     .attr("width", width + margin.left + margin.right)
+//     .attr("height", height + margin.top + margin.bottom)
+//     .append("g")
+//     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+//     // .call(d3.behavior.zoom().x(x).scaleExtent([1, 10]).on("zoom", zoomed));
+ 
+//   chart.call(tip);
+
+//   chart.append("g")            
+//     .attr("class", "grid")
+//     .call(make_y_axis()
+//       .tickSize(-width , 0, 0)
+//       .tickFormat("")
+//     )
+
+//   chart.append("g")
+//       .attr("class", "x axis")
+//       .attr("transform", "translate(0," + height + ")")
+//       .call(xAxis);
+
+//   chart.append("g")
+//       .attr("class", "y axis")
+//       .call(yAxis)
+
+//   chart.selectAll("div")
+//       .data(arr)
+//       .enter().append("rect")
+//       .attr("class", "bar1")
+//       .style("fill", "#FF6161")
+//       .attr("x", function(d) {return g(d.element) + 20; })
+//       .attr("y",height)
+//       .attr("width", 41)  
+//       .attr("height", 0)
+//       .on('mouseover', tip.show)
+//       .on('mouseout', tip.hide)
+//       .transition()
+//       .duration(1500)
+//       .attr("y", function (d) { return y(d.x);})
+//       .attr("height", function (d) { return (height - y(d.x)); })
+//       .filter(function(d) { return d.element == arr[4].element; })
+//       .style("fill", "#FC3E3E")
+//       .attr("class", "fdasfds");
+  
+//   chart.selectAll("div")
+//       .data(arr)
+//       .enter().append("rect")
+//       .attr("class", "bar2")
+//       .style("fill", "#5C46A4")
+//       .attr("x", function(d) {return g2(d.element) + 62; })
+//       .attr("y", height)
+//       .attr("width", 41)
+//       .attr("height", 0)
+//       .on('mouseover', tip.show)
+//       .on('mouseout', tip.hide)
+//       .transition()
+//       .duration(1500)
+//       .attr("y", function (d) { return y(d.y);})
+//       .attr("height", function (d) { return (height - y(d.y)); })
+//       .filter(function(d) { return d.element == arr[4].element; })
+//         .style("fill", "#3D2390");
+
+//   chart.selectAll('.x .tick')
+//       .data(arr)
+//       .each(function(d, i) {
+//           if(d.years == arr[4].years) {
+//               d3.select(this)
+//                 .append('line')
+//                 .attr({
+//                     "text-anchor": "middle",
+//                     dy: 24,
+//                     "y1" : 28,
+//                     "y2" : 28,
+//                     "x1" : -41,
+//                      "x2" : 42,
+//                     "font-size": "10.5px",
+//                     "class": "line-current-year"
+
+//                 })
+//               d3.select(this)
+//                 .selectAll('.line-current-year')
+//                     .style({
+//                       "stroke": "#FC3E3E",
+//                       "stroke-width": "4px"
+
+//                 })
+//           }
+//       });
+
+// // function zoom() {
+// //   chart.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
+// //     chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
+// //         .call(xAxis.scale(x.rangeRoundBands([0, width * d3.event.scale],.1 * d3.event.scale)));
+// //   chart.select(".y.axis").call(yAxis);
+// // }
+// // function zoomed() {
+// //   // chart.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+// //     chart.select(".x.axis").call(xAxis);
+// //   // chart.select(".y.axis").call(yAxis);
+// // }
+
 // function zoom() {
-//   chart.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
-//     chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
-//         .call(xAxis.scale(x.rangeRoundBands([0, width * d3.event.scale],.1 * d3.event.scale)));
+
+//   /* call the zoom.translate vector with the array returned from panLimit() */
+//   zoom.translate(panLimit());
+          
+//   chart.select(".x.axis").call(xAxis);
 //   chart.select(".y.axis").call(yAxis);
 // }
-// function zoomed() {
-//   // chart.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-//     chart.select(".x.axis").call(xAxis);
-//   // chart.select(".y.axis").call(yAxis);
+
+// function panLimit() {
+//   /*
+  
+//   include boolean to work out the panExtent and return to zoom.translate()
+  
+//   */
+
+//   var divisor = {h: height / ((y.domain()[1]-y.domain()[0])*zoom.scale()), w: width / ((x.domain()[1]-x.domain()[0])*zoom.scale())},
+//     minX = -(((x.domain()[0]-x.domain()[1])*zoom.scale())+(panExtent.x[1]-(panExtent.x[1]-(width/divisor.w)))),
+//     minY = -(((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-(panExtent.y[1]-(height*(zoom.scale())/divisor.h))))*divisor.h,
+//     maxX = -(((x.domain()[0]-x.domain()[1]))+(panExtent.x[1]-panExtent.x[0]))*divisor.w*zoom.scale(),
+//     maxY = (((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-panExtent.y[0]))*divisor.h*zoom.scale(), 
+
+//     tx = x.domain()[0] < panExtent.x[0] ? 
+//         minX : 
+//         x.domain()[1] > panExtent.x[1] ? 
+//           maxX : 
+//           zoom.translate()[0],
+//     ty = y.domain()[0]  < panExtent.y[0]? 
+//         minY : 
+//         y.domain()[1] > panExtent.y[1] ? 
+//           maxY : 
+//           zoom.translate()[1];
+  
+//   return [tx,0];
+
 // }
 
-function zoom() {
-
-  /* call the zoom.translate vector with the array returned from panLimit() */
-  zoom.translate(panLimit());
-          
-  chart.select(".x.axis").call(xAxis);
-  chart.select(".y.axis").call(yAxis);
-}
-
-function panLimit() {
-  /*
-  
-  include boolean to work out the panExtent and return to zoom.translate()
-  
-  */
-
-  var divisor = {h: height / ((y.domain()[1]-y.domain()[0])*zoom.scale()), w: width / ((x.domain()[1]-x.domain()[0])*zoom.scale())},
-    minX = -(((x.domain()[0]-x.domain()[1])*zoom.scale())+(panExtent.x[1]-(panExtent.x[1]-(width/divisor.w)))),
-    minY = -(((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-(panExtent.y[1]-(height*(zoom.scale())/divisor.h))))*divisor.h,
-    maxX = -(((x.domain()[0]-x.domain()[1]))+(panExtent.x[1]-panExtent.x[0]))*divisor.w*zoom.scale(),
-    maxY = (((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-panExtent.y[0]))*divisor.h*zoom.scale(), 
-
-    tx = x.domain()[0] < panExtent.x[0] ? 
-        minX : 
-        x.domain()[1] > panExtent.x[1] ? 
-          maxX : 
-          zoom.translate()[0],
-    ty = y.domain()[0]  < panExtent.y[0]? 
-        minY : 
-        y.domain()[1] > panExtent.y[1] ? 
-          maxY : 
-          zoom.translate()[1];
-  
-  return [tx,0];
-
-}
-
-  jQuery( "text:contains('2016-17')").css('fill', '#3D2390');
+//   jQuery( "text:contains('2016-17')").css('fill', '#3D2390');
 
 });
 
