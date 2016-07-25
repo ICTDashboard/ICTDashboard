@@ -14,7 +14,7 @@ function ict_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autologout_enforce_admin';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['autologout_enforce_admin'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -28,7 +28,7 @@ function ict_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autologout_max_timeout';
-  $strongarm->value = '900';
+  $strongarm->value = '3600';
   $export['autologout_max_timeout'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -70,7 +70,7 @@ function ict_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autologout_role_153917155_timeout';
-  $strongarm->value = '900';
+  $strongarm->value = '3600';
   $export['autologout_role_153917155_timeout'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -84,7 +84,7 @@ function ict_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autologout_role_2_timeout';
-  $strongarm->value = '900';
+  $strongarm->value = '3600';
   $export['autologout_role_2_timeout'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -98,7 +98,7 @@ function ict_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autologout_role_3_timeout';
-  $strongarm->value = '900';
+  $strongarm->value = '3600';
   $export['autologout_role_3_timeout'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -112,7 +112,7 @@ function ict_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autologout_role_41888116_timeout';
-  $strongarm->value = '900';
+  $strongarm->value = '3600';
   $export['autologout_role_41888116_timeout'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -126,7 +126,7 @@ function ict_users_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autologout_timeout';
-  $strongarm->value = '900';
+  $strongarm->value = '3600';
   $export['autologout_timeout'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -290,6 +290,12 @@ A site administrator at [site:name] has created an account for you. You may now 
 [user:one-time-login-url]
 
 This link can only be used once to log in and will lead you to a page where you can set your password.
+
+As a user of this application, you agree to not enter data that has a security classification of PROTECTED or above. You also acknowledge the Disclaimer, Terms of Use and Privacy statements as set out in the footer of this website.
+ 
+Agree = continue registration/first time login
+ 
+Not Agree = Message “Your registration cannot continue unless you agree to these requirements” – stop process.
 
 After setting your password, you will be able to log in at [site:login-url] in the future using:
 

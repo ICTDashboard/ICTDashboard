@@ -3,9 +3,7 @@
   <div class="other-option-buttons">
     <a href="#ict-baseline-decline-form" class="general-button submit-button fancybox-baseline-decline-form"><span><?php print t('Reject Submission'); ?></span></a>
 
-    <div class="pdf_button submit">
-      <span class="print_pdf"><a href="javascript:void(0);" title="Print this page." class="print-pdf export-btn" onclick="window.print(); return false" rel="nofollow">Print Preview</a></span>        
-    </div>
+    <?php print theme('ict_project_print_pdf_button') ?>
 
   </div>
     <?php print render($form['approve']); ?>
