@@ -22,30 +22,30 @@
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
-		<?php if (!empty($nid) && ($projects > 1)) : ?>
-		  	<div class= "view-baseline-history">
+		<div class= "view-baseline-history">
+		  	<?php if (!empty($nid) && ($projects > 1)) : ?>
 		  		<?php if (!empty($result)) : ?>
 		  			<div>
-					<a href="<?php print url('project/' . $last_rebaseline. '/history'); ?>" class="view-baseline-link">
-						<?php print t('View Baseline History (!number)', array('!number' => $projects)); ?>
-					</a>
-					<a href="javascript:void(0);" class="tooltip view-baseline-tooltip">
+						<a href="<?php print url('project/' . $last_rebaseline. '/history'); ?>" class="view-baseline-link">
+							<?php print t('View Baseline History (!number)', array('!number' => $projects)); ?>
+						</a>
+						<a href="javascript:void(0);" class="tooltip view-baseline-tooltip">
 							<i class="tooltip-icon"></i>
 							<span class="tooltip-content">
 								<?php print t('Click to view all (!projects) Baselines for this project.', array('!projects' => $projects)); ?>
 							</span>
-					</a>
-					</div>
-				<?php endif ;?>
-		<!-- Link to Data.gov.au  -->
-				<?php if (isset($resource_id) && !empty($resource_id)) : ?>
-					<div class="external-link-to-data-gov">
-						<a href="<?php print $ckan_url . "/dataset/" . $dataset_id . "/resource/" . $resource_id; ?>" target="_blank">
-							<?php print t('View data in data.gov.au'); ?>
 						</a>
 					</div>
-				<?php endif; ?>
-		    </div>
-		<?php endif; ?>
+				<?php endif ;?>
+			<?php endif; ?>
+		<!-- Link to Data.gov.au  -->
+			<?php if (isset($resource_id) && !empty($resource_id)) : ?>
+				<div class="external-link-to-data-gov">
+					<a href="<?php print $ckan_url . "/dataset/" . $dataset_id . "/resource/" . $resource_id; ?>" target="_blank">
+						<?php print t('View data in data.gov.au'); ?>
+					</a>
+				</div>
+			<?php endif; ?>
+		</div>
 	</div>
 <?php endif; ?>

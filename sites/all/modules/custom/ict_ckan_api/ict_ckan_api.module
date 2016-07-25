@@ -247,7 +247,7 @@ function ckan_send_updates($data) {
           node_save($update);
         }
 
-        // watchdog('resource_result', json_encode($resource_create));
+        watchdog('resource_created', t("Resource was created with this id: " . $resource_create->id . " in this dataset id: " . $resource_create->package_id));
       }
 
       // Recource update
@@ -295,6 +295,8 @@ function ckan_send_updates($data) {
         if (!empty($resource_update) && isset($resource_update->id)) {
           $update->field_update_published['und'][0]['value'] = 1;
           node_save($update);
+
+          watchdog('resource_updated', t("Resource with this id: " . $resource_update->id . " was updated."));
         }
       }
     }
