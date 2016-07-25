@@ -177,7 +177,7 @@ function ckan_send_updates($data) {
         "Portfolio Name" => $project_term_portfolio->name,
         "Government Implementation Partner/s" => $partners,
         "Program Name" => $project->field_program_name['und'][0]['safe_value'],
-        "Project Summary And Objectives" => strip_tags($project->field_brief_project_summary['und'][0]['safe_value']),
+        "Project Summary And Objectives" => str_replace(array("\r\n", "\n", "\r"), "", strip_tags($project->field_brief_project_summary['und'][0]['safe_value'])),
         "Total Expenditure To Date" => isset($budget_total_spent['total']) ? $budget_total_spent['total'] : '$0.00m',
         "Original Total Project Budget" => isset($budget_total['total']) ? $budget_total['total'] : '$0.00m',
         "Project Budget" => isset($budget_total['splited']) ? $budget_total['splited'] : array(),
@@ -192,7 +192,7 @@ function ckan_send_updates($data) {
         "Current Expected Financial Benefits" => $curr_expected_fin_benefits,
         "Value of Financial Benefits Realised To Date" => $value_of_fin_benefits,
         "Benefits Realised" => $benefits_realised,
-        "Entity Comments" => strip_tags($entity_comments),
+        "Entity Comments" => str_replace(array("\r\n", "\n", "\r"), "", strip_tags($entity_comments)),
         "Update Date" => $get_approved_date
       );
 
