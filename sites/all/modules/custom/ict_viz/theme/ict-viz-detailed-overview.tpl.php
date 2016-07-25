@@ -108,6 +108,26 @@
 
 jQuery(document).ready(function () {
 
+ if(jQuery( window ).width() > 1024) {
+  var bar_width = 41;
+  var bar_distance = 14;
+  var bar_distance2 = 56;
+  var bar_x_distance = 100;
+  var activate_year_line_x1 = -41;
+  var activate_year_line_x2 = 42;
+  var tooltip_bar_x = -70;
+  var tooltip_bar_y = 30;
+ }
+ else {
+  var bar_width = 31;
+  var bar_distance = 10;
+  var bar_distance2 = 42;
+  var bar_x_distance = 325;
+  var activate_year_line_x1 = -30
+  var activate_year_line_x2 = 32
+  var tooltip_bar_x = -50;
+  var tooltip_bar_y = 30;
+ }
 var panExtent = {x: [0,width], y: [-100,400] };
 
 
@@ -115,36 +135,52 @@ var panExtent = {x: [0,width], y: [-100,400] };
       width = 960 - margin.left - margin.right,
       height = 360 - margin.top - margin.bottom;
 
-    var data1 = Drupal.settings.detailed_budget_chart;
-    // data1.data.datasets[0].data.shift();
-    // data1.data.datasets[1].data.shift();
-    // data1.data.labels.shift();
-    // data1.data.datasets[0].data.pop();
-    // data1.data.datasets[1].data.pop();
-    // data1.data.labels.pop();
+    var detailed_budget = Drupal.settings.detailed_budget_chart;
+    // detailed_budget.data.datasets[0].data.shift();
+    // detailed_budget.data.datasets[1].data.shift();
+    // detailed_budget.data.labels.shift();
+    // detailed_budget.data.datasets[0].data.pop();
+    // detailed_budget.data.datasets[1].data.pop();
+    // detailed_budget.data.labels.pop();
     var arr = [];
     var element = [];
 
-    for(i = 0; i < data1.data.labels.length; i++) {
+    for(i = 0; i < detailed_budget.data.labels.length; i++) {
       arr.push({
-        x: data1.data.datasets[0].data[i],y: data1.data.datasets[1].data[i], years: data1.data['labels'][i], element : i
+        x: detailed_budget.data.datasets[0].data[i],y: detailed_budget.data.datasets[1].data[i], years: detailed_budget.data['labels'][i], element : i
       });
       element.push(i);
     };
-    // var current_year = {data1 : arr[4].x, data2 : arr[4].y, year : arr[4].years};
-    var data = [{ "x" : data1.data.datasets[0].data,
-                 "y" : data1.data.datasets[1].data,
-                 "year" : data1.data['labels'],
-                "element": element}];
+    var current_year = "20" + detailed_budget.data.current_year.replace("/", "-") + "*";
+    var current_year2 = "20" + detailed_budget.data.current_year.replace("/", "-");
+
+    var current = jQuery.map(arr, function(value,key){
+      if(value.years == current_year) {
+        var current_key = key;
+        return value;
+
+      }    
+    })
+    // var date1 = '2016-17';
+    // var parser = d3.time.format("%Y-%y");
+    // var date2 = parser.parse(date1);
+    // console.log(date2);
+    // console.log(arr);
+    var arr2 = arr.slice(current[0].element - 3,current[0].element + 4); 
+    // console.log(arr2);
+    // var data = [{ "x" : detailed_budget.data.datasets[0].data,
+    //              "y" : detailed_budget.data.datasets[1].data,
+    //              "year" : detailed_budget.data['labels'],
+    //             "element": element}];
 
       var x = d3.scale.ordinal()
-      .domain(arr.map(function(d) { return d.years; }))
-      .rangeRoundBands([0, width - margin.right])
+      .domain(arr2.map(function(d) { return d.years; }))
+      .rangeRoundBands([0, width - margin.right - bar_x_distance])
 
       var y = d3.scale.linear()
       .range([height, 0])
       .domain([0,
-        d3.max(arr, function(d) {
+        d3.max(arr2, function(d) {
           return d.y;
         })
       ]);
@@ -162,11 +198,6 @@ var panExtent = {x: [0,width], y: [-100,400] };
         return '$' + prefix.scale(d);
       });
 
-      // var zoom = d3.behavior.zoom()
-      //   .x(xAxis)
-      //   .y(yAxis)
-      //   .scaleExtent([1, 30])
-      // .on("zoom", zoomed);
 
       function make_y_axis() {
         return d3.svg.axis()
@@ -176,7 +207,7 @@ var panExtent = {x: [0,width], y: [-100,400] };
 
     var tip = d3.tip()
       .attr('class', 'd3-tip')
-      .offset([0, -70])
+      .offset([tooltip_bar_y, tooltip_bar_x])
       .html(function(d) {
         return "<span style='border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
       })
@@ -186,7 +217,7 @@ var panExtent = {x: [0,width], y: [-100,400] };
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .call(d3.behavior.zoom().scaleExtent([1, 1]).on("zoom", zoom));
+    // .call(d3.behavior.zoom().y(y).scaleExtent([1, 1]).on("zoom", zoom));
 
   chart.call(tip);
  
@@ -208,13 +239,13 @@ var panExtent = {x: [0,width], y: [-100,400] };
 
 
   chart.selectAll("div")
-      .data(arr)
+      .data(arr2)
       .enter().append("rect")
       .attr("class", "bar1")
       .style("fill", "#FF6161")
-      .attr("x", function(d) {return x(d.years) + 10; })
+      .attr("x", function(d) {return x(d.years) + bar_distance; })
       .attr("y",height)
-      .attr("width", 41)  
+      .attr("width", bar_width)  
       .attr("height", 0)
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
@@ -222,18 +253,18 @@ var panExtent = {x: [0,width], y: [-100,400] };
       .duration(1500)
       .attr("y", function (d) { return y(d.x);})
       .attr("height", function (d) { return (height - y(d.x)); })
-      .filter(function(d) { return d.element == arr[4].element; })
+      .filter(function(d) { return d.x == current[0].x; })
       .style("fill", "#FC3E3E")
       .attr("class", "fdasfds");
 
   chart.selectAll("div")
-      .data(arr)
+      .data(arr2)
       .enter().append("rect")
       .attr("class", "bar2")
       .style("fill", "#5C46A4")
-      .attr("x", function(d) {return x(d.years) + 52; })
+      .attr("x", function(d) {return x(d.years) + bar_distance2; })
       .attr("y", height)
-      .attr("width", 41)
+      .attr("width", bar_width)
       .attr("height", 0)
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
@@ -241,13 +272,13 @@ var panExtent = {x: [0,width], y: [-100,400] };
       .duration(1500)
       .attr("y", function (d) { return y(d.y);})
       .attr("height", function (d) { return (height - y(d.y)); })
-      .filter(function(d) { return d.element == arr[4].element; })
+      .filter(function(d) { return d.y == current[0].y; })
         .style("fill", "#3D2390");
 
   chart.selectAll('.x .tick')
-      .data(arr)
+      .data(arr2)
       .each(function(d, i) {
-          if(d.years == arr[4].years) {
+          if(d.years == current_year) {
               d3.select(this)
                 .append('line')
                 .attr({
@@ -255,8 +286,8 @@ var panExtent = {x: [0,width], y: [-100,400] };
                     dy: 24,
                     "y1" : 28,
                     "y2" : 28,
-                    "x1" : -41,
-                     "x2" : 42,
+                    "x1" : activate_year_line_x1,
+                     "x2" : activate_year_line_x2,
                     "font-size": "10.5px",
                     "class": "line-current-year"
 
@@ -271,14 +302,13 @@ var panExtent = {x: [0,width], y: [-100,400] };
           }
       });
 
-function zoom() {
-  chart.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
-    chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
-        .call(xAxis.scale(x.rangeRoundBands([0, width * d3.event.scale],.1 * d3.event.scale)));
-  // chart.select(".y.axis").call(yAxis);
+  jQuery( "text:contains("+ current[0].years +")").css('fill', '#3D2390').text(current_year2);
+
+function zoomed() {
+  svg.select(".x.axis").call(xAxis);
+  svg.select(".y.axis").call(yAxis);
 }
 
-jQuery( "text:contains('2015-16')").css('fill', '#3D2390');
 
 //     var x = d3.scale.ordinal()
 //       .domain(data[0].year)

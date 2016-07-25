@@ -4896,9 +4896,11 @@ DETAILED OVERVIEW STYLES
         color: #aabcb9; }
 
 #detailed-view-expenditure {
-  overflow-x: scroll; }
-  #detailed-view-expenditure #detailed-overview-chart {
-    margin-left: 53px; }
+  overflow-x: scroll;
+  margin-right: 20px; }
+
+.tick text {
+  font-size: 14px; }
 
 .y.axis path {
   stroke: #000; }
@@ -7400,7 +7402,9 @@ you can add resource intensive styles.
           color: #aabcb9; }
 
   #detailed-view-expenditure {
-    overflow-x: hidden; } }
+    overflow-x: hidden; }
+    #detailed-view-expenditure #detailed-overview-chart {
+      margin-left: 53px; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.

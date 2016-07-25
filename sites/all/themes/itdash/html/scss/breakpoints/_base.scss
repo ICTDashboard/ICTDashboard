@@ -2164,11 +2164,14 @@ DETAILED OVERVIEW STYLES
 
 #detailed-view-expenditure {
   overflow-x: scroll;
-  #detailed-overview-chart {
-  	margin-left: 53px;
-  }
+  margin-right: 20px;
+  // #detailed-overview-chart {
+  // 	margin-left: 53px;
+  // }
 }
-
+.tick text {
+	font-size: 14px;
+}
 .y.axis path {
   stroke: #000;
 }
