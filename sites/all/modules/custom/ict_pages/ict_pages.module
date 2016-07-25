@@ -32,6 +32,7 @@ function template_preprocess_ict_pages_last_update(&$vars) {
   $query = db_select('project_workflow', 'wf');
   $query->addField('wf', 'created');
   $query->condition('wf.state', 'approved');
+  
   if (!empty($vars['nid']) && is_numeric($vars['nid'])) {
     $nid = $vars['nid'];
 
@@ -40,6 +41,10 @@ function template_preprocess_ict_pages_last_update(&$vars) {
     $last_rebaseline = ict_project_get_last_rebaseline_project($nid);
     $old_rebaselines = ict_project_get_old_baselines($last_rebaseline);
     $active_from = ict_project_project_active_from_date($nid);
+    $project = node_load($nid);
+    $vars['resource_id'] = isset($project->field_resource_id['und']) ? $project->field_resource_id['und'][0]['value'] : '';
+    $vars['dataset_id'] = variable_get('dataset_id', '');
+    $vars['ckan_url'] = variable_get('ckan_url', '');
     $vars['active_from'] = $active_from->first_update;
     $vars['active'] = $active_from->unpublished_on;
     $vars['last_rebaseline'] = $last_rebaseline;
@@ -51,7 +56,7 @@ function template_preprocess_ict_pages_last_update(&$vars) {
 
   // we should show unapproved baselines for
   if (!$result && !empty($vars['nid'])) {
-    $node = node_load($vars['nid']);
+    $node = !isset($project) ? node_load($vars['nid']) : $project;
     if (!empty($node->type) && $node->type == 'project') {
       $result = $node->changed;
     }
