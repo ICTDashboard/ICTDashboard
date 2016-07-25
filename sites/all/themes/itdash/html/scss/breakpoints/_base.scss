@@ -2160,3 +2160,27 @@ DETAILED OVERVIEW STYLES
     }
   }
 }
+
+/* User custom login form agreement */
+#user-login {
+	#agreement-text-login {
+		max-height: 250px;
+		overflow-y: auto;
+	}
+	& .agr-btn {
+		color: #fff;
+		font-weight: bold;
+		font-size: 15px;
+		background: #17716b !important;
+		text-indent: 0px !important;
+		@include border-radius(3px);
+
+		&:hover {
+			background: #095F69 !important;
+		}
+	}
+
+	& .agreement-accept {
+		margin-left: 10px;
+	}
+}
