@@ -96,10 +96,11 @@ function ckan_send_updates($data) {
 
     $project_id = $update->field_project['und'][0]['target_id'];
     $project = node_load($project_id);
-    $published = $project ? ict_project_is_published_project($project->nid) : FALSE;
+    $unpublished_projects = ict_project_get_all_unpublished_projects();
+    $unpublished = $project ? in_array($project->nid, $unpublished_projects) : TRUE;
 
     // Check for Project entity to be an Object (secure from broken updates)
-    if ($project && $published) {
+    if ($project && !$unpublished) {
       // Generating Budget total
       $node_project_wrapper = entity_metadata_wrapper('node', $project);
       $budget_values = $node_project_wrapper->field_original_total_budget->value();
