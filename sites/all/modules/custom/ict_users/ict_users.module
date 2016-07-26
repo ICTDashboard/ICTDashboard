@@ -322,7 +322,8 @@ function ict_users_form_user_login_alter(&$form, &$form_state, $form_id) {
 
     $agr_text = variable_get('agreement_text', array('value' =>'', 'format' => 'filtered_html'));
     $form['agr_text'] = array(
-      '#prefix' => '<div id="agreement-text-login">',
+      '#prefix' => '<p><b id="use-terms-header">I agree that accessing (or logging into) the ICT Projects Dashboard system means I undertake to abide by and/or agree to the following statements:</b></p>
+            <div id="agreement-text-login">',
       '#markup' => $agr_text['value'],
       '#suffix' => '</div>'
     );
