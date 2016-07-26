@@ -2163,9 +2163,19 @@ DETAILED OVERVIEW STYLES
 
 /* User custom login form agreement */
 #user-login {
+	#use-terms-header {
+		font-size: 16px;
+	}
 	#agreement-text-login {
 		max-height: 250px;
 		overflow-y: auto;
+		border: 1px solid #abb6cb;
+		padding: 10px;
+		margin-bottom: 20px;
+		ul {
+			list-style: disc;
+			padding: 20px;
+		}
 	}
 	& .agr-btn {
 		color: #fff;
