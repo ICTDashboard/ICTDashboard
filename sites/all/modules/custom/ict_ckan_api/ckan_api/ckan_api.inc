@@ -72,8 +72,8 @@ class CkanApi {
       if ($rdata->success) {
         return $rdata->result;
       } else {
-        watchdog('ckan_' . $action, serialize($rdata));
-        return $rdata->error;
+        watchdog('ckan_' . $action, 'Couldn\'t run action: ' . $action);
+        return FALSE;
       }
     }
     else if ( array_key_exists($action, $this->get_actions ) ) {
