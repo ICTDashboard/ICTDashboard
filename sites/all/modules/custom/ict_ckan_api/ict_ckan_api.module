@@ -96,9 +96,10 @@ function ckan_send_updates($data) {
 
     $project_id = $update->field_project['und'][0]['target_id'];
     $project = node_load($project_id);
+    $published = $project ? ict_project_is_published_project($project->nid) : FALSE;
 
     // Check for Project entity to be an Object (secure from broken updates)
-    if ($project && $project->status) {
+    if ($project && $published) {
       // Generating Budget total
       $node_project_wrapper = entity_metadata_wrapper('node', $project);
       $budget_values = $node_project_wrapper->field_original_total_budget->value();
@@ -245,9 +246,9 @@ function ckan_send_updates($data) {
           // Mark Update as published
           $update->field_update_published['und'][0]['value'] = 1;
           node_save($update);
-        }
 
-        watchdog('resource_created', t("Resource was created with this id: " . $resource_create->id . " in this dataset id: " . $resource_create->package_id . ". Update id is " . $update->nid . ", Project id is " . $project->nid));
+          watchdog('resource_created', t("Resource was created with this id: " . $resource_create->id . " in this dataset id: " . $resource_create->package_id . ". Update id is " . $update->nid . ", Project id is " . $project->nid));
+        }
       }
 
       // Recource update
