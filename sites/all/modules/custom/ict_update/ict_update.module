@@ -144,7 +144,28 @@ function ict_update_update_form_recursive($key, $value, $array) {
  * Implements hook_form_FORM_ID_alter().
  */
 function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) {
+  var_dump($form_id);
+
+  $query = db_select('project_workflow', 'm');
+  $query->fields('m', array('nid', 'state', 'created'));
   
+  $query->fields('u', array('name', 'uid'));
+  $query->leftJoin('node', 'n', 'n.nid = m.nid');
+  $query->leftJoin('users', 'u', 'u.uid = m.uid');
+  $query->condition('m.nid', '2322');
+  $query->condition('state', array('approved'));
+  $query->orderBy('nid', 'DESC');
+  $res = $query->execute()->fetchAll();
+  var_dump($res);
+  $project = node_load($res[0]->nid);
+  $res1 = format_date($res[0]->created + '3 month', 'medium', 'd-m-Y');
+
+  $dating = format_date(strtotime('+3 month'), 'medium', 'd-m-Y');
+
+  $diff = date_diff(new DateTime($dating), new DateTime($res1))->m;
+  // var_dump($diff);
+
+
   $form['#after_build'][] = 'ict_update_node_form_after_build';
   global $user;
   $update = $form['#node'];
@@ -647,6 +668,37 @@ function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) 
 //  $form_state['redirect'] = 'node/'. $form['#nid'];
 }
 
+
+function ict_update_node_last_approved() {
+
+  $query = db_select('project_workflow', 'm');
+  $query->fields('m', array('nid', 'state', 'created'));
+  $query->fields('n', array('title'));
+  $query->fields('u', array('name'));
+  $query->leftJoin('node', 'n', 'n.nid = m.nid');
+  $query->leftJoin('users', 'u', 'u.uid = m.uid');
+  $query->condition('m.nid', '2324');
+  $query->condition('state', 'approved');
+  $query->orderBy('nid', 'DESC');
+  $res = $query->execute()->fetchAll();
+  // var_dump($res[0]->created);
+  $project = node_load($res[0]->nid);
+  $res1 = format_date($res[0]->created + '3 month', 'medium', 'd-m-Y');
+
+  $dating = format_date(strtotime('+3 month'), 'medium', 'd-m-Y');
+
+  $diff = date_diff(new DateTime($dating), new DateTime($res1))->m;
+  // var_dump($diff);
+
+// if ($diff == 3) {
+  var_dump('hello');
+  $key = 'send_email';
+     drupal_mail('ict_mail', 'send_email', 'yan.rudenko@gmail.com', language_default(),  array('editor_name' => $res[0]->name, 'name' => $res[0]->name, 'title' => $res[0]->title, 'approver_name' => $res[0]->name));
+  // __ict_mail_process_mails('ict_mail', 'send_email', $project, array(), array('editor_name' => 'Editor SDC'));
+  // }
+}
+
+
 function ict_update_workflow_set_approve($form, &$form_state) {
   if (!$form_state['node']->nid) {
     return;
@@ -890,6 +942,7 @@ function ict_update_baseline_approve_form_validate ($form, &$form_state) {
 }
 
 function ict_update_review_workflow_set_approve($form, &$form_state) {
+  var_dump($form);
   if (!$form['#update_id']) {
     return;
   }
@@ -1295,4 +1348,9 @@ function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
     'count' => $count,
     'benefits' => $results,
   );
+}
+
+
+function ict_update_cron() {
+  ict_update_node_last_approved();
 }
