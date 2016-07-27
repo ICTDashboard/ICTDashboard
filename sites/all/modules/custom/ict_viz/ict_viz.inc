@@ -186,6 +186,7 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
       $year_label[$year] = '20' . $start_year . '-' . $end_year;
 
       for ($quarter = 4; $quarter > 0; $quarter--) {
+      
         $max_date = $quarter < 3 ?
           '20' . $start_year . '-' .$quarter_deadlines[$quarter] :
           '20' . $end_year . '-' .$quarter_deadlines[$quarter];
@@ -193,15 +194,16 @@ function ict_viz_prepare_detailed_project_schedule_data($all_projects) {
         // if deadline in future we need to request current snapshot
         $timestamp = strtotime($max_date);
         if ($timestamp > time()) {
-          $prev_quarter = $quarter - 1;
+          $prev_quarter = $quarter > 1 ? $quarter - 1 : 4;
 
           // next quarter cannot be found
           if (!isset($quarter_deadlines[$prev_quarter]))  continue;
-
+          
           // next quarter hasn't started
-          $prevmax_date = $prev_quarter < 3 ?
+          $prevmax_date = $prev_quarter < 3 || $prev_quarter == 4 ?
             '20' . $start_year . '-' .$quarter_deadlines[$prev_quarter] :
             '20' . $end_year . '-' .$quarter_deadlines[$prev_quarter];
+            
           if (strtotime($prevmax_date) > time()) continue;
 
           // current snapshot will be requested
