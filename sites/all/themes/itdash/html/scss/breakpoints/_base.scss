@@ -1916,8 +1916,10 @@ DETAILED OVERVIEW STYLES
 					}
 				}
 			}
-			#detailed_schedule_chart_current {
+			#detailed_schedule_chart_current,
+			#detailed_schedule_chart_previous {
 				margin-left: 7px;
+
 			}
 			.benefits_chart_divs {
 				overflow: hidden;
