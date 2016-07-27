@@ -361,6 +361,7 @@ function ict_users_custom_login($form, &$form_state) {
     
     // Run default login handler
     user_login_submit($form, $form_state);
+    drupal_goto('projects');
   }
   $form_state['rebuild'] = TRUE;
 }
