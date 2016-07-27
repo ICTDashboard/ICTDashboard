@@ -15,7 +15,7 @@
     <th>
       <div class="label">
         <?php print t('Realised Status'); ?>
-<!--        <a href="javascript:void(0);" class="tooltip tooltip-bottom"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, indicate the status of benefit realisation. Realised - The benefit has been realised; Partially - The benefit has been partially realised; On Track – The project is on track to realise the benefit as originally expected; At Risk - The benefit is not likely to be realised as originally expected; Not Realised - The benefit will not be realised.</span></a>-->
+<!--        <a href="javascript:void(0);" class="tooltip tooltip-bottom"><i class="tooltip-icon"></i><span class="tooltip-content">For each benefit listed, indicate the status of benefit realisation. Realised – The benefit has been realised. Not Realised – The benefit will not be realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.</span></a>-->
       </div>
     </th>
     <th>
