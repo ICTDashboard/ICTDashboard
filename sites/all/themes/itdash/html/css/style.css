@@ -4755,7 +4755,8 @@ DETAILED OVERVIEW STYLES
       #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li .noofproj,
       #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li .curqua {
         text-align: right; }
-  #container #content #ict-dashboard-detailed-overview #detailed_schedule_chart_current {
+  #container #content #ict-dashboard-detailed-overview #detailed_schedule_chart_current,
+  #container #content #ict-dashboard-detailed-overview #detailed_schedule_chart_previous {
     margin-left: 7px; }
   #container #content #ict-dashboard-detailed-overview .benefits_chart_divs {
     overflow: hidden; }
