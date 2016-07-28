@@ -200,8 +200,8 @@ function ict_mail_mail($key, &$message, $params) {
 
     case 'remainder_update':
       $message['subject'] = t('ICT Projects DashboardReminder - Update @TITLE', array('@TITLE' => $params['title']));
-      $message['body'][] = t('The information on the Dashboard for the project @TITLE is approaching 3 months old. Please update @TITLE on the Dashboard as soon as possible by logging into your ICT Projects Dashboard account to update and submit the project data.!URL @EDITOR', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '!URL' => $base_url));
-      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $params[$dep_name]));
+      $message['body'][] = t("The information on the Dashboard for the project @TITLE is approaching 3 months old. Please update @TITLE on the Dashboard as soon as possible by logging into your ICT Projects Dashboard account to update and submit the project data. !URL ", array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '!URL' => $base_url));
+      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $params['dep_admin']));
       break;
 
     case 'remainder_waiting_approval_baseline':
