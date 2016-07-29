@@ -156,44 +156,126 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
   // $query->condition('state', array('approved'));
   // $query->orderBy('nid', 'DESC');
 
-  $query = db_select('project_access', 'pa');
-  $query->fields('pa', array('nid', 'uid', 'access_type'));
-  $query->fields('u', array('name','mail'));
-  $query->fields('pw', array('created', 'state'));
-  $query->fields('n', array('title'));
+
+//////////////////////// QUERY FOR BASELINE WAITING APPROVAL
+  $query = db_select('project_workflow', 'pw');
+  
+  $query->fields('pw', array('nid','created', 'state', 'old_state'));
+  $query->fields('n', array('title', 'type','changed'));
+  $query->fields('pa', array('uid'));
+  $query->fields('u', array('name', 'mail'));
+
+  $query->leftJoin('node', 'n', 'n.nid = pw.nid');
+  $query->leftJoin('project_access', 'pa', 'pa.nid = pw.nid');
   $query->leftJoin('users', 'u', 'u.uid = pa.uid');
-  $query->leftJoin('project_workflow', 'pw', 'pw.nid = pa.nid');
-  $query->leftJoin('node', 'n', 'n.nid = pa.nid');
-  // $query->condition('pa.nid', '1961');
-  $query->condition('pw.state', 'approved');
-  $res = $query->execute()->fetchAll();
-  $test_arr = array();
 
-  foreach ($res as $key => $value) {
-    $test_arr[$value->nid][] = $value;
-    $res1 = format_date($value->created, 'medium', 'd-m-Y');
-    $dating = format_date(time(), 'medium', 'd-m-Y');
-    $diff = date_diff(new DateTime($dating), new DateTime($res1))->format('%m');
-    $gg = node_load($value->nid);
-    $query = db_select('users', 'u');
-    $query->fields('u', array('name','mail'));
-    $query->condition('u.uid', array($gg->revision_uid, $gg->uid));
-    $res3 = $query->execute()->fetchAll();
-    // var_dump($res3);
+  $query->orderBy('pw.nid', 'DESC');
+  $info = $query->execute()->fetchAll();
 
-    if($diff >=3) {
-      if($value->access_type == 'edit') {
-        $gg = node_load($value->nid);
-        // var_dump($res3);
-      } 
-    }
-    if($diff == 2) {
-      if($value->access_type == 'edit') {
-        $gg = node_load($value->nid);
-        // var_dump($res3);
-      } 
+  foreach ($info as $key => $value) {
+    if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "project") {
+      $project_date = format_date($value->created, 'medium', 'd-m-Y');
+      $dating = format_date(time(), 'medium', 'd-m-Y');
+      $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
+      $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
+      // var_dump($days);
+      if($days >= 2) {
+        // var_dump($value);
+      }
     }
   }
+
+///////////////////////////QUESRY FOR WAITING UPDATE
+  $query = db_select('project_workflow', 'pw');
+  
+  $query->fields('pw', array('nid','created', 'state', 'old_state'));
+  $query->fields('n', array('title', 'type','changed'));
+  $query->fields('pa', array('uid'));
+  $query->fields('u', array('name', 'mail'));
+  $query->fields('p', array('field_project_target_id'));
+
+  $query->leftJoin('node', 'n', 'n.nid = pw.nid');
+  $query->leftJoin('project_access', 'pa', 'pa.nid = pw.nid');
+  $query->leftJoin('users', 'u', 'u.uid = pa.uid');
+  $query->leftJoin('field_data_field_project', 'p', 'p.entity_id = pw.nid');
+
+  $query->orderBy('pw.nid', 'DESC');
+  $info = $query->execute()->fetchAll();
+
+  foreach ($info as $key => $value) {
+    if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "update") {
+      $project_date = format_date($value->created, 'medium', 'd-m-Y');
+      $dating = format_date(time(), 'medium', 'd-m-Y');
+      $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
+      $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
+      // var_dump($months);
+      if($days >= 2) {
+        // var_dump($value);
+        $node = node_load($value->nid);
+        // $query = db_select('project_access', 'pa');
+        // $query->fields('pa', array('uid','nid'));
+        // $query->fields('n', array('title', 'type','changed'));
+        // $query->fields('u', array('name', 'mail'));
+        // $query->leftJoin('users', 'u', 'u.uid = pa.uid');
+        // $query->leftJoin('node', 'n', 'n.nid = pa.nid');
+        // $query->condition('pa.nid', $value->field_project_target_id);
+        // $query->orderBy('pa.nid', 'DESC');
+        // $info1 = $query->execute()->fetchAll();
+        // var_dump($node);
+        // var_dump($node);
+        foreach ($info1 as $key => $value) {
+          
+        }
+      }
+    }
+  }
+  // $query = db_select('project_access', 'pa');
+  // $query->fields('pa', array('nid', 'uid', 'access_type'));
+  // $query->fields('u', array('name','mail'));
+  // $query->fields('pw', array('created', 'state'));
+  // $query->fields('n', array('title'));
+  // $query->leftJoin('users', 'u', 'u.uid = pa.uid');
+  // $query->leftJoin('project_workflow', 'pw', 'pw.nid = pa.nid');
+  // $query->leftJoin('node', 'n', 'n.nid = pw.nid');
+  // // $query->condition('pa.nid', '1961');
+  // $query->condition('pw.state', 'approved');
+  // $res = $query->execute()->fetchAll();
+  // $test_arr = array();
+
+  // foreach ($res as $key => $value) {
+  //   $test_arr[$value->nid][] = $value;
+  //   $project_date = format_date($value->created, 'medium', 'd-m-Y');
+  //   $dating = format_date(time(), 'medium', 'd-m-Y');
+  //   $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
+  //   $diff2 = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
+  //   var_dump($value->nid);
+  //   $gg = node_load($value->nid);
+  //   $query = db_select('users', 'u');
+  //   $query->fields('u', array('name','mail'));
+  //   $query->condition('u.uid', array($gg->revision_uid, $gg->uid));
+  //   $res3 = $query->execute()->fetchAll();
+  //   // var_dump($res3);
+
+  //   if($months >3) {
+  //     if($value->access_type == 'edit') {
+  //       $gg = node_load($value->nid);
+  //       // var_dump($res3);
+  //     } 
+  //   }
+
+  //   if($months ==3) {
+  //     if($value->access_type == 'edit') {
+  //       $gg = node_load($value->nid);
+  //       // var_dump("2");
+  //     } 
+  //   }
+  //   if($months == 2) {
+  //     if($value->access_type == 'edit') {
+  //       $gg = node_load($value->nid);
+  //       // var_dump("3");
+  //     } 
+  //   }
+  // }
   // var_dump($test_arr); die;
   $project = node_load($res[0]->nid);
   $res1 = format_date($res[0]->created + '3 month', 'medium', 'd-m-Y');
