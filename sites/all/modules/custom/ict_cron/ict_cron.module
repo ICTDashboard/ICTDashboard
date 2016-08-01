@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ICT Cron feature.
+ */
+
+include_once 'ict_cron.features.inc';

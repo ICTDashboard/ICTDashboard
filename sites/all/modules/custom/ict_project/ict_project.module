@@ -1777,6 +1777,7 @@ function ict_project_node_waiting_approval() {
 //////////////////////// QUERY FOR BASELINE WAITING APPROVAL
   $query = db_select('project_workflow', 'pw');
   
+  $query->addExpression('n.uid', 'departmental_id');
   $query->fields('pw', array('nid','created', 'state', 'old_state'));
   $query->fields('n', array('title', 'type','changed'));
   $query->fields('pa', array('uid', 'access_type'));
@@ -1799,10 +1800,11 @@ function ict_project_node_waiting_approval() {
       if($days >= 2) {
         if($value->access_type == 'approve') {
           $data = node_load($value->nid);
+          $dep_admin = user_load($value->departmental_id);
           $project_date = format_date($data->changed, 'medium', 'd/m/Y');
           var_dump($data->name);
 
-          drupal_mail('ict_mail', 'remainder_waiting_approval_baseline', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date));        
+          drupal_mail('ict_mail', 'remainder_waiting_approval_baseline', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date, 'depart_name' => $dep_admin->name));        
         }
       }
     }
