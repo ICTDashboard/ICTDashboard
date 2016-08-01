@@ -146,23 +146,13 @@ function ict_update_update_form_recursive($key, $value, $array) {
 function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) {
   var_dump($form_id);
 
-  // $query = db_select('project_workflow', 'm');
-  // $query->fields('m', array('nid', 'state', 'created'));
-  
-  // $query->fields('u', array('name', 'uid'));
-  // $query->leftJoin('node', 'n', 'n.nid = m.nid');
-  // $query->leftJoin('users', 'u', 'u.uid = m.uid');
-  // $query->condition('m.nid', '2322');
-  // $query->condition('state', array('approved'));
-  // $query->orderBy('nid', 'DESC');
-
 
 //////////////////////// QUERY FOR BASELINE WAITING APPROVAL
   $query = db_select('project_workflow', 'pw');
   
   $query->fields('pw', array('nid','created', 'state', 'old_state'));
   $query->fields('n', array('title', 'type','changed'));
-  $query->fields('pa', array('uid'));
+  $query->fields('pa', array('uid', 'access_type'));
   $query->fields('u', array('name', 'mail'));
 
   $query->leftJoin('node', 'n', 'n.nid = pw.nid');
@@ -180,55 +170,141 @@ function ict_update_form_update_node_form_alter(&$form, &$form_state, $form_id) 
       $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
       // var_dump($days);
       if($days >= 2) {
-        // var_dump($value);
-      }
-    }
-  }
+        if($value->access_type == 'approve') {
+          $data = node_load($value->nid);
+          var_dump($data);
+          $project_date = format_date($data->changed, 'medium', 'd/m/Y');
+          // var_dump($data->name);
 
-///////////////////////////QUESRY FOR WAITING UPDATE
-  $query = db_select('project_workflow', 'pw');
-  
-  $query->fields('pw', array('nid','created', 'state', 'old_state'));
-  $query->fields('n', array('title', 'type','changed'));
-  $query->fields('pa', array('uid'));
-  $query->fields('u', array('name', 'mail'));
-  $query->fields('p', array('field_project_target_id'));
-
-  $query->leftJoin('node', 'n', 'n.nid = pw.nid');
-  $query->leftJoin('project_access', 'pa', 'pa.nid = pw.nid');
-  $query->leftJoin('users', 'u', 'u.uid = pa.uid');
-  $query->leftJoin('field_data_field_project', 'p', 'p.entity_id = pw.nid');
-
-  $query->orderBy('pw.nid', 'DESC');
-  $info = $query->execute()->fetchAll();
-
-  foreach ($info as $key => $value) {
-    if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "update") {
-      $project_date = format_date($value->created, 'medium', 'd-m-Y');
-      $dating = format_date(time(), 'medium', 'd-m-Y');
-      $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
-      $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
-      // var_dump($months);
-      if($days >= 2) {
-        // var_dump($value);
-        $node = node_load($value->nid);
-        // $query = db_select('project_access', 'pa');
-        // $query->fields('pa', array('uid','nid'));
-        // $query->fields('n', array('title', 'type','changed'));
-        // $query->fields('u', array('name', 'mail'));
-        // $query->leftJoin('users', 'u', 'u.uid = pa.uid');
-        // $query->leftJoin('node', 'n', 'n.nid = pa.nid');
-        // $query->condition('pa.nid', $value->field_project_target_id);
-        // $query->orderBy('pa.nid', 'DESC');
-        // $info1 = $query->execute()->fetchAll();
-        // var_dump($node);
-        // var_dump($node);
-        foreach ($info1 as $key => $value) {
-          
+          // drupal_mail('ict_mail', 'remainder_waiting_approval_baseline', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date));        
         }
       }
     }
   }
+
+
+
+///////////////////////////QUERY FOR WAITING UPDATE
+
+  $query = db_select('field_data_field_project', 'p');
+  $query->fields('p', array('field_project_target_id', 'entity_id', 'bundle'));
+  $query->fields('pa', array('uid', 'access_type'));
+  $query->fields('u', array('name', 'mail'));
+  $query->fields('n', array('title', 'type','changed'));
+  $query->fields('pw', array('created', 'state', 'old_state'));
+
+
+  $query->leftJoin('project_access', 'pa', 'pa.nid = p.field_project_target_id');
+  $query->leftJoin('users', 'u', 'u.uid = pa.uid');
+  $query->leftJoin('node', 'n', 'n.nid = p.entity_id');
+  $query->leftJoin('project_workflow', 'pw', 'pw.nid = p.entity_id');
+
+  // $query->condition('p.entity_id', '2320');
+  $query->orderBy('p.entity_id', 'DESC');
+  $info = $query->execute()->fetchAll();
+  // var_dump($info);
+
+  foreach ($info as $key => $value) {
+      $project_date = format_date($value->created, 'medium', 'd-m-Y');
+      $dating = format_date(time(), 'medium', 'd-m-Y');
+
+      $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
+      $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
+      // var_dump($months);
+///////////////////////////QUERY WAITING FOR UPDATE(WAITING FOR APPROVAL MORE THEN 2 DAYS)
+    
+    if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "update") {  
+      
+      if($days >= 2) {
+
+        if($value->access_type == 'approve') {
+          var_dump($value);
+
+          // var_dump($days);
+          $data = node_load($value->entity_id);
+          // $project_date = format_date($data->created, 'medium', 'd/m/Y H:m');
+          $project_date = format_date($data->changed, 'medium', 'd/m/Y');
+          // var_dump($data);
+          // var_dump($project_date);
+
+          // drupal_mail('ict_mail', 'remainder_waiting_approval_update', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date));
+        } 
+      }
+    
+    }
+    
+    if($value->created == $value->changed && $value->state == 'approved' && $value->type == "update") {  
+  // var_dump($days);
+///////////////////////////QUERY FOR WAITING UPDATE(APPROVED MORE THEN 3 MONTHS)
+      if($days > 90) { 
+        // var_dump('1');
+        // var_dump($months);
+        continue;
+        
+      }
+
+///////////////////////////QUERY FOR WAITING UPDATE(APPROVED LAST 3 MONTHS)
+      if($months == 3) { 
+        // var_dump('2');
+        // var_dump($months);
+        continue;
+      }
+
+///////////////////////////QUERY APPROVED UPDATE(APPROVED LAST 2 MONTHS)     
+      if($months == 2) { 
+        // var_dump('3');
+        // var_dump($value->name);
+        continue;
+      }
+    
+    }
+
+  }
+
+//   $query = db_select('project_workflow', 'pw');
+  
+//   $query->fields('pw', array('nid','created', 'state', 'old_state'));
+//   $query->fields('n', array('title', 'type','changed'));
+//   $query->fields('pa', array('uid'));
+//   $query->fields('u', array('name', 'mail'));
+//   $query->fields('p', array('field_project_target_id'));
+
+//   $query->leftJoin('node', 'n', 'n.nid = pw.nid');
+  
+//   $query->leftJoin('users', 'u', 'u.uid = pa.uid');
+//   $query->leftJoin('field_data_field_project', 'p', 'p.entity_id = pw.nid');
+//   $query->rightJoin('project_access', 'pa', 'pa.nid = p.field_project_target_id');
+
+//   $query->orderBy('pw.nid', 'DESC');
+//   $info = $query->execute()->fetchAll();
+// var_dump($info);
+//   foreach ($info as $key => $value) {
+//     if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "update") {
+//       $project_date = format_date($value->created, 'medium', 'd-m-Y');
+//       $dating = format_date(time(), 'medium', 'd-m-Y');
+//       $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
+//       $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
+//       // var_dump($months);
+//       if($days >= 2) {
+//         // var_dump($value);
+//         $node = node_load($value->nid);
+//         // $query = db_select('project_access', 'pa');
+//         // $query->fields('pa', array('uid','nid'));
+//         // $query->fields('n', array('title', 'type','changed'));
+//         // $query->fields('u', array('name', 'mail'));
+//         // $query->leftJoin('users', 'u', 'u.uid = pa.uid');
+//         // $query->leftJoin('node', 'n', 'n.nid = pa.nid');
+//         // $query->condition('pa.nid', $value->field_project_target_id);
+//         // $query->orderBy('pa.nid', 'DESC');
+//         // $info1 = $query->execute()->fetchAll();
+//         // var_dump($node);
+//         // var_dump($node);
+//         foreach ($info1 as $key => $value) {
+          
+//         }
+//       }
+//     }
+//   }
   // $query = db_select('project_access', 'pa');
   // $query->fields('pa', array('nid', 'uid', 'access_type'));
   // $query->fields('u', array('name','mail'));
@@ -791,66 +867,79 @@ function ict_update_workflow_set_wait_approve_preview_page($form, &$form_state) 
 
 function ict_update_node_last_approved() {
 
-  // $query = db_select('project_access', 'pa');
-  // $query->fields('pa', array('nid', 'uid', 'access_type'));
-  // $query->fields('u', array('name','mail'));
-  // $query->fields('pw', array('created', 'state'));
-  // $query->fields('n', array('title'));
-  // $query->leftJoin('users', 'u', 'u.uid = pa.uid');
-  // $query->leftJoin('project_workflow', 'pw', 'pw.nid = pa.nid');
-  // $query->leftJoin('node', 'n', 'n.nid = pa.nid');
-  // $query->condition('pa.nid', '1963');
-  // $query->condition('pw.state', 'approved');
-  // $res = $query->execute()->fetchAll();
-  // foreach ($res as $key => $value) {
-  //   $res1 = format_date($value->created + '3 month', 'medium', 'd-m-Y');
-  //   $dating = format_date(time(), 'medium', 'd-m-Y');
-  //   $diff = date_diff(new DateTime($dating), new DateTime($res1))->m;
-  //   // var_dump($diff);
-  //   if($diff >= 4) {
-  //     if($value->access_type == 'approve' && $value->state == 'approved') {
-  //       $gg = node_load($value->nid);
-  //       var_dump('1');
-  //        drupal_mail('ict_mail', 'remainder_update', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $value->name, 'name' => $value->name, 'title' => $value->title, 'approver_name' => $value->name));
-  //     } 
-  //   }
-  // }
+  $query = db_select('field_data_field_project', 'p');
+  $query->fields('p', array('field_project_target_id', 'entity_id', 'bundle'));
+  $query->fields('pa', array('uid', 'access_type'));
+  $query->fields('u', array('name', 'mail'));
+  $query->fields('n', array('title', 'type','changed'));
+  $query->fields('pw', array('created', 'state', 'old_state'));
 
-  $query = db_select('project_access', 'pa');
-  $query->fields('pa', array('nid', 'uid', 'access_type'));
-  $query->fields('u', array('name','mail'));
-  $query->fields('pw', array('created', 'state'));
-  $query->fields('n', array('title'));
+
+  $query->leftJoin('project_access', 'pa', 'pa.nid = p.field_project_target_id');
   $query->leftJoin('users', 'u', 'u.uid = pa.uid');
-  $query->leftJoin('project_workflow', 'pw', 'pw.nid = pa.nid');
-  $query->leftJoin('node', 'n', 'n.nid = pa.nid');
-  $query->condition('pa.nid', '1961');
-  $query->condition('pw.state', 'approved');
-  $res = $query->execute()->fetchAll();
-  $test_arr = array();
+  $query->leftJoin('node', 'n', 'n.nid = p.entity_id');
+  $query->leftJoin('project_workflow', 'pw', 'pw.nid = p.entity_id');
 
-  foreach ($res as $key => $value) {
-    $test_arr[$value->nid][] = $value;
-    $res1 = format_date($value->created + '3 month', 'medium', 'd-m-Y');
-    $dating = format_date(time(), 'medium', 'd-m-Y');
-    $diff = date_diff(new DateTime($dating), new DateTime($res1))->format('%m');
+  $query->condition('p.entity_id', '2320');
+  $query->orderBy('p.entity_id', 'DESC');
+  $info = $query->execute()->fetchAll();
+
+  foreach ($info as $key => $value) {
+      $project_date = format_date($value->created, 'medium', 'd-m-Y');
+      $dating = format_date(time(), 'medium', 'd-m-Y');
+      $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
+      $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
+
+///////////////////////////QUERY WAITING FOR UPDATE(WAITING FOR APPROVAL MORE THEN 2 DAYS)
     
-    if($diff >=3) {
-      if($value->access_type == 'edit') {
-        $gg = node_load($value->nid);
-    $query = db_select('users', 'u');
-    $query->fields('u', array('name','mail'));
-    $query->condition('u.uid', array($gg->revision_uid, $gg->uid));
-    $res3 = $query->execute()->fetchAll();
-    var_dump($res3);
-        drupal_mail('ict_mail', 'remainder_update', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $value->name, 'name' => $value->name, 'title' => $value->title, 'approver_name' => $res3[0]->name, 'dep_admin' => $res3[1]->name));
-      } 
+    if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "update") {  
+      
+      if($days >= 2) {
+
+        if($value->access_type == 'approve') {
+          // var_dump($value);
+
+          // var_dump($days);
+          $data = node_load($value->entity_id);
+          // $project_date = format_date($data->created, 'medium', 'd/m/Y H:m');
+          $project_date = format_date($data->changed, 'medium', 'd/m/Y');
+          // var_dump($data);
+          // var_dump($project_date);
+
+          // drupal_mail('ict_mail', 'remainder_waiting_approval_update', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date));
+        } 
+      }
+    
     }
-    if($diff == 2) {
-      if($value->access_type == 'edit') {
-        $gg = node_load($value->nid);
-      } 
+    
+    if($value->created == $value->changed && $value->state == 'approved' && $value->type == "update") {  
+
+///////////////////////////QUERY FOR WAITING UPDATE(APPROVED MORE THEN 3 MONTHS)
+      if($days > 92) { 
+        // var_dump($value);
+        // var_dump($months);
+
+        // drupal_mail('ict_mail', 'remainder_update_after', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title));
+        continue;        
+      }
+
+///////////////////////////QUERY FOR WAITING UPDATE(APPROVED LAST 3 MONTHS)
+      if($months == 3) { 
+        // var_dump($value);
+        // var_dump($months);
+        // drupal_mail('ict_mail', 'remainder_update_3', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title));
+        continue;  
+      }
+
+ ///////////////////////////QUERY APPROVED UPDATE(APPROVED LAST 2 MONTHS)     
+      if($months == 2) { 
+        // var_dump($value);
+        // var_dump($months);
+        // drupal_mail('ict_mail', 'remainder_update_2', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title)); 
+        continue;   
+      }    
     }
+
   }
 
 }
