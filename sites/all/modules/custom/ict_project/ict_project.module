@@ -1796,7 +1796,6 @@ function ict_project_node_waiting_approval() {
       $dating = format_date(time(), 'medium', 'd-m-Y');
       $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
       $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
-      // var_dump($days);
       if($days >= 2) {
         if($value->access_type == 'approve') {
           $data = node_load($value->nid);
