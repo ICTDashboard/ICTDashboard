@@ -1,3 +1,4 @@
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <div id="ict-dashboard-detailed-overview">
   <div class="wrap cf">
     <div class="section-title">
@@ -12,7 +13,8 @@
       </h2>
     </div>
     <div id="detailed-view-expenditure" style="max-width: 945px;">
-        <canvas id="detailed_budget_chart" width="945" height="360"></canvas>
+        <!-- <canvas id="detailed_budget_chart" width="945" height="360"></canvas> -->
+        <svg id="detailed-overview-chart"></svg>
         <div id="expenditure_legend" class="legend">
           <ul class="bar-legend">
             <li>
@@ -27,10 +29,10 @@
               </span>
               <?php print t('Total Budget ($m)'); ?>
             </li>
-            <li>
+<!--             <li>
               <span class="required">*</span>
               <?php print t('Current Financial Year'); ?>
-            </li>
+            </li> -->
           </ul>
         </div>
     </div>
@@ -98,20 +100,205 @@
     <?php print theme('all_benefits_pie_chart'); ?>
   </div>
 </div>
-<script>
+<script> 
+
+jQuery(document).ready(function () {
+
+ if(jQuery( window ).width() > 1024) {
+  var bar_width = 41;
+  var bar_distance = 14;
+  var bar_distance2 = 56;
+  var bar_x_distance = 100;
+  var activate_year_line_x1 = -41;
+  var activate_year_line_x2 = 42;
+  var tooltip_bar_x = -70;
+  var tooltip_bar_y = 30;
+ }
+ else {
+  var bar_width = 31;
+  var bar_distance = 10;
+  var bar_distance2 = 42;
+  var bar_x_distance = 325;
+  var activate_year_line_x1 = -30
+  var activate_year_line_x2 = 32
+  var tooltip_bar_x = -50;
+  var tooltip_bar_y = 30;
+ }
+
+
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 360 - margin.top - margin.bottom;
+
+  var detailed_budget = Drupal.settings.detailed_budget_chart;
+
+  var arr = [];
+  var element = [];
+
+  for(i = 0; i < detailed_budget.data.labels.length; i++) {
+    arr.push({
+      x: detailed_budget.data.datasets[0].data[i],y: detailed_budget.data.datasets[1].data[i], years: detailed_budget.data['labels'][i], element : i
+    });
+    element.push(i);
+  };
+  var current_year = "20" + detailed_budget.data.current_year.replace("/", "-") + "*";
+  var current_year2 = "20" + detailed_budget.data.current_year.replace("/", "-");
+
+  var current = jQuery.map(arr, function(value,key){
+    if(value.years == current_year) {
+      var current_key = key;
+      return value;
+
+    }    
+  })
+
+  var arr2 = arr.slice(current[0].element - 3,current[0].element + 4); 
+
+    var x = d3.scale.ordinal()
+    .domain(arr2.map(function(d) { return d.years; }))
+    .rangeRoundBands([0, width - margin.right - bar_x_distance])
+
+    var y = d3.scale.linear()
+    .range([height, 0])
+    .domain([0,
+      d3.max(arr2, function(d) {
+        return d.y;
+      })
+    ]);
+
+    var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickSize(0)
+    .tickFormat(function (d) {
+      var prefix = d3.formatPrefix(d);
+      return '$' + prefix.scale(d);
+    });
+
+
+    function make_y_axis() {
+      return d3.svg.axis()
+          .scale(y)
+          .orient("left")
+    }
+
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([tooltip_bar_y, tooltip_bar_x])
+    .html(function(d) {
+      return "<span style='border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
+    })
+
+  var chart = d3.select("#detailed-overview-chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  chart.call(tip);
+ 
+  chart.append("g")            
+    .attr("class", "grid")
+    .call(make_y_axis()
+      .tickSize(-width , 0, 0)
+      .tickFormat("")
+    )
+
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+
+  chart.selectAll("div")
+      .data(arr2)
+      .enter().append("rect")
+      .attr("class", "bar1")
+      .style("fill", "#FF6161")
+      .attr("x", function(d) {return x(d.years) + bar_distance; })
+      .attr("y",height)
+      .attr("width", bar_width)  
+      .attr("height", 0)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+      .transition()
+      .duration(1500)
+      .attr("y", function (d) { return y(d.x);})
+      .attr("height", function (d) { return (height - y(d.x)); })
+      .filter(function(d) { return d.x == current[0].x; })
+      .style("fill", "#FC3E3E")
+      .attr("class", "fdasfds");
+
+  chart.selectAll("div")
+      .data(arr2)
+      .enter().append("rect")
+      .attr("class", "bar2")
+      .style("fill", "#5C46A4")
+      .attr("x", function(d) {return x(d.years) + bar_distance2; })
+      .attr("y", height)
+      .attr("width", bar_width)
+      .attr("height", 0)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+      .transition()
+      .duration(1500)
+      .attr("y", function (d) { return y(d.y);})
+      .attr("height", function (d) { return (height - y(d.y)); })
+      .filter(function(d) { return d.y == current[0].y; })
+        .style("fill", "#3D2390");
+
+  chart.selectAll('.x .tick')
+      .data(arr2)
+      .each(function(d, i) {
+          if(d.years == current_year) {
+              d3.select(this)
+                .append('line')
+                .attr({
+                    "text-anchor": "middle",
+                    dy: 24,
+                    "y1" : 28,
+                    "y2" : 28,
+                    "x1" : activate_year_line_x1,
+                     "x2" : activate_year_line_x2,
+                    "font-size": "10.5px",
+                    "class": "line-current-year"
+
+                })
+              d3.select(this)
+                .selectAll('.line-current-year')
+                    .style({
+                      "stroke": "#FC3E3E",
+                      "stroke-width": "4px"
+
+                })
+          }
+      });
+
+  jQuery( "text:contains("+ current[0].years +")").css('fill', '#3D2390').text(current_year2);
+
+});
+
   (function ($){
     $(document).ready(function () {
-      // *** Expenditure Graph ***
-      var ctx = document.getElementById("detailed_budget_chart").getContext("2d");
-      var ExpenditureChart = new Chart(ctx).Bar(
-        Drupal.settings.detailed_budget_chart.data,
-        Drupal.settings.detailed_budget_chart.options
-      );
-      $('#detailed_budget_chart').css('width', '100%');
-      if (screen.width == 320) {
-        $('#detailed_budget_chart').css('max-width', 280 + 'px');
-      }
-      $('#detailed_budget_chart').css('height', 'auto');
+  //     // *** Expenditure Graph ***
+  //     var ctx = document.getElementById("detailed_budget_chart").getContext("2d");
+  //     var ExpenditureChart = new Chart(ctx).Bar(
+  //       Drupal.settings.detailed_budget_chart.data,
+  //       Drupal.settings.detailed_budget_chart.options
+  //     );
+  //     $('#detailed_budget_chart').css('width', '100%');
+  //     if (screen.width == 320) {
+  //       $('#detailed_budget_chart').css('max-width', 280 + 'px');
+  //     }
+  //     $('#detailed_budget_chart').css('height', 'auto');
       // *** Schedule Status Graph ***
       var data = Drupal.settings.detailed_schedule_chart,
         width = $('#detailed-view-schedule-status').innerWidth();

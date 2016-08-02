@@ -2851,7 +2851,7 @@ body a.submit-button,
   overflow: hidden;
   margin-bottom: 25px; }
   .legend .bar-legend {
-    padding-left: 40px; }
+    padding-left: 93px; }
     .legend .bar-legend li {
       line-height: 20px;
       float: left;
@@ -4939,6 +4939,34 @@ DETAILED OVERVIEW STYLES
         content: "• ";
         line-height: 1;
         color: #aabcb9; }
+
+#detailed-view-expenditure {
+  overflow-x: scroll;
+  margin-right: 20px; }
+
+.tick text {
+  font-size: 14px; }
+
+.y.axis path {
+  stroke: #000; }
+
+.axis path {
+  fill: none;
+  shape-rendering: crispEdges; }
+
+.grid .tick {
+  stroke: lightgrey;
+  stroke-opacity: 0.4;
+  shape-rendering: crispEdges; }
+
+.y.axis .tick:first-of-type text {
+  font-weight: bold; }
+
+.y.axis .tick:last-of-type text {
+  font-weight: bold; }
+
+.x.axis .tick text {
+  font-weight: bold; }
 
 /* User custom login form agreement */
 #user-login #use-terms-header {
@@ -7503,7 +7531,12 @@ you can add resource intensive styles.
         .page-block #content ul li ul li ul li:before, .node-type-page #content #inner-content ul li ul li ul li:before, .entity-bean .content ul li ul li ul li:before {
           content: "• ";
           line-height: 1;
-          color: #aabcb9; } }
+          color: #aabcb9; }
+
+  #detailed-view-expenditure {
+    overflow-x: hidden; }
+    #detailed-view-expenditure #detailed-overview-chart {
+      margin-left: 53px; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
