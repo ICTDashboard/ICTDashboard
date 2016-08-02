@@ -20,7 +20,7 @@ function ict_users_email_registration_name($edit, $account) {
 function ict_users_forms($form_id, $args) {
   return array(
     'ict_users_register_form' => array(
-      'callback' => 'user_register_form',
+      'callback' => 'ict_user_register_form',
     ),
   );
 }
@@ -38,6 +38,9 @@ function ict_users_form_alter (&$form, &$form_state, $form_id) {
     $form['actions']['#attributes']['class'][] = 'submit';
   }
   if ($form_id == 'ict_users_register_form') {
+    $form['account']['status']['#default_value'] = array('1');
+    $form['account']['status']['#access'] = TRUE;
+
     $form['#validate'][] = 'ict_users_register_form_email_validation';
     $form['#validate'][] = 'ict_users_profile_departmental_admin_validate';
 
@@ -81,6 +84,9 @@ function ict_users_form_alter (&$form, &$form_state, $form_id) {
     $form['account']['mail']['#title'] = t('Email address');
 
     $form['#suffix'] = '</div></div>';
+    array_unshift($form['#validate'], 'ict_users_register_form_add_username_value');
+    $form['account']['name']['#required'] = FALSE;
+    $form['account']['name']['#validated'] = FALSE;
   }
   if ($form_id == 'user_register_form') {
     $form['#validate'][] = 'ict_users_register_form_email_validation';
@@ -112,6 +118,119 @@ function ict_users_form_alter (&$form, &$form_state, $form_id) {
     }
   }
 }
+
+function ict_user_register_form($form, &$form_state) {
+  global $user;
+
+  $admin = user_access('administer users');
+
+  // Pass access information to the submit handler. Running an access check
+  // inside the submit function interferes with form processing and breaks
+  // hook_form_alter().
+  $form['administer_users'] = array(
+      '#type' => 'value',
+      '#value' => $admin,
+  );
+
+  // If we aren't admin but already logged on, go to the user page instead.
+  if ((!$admin && $user->uid) && (!array_key_exists(ICT_DEPARTMENT_ADMIN_ROLE, $user->roles))) {
+    drupal_goto('user/' . $user->uid);
+  }
+  $form['#user'] = drupal_anonymous_user();
+  $form['#user_category'] = 'register';
+
+  $form['#attached']['library'][] = array('system', 'jquery.cookie');
+  $form['#attributes']['class'][] = 'user-info-from-cookie';
+
+  // Start with the default user account fields.
+  user_account_form($form, $form_state);
+
+  // Attach field widgets, and hide the ones where the 'user_register_form'
+  // setting is not on.
+  $langcode = entity_language('user', $form['#user']);
+  field_attach_form('user', $form['#user'], $form, $form_state, $langcode);
+  foreach (field_info_instances('user', 'user') as $field_name => $instance) {
+    if (empty($instance['settings']['user_register_form'])) {
+      $form[$field_name]['#access'] = FALSE;
+    }
+  }
+
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Create new account'),
+  );
+
+  $form['#validate'][] = 'user_register_validate';
+  // Add the final user registration form submit handler.
+  $form['#submit'][] = 'user_register_submit';
+
+  return $form;
+}
+
+function ict_users_register_form_add_username_value(&$form, &$form_state) {
+  $form['account']['name']['#value'] = reset(explode('@', $form_state['values']['mail']));
+  $form_state['values']['name'] = reset(explode('@', $form_state['values']['mail']));
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function ict_users_menu() {
+  $items['admin/people/agreement'] = array(
+    'title' => 'Login form Agreement',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('agreement_conf_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('change agreement'),
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function ict_users_permission() {
+  $permission = array(
+    'change agreement' => array(
+      'title' => t('Change Agreement Text')
+    ),
+  );
+
+  return $permission;
+}
+
+// Agreement config form
+function agreement_conf_form($form, &$form_state) {
+  global $base_url;
+  
+  $form = array();
+  $agreement_text = variable_get('agreement_text', array('value' => '', 'format' => 'filtered_html'));
+  
+  $form['agreement_text'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Agreement Text'),
+    '#default_value' => $agreement_text['value'],
+    '#format' => $agreement_text['format'],
+    '#rows' => 15,
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+function ict_users_menu_alter(&$items) {
+  $items['admin/help']['access callback'] = 'ict_users_is_admin';
+}
+
+function ict_users_is_admin() {
+  global $user;
+
+  return !user_has_role(ICT_ADMINISTRATOR_ROLE, $user) ? FALSE : TRUE;
+}
+
 
 function ict_user_update_department_mail($form, &$form_state) {
   return $form['account']['mail'];
@@ -192,4 +311,61 @@ function ict_users_profile_departmental_admin_validate ($form, &$form_state) {
  */
 function ict_users_user_login(&$edit, $account) {
   $edit['redirect'] = '/projects';
+}
+
+// Override User Login Form
+function ict_users_form_user_login_alter(&$form, &$form_state, $form_id) {
+
+  if (isset($form_state['view_agreement'])) {
+
+    unset($form['name'], $form['pass'], $form['actions']['submit']);
+
+    $agr_text = variable_get('agreement_text', array('value' =>'', 'format' => 'filtered_html'));
+    $form['agr_text'] = array(
+      '#prefix' => '<p><b id="use-terms-header">I agree that accessing (or logging into) the ICT Projects Dashboard system means I undertake to abide by and/or agree to the following statements:</b></p>
+            <div id="agreement-text-login">',
+      '#markup' => $agr_text['value'],
+      '#suffix' => '</div>'
+    );
+    $form['cancel'] = array(
+      '#type' => 'submit',
+      '#value' => t('Cancel'),
+      '#attributes' => array(
+        'class' => array('agreement-cancel', 'agr-btn')
+      ),
+      '#submit' => array('ict_users_redirect_login')
+    );
+
+    $form['agree'] = array(
+      '#type' => 'submit',
+      '#value' => t('Agree'),
+      '#attributes' => array(
+        'class' => array('agreement-accept', 'agr-btn')
+      ),
+      '#submit' => array('ict_users_custom_login')
+    );
+  }
+  else {
+    $form['#submit'] = array();
+    $form['#submit'][] = "ict_users_custom_login";
+  }
+
+}
+
+function ict_users_custom_login($form, &$form_state) {
+  global $user;
+  
+  $form_state['view_agreement'] = isset($form_state['view_agreement']) ? FALSE : TRUE;
+  
+  if (!$form_state['view_agreement']) {
+    
+    // Run default login handler
+    user_login_submit($form, $form_state);
+    drupal_goto('projects');
+  }
+  $form_state['rebuild'] = TRUE;
+}
+
+function ict_users_redirect_login() {
+  drupal_goto('user');
 }

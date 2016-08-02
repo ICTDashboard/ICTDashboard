@@ -548,8 +548,8 @@ some nice typographical defaults
 more here: http://www.newnet-soft.com/blog/csstypography
 */
 p {
-  -ms-word-break: break-all;
-  -ms-word-wrap: break-all;
+  -ms-word-break: break-word;
+  -ms-word-wrap: break-word;
   word-break: break-word;
   word-break: break-word;
   -webkit-hyphens: auto;
@@ -1627,6 +1627,25 @@ body #inner-content h3,
   font-size: 18px;
   color: #202b3d;
   font-weight: 600; }
+body #inner-content .project-draft-submission #ict-project-baseline-edit-form .other-option-buttons .pdf_button.submit,
+body #inner-content .project-draft-submission #ict-update-edit-form .other-option-buttons .pdf_button.submit,
+body #inner-content .project-draft-submission #ict-update-approve-form .other-option-buttons .pdf_button.submit,
+body #inner-content .project-draft-submission #ict-project-baseline-approve-form .other-option-buttons .pdf_button.submit,
+#content #inner-content .project-draft-submission #ict-project-baseline-edit-form .other-option-buttons .pdf_button.submit,
+#content #inner-content .project-draft-submission #ict-update-edit-form .other-option-buttons .pdf_button.submit,
+#content #inner-content .project-draft-submission #ict-update-approve-form .other-option-buttons .pdf_button.submit,
+#content #inner-content .project-draft-submission #ict-project-baseline-approve-form .other-option-buttons .pdf_button.submit {
+  margin-top: 0;
+  border-top: none; }
+  body #inner-content .project-draft-submission #ict-project-baseline-edit-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  body #inner-content .project-draft-submission #ict-update-edit-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  body #inner-content .project-draft-submission #ict-update-approve-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  body #inner-content .project-draft-submission #ict-project-baseline-approve-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  #content #inner-content .project-draft-submission #ict-project-baseline-edit-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  #content #inner-content .project-draft-submission #ict-update-edit-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  #content #inner-content .project-draft-submission #ict-update-approve-form .other-option-buttons .pdf_button.submit a.print-pdf,
+  #content #inner-content .project-draft-submission #ict-project-baseline-approve-form .other-option-buttons .pdf_button.submit a.print-pdf {
+    margin-top: 0; }
 body .ict-benefits,
 #content .ict-benefits {
   max-width: 812px;
@@ -3281,7 +3300,7 @@ body a.submit-button,
     display: block; }
     .other-option-buttons .print_pdf a.print-pdf {
       min-width: 275px !important;
-      margin: 10px 10px 3px; }
+      margin: 0px 10px 3px; }
 
 body .object_and_summary a, body .entity_comments a, span.tooltip-content a {
   color: #0d6c88;
@@ -3337,7 +3356,7 @@ div.tooltip-edit {
       text-transform: uppercase; }
       #print-links-container .pdf_button .print_pdf a.print-pdf {
         min-width: 275px !important;
-        margin: 10px 10px 3px; }
+        margin: 0px 10px 3px; }
 
 #project-listings h2 {
   font-weight: 600;
@@ -3477,6 +3496,9 @@ div.tooltip-edit {
     color: #0d6c88; }
   #content .project-program-link:focus {
     color: #0d6c88; }
+
+#user-pass-reset .expiration-date-user-pass-reset em {
+  font-style: normal; }
 
 /*********************
 BASE (MOBILE) SIZE
@@ -4711,7 +4733,8 @@ DETAILED OVERVIEW STYLES
       #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li .noofproj,
       #container #content #ict-dashboard-detailed-overview #detailed-view-schedule-status #statuses_legend .bar-legend li .curqua {
         text-align: right; }
-  #container #content #ict-dashboard-detailed-overview #detailed_schedule_chart_current {
+  #container #content #ict-dashboard-detailed-overview #detailed_schedule_chart_current,
+  #container #content #ict-dashboard-detailed-overview #detailed_schedule_chart_previous {
     margin-left: 7px; }
   #container #content #ict-dashboard-detailed-overview .benefits_chart_divs {
     overflow: hidden; }
@@ -4927,6 +4950,32 @@ DETAILED OVERVIEW STYLES
   stroke-width: 4px;
   stroke: black; }
 
+/* User custom login form agreement */
+#user-login #use-terms-header {
+  font-size: 16px; }
+#user-login #agreement-text-login {
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #abb6cb;
+  padding: 10px;
+  margin-bottom: 20px; }
+  #user-login #agreement-text-login ul {
+    list-style: disc;
+    padding: 20px; }
+#user-login .agr-btn {
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  background: #17716b !important;
+  text-indent: 0px !important;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+  #user-login .agr-btn:hover {
+    background: #095F69 !important; }
+#user-login .agreement-accept {
+  margin-left: 10px; }
+
 /*********************
 LARGER MOBILE DEVICES
 This is for devices like the Galaxy Note or something that's
@@ -5120,7 +5169,7 @@ tweeners.
     margin-bottom: 50px; }
     #content #inner-content #print-links-container .pdf_button a {
       min-width: 275px !important;
-      margin: 10px 10px 3px;
+      margin: 0px 10px 3px;
       width: 275px; }
 
   .page-title {
@@ -5265,6 +5314,9 @@ you can add resource intensive styles.
   body > #container {
     height: auto;
     min-height: 100%; }
+
+  .page-block-user-guide #container {
+    padding-bottom: 50px; }
 
   /*********************
   LAYOUT & GRID STYLES
@@ -7023,7 +7075,7 @@ you can add resource intensive styles.
     margin-bottom: 67px; }
     #container #inner-content #print-links-container .pdf_button a {
       min-width: 275px !important;
-      margin: 10px 10px 3px;
+      margin: 0px 10px 3px;
       width: 275px; }
   #container #inner-content .last-updated-block {
     margin: 0;
@@ -7066,7 +7118,7 @@ you can add resource intensive styles.
     margin-bottom: 67px; }
     #container #inner-content #inner-content #print-links-container .pdf_button a {
       min-width: 275px !important;
-      margin: 10px 10px 3px;
+      margin: 0px 10px 3px;
       width: 275px; }
   #container #inner-content #inner-content h2.individual-project-page {
     margin: 20px 0; }
@@ -7600,4 +7652,10 @@ be set to display none.
 
   td, th {
     border: 1px solid black !important;
-    border-collapse: collapse !important; } }
+    border-collapse: collapse !important; }
+
+  #inner-footer .menu {
+    display: none !important; }
+
+  .login-register {
+    display: none !important; } }

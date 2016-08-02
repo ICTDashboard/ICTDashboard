@@ -33,7 +33,7 @@ jQuery(document).ready(function(){
                     marginBottom = parseInt(jQuery('.fancybox-inner .ict-fancy-content').css('margin-bottom'));
 
                 jQuery('.fancybox-inner .ict-fancy-content').css('max-height', fancyHeight - bottomPadding - topPadding - marginTop - marginBottom);
-                jQuery('.fancybox-wrap').appendTo('form');
+                jQuery('.fancybox-wrap').appendTo('form#ict-update-approve-form, form#ict-project-baseline-approve-form');
             }, 0);
         }
     });

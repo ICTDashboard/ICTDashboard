@@ -1,8 +1,4 @@
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-<style type="text/css">
-
-</style>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <div id="ict-dashboard-detailed-overview">
   <div class="wrap cf">
     <div class="section-title">
@@ -128,96 +124,80 @@ jQuery(document).ready(function () {
   var tooltip_bar_x = -50;
   var tooltip_bar_y = 30;
  }
-var panExtent = {x: [0,width], y: [-100,400] };
 
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-      width = 960 - margin.left - margin.right,
-      height = 360 - margin.top - margin.bottom;
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 360 - margin.top - margin.bottom;
 
-    var detailed_budget = Drupal.settings.detailed_budget_chart;
-    // detailed_budget.data.datasets[0].data.shift();
-    // detailed_budget.data.datasets[1].data.shift();
-    // detailed_budget.data.labels.shift();
-    // detailed_budget.data.datasets[0].data.pop();
-    // detailed_budget.data.datasets[1].data.pop();
-    // detailed_budget.data.labels.pop();
-    var arr = [];
-    var element = [];
+  var detailed_budget = Drupal.settings.detailed_budget_chart;
 
-    for(i = 0; i < detailed_budget.data.labels.length; i++) {
-      arr.push({
-        x: detailed_budget.data.datasets[0].data[i],y: detailed_budget.data.datasets[1].data[i], years: detailed_budget.data['labels'][i], element : i
-      });
-      element.push(i);
-    };
-    var current_year = "20" + detailed_budget.data.current_year.replace("/", "-") + "*";
-    var current_year2 = "20" + detailed_budget.data.current_year.replace("/", "-");
+  var arr = [];
+  var element = [];
 
-    var current = jQuery.map(arr, function(value,key){
-      if(value.years == current_year) {
-        var current_key = key;
-        return value;
+  for(i = 0; i < detailed_budget.data.labels.length; i++) {
+    arr.push({
+      x: detailed_budget.data.datasets[0].data[i],y: detailed_budget.data.datasets[1].data[i], years: detailed_budget.data['labels'][i], element : i
+    });
+    element.push(i);
+  };
+  var current_year = "20" + detailed_budget.data.current_year.replace("/", "-") + "*";
+  var current_year2 = "20" + detailed_budget.data.current_year.replace("/", "-");
 
-      }    
-    })
-    // var date1 = '2016-17';
-    // var parser = d3.time.format("%Y-%y");
-    // var date2 = parser.parse(date1);
-    // console.log(date2);
-    // console.log(arr);
-    var arr2 = arr.slice(current[0].element - 3,current[0].element + 4); 
-    // console.log(arr2);
-    // var data = [{ "x" : detailed_budget.data.datasets[0].data,
-    //              "y" : detailed_budget.data.datasets[1].data,
-    //              "year" : detailed_budget.data['labels'],
-    //             "element": element}];
+  var current = jQuery.map(arr, function(value,key){
+    if(value.years == current_year) {
+      var current_key = key;
+      return value;
 
-      var x = d3.scale.ordinal()
-      .domain(arr2.map(function(d) { return d.years; }))
-      .rangeRoundBands([0, width - margin.right - bar_x_distance])
+    }    
+  })
 
-      var y = d3.scale.linear()
-      .range([height, 0])
-      .domain([0,
-        d3.max(arr2, function(d) {
-          return d.y;
-        })
-      ]);
+  var arr2 = arr.slice(current[0].element - 3,current[0].element + 4); 
 
-      var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom");
+    var x = d3.scale.ordinal()
+    .domain(arr2.map(function(d) { return d.years; }))
+    .rangeRoundBands([0, width - margin.right - bar_x_distance])
 
-      var yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left")
-      .tickSize(0)
-      .tickFormat(function (d) {
-        var prefix = d3.formatPrefix(d);
-        return '$' + prefix.scale(d);
-      });
-
-
-      function make_y_axis() {
-        return d3.svg.axis()
-            .scale(y)
-            .orient("left")
-      }
-
-    var tip = d3.tip()
-      .attr('class', 'd3-tip')
-      .offset([tooltip_bar_y, tooltip_bar_x])
-      .html(function(d) {
-        return "<span style='border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
+    var y = d3.scale.linear()
+    .range([height, 0])
+    .domain([0,
+      d3.max(arr2, function(d) {
+        return d.y;
       })
+    ]);
+
+    var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickSize(0)
+    .tickFormat(function (d) {
+      var prefix = d3.formatPrefix(d);
+      return '$' + prefix.scale(d);
+    });
+
+
+    function make_y_axis() {
+      return d3.svg.axis()
+          .scale(y)
+          .orient("left")
+    }
+
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([tooltip_bar_y, tooltip_bar_x])
+    .html(function(d) {
+      return "<span style='border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
+    })
 
   var chart = d3.select("#detailed-overview-chart")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    // .call(d3.behavior.zoom().y(y).scaleExtent([1, 1]).on("zoom", zoom));
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   chart.call(tip);
  
@@ -303,204 +283,6 @@ var panExtent = {x: [0,width], y: [-100,400] };
       });
 
   jQuery( "text:contains("+ current[0].years +")").css('fill', '#3D2390').text(current_year2);
-
-function zoomed() {
-  svg.select(".x.axis").call(xAxis);
-  svg.select(".y.axis").call(yAxis);
-}
-
-
-//     var x = d3.scale.ordinal()
-//       .domain(data[0].year)
-//       .rangeBands([8, width - margin.right - 150]);
-    
-//     var y = d3.scale.linear().range([height, 0]).domain([0,
-//         d3.max(data[0].y, function (d) {
-//           return d;
-//         })
-//       ]);
-
-//     var g = d3.scale.ordinal()
-//       .domain(data[0].element)
-//       .rangeBands([0, width - margin.right - 160]);
-
-//     var g2 = d3.scale.ordinal()
-//       .domain(data[0].element)
-//       .rangeBands([0, width - margin.right - 160]);
-    
-//     var xAxis = d3.svg.axis()
-//       .scale(x) 
-//       .outerTickSize(0)
-//       .orient("bottom");
-
-//     var yAxis = d3.svg.axis()
-//       .scale(y)
-//       .orient("left")
-//       .tickSize(0)
-//       .tickFormat(function (d) {
-//         var prefix = d3.formatPrefix(d);
-//         return '$' + prefix.scale(d);
-//       });
-
-//     var tip = d3.tip()
-//       .attr('class', 'd3-tip')
-//       .offset([0, -70])
-//       .html(function(d) {
-//         return "<span style='border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
-//       })
-
-
-//   function make_y_axis() {
-//     return d3.svg.axis()
-//         .scale(y)
-//         .orient("left")
-//   }
-
-//   // var zoom = d3.behavior.zoom()
-//   //   .x(x)
-//   //   .y(y)
-//   //   .scaleExtent([1, 10])
-//   //   .on("zoom", zoomed);
-
-//   var chart = d3.select("#detailed-overview-chart")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//     .append("g")
-//     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-//     // .call(d3.behavior.zoom().x(x).scaleExtent([1, 10]).on("zoom", zoomed));
- 
-//   chart.call(tip);
-
-//   chart.append("g")            
-//     .attr("class", "grid")
-//     .call(make_y_axis()
-//       .tickSize(-width , 0, 0)
-//       .tickFormat("")
-//     )
-
-//   chart.append("g")
-//       .attr("class", "x axis")
-//       .attr("transform", "translate(0," + height + ")")
-//       .call(xAxis);
-
-//   chart.append("g")
-//       .attr("class", "y axis")
-//       .call(yAxis)
-
-//   chart.selectAll("div")
-//       .data(arr)
-//       .enter().append("rect")
-//       .attr("class", "bar1")
-//       .style("fill", "#FF6161")
-//       .attr("x", function(d) {return g(d.element) + 20; })
-//       .attr("y",height)
-//       .attr("width", 41)  
-//       .attr("height", 0)
-//       .on('mouseover', tip.show)
-//       .on('mouseout', tip.hide)
-//       .transition()
-//       .duration(1500)
-//       .attr("y", function (d) { return y(d.x);})
-//       .attr("height", function (d) { return (height - y(d.x)); })
-//       .filter(function(d) { return d.element == arr[4].element; })
-//       .style("fill", "#FC3E3E")
-//       .attr("class", "fdasfds");
-  
-//   chart.selectAll("div")
-//       .data(arr)
-//       .enter().append("rect")
-//       .attr("class", "bar2")
-//       .style("fill", "#5C46A4")
-//       .attr("x", function(d) {return g2(d.element) + 62; })
-//       .attr("y", height)
-//       .attr("width", 41)
-//       .attr("height", 0)
-//       .on('mouseover', tip.show)
-//       .on('mouseout', tip.hide)
-//       .transition()
-//       .duration(1500)
-//       .attr("y", function (d) { return y(d.y);})
-//       .attr("height", function (d) { return (height - y(d.y)); })
-//       .filter(function(d) { return d.element == arr[4].element; })
-//         .style("fill", "#3D2390");
-
-//   chart.selectAll('.x .tick')
-//       .data(arr)
-//       .each(function(d, i) {
-//           if(d.years == arr[4].years) {
-//               d3.select(this)
-//                 .append('line')
-//                 .attr({
-//                     "text-anchor": "middle",
-//                     dy: 24,
-//                     "y1" : 28,
-//                     "y2" : 28,
-//                     "x1" : -41,
-//                      "x2" : 42,
-//                     "font-size": "10.5px",
-//                     "class": "line-current-year"
-
-//                 })
-//               d3.select(this)
-//                 .selectAll('.line-current-year')
-//                     .style({
-//                       "stroke": "#FC3E3E",
-//                       "stroke-width": "4px"
-
-//                 })
-//           }
-//       });
-
-// // function zoom() {
-// //   chart.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
-// //     chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
-// //         .call(xAxis.scale(x.rangeRoundBands([0, width * d3.event.scale],.1 * d3.event.scale)));
-// //   chart.select(".y.axis").call(yAxis);
-// // }
-// // function zoomed() {
-// //   // chart.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-// //     chart.select(".x.axis").call(xAxis);
-// //   // chart.select(".y.axis").call(yAxis);
-// // }
-
-// function zoom() {
-
-//   /* call the zoom.translate vector with the array returned from panLimit() */
-//   zoom.translate(panLimit());
-          
-//   chart.select(".x.axis").call(xAxis);
-//   chart.select(".y.axis").call(yAxis);
-// }
-
-// function panLimit() {
-//   /*
-  
-//   include boolean to work out the panExtent and return to zoom.translate()
-  
-//   */
-
-//   var divisor = {h: height / ((y.domain()[1]-y.domain()[0])*zoom.scale()), w: width / ((x.domain()[1]-x.domain()[0])*zoom.scale())},
-//     minX = -(((x.domain()[0]-x.domain()[1])*zoom.scale())+(panExtent.x[1]-(panExtent.x[1]-(width/divisor.w)))),
-//     minY = -(((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-(panExtent.y[1]-(height*(zoom.scale())/divisor.h))))*divisor.h,
-//     maxX = -(((x.domain()[0]-x.domain()[1]))+(panExtent.x[1]-panExtent.x[0]))*divisor.w*zoom.scale(),
-//     maxY = (((y.domain()[0]-y.domain()[1])*zoom.scale())+(panExtent.y[1]-panExtent.y[0]))*divisor.h*zoom.scale(), 
-
-//     tx = x.domain()[0] < panExtent.x[0] ? 
-//         minX : 
-//         x.domain()[1] > panExtent.x[1] ? 
-//           maxX : 
-//           zoom.translate()[0],
-//     ty = y.domain()[0]  < panExtent.y[0]? 
-//         minY : 
-//         y.domain()[1] > panExtent.y[1] ? 
-//           maxY : 
-//           zoom.translate()[1];
-  
-//   return [tx,0];
-
-// }
-
-//   jQuery( "text:contains('2016-17')").css('fill', '#3D2390');
 
 });
 

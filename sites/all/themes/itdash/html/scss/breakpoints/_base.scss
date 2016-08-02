@@ -1916,8 +1916,10 @@ DETAILED OVERVIEW STYLES
 					}
 				}
 			}
-			#detailed_schedule_chart_current {
+			#detailed_schedule_chart_current,
+			#detailed_schedule_chart_previous {
 				margin-left: 7px;
+
 			}
 			.benefits_chart_divs {
 				overflow: hidden;
@@ -2161,7 +2163,6 @@ DETAILED OVERVIEW STYLES
   }
 }
 
-
 #detailed-view-expenditure {
   overflow-x: scroll;
   margin-right: 20px;
@@ -2196,4 +2197,39 @@ shape-rendering: crispEdges;
 .Hello {
 	    stroke-width: 4px;
     stroke: black;
+}
+
+
+/* User custom login form agreement */
+#user-login {
+	#use-terms-header {
+		font-size: 16px;
+	}
+	#agreement-text-login {
+		max-height: 250px;
+		overflow-y: auto;
+		border: 1px solid #abb6cb;
+		padding: 10px;
+		margin-bottom: 20px;
+		ul {
+			list-style: disc;
+			padding: 20px;
+		}
+	}
+	& .agr-btn {
+		color: #fff;
+		font-weight: bold;
+		font-size: 15px;
+		background: #17716b !important;
+		text-indent: 0px !important;
+		@include border-radius(3px);
+
+		&:hover {
+			background: #095F69 !important;
+		}
+	}
+
+	& .agreement-accept {
+		margin-left: 10px;
+	}
 }
