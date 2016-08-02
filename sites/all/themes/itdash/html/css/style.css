@@ -4946,10 +4946,6 @@ DETAILED OVERVIEW STYLES
 .x.axis .tick text {
   font-weight: bold; }
 
-.Hello {
-  stroke-width: 4px;
-  stroke: black; }
-
 /* User custom login form agreement */
 #user-login #use-terms-header {
   font-size: 16px; }
