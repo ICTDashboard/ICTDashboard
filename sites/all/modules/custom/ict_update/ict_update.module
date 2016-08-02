@@ -1348,7 +1348,7 @@ function ict_update_node_last_approved() {
           $depart_admin = user_load($parent_data->uid);
           $last_approver = user_load($data->revision_uid);
 ///////////////////////////QUERY FOR WAITING UPDATE(APPROVED MORE THEN 3 MONTHS)
-      if($value->access_type == 'edit') {
+      if($value->access_type == 'edit' && $parent_data->changed == $value->changed) {
         if($days > 92) { 
             // var_dump($last_approver);
             drupal_mail('ict_mail', 'remainder_update_after', $value->mail, language_default(),  array('editor_name' => $value->name, 'name' => $value->name, 'title' => $parent_data->title, 'depart_name' => $depart_admin->name, 'approver_name' => $last_approver->name));
