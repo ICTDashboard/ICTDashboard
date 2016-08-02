@@ -15,7 +15,7 @@ function ict_cron_default_elysia_cron_rules() {
   $cron_rule->api_version = 1;
   $cron_rule->name = 'ict_project_cron';
   $cron_rule->disable = NULL;
-  $cron_rule->rule = '* * */2 * *';
+  $cron_rule->rule = '0 0 */2 * *';
   $cron_rule->weight = NULL;
   $cron_rule->context = NULL;
   $cron_rules['ict_project_cron'] = $cron_rule;
@@ -25,7 +25,7 @@ function ict_cron_default_elysia_cron_rules() {
   $cron_rule->api_version = 1;
   $cron_rule->name = 'ict_update_cron';
   $cron_rule->disable = NULL;
-  $cron_rule->rule = '* * */2 * *';
+  $cron_rule->rule = '0 0 */2 * *';
   $cron_rule->weight = NULL;
   $cron_rule->context = NULL;
   $cron_rules['ict_update_cron'] = $cron_rule;

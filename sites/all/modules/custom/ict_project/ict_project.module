@@ -1801,17 +1801,13 @@ function ict_project_node_waiting_approval() {
           $data = node_load($value->nid);
           $dep_admin = user_load($value->departmental_id);
           $project_date = format_date($data->changed, 'medium', 'd/m/Y');
-          var_dump($data->name);
 
-          drupal_mail('ict_mail', 'remainder_waiting_approval_baseline', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date, 'depart_name' => $dep_admin->name));        
+          drupal_mail('ict_mail', 'remainder_waiting_approval_baseline', $value->mail, language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date, 'depart_name' => $dep_admin->name));        
         }
       }
     }
   }
-
-
 }
-
 
 function ict_project_cron() {
   ict_project_node_waiting_approval();

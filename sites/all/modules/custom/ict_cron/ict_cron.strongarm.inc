@@ -43,7 +43,7 @@ function ict_cron_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'elysia_cron_last_run';
-  $strongarm->value = 1470046651;
+  $strongarm->value = 1470130149;
   $export['elysia_cron_last_run'] = $strongarm;
 
   $strongarm = new stdClass();
