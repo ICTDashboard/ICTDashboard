@@ -1335,7 +1335,7 @@ function ict_update_node_last_approved() {
       if($days >= 2) {
 
         if($value->access_type == 'approve') {
-          drupal_mail('ict_mail', 'remainder_waiting_approval_update', 'yan.rudenko1@gmail.com', language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $parent_data->title, 'date' => $project_date, 'depart_name' => $depart_admin->name));
+          drupal_mail('ict_mail', 'remainder_waiting_approval_update', $value->mail, language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $parent_data->title, 'date' => $project_date, 'depart_name' => $depart_admin->name));
           continue;
         } 
       }
