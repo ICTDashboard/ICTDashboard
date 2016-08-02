@@ -142,7 +142,8 @@ function ict_viz_prepare_detailed_project_expenditure_data($all_projects = array
         'options' => $chart_options,
         'data' => array(
           'labels' => $labels,
-          'datasets' => $datasets
+          'datasets' => $datasets,
+          'current_year' => $current_fin_year
         ),
       )
     ),

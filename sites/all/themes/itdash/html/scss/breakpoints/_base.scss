@@ -2163,6 +2163,39 @@ DETAILED OVERVIEW STYLES
   }
 }
 
+#detailed-view-expenditure {
+  overflow-x: scroll;
+  margin-right: 20px;
+  // #detailed-overview-chart {
+  // 	margin-left: 53px;
+  // }
+}
+.tick text {
+	font-size: 14px;
+}
+.y.axis path {
+  stroke: #000;
+}
+.axis path {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+.grid .tick {
+stroke: lightgrey;
+stroke-opacity: 0.4;
+shape-rendering: crispEdges;
+}
+.y.axis .tick:first-of-type text {
+  font-weight: bold;
+}
+.y.axis .tick:last-of-type text {
+  font-weight: bold;
+}
+.x.axis .tick text{
+  font-weight: bold; 
+}
+
+
 /* User custom login form agreement */
 #user-login {
 	#use-terms-header {
