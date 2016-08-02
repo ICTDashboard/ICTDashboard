@@ -1770,3 +1770,45 @@ function ict_project_get_all_active_projects() {
 
   return $active;
 }
+
+
+function ict_project_node_waiting_approval() {
+
+//////////////////////// QUERY FOR BASELINE WAITING APPROVAL
+  $query = db_select('project_workflow', 'pw');
+  
+  $query->addExpression('n.uid', 'departmental_id');
+  $query->fields('pw', array('nid','created', 'state', 'old_state'));
+  $query->fields('n', array('title', 'type','changed'));
+  $query->fields('pa', array('uid', 'access_type'));
+  $query->fields('u', array('name', 'mail'));
+
+  $query->leftJoin('node', 'n', 'n.nid = pw.nid');
+  $query->leftJoin('project_access', 'pa', 'pa.nid = pw.nid');
+  $query->leftJoin('users', 'u', 'u.uid = pa.uid');
+
+  $query->orderBy('pw.nid', 'DESC');
+  $info = $query->execute()->fetchAll();
+
+  foreach ($info as $key => $value) {
+    if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "project") {
+      $project_date = format_date($value->created, 'medium', 'd-m-Y');
+      $dating = format_date(time(), 'medium', 'd-m-Y');
+      $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
+      $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
+      if($days >= 2) {
+        if($value->access_type == 'approve') {
+          $data = node_load($value->nid);
+          $dep_admin = user_load($value->departmental_id);
+          $project_date = format_date($data->changed, 'medium', 'd/m/Y');
+
+          drupal_mail('ict_mail', 'remainder_waiting_approval_baseline', $value->mail, language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date, 'depart_name' => $dep_admin->name));        
+        }
+      }
+    }
+  }
+}
+
+function ict_project_cron() {
+  ict_project_node_waiting_approval();
+}

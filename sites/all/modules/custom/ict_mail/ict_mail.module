@@ -197,6 +197,42 @@ function ict_mail_mail($key, &$message, $params) {
       $message['body'][] = t('4) Will not be represented in the Dashboard visualisations.');
       $message['body'][] = t('Please contact the Finance Administrator, @FIN_ADMIN, if you have any queries.', array('@FIN_ADMIN' => $params['fin_name']));
       break;
+
+    case 'remainder_update_2':
+      $message['subject'] = t('ICT Projects DashboardReminder - Update @TITLE', array('@TITLE' => $params['title']));
+      $message['body'][] = t("The information on the Dashboard for the project @TITLE is approaching 3 months old. Please update @TITLE on the Dashboard as soon as possible by logging into your ICT Projects Dashboard account to update and submit the project data. !URL ", array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '!URL' => $base_url));
+      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $params['depart_name']));
+      break;
+
+    case 'remainder_waiting_approval_baseline':
+      $message['subject'] = t('ICT Projects DashboardReminder - Waiting for @TITLE Baseline Approval', array('@TITLE' => $params['title']));
+      $message['body'][] = t('@EDITOR has requested your approval for the baseline submission for the project @TITLE on @DATE', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '@DATE' => $params['date']));
+      $message['body'][] = t('Please log into you ICT Projects Dashboard account to review and approve the submitted project as soon as possible. !URL', array('!URL' => $base_url));
+      $message['body'][] = t('<strong>Please note that once approved, some baseline data such as budget and original dates, cannot be changed</strong>');
+      $message['body'][] = t('Please contact @EDITOR or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@EDITOR' => $params['editor_name'], '@DEP_ADMIN' => $params['depart_name']));
+      break;
+
+    case 'remainder_waiting_approval_update':
+      $message['subject'] = t('ICT Projects DashboardReminder - Waiting for @TITLE Update Approval', array('@TITLE' => $params['title']));
+      $message['body'][] = t('@EDITOR has requested your approval for the update submission for the project @TITLE on @DATE', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '@DATE' => $params['date']));
+      $message['body'][] = t('Please log into you ICT Projects Dashboard account to review and approve the submitted project as soon as possible. !URL', array('!URL' => $base_url));
+      $message['body'][] = t('<strong>Please note that once approved, this update data will be published on the Dashboard</strong>');
+      $message['body'][] = t('Please contact @EDITOR or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@EDITOR' => $params['editor_name'], '@DEP_ADMIN' => $params['depart_name']));
+      break;
+
+    case 'remainder_update_3':
+      $message['subject'] = t('ICT Projects DashboardReminder - Update @TITLE', array('@TITLE' => $params['title']));
+      $message['body'][] = t('The information on the Dashboard for the project @TITLE is 3 months old. Please update @TITLE on the Dashboard <strong>today</strong> by logging into your ICT Projects Dashboard account to update and submit the project data. !URL', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '@DATE' => $params['date'], '!URL' => $base_url));
+      $message['body'][] = t('Please log into you ICT Projects Dashboard account to review and approve the submitted project as soon as possible. !URL', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $params[$dep_name], '!URL' => $base_url));
+      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $params['depart_name']));
+      break;
+
+    case 'remainder_update_after':
+      $message['subject'] = t('ICT Projects DashboardReminder - Update @TITLE', array('@TITLE' => $params['title']));
+      $message['body'][] = t('The information on the Dashboard for the project @TITLE more than 3 months old. Please update @TITLE on the Dashboard <strong>immediately</strong> by logging into your ICT Projects Dashboard account to update and submit the project data. !URL', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '@DATE' => $params['date'], '!URL' => $base_url));
+      $message['body'][] = t('Please log into you ICT Projects Dashboard account to review and approve the submitted project as soon as possible. !URL', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $params[$dep_name], '!URL' => $base_url));
+      $message['body'][] = t('Please contact @APPROVER_NAME or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $params['depart_name']));
+      break;
   }
 }
 
