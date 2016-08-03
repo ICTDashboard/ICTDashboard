@@ -7451,7 +7451,7 @@ you can add resource intensive styles.
 
   #detailed-view-expenditure {
     overflow-x: hidden; }
-    #detailed-view-expenditure #detailed-overview-chart {
+    #detailed-view-expenditure #detailed-overview-chart, #detailed-view-expenditure #detailed-overview-chart1 {
       margin-left: 53px; } }
 /*********************
 LARGE VIEWING SIZE
