@@ -184,6 +184,13 @@ jQuery(document).ready(function () {
 //////////////////////////////////////////////////////////// GRAPHIC NUMBER TWO!
   jQuery(document).ready(function () {
 
+    var margin = {top: 20, right: 20, bottom: 30, left: 40},
+      width = 960 - margin.left - margin.right,
+      height = 360 - margin.top - margin.bottom;
+
+    var detailed_budget = Drupal.settings.detailed_budget_chart;
+
+
    if(jQuery( window ).width() > 1024) {
     var bar_width = 41;
     var bar_distance = 14;
@@ -193,6 +200,7 @@ jQuery(document).ready(function () {
     var activate_year_line_x2 = 42;
     var tooltip_bar_x = -70;
     var tooltip_bar_y = 30;
+    var focus_current = -width / 9;
    }
    else {
     var bar_width = 31;
@@ -203,14 +211,9 @@ jQuery(document).ready(function () {
     var activate_year_line_x2 = 32
     var tooltip_bar_x = -50;
     var tooltip_bar_y = 30;
+    var focus_current = -width / 4;
    }
 
-
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-      width = 960 - margin.left - margin.right,
-      height = 360 - margin.top - margin.bottom;
-
-    var detailed_budget = Drupal.settings.detailed_budget_chart;
 
     var arr = [];
     var element = [];
@@ -242,7 +245,7 @@ jQuery(document).ready(function () {
 
   var x = d3.scale.ordinal()
     .domain(arr.map(function(d) { return d.years; }))
-    .rangeRoundBands([0, width], .1);
+    .rangeRoundBands([0, width - margin.right  - bar_x_distance ], .25, -1);
 
   var y = d3.scale.linear()
   .range([height, 0])
@@ -326,7 +329,12 @@ jQuery(document).ready(function () {
   xAxisGroup.append('g')
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    .call(xAxis)
+    .transition()
+    .duration(1500)
+    .transition()
+    .duration(1500)
+    .attr("transform", "translate("+ focus_current +"," + height + ")") //////////////////////////////////////////////////////////////////
 
   //The xAxis is scalled on zoom, so we need to clip it to
 
@@ -343,36 +351,42 @@ jQuery(document).ready(function () {
     .style("fill",function(d) {if(d.x == current[0].x){ return "#FC3E3E";} else { return "#FF6161";} } )
     // .attr("transform", "translate(-165,0)") //////////////////////////////////////////////////////////////////
     .attr("x", function(d) { return x(d.years); })
-    .attr("width", x.rangeBand() / 2)
-    // .attr("height", 0)
+    .attr("width", x.rangeBand() / 2 - 1)
+    .attr("height", 0)
+    .attr("y", height)
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
-    // .transition()
-    // .duration(1500)
+    
+    bars.transition()
+    .duration(1500)
+    // .attr("transform", "translate(-105,0)") //////////////////////////////////////////////////////////////////
     .attr("y", function(d) { return y(d.x); })
     .attr("height", function(d) { return height - y(d.x); })
-      //     .filter(function(d) { return d.x == current[0].x; })
-      // .style("fill", "#FC3E3E")
-      // .attr("class", "fdasfds");
+    .transition()
+    .duration(1500)
+    .attr("transform", "translate("+ focus_current +",0)") //////////////////////////////////////////////////////////////////
+
 
   var bars2 = barsGroup.selectAll(".div")
     .data(arr)
     .enter().append("rect")
-    .attr("class", "bar2")
+    .attr("class",function(d) {if(d.y == current[0].y){ return "active_bar2";} else { return "bar2";} } )
     .style("fill", function(d) {if(d.y == current[0].y){ return "#3D2390";} else { return "#5C46A4";} })
     // .attr("transform", "translate(-165,0)") //////////////////////////////////////////////////////////////////
     .attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1; })
-    .attr("width", x.rangeBand() / 2)
-    // .attr("height", 0)
+    .attr("width", x.rangeBand() / 2 - 1)
+    .attr("height", 0)
+    .attr("y", height)
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
-    // .transition()
-    // .duration(1500)
+    
+    bars2.transition()
+    .duration(1500)
     .attr("y", function(d) { return y(d.y); })
     .attr("height", function(d) { return height - y(d.y); })
-        //   .filter(function(d) { return d.y == current[0].y; })
-        // .style("fill", "#3D2390");
-
+    .transition()
+    .duration(1500)
+    .attr("transform", "translate("+ focus_current +",0)") //////////////////////////////////////////////////////////////////
 
   chart.selectAll('.x .tick')
       .data(arr)
@@ -407,7 +421,7 @@ jQuery( "text:contains("+ current_year +")").css('fill', '#3D2390').text(current
     bars.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
     bars2.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
     chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
-          .call(xAxis.scale(x.rangeRoundBands([0, width * d3.event.scale],.1 * d3.event.scale)));
+          .call(xAxis.scale(x.rangeRoundBands([0, width - margin.right  - bar_x_distance * d3.event.scale],.25 * d3.event.scale, -1 * d3.event.scale)));
     chart.select(".y.axis").call(yAxis);
 
     jQuery( "text:contains("+ current_year +")").css('fill', '#3D2390').text(current_year2);

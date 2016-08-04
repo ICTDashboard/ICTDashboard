@@ -336,11 +336,13 @@ jQuery(document).ready(function () {
     .style("fill", "#FF6161")
     .attr("x", function(d) { return x(d.years); })
     .attr("width", x.rangeBand() / 2)
-    // .attr("height", 0)
+    .attr("height", 0)
+    .attr("y", height)
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
-    // .transition()
-    // .duration(1500)
+    
+    bars.transition()
+    .duration(1500)
     .attr("y", function(d) { return y(d.x); })
     .attr("height", function(d) { return height - y(d.x); })
 
@@ -351,11 +353,13 @@ jQuery(document).ready(function () {
     .style("fill", "#5C46A4")
     .attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1; })
     .attr("width", x.rangeBand() / 2)
-    // .attr("height", 0)
+    .attr("height", 0)
+    .attr("y", height)
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
-    // .transition()
-    // .duration(1500)
+    
+    bars2.transition()
+    .duration(1500)
     .attr("y", function(d) { return y(d.y); })
     .attr("height", function(d) { return height - y(d.y); })
 

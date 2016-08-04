@@ -4919,8 +4919,10 @@ DETAILED OVERVIEW STYLES
         color: #aabcb9; }
 
 #detailed-view-expenditure {
-  overflow-x: scroll;
+  overflow: hidden;
   margin-right: 20px; }
+  #detailed-view-expenditure .bar, #detailed-view-expenditure .bar2, #detailed-view-expenditure .active_bar, #detailed-view-expenditure .active_bar2 {
+    cursor: col-resize; }
 
 .tick text {
   font-size: 14px; }
