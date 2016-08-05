@@ -191,12 +191,12 @@ jQuery(document).ready(function () {
     var detailed_budget = Drupal.settings.detailed_budget_chart;
 
 
-   if(jQuery( window ).width() > 1024) {
+   if(jQuery( window ).width() > 767) {
     var bar_width = 41;
-    var bar_distance = 14;
-    var bar_distance2 = 56;
+    var bar_distance = 350;
+    var bar_distance2 = 350;
     var bar_x_distance = 100;
-    var activate_year_line_x1 = -41;
+    var activate_year_line_x = 391;
     var activate_year_line_x2 = 42;
     var tooltip_bar_x = -70;
     var tooltip_bar_y = 30;
@@ -204,11 +204,10 @@ jQuery(document).ready(function () {
    }
    else {
     var bar_width = 31;
-    var bar_distance = 10;
-    var bar_distance2 = 42;
+    var bar_distance = 90;
+    var bar_distance2 = 90;
     var bar_x_distance = 325;
-    var activate_year_line_x1 = -30
-    var activate_year_line_x2 = 32
+    var activate_year_line_x = 118;
     var tooltip_bar_x = -50;
     var tooltip_bar_y = 30;
     var focus_current = -width / 4;
@@ -330,11 +329,9 @@ jQuery(document).ready(function () {
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis)
-    .transition()
-    .duration(1500)
-    .transition()
-    .duration(1500)
-    .attr("transform", "translate("+ focus_current +"," + height + ")") //////////////////////////////////////////////////////////////////
+    // .transition()
+    // .duration(1500)
+    // .attr("transform", "translate("+ focus_current +"," + height + ")") //////////////////////////////////////////////////////////////////
 
   //The xAxis is scalled on zoom, so we need to clip it to
 
@@ -356,15 +353,17 @@ jQuery(document).ready(function () {
     .attr("y", height)
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
-    
+var active_bar = jQuery( ".active_bar").attr('x') 
+bars.attr("x", function(d) { return x(d.years) - active_bar + bar_distance; })   
     bars.transition()
     .duration(1500)
+    
     // .attr("transform", "translate(-105,0)") //////////////////////////////////////////////////////////////////
     .attr("y", function(d) { return y(d.x); })
     .attr("height", function(d) { return height - y(d.x); })
-    .transition()
-    .duration(1500)
-    .attr("transform", "translate("+ focus_current +",0)") //////////////////////////////////////////////////////////////////
+    // .transition()
+    // .duration(1500)
+    // .attr("transform", "translate("+ focus_current +",0)") //////////////////////////////////////////////////////////////////
 
 
   var bars2 = barsGroup.selectAll(".div")
@@ -379,16 +378,33 @@ jQuery(document).ready(function () {
     .attr("y", height)
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
-    
+var active_bar2 = jQuery( ".active_bar2").attr('x')
+ bars2.attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1 - active_bar2 + x.rangeBand() / 2 + bar_distance2; })        
     bars2.transition()
     .duration(1500)
+   
     .attr("y", function(d) { return y(d.y); })
     .attr("height", function(d) { return height - y(d.y); })
-    .transition()
-    .duration(1500)
-    .attr("transform", "translate("+ focus_current +",0)") //////////////////////////////////////////////////////////////////
+    // .transition()
+    // .duration(1500)
+    // .attr("transform", "translate("+ focus_current +",0)") //////////////////////////////////////////////////////////////////
 
-  chart.selectAll('.x .tick')
+var x_path = jQuery( "text:contains("+ current_year +")").parent().attr('transform')
+var x_path_sliced = parseFloat(x_path.match(/\((.*)\)/)[1])
+// jQuery(".x-axis g[transform]").each(function(){
+//   // var slive = jQuery('.x-axis .x .tick').attr('transform');
+//   // var slive2 =parseFloat(slive.match(/\((.*)\)/)[1])
+//   console.log(jQuery('.x-axis .x g').attr('transform'));
+// })
+
+jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
+    // alert("Index: " + index + " Expression: " + transform);
+    var gg = parseFloat(transform.match(/\((.*)\)/)[1]);
+    // alert(gg)
+    jQuery(this).attr("transform", "translate("+ (gg - x_path_sliced + activate_year_line_x) +",0)");
+});
+// console.log(x_path_sliced);
+  chart.selectAll('.x-axis .x .tick')
       .data(arr)
       .each(function(d, i) {
           if(d.years == current_year) {
@@ -414,6 +430,8 @@ jQuery(document).ready(function () {
                 })
           }
       });
+
+
 
 jQuery( "text:contains("+ current_year +")").css('fill', '#3D2390').text(current_year2);
 
@@ -452,6 +470,13 @@ jQuery( "text:contains("+ current_year +")").css('fill', '#3D2390').text(current
                 })
           }
       });
+
+      jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
+    // alert("Index: " + index + " Expression: " + transform);
+    var gg = parseFloat(transform.match(/\((.*)\)/)[1]);
+    // alert(gg)
+    jQuery(this).attr("transform", "translate("+ (gg - x_path_sliced + activate_year_line_x) +",0)");
+});
   }
 });
 
