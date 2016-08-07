@@ -15,7 +15,6 @@
     <div id="detailed-view-expenditure" style="max-width: 945px;">
         <!-- <canvas id="detailed_budget_chart" width="945" height="360"></canvas> -->
         <svg id="detailed-overview-chart"></svg>
-        <svg id="detailed-overview-chart1"></svg>
         <div id="expenditure_legend" class="legend">
           <ul class="bar-legend">
             <li>

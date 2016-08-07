@@ -3,8 +3,7 @@
 
 <div class="project-individual-page-graph" style="max-width: 945px;">
   <svg id="project-individual-budget-chart"></svg>
-  <svg id="project-individual-budget-chart1"></svg>
-  <canvas id="budgetChart" width="945" height="325"></canvas>
+  <!-- <canvas id="budgetChart" width="945" height="325"></canvas> -->
   <div class="legend" id="expenditure_legend">
     <ul class="bar-legend">
       <li>
