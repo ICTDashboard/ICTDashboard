@@ -4941,8 +4941,10 @@ DETAILED OVERVIEW STYLES
         color: #aabcb9; }
 
 #detailed-view-expenditure {
-  overflow-x: scroll;
+  overflow: hidden;
   margin-right: 20px; }
+  #detailed-view-expenditure .bar, #detailed-view-expenditure .bar2, #detailed-view-expenditure .active_bar, #detailed-view-expenditure .active_bar2 {
+    cursor: col-resize; }
 
 .tick text {
   font-size: 14px; }
@@ -7535,7 +7537,7 @@ you can add resource intensive styles.
 
   #detailed-view-expenditure {
     overflow-x: hidden; }
-    #detailed-view-expenditure #detailed-overview-chart {
+    #detailed-view-expenditure #detailed-overview-chart, #detailed-view-expenditure #detailed-overview-chart1 {
       margin-left: 53px; } }
 /*********************
 LARGE VIEWING SIZE

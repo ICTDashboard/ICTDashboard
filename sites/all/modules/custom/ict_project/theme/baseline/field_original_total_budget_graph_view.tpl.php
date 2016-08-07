@@ -1,5 +1,9 @@
+   <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
 <div class="project-individual-page-graph" style="max-width: 945px;">
-  <canvas id="budgetChart" width="945" height="325"></canvas>
+  <svg id="project-individual-budget-chart"></svg>
+  <!-- <canvas id="budgetChart" width="945" height="325"></canvas> -->
   <div class="legend" id="expenditure_legend">
     <ul class="bar-legend">
       <li>
@@ -21,16 +25,3 @@
     </ul>
   </div>
 </div>
-<script>
-  (function ($) {
-    $(document).ready(function () {
-
-      var ctx = document.getElementById("budgetChart").getContext("2d");
-      var ExpenditureChart = new Chart(ctx).Bar(
-        Drupal.settings.budget_chart.data,
-        Drupal.settings.budget_chart.options
-      );
-
-    });
-  })(jQuery);
-</script>
