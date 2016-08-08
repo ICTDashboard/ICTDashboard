@@ -1414,4 +1414,5 @@ function ict_update_node_waiting_approval() {
 
 function ict_update_cron() {
   ict_update_node_last_approved();
+  ict_update_node_waiting_approval();
 }
