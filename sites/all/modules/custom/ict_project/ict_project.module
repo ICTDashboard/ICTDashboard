@@ -1771,8 +1771,10 @@ function ict_project_get_all_active_projects() {
   return $active;
 }
 
-
-function ict_project_node_waiting_approval() {
+/**
+ * Sends reminder about baseline waiting approval
+ */
+function ict_project_node_waiting_approval_reminder() {
 
   // ******QUERY FOR BASELINE WAITING APPROVAL*******
   $subquery = db_select('project_workflow', 'workflow');
@@ -1796,15 +1798,13 @@ function ict_project_node_waiting_approval() {
     $dt->setTimestamp($project->created);
     $days = date_diff(new DateTime(), $dt)->format('%a');
 
+    // email should be sent every 2 days
     if(($days%2) == 0) {
       $node = node_load($project->nid);
       $editor = user_load($project->uid);
       $editor_name = $editor->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $editor->field_last_name[LANGUAGE_NONE][0]['value'];
+      // Send email to Project Approvers
       __ict_mail_process_mails('ict_mail', 'reminder_waiting_approval_baseline', $node, array('data_approvers'), array('editor_name' => $editor_name));
     }
   }
-}
-
-function ict_project_cron() {
-  ict_project_node_waiting_approval();
 }

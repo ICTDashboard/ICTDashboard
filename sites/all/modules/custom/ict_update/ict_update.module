@@ -1298,79 +1298,74 @@ function ict_update_get_benefits_count($exclude = array(), $project_id = NULL) {
   );
 }
 
+/**
+ * Sends reminder about Projects that don't have recent updates
+*/
+function ict_update_node_update_reminders() {
 
-function ict_update_node_last_approved() {
+  // unpublished projects
+  $unpublished_projects = ict_project_get_all_unpublished_projects();
 
-  $query = db_select('field_data_field_project', 'p');
-  $query->fields('p', array('field_project_target_id', 'entity_id', 'bundle'));
-  $query->fields('pa', array('uid', 'access_type'));
-  $query->fields('u', array('name', 'mail'));
-  $query->fields('n', array('title', 'type','changed'));
-  $query->fields('pw', array('created', 'state', 'old_state'));
+  // ******QUERY FOR LAST PUBLISHED UPDATES*******
+  $subquery = db_select('project_workflow', 'workflow');
+  $subquery->join('node', 'n', 'n.nid = workflow.nid');
+  $subquery->fields('n', array('nid'));
+  $subquery->condition('n.type', 'update', '=');
+  $subquery->condition('workflow.state', 'approved', '=');
+  $subquery->condition('workflow.created', strtotime('-60 day'), '<=');
+  $subquery->addExpression('MAX(workflow.vid)', 'last_vid');
+  $subquery->groupBy('n.nid');
 
+  $query = db_select('node', 'n');
+  $query->join($subquery, 'last_action', 'last_action.last_vid = n.vid AND n.nid = last_action.nid');
 
-  $query->leftJoin('project_access', 'pa', 'pa.nid = p.field_project_target_id');
-  $query->leftJoin('users', 'u', 'u.uid = pa.uid');
-  $query->leftJoin('node', 'n', 'n.nid = p.entity_id');
-  $query->leftJoin('project_workflow', 'pw', 'pw.nid = p.entity_id');
+  $query->join('project_workflow', 'workflow', 'workflow.nid = n.nid and n.vid = workflow.vid');
+  $query->join('field_data_field_project', 'project_relation', 'n.nid = project_relation.entity_id AND project_relation.revision_id = n.vid');
+  $query->addField('project_relation', 'field_project_target_id', 'project_id');
+  $query->addField('n', 'nid', 'update_id');
+  $query->fields('workflow', array('created', 'uid'));
+  if ($unpublished_projects) {
+    $query->condition('project_relation.field_project_target_id', $unpublished_projects, 'NOT IN');
+  }
 
-  $query->orderBy('p.entity_id', 'DESC');
-  $info = $query->execute()->fetchAll();
+  $project_updates = $query->execute()->fetchAll();
 
-  foreach ($info as $key => $value) {
-      $project_date = format_date($value->created, 'medium', 'd-m-Y');
-      $dating = format_date(time(), 'medium', 'd-m-Y');
-      $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
-      $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
-
-///////////////////////////QUERY WAITING FOR UPDATE(WAITING FOR APPROVAL MORE THEN 2 DAYS)
-    
-    if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "update") {  
-  
-      $data = node_load($value->entity_id);
-      $parent_data = node_load($value->field_project_target_id);
-      $depart_admin = user_load($parent_data->uid);
-      $project_date = format_date($data->changed, 'medium', 'd/m/Y');
-
-      if($days >= 2) {
-
-        if($value->access_type == 'approve') {
-          drupal_mail('ict_mail', 'remainder_waiting_approval_update', $value->mail, language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $parent_data->title, 'date' => $project_date, 'depart_name' => $depart_admin->name));
-          continue;
-        } 
-      }
-    
+  foreach ($project_updates as $key => $project) {
+    // Waiting Approval pnes should be ignored because Data Approvers will receive the notification
+    $current_update_state = ict_project_get_workflow_state($project->update_id);
+    if ($current_update_state == 'waiting_approval') {
+      continue;
     }
-    
-    if($value->created == $value->changed && $value->state == 'approved' && $value->type == "update") {  
-          $data = node_load($value->entity_id);
-          $parent_data = node_load($value->field_project_target_id);
-          $depart_admin = user_load($parent_data->uid);
-          $last_approver = user_load($data->revision_uid);
-///////////////////////////QUERY FOR WAITING UPDATE(APPROVED MORE THEN 3 MONTHS)
-      if($value->access_type == 'edit' && $parent_data->changed == $value->changed) {
-        if($days > 92) { 
-            // var_dump($last_approver);
-            drupal_mail('ict_mail', 'remainder_update_after', $value->mail, language_default(),  array('editor_name' => $value->name, 'name' => $value->name, 'title' => $parent_data->title, 'depart_name' => $depart_admin->name, 'approver_name' => $last_approver->name));
-            continue; 
-        }
 
-  ///////////////////////////QUERY FOR WAITING UPDATE(APPROVED LAST 3 MONTHS)
-        if($months == 3) { 
-            drupal_mail('ict_mail', 'remainder_update_3', $value->mail, language_default(),  array('editor_name' => $value->name, 'name' => $value->name, 'title' => $parent_data->title, 'depart_name' => $depart_admin->name, 'approver_name' => $last_approver->name));
-            continue; 
-          } 
+    $dt = new DateTime();
+    $dt->setTimestamp($project->created);
+    $days = date_diff(new DateTime(), $dt)->format('%a');
 
-   ///////////////////////////QUERY APPROVED UPDATE(APPROVED LAST 2 MONTHS)     
-        if($months == 2) { 
-            drupal_mail('ict_mail', 'remainder_update_2', $value->mail, language_default(),  array('editor_name' => $value->name, 'name' => $value->name, 'title' => $parent_data->title, 'depart_name' => $depart_admin->name, 'approver_name' => $last_approver->name));
-            continue; 
-        }
-      }    
+    $node = node_load($project->project_id);
+    $approver = user_load($project->uid);
+    $approver_name = $approver->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $approver->field_last_name[LANGUAGE_NONE][0]['value'];
+
+    // Update project e-mail reminder sent to all assigned Project Editors one month prior to the last approved date.
+    if($days == 60) {
+      __ict_mail_process_mails('ict_mail', 'reminder_update_2_month', $node, array('data_editors'), array('approver_name' => $approver_name));
+    }
+
+    // Update project e-mail reminder sent to all assigned Project Editors on due date.
+    if($days == 90) {
+      __ict_mail_process_mails('ict_mail', 'reminder_update_3_month', $node, array('data_editors'), array('approver_name' => $approver_name));
+    }
+
+    // Update project e-mail reminder sent to all assigned Departmental Administrator, Project Editors and Project Approvers every 2 days after due date.
+    if($days > 90 && ($days%2) == 0) {
+      __ict_mail_process_mails('ict_mail', 'reminder_update_after', $node, array('data_editors', 'data_approvers', 'departmental_admins'), array('approver_name' => $approver_name));
     }
   }
 }
 
+
+/**
+ * Sends reminder about update waiting approval
+ */
 function ict_update_node_waiting_approval() {
 
   // unpublished projects
@@ -1390,7 +1385,7 @@ function ict_update_node_waiting_approval() {
   $query->join('project_workflow', 'workflow', 'workflow.nid = n.nid and n.vid = workflow.vid');
   $query->join('field_data_field_project', 'project_relation', 'n.nid = project_relation.entity_id AND project_relation.revision_id = n.vid');
   $query->condition('workflow.state', 'waiting_approval');
-  $query->fields('project_relation', array('field_project_target_id'));
+  $query->addField('project_relation', 'field_project_target_id', 'project_id');
   $query->fields('workflow', array('created', 'uid'));
   if ($unpublished_projects) {
     $query->condition('project_relation.field_project_target_id', $unpublished_projects, 'NOT IN');
@@ -1403,16 +1398,13 @@ function ict_update_node_waiting_approval() {
     $dt->setTimestamp($project->created);
     $days = date_diff(new DateTime(), $dt)->format('%a');
 
+    // email should be sent every 2 days
     if(($days%2) == 0) {
-      $node = node_load($project->field_project_target_id);
+      $node = node_load($project->project_id);
       $editor = user_load($project->uid);
       $editor_name = $editor->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $editor->field_last_name[LANGUAGE_NONE][0]['value'];
+      // Send email to Project Approvers
       __ict_mail_process_mails('ict_mail', 'reminder_waiting_approval_update', $node, array('data_approvers'), array('editor_name' => $editor_name));
     }
   }
-}
-
-function ict_update_cron() {
-  ict_update_node_last_approved();
-  ict_update_node_waiting_approval();
 }
