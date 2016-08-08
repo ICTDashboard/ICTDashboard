@@ -1775,44 +1775,40 @@ function ict_project_get_all_active_projects() {
   return $active;
 }
 
+/**
+ * Sends reminder about baseline waiting approval
+ */
+function ict_project_node_waiting_approval_reminder() {
 
-function ict_project_node_waiting_approval() {
+  // ******QUERY FOR BASELINE WAITING APPROVAL*******
+  $subquery = db_select('project_workflow', 'workflow');
+  $subquery->join('node', 'n', 'n.nid = workflow.nid');
+  $subquery->fields('n', array('nid'));
+  $subquery->condition('n.type', 'project', '=');
+  $subquery->addExpression('MAX(workflow.vid)', 'last_vid');
+  $subquery->groupBy('n.nid');
 
-//////////////////////// QUERY FOR BASELINE WAITING APPROVAL
-  $query = db_select('project_workflow', 'pw');
-  
-  $query->addExpression('n.uid', 'departmental_id');
-  $query->fields('pw', array('nid','created', 'state', 'old_state'));
-  $query->fields('n', array('title', 'type','changed'));
-  $query->fields('pa', array('uid', 'access_type'));
-  $query->fields('u', array('name', 'mail'));
+  $query = db_select('node', 'n');
+  $query->join($subquery, 'last_action', 'last_action.last_vid = n.vid AND n.nid = last_action.nid');
+  $query->join('project_workflow', 'workflow', 'workflow.nid = n.nid and n.vid = workflow.vid');
+  $query->condition('workflow.state', 'waiting_approval');
+  $query->fields('n', array('nid'));
+  $query->fields('workflow', array('created', 'uid'));
 
-  $query->leftJoin('node', 'n', 'n.nid = pw.nid');
-  $query->leftJoin('project_access', 'pa', 'pa.nid = pw.nid');
-  $query->leftJoin('users', 'u', 'u.uid = pa.uid');
+  $projects = $query->execute()->fetchAll();
 
-  $query->orderBy('pw.nid', 'DESC');
-  $info = $query->execute()->fetchAll();
+  foreach ($projects as $key => $project) {
+    $dt = new DateTime();
+    $dt->setTimestamp($project->created);
+    $days = date_diff(new DateTime(), $dt)->format('%a');
 
-  foreach ($info as $key => $value) {
-    if($value->created == $value->changed && $value->state == 'waiting_approval' && $value->type == "project") {
-      $project_date = format_date($value->created, 'medium', 'd-m-Y');
-      $dating = format_date(time(), 'medium', 'd-m-Y');
-      $months = date_diff(new DateTime($dating), new DateTime($project_date))->format('%m');
-      $days = date_diff(new DateTime($dating), new DateTime($project_date))->format('%a');
-      if($days >= 2) {
-        if($value->access_type == 'approve') {
-          $data = node_load($value->nid);
-          $dep_admin = user_load($value->departmental_id);
-          $project_date = format_date($data->changed, 'medium', 'd/m/Y');
-
-          drupal_mail('ict_mail', 'remainder_waiting_approval_baseline', $value->mail, language_default(),  array('editor_name' => $data->name, 'name' => $value->name, 'title' => $value->title, 'date' => $project_date, 'depart_name' => $dep_admin->name));        
-        }
-      }
+    // email should be sent every 2 days
+    if(($days%2) == 0) {
+      $node = node_load($project->nid);
+      $editor = user_load($project->uid);
+      $editor_name = $editor->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $editor->field_last_name[LANGUAGE_NONE][0]['value'];
+      // Send email to Project Approvers
+      __ict_mail_process_mails('ict_mail', 'reminder_waiting_approval_baseline', $node, array('data_approvers'), array('editor_name' => $editor_name));
     }
   }
-}
-
-function ict_project_cron() {
-  ict_project_node_waiting_approval();
 }

@@ -13,9 +13,7 @@ function ict_cron_user_default_permissions() {
   // Exported permission: 'administer elysia_cron'.
   $permissions['administer elysia_cron'] = array(
     'name' => 'administer elysia_cron',
-    'roles' => array(
-      'Finance Admin' => 'Finance Admin',
-    ),
+    'roles' => array(),
     'module' => 'elysia_cron',
   );
 
