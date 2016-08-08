@@ -1366,7 +1366,7 @@ function ict_update_node_update_reminders() {
 /**
  * Sends reminder about update waiting approval
  */
-function ict_update_node_waiting_approval() {
+function ict_update_node_waiting_approval_reminder() {
 
   // unpublished projects
   $unpublished_projects = ict_project_get_all_unpublished_projects();
