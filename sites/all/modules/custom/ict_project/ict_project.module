@@ -1787,7 +1787,7 @@ function ict_project_node_waiting_approval() {
   $query->join('project_workflow', 'workflow', 'workflow.nid = n.nid and n.vid = workflow.vid');
   $query->condition('workflow.state', 'waiting_approval');
   $query->fields('n', array('nid'));
-  $query->fields('workflow', array('created'));
+  $query->fields('workflow', array('created', 'uid'));
 
   $projects = $query->execute()->fetchAll();
 
@@ -1798,7 +1798,9 @@ function ict_project_node_waiting_approval() {
 
     if(($days%2) == 0) {
       $node = node_load($project->nid);
-//      __ict_mail_process_mails('ict_mail', 'baseline_request_approve', $node, array('data_approvers', 'data_editors'), array('editor_name' => $editor_name));
+      $editor = user_load($project->uid);
+      $editor_name = $editor->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $editor->field_last_name[LANGUAGE_NONE][0]['value'];
+      __ict_mail_process_mails('ict_mail', 'reminder_waiting_approval_baseline', $node, array('data_approvers'), array('editor_name' => $editor_name));
     }
   }
 }
