@@ -208,7 +208,7 @@ function ict_mail_mail($key, &$message, $params) {
       $message['subject'] = t('ICT Projects DashboardReminder - Waiting for @TITLE Baseline Approval', array('@TITLE' => $params['title']));
       $message['body'][] = t('@EDITOR has requested your approval for the baseline submission for the project @TITLE on @DATE', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '@DATE' => $params['date']));
       $message['body'][] = t('Please log into you ICT Projects Dashboard account to review and approve the submitted project as soon as possible. !URL', array('!URL' => $base_url));
-      $message['body'][] = t('<strong>Please note that once approved, some baseline data such as budget and original dates, cannot be changed</strong>');
+      $message['body'][] = t('<strong>Please note that once approved, some baseline data such as budget and original dates, cannot be changed.</strong>');
       $message['body'][] = t('Please contact @EDITOR or your Departmental Administrator @DEP_ADMIN if you have any queries.', array('@EDITOR' => $params['editor_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
@@ -216,7 +216,7 @@ function ict_mail_mail($key, &$message, $params) {
       $message['subject'] = t('ICT Projects DashboardReminder - Waiting for @TITLE Update Approval', array('@TITLE' => $params['title']));
       $message['body'][] = t('@EDITOR has requested your approval for the update submission for the project @TITLE on @DATE', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '@DATE' => $params['date']));
       $message['body'][] = t('Please log into you ICT Projects Dashboard account to review and approve the submitted project as soon as possible. !URL', array('!URL' => $base_url));
-      $message['body'][] = t('<strong>Please note that once approved, this update data will be published on the Dashboard</strong>');
+      $message['body'][] = t('<strong>Please note that once approved, this update data will be published on the Dashboard.</strong>');
       $message['body'][] = t('Please contact @EDITOR or Departmental Administrator @DEP_ADMIN if you have any queries.', array('@EDITOR' => $params['editor_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
