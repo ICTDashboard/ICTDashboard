@@ -1307,25 +1307,21 @@ function ict_update_node_update_reminders() {
   $unpublished_projects = ict_project_get_all_unpublished_projects();
 
   // ******QUERY FOR LAST PUBLISHED UPDATES*******
-  $subquery = db_select('project_workflow', 'workflow');
-  $subquery->join('node', 'n', 'n.nid = workflow.nid');
-  $subquery->fields('n', array('nid'));
-  $subquery->condition('n.type', 'update', '=');
-  $subquery->condition('workflow.state', 'approved', '=');
-  $subquery->condition('workflow.created', strtotime('-60 day'), '<=');
-  $subquery->addExpression('MAX(workflow.vid)', 'last_vid');
-  $subquery->groupBy('n.nid');
+  $subquery = db_select('field_data_field_project', 'pr');
+  $subquery->condition('pr.bundle', 'update');
+  $subquery->addField('pr', 'field_project_target_id', 'project_id');
+  $subquery->addExpression('MAX(entity_id)', 'update_id');
+  $subquery->join('project_workflow', 'wf', 'wf.nid = entity_id AND state = :state', array(':state' => 'approved'));
+  $subquery->groupBy('field_project_target_id');
 
   $query = db_select('node', 'n');
-  $query->join($subquery, 'last_action', 'last_action.last_vid = n.vid AND n.nid = last_action.nid');
-
+  $query->join($subquery, 'last_upd', 'last_upd.project_id = n.nid');
   $query->join('project_workflow', 'workflow', 'workflow.nid = n.nid and n.vid = workflow.vid');
-  $query->join('field_data_field_project', 'project_relation', 'n.nid = project_relation.entity_id AND project_relation.revision_id = n.vid');
-  $query->addField('project_relation', 'field_project_target_id', 'project_id');
-  $query->addField('n', 'nid', 'update_id');
+  $query->addField('n', 'nid', 'project_id');
+  $query->addField('last_upd', 'update_id', 'update_id');
   $query->fields('workflow', array('created', 'uid'));
   if ($unpublished_projects) {
-    $query->condition('project_relation.field_project_target_id', $unpublished_projects, 'NOT IN');
+    $query->condition('n.nid', $unpublished_projects, 'NOT IN');
   }
 
   $project_updates = $query->execute()->fetchAll();
