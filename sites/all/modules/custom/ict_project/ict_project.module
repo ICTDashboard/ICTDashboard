@@ -1804,7 +1804,15 @@ function ict_project_node_waiting_approval_reminder() {
       $editor = user_load($project->uid);
       $editor_name = $editor->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $editor->field_last_name[LANGUAGE_NONE][0]['value'];
       // Send email to Project Approvers
-      __ict_mail_process_mails('ict_mail', 'reminder_waiting_approval_baseline', $node, array('data_approvers'), array('editor_name' => $editor_name));
+      __ict_mail_process_mails(
+        'ict_mail',
+        'reminder_waiting_approval_baseline',
+        $node,
+        array('data_approvers'),
+        array(
+          'editor_name' => $editor_name,
+          'date' => format_date($project->created, 'medium', 'j M Y')
+        ));
     }
   }
 }
