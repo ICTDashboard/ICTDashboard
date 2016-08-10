@@ -90,7 +90,10 @@ jQuery(document).ready(function () {
     .attr('class', 'd3-tip')
     .offset([tooltip_bar_y, tooltip_bar_x])
     .html(function(d) {
-      return "<span style='border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
+      if(d.years == current_year) {
+      d.years = current_year2
+      } 
+      return "<span style='box-shadow: 0px 0px 5px 0px #4e5365; border:1px solid #ededed; border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
     })
   var chart = d3.select("#detailed-overview-chart")
     .attr("width", width + margin.left + margin.right)
@@ -98,6 +101,12 @@ jQuery(document).ready(function () {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .call(d3.behavior.zoom().scaleExtent([1, 1]).on("zoom", zoom));
+
+chart.append("chart:rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "#fff")
+    .attr("class", "main-scroll-area");
 
     chart.call(tip);
   
@@ -236,6 +245,9 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
       .data(arr)
       .each(function(d, i) {
           if(d.years == current_year) {
+            d.years = current_year2
+          } 
+          if(d.years == current_year2) {
               d3.select(this)
                 .append('line')
                 .attr({
@@ -258,6 +270,11 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
                 })
           }
       });
+
+      chart.select(".grid")
+        .call(make_y_axis()
+        .tickSize(-width, 0, 0)
+        .tickFormat(""));
 
     jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
     var x_coordinate = parseFloat(transform.match(/\((.*)\)/)[1]);

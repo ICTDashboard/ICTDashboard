@@ -2163,15 +2163,14 @@ DETAILED OVERVIEW STYLES
   }
 }
 
-#detailed-view-expenditure {
-  // overflow-x: scroll;
+#detailed-view-expenditure, #project-individual-budget-chart {
   overflow: hidden;
   margin-right: 20px;
-  // #detailed-overview-chart {
-  // 	margin-left: 53px;
-  // }
-  .bar, .bar2, .active_bar, .active_bar2 {
+  .bar, .bar2, .active_bar, .active_bar2, .main-scroll-area {
   	cursor: col-resize;
+  }
+  .legend .bar-legend {
+  	padding-left: 40px;
   }
 }
 .tick text {
