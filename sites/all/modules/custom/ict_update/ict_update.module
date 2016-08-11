@@ -1324,43 +1324,9 @@ function ict_update_node_update_reminders() {
 
   $project_updates = $query->execute()->fetchAll();
 
+  $queue = DrupalQueue::get('ict_update_outdated_data_reminders');
   foreach ($project_updates as $key => $project) {
-    // TODO: check curren update workflow state
-    // TODO: convert to cron queue for better performance
-
-
-    // Waiting Approval pnes should be ignored because Data Approvers will receive the notification
-    $current_update_state = ict_project_get_workflow_state($project->update_id);
-    if ($current_update_state == 'waiting_approval') {
-      continue;
-    }
-
-    $dt = new DateTime();
-    $dt->setTimestamp($project->created);
-    $days = date_diff(new DateTime(), $dt)->format('%a');
-
-    if ($days < 60) {
-      continue;
-    }
-
-    $node = node_load($project->project_id);
-    $approver = user_load($project->uid);
-    $approver_name = $approver->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $approver->field_last_name[LANGUAGE_NONE][0]['value'];
-
-    // Update project e-mail reminder sent to all assigned Project Editors one month prior to the last approved date.
-    if($days == 60) {
-      __ict_mail_process_mails('ict_mail', 'reminder_update_2_month', $node, array('data_editors'), array('approver_name' => $approver_name));
-    }
-
-    // Update project e-mail reminder sent to all assigned Project Editors on due date.
-    if($days == 90) {
-      __ict_mail_process_mails('ict_mail', 'reminder_update_3_month', $node, array('data_editors'), array('approver_name' => $approver_name));
-    }
-
-    // Update project e-mail reminder sent to all assigned Departmental Administrator, Project Editors and Project Approvers every 2 days after due date.
-    if($days > 90 && ($days%2) == 0) {
-      __ict_mail_process_mails('ict_mail', 'reminder_update_after', $node, array('data_editors', 'data_approvers', 'departmental_admins'), array('approver_name' => $approver_name));
-    }
+    $queue->createItem($project);
   }
 }
 
@@ -1415,5 +1381,54 @@ function ict_update_node_waiting_approval_reminder() {
           'date' => format_date($project->created, 'medium', 'j M Y')
         ));
     }
+  }
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function ict_update_cron_queue_info () {
+  $queues['ict_update_outdated_data_reminders'] = array(
+    'worker callback' => 'ict_update_outdated_data_reminders',
+    'time' => 20,
+  );
+  return $queues;
+}
+
+/**
+ * Worker callback for ict_update_outdated_data_reminders cron queue
+ */
+function ict_update_outdated_data_reminders ($project) {
+  // Waiting Approval pnes should be ignored because Data Approvers will receive the notification
+  $current_update_state = ict_project_get_workflow_state($project->update_id);
+  if ($current_update_state == 'waiting_approval') {
+    return;
+  }
+
+  $dt = new DateTime();
+  $dt->setTimestamp($project->created);
+  $days = date_diff(new DateTime(), $dt)->format('%a');
+
+  if ($days < 60) {
+    return;
+  }
+
+  $node = node_load($project->project_id);
+  $approver = user_load($project->uid);
+  $approver_name = $approver->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $approver->field_last_name[LANGUAGE_NONE][0]['value'];
+
+  // Update project e-mail reminder sent to all assigned Project Editors one month prior to the last approved date.
+  if($days == 60) {
+    __ict_mail_process_mails('ict_mail', 'reminder_update_2_month', $node, array('data_editors'), array('approver_name' => $approver_name));
+  }
+
+  // Update project e-mail reminder sent to all assigned Project Editors on due date.
+  if($days == 90) {
+    __ict_mail_process_mails('ict_mail', 'reminder_update_3_month', $node, array('data_editors'), array('approver_name' => $approver_name));
+  }
+
+  // Update project e-mail reminder sent to all assigned Departmental Administrator, Project Editors and Project Approvers every 2 days after due date.
+  if($days > 90 && ($days%2) == 0) {
+    __ict_mail_process_mails('ict_mail', 'reminder_update_after', $node, array('data_editors', 'data_approvers', 'departmental_admins'), array('approver_name' => $approver_name));
   }
 }
