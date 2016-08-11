@@ -1316,10 +1316,8 @@ function ict_update_node_update_reminders() {
 
   $query = db_select('node', 'n');
   $query->join($subquery, 'last_upd', 'last_upd.project_id = n.nid');
-  $query->join('project_workflow', 'workflow', 'workflow.nid = n.nid and n.vid = workflow.vid');
   $query->addField('n', 'nid', 'project_id');
   $query->addField('last_upd', 'update_id', 'update_id');
-  $query->fields('workflow', array('created', 'uid'));
   if ($unpublished_projects) {
     $query->condition('n.nid', $unpublished_projects, 'NOT IN');
   }
@@ -1327,6 +1325,10 @@ function ict_update_node_update_reminders() {
   $project_updates = $query->execute()->fetchAll();
 
   foreach ($project_updates as $key => $project) {
+    // TODO: check curren update workflow state
+    // TODO: convert to cron queue for better performance
+
+
     // Waiting Approval pnes should be ignored because Data Approvers will receive the notification
     $current_update_state = ict_project_get_workflow_state($project->update_id);
     if ($current_update_state == 'waiting_approval') {
@@ -1336,6 +1338,10 @@ function ict_update_node_update_reminders() {
     $dt = new DateTime();
     $dt->setTimestamp($project->created);
     $days = date_diff(new DateTime(), $dt)->format('%a');
+
+    if ($days < 60) {
+      continue;
+    }
 
     $node = node_load($project->project_id);
     $approver = user_load($project->uid);
@@ -1400,7 +1406,14 @@ function ict_update_node_waiting_approval_reminder() {
       $editor = user_load($project->uid);
       $editor_name = $editor->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $editor->field_last_name[LANGUAGE_NONE][0]['value'];
       // Send email to Project Approvers
-      __ict_mail_process_mails('ict_mail', 'reminder_waiting_approval_update', $node, array('data_approvers'), array('editor_name' => $editor_name));
+      __ict_mail_process_mails(
+        'ict_mail',
+        'reminder_waiting_approval_update',
+        $node, array('data_approvers'),
+        array(
+          'editor_name' => $editor_name,
+          'date' => format_date($project->created, 'medium', 'j M Y')
+        ));
     }
   }
 }
