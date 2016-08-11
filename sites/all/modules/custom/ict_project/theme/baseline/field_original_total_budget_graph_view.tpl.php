@@ -18,10 +18,10 @@
         </span>
         <?php print t('Total Budget ($m)'); ?>
       </li>
-      <li>
+<!--       <li>
         <span class="required">*</span>
         <?php print t('Current Financial Year'); ?>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>

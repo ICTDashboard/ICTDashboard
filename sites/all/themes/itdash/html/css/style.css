@@ -4940,11 +4940,13 @@ DETAILED OVERVIEW STYLES
         line-height: 1;
         color: #aabcb9; }
 
-#detailed-view-expenditure {
+#detailed-view-expenditure, #project-individual-budget-chart {
   overflow: hidden;
   margin-right: 20px; }
-  #detailed-view-expenditure .bar, #detailed-view-expenditure .bar2, #detailed-view-expenditure .active_bar, #detailed-view-expenditure .active_bar2 {
+  #detailed-view-expenditure .bar, #detailed-view-expenditure .bar2, #detailed-view-expenditure .active_bar, #detailed-view-expenditure .active_bar2, #detailed-view-expenditure .main-scroll-area, #project-individual-budget-chart .bar, #project-individual-budget-chart .bar2, #project-individual-budget-chart .active_bar, #project-individual-budget-chart .active_bar2, #project-individual-budget-chart .main-scroll-area {
     cursor: col-resize; }
+  #detailed-view-expenditure .legend .bar-legend, #project-individual-budget-chart .legend .bar-legend {
+    padding-left: 40px; }
 
 .tick text {
   font-size: 14px; }
@@ -7538,7 +7540,9 @@ you can add resource intensive styles.
   #detailed-view-expenditure {
     overflow-x: hidden; }
     #detailed-view-expenditure #detailed-overview-chart, #detailed-view-expenditure #detailed-overview-chart1 {
-      margin-left: 53px; } }
+      margin-left: 53px; }
+    #detailed-view-expenditure .legend .bar-legend {
+      padding-left: 93px; } }
 /*********************
 LARGE VIEWING SIZE
 This is for the larger monitors and possibly full screen viewers.
