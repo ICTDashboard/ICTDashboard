@@ -200,7 +200,7 @@ function ict_mail_mail($key, &$message, $params) {
 
     case 'reminder_update_2_month_data_editors':
       $message['subject'] = t('ICT Projects DashboardReminder - Update @TITLE', array('@TITLE' => $params['title']));
-      $message['body'][] = t("The information on the Dashboard for the project @TITLE is approaching 3 months old. Please update @TITLE on the Dashboard as soon as possible by logging into your ICT Projects Dashboard account to update and submit the project data. !URL ", array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '!URL' => $base_url));
+      $message['body'][] = t("The information on the Dashboard for the project @TITLE is approaching 3 months old. Please update @TITLE on the Dashboard as soon as possible by logging into your ICT Projects Dashboard account to update and submit the project data. !URL ", array('@TITLE' => $params['title'], '!URL' => $base_url));
       $message['body'][] = t('Please contact @APPROVER_NAME or Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
@@ -222,13 +222,13 @@ function ict_mail_mail($key, &$message, $params) {
 
     case 'reminder_update_3_month_data_editors':
       $message['subject'] = t('ICT Projects DashboardReminder - Update @TITLE', array('@TITLE' => $params['title']));
-      $message['body'][] = t('The information on the Dashboard for the project @TITLE is 3 months old. Please update @TITLE on the Dashboard <strong>today</strong> by logging into your ICT Projects Dashboard account to update and submit the project data. !URL', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '@DATE' => $params['date'], '!URL' => $base_url));
+      $message['body'][] = t('The information on the Dashboard for the project @TITLE is 3 months old. Please update @TITLE on the Dashboard <strong>today</strong> by logging into your ICT Projects Dashboard account to update and submit the project data. !URL', array('@TITLE' => $params['title'], '!URL' => $base_url));
       $message['body'][] = t('Please contact @APPROVER_NAME or Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
       break;
 
     case in_array($key, array('reminder_update_after_data_approvers', 'reminder_update_after_data_editors', 'reminder_update_after_departmental_admins')):
       $message['subject'] = t('ICT Projects DashboardReminder - Update @TITLE', array('@TITLE' => $params['title']));
-      $message['body'][] = t('The information on the Dashboard for the project @TITLE more than 3 months old. Please update @TITLE on the Dashboard <strong>immediately</strong> by logging into your ICT Projects Dashboard account to update and submit the project data. !URL', array('@TITLE' => $params['title'], '@EDITOR' => $params['editor_name'], '@DATE' => $params['date'], '!URL' => $base_url));
+      $message['body'][] = t('The information on the Dashboard for the project @TITLE more than 3 months old. Please update @TITLE on the Dashboard <strong>immediately</strong> by logging into your ICT Projects Dashboard account to update and submit the project data. !URL', array('@TITLE' => $params['title'], '!URL' => $base_url));
       $message['body'][] = t('Please contact @APPROVER_NAME or Departmental Administrator @DEP_ADMIN if you have any queries.', array('@APPROVER_NAME' => $params['approver_name'], '@DEP_ADMIN' => $dep_name));
       break;
   }

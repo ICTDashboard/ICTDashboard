@@ -1405,8 +1405,10 @@ function ict_update_outdated_data_reminders ($project) {
     return;
   }
 
+  $last_updated = ict_project_get_last_transaction_by_state($project->update_id, 'approved');
+
   $dt = new DateTime();
-  $dt->setTimestamp($project->created);
+  $dt->setTimestamp($last_updated->created);
   $days = date_diff(new DateTime(), $dt)->format('%a');
 
   if ($days < 60) {
@@ -1414,7 +1416,7 @@ function ict_update_outdated_data_reminders ($project) {
   }
 
   $node = node_load($project->project_id);
-  $approver = user_load($project->uid);
+  $approver = user_load($last_updated->uid);
   $approver_name = $approver->field_first_name[LANGUAGE_NONE][0]['value'] . ' ' . $approver->field_last_name[LANGUAGE_NONE][0]['value'];
 
   // Update project e-mail reminder sent to all assigned Project Editors one month prior to the last approved date.
