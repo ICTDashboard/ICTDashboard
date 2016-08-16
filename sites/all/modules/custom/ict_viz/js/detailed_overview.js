@@ -7,7 +7,6 @@ jQuery(document).ready(function () {
   var detailed_budget = Drupal.settings.detailed_budget_chart;
 
    if(jQuery( window ).width() > 767) {
-    var bar_width = 41;
     var bar_distance = 350;
     var bar_distance2 = 350;
     var bar_x_distance = 100;
@@ -18,9 +17,8 @@ jQuery(document).ready(function () {
     var focus_current = -width / 9;
    }
    else {
-    var bar_width = 31;
-    var bar_distance = 90;
-    var bar_distance2 = 90;
+    var bar_distance = 85;
+    var bar_distance2 = 85;
     var bar_x_distance = 325;
     var activate_year_line_x = 118;
     var tooltip_bar_x = -50;
@@ -49,6 +47,7 @@ jQuery(document).ready(function () {
 
     }    
   })
+  var length_width = arr.length;
 
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
@@ -56,7 +55,7 @@ jQuery(document).ready(function () {
 
   var x = d3.scale.ordinal()
     .domain(arr.map(function(d) { return d.years; }))
-    .rangeRoundBands([0, width - margin.right  - bar_x_distance ], .25, -1);
+    .rangeRoundBands([0, length_width * 100 - margin.right  - bar_x_distance ], .25, -1);
 
   var y = d3.scale.linear()
   .range([height, 0])
@@ -159,7 +158,7 @@ chart.append("chart:rect")
     .attr("y", height)
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
-    
+
     var active_bar = jQuery( ".active_bar").attr('x') 
     bars.attr("x", function(d) { return x(d.years) - active_bar + bar_distance; })   
     bars.transition()
@@ -214,8 +213,8 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
                     dy: 24,
                     "y1" : 28,
                     "y2" : 28,
-                    "x1" :  -x.rangeBand() / 2,
-                     "x2" : x.rangeBand() / 2,
+                    "x1" :  -x.rangeBand() / 2 - 1,
+                     "x2" : x.rangeBand() / 2 - 2,
                     "font-size": "10.5px",
                     "class": "line-current-year"
 
@@ -233,10 +232,13 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
   jQuery( "text:contains("+ current_year +")").css('fill', '#3D2390').text(current_year2);
 
   function zoom() {
-    bars.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
-    bars2.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
-    chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
-          .call(xAxis.scale(x.rangeRoundBands([0, width - margin.right  - bar_x_distance * d3.event.scale],.25 * d3.event.scale, -1 * d3.event.scale)));
+    var scroll_limit_for_bars1 = jQuery("#detailed-view-expenditure .bar").first().attr('x');
+    var scroll_limit_for_bars2 = jQuery("#detailed-view-expenditure .bar2").last().attr('x');
+    var tx = Math.min(-scroll_limit_for_bars1 + 20, Math.max(d3.event.translate[0], -scroll_limit_for_bars2 + 40));
+    bars.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
+    bars2.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
+    chart.select(".x.axis").attr("transform", "translate(" + tx +","+(height)+")")
+          .call(xAxis.scale(x.rangeRoundBands([0, length_width * 100 - margin.right  - bar_x_distance * d3.event.scale],.25 * d3.event.scale, -1 * d3.event.scale)));
     chart.select(".y.axis").call(yAxis);
 
     jQuery( "text:contains("+ current_year +")").css('fill', '#3D2390').text(current_year2);
@@ -255,8 +257,8 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
                     dy: 24,
                     "y1" : 28,
                     "y2" : 28,
-                    "x1" : -x.rangeBand() / 2,
-                     "x2" : x.rangeBand() / 2,
+                    "x1" : -x.rangeBand() / 2 - 1,
+                     "x2" : x.rangeBand() / 2 - 2,
                     "font-size": "10.5px",
                     "class": "line-current-year"
 
