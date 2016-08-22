@@ -4153,6 +4153,7 @@ POSTS & CONTENT STYLES
   #content #inner-content .project-draft-submission .row .text p {
     color: #4e5365; }
   #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
+    overflow: hidden;
     margin-left: 0; }
     #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
       margin: 3px 0;
