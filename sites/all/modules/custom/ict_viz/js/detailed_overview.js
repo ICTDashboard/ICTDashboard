@@ -5,9 +5,13 @@ jQuery(document).ready(function () {
     height = 360 - margin.top - margin.bottom;
 
   var detailed_budget = Drupal.settings.detailed_budget_chart;
+    var bars_color = '#FF6161';
+    var bars_color2 = '#5C46A4';
+    var active_year_bars_color = '#FC3E3E';
+    var active_year_bars_color2 = '3D2390';
+    var active_year_color = '3D2390';
 
-   if(jQuery( window ).width() > 767) {
-    var bar_width = 41;
+  if(jQuery( window ).width() > 767) {
     var bar_distance = 350;
     var bar_distance2 = 350;
     var bar_x_distance = 100;
@@ -16,28 +20,27 @@ jQuery(document).ready(function () {
     var tooltip_bar_x = -70;
     var tooltip_bar_y = 30;
     var focus_current = -width / 9;
-   }
-   else {
-    var bar_width = 31;
-    var bar_distance = 90;
-    var bar_distance2 = 90;
+  }
+  else {
+    var bar_distance = 85;
+    var bar_distance2 = 85;
     var bar_x_distance = 325;
     var activate_year_line_x = 118;
     var tooltip_bar_x = -50;
     var tooltip_bar_y = 30;
     var focus_current = -width / 4;
-   }
+  }
 
 
-    var arr = [];
-    var element = [];
+  var arr = [];
+  var element = [];
 
-    for(i = 0; i < detailed_budget.data.labels.length; i++) {
-      arr.push({
-        x: detailed_budget.data.datasets[0].data[i],y: detailed_budget.data.datasets[1].data[i], years: detailed_budget.data['labels'][i], element : i
-      });
-      element.push(i);
-    };
+  for(i = 0; i < detailed_budget.data.labels.length; i++) {
+    arr.push({
+      x: detailed_budget.data.datasets[0].data[i],y: detailed_budget.data.datasets[1].data[i], years: detailed_budget.data['labels'][i], element : i
+    });
+    element.push(i);
+  };
 
   var current_year = "20" + detailed_budget.data.current_year.replace("/", "-") + "*";
   var current_year2 = "20" + detailed_budget.data.current_year.replace("/", "-");
@@ -49,6 +52,7 @@ jQuery(document).ready(function () {
 
     }    
   })
+  var length_width = arr.length;
 
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
@@ -56,7 +60,7 @@ jQuery(document).ready(function () {
 
   var x = d3.scale.ordinal()
     .domain(arr.map(function(d) { return d.years; }))
-    .rangeRoundBands([0, width - margin.right  - bar_x_distance ], .25, -1);
+    .rangeRoundBands([0, length_width * 100 - margin.right  - bar_x_distance ], .25, -1);
 
   var y = d3.scale.linear()
   .range([height, 0])
@@ -80,11 +84,11 @@ jQuery(document).ready(function () {
     return '$' + prefix.scale(d);
   });
 
-      function make_y_axis() {
-      return d3.svg.axis()
-          .scale(y)
-          .orient("left")
-    }
+  function make_y_axis() {
+    return d3.svg.axis()
+        .scale(y)
+        .orient("left")
+  }
 
   var tip = d3.tip()
     .attr('class', 'd3-tip')
@@ -152,14 +156,14 @@ chart.append("chart:rect")
     .data(arr)
     .enter().append("rect")
     .attr("class",function(d) {if(current.length > 0 && d.x == current[0].x){ return "active_bar";} else { return "bar";} } )
-    .style("fill",function(d) {if(current.length > 0 && d.x == current[0].x){ return "#FC3E3E";} else { return "#FF6161";} } )
+    .style("fill",function(d) {if(current.length > 0 && d.x == current[0].x){ return active_year_bars_color;} else { return bars_color;} } )
     .attr("x", function(d) { return x(d.years); })
     .attr("width", x.rangeBand() / 2 - 1)
     .attr("height", 0)
     .attr("y", height)
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
-    
+
     var active_bar = jQuery( ".active_bar").attr('x') 
     bars.attr("x", function(d) { return x(d.years) - active_bar + bar_distance; })   
     bars.transition()
@@ -176,8 +180,7 @@ chart.append("chart:rect")
     .data(arr)
     .enter().append("rect")
     .attr("class",function(d) {if(current.length > 0 && d.y == current[0].y){ return "active_bar2";} else { return "bar2";} } )
-    .style("fill", function(d) {if(current.length > 0 && d.y == current[0].y){ return "#3D2390";} else { return "#5C46A4";} })
-    // .attr("transform", "translate(-165,0)") //////////////////////////////////////////////////////////////////
+    .style("fill", function(d) {if(current.length > 0 && d.y == current[0].y){ return active_year_bars_color2;} else { return bars_color2;} })
     .attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1; })
     .attr("width", x.rangeBand() / 2 - 1)
     .attr("height", 0)
@@ -214,8 +217,8 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
                     dy: 24,
                     "y1" : 28,
                     "y2" : 28,
-                    "x1" :  -x.rangeBand() / 2,
-                     "x2" : x.rangeBand() / 2,
+                    "x1" :  -x.rangeBand() / 2 - 1,
+                     "x2" : x.rangeBand() / 2 - 2,
                     "font-size": "10.5px",
                     "class": "line-current-year"
 
@@ -230,16 +233,19 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
           }
       });
 
-  jQuery( "text:contains("+ current_year +")").css('fill', '#3D2390').text(current_year2);
+  jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
 
   function zoom() {
-    bars.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
-    bars2.attr("transform", "translate(" + d3.event.translate[0]+",0)scale(" + d3.event.scale + ",1)");
-    chart.select(".x.axis").attr("transform", "translate(" + d3.event.translate[0]+","+(height)+")")
-          .call(xAxis.scale(x.rangeRoundBands([0, width - margin.right  - bar_x_distance * d3.event.scale],.25 * d3.event.scale, -1 * d3.event.scale)));
+    var scroll_limit_for_bars1 = jQuery("#detailed-view-expenditure .bar").first().attr('x');
+    var scroll_limit_for_bars2 = jQuery("#detailed-view-expenditure .bar2").last().attr('x');
+    var tx = Math.min(-scroll_limit_for_bars1 + 20, Math.max(d3.event.translate[0], -scroll_limit_for_bars2 + 40));
+    bars.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
+    bars2.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
+    chart.select(".x.axis").attr("transform", "translate(" + tx +","+(height)+")")
+          .call(xAxis.scale(x.rangeRoundBands([0, length_width * 100 - margin.right  - bar_x_distance * d3.event.scale],.25 * d3.event.scale, -1 * d3.event.scale)));
     chart.select(".y.axis").call(yAxis);
 
-    jQuery( "text:contains("+ current_year +")").css('fill', '#3D2390').text(current_year2);
+    jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
 
     chart.selectAll('.x .tick')
       .data(arr)
@@ -255,8 +261,8 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
                     dy: 24,
                     "y1" : 28,
                     "y2" : 28,
-                    "x1" : -x.rangeBand() / 2,
-                     "x2" : x.rangeBand() / 2,
+                    "x1" : -x.rangeBand() / 2 - 1,
+                     "x2" : x.rangeBand() / 2 - 2,
                     "font-size": "10.5px",
                     "class": "line-current-year"
 
