@@ -95,6 +95,13 @@ function ict_users_user_default_permissions() {
     'module' => 'vppr',
   );
 
+  // Exported permission: 'administer password policies'.
+  $permissions['administer password policies'] = array(
+    'name' => 'administer password policies',
+    'roles' => array(),
+    'module' => 'password_policy',
+  );
+
   // Exported permission: 'administer permissions'.
   $permissions['administer permissions'] = array(
     'name' => 'administer permissions',
@@ -298,6 +305,15 @@ function ict_users_user_default_permissions() {
     'module' => 'admin_menu',
   );
 
+  // Exported permission: 'force password change'.
+  $permissions['force password change'] = array(
+    'name' => 'force password change',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+    ),
+    'module' => 'password_policy',
+  );
+
   // Exported permission: 'select account cancellation method'.
   $permissions['select account cancellation method'] = array(
     'name' => 'select account cancellation method',
@@ -305,6 +321,15 @@ function ict_users_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'unblock expired accounts'.
+  $permissions['unblock expired accounts'] = array(
+    'name' => 'unblock expired accounts',
+    'roles' => array(
+      'Finance Admin' => 'Finance Admin',
+    ),
+    'module' => 'password_policy',
   );
 
   // Exported permission: 'use text format ds_code'.
