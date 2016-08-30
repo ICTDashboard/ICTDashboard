@@ -8,7 +8,7 @@ jQuery(document).ready(function () {
     var bars_color = '#FF6161';
     var bars_color2 = '#5C46A4';
     var active_year_bars_color = '#FC3E3E';
-    var active_year_bars_color2 = '3D2390';
+    var active_year_bars_color2 = '#3D2390';
     var active_year_color = '3D2390';
 
   if(jQuery( window ).width() > 767) {
