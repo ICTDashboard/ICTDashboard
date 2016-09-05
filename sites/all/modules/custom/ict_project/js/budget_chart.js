@@ -10,17 +10,26 @@ jQuery(document).ready(function () {
   var bars_color2 = '#5C46A4';
   var active_year_bars_color = '#FC3E3E';
   var active_year_bars_color2 = '#3D2390';
-  var active_year_color = '3D2390';
+  var active_year_color = '#3D2390';
 
  if(jQuery( window ).width() > 1024) {
+  var bar_distance = 350;
+  var bar_distance2 = 350;
+  var bar_x_distance = 100;
+  var activate_year_line_x = 391;
+  var activate_year_line_x2 = 42;
   var tooltip_bar_x = -70;
   var tooltip_bar_y = 30;
-  var bar_x_distance = 100;
+  var focus_current = -width / 9;
  }
  else {
+  var bar_distance = 85;
+  var bar_distance2 = 85;
+  var bar_x_distance = 325;
+  var activate_year_line_x = 118;
   var tooltip_bar_x = -50;
   var tooltip_bar_y = 30;
-  var bar_x_distance = 325;
+  var focus_current = -width / 4;
  }
 
   var arr = [];
@@ -46,9 +55,27 @@ var current = jQuery.map(arr, function(value,key){
 
 var length_width = arr.length;
 
+if (length_width > 6) {
+  new_width = length_width * 100;
+  outer_padding = -1;
+  paddong_between_bars = 0.25;
+}
+else {
+  if(jQuery( window ).width() < 768) {
+  new_width = length_width * 175
+  outer_padding = 0;
+  paddong_between_bars = 0.1;    
+  }
+  else {
+    new_width = width
+    outer_padding = 0;
+    paddong_between_bars = 0.1; 
+  }
+}
+
 var x = d3.scale.ordinal()
   .domain(arr.map(function(d) { return d.years; }))
-  .rangeRoundBands([0, width - margin.right  - bar_x_distance], .1);
+  .rangeRoundBands([0, new_width - margin.right  - bar_x_distance], paddong_between_bars, outer_padding);
 
 var y = d3.scale.linear()
 .range([height, 0])
@@ -157,12 +184,18 @@ xAxisGroup.append('g')
   .attr("class",function(d) {if(current.length > 0 && d.x == current[0].x && d.years == current[0].years){ return "active_bar";} else { return "bar";} } )
   .style("fill",function(d) {if(current.length > 0 && d.x == current[0].x && d.years == current[0].years){ return active_year_bars_color} else { return bars_color;} } )
   .attr("x", function(d) { return x(d.years); })
-  .attr("width", x.rangeBand() / 2)
+  .attr("width", x.rangeBand() / 2 - 1)
   .attr("height", 0)
   .attr("y", height)
   .on('mouseover', tip.show)
   .on('mouseout', tip.hide)
-  
+
+  if (length_width > 6) {  
+    if(jQuery( ".active_bar").attr('x')) {
+      var active_bar = jQuery( ".active_bar").attr('x') 
+      bars.attr("x", function(d) { return x(d.years) - active_bar + bar_distance; })       
+    }
+  }
   bars.transition()
   .duration(1500)
   .attr("y", function(d) { return y(d.x); })
@@ -179,11 +212,28 @@ xAxisGroup.append('g')
   .attr("y", height)
   .on('mouseover', tip.show)
   .on('mouseout', tip.hide)
-  
+  if (length_width > 6) {
+    if(jQuery( ".active_bar2").attr('x')) {
+      var active_bar2 = jQuery( ".active_bar2").attr('x') 
+      bars2.attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1 - active_bar2 + x.rangeBand() / 2 + bar_distance2; })
+    }
+  }  
   bars2.transition()
   .duration(1500)
   .attr("y", function(d) { return y(d.y); })
   .attr("height", function(d) { return height - y(d.y); })
+
+if (length_width > 6) { 
+  if(jQuery( "text:contains("+ current_year +")").parent().attr('transform')) {
+    var x_path = jQuery( "text:contains("+ current_year +")").parent().attr('transform')
+    var x_path_sliced = parseFloat(x_path.match(/\((.*)\)/)[1])
+
+    jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
+        var x_coordinate = parseFloat(transform.match(/\((.*)\)/)[1]);
+        jQuery(this).attr("transform", "translate("+ (x_coordinate - x_path_sliced + activate_year_line_x) +",0)");
+    });  
+  }
+}
 
  chart.selectAll('.x-axis .x .tick')
     .data(arr)
@@ -215,13 +265,13 @@ xAxisGroup.append('g')
 jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
 
 function zoom() {
-      var scroll_limit_for_bars1 = jQuery("#project-individual-budget-chart .bar").first().attr('x');
+  var scroll_limit_for_bars1 = jQuery("#project-individual-budget-chart .bar").first().attr('x');
   var scroll_limit_for_bars2 = jQuery("#project-individual-budget-chart .bar2").last().attr('x');
   var tx = Math.min(-scroll_limit_for_bars1 + 20, Math.max(d3.event.translate[0], -scroll_limit_for_bars2 + 40));
   bars.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
   bars2.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
-    chart.select(".x.axis").attr("transform", "translate(" + tx +","+(height)+")")
-        .call(xAxis.scale(x.rangeRoundBands([0, width - margin.right  - bar_x_distance * d3.event.scale],.1 * d3.event.scale)));
+  chart.select(".x.axis").attr("transform", "translate(" + tx +","+(height)+")")
+    .call(xAxis.scale(x.rangeRoundBands([0, new_width - margin.right  - bar_x_distance * d3.event.scale],paddong_between_bars * d3.event.scale, outer_padding * d3.event.scale)));
   chart.select(".y.axis").call(yAxis);
 
   jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
@@ -261,6 +311,14 @@ function zoom() {
   .tickSize(-width, 0, 0)
   .tickFormat(""));
 
+  if (length_width > 6) {
+    if (x_path_sliced) {
+      jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
+      var x_coordinate = parseFloat(transform.match(/\((.*)\)/)[1]);
+      jQuery(this).attr("transform", "translate("+ (x_coordinate - x_path_sliced + activate_year_line_x) +",0)");
+      });
+    }
+  }
   }
 });
 

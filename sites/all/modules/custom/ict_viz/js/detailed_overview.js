@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
     var bars_color2 = '#5C46A4';
     var active_year_bars_color = '#FC3E3E';
     var active_year_bars_color2 = '#3D2390';
-    var active_year_color = '3D2390';
+    var active_year_color = '#3D2390';
 
   if(jQuery( window ).width() > 767) {
     var bar_distance = 350;
@@ -54,13 +54,24 @@ jQuery(document).ready(function () {
   })
   var length_width = arr.length;
 
+if (length_width > 6) {
+  new_width = length_width * 100;
+  outer_padding = -1;
+  paddong_between_bars = 0.25;
+}
+else {
+  new_width = width
+  outer_padding = 0;
+  paddong_between_bars = 0.1;
+}
+
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 360 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
     .domain(arr.map(function(d) { return d.years; }))
-    .rangeRoundBands([0, length_width * 100 - margin.right  - bar_x_distance ], .25, -1);
+    .rangeRoundBands([0, new_width - margin.right  - bar_x_distance ], paddong_between_bars, outer_padding);
 
   var y = d3.scale.linear()
   .range([height, 0])
@@ -242,7 +253,7 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
     bars.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
     bars2.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
     chart.select(".x.axis").attr("transform", "translate(" + tx +","+(height)+")")
-          .call(xAxis.scale(x.rangeRoundBands([0, length_width * 100 - margin.right  - bar_x_distance * d3.event.scale],.25 * d3.event.scale, -1 * d3.event.scale)));
+      .call(xAxis.scale(x.rangeRoundBands([0, new_width - margin.right  - bar_x_distance * d3.event.scale],paddong_between_bars * d3.event.scale, outer_padding * d3.event.scale)));
     chart.select(".y.axis").call(yAxis);
 
     jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
