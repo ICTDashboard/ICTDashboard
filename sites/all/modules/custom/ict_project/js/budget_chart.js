@@ -12,26 +12,6 @@ jQuery(document).ready(function () {
   var active_year_bars_color2 = '#3D2390';
   var active_year_color = '#3D2390';
 
- if(jQuery( window ).width() > 1024) {
-  var bar_distance = 350;
-  var bar_distance2 = 350;
-  var bar_x_distance = 100;
-  var activate_year_line_x = 391;
-  var activate_year_line_x2 = 42;
-  var tooltip_bar_x = -70;
-  var tooltip_bar_y = 30;
-  var focus_current = -width / 9;
- }
- else {
-  var bar_distance = 85;
-  var bar_distance2 = 85;
-  var bar_x_distance = 325;
-  var activate_year_line_x = 118;
-  var tooltip_bar_x = -50;
-  var tooltip_bar_y = 30;
-  var focus_current = -width / 4;
- }
-
   var arr = [];
   var element = [];
 
@@ -55,6 +35,50 @@ var current = jQuery.map(arr, function(value,key){
 
 var length_width = arr.length;
 
+ if(jQuery( window ).width() > 1024) {
+  if (length_width == 4) {
+    var bar_distance = 302;
+    var bar_distance2 = 302;    
+  }
+  else {
+    var bar_distance = 350;
+    var bar_distance2 = 350;  
+  }
+  if (length_width == 5) {
+    var bar_distance = 320;
+    var bar_distance2 = 320; 
+  }
+  var bar_x_distance = 100;
+  var activate_year_line_x = 391;
+  var activate_year_line_x2 = 42;
+  var tooltip_bar_x = -70;
+  var tooltip_bar_y = 30;
+  var focus_current = -width / 9;
+ }
+ else {
+  if (length_width == 4 || length_width == 5) {
+    var bar_distance = 75;
+    var bar_distance2 = 75;    
+  }
+  else {
+    var bar_distance = 85;
+    var bar_distance2 = 85;  
+  }
+  if (length_width == 1) {
+    var bar_x_distance = 0;
+  }
+  if (length_width == 2) {
+    var bar_x_distance = 150;
+  }
+  if (length_width > 2) {
+    var bar_x_distance = 325;
+  }
+  var activate_year_line_x = 118;
+  var tooltip_bar_x = -50;
+  var tooltip_bar_y = 30;
+  var focus_current = -width / 4;
+ }
+
 if (length_width > 6) {
   new_width = length_width * 100;
   outer_padding = -1;
@@ -62,13 +86,25 @@ if (length_width > 6) {
 }
 else {
   if(jQuery( window ).width() < 768) {
-  new_width = length_width * 175
-  outer_padding = 0;
-  paddong_between_bars = 0.1;    
+    if(length_width == 1 || length_width == 2) {
+      new_width = length_width * 200
+      outer_padding = 0.05;
+      paddong_between_bars = 0.1;       
+    }
+    if(length_width == 3 || length_width == 4) {
+      new_width = length_width * 195
+      outer_padding = 0.05;
+      paddong_between_bars = 0.1; 
+    }
+    if(length_width == 5) {
+      new_width = length_width * 160
+      outer_padding = 0.05;
+      paddong_between_bars = 0.10;       
+    } 
   }
   else {
     new_width = width
-    outer_padding = 0;
+    outer_padding = 0.05;
     paddong_between_bars = 0.1; 
   }
 }
@@ -190,7 +226,7 @@ xAxisGroup.append('g')
   .on('mouseover', tip.show)
   .on('mouseout', tip.hide)
 
-  if (length_width > 6) {  
+  if (length_width > 3) {  
     if(jQuery( ".active_bar").attr('x')) {
       var active_bar = jQuery( ".active_bar").attr('x') 
       bars.attr("x", function(d) { return x(d.years) - active_bar + bar_distance; })       
@@ -212,7 +248,7 @@ xAxisGroup.append('g')
   .attr("y", height)
   .on('mouseover', tip.show)
   .on('mouseout', tip.hide)
-  if (length_width > 6) {
+  if (length_width > 3) {
     if(jQuery( ".active_bar2").attr('x')) {
       var active_bar2 = jQuery( ".active_bar2").attr('x') 
       bars2.attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1 - active_bar2 + x.rangeBand() / 2 + bar_distance2; })
@@ -223,7 +259,7 @@ xAxisGroup.append('g')
   .attr("y", function(d) { return y(d.y); })
   .attr("height", function(d) { return height - y(d.y); })
 
-if (length_width > 6) { 
+if (length_width > 3) { 
   if(jQuery( "text:contains("+ current_year +")").parent().attr('transform')) {
     var x_path = jQuery( "text:contains("+ current_year +")").parent().attr('transform')
     var x_path_sliced = parseFloat(x_path.match(/\((.*)\)/)[1])
@@ -265,8 +301,19 @@ if (length_width > 6) {
 jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
 
 function zoom() {
-  var scroll_limit_for_bars1 = jQuery("#project-individual-budget-chart .bar").first().attr('x');
-  var scroll_limit_for_bars2 = jQuery("#project-individual-budget-chart .bar2").last().attr('x');
+  // console.log(length_width);
+  // console.log(arr[0].years);
+  if (length_width == 1 && current_year2 == arr[0].years) {
+    var scroll_limit_for_bars1 = jQuery("#project-individual-budget-chart .active_bar").first().attr('x');
+    var scroll_limit_for_bars2 = jQuery("#project-individual-budget-chart .active_bar2").last().attr('x');
+  } 
+  else {
+    var scroll_limit_for_bars1 = jQuery("#project-individual-budget-chart .bar").first().attr('x');
+    var scroll_limit_for_bars2 = jQuery("#project-individual-budget-chart .bar2").last().attr('x');   
+  }
+
+  // var scroll_limit_for_bars1 = jQuery("#project-individual-budget-chart .bar").first().attr('x');
+  // var scroll_limit_for_bars2 = jQuery("#project-individual-budget-chart .bar2").last().attr('x');
   var tx = Math.min(-scroll_limit_for_bars1 + 20, Math.max(d3.event.translate[0], -scroll_limit_for_bars2 + 40));
   bars.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
   bars2.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
@@ -311,7 +358,7 @@ function zoom() {
   .tickSize(-width, 0, 0)
   .tickFormat(""));
 
-  if (length_width > 6) {
+  if (length_width > 3) {
     if (x_path_sliced) {
       jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
       var x_coordinate = parseFloat(transform.match(/\((.*)\)/)[1]);
