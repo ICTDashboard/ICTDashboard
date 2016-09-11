@@ -5,32 +5,12 @@ jQuery(document).ready(function () {
     height = 360 - margin.top - margin.bottom;
 
   var detailed_budget = Drupal.settings.detailed_budget_chart;
-    var bars_color = '#FF6161';
-    var bars_color2 = '#5C46A4';
-    var active_year_bars_color = '#FC3E3E';
-    var active_year_bars_color2 = '#3D2390';
-    var active_year_color = '3D2390';
 
-  if(jQuery( window ).width() > 767) {
-    var bar_distance = 350;
-    var bar_distance2 = 350;
-    var bar_x_distance = 100;
-    var activate_year_line_x = 391;
-    var activate_year_line_x2 = 42;
-    var tooltip_bar_x = -70;
-    var tooltip_bar_y = 30;
-    var focus_current = -width / 9;
-  }
-  else {
-    var bar_distance = 85;
-    var bar_distance2 = 85;
-    var bar_x_distance = 325;
-    var activate_year_line_x = 118;
-    var tooltip_bar_x = -50;
-    var tooltip_bar_y = 30;
-    var focus_current = -width / 4;
-  }
-
+  var bars_color = '#FF6161';
+  var bars_color2 = '#5C46A4';
+  var active_year_bars_color = '#FC3E3E';
+  var active_year_bars_color2 = '#3D2390';
+  var active_year_color = '#3D2390';
 
   var arr = [];
   var element = [];
@@ -42,210 +22,306 @@ jQuery(document).ready(function () {
     element.push(i);
   };
 
-  var current_year = "20" + detailed_budget.data.current_year.replace("/", "-") + "*";
-  var current_year2 = "20" + detailed_budget.data.current_year.replace("/", "-");
+var current_year = "20" + detailed_budget.data.current_year.replace("/", "-") + "*";
+var current_year2 = "20" + detailed_budget.data.current_year.replace("/", "-");
 
-  var current = jQuery.map(arr, function(value,key){
-    if(value.years == current_year) {
-      var current_key = key;
-      return value;
+var current = jQuery.map(arr, function(value,key){
+  if(value.years == current_year) {
+    var current_key = key;
+    return value;
 
-    }    
+  }    
+})
+
+var length_width = arr.length;
+
+ if(jQuery( window ).width() > 1024) {
+  if (length_width == 4) {
+    var bar_distance = 302;
+    var bar_distance2 = 302;    
+  }
+  else {
+    var bar_distance = 350;
+    var bar_distance2 = 350;  
+  }
+  if (length_width == 5) {
+    var bar_distance = 320;
+    var bar_distance2 = 320; 
+  }
+  var bar_x_distance = 100;
+  var activate_year_line_x = 391;
+  var activate_year_line_x2 = 42;
+  var tooltip_bar_x = -70;
+  var tooltip_bar_y = 30;
+  var focus_current = -width / 9;
+ }
+ else {
+  if (length_width == 4 || length_width == 5) {
+    var bar_distance = 75;
+    var bar_distance2 = 75;    
+  }
+  else {
+    var bar_distance = 85;
+    var bar_distance2 = 85;  
+  }
+  if (length_width == 1) {
+    var bar_x_distance = 0;
+  }
+  if (length_width == 2) {
+    var bar_x_distance = 150;
+  }
+  if (length_width > 2) {
+    var bar_x_distance = 325;
+  }
+  var activate_year_line_x = 118;
+  var tooltip_bar_x = -50;
+  var tooltip_bar_y = 30;
+  var focus_current = -width / 4;
+ }
+
+if (length_width > 6) {
+  new_width = length_width * 100;
+  outer_padding = -1;
+  paddong_between_bars = 0.25;
+}
+else {
+  if(jQuery( window ).width() < 768) {
+    if(length_width == 1 || length_width == 2) {
+      new_width = length_width * 200
+      outer_padding = 0.05;
+      paddong_between_bars = 0.1;       
+    }
+    if(length_width == 3 || length_width == 4) {
+      new_width = length_width * 195
+      outer_padding = 0.05;
+      paddong_between_bars = 0.1; 
+    }
+    if(length_width == 5) {
+      new_width = length_width * 160
+      outer_padding = 0.05;
+      paddong_between_bars = 0.10;       
+    } 
+  }
+  else {
+    new_width = width
+    outer_padding = 0.05;
+    paddong_between_bars = 0.1; 
+  }
+}
+
+var x = d3.scale.ordinal()
+  .domain(arr.map(function(d) { return d.years; }))
+  .rangeRoundBands([0, new_width - margin.right  - bar_x_distance], paddong_between_bars, outer_padding);
+
+var y = d3.scale.linear()
+.range([height, 0])
+.domain([0,
+  d3.max(arr, function(d) {
+    return d.y;
   })
-  var length_width = arr.length;
-
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 360 - margin.top - margin.bottom;
-
-  var x = d3.scale.ordinal()
-    .domain(arr.map(function(d) { return d.years; }))
-    .rangeRoundBands([0, length_width * 100 - margin.right  - bar_x_distance ], .25, -1);
-
-  var y = d3.scale.linear()
-  .range([height, 0])
-  .domain([0,
-    d3.max(arr, function(d) {
-      return d.y;
-    })
-  ]);
+]);
 
 
-  var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
+var xAxis = d3.svg.axis()
+  .scale(x)
+  .orient("bottom");
 
-  var yAxis = d3.svg.axis()
-  .scale(y)
-  .orient("left")
-  .tickSize(0)
-  .tickFormat(function (d) {
-    var prefix = d3.formatPrefix(d);
-    return '$' + prefix.scale(d);
-  });
+var yAxis = d3.svg.axis()
+.scale(y)
+.orient("left")
+.tickSize(0)
+.tickFormat(function (d) {
+  var prefix = d3.formatPrefix(d);
+  return '$' + prefix.scale(d);
+});
 
-  function make_y_axis() {
+    function make_y_axis() {
     return d3.svg.axis()
         .scale(y)
         .orient("left")
   }
 
-  var tip = d3.tip()
-    .attr('class', 'd3-tip')
-    .offset([tooltip_bar_y, tooltip_bar_x])
-    .html(function(d) {
-      if(d.years == current_year) {
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([tooltip_bar_y, tooltip_bar_x])
+  .html(function(d) {
+    if(d.years == current_year) {
       d.years = current_year2
-      } 
-      return "<span style='box-shadow: 0px 0px 5px 0px #4e5365; border:1px solid #ededed; border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
-    })
-  var chart = d3.select("#detailed-overview-chart")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .call(d3.behavior.zoom().scaleExtent([1, 1]).on("zoom", zoom));
+    } 
+    return "<span style='box-shadow: 0px 0px 5px 0px #4e5365; border:1px solid #ededed; border-radius: 5px;padding: 10px;background: #fff; display: block;color:black; font-weight:bold; font-size: 12px;'>"+ d.years + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #FF6161;content:'';'></span> $" + d.x + "m" + "</br><span style='display: inline-block;width: 10px;height: 10px;background: #5C46A4;content:'';'></span> $" + d.y + "m" + "</span>";
+  })
+var chart = d3.select("#detailed-overview-chart")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+  .call(d3.behavior.zoom().scaleExtent([1, 1]).on("zoom", zoom));
 
-chart.append("chart:rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("fill", "#fff")
-    .attr("class", "main-scroll-area");
+  chart.append("chart:rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "#fff")
+  .attr("class", "main-scroll-area");
 
-    chart.call(tip);
-  
-    chart.append("g")            
-      .attr("class", "grid")
-      .call(make_y_axis()
-        .tickSize(-width , 0, 0)
-        .tickFormat("")
-    )
+  chart.call(tip);
 
-  var mSvg = d3.select("#detailed-overview-chart");
+  chart.append("g")            
+    .attr("class", "grid")
+    .call(make_y_axis()
+      .tickSize(-width , 0, 0)
+      .tickFormat("")
+  )
 
-  var defs = mSvg.append("defs");
 
-  defs.append("clipPath").attr('id','my-clip-path').append('rect')
-      .attr('width',width)
-      .attr('height',height);
-  defs.append("clipPath").attr('id','x-clip-path').append('rect')
-      .attr('width',width)
-      .attr('height',height + margin.bottom);
+//Add a clip path, so the content outside the domain should be hidden
 
-  var barsGroup = chart.append('g');
+var mSvg = d3.select("#detailed-overview-chart");
 
-  barsGroup.attr('clip-path','url(#my-clip-path)');
 
-  var xAxisGroup = chart.append("g").attr('class','x-axis')
 
-  xAxisGroup.append('g')
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis)
-    // .transition()
-    // .duration(1500)
-    // .attr("transform", "translate("+ focus_current +"," + height + ")") //////////////////////////////////////////////////////////////////
+//Add a "defs" element to the svg
+var defs = mSvg.append("defs");
 
-  xAxisGroup.attr('clip-path','url(#x-clip-path)');
+//Append a clipPath element to the defs element, and a Shape
+// to define the cliping area
+defs.append("clipPath").attr('id','my-clip-path').append('rect')
+    .attr('width',width) //Set the width of the clipping area
+    .attr('height',height); // set the height of the clipping area
 
-  chart.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
+//clip path for x axis
+defs.append("clipPath").attr('id','x-clip-path').append('rect')
+    .attr('width',width) //Set the width of the clipping area
+    .attr('height',height + margin.bottom); // set the height of the clipping area
+
+//add a group that will be clipped (this will contain the bars)
+var barsGroup = chart.append('g');
+
+//Set the clipping path to the group (g element) that you want to clip
+barsGroup.attr('clip-path','url(#my-clip-path)');
+
+var xAxisGroup = chart.append("g").attr('class','x-axis')
+
+xAxisGroup.append('g')
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
+
+//The xAxis is scalled on zoom, so we need to clip it to
+
+ xAxisGroup.attr('clip-path','url(#x-clip-path)');
+
+ chart.append("g")
+  .attr("class", "y axis")
+  .call(yAxis);
 
   var bars = barsGroup.selectAll(".div ")
+  .data(arr)
+  .enter().append("rect")
+  .attr("class",function(d) {if(current.length > 0 && d.x == current[0].x && d.years == current[0].years){ return "active_bar";} else { return "bar";} } )
+  .style("fill",function(d) {if(current.length > 0 && d.x == current[0].x && d.years == current[0].years){ return active_year_bars_color} else { return bars_color;} } )
+  .attr("x", function(d) { return x(d.years); })
+  .attr("width", x.rangeBand() / 2 - 1)
+  .attr("height", 0)
+  .attr("y", height)
+  .on('mouseover', tip.show)
+  .on('mouseout', tip.hide)
+
+  if (length_width > 3) {  
+    if(jQuery( ".active_bar").attr('x')) {
+      var active_bar = jQuery( ".active_bar").attr('x') 
+      bars.attr("x", function(d) { return x(d.years) - active_bar + bar_distance; })       
+    }
+  }
+  bars.transition()
+  .duration(1500)
+  .attr("y", function(d) { return y(d.x); })
+  .attr("height", function(d) { return height - y(d.x); })
+
+ var bars2 = barsGroup.selectAll(".div")
+  .data(arr)
+  .enter().append("rect")
+  .attr("class",function(d) {if(current.length > 0 && d.y == current[0].y && d.years == current[0].years){ return "active_bar2";} else { return "bar2";} } )
+  .style("fill", function(d) {if(current.length > 0 && d.y == current[0].y && d.years == current[0].years){ return active_year_bars_color2;} else { return bars_color2;} })
+  .attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1; })
+  .attr("width", x.rangeBand() / 2)
+  .attr("height", 0)
+  .attr("y", height)
+  .on('mouseover', tip.show)
+  .on('mouseout', tip.hide)
+  if (length_width > 3) {
+    if(jQuery( ".active_bar2").attr('x')) {
+      var active_bar2 = jQuery( ".active_bar2").attr('x') 
+      bars2.attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1 - active_bar2 + x.rangeBand() / 2 + bar_distance2; })
+    }
+  }  
+  bars2.transition()
+  .duration(1500)
+  .attr("y", function(d) { return y(d.y); })
+  .attr("height", function(d) { return height - y(d.y); })
+
+if (length_width > 3) { 
+  if(jQuery( "text:contains("+ current_year +")").parent().attr('transform')) {
+    var x_path = jQuery( "text:contains("+ current_year +")").parent().attr('transform')
+    var x_path_sliced = parseFloat(x_path.match(/\((.*)\)/)[1])
+
+    jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
+        var x_coordinate = parseFloat(transform.match(/\((.*)\)/)[1]);
+        jQuery(this).attr("transform", "translate("+ (x_coordinate - x_path_sliced + activate_year_line_x) +",0)");
+    });  
+  }
+}
+
+ chart.selectAll('.x-axis .x .tick')
     .data(arr)
-    .enter().append("rect")
-    .attr("class",function(d) {if(current.length > 0 && d.x == current[0].x){ return "active_bar";} else { return "bar";} } )
-    .style("fill",function(d) {if(current.length > 0 && d.x == current[0].x){ return active_year_bars_color;} else { return bars_color;} } )
-    .attr("x", function(d) { return x(d.years); })
-    .attr("width", x.rangeBand() / 2 - 1)
-    .attr("height", 0)
-    .attr("y", height)
-    .on('mouseover', tip.show)
-    .on('mouseout', tip.hide)
+    .each(function(d, i) {
+        if(d.years == current_year) {
+            d3.select(this)
+              .append('line')
+              .attr({
+                  "text-anchor": "middle",
+                  dy: 24,
+                  "y1" : 28,
+                  "y2" : 28,
+                  "x1" :  -x.rangeBand() / 2,
+                   "x2" : x.rangeBand() / 2,
+                  "font-size": "10.5px",
+                  "class": "line-current-year"
 
-    var active_bar = jQuery( ".active_bar").attr('x') 
-    bars.attr("x", function(d) { return x(d.years) - active_bar + bar_distance; })   
-    bars.transition()
-    .duration(1500)
-    
-    .attr("y", function(d) { return y(d.x); })
-    .attr("height", function(d) { return height - y(d.x); })
-    // .transition()
-    // .duration(1500)
-    // .attr("transform", "translate("+ focus_current +",0)") //////////////////////////////////////////////////////////////////
+              })
+            d3.select(this)
+              .selectAll('.line-current-year')
+                  .style({
+                    "stroke": "#FC3E3E",
+                    "stroke-width": "4px"
 
+              })
+        }
+    });
 
-  var bars2 = barsGroup.selectAll(".div")
-    .data(arr)
-    .enter().append("rect")
-    .attr("class",function(d) {if(current.length > 0 && d.y == current[0].y){ return "active_bar2";} else { return "bar2";} } )
-    .style("fill", function(d) {if(current.length > 0 && d.y == current[0].y){ return active_year_bars_color2;} else { return bars_color2;} })
-    .attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1; })
-    .attr("width", x.rangeBand() / 2 - 1)
-    .attr("height", 0)
-    .attr("y", height)
-    .on('mouseover', tip.show)
-    .on('mouseout', tip.hide)
-    
-    var active_bar2 = jQuery( ".active_bar2").attr('x')
-    bars2.attr("x", function(d) { return x(d.years) + x.rangeBand() / 2 + 1 - active_bar2 + x.rangeBand() / 2 + bar_distance2; })        
-    bars2.transition()
-    .duration(1500)
-   
-    .attr("y", function(d) { return y(d.y); })
-    .attr("height", function(d) { return height - y(d.y); })
-    // .transition()
-    // .duration(1500)
-    // .attr("transform", "translate("+ focus_current +",0)") //////////////////////////////////////////////////////////////////
+jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
 
-var x_path = jQuery( "text:contains("+ current_year +")").parent().attr('transform')
-var x_path_sliced = parseFloat(x_path.match(/\((.*)\)/)[1])
+function zoom() {
+  // console.log(length_width);
+  // console.log(arr[0].years);
+  if (length_width == 1 && current_year2 == arr[0].years) {
+    var scroll_limit_for_bars1 = jQuery("#detailed-view-expenditure .active_bar").first().attr('x');
+    var scroll_limit_for_bars2 = jQuery("#detailed-view-expenditure .active_bar2").last().attr('x');
+  } 
+  else {
+    var scroll_limit_for_bars1 = jQuery("#detailed-view-expenditure .bar").first().attr('x');
+    var scroll_limit_for_bars2 = jQuery("#detailed-view-expenditure .bar2").last().attr('x');   
+  }
 
-jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
-    var x_coordinate = parseFloat(transform.match(/\((.*)\)/)[1]);
-    jQuery(this).attr("transform", "translate("+ (x_coordinate - x_path_sliced + activate_year_line_x) +",0)");
-});
-  chart.selectAll('.x-axis .x .tick')
-      .data(arr)
-      .each(function(d, i) {
-          if(d.years == current_year) {
-              d3.select(this)
-                .append('line')
-                .attr({
-                    "text-anchor": "middle",
-                    dy: 24,
-                    "y1" : 28,
-                    "y2" : 28,
-                    "x1" :  -x.rangeBand() / 2 - 1,
-                     "x2" : x.rangeBand() / 2 - 2,
-                    "font-size": "10.5px",
-                    "class": "line-current-year"
-
-                })
-              d3.select(this)
-                .selectAll('.line-current-year')
-                    .style({
-                      "stroke": "#FC3E3E",
-                      "stroke-width": "4px"
-
-                })
-          }
-      });
+  // var scroll_limit_for_bars1 = jQuery("#project-individual-budget-chart .bar").first().attr('x');
+  // var scroll_limit_for_bars2 = jQuery("#project-individual-budget-chart .bar2").last().attr('x');
+  var tx = Math.min(-scroll_limit_for_bars1 + 20, Math.max(d3.event.translate[0], -scroll_limit_for_bars2 + 40));
+  bars.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
+  bars2.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
+  chart.select(".x.axis").attr("transform", "translate(" + tx +","+(height)+")")
+    .call(xAxis.scale(x.rangeRoundBands([0, new_width - margin.right  - bar_x_distance * d3.event.scale],paddong_between_bars * d3.event.scale, outer_padding * d3.event.scale)));
+  chart.select(".y.axis").call(yAxis);
 
   jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
-
-  function zoom() {
-    var scroll_limit_for_bars1 = jQuery("#detailed-view-expenditure .bar").first().attr('x');
-    var scroll_limit_for_bars2 = jQuery("#detailed-view-expenditure .bar2").last().attr('x');
-    var tx = Math.min(-scroll_limit_for_bars1 + 20, Math.max(d3.event.translate[0], -scroll_limit_for_bars2 + 40));
-    bars.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
-    bars2.attr("transform", "translate(" + tx +",0)scale(" + d3.event.scale + ",1)");
-    chart.select(".x.axis").attr("transform", "translate(" + tx +","+(height)+")")
-          .call(xAxis.scale(x.rangeRoundBands([0, length_width * 100 - margin.right  - bar_x_distance * d3.event.scale],.25 * d3.event.scale, -1 * d3.event.scale)));
-    chart.select(".y.axis").call(yAxis);
-
-    jQuery( "text:contains("+ current_year +")").css('fill', active_year_color).text(current_year2);
 
     chart.selectAll('.x .tick')
       .data(arr)
@@ -261,8 +337,8 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
                     dy: 24,
                     "y1" : 28,
                     "y2" : 28,
-                    "x1" : -x.rangeBand() / 2 - 1,
-                     "x2" : x.rangeBand() / 2 - 2,
+                    "x1" : -x.rangeBand() / 2,
+                     "x2" : x.rangeBand() / 2,
                     "font-size": "10.5px",
                     "class": "line-current-year"
 
@@ -275,21 +351,23 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
 
                 })
           }
+  });
+
+  chart.select(".grid")
+  .call(make_y_axis()
+  .tickSize(-width, 0, 0)
+  .tickFormat(""));
+
+  if (length_width > 3) {
+    if (x_path_sliced) {
+      jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
+      var x_coordinate = parseFloat(transform.match(/\((.*)\)/)[1]);
+      jQuery(this).attr("transform", "translate("+ (x_coordinate - x_path_sliced + activate_year_line_x) +",0)");
       });
-
-      chart.select(".grid")
-        .call(make_y_axis()
-        .tickSize(-width, 0, 0)
-        .tickFormat(""));
-
-    jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
-    var x_coordinate = parseFloat(transform.match(/\((.*)\)/)[1]);
-    jQuery(this).attr("transform", "translate("+ (x_coordinate - x_path_sliced + activate_year_line_x) +",0)");
-    });
+    }
+  }
   }
 });
-
-
 
 
 
@@ -299,16 +377,16 @@ jQuery(".x-axis .x g[transform]").attr("transform", function(index, transform){
   (function ($){
     $(document).ready(function () {
   //     // *** Expenditure Graph ***
-  //     var ctx = document.getElementById("detailed_budget_chart").getContext("2d");
+  //     var ctx = document.getElementById("detailed_detailed_budget").getContext("2d");
   //     var ExpenditureChart = new Chart(ctx).Bar(
-  //       Drupal.settings.detailed_budget_chart.data,
-  //       Drupal.settings.detailed_budget_chart.options
+  //       Drupal.settings.detailed_detailed_budget.data,
+  //       Drupal.settings.detailed_detailed_budget.options
   //     );
-  //     $('#detailed_budget_chart').css('width', '100%');
+  //     $('#detailed_detailed_budget').css('width', '100%');
   //     if (screen.width == 320) {
-  //       $('#detailed_budget_chart').css('max-width', 280 + 'px');
+  //       $('#detailed_detailed_budget').css('max-width', 280 + 'px');
   //     }
-  //     $('#detailed_budget_chart').css('height', 'auto');
+  //     $('#detailed_detailed_budget').css('height', 'auto');
       // *** Schedule Status Graph ***
       var data = Drupal.settings.detailed_schedule_chart,
         width = $('#detailed-view-schedule-status').innerWidth();
