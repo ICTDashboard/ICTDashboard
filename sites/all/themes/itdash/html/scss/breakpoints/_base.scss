@@ -2163,7 +2163,11 @@ DETAILED OVERVIEW STYLES
     }
   }
 }
-
+.project-individual-page-graph {
+	ul.bar-legend {
+		padding-left: 40px;
+	}
+}
 #detailed-view-expenditure, #project-individual-budget-chart {
   overflow: hidden;
   margin-right: 20px;

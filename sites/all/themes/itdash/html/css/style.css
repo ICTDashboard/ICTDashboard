@@ -4941,6 +4941,9 @@ DETAILED OVERVIEW STYLES
         line-height: 1;
         color: #aabcb9; }
 
+.project-individual-page-graph ul.bar-legend {
+  padding-left: 40px; }
+
 #detailed-view-expenditure, #project-individual-budget-chart {
   overflow: hidden;
   margin-right: 20px; }
