@@ -6,7 +6,7 @@
         <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print t('Expenditure to date and budget across all active projects by financial year.'); ?>
+                <?php print t('Expenditure to date and budget across active projects by financial year.'); ?>
               </span>
         </a>
       </h2>
@@ -40,7 +40,7 @@
         <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
           <span class="tooltip-content">
-            <?php print t('A summary of schedule status for all active projects compared to their planned schedule.'); ?>
+            <?php print t('The quarterly status of active projects in each financial year.'); ?>
           </span>
         </a>
       </h2>
@@ -89,7 +89,7 @@
         <a href="javascript:void(0);" class="tooltip">
           <i class="tooltip-icon"></i>
               <span class="tooltip-content">
-                <?php print t('Benefits over all active projects.'); ?>
+                <?php print t('The number of benefits over active projects.'); ?>
               </span>
         </a>
       </h2>
