@@ -33,19 +33,20 @@
  *
  * @ingroup themeable
  */
+
 ?>
 <?php global $user;?>
 <div class="page-title dotbg">
   <div class="inner-title-content wrap cf">
-    <h1><?php print $user_profile['field_first_name']['#object']->name;?></h1>
+    <h1><?php print $user_name;?></h1>
   </div>
 </div>
 <div id="inner-content" class="wrap cf">
   <div class="signin-request">
     <div class="profile"<?php print $attributes; ?>>
       <ul class="tab-head cf">
-        <li><?php print l(t('Edit'), 'user/' . $user_profile['field_first_name']['#object']->uid . '/edit');?></li>
-        <?php if ($user->name == $user_profile['field_first_name']['#object']->name): ?> 
+        <li><?php print l(t('Edit'), 'user/' . $user_id . '/edit');?></li>
+        <?php if ($user->uid == $user_id): ?> 
           <li><?php print l('Request new password', 'user/password');?></li>
         <?php endif; ?>
       </ul>
