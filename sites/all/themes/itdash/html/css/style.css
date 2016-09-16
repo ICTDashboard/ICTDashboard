@@ -1548,19 +1548,16 @@ select.ui-datepicker-month, select.ui-datepicker-year {
       text-decoration: none; }
 
 .page-entityform #content,
-#user-pass-reset,
 .entity-bean,
 .node-type-page #inner-content {
   margin: 25px auto; }
   .page-entityform #content .field,
-  #user-pass-reset .field,
   .entity-bean .field,
   .node-type-page #inner-content .field {
     height: auto;
     line-height: 2.5em;
     max-width: none; }
   .page-entityform #content ul,
-  #user-pass-reset ul,
   .entity-bean ul,
   .node-type-page #inner-content ul {
     list-style: none;
@@ -1569,14 +1566,12 @@ select.ui-datepicker-month, select.ui-datepicker-year {
     margin-top: -2px;
     padding-left: 28px; }
     .page-entityform #content ul li,
-    #user-pass-reset ul li,
     .entity-bean ul li,
     .node-type-page #inner-content ul li {
       padding-left: 18px;
       line-height: 22px;
       position: relative; }
       .page-entityform #content ul li:before,
-      #user-pass-reset ul li:before,
       .entity-bean ul li:before,
       .node-type-page #inner-content ul li:before {
         position: absolute;
@@ -4919,17 +4914,21 @@ DETAILED OVERVIEW STYLES
         color: #aabcb9; }
 
 /* User custom login form agreement */
+#user-pass-reset #use-terms-header,
 #user-login #use-terms-header {
   font-size: 16px; }
+#user-pass-reset #agreement-text-login,
 #user-login #agreement-text-login {
   max-height: 250px;
   overflow-y: auto;
   border: 1px solid #abb6cb;
   padding: 10px;
   margin-bottom: 20px; }
+  #user-pass-reset #agreement-text-login ul,
   #user-login #agreement-text-login ul {
     list-style: disc;
     padding: 20px; }
+#user-pass-reset .agr-btn,
 #user-login .agr-btn {
   color: #fff;
   font-weight: bold;
@@ -4939,8 +4938,10 @@ DETAILED OVERVIEW STYLES
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px; }
+  #user-pass-reset .agr-btn:hover,
   #user-login .agr-btn:hover {
     background: #095F69 !important; }
+#user-pass-reset .agreement-accept,
 #user-login .agreement-accept {
   margin-left: 10px; }
 
