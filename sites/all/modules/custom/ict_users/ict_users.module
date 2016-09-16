@@ -253,19 +253,28 @@ function ict_users_get_allowed_domains($term) {
 function ict_users_register_form_email_validation ($form, &$form_state) {
   $values = $form_state['values'];
 
-  function endsWith($haystack, $needle) {
-    $length = strlen($needle);
-    if ($length == 0) {
-      return true;
-    }
-    return (substr($haystack, -$length) === $needle);
-  }
-
   $department_id = $form_state['values']['field_department']['und'][0]['tid'];
   $department_term = taxonomy_term_load($department_id);
   if (!ict_project_validate_email_department($values['mail'], $department_term)) {
     form_set_error('mail', t('Email doesn\'t belong to department.'));
   }
+}
+
+/**
+ * Checks if valid email has been provided for department
+ *
+ * @param $email
+ * @param $domain
+ * @return bool
+ */
+function ict_user_email_domain_is_valid ($email, $domain) {
+  // precise check
+  $domain = '@' . $domain;
+  $length = strlen($domain);
+  if ($length == 0) {
+    return true;
+  }
+  return (substr($email, -$length) === $domain);
 }
 
 /**
