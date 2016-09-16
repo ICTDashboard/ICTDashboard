@@ -291,9 +291,9 @@ function itdash_form_user_pass_reset_alter(&$form, &$form_state, $form_id) {
   $form['message'] = array(
     '#markup' => t('
         <p>This is one-time login for %user_name and will expire on <span class="expiration-date-user-pass-reset">%expiration_date</span>.</p>
-        <p>If you agree to the terms of use, click on the <em>log in</em> button to change your password.</p>
         <p><strong>Terms of use:</strong></p>
         <div id="agreement-text-login">!arr_text</div>
+        <p>If you agree to the terms of use, click on the <em>log in</em> button to change your password.</p>
         <p>If you do not agree, click on the <em>home</em> button located at the top of the page to return to the Dashboard.</p>
     ',
     array(
