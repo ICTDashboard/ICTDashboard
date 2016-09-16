@@ -170,7 +170,7 @@ function ict_project_validate_email_department($email, $term) {
 
   $valid = FALSE;
   foreach ($allowed_daomains as $domain) {
-    if (endsWith($email, $domain)) {
+    if (ict_user_email_domain_is_valid($email, $domain)) {
       $valid = TRUE;
       break;
     }
