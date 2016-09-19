@@ -926,6 +926,7 @@ POSTS & CONTENT STYLES
 						color: #4e5365;
 					}
 					.project-individual-page-graph{
+						overflow: hidden;
 						margin-left: 0;
 						.bar-legend li {
 							margin: 3px 0;
@@ -2162,6 +2163,46 @@ DETAILED OVERVIEW STYLES
     }
   }
 }
+.project-individual-page-graph {
+	ul.bar-legend {
+		padding-left: 40px;
+	}
+}
+#detailed-view-expenditure, #project-individual-budget-chart {
+  overflow: hidden;
+  margin-right: 20px;
+  .bar, .bar2, .active_bar, .active_bar2, .main-scroll-area {
+  	cursor: col-resize;
+  }
+  .legend .bar-legend {
+  	padding-left: 40px;
+  }
+}
+.tick text {
+	font-size: 14px;
+}
+.y.axis path {
+  stroke: #000;
+}
+.axis path {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+.grid .tick {
+stroke: lightgrey;
+stroke-opacity: 0.4;
+shape-rendering: crispEdges;
+}
+.y.axis .tick:first-of-type text {
+  font-weight: bold;
+}
+.y.axis .tick:last-of-type text {
+  font-weight: bold;
+}
+.x.axis .tick text{
+  font-weight: bold; 
+}
+
 
 /* User custom login form agreement */
 #user-login {
