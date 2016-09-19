@@ -1568,6 +1568,9 @@ function ict_project_preprocess_project_schedule_status_viz (&$vars) {
  * Implements hook_preprocess_template().
  */
 function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) {
+
+  drupal_add_js(drupal_get_path('module', 'ict_project') . '/js/budget_chart.js');
+
   $rows = $vars['rows'];
   $max_columns = 0;
   foreach ($rows as $item) {
@@ -1683,7 +1686,8 @@ function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) 
         'options' => $chart_options,
         'data' => array(
           'labels' => $labels,
-          'datasets' => $datasets
+          'datasets' => $datasets,
+          'current_year' => $current_fin_year
         ),
       )
     ),
