@@ -1570,6 +1570,8 @@ function ict_project_preprocess_project_schedule_status_viz (&$vars) {
 function ict_project_preprocess_field_original_total_budget_graph_view (&$vars) {
 
   drupal_add_js(drupal_get_path('module', 'ict_project') . '/js/budget_chart.js');
+  drupal_add_js('//d3js.org/d3.v3.min.js', array('external' => TRUE));
+  drupal_add_js(drupal_get_path('module', 'ict_viz') . '/js/d3.tip.v0.6.3.js');
 
   $rows = $vars['rows'];
   $max_columns = 0;

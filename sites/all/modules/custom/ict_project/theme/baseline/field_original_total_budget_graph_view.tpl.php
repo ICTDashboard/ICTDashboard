@@ -1,6 +1,3 @@
-   <script src="//d3js.org/d3.v3.min.js"></script>
-    <script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-
 <div class="project-individual-page-graph" style="max-width: 945px;">
   <svg id="project-individual-budget-chart"></svg>
   <!-- <canvas id="budgetChart" width="945" height="325"></canvas> -->

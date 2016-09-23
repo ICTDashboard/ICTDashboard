@@ -1,4 +1,3 @@
-<script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <div id="ict-dashboard-detailed-overview">
   <div class="wrap cf">
     <div class="section-title">
