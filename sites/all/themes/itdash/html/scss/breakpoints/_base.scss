@@ -926,7 +926,6 @@ POSTS & CONTENT STYLES
 						color: #4e5365;
 					}
 					.project-individual-page-graph{
-						overflow: hidden;
 						margin-left: 0;
 						.bar-legend li {
 							margin: 3px 0;
@@ -2169,7 +2168,7 @@ DETAILED OVERVIEW STYLES
 	}
 }
 #detailed-view-expenditure, #project-individual-budget-chart {
-  overflow: hidden;
+  overflow-x: overlay;
   margin-right: 20px;
   .bar, .bar2, .active_bar, .active_bar2, .main-scroll-area {
   	cursor: col-resize;
@@ -2235,5 +2234,12 @@ shape-rendering: crispEdges;
 
 	& .agreement-accept {
 		margin-left: 10px;
+	}
+}
+
+#detailed-view-expenditure {
+	#detailed-overview-chart, #detailed-overview-chart1 {
+		margin-left: 15px;
+		overflow-x: overlay;
 	}
 }

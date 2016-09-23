@@ -4153,7 +4153,6 @@ POSTS & CONTENT STYLES
   #content #inner-content .project-draft-submission .row .text p {
     color: #4e5365; }
   #content #inner-content .project-draft-submission .row .text .project-individual-page-graph {
-    overflow: hidden;
     margin-left: 0; }
     #content #inner-content .project-draft-submission .row .text .project-individual-page-graph .bar-legend li {
       margin: 3px 0;
@@ -4923,7 +4922,7 @@ DETAILED OVERVIEW STYLES
   padding-left: 40px; }
 
 #detailed-view-expenditure, #project-individual-budget-chart {
-  overflow: hidden;
+  overflow-x: overlay;
   margin-right: 20px; }
   #detailed-view-expenditure .bar, #detailed-view-expenditure .bar2, #detailed-view-expenditure .active_bar, #detailed-view-expenditure .active_bar2, #detailed-view-expenditure .main-scroll-area, #project-individual-budget-chart .bar, #project-individual-budget-chart .bar2, #project-individual-budget-chart .active_bar, #project-individual-budget-chart .active_bar2, #project-individual-budget-chart .main-scroll-area {
     cursor: col-resize; }
@@ -4979,6 +4978,10 @@ DETAILED OVERVIEW STYLES
     background: #095F69 !important; }
 #user-login .agreement-accept {
   margin-left: 10px; }
+
+#detailed-view-expenditure #detailed-overview-chart, #detailed-view-expenditure #detailed-overview-chart1 {
+  margin-left: 15px;
+  overflow-x: overlay; }
 
 /*********************
 LARGER MOBILE DEVICES
