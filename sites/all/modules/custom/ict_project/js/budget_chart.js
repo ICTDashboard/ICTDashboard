@@ -132,7 +132,7 @@ var yAxis = d3.svg.axis()
 .tickSize(0)
 .tickFormat(function (d) {
   var prefix = d3.formatPrefix(d);
-  return '$' + prefix.scale(d);
+  return '$' + prefix.scale(d) + 'm';
 });
 
     function make_y_axis() {
