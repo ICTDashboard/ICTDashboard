@@ -184,7 +184,7 @@ function template_preprocess_ict_viz_home_projects(&$vars) {
 
 
 function template_preprocess_ict_viz_detailed_overview(&$vars) {
-  drupal_add_js('//d3js.org/d3.v3.min.js', array('external' => TRUE));
+  drupal_add_js('https://d3js.org/d3.v3.min.js', array('external' => TRUE));
   drupal_add_js(drupal_get_path('module', 'ict_viz') . '/js/d3.tip.v0.6.3.js', array('preprocess' => FALSE));
 }
 
