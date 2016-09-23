@@ -4922,7 +4922,7 @@ DETAILED OVERVIEW STYLES
   padding-left: 40px; }
 
 #detailed-view-expenditure, #project-individual-budget-chart {
-  overflow-x: overlay;
+  overflow: visible;
   margin-right: 20px; }
   #detailed-view-expenditure .bar, #detailed-view-expenditure .bar2, #detailed-view-expenditure .active_bar, #detailed-view-expenditure .active_bar2, #detailed-view-expenditure .main-scroll-area, #project-individual-budget-chart .bar, #project-individual-budget-chart .bar2, #project-individual-budget-chart .active_bar, #project-individual-budget-chart .active_bar2, #project-individual-budget-chart .main-scroll-area {
     cursor: col-resize; }
@@ -4981,7 +4981,7 @@ DETAILED OVERVIEW STYLES
 
 #detailed-view-expenditure #detailed-overview-chart, #detailed-view-expenditure #detailed-overview-chart1 {
   margin-left: 15px;
-  overflow-x: overlay; }
+  overflow: visible; }
 
 /*********************
 LARGER MOBILE DEVICES

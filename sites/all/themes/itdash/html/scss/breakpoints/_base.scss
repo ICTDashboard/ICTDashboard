@@ -2168,7 +2168,7 @@ DETAILED OVERVIEW STYLES
 	}
 }
 #detailed-view-expenditure, #project-individual-budget-chart {
-  overflow-x: overlay;
+  overflow: visible;
   margin-right: 20px;
   .bar, .bar2, .active_bar, .active_bar2, .main-scroll-area {
   	cursor: col-resize;
@@ -2240,6 +2240,6 @@ shape-rendering: crispEdges;
 #detailed-view-expenditure {
 	#detailed-overview-chart, #detailed-overview-chart1 {
 		margin-left: 15px;
-		overflow-x: overlay;
+		overflow: visible;
 	}
 }
