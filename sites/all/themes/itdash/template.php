@@ -296,3 +296,11 @@ function itdash_form_user_pass_reset_alter(&$form, &$form_state, $form_id) {
                      array('%user_name' => $users[$uid]->name, '%expiration_date' => format_date($timestamp + $timeout, 'custom', 'D, d/m/Y - H:ia'))));
   $form['help'] = array('#markup' => '<p>' . t('This login can be used only once.') . '</p>');
 }
+
+function itdash_preprocess_user_profile(&$variables) {
+  
+  $account = $variables['elements']['#account'];
+  //Add the user ID into the user profile as a variable
+  $variables['user_id'] = $account->uid;
+  $variables['user_name'] = $account->name;
+}

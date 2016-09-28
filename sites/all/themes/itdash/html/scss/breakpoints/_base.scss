@@ -1916,8 +1916,10 @@ DETAILED OVERVIEW STYLES
 					}
 				}
 			}
-			#detailed_schedule_chart_current {
+			#detailed_schedule_chart_current,
+			#detailed_schedule_chart_previous {
 				margin-left: 7px;
+
 			}
 			.benefits_chart_divs {
 				overflow: hidden;
@@ -2160,6 +2162,46 @@ DETAILED OVERVIEW STYLES
     }
   }
 }
+.project-individual-page-graph {
+	ul.bar-legend {
+		padding-left: 40px;
+	}
+}
+#detailed-view-expenditure, #project-individual-budget-chart {
+  overflow: visible;
+  margin-right: 20px;
+  .bar, .bar2, .active_bar, .active_bar2, .main-scroll-area {
+  	cursor: col-resize;
+  }
+  .legend .bar-legend {
+  	padding-left: 40px;
+  }
+}
+.tick text {
+	font-size: 14px;
+}
+.y.axis path {
+  stroke: #000;
+}
+.axis path {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+.grid .tick {
+stroke: lightgrey;
+stroke-opacity: 0.4;
+shape-rendering: crispEdges;
+}
+.y.axis .tick:first-of-type text {
+  font-weight: bold;
+}
+.y.axis .tick:last-of-type text {
+  font-weight: bold;
+}
+.x.axis .tick text{
+  font-weight: bold; 
+}
+
 
 /* User custom login form agreement */
 #user-login {
@@ -2192,5 +2234,12 @@ DETAILED OVERVIEW STYLES
 
 	& .agreement-accept {
 		margin-left: 10px;
+	}
+}
+
+#detailed-view-expenditure {
+	#detailed-overview-chart, #detailed-overview-chart1 {
+		margin-left: 15px;
+		overflow: visible;
 	}
 }

@@ -350,7 +350,7 @@ function ict_project_allowed_view_states($project_id, $account = NULL) {
       'approved',
     );
   }
-  if (user_has_role(ICT_DEPARTMENT_ADMIN_ROLE, $account)) {
+  if (__ict_project_user_is_dep_admin_for_project($project_id, $account) || user_has_role(ICT_FINANCE_ADMIN_ROLE, $account)) {
     $states = array(
       'draft',
       'waiting_approval',

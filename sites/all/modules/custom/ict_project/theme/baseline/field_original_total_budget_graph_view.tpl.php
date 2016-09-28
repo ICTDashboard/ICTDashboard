@@ -1,5 +1,6 @@
 <div class="project-individual-page-graph" style="max-width: 945px;">
-  <canvas id="budgetChart" width="945" height="325"></canvas>
+  <svg id="project-individual-budget-chart"></svg>
+  <!-- <canvas id="budgetChart" width="945" height="325"></canvas> -->
   <div class="legend" id="expenditure_legend">
     <ul class="bar-legend">
       <li>
@@ -14,23 +15,10 @@
         </span>
         <?php print t('Total Budget ($m)'); ?>
       </li>
-      <li>
+<!--       <li>
         <span class="required">*</span>
         <?php print t('Current Financial Year'); ?>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>
-<script>
-  (function ($) {
-    $(document).ready(function () {
-
-      var ctx = document.getElementById("budgetChart").getContext("2d");
-      var ExpenditureChart = new Chart(ctx).Bar(
-        Drupal.settings.budget_chart.data,
-        Drupal.settings.budget_chart.options
-      );
-
-    });
-  })(jQuery);
-</script>

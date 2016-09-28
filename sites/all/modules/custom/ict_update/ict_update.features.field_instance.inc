@@ -229,7 +229,7 @@ function ict_update_field_default_field_instances() {
     'bundle' => 'field_benefits_realised',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Indicate the status of benefit realisation. Yes – The benefit has been realised. No – The benefit has not been realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.',
+    'description' => 'Indicate the status of benefit realisation. Realised – The benefit has been realised. Not Realised – The benefit will not be realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1016,7 +1016,7 @@ function ict_update_field_default_field_instances() {
   t('For each benefit listed, the date range when benefit is expected to be realised.');
   t('Forecast Level of Project Completion');
   t('Government Implementation Partner/s');
-  t('Indicate the status of benefit realisation. Yes – The benefit has been realised. No – The benefit has not been realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.');
+  t('Indicate the status of benefit realisation. Realised – The benefit has been realised. Not Realised – The benefit will not be realised. On Track – The project is on track to realise the benefit as originally expected. At Risk - The benefit is not likely to be realised as originally expected.');
   t('Project');
   t('Project Budget By Financial Year ');
   t('Project Stage');
