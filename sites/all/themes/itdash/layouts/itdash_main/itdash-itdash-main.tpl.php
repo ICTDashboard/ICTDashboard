@@ -49,7 +49,8 @@
         <?php $footer_menu_tree = menu_tree('menu-footer-menu'); ?>
         <?php print drupal_render($footer_menu_tree); ?>
         <?php //print l(t('Contact us'), 'mailto:InvestmentFrame@finance.gov.au', array('attributes' => array('id' => 'contact_link'))); ?>
-        <p class="copy">&copy; <?php print t('All content is available under the Creative Commons CC BY 3.0 Licence, except where otherwise stated'); ?></p>
+        <p class="copy">
+          <?php print t('With the exception of the Commonwealth Coat of Arms, this site is licensed under a Creative Commons Attribution 3.0 licence (CC BY 3.0 AU).'); ?></p>
         <p class="copy second-copy"><?php print t('ICT Projects Dashboard 2016'); ?></p>
       </div>
     </div>
