@@ -118,7 +118,7 @@
     <?php endif; ?>
     <div id="footer-copyright">
       <div>
-        <?php print t('© All content is available under the Creative Commons CC BY 3.0 Licence, except where otherwise stated'); ?>
+        <?php print t('With the exception of the Commonwealth Coat of Arms, this site is licensed under a Creative Commons Attribution 3.0 licence (CC BY 3.0 AU).'); ?>
       </div>
       <div>
         <?php print t('ICT Projects Dashboard !year', array('!year' => date('Y', time()))); ?>
