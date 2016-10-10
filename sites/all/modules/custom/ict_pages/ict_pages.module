@@ -35,8 +35,17 @@ function template_preprocess_ict_pages_last_update(&$vars) {
   
   if (!empty($vars['nid']) && is_numeric($vars['nid'])) {
     $nid = $vars['nid'];
+    $entity_list = ict_update_get_allowed_entity_list($nid);
 
-    $query->condition('wf.nid', $nid);
+    // find last update if exists
+    if ($entity_list) {
+      $last_project_revision_updates = end($entity_list);
+      $last_update = end($last_project_revision_updates);
+    }
+    else {
+      $last_update = 0;
+    }
+    $query->condition('wf.nid', $last_update);
 
     $last_rebaseline = ict_project_get_last_rebaseline_project($nid);
     $old_rebaselines = ict_project_get_old_baselines($last_rebaseline);
